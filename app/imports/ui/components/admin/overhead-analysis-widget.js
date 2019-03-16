@@ -35,6 +35,7 @@ Template.Overhead_Analysis_Widget.onCreated(function overheadAnalysisWidgetOnCre
   this.selectedUser = new ReactiveVar('');
   this.dateRange = new ReactiveVar({});
   this.sortOrder = new ReactiveDict();
+  this.working = new ReactiveVar(false);
 });
 
 Template.Overhead_Analysis_Widget.helpers({
@@ -103,11 +104,15 @@ Template.Overhead_Analysis_Widget.helpers({
       },
     };
   },
+  working() {
+    return Template.instance().working.get();
+  },
 });
 
 Template.Overhead_Analysis_Widget.events({
   submit(event, instance) {
     event.preventDefault();
+    instance.working.set(true);
     const startDate = moment(event.target.startDate.value, 'MMMM D, YYYY').toDate();
     const endDate = moment(event.target.endDate.value, 'MMMM D, YYYY').endOf('day').toDate();
     instance.dateRange.set({ startDate, endDate });
@@ -164,6 +169,7 @@ Template.Overhead_Analysis_Widget.events({
         });
         instance.overheadData.set(overheadData);
         instance.sortOrder.clear();
+        instance.working.set(false);
       }
     });
   },

@@ -55,7 +55,8 @@
                 <label>Send to students too</label>
               </div>
             </div>
-            <button class="ui basic green button" type="submit">Send To Admin</button>
+            <button class="ui basic green {{#if adminWorking}}loading{{/if}} button" type="submit">Send To Admin
+            </button>
             <div><span style="color: crimson;">{{testEmailStatus}}</span></div>
           </form>
         </div>
@@ -85,7 +86,8 @@
                 <label>Check to confirm send</label>
               </div>
             </div>
-            <button class="ui basic green button" type="submit">Send To Students</button>
+            <button class="ui basic green {{#if studentsWorking}}loading{{/if}} button" type="submit">Send To Students
+            </button>
             <div><span style="color: crimson;">{{levelEmailStatus}}</span></div>
           </form>
         </div>
@@ -100,7 +102,9 @@
                 <label>Check to confirm send</label>
               </div>
             </div>
-            <button class="ui basic green button" type="submit">Send To All Students</button>
+            <button class="ui basic green {{#if allStudentsWorking}}loading{{/if}} button" type="submit">Send To All
+              Students
+            </button>
             <div><span style="color: crimson;">{{sendAllEmailStatus}}</span></div>
           </form>
         </div>

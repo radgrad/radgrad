@@ -449,6 +449,9 @@ Template.Generate_Newsletter_Widget.onCreated(function generateNewsletterWidgetO
   this.levelEmailStatus = new ReactiveVar('');
   this.sendAllEmailStatus = new ReactiveVar('');
   this.adminMessage = new ReactiveVar('');
+  this.adminWorking = new ReactiveVar(false);
+  this.studentsWorking = new ReactiveVar(false);
+  this.allStudentsWorking = new ReactiveVar(false);
 });
 
 Template.Generate_Newsletter_Widget.helpers({
@@ -467,6 +470,15 @@ Template.Generate_Newsletter_Widget.helpers({
   levelCount(level) {
     return StudentProfiles.find({ level, isAlumni: false }).count();
   },
+  adminWorking() {
+    return Template.instance().adminWorking.get();
+  },
+  studentsWorking() {
+    return Template.instance().studentsWorking.get();
+  },
+  allStudentsWorking() {
+    return Template.instance().allStudentsWorking.get();
+  },
 });
 
 Template.Generate_Newsletter_Widget.events({
@@ -477,10 +489,12 @@ Template.Generate_Newsletter_Widget.events({
   },
   'submit .test': function sendTestEmail(event, instance) {
     event.preventDefault();
+    instance.adminWorking.set(true);
     const emailList = event.target.text.value;
     const emailListArray = _.map(emailList.split(','), email => email.trim());
     if (emailListArray.length === 1 && emailListArray[0] === '') {
       instance.testEmailStatus.set('Please input at least one email');
+      instance.adminWorking.set(false);
       return;
     }
     const bccList = $('#bcc-list').val();
@@ -488,6 +502,7 @@ Template.Generate_Newsletter_Widget.events({
     const adminMessage = $('.markdown').html();
     if (!(adminMessage.match(/[a-z]/i))) {
       instance.testEmailStatus.set('Please input an admin message');
+      instance.adminWorking.set(false);
       return;
     }
     instance.testEmailStatus.set('Sending emails...');
@@ -523,26 +538,33 @@ Template.Generate_Newsletter_Widget.events({
       }
     });
     instance.testEmailStatus.set('All emails sent!');
+    instance.adminWorking.set(false);
   },
   'submit .level': function sendToAdmin(event, instance) {
     event.preventDefault();
+    instance.studentsWorking.set(true);
+    console.log('submit .level %o', instance.studentsWorking.get());
     const adminMessage = $('.markdown').html();
     if (!(adminMessage.match(/[a-z]/i))) {
       instance.levelEmailStatus.set('Please input an admin message');
+      instance.studentsWorking.set(false);
       return;
     }
     const subject = $('#subject-field').val();
     if (!subject) {
       instance.levelEmailStatus.set('Please input a subject line');
+      instance.studentsWorking.set(false);
       return;
     }
     if (!event.target['confirm-checkbox'].checked) {
       instance.levelEmailStatus.set('Please check the send confirmation box');
+      instance.studentsWorking.set(false);
       return;
     }
     const level = parseInt(event.target['level-dropdown'].value, 10);
     if (!level) {
       instance.levelEmailStatus.set('Please select a level');
+      instance.studentsWorking.set(false);
       return;
     }
     $('.ui.dropdown').dropdown('clear');
@@ -580,24 +602,29 @@ Template.Generate_Newsletter_Widget.events({
         }
         if (index === lastIndex) {
           instance.levelEmailStatus.set(`Level ${level}: All emails sent!`);
+          instance.studentsWorking.set(false);
         }
       }, index * 1000);
     });
   },
   'submit .all': function sendToAllStudents(event, instance) {
     event.preventDefault();
+    instance.allStudentsWorking.set(true);
     const adminMessage = $('.markdown').html();
     if (!(adminMessage.match(/[a-z]/i))) {
       instance.sendAllEmailStatus.set('Please input an admin message');
+      instance.allStudentsWorking.set(false);
       return;
     }
     const subject = $('#subject-field').val();
     if (!subject) {
       instance.sendAllEmailStatus.set('Please input a subject line');
+      instance.allStudentsWorking.set(false);
       return;
     }
     if (!event.target['confirm-checkbox'].checked) {
       instance.sendAllEmailStatus.set('Please check the send confirmation box');
+      instance.allStudentsWorking.set(false);
       return;
     }
     $('.ui.dropdown').dropdown('clear');
@@ -635,6 +662,7 @@ Template.Generate_Newsletter_Widget.events({
         }
         if (index === lastIndex) {
           instance.sendAllEmailStatus.set('All emails sent!');
+          instance.allStudentsWorking.set(false);
         }
       }, index * 1000);
     });

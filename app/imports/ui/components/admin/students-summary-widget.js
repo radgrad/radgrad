@@ -14,6 +14,7 @@ Template.Students_Summary_Widget.onCreated(function studentsSummaryWidgetOnRende
   this.selectedUser = new ReactiveVar();
   this.behaviors = new ReactiveVar();
   this.dateRange = new ReactiveVar();
+  this.working = new ReactiveVar(false);
   studentPopulation = StudentProfiles.find().count();
   /* There is a possible bug with Semantic where the timeline modal is duplicated in the DOM
     upon navigating back to the student summary page from any other page. A suggested fix (temporary)
@@ -165,11 +166,15 @@ Template.Students_Summary_Widget.helpers({
   user() {
     return Template.instance().selectedUser.get();
   },
+  working() {
+    return Template.instance().working.get();
+  },
 });
 
 Template.Students_Summary_Widget.events({
   submit(event, instance) {
     event.preventDefault();
+    instance.working.set(true);
     const startDate = moment(event.target.startDate.value, 'MMMM D, YYYY').toDate();
     const endDate = moment(event.target.endDate.value, 'MMMM D, YYYY').endOf('day').toDate();
     const dateRange = { startDate, endDate };
@@ -238,6 +243,7 @@ Template.Students_Summary_Widget.events({
         instance.interactionsByUser.set(users);
         instance.behaviors.set(behaviors);
         instance.dateRange.set(dateRange);
+        instance.working.set(false);
       }
     });
   },
