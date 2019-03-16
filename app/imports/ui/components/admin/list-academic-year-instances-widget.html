@@ -2,23 +2,23 @@
   <div class="ui padded container segment">
     <div class="ui dividing header"><h4>ACADEMIC YEAR INSTANCES ({{ count }})</h4></div>
     <div class="ui grid">
-      {{#if paginationEnabled}}
-        <div class="centered row">
-          <button class="ui basic green {{#if firstDisabled}}disabled{{/if}} button jsFirst"><i class="fast backward icon"></i> First</button>
-          <button class="ui basic green {{#if firstDisabled}}disabled{{/if}} button jsPrev"><i class="step backward icon"></i> Prev</button>
-          <div class="ui message" style="margin: 0px;">{{paginationLabel}}</div>
-          <button class="ui basic green {{#if lastDisabled}}disabled{{/if}} button jsNext"><i class="step forward icon"></i> Next</button>
-          <button class="ui basic green {{#if lastDisabled}}disabled{{/if}} button jsLast"><i class="fast forward icon"></i> Last</button>
-          <select class="ui dropdown jsNum">
-            <option value="50" selected={{isSelected 50}}>50</option>
-            <option value="25" selected={{isSelected 25}}>25</option>
-            <option value="10" selected={{isSelected 10}}>10</option>
-          </select>
-          <div class="ui message" style="margin: 0px;">Records / Page</div>
+      <!--{{#if paginationEnabled}}-->
+        <!--<div class="centered row">-->
+          <!--<button class="ui basic green {{#if firstDisabled}}disabled{{/if}} button jsFirst"><i class="fast backward icon"></i> First</button>-->
+          <!--<button class="ui basic green {{#if firstDisabled}}disabled{{/if}} button jsPrev"><i class="step backward icon"></i> Prev</button>-->
+          <!--<div class="ui message" style="margin: 0px;">{{paginationLabel}}</div>-->
+          <!--<button class="ui basic green {{#if lastDisabled}}disabled{{/if}} button jsNext"><i class="step forward icon"></i> Next</button>-->
+          <!--<button class="ui basic green {{#if lastDisabled}}disabled{{/if}} button jsLast"><i class="fast forward icon"></i> Last</button>-->
+          <!--<select class="ui dropdown jsNum">-->
+            <!--<option value="50" selected={{isSelected 50}}>50</option>-->
+            <!--<option value="25" selected={{isSelected 25}}>25</option>-->
+            <!--<option value="10" selected={{isSelected 10}}>10</option>-->
+          <!--</select>-->
+          <!--<div class="ui message" style="margin: 0px;">Records / Page</div>-->
 
-        </div>
-      {{/if}}
-
+        <!--</div>-->
+      <!--{{/if}}-->
+      {{> Admin_Datamodel_Pagination_Widget showItemCount=getItemCount showIndex=getItemIndex collection=getCollection }}
       {{#each academicYearInstance in academicYearInstances}}
         {{> Admin_Datamodel_Academicplan_Accordion academicYearInstance=academicYearInstance name=(name academicYearInstance)  descriptionPairs=(descriptionPairs academicYearInstance) id=academicYearInstance._id updateID=updateID deleteDisabled=(deleteDisabled academicYearInstance)}}
       {{/each}}

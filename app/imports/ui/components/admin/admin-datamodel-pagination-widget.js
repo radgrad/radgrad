@@ -1,0 +1,85 @@
+import { Template } from 'meteor/templating';
+import { AcademicYearInstances } from '../../../api/degree-plan/AcademicYearInstanceCollection';
+
+Template.Admin_Datamodel_Pagination_Widget.onCreated(function admindatamodelpaginationwidgetOnCreated() {
+  console.log('onCreated data=%o', this.data);
+  if (this.data) {
+    this.showItemCount = this.data.showItemCount;
+    this.showIndex = this.data.showIndex;
+    this.collection = this.data.collection;
+  }
+});
+
+Template.Admin_Datamodel_Pagination_Widget.helpers({
+  paginationLabel() {
+    const count = Template.instance().collection.count();
+    if (count < Template.instance().showItemCount.get()) {
+      return 'Showing all';
+    }
+    const startIndex = Template.instance().showIndex.get() + 1;
+    let endIndex = startIndex + Template.instance().showItemCount.get();
+    endIndex--;
+    if (endIndex > count) {
+      endIndex = count;
+    }
+    return ` ${startIndex} - ${endIndex} of ${count} `;
+  },
+  paginationEnabled() {
+    console.log('count = %o item count = %o', Template.instance().collection.count(),
+      Template.instance().showItemCount.get());
+    return Template.instance().collection.count() > Template.instance().showItemCount.get();
+  },
+  firstDisabled() {
+    return Template.instance().showIndex.get() === 0;
+  },
+  lastDisabled() {
+    const count = Template.instance().collection.count();
+    const index = Template.instance().showIndex.get();
+    const showCount = Template.instance().showItemCount.get();
+    return (index + showCount) >= count;
+  },
+  isSelected(count) {
+    return count === Template.instance().showItemCount.get();
+  },
+});
+
+Template.Admin_Datamodel_Pagination_Widget.events({
+  'click .jsFirst': function jsFirst(event, instance) {
+    event.preventDefault();
+    instance.showIndex.set(0);
+  },
+  'click .jsPrev': function jsFirst(event, instance) {
+    event.preventDefault();
+    let index = instance.showIndex.get();
+    index -= instance.showItemCount.get();
+    if (index < 0) {
+      index = 0;
+    }
+    instance.showIndex.set(index);
+  },
+  'click .jsNext': function jsFirst(event, instance) {
+    event.preventDefault();
+    const index = instance.showIndex.get();
+    instance.showIndex.set(index + instance.showItemCount.get());
+  },
+  'click .jsLast': function jsFirst(event, instance) {
+    event.preventDefault();
+    const count = AcademicYearInstances.count();
+    instance.showIndex.set(count - instance.showItemCount.get());
+  },
+  'change .jsNum': function jsNum(event, instance) {
+    event.preventDefault();
+    // console.log('event = %o instance = %o', event, instance);
+    const numStr = event.target.value;
+    instance.showItemCount.set(parseInt(numStr, 10));
+  },
+});
+
+Template.Admin_Datamodel_Pagination_Widget.onRendered(function admindatamodelpaginationwidgetOnRendered() {
+  // add your statement here
+});
+
+Template.Admin_Datamodel_Pagination_Widget.onDestroyed(function admindatamodelpaginationwidgetOnDestroyed() {
+  // add your statement here
+});
+
