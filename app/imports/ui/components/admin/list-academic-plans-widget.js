@@ -1,4 +1,6 @@
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
@@ -16,9 +18,29 @@ function numReferences(academicPlan) {
   return references;
 }
 
+Template.List_Academic_Plans_Widget.onCreated(function listAcademicPlansWidgetOnCreated() {
+  this.itemCount = new ReactiveVar(50);
+  this.itemIndex = new ReactiveVar(0);
+});
+
 Template.List_Academic_Plans_Widget.helpers({
   academicPlans() {
-    return AcademicPlans.find({}, { sort: { year: 1, name: 1 } }).fetch();
+    const plans = AcademicPlans.find({}, { sort: { year: 1, name: 1 } }).fetch();
+    const startIndex = Template.instance().itemIndex.get();
+    const endIndex = startIndex + Template.instance().itemCount.get() + 1;
+    return _.slice(plans, startIndex, endIndex);
+  },
+  paginationLabel() {
+    const count = AcademicPlans.count();
+    if (count < Template.instance().itemCount.get()) {
+      return 'Showing all';
+    }
+    const startIndex = Template.instance().itemIndex.get();
+    const endIndex = startIndex + Template.instance().itemCount.get();
+    return `[ ${startIndex} to ${endIndex} of ${count} ]`;
+  },
+  paginationEnabled() {
+    return AcademicPlans.count() > Template.instance().itemCount.get();
   },
   count() {
     return AcademicPlans.find({}, { sort: { year: 1, name: 1 } }).fetch().length;

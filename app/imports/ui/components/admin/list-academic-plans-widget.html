@@ -1,9 +1,19 @@
 <template name="List_Academic_Plans_Widget">
   <div class="ui padded container segment">
     <div class="ui dividing header"><h4>ACADEMIC PLANS ({{ count }})</h4></div>
-
-    {{#each academicPlan in academicPlans}}
-      {{> Admin_Datamodel_Academicplan_Accordion academicPlan=academicPlan degreePlanner=false name=academicPlan.name slug=(slugName academicPlan.slugID) descriptionPairs=(descriptionPairs academicPlan) id=academicPlan._id updateID=updateID deleteDisabled=(deleteDisabled academicPlan) retired=(retired academicPlan)}}
-    {{/each}}
+    <div class="ui grid">
+      {{#if paginationEnabled}}
+        <div class="centered row">
+          <button class="ui basic green button"><i class="fast backward icon"></i> First</button>
+          <button class="ui basic green button"><i class="step backward icon"></i> Prev</button>
+          <div class="ui message" style="margin: 0px;">{{paginationLabel}}</div>
+          <button class="ui basic green button"><i class="step forward icon"></i> Next</button>
+          <button class="ui basic green button"><i class="step forward icon"></i> Last</button>
+        </div>
+      {{/if}}
+      {{#each academicPlan in academicPlans}}
+        {{> Admin_Datamodel_Academicplan_Accordion academicPlan=academicPlan degreePlanner=false name=academicPlan.name slug=(slugName academicPlan.slugID) descriptionPairs=(descriptionPairs academicPlan) id=academicPlan._id updateID=updateID deleteDisabled=(deleteDisabled academicPlan) retired=(retired academicPlan)}}
+      {{/each}}
+    </div>
   </div>
 </template>

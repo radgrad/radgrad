@@ -1,9 +1,20 @@
 <template name="List_Academic_Year_Instances_Widget">
   <div class="ui padded container segment">
     <div class="ui dividing header"><h4>ACADEMIC YEAR INSTANCES ({{ count }})</h4></div>
+    <div class="ui grid">
+      {{#if paginationEnabled}}
+        <div class="centered row">
+          <button class="ui basic green {{#if firstDisabled}}disabled{{/if}} button jsFirst"><i class="fast backward icon"></i> First</button>
+          <button class="ui basic green {{#if firstDisabled}}disabled{{/if}} button jsPrev"><i class="step backward icon"></i> Prev</button>
+          <div class="ui message" style="margin: 0px;">{{paginationLabel}}</div>
+          <button class="ui basic green {{#if lastDisabled}}disabled{{/if}} button jsNext"><i class="step forward icon"></i> Next</button>
+          <button class="ui basic green {{#if lastDisabled}}disabled{{/if}} button jsLast"><i class="fast forward icon"></i> Last</button>
+        </div>
+      {{/if}}
 
-    {{#each academicYearInstance in academicYearInstances}}
-      {{> Admin_Datamodel_Academicplan_Accordion academicYearInstance=academicYearInstance name=(name academicYearInstance)  descriptionPairs=(descriptionPairs academicYearInstance) id=academicYearInstance._id updateID=updateID deleteDisabled=(deleteDisabled academicYearInstance)}}
-    {{/each}}
+      {{#each academicYearInstance in academicYearInstances}}
+        {{> Admin_Datamodel_Academicplan_Accordion academicYearInstance=academicYearInstance name=(name academicYearInstance)  descriptionPairs=(descriptionPairs academicYearInstance) id=academicYearInstance._id updateID=updateID deleteDisabled=(deleteDisabled academicYearInstance)}}
+      {{/each}}
+    </div>
   </div>
 </template>
