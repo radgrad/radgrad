@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
@@ -14,6 +15,11 @@ function numReferences() {
   return 0;
 }
 
+Template.List_Reviews_Widget.onCreated(function listReviewsOnCreated() {
+  this.itemCount = new ReactiveVar(25);
+  this.itemIndex = new ReactiveVar(0);
+});
+
 Template.List_Reviews_Widget.helpers({
   reviews() {
     const allReviews = Reviews.find().fetch();
@@ -25,9 +31,12 @@ Template.List_Reviews_Widget.helpers({
       }
       return '';
     });
-    return _.sortBy(sortByReviewee, function (review) {
+    const items = _.sortBy(sortByReviewee, function (review) {
       return Users.getFullName(review.studentID);
     });
+    const startIndex = Template.instance().itemIndex.get();
+    const endIndex = startIndex + Template.instance().itemCount.get();
+    return _.slice(items, startIndex, endIndex);
   },
   count() {
     return Reviews.count();
@@ -56,6 +65,15 @@ Template.List_Reviews_Widget.helpers({
       { label: 'Visible', value: review.visible.toString() },
       { label: 'Moderator Comments', value: review.moderatorComments },
     ];
+  },
+  getItemCount() {
+    return Template.instance().itemCount;
+  },
+  getItemIndex() {
+    return Template.instance().itemIndex;
+  },
+  getCollection() {
+    return Reviews;
   },
 });
 

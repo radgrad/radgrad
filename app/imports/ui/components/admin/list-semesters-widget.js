@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
 import { Slugs } from '../../../api/slug/SlugCollection';
@@ -20,9 +21,17 @@ function numReferences(semester) {
   return references;
 }
 
+Template.List_Semesters_Widget.onCreated(function listSemestersOnCreated() {
+  this.itemCount = new ReactiveVar(25);
+  this.itemIndex = new ReactiveVar(0);
+});
+
 Template.List_Semesters_Widget.helpers({
   semesters() {
-    return Semesters.find({}, { sort: { semesterNumber: 1 } });
+    const items = Semesters.find({}, { sort: { semesterNumber: 1 } }).fetch();
+    const startIndex = Template.instance().itemIndex.get();
+    const endIndex = startIndex + Template.instance().itemCount.get();
+    return _.slice(items, startIndex, endIndex);
   },
   count() {
     return Semesters.count();
@@ -46,6 +55,15 @@ Template.List_Semesters_Widget.helpers({
   },
   retired(semester) {
     return semester.retired;
+  },
+  getItemCount() {
+    return Template.instance().itemCount;
+  },
+  getItemIndex() {
+    return Template.instance().itemIndex;
+  },
+  getCollection() {
+    return Semesters;
   },
 });
 

@@ -1,7 +1,14 @@
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import * as FormUtils from '../form-fields/form-field-utilities';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { PlanChoices } from '../../../api/degree-plan/PlanChoiceCollection';
+
+Template.List_Plan_Choice_Widget.onCreated(function listPlanChoicesOnCreated() {
+  this.itemCount = new ReactiveVar(25);
+  this.itemIndex = new ReactiveVar(0);
+});
 
 Template.List_Plan_Choice_Widget.helpers({
   count() {
@@ -19,7 +26,19 @@ Template.List_Plan_Choice_Widget.helpers({
     return pc.choice;
   },
   planChoices() {
-    return PlanChoices.find().fetch();
+    const items = PlanChoices.find().fetch();
+    const startIndex = Template.instance().itemIndex.get();
+    const endIndex = startIndex + Template.instance().itemCount.get();
+    return _.slice(items, startIndex, endIndex);
+  },
+  getItemCount() {
+    return Template.instance().itemCount;
+  },
+  getItemIndex() {
+    return Template.instance().itemIndex;
+  },
+  getCollection() {
+    return PlanChoices;
   },
 });
 

@@ -1,8 +1,11 @@
 <template name="List_Mentor_Answers_Widget">
   <div class="ui padded container segment">
     <div class="ui dividing header"><h4>MENTOR ANSWERS ({{ count }})</h4></div>
-    {{#each mentorAnswer in mentorAnswers}}
-      {{> Admin_DataModel_Accordion name=(title mentorAnswer) descriptionPairs=(descriptionPairs mentorAnswer) id=mentorAnswer._id updateID=updateID deleteDisabled=false}}
-    {{/each}}
+    <div class="ui grid">
+      {{> Admin_Datamodel_Pagination_Widget showItemCount=getItemCount showIndex=getItemIndex collection=getCollection }}
+      {{#each mentorAnswer in mentorAnswers}}
+        {{> Admin_DataModel_Accordion name=(title mentorAnswer) descriptionPairs=(descriptionPairs mentorAnswer) id=mentorAnswer._id updateID=updateID deleteDisabled=false}}
+      {{/each}}
+    </div>
   </div>
 </template>

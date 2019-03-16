@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Courses } from '../../../api/course/CourseCollection';
@@ -22,10 +23,17 @@ function numReferences(interest) {
   });
   return references;
 }
+Template.List_Interests_Widget.onCreated(function listInterestsOnCreated() {
+  this.itemCount = new ReactiveVar(25);
+  this.itemIndex = new ReactiveVar(0);
+});
 
 Template.List_Interests_Widget.helpers({
   interests() {
-    return Interests.find({}, { sort: { name: 1 } });
+    const items = Interests.find({}, { sort: { name: 1 } }).fetch();
+    const startIndex = Template.instance().itemIndex.get();
+    const endIndex = startIndex + Template.instance().itemCount.get();
+    return _.slice(items, startIndex, endIndex);
   },
   count() {
     return Interests.count();
@@ -42,6 +50,15 @@ Template.List_Interests_Widget.helpers({
       { label: 'Interest Type', value: InterestTypes.findDoc(interest.interestTypeID).name },
       { label: 'References', value: `${numReferences(interest)}` },
     ];
+  },
+  getItemCount() {
+    return Template.instance().itemCount;
+  },
+  getItemIndex() {
+    return Template.instance().itemIndex;
+  },
+  getCollection() {
+    return Interests;
   },
 });
 

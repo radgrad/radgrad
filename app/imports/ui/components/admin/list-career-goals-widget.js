@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
@@ -16,10 +17,17 @@ function numReferences(careerGoal) {
   });
   return references;
 }
+Template.List_Career_Goals_Widget.onCreated(function listCareerGoalsOnCreated() {
+  this.itemCount = new ReactiveVar(25);
+  this.itemIndex = new ReactiveVar(0);
+});
 
 Template.List_Career_Goals_Widget.helpers({
   careerGoals() {
-    return CareerGoals.find({}, { sort: { name: 1 } });
+    const items = CareerGoals.find({}, { sort: { name: 1 } });
+    const startIndex = Template.instance().itemIndex.get();
+    const endIndex = startIndex + Template.instance().itemCount.get();
+    return _.slice(items, startIndex, endIndex);
   },
   count() {
     return CareerGoals.count();
@@ -35,6 +43,15 @@ Template.List_Career_Goals_Widget.helpers({
       { label: 'Description', value: careerGoal.description },
       { label: 'Interests', value: _.sortBy(Interests.findNames(careerGoal.interestIDs)) },
       { label: 'References', value: `Users: ${numReferences(careerGoal)}` }];
+  },
+  getItemCount() {
+    return Template.instance().itemCount;
+  },
+  getItemIndex() {
+    return Template.instance().itemIndex;
+  },
+  getCollection() {
+    return CareerGoals;
   },
 });
 

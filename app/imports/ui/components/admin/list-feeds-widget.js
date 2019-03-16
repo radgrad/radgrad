@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { Feeds } from '../../../api/feed/FeedCollection';
@@ -14,7 +15,10 @@ function numReferences() {
 }
 
 /* eslint-disable max-len */
-
+Template.List_Feeds_Widget.onCreated(function listFeedsOnCreated() {
+  this.itemCount = new ReactiveVar(25);
+  this.itemIndex = new ReactiveVar(0);
+});
 Template.List_Feeds_Widget.helpers({
   name(feed) {
     return `${feed.feedType} ${feed.description}`;
@@ -24,9 +28,12 @@ Template.List_Feeds_Widget.helpers({
     const byTime = _.sortBy(allFeeds, function (feed) {
       return feed.timestamp;
     });
-    return _.sortBy(byTime, function (feed) {
+    const items = _.sortBy(byTime, function (feed) {
       return feed.feedType;
     });
+    const startIndex = Template.instance().itemIndex.get();
+    const endIndex = startIndex + Template.instance().itemCount.get();
+    return _.slice(items, startIndex, endIndex);
   },
   count() {
     return Feeds.count();
@@ -63,6 +70,15 @@ Template.List_Feeds_Widget.helpers({
       { label: 'Course', value: courseName },
       { label: 'Semester', value: semesterName },
     ];
+  },
+  getItemCount() {
+    return Template.instance().itemCount;
+  },
+  getItemIndex() {
+    return Template.instance().itemIndex;
+  },
+  getCollection() {
+    return Feeds;
   },
 });
 

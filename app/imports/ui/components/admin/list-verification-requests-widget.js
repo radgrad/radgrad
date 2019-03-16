@@ -1,4 +1,6 @@
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import * as FormUtils from '../form-fields/form-field-utilities.js';
@@ -11,9 +13,17 @@ function numReferences() {
   return 0;
 }
 
+Template.List_Verification_Requests_Widget.onCreated(function listVerificationRequestsOnCreated() {
+  this.itemCount = new ReactiveVar(25);
+  this.itemIndex = new ReactiveVar(0);
+});
+
 Template.List_Verification_Requests_Widget.helpers({
   verificationRequests() {
-    return VerificationRequests.find({});
+    const items = VerificationRequests.find({}).fetch();
+    const startIndex = Template.instance().itemIndex.get();
+    const endIndex = startIndex + Template.instance().itemCount.get();
+    return _.slice(items, startIndex, endIndex);
   },
   count() {
     return VerificationRequests.count();
@@ -40,6 +50,15 @@ Template.List_Verification_Requests_Widget.helpers({
       { label: 'Status', value: vr.status },
       { label: 'ICE', value: `${vr.ice.i}, ${vr.ice.c}, ${vr.ice.e}` },
     ];
+  },
+  getItemCount() {
+    return Template.instance().itemCount;
+  },
+  getItemIndex() {
+    return Template.instance().itemIndex;
+  },
+  getCollection() {
+    return VerificationRequests;
   },
 });
 

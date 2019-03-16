@@ -1,11 +1,21 @@
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import { HelpMessages } from '../../../api/help/HelpMessageCollection';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 import * as FormUtils from '../form-fields/form-field-utilities.js';
 
+Template.List_Help_Messages_Widget.onCreated(function listHelpMessagesOnCreated() {
+  this.itemCount = new ReactiveVar(25);
+  this.itemIndex = new ReactiveVar(0);
+});
+
 Template.List_Help_Messages_Widget.helpers({
   helpMessages() {
-    return HelpMessages.find({}, { sort: { routeName: 1 } });
+    const items = HelpMessages.find({}, { sort: { routeName: 1 } }).fetch();
+    const startIndex = Template.instance().itemIndex.get();
+    const endIndex = startIndex + Template.instance().itemCount.get();
+    return _.slice(items, startIndex, endIndex);
   },
   count() {
     return HelpMessages.count();
@@ -19,6 +29,15 @@ Template.List_Help_Messages_Widget.helpers({
       { label: 'Title', value: helpMessage.title },
       { label: 'Text', value: helpMessage.text },
     ];
+  },
+  getItemCount() {
+    return Template.instance().itemCount;
+  },
+  getItemIndex() {
+    return Template.instance().itemIndex;
+  },
+  getCollection() {
+    return HelpMessages;
   },
 });
 

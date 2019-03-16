@@ -1,11 +1,21 @@
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 import * as FormUtils from '../form-fields/form-field-utilities.js';
 
+Template.List_Slugs_Widget.onCreated(function listSlugsOnCreated() {
+  this.itemCount = new ReactiveVar(25);
+  this.itemIndex = new ReactiveVar(0);
+});
+
 Template.List_Slugs_Widget.helpers({
   slugs() {
-    return Slugs.find({}, { sort: { name: 1 } });
+    const items = Slugs.find({}, { sort: { name: 1 } }).fetch();
+    const startIndex = Template.instance().itemIndex.get();
+    const endIndex = startIndex + Template.instance().itemCount.get();
+    return _.slice(items, startIndex, endIndex);
   },
   count() {
     return Slugs.count();
@@ -19,6 +29,15 @@ Template.List_Slugs_Widget.helpers({
       { label: 'Entity Name', value: `${slug.entityName}` },
       { label: 'Entity ID', value: `${slug.entityID}` },
     ];
+  },
+  getItemCount() {
+    return Template.instance().itemCount;
+  },
+  getItemIndex() {
+    return Template.instance().itemIndex;
+  },
+  getCollection() {
+    return Slugs;
   },
 });
 

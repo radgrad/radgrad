@@ -1,8 +1,11 @@
 <template name="List_Verification_Requests_Widget">
   <div class="ui padded container segment">
     <div class="ui dividing header"><h4>VERIFICATION REQUESTS ({{ count }})</h4></div>
-    {{#each verificationRequest in verificationRequests}}
-      {{> Admin_DataModel_Accordion name=(name verificationRequest) descriptionPairs=(descriptionPairs verificationRequest) id=verificationRequest._id updateID=updateID deleteDisabled=(deleteDisabled verificationRequest)}}
-    {{/each}}
+    <div class="ui grid">
+      {{> Admin_Datamodel_Pagination_Widget showItemCount=getItemCount showIndex=getItemIndex collection=getCollection }}
+      {{#each verificationRequest in verificationRequests}}
+        {{> Admin_DataModel_Accordion name=(name verificationRequest) descriptionPairs=(descriptionPairs verificationRequest) id=verificationRequest._id updateID=updateID deleteDisabled=(deleteDisabled verificationRequest)}}
+      {{/each}}
+    </div>
   </div>
 </template>

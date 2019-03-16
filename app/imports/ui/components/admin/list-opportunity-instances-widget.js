@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
@@ -7,15 +8,23 @@ import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection';
 import * as FormUtils from '../form-fields/form-field-utilities.js';
 
+Template.List_Opportunity_Instances_Widget.onCreated(function listOpportunityInstancesOnCreated() {
+  this.itemCount = new ReactiveVar(25);
+  this.itemIndex = new ReactiveVar(0);
+});
+
 Template.List_Opportunity_Instances_Widget.helpers({
   opportunityInstances() {
     const allOpportunityInstances = OpportunityInstances.find().fetch();
     const sortBySemester = _.sortBy(allOpportunityInstances, function (oi) {
       return Semesters.toString(oi.semesterID, true);
     });
-    return _.sortBy(sortBySemester, function (oi) {
+    const items = _.sortBy(sortBySemester, function (oi) {
       return Users.getProfile(oi.studentID).username;
     });
+    const startIndex = Template.instance().itemIndex.get();
+    const endIndex = startIndex + Template.instance().itemCount.get();
+    return _.slice(items, startIndex, endIndex);
   },
   count() {
     return OpportunityInstances.count();
@@ -38,6 +47,15 @@ Template.List_Opportunity_Instances_Widget.helpers({
     const username = Users.getProfile(oi.studentID).username;
     const semester = Semesters.toString(oi.semesterID, true);
     return `${username}-${oppName}-${semester}`;
+  },
+  getItemCount() {
+    return Template.instance().itemCount;
+  },
+  getItemIndex() {
+    return Template.instance().itemIndex;
+  },
+  getCollection() {
+    return OpportunityInstances;
   },
 });
 

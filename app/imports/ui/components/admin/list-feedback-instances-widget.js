@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { FeedbackInstances } from '../../../api/feedback/FeedbackInstanceCollection';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
@@ -7,6 +8,8 @@ import * as FormUtils from '../form-fields/form-field-utilities.js';
 
 Template.List_Feedback_Instances_Widget.onCreated(function onCreated() {
   this.subscribe(FeedbackInstances.getPublicationName());
+  this.itemCount = new ReactiveVar(25);
+  this.itemIndex = new ReactiveVar(0);
 });
 
 Template.List_Feedback_Instances_Widget.helpers({
@@ -15,9 +18,12 @@ Template.List_Feedback_Instances_Widget.helpers({
     const sortByUser = _.sortBy(allFeedbackInstances, function (fi) {
       return Users.getProfile(fi.userID).username;
     });
-    return _.sortBy(sortByUser, function (fi) {
+    const items = _.sortBy(sortByUser, function (fi) {
       return fi.functionName;
     });
+    const startIndex = Template.instance().itemIndex.get();
+    const endIndex = startIndex + Template.instance().itemCount.get();
+    return _.slice(items, startIndex, endIndex);
   },
   count() {
     return FeedbackInstances.count();
@@ -37,6 +43,15 @@ Template.List_Feedback_Instances_Widget.helpers({
       { label: 'Description', value: feedbackInstance.description },
       { label: 'Type', value: feedbackInstance.feedbackType },
     ];
+  },
+  getItemCount() {
+    return Template.instance().itemCount;
+  },
+  getItemIndex() {
+    return Template.instance().itemIndex;
+  },
+  getCollection() {
+    return FeedbackInstances;
   },
 });
 

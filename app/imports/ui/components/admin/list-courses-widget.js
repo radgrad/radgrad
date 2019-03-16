@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Courses } from '../../../api/course/CourseCollection';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
@@ -12,9 +13,17 @@ function numReferences(course) {
   return CourseInstances.find({ courseID: course._id }).count();
 }
 
+Template.List_Courses_Widget.onCreated(function listCoursesOnCreated() {
+  this.itemCount = new ReactiveVar(25);
+  this.itemIndex = new ReactiveVar(0);
+});
+
 Template.List_Courses_Widget.helpers({
   courses() {
-    return Courses.find({}, { sort: { number: 1 } });
+    const items = Courses.find({}, { sort: { number: 1 } }).fetch();
+    const startIndex = Template.instance().itemIndex.get();
+    const endIndex = startIndex + Template.instance().itemCount.get();
+    return _.slice(items, startIndex, endIndex);
   },
   count() {
     return Courses.count();
@@ -41,6 +50,15 @@ Template.List_Courses_Widget.helpers({
       { label: 'References', value: `Course Instances: ${numReferences(course)}` },
       { label: 'Retired', value: course.retired ? 'True' : 'False' },
     ];
+  },
+  getItemCount() {
+    return Template.instance().itemCount;
+  },
+  getItemIndex() {
+    return Template.instance().itemIndex;
+  },
+  getCollection() {
+    return Courses;
   },
 });
 

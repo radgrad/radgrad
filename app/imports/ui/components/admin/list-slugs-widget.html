@@ -1,8 +1,11 @@
 <template name="List_Slugs_Widget">
   <div class="ui padded container segment">
     <div class="ui dividing header"><h4>SLUGS ({{ count }})</h4></div>
-    {{#each slug in slugs}}
-      {{> Admin_DataModel_Accordion name=(name slug) descriptionPairs=(descriptionPairs slug) id=slug._id updateID=updateID updateDisabled='disabled' deleteDisabled='disabled'}}
-    {{/each}}
+    <div class="ui grid">
+      {{> Admin_Datamodel_Pagination_Widget showItemCount=getItemCount showIndex=getItemIndex collection=getCollection }}
+      {{#each slug in slugs}}
+        {{> Admin_DataModel_Accordion name=(name slug) descriptionPairs=(descriptionPairs slug) id=slug._id updateID=updateID updateDisabled='disabled' deleteDisabled='disabled'}}
+      {{/each}}
+    </div>
   </div>
 </template>

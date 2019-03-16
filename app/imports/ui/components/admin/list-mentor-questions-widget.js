@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
@@ -7,6 +8,11 @@ import { Users } from '../../../api/user/UserCollection';
 import * as FormUtils from '../form-fields/form-field-utilities.js';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 
+Template.List_Mentor_Questions_Widget.onCreated(function listMentorQuestionsOnCreated() {
+  this.itemCount = new ReactiveVar(25);
+  this.itemIndex = new ReactiveVar(0);
+});
+
 Template.List_Mentor_Questions_Widget.helpers({
   title(question) {
     const fullName = Users.getFullName(StudentProfiles.getProfile(question.studentID).username);
@@ -14,10 +20,12 @@ Template.List_Mentor_Questions_Widget.helpers({
   },
   mentorQuestions() {
     const questions = MentorQuestions.find({}).fetch();
-    const sorted = _.sortBy(questions, ['question', function (a) {
+    const items = _.sortBy(questions, ['question', function (a) {
       return StudentProfiles.getProfile(a.studentID).username;
     }]);
-    return sorted;
+    const startIndex = Template.instance().itemIndex.get();
+    const endIndex = startIndex + Template.instance().itemCount.get();
+    return _.slice(items, startIndex, endIndex);
   },
   count() {
     return MentorQuestions.count();
@@ -33,6 +41,15 @@ Template.List_Mentor_Questions_Widget.helpers({
       { label: 'Visible', value: question.visible.toString() },
       { label: 'Moderator Comments', value: question.moderatorComments },
     ];
+  },
+  getItemCount() {
+    return Template.instance().itemCount;
+  },
+  getItemIndex() {
+    return Template.instance().itemIndex;
+  },
+  getCollection() {
+    return MentorQuestions;
   },
 });
 

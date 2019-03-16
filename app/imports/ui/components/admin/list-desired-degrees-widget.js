@@ -1,4 +1,6 @@
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import * as FormUtils from '../form-fields/form-field-utilities.js';
@@ -8,10 +10,16 @@ import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection
 function numReferences(desiredDegree) {
   return AcademicPlans.find({ degreeID: desiredDegree._id }).count();
 }
-
+Template.List_Desired_Degrees_Widget.onCreated(function listDesiredDegreesOnCreated() {
+  this.itemCount = new ReactiveVar(25);
+  this.itemIndex = new ReactiveVar(0);
+});
 Template.List_Desired_Degrees_Widget.helpers({
   desiredDegrees() {
-    return DesiredDegrees.find({}, { sort: { name: 1 } });
+    const items = DesiredDegrees.find({}, { sort: { name: 1 } }).fetch();
+    const startIndex = Template.instance().itemIndex.get();
+    const endIndex = startIndex + Template.instance().itemCount.get();
+    return _.slice(items, startIndex, endIndex);
   },
   count() {
     return DesiredDegrees.count();
@@ -36,6 +44,15 @@ Template.List_Desired_Degrees_Widget.helpers({
   },
   retired(desiredDegree) {
     return desiredDegree.retired;
+  },
+  getItemCount() {
+    return Template.instance().itemCount;
+  },
+  getItemIndex() {
+    return Template.instance().itemIndex;
+  },
+  getCollection() {
+    return DesiredDegrees;
   },
 });
 

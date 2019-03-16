@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection';
@@ -26,6 +27,11 @@ function numReferences() {
   return 0;
 }
 
+Template.List_Opportunities_Widget.onCreated(function listOpportunitiesOnCreated() {
+  this.itemCount = new ReactiveVar(25);
+  this.itemIndex = new ReactiveVar(0);
+});
+
 Template.List_Opportunities_Widget.helpers({
   facultyOpportunities() {
     return Opportunities.find({ sponsorID: getUserIdFromRoute() }, { sort: { name: 1 } });
@@ -35,7 +41,10 @@ Template.List_Opportunities_Widget.helpers({
     if (group === 'faculty') {
       return Opportunities.find({ sponsorID: { $ne: getUserIdFromRoute() } }, { sort: { name: 1 } });
     }
-    return Opportunities.find({}, { sort: { name: 1 } });
+    const items = Opportunities.find({}, { sort: { name: 1 } }).fetch();
+    const startIndex = Template.instance().itemIndex.get();
+    const endIndex = startIndex + Template.instance().itemCount.get();
+    return _.slice(items, startIndex, endIndex);
   },
   count() {
     return Opportunities.find({ sponsorID: { $ne: getUserIdFromRoute() } }).count();
@@ -81,6 +90,15 @@ Template.List_Opportunities_Widget.helpers({
   },
   titleICE(opportunity) {
     return `ICE: ${opportunity.ice.i}/${opportunity.ice.c}/${opportunity.ice.e}`;
+  },
+  getItemCount() {
+    return Template.instance().itemCount;
+  },
+  getItemIndex() {
+    return Template.instance().itemIndex;
+  },
+  getCollection() {
+    return Opportunities;
   },
 });
 

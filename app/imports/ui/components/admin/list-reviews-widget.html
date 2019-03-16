@@ -1,8 +1,11 @@
 <template name="List_Reviews_Widget">
   <div class="ui padded container segment">
     <div class="ui dividing header"><h4>REVIEWS ({{ count }})</h4></div>
-    {{#each review in reviews}}
-      {{> Admin_DataModel_Accordion name = '' slug=(slugName review.slugID) descriptionPairs=(descriptionPairs review) id=review._id updateID=updateID deleteDisabled=(deleteDisabled review)}}
-    {{/each}}
+    <div class="ui grid">
+      {{> Admin_Datamodel_Pagination_Widget showItemCount=getItemCount showIndex=getItemIndex collection=getCollection }}
+      {{#each review in reviews}}
+        {{> Admin_DataModel_Accordion name = '' slug=(slugName review.slugID) descriptionPairs=(descriptionPairs review) id=review._id updateID=updateID deleteDisabled=(deleteDisabled review)}}
+      {{/each}}
+    </div>
   </div>
 </template>
