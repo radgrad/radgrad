@@ -9,7 +9,7 @@ function numReferences(academicYearInstance) { // eslint-disable-line
 }
 
 Template.List_Academic_Year_Instances_Widget.onCreated(function listAcademicYearInstancesOnCreated() {
-  this.itemCount = new ReactiveVar(50);
+  this.itemCount = new ReactiveVar(25);
   this.itemIndex = new ReactiveVar(0);
 });
 
@@ -23,7 +23,7 @@ Template.List_Academic_Year_Instances_Widget.helpers({
       return Users.getProfile(ayi.studentID).username;
     });
     const startIndex = Template.instance().itemIndex.get();
-    const endIndex = startIndex + Template.instance().itemCount.get() + 1;
+    const endIndex = startIndex + Template.instance().itemCount.get();
     return _.slice(years, startIndex, endIndex);
   },
   count() {
@@ -46,9 +46,13 @@ Template.List_Academic_Year_Instances_Widget.helpers({
     if (count < Template.instance().itemCount.get()) {
       return 'Showing all';
     }
-    const startIndex = Template.instance().itemIndex.get();
-    const endIndex = startIndex + Template.instance().itemCount.get();
-    return `[ ${startIndex} - ${endIndex} of ${count} ]`;
+    const startIndex = Template.instance().itemIndex.get() + 1;
+    let endIndex = startIndex + Template.instance().itemCount.get();
+    endIndex--;
+    if (endIndex > count) {
+      endIndex = count;
+    }
+    return ` ${startIndex} - ${endIndex} of ${count} `;
   },
   paginationEnabled() {
     return AcademicYearInstances.count() > Template.instance().itemCount.get();
@@ -62,6 +66,9 @@ Template.List_Academic_Year_Instances_Widget.helpers({
     const showCount = Template.instance().itemCount.get();
     return (index + showCount) >= count;
   },
+  isSelected(count) {
+    return count === Template.instance().itemCount.get();
+  },
 });
 
 Template.List_Academic_Year_Instances_Widget.events({
@@ -71,8 +78,12 @@ Template.List_Academic_Year_Instances_Widget.events({
   },
   'click .jsPrev': function jsFirst(event, instance) {
     event.preventDefault();
-    const index = instance.itemIndex.get();
-    instance.itemIndex.set(index - instance.itemCount.get());
+    let index = instance.itemIndex.get();
+    index -= instance.itemCount.get();
+    if (index < 0) {
+      index = 0;
+    }
+    instance.itemIndex.set(index);
   },
   'click .jsNext': function jsFirst(event, instance) {
     event.preventDefault();
@@ -83,5 +94,11 @@ Template.List_Academic_Year_Instances_Widget.events({
     event.preventDefault();
     const count = AcademicYearInstances.count();
     instance.itemIndex.set(count - instance.itemCount.get());
+  },
+  'change .jsNum': function jsNum(event, instance) {
+    event.preventDefault();
+    // console.log('event = %o instance = %o', event, instance);
+    const numStr = event.target.value;
+    instance.itemCount.set(parseInt(numStr, 10));
   },
 });
