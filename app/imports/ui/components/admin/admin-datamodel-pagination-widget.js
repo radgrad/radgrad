@@ -2,7 +2,7 @@ import { Template } from 'meteor/templating';
 import { AcademicYearInstances } from '../../../api/degree-plan/AcademicYearInstanceCollection';
 
 Template.Admin_Datamodel_Pagination_Widget.onCreated(function admindatamodelpaginationwidgetOnCreated() {
-  console.log('onCreated data=%o', this.data);
+  // console.log('onCreated data=%o', this.data);
   if (this.data) {
     this.showItemCount = this.data.showItemCount;
     this.showIndex = this.data.showIndex;
@@ -23,11 +23,6 @@ Template.Admin_Datamodel_Pagination_Widget.helpers({
       endIndex = count;
     }
     return ` ${startIndex} - ${endIndex} of ${count} `;
-  },
-  paginationEnabled() {
-    console.log('count = %o item count = %o', Template.instance().collection.count(),
-      Template.instance().showItemCount.get());
-    return Template.instance().collection.count() > Template.instance().showItemCount.get();
   },
   firstDisabled() {
     return Template.instance().showIndex.get() === 0;
