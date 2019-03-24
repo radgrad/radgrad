@@ -114,7 +114,7 @@ Template.Semester_List_2.events({
             verified: false,
             fromSTAR: false,
             note: course.number,
-            grade: 'B',
+            grade: '***',
             student: username,
           };
           const semesterID = Template.instance().localState.get('semester')._id;

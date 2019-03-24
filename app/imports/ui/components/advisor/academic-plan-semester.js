@@ -40,79 +40,77 @@ function checkIfPlanSlugIsSatisfied(takenCourseSlugs, planCourseSlugs, planSlug)
           }
         });
       });
-    } else
-      if (planSlug.indexOf('300+') !== -1) {  // 300 or above choice
-        const pcs = planCourseSlugs.slice();
-        const tcs = takenCourseSlugs.slice();
-        _.forEach(takenCourseSlugs, (ts) => {
-          const pcsLen = pcs.length;
-          _.remove(pcs, function match(slug) {
-            return slug.startsWith(ts);
-          });
-          if (pcsLen !== pcs.length) {
-            _.remove(tcs, function match(slug) {
-              return slug === ts;
-            });
-          }
+    } else if (planSlug.indexOf('300+') !== -1) {  // 300 or above choice
+      const pcs = planCourseSlugs.slice();
+      const tcs = takenCourseSlugs.slice();
+      _.forEach(takenCourseSlugs, (ts) => {
+        const pcsLen = pcs.length;
+        _.remove(pcs, function match(slug) {
+          return slug.startsWith(ts);
         });
-        _.forEach(tcs, (slug) => {
-          _.forEach(depts, (d) => {
-            if (slug.startsWith(`${d}_3`) || slug.startsWith(`${d}_4`)) {
-              ret = true;
-            }
+        if (pcsLen !== pcs.length) {
+          _.remove(tcs, function match(slug) {
+            return slug === ts;
           });
-        });
-      } else {  // specific plan choice must match
-        _.forEach(takenCourseSlugs, (slug) => {
-          if (planSlug.indexOf(slug) !== -1) {
+        }
+      });
+      _.forEach(tcs, (slug) => {
+        _.forEach(depts, (d) => {
+          if (slug.startsWith(`${d}_3`) || slug.startsWith(`${d}_4`)) {
             ret = true;
           }
         });
-      }
-  } else // multiple choices so we need to count the matches.
-    if (planSlug.indexOf('400+') !== -1) {
-      let c = 0;
-      _.forEach(cleanedTaken, (s) => {
-        _.forEach(depts, (d) => {
-          if (s.startsWith(`${d}_4`)) {
-            c += 1;
-          }
-        });
       });
-      ret = c >= planCount;
-    } else
-      if (planSlug.indexOf('300+') !== -1) {
-        const pcs = planCourseSlugs.slice();
-        const tcs = takenCourseSlugs.slice();
-        _.forEach(takenCourseSlugs, (ts) => {
-          const pcsLen = pcs.length;
-          _.remove(pcs, function match(slug) {
-            return slug.startsWith(ts);
-          });
-          if (pcsLen !== pcs.length) {
-            _.remove(tcs, function match(slug) {
-              return slug === ts;
-            });
-          }
+    } else {  // specific plan choice must match
+      _.forEach(takenCourseSlugs, (slug) => {
+        if (planSlug.indexOf(slug) !== -1) {
+          ret = true;
+        }
+      });
+    }
+  } else // multiple choices so we need to count the matches.
+  if (planSlug.indexOf('400+') !== -1) {
+    let c = 0;
+    _.forEach(cleanedTaken, (s) => {
+      _.forEach(depts, (d) => {
+        if (s.startsWith(`${d}_4`)) {
+          c += 1;
+        }
+      });
+    });
+    ret = c >= planCount;
+  } else if (planSlug.indexOf('300+') !== -1) {
+    const pcs = planCourseSlugs.slice();
+    const tcs = takenCourseSlugs.slice();
+    _.forEach(takenCourseSlugs, (ts) => {
+      const pcsLen = pcs.length;
+      _.remove(pcs, function match(slug) {
+        return slug.startsWith(ts);
+      });
+      if (pcsLen !== pcs.length) {
+        _.remove(tcs, function match(slug) {
+          return slug === ts;
         });
-        let c = 0;
-        _.forEach(tcs, (slug) => {
-          _.forEach(depts, (d) => {
-            if (slug.startsWith(`${d}_3`) || slug.startsWith(`${d}_4`)) {
-              c += 1;
-            }
-          });
-        });
-        ret = c >= planCount;
-      } else {
-        let c = 0;
-        _.forEach(takenCourseSlugs, (slug) => {
-          if (planSlug.indexOf(slug) !== -1) {
-            c += 1;
-          }
-        });
-        ret = c >= planCount;
       }
+    });
+    let c = 0;
+    _.forEach(tcs, (slug) => {
+      _.forEach(depts, (d) => {
+        if (slug.startsWith(`${d}_3`) || slug.startsWith(`${d}_4`)) {
+          c += 1;
+        }
+      });
+    });
+    ret = c >= planCount;
+  } else {
+    let c = 0;
+    _.forEach(takenCourseSlugs, (slug) => {
+      if (planSlug.indexOf(slug) !== -1) {
+        c += 1;
+      }
+    });
+    ret = c >= planCount;
+  }
   return ret;
 }
 
@@ -131,6 +129,17 @@ Template.Academic_Plan_Semester.helpers({
   choices(course) {
     return course && planChoiceUtils.complexChoiceToArray(course);
   },
+  courseName(planSlug) {
+    if (planChoiceUtils.isSingleChoice(planSlug)) {
+      if (!planChoiceUtils.isXXChoice(planSlug)) {
+        const courseSlug = planChoiceUtils.stripCounter(planSlug);
+        const course = Courses.findDocBySlug(courseSlug);
+        return course.name;
+      }
+      return 'Use the Explorer/Inspector to choose a course';
+    }
+    return '';
+  },
   courseSlug(course) {
     if (planChoiceUtils.isSingleChoice(course)) {
       return planChoiceUtils.stripCounter(course);
@@ -141,7 +150,8 @@ Template.Academic_Plan_Semester.helpers({
     const planCourses = Template.instance().data.plan.courseList;
     const studentID = getUserIdFromRoute();
     if (Roles.userIsInRole(studentID, [ROLE.STUDENT])) {
-      const courses = CourseInstances.find({ studentID }).fetch();
+      const courses = CourseInstances.find({ studentID })
+        .fetch();
       const courseSlugs = takenSlugs(courses);
       return checkIfPlanSlugIsSatisfied(courseSlugs, planCourses, course);
     }
@@ -160,7 +170,8 @@ Template.Academic_Plan_Semester.events({
       const courseID = Slugs.getEntityID(slug, 'Course');
       const course = Courses.findDoc(courseID);
       const instance = Template.instance();
-      const ci = CourseInstances.find({ courseID, studentID: getUserIdFromRoute() }).fetch();
+      const ci = CourseInstances.find({ courseID, studentID: getUserIdFromRoute() })
+        .fetch();
       if (ci.length > 0) {
         instance.state.set('detailCourse', null);
         instance.state.set('detailCourseInstance', ci[0]);
@@ -175,10 +186,9 @@ Template.Academic_Plan_Semester.events({
         getFutureEnrollmentMethod.call(courseID, (error, result) => {
           if (error) {
             console.log('Error in getting future enrollment', error);
-          } else
-            if (course._id === result.courseID) {
-              instance.state.set('plannedEnrollment', result);
-            }
+          } else if (course._id === result.courseID) {
+            instance.state.set('plannedEnrollment', result);
+          }
         });
       }
     }
@@ -186,5 +196,6 @@ Template.Academic_Plan_Semester.events({
 });
 
 Template.Academic_Plan_Semester.onRendered(function academicPlanSemesterOnRendered() {
-  this.$('.label').popup({});
+  this.$('.label')
+    .popup({});
 });

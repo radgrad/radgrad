@@ -53,7 +53,7 @@ export function assertICE(obj) {
  * Students only earn ICE competency points for 'interesting' courses. Interesting
  * courses are courses that have non other slugs.
  * If an A, then return 9 competency points.
- * If a B, then return 5 competency points.
+ * If a B, then return 6 competency points.
  * Otherwise return zero points.
  * @param course The course slug. If it's the "uninteresting" slug, then disregard it.
  * @param grade The grade
@@ -74,7 +74,10 @@ export function makeCourseICE(course, grade) {
   } else
     if (_.includes(['A+', 'A', 'A-'], grade)) {
       c = gradeCompetency.A;
-    }
+    } else
+      if (_.includes(['*', '**', '***'], grade)) {
+        c = 9;
+      }
   return { i, c, e };
 }
 
@@ -119,5 +122,6 @@ export function getProjectedICE(docs) {
     total.e += instance.ice.e;
     return null;
   });
+  total.c = Math.floor(total.c);
   return total;
 }
