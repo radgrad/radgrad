@@ -3,7 +3,7 @@ import { ReactiveDict } from 'meteor/reactive-dict';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { $ } from 'meteor/jquery';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
-import { defineMethod, updateMethod } from '../../../api/base/BaseCollection.methods';
+import { defineMethod, removeItMethod, updateMethod } from '../../../api/base/BaseCollection.methods';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
@@ -284,6 +284,29 @@ Template.Semester_List_2.events({
         template.state.set(plannerKeys.detailCourse, null);
         template.state.set(plannerKeys.detailCourseInstance, null);
       }
+    template.state.set(plannerKeys.selectedInspectorTab, true);
+    template.state.set(plannerKeys.selectedPlanTab, false);
+  },
+  'click .jsDelCourse': function clickJsDelCourse(event) {
+    event.preventDefault();
+    // console.log(event.target);
+    const instance = event.target.id;
+    console.log(`removing CourseInstance ${instance}`);
+    const collectionName = CourseInstances.getCollectionName();
+    removeItMethod.call({ collectionName, instance }, (error) => {
+      if (error) {
+        console.warn('Error removing CourseInstance %o', error);
+      }
+    });
+    const template = Template.instance();
+    template.state.set(plannerKeys.selectedPlanTab, true);
+    template.state.set(plannerKeys.selectedInspectorTab, false);
+    template.state.set(plannerKeys.detailCourse, null);
+    template.state.set(plannerKeys.detailCourseInstance, null);
+    template.state.set(plannerKeys.detailICE, null);
+    template.state.set(plannerKeys.detailOpportunity, null);
+    template.state.set(plannerKeys.detailOpportunityInstance, null);
+    template.state.set(plannerKeys.detailICE, null);
   },
 });
 
