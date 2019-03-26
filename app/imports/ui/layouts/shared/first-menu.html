@@ -1,20 +1,30 @@
 <template name="First_Menu">
   <div class="ui top fixed borderless menu radgrad-first-menu">
-    <div class="mobile hidden item"><a href="{{pathFor landingRouteName}}"><img class="ui image" src="/images/radgrad_logo.png" style="width: 50px;"></a></div>
+    <div class="mobile hidden item"><a href="{{pathFor landingRouteName}}"><img class="ui image"
+                                                                                src="/images/radgrad_logo.png"
+                                                                                style="width: 50px;"></a></div>
     <div class="mobile hidden item" style="padding-left: 0;">
       <h1>{{> RadGrad_Logo_Text}}</h1>
     </div>
     <div class="mobile only item" style="padding-right: 0;">
-      <a class="ui icon basic green compact button mobileSidebar"><i class="content icon" style="color: #6FBE44 !important;"></i></a>
+      <a class="ui icon basic green compact button mobileSidebar"><i class="content icon"
+                                                                     style="color: #6FBE44 !important;"></i></a>
     </div>
     <div class="right menu radgrad-menu-profile">
 
       {{#if displayLevelAndIce}}
         <div class="item">
-          <a href="{{pathFor levelsRouteName username=routeUserName}}">{{> First_Menu_Level_Icon level=level}}</a>
-          <a href="{{pathFor iceRouteName username=routeUserName}}" style="margin-top: 5px; margin-right: 5px;">{{> First_Menu_Ice earned=earnedICE.i planned=projectedICE.i iceType="innov" type='menu'}}</a>
-          <a href="{{pathFor iceRouteName username=routeUserName}}" style="margin-top: 5px; margin-right: 5px;">{{> First_Menu_Ice earned=earnedICE.c planned=projectedICE.c iceType="comp" type='menu'}}</a>
-          <a href="{{pathFor iceRouteName username=routeUserName}}" style="margin-top: 5px;">{{> First_Menu_Ice earned=earnedICE.e planned=projectedICE.e iceType="exp" type='menu'}}</a>
+          <a href="{{pathFor levelsRouteName username=routeUserName}}" data-tooltip="Level {{level}}"
+             data-position="bottom left">{{> First_Menu_Level_Icon level=level}}</a>
+          <a href="{{pathFor iceRouteName username=routeUserName}}" style="margin-top: 5px; margin-right: 5px;"
+             data-tooltip={{icePopUpText projectedICE.i earnedICE.i}}
+             data-position="bottom left">{{> First_Menu_Ice earned=earnedICE.i planned=projectedICE.i iceType="innov" type='menu'}}</a>
+          <a href="{{pathFor iceRouteName username=routeUserName}}" style="margin-top: 5px; margin-right: 5px;"
+             data-tooltip={{icePopUpText projectedICE.c earnedICE.c}}
+             data-position="bottom left">{{> First_Menu_Ice earned=earnedICE.c planned=projectedICE.c iceType="comp" type='menu'}}</a>
+          <a href="{{pathFor iceRouteName username=routeUserName}}" style="margin-top: 5px;" data-tooltip={{icePopUpText
+              projectedICE.e earnedICE.e}}
+             data-position="bottom left">{{> First_Menu_Ice earned=earnedICE.e planned=projectedICE.e iceType="exp" type='menu'}}</a>
         </div>
       {{/if}}
 
@@ -27,7 +37,7 @@
       </div>
       <div class="mobile hidden item">
         <!--<button class="ui green basic button">-->
-          {{> loginButtons align="right"}}
+        {{> loginButtons align="right"}}
         <!--</button>-->
       </div>
     </div>
