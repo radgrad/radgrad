@@ -46,6 +46,7 @@
               <td style="border-top: none;">
                 {{> Planned_Course_Grade course=course dictionary=dictionary}}
               </td>
+              <td class="right aligned" style="border-top: none; margin: 0;"><i id="{{course._id}}" class="red remove circle icon jsDelCourse"></i></td>
             </tr>
           {{/each}}
           {{#each opportunity in semesterOpportunities}}
