@@ -308,6 +308,27 @@ Template.Semester_List_2.events({
     template.state.set(plannerKeys.detailOpportunityInstance, null);
     template.state.set(plannerKeys.detailICE, null);
   },
+  'click .jsDelOpp': function clickJsDelOpp(event) {
+    event.preventDefault();
+    // console.log(event.target);
+    const instance = event.target.id;
+    console.log(`removing OpportunityInstance ${instance}`);
+    const collectionName = OpportunityInstances.getCollectionName();
+    removeItMethod.call({ collectionName, instance }, (error) => {
+      if (error) {
+        console.warn('Error removing OpportunityInstance %o', error);
+      }
+    });
+    const template = Template.instance();
+    template.state.set(plannerKeys.selectedPlanTab, true);
+    template.state.set(plannerKeys.selectedInspectorTab, false);
+    template.state.set(plannerKeys.detailCourse, null);
+    template.state.set(plannerKeys.detailCourseInstance, null);
+    template.state.set(plannerKeys.detailICE, null);
+    template.state.set(plannerKeys.detailOpportunity, null);
+    template.state.set(plannerKeys.detailOpportunityInstance, null);
+    template.state.set(plannerKeys.detailICE, null);
+  },
 });
 
 Template.Semester_List_2.onRendered(function semesterListOnRendered() {
