@@ -12,7 +12,7 @@
           {{#each course in icsCourses}}
             <tr id="{{course._id}}" class="courseInstance clickEnabled" draggable="true" ondragstart="drag(event)"
                 data-position="top center" style="cursor: move;">
-              <td style="border-top: none;"><strong class="tooltip" data-position="right center" data-tooltip={{courseName course}}>{{course.note}}</strong></td>
+              <td style="border-top: none;"><strong class="tooltip" data-position="right center" data-tooltip={{courseName course}}><div class="ui basic green label">{{course.note}}</div></strong></td>
               <!--<td style="border-top: none;">-->
                 <!--{{> Planned_Course_Grade course=course dictionary=dictionary}}-->
               <!--</td>-->

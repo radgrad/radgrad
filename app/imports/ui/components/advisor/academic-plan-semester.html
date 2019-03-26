@@ -8,7 +8,7 @@
                  course-slug="{{courseSlug course}}"
                  slug="{{course}}" style="{{#if canDrag course}}margin: 2px; cursor: move;{{/if}}" data-position="left center" data-tooltip={{courseName course}}
                  draggable="{{#if canDrag course}}true{{else}}false{{/if}}"
-                 ondragstart="dragPlanCourse(event)" data-content="{{#if inPlan course}}{{else}}Drag to add {{choiceLabel course}}{{/if}}">{{choiceLabel
+                 ondragstart="dragPlanCourse(event)">{{choiceLabel
                 course}}</div>
           {{else}}
             <div id="{{course}}" class="ui basic {{#if inPlan course}}green {{else}}red {{/if}}vertical buttons"
@@ -19,7 +19,7 @@
                 {{/if}}
                 <div id="{{choice}}" class="ui basic {{#if inPlan course}}green {{else}}red {{/if}}label"
                      course-slug="{{choice}}" data-position="left center" data-tooltip={{courseName choice}}
-                     slug="{{course}}" style="margin: 2px; cursor: move;" draggable="true" ondragstart="dragPlanCourse(event)" data-content="{{#if inPlan course}}{{else}}Drag to add the course{{/if}}">{{choiceLabel choice}}</div>
+                     slug="{{course}}" style="margin: 2px; cursor: move;" draggable="true" ondragstart="dragPlanCourse(event)">{{choiceLabel choice}}</div>
               {{/each}}
             </div>
           {{/if}}

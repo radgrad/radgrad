@@ -130,11 +130,20 @@ Template.Academic_Plan_Semester.helpers({
     return course && planChoiceUtils.complexChoiceToArray(course);
   },
   courseName(planSlug) {
+    let inPlan = false;
+    const planCourses = Template.instance().data.plan.courseList;
+    const studentID = getUserIdFromRoute();
+    if (Roles.userIsInRole(studentID, [ROLE.STUDENT])) {
+      const courses = CourseInstances.find({ studentID })
+        .fetch();
+      const courseSlugs = takenSlugs(courses);
+      inPlan = checkIfPlanSlugIsSatisfied(courseSlugs, planCourses, planSlug);
+    }
     if (planChoiceUtils.isSingleChoice(planSlug)) {
       if (!planChoiceUtils.isXXChoice(planSlug)) {
         const courseSlug = planChoiceUtils.stripCounter(planSlug);
         const course = Courses.findDocBySlug(courseSlug);
-        return course.name;
+        return `${course.name} ${inPlan ? '' : ': drag to add to plan'} `;
       }
       return 'Use the Explorer/Inspector to choose a course';
     }
