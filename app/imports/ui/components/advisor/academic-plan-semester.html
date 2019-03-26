@@ -6,7 +6,8 @@
           {{#if isSingleChoice course}}
             <div id="{{course}}" class="ui basic {{#if inPlan course}}green {{else}}red {{/if}}label"
                  course-slug="{{courseSlug course}}"
-                 slug="{{course}}" style="{{#if canDrag course}}margin: 2px; cursor: move;{{/if}}" data-position="left center" data-tooltip={{courseName course}}
+                 slug="{{course}}" style="{{#if canDrag course}}margin: 2px; cursor: move;{{/if}}"
+                 data-position="left center" data-tooltip={{courseName course}}
                  draggable="{{#if canDrag course}}true{{else}}false{{/if}}"
                  ondragstart="dragPlanCourse(event)">{{choiceLabel
                 course}}</div>
@@ -19,13 +20,27 @@
                 {{/if}}
                 <div id="{{choice}}" class="ui basic {{#if inPlan course}}green {{else}}red {{/if}}label"
                      course-slug="{{choice}}" data-position="left center" data-tooltip={{courseName choice}}
-                     slug="{{course}}" style="margin: 2px; cursor: move;" draggable="true" ondragstart="dragPlanCourse(event)">{{choiceLabel choice}}</div>
+                     slug="{{course}}" style="margin: 2px; cursor: move;" draggable="true"
+                     ondragstart="dragPlanCourse(event)">{{choiceLabel choice}}</div>
               {{/each}}
             </div>
           {{/if}}
         {{else}}
-          <div id="{{course}}" class="ui basic {{#if inPlan course}}green {{else}}red {{/if}}label"
-               slug="{{course}}" data-position="top center" data-tooltip={{courseName course}}>{{choiceLabel course}}</div>
+          {{#if isSingleChoice course}}
+            <div id="{{course}}" class="ui basic {{#if inPlan course}}green {{else}}red {{/if}}label"
+                 style="{{#if canDrag course}}margin: 2px; cursor: move;{{/if}}">{{choiceLabel course}}</div>
+          {{else}}
+            <div id="{{course}}" class="ui basic {{#if inPlan course}}green {{else}}red {{/if}}vertical buttons"
+                 slug="{{course}}" style="padding: 2px;">
+              {{#each choice in (choices course)}}
+                {{#if @index}}
+                  <div class="or"></div>
+                {{/if}}
+                <div id="{{choice}}" class="ui basic {{#if inPlan course}}green {{else}}red {{/if}}label"
+                     course-slug="{{choice}}" style="margin: 2px; cursor: move;">{{choiceLabel choice}}</div>
+              {{/each}}
+            </div>
+          {{/if}}
         {{/if}}
       </td>
     </tr>

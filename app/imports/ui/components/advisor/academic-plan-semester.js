@@ -138,6 +138,8 @@ Template.Academic_Plan_Semester.helpers({
         .fetch();
       const courseSlugs = takenSlugs(courses);
       inPlan = checkIfPlanSlugIsSatisfied(courseSlugs, planCourses, planSlug);
+    } else {
+      inPlan = true;
     }
     if (planChoiceUtils.isSingleChoice(planSlug)) {
       if (!planChoiceUtils.isXXChoice(planSlug)) {
