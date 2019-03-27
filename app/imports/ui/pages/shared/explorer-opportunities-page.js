@@ -60,9 +60,10 @@ Template.Explorer_Opportunities_Page.helpers({
         opportunityID: opportunity._id,
       }).fetch();
       if (oi.length > 0) {
-        addedOpportunities.push(opportunity);
+        addedOpportunities.push({ item: opportunity, count: oi.length });
       }
     });
+    console.log('addedOpportunities %o', addedOpportunities);
     return addedOpportunities;
   },
   completed() {

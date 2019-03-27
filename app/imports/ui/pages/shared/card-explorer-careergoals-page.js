@@ -12,7 +12,7 @@ Template.Card_Explorer_CareerGoals_Page.helpers({
     const profile = Users.getProfile(getRouteUserName());
     _.forEach(allCareerGoals, (careerGoal) => {
       if (_.includes(profile.careerGoalIDs, careerGoal._id)) {
-        addedCareerGoals.push(careerGoal);
+        addedCareerGoals.push({ item: careerGoal, count: 1 });
       }
     });
     return addedCareerGoals;

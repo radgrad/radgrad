@@ -22,7 +22,7 @@ Template.Card_Explorer_Opportunities_Page.helpers({
         })
           .fetch();
         if (oi.length > 0) {
-          addedOpportunities.push(opportunity);
+          addedOpportunities.push({ item: opportunity, count: oi.length });
         }
       });
     }

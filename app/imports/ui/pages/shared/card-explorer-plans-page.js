@@ -12,7 +12,7 @@ Template.Card_Explorer_Plans_Page.helpers({
       const profile = Users.getProfile(getRouteUserName());
       const thePlan = AcademicPlans.findOne({ _id: profile.academicPlanID });
       if (thePlan) {
-        plan.push(thePlan);
+        plan.push({ item: thePlan, count: 1 });
       }
     }
     return plan;

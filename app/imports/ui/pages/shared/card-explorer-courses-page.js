@@ -21,18 +21,20 @@ Template.Card_Explorer_Courses_Page.helpers({
       }).fetch();
       if (ci.length > 0) {
         if (course.shortName !== 'Non-CS Course') {
-          addedCourses.push(course);
+          addedCourses.push({ item: course, count: ci.length });
         }
       }
     });
     if (Roles.userIsInRole(userID, [ROLE.STUDENT])) {
       const profile = StudentProfiles.findDoc({ userID });
       const plan = AcademicPlans.findDoc(profile.academicPlanID);
+      // CAM: why are we filtering?
       if (plan.coursesPerSemester.length < 15) { // not bachelors and masters
         const regex = /[1234]\d\d/g;
-        addedCourses = _.filter(addedCourses, (c) => c.number.match(regex));
+        addedCourses = _.filter(addedCourses, (c) => c.item.number.match(regex));
       }
     }
+    console.log('addedCourses %o', addedCourses);
     return addedCourses;
   },
   nonAddedCourses() {
