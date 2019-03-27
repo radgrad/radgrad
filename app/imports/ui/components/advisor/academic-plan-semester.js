@@ -150,7 +150,10 @@ Template.Academic_Plan_Semester.helpers({
         const course = Courses.findDocBySlug(courseSlug);
         return `${course.name} ${inPlan ? '' : ': drag to add to plan'} `;
       }
-      return 'Use the Explorer/Inspector to choose a course';
+      if (!inPlan) {
+        return 'Use the Explorer/Inspector to choose a course';
+      }
+      return 'Satisfied';
     }
     return '';
   },
