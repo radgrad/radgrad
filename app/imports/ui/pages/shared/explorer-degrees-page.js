@@ -32,7 +32,7 @@ Template.Explorer_Degrees_Page.helpers({
     const profile = Users.getProfile(getRouteUserName());
     if (profile.academicPlanID) {
       const plan = AcademicPlans.findDoc(profile.academicPlanID);
-      return [DesiredDegrees.findDoc(plan.degreeID)];
+      return [{ item: DesiredDegrees.findDoc(plan.degreeID), count: 1 }];
     }
     return [];
   },

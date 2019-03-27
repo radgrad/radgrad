@@ -28,7 +28,7 @@ Template.Explorer_Plans_Page.helpers({
   addedPlans() {
     const profile = Users.getProfile(getRouteUserName());
     if (profile.academicPlanID) {
-      return [AcademicPlans.findDoc(profile.academicPlanID)];
+      return [{ item: AcademicPlans.findDoc(profile.academicPlanID), count: 1 }];
     }
     return [];
   },
@@ -48,7 +48,7 @@ Template.Explorer_Plans_Page.helpers({
       }
       return true;
     });
-    return nonAddedPlans;
+    return _.map(nonAddedPlans, (p) => ({ item: p, count: 1 }));
   },
   plan() {
     const planSlugName = FlowRouter.getParam('plan');

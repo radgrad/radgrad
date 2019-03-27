@@ -87,7 +87,7 @@ Template.Explorer_Courses_Page.helpers({
         .fetch();
       if (ci.length > 0) {
         if (course.shortName !== 'Non-CS Course') {
-          addedCourses.push(course);
+          addedCourses.push({ item: course, count: ci.length });
         }
       }
     });

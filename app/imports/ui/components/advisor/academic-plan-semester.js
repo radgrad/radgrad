@@ -138,14 +138,18 @@ Template.Academic_Plan_Semester.helpers({
     return '';
   },
   inPlan(course) {
-    const planCourses = Template.instance().data.plan.courseList;
-    const studentID = getUserIdFromRoute();
-    if (Roles.userIsInRole(studentID, [ROLE.STUDENT])) {
-      const courses = CourseInstances.find({ studentID }).fetch();
-      const courseSlugs = takenSlugs(courses);
-      return checkIfPlanSlugIsSatisfied(courseSlugs, planCourses, course);
+    if (course) {
+      // console.log('inPlan(%o)', course);
+      const planCourses = Template.instance().data.plan.courseList;
+      const studentID = getUserIdFromRoute();
+      if (Roles.userIsInRole(studentID, [ROLE.STUDENT])) {
+        const courses = CourseInstances.find({ studentID }).fetch();
+        const courseSlugs = takenSlugs(courses);
+        return checkIfPlanSlugIsSatisfied(courseSlugs, planCourses, course);
+      }
+      return true;
     }
-    return true;
+    return false;
   },
   isSingleChoice(course) {
     return planChoiceUtils.isSingleChoice(course);
