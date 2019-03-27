@@ -18,10 +18,26 @@
                 {{#if @index}}
                   <div class="or"></div>
                 {{/if}}
-                <div id="{{choice}}" class="ui basic {{#if inPlan course}}green {{else}}red {{/if}}label"
-                     course-slug="{{choice}}" data-position="left center" data-tooltip={{courseName choice}}
-                     slug="{{course}}" style="margin: 2px; cursor: move;" draggable="true"
-                     ondragstart="dragPlanCourse(event)">{{choiceLabel choice}}</div>
+                {{#if isSingleChoice choice}}
+                  <div id="{{choice}}" class="ui basic {{#if inPlan choice}}green {{else}}red {{/if}}label"
+                       course-slug="{{choice}}" data-position="left center" data-tooltip={{courseName choice}}
+                       slug="{{course}}" style="margin: 2px; cursor: move;" draggable="true"
+                       ondragstart="dragPlanCourse(event)">{{choiceLabel choice}}</div>
+                {{else}}
+                  <div id="{{course}}" class="ui basic {{#if inPlan course}}green {{else}}red {{/if}}vertical buttons"
+                       slug="{{course}}" style="padding: 2px;">
+                    {{#each innerChoice in (choices choice)}}
+                      {{#if @index}}
+                        <div class="or"></div>
+                      {{/if}}
+                      <div id="{{innerChoice}}" class="ui basic {{#if inPlan innerChoice}}green {{else}}red {{/if}}label"
+                           course-slug="{{innerChoice}}" data-position="left center" data-tooltip={{courseName innerChoice}}
+                           slug="{{innerChoice}}" style="margin: 2px; cursor: move;" draggable="true"
+                           ondragstart="dragPlanCourse(event)">{{choiceLabel innerChoice}}</div>
+                    {{/each}}
+                  </div>
+                {{/if}}
+
               {{/each}}
             </div>
           {{/if}}

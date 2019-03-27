@@ -28,7 +28,10 @@ function removeTakenCourses(takenCourseSlugs, planCourseSlugs) {
 function checkIfPlanSlugIsSatisfied(takenCourseSlugs, planCourseSlugs, planSlug) {
   let ret = false;
   const countIndex = planSlug.indexOf('-');
-  const planCount = parseInt(planSlug.substring(countIndex + 1), 10);
+  let planCount = 1;
+  if (countIndex !== -1) {
+    planCount = parseInt(planSlug.substring(countIndex + 1), 10);
+  }
   const depts = planChoiceUtils.getDepartments(planSlug);
   const cleanedTaken = removeTakenCourses(takenCourseSlugs, planCourseSlugs);
   if (planCount === 1) {  // Only need one instance of the planSlug in the takenCourseSlugs
@@ -127,7 +130,7 @@ Template.Academic_Plan_Semester.helpers({
     return course && PlanChoices.toStringFromSlug(course);
   },
   choices(course) {
-    return course && planChoiceUtils.complexChoiceToArray(course);
+    return course && planChoiceUtils.complexChoiceToComplexArray(course);
   },
   courseName(planSlug) {
     let inPlan = false;
@@ -172,6 +175,7 @@ Template.Academic_Plan_Semester.helpers({
     return false;
   },
   isSingleChoice(course) {
+    // console.log('isSingleChoice %o', course);
     return planChoiceUtils.isSingleChoice(course);
   },
 });
