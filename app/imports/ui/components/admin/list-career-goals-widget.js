@@ -24,10 +24,12 @@ Template.List_Career_Goals_Widget.onCreated(function listCareerGoalsOnCreated() 
 
 Template.List_Career_Goals_Widget.helpers({
   careerGoals() {
-    const items = CareerGoals.find({}, { sort: { name: 1 } });
+    const items = CareerGoals.find({}, { sort: { name: 1 } }).fetch();
     const startIndex = Template.instance().itemIndex.get();
     const endIndex = startIndex + Template.instance().itemCount.get();
-    return _.slice(items, startIndex, endIndex);
+    const ret = _.slice(items, startIndex, endIndex);
+    // console.log(startIndex, endIndex, ret);
+    return ret;
   },
   count() {
     return CareerGoals.count();

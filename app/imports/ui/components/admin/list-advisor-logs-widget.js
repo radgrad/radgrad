@@ -13,7 +13,7 @@ Template.List_Advisor_Logs_Widget.onCreated(function listAdvisorLogsOnCreated() 
 
 Template.List_Advisor_Logs_Widget.helpers({
   advisorLogs() {
-    const items = AdvisorLogs.find({}, { sort: { createdOn: 1 } });
+    const items = AdvisorLogs.find({}, { sort: { createdOn: 1 } }).fetch();
     const startIndex = Template.instance().itemIndex.get();
     const endIndex = startIndex + Template.instance().itemCount.get();
     return _.slice(items, startIndex, endIndex);
