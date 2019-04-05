@@ -110,6 +110,9 @@ import './list-advisor-logs-widget';
 import './list-career-goals-widget.html';
 import './list-career-goals-widget.js';
 
+import './list-collection-widget.html';
+import './list-collection-widget';
+
 import './list-course-instances-widget.html';
 import './list-course-instances-widget.js';
 

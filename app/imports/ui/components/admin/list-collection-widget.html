@@ -1,0 +1,13 @@
+<template name="List_Collection_Widget">
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>{{title}} ({{ count }})</h4></div>
+    <div class="ui grid">
+      {{> Admin_Datamodel_Pagination_Widget showItemCount=getItemCount showIndex=getItemIndex collection=getCollection }}
+      {{#each item in items}}
+        {{> Admin_DataModel_Accordion name=(name item) slug=(slugName item.slugID)
+            descriptionPairs=(descriptionPairs item) id=item._id retired=item.retired
+            additionalTitleInfo=(additionalTitleInfo item)}}
+      {{/each}}
+    </div>
+  </div>
+</template>
