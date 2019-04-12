@@ -22,6 +22,7 @@ class FeedbackInstanceCollection extends BaseCollection {
       functionName: String,
       description: String,
       feedbackType: String,
+      retired: { type: Boolean, optional: true },
     }));
     this.WARNING = 'Warning';
     this.RECOMMENDATION = 'Recommendation';
@@ -67,7 +68,7 @@ class FeedbackInstanceCollection extends BaseCollection {
    * @param feedbackType
    * @param functionName
    */
-  update(docID, { user, description, feedbackType, functionName }) {
+  update(docID, { user, description, feedbackType, functionName, retired }) {
     this.assertDefined(docID);
     const updateData = {};
     if (user) {
@@ -81,6 +82,9 @@ class FeedbackInstanceCollection extends BaseCollection {
     }
     if (functionName) {
       updateData.functionName = functionName;
+    }
+    if (_.isBoolean(retired)) {
+      updateData.retired = retired;
     }
     this._collection.update(docID, { $set: updateData });
   }

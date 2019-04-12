@@ -139,7 +139,7 @@ class OpportunityCollection extends BaseSlugCollection {
       assertICE(ice);
       updateData.ice = ice;
     }
-    if (retired) {
+    if (_.isBoolean(retired)) {
       updateData.retired = retired;
     }
     this._collection.update(docID, { $set: updateData });

@@ -21,6 +21,7 @@ class BaseTypeCollection extends BaseCollection {
       name: { type: String },
       slugID: { type: SimpleSchema.RegEx.Id },
       description: { type: String },
+      retired: { type: Boolean, optional: true },
     }));
   }
 

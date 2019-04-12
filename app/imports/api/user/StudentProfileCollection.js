@@ -95,10 +95,10 @@ class StudentProfileCollection extends BaseProfileCollection {
    * @param motivation the motivation (optional).
    */
   update(docID, { firstName, lastName, picture, website, interests, careerGoals, level, academicPlan, declaredSemester,
-      hiddenCourses, hiddenOpportunities, isAlumni }) {
+      hiddenCourses, hiddenOpportunities, isAlumni, retired }) {
     this.assertDefined(docID);
     const updateData = {};
-    this._updateCommonFields(updateData, { firstName, lastName, picture, website, interests, careerGoals });
+    this._updateCommonFields(updateData, { firstName, lastName, picture, website, interests, careerGoals, retired });
     if (academicPlan) {
       updateData.academicPlanID = AcademicPlans.getID(academicPlan);
     }

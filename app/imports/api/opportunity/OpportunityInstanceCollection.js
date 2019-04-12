@@ -29,6 +29,7 @@ class OpportunityInstanceCollection extends BaseCollection {
       studentID: { type: SimpleSchema.RegEx.Id },
       sponsorID: { type: SimpleSchema.RegEx.Id },
       ice: { type: Object, optional: true, blackbox: true },
+      retired: { type: Boolean, optional: true },
     }));
     this.publicationNames = {
       student: this._collectionName,
@@ -100,7 +101,7 @@ class OpportunityInstanceCollection extends BaseCollection {
    * @param verified boolean optional.
    * @param ice an object with fields i, c, e (optional)
    */
-  update(docID, { semesterID, verified, ice }) {
+  update(docID, { semesterID, verified, ice, retired }) {
     this.assertDefined(docID);
     const updateData = {};
     if (semesterID) {
@@ -111,6 +112,9 @@ class OpportunityInstanceCollection extends BaseCollection {
     }
     if (ice) {
       updateData.ice = ice;
+    }
+    if (_.isBoolean(retired)) {
+      updateData.retired = retired;
     }
     this._collection.update(docID, { $set: updateData });
   }

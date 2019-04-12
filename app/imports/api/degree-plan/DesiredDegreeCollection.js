@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import BaseSlugCollection from '../base/BaseSlugCollection';
 import { AcademicPlans } from './AcademicPlanCollection';
 import { Slugs } from '../slug/SlugCollection';
@@ -37,10 +38,10 @@ class DesiredDegreeCollection extends BaseSlugCollection {
    * @throws { Meteor.Error } If the slug already exists.
    * @returns The newly created docID.
    */
-  define({ name, shortName = name, slug, description, retired = false }) {
+  define({ name, shortName = name, slug, description }) {
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
-    const desiredDegreeID = this._collection.insert({ name, shortName, slugID, description, retired });
+    const desiredDegreeID = this._collection.insert({ name, shortName, slugID, description });
     // Connect the Slug to this Interest
     Slugs.updateEntityID(slugID, desiredDegreeID);
     return desiredDegreeID;
@@ -65,10 +66,8 @@ class DesiredDegreeCollection extends BaseSlugCollection {
     if (description) {
       updateData.description = description;
     }
-    if (retired) {
+    if (_.isBoolean(retired)) {
       updateData.retired = true;
-    } else {
-      updateData.retired = false;
     }
     this._collection.update(docID, { $set: updateData });
   }

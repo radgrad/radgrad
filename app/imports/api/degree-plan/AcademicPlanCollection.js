@@ -126,10 +126,8 @@ class AcademicPlanCollection extends BaseSlugCollection {
       });
       updateData.courseList = courseList;
     }
-    if (retired) {
+    if (_.isBoolean(retired)) {
       updateData.retired = retired;
-    } else {
-      updateData.retired = false;
     }
     this._collection.update(docID, { $set: updateData });
   }

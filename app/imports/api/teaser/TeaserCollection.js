@@ -25,6 +25,7 @@ class TeaserCollection extends BaseSlugCollection {
       interestIDs: [SimpleSchema.RegEx.Id],
       opportunityID: SimpleSchema.RegEx.Id,
       duration: { type: String, optional: true },
+      retired: { type: Boolean, optional: true },
     }));
   }
 
@@ -72,7 +73,7 @@ class TeaserCollection extends BaseSlugCollection {
    * @param docID The docID to be updated.
    * @throws { Meteor.Error } If docID is not defined, or if any interest or opportunity is undefined.
    */
-  update(docID, { title, opportunity, interests, author, url, description, duration }) {
+  update(docID, { title, opportunity, interests, author, url, description, duration, retired }) {
     this.assertDefined(docID);
     const updateData = {};
     if (title) {
@@ -95,6 +96,9 @@ class TeaserCollection extends BaseSlugCollection {
     }
     if (duration) {
       updateData.duration = duration;
+    }
+    if (_.isBoolean(retired)) {
+      updateData.retired = retired;
     }
     this._collection.update(docID, { $set: updateData });
   }

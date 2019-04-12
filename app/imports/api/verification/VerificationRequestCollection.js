@@ -40,6 +40,7 @@ class VerificationRequestCollection extends BaseCollection {
       status: String,
       processed: [ProcessedSchema],
       ice: { type: Object, optional: true, blackbox: true },
+      retired: { type: Boolean, optional: true },
     }));
     this.ACCEPTED = 'Accepted';
     this.REJECTED = 'Rejected';
@@ -196,6 +197,19 @@ class VerificationRequestCollection extends BaseCollection {
   }
 
   /**
+   * Updates the retired flag for docID.
+   * @param docID the ID of the verification request.
+   * @param retired the retired status.
+   */
+  update(docID, { retired }) {
+    this.assertDefined(docID);
+    const updateData = {};
+    if (_.isBoolean(retired)) {
+      updateData.retired = retired;
+    }
+    this._collection.update(docID, { $set: updateData });
+  }
+         /**
    * Updates the VerificationRequest's status and processed array.
    * @param requestID The VerificationRequest ID.
    * @param status The new Status.

@@ -1,4 +1,5 @@
 import SimpleSchema from 'simpl-schema';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import BaseCollection from '../base/BaseCollection';
 import { MentorQuestions } from '../mentor/MentorQuestionCollection';
 import { ROLE } from '../role/Role';
@@ -19,6 +20,7 @@ class MentorAnswerCollection extends BaseCollection {
       questionID: { type: SimpleSchema.RegEx.Id },
       mentorID: { type: SimpleSchema.RegEx.Id },
       text: { type: String },
+      retired: { type: Boolean, optional: true },
     }));
   }
 
@@ -48,11 +50,14 @@ class MentorAnswerCollection extends BaseCollection {
    * @param docID the docID of the mentor answer.
    * @param text the updated text.
    */
-  update(docID, { text }) {
+  update(docID, { text, retired }) {
     this.assertDefined(docID);
     const updateData = {};
     if (text) {
       updateData.text = text;
+    }
+    if (_.isBoolean(retired)) {
+      updateData.retired = retired;
     }
     this._collection.update(docID, { $set: updateData });
   }

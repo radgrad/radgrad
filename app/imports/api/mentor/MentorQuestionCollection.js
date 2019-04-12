@@ -23,6 +23,7 @@ class MentorQuestionCollection extends BaseSlugCollection {
       moderated: { type: Boolean },
       visible: { type: Boolean },
       moderatorComments: { type: String, optional: true },
+      retired: { type: Boolean, optional: true },
     }));
   }
 
@@ -52,7 +53,7 @@ class MentorQuestionCollection extends BaseSlugCollection {
    * @param visible boolean (optional).
    * @param moderatorComments string (optional).
    */
-  update(instance, { question, student, moderated, visible, moderatorComments }) {
+  update(instance, { question, student, moderated, visible, moderatorComments, retired }) {
     const docID = this.getID(instance);
     const updateData = {};
     if (question) {
@@ -69,6 +70,9 @@ class MentorQuestionCollection extends BaseSlugCollection {
     }
     if (moderatorComments) {
       updateData.moderatorComments = moderatorComments;
+    }
+    if (_.isBoolean(retired)) {
+      updateData.retired = retired;
     }
     this._collection.update(docID, { $set: updateData });
   }

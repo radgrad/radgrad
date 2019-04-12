@@ -27,6 +27,7 @@ class InterestCollection extends BaseSlugCollection {
       slugID: { type: SimpleSchema.RegEx.Id },
       description: { type: String },
       interestTypeID: { type: SimpleSchema.RegEx.Id },
+      retired: { type: Boolean, optional: true },
     }));
   }
 
@@ -63,7 +64,7 @@ class InterestCollection extends BaseSlugCollection {
    * @param interestType The new interestType slug or ID (optional).
    * @throws { Meteor.Error } If docID is not defined, or if interestType is not valid.
    */
-  update(docID, { name, description, interestType }) {
+  update(docID, { name, description, interestType, retired }) {
     this.assertDefined(docID);
     const updateData = {};
     if (name) {
@@ -75,6 +76,9 @@ class InterestCollection extends BaseSlugCollection {
     if (interestType) {
       const interestTypeID = InterestTypes.getID(interestType);
       updateData.interestTypeID = interestTypeID;
+    }
+    if (_.isBoolean(retired)) {
+      updateData.retired = retired;
     }
     this._collection.update(docID, { $set: updateData });
   }

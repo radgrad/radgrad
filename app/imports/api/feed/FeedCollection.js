@@ -58,6 +58,7 @@ class FeedCollection extends BaseCollection {
       opportunityID: { type: SimpleSchema.RegEx.Id, optional: true },
       courseID: { type: SimpleSchema.RegEx.Id, optional: true },
       semesterID: { type: SimpleSchema.RegEx.Id, optional: true },
+      retired: { type: Boolean, optional: true },
     }));
     this.NEW_USER = 'new-user';
     this.NEW_COURSE = 'new-course';
@@ -108,7 +109,7 @@ class FeedCollection extends BaseCollection {
    * The timestamp and feedtype fields cannot be updated once created.
    * @throws { Meteor.Error } If docID is not defined, or if users, opportunity, or course are not defined.
    */
-  update(docID, { description, picture, users, opportunity, course, semester }) {
+  update(docID, { description, picture, users, opportunity, course, semester, retired }) {
     this.assertDefined(docID);
     const updateData = {};
     if (description) {
@@ -129,6 +130,9 @@ class FeedCollection extends BaseCollection {
     }
     if (semester) {
       updateData.semesterID = Semesters.getID(course);
+    }
+    if (_.isBoolean(retired)) {
+      updateData.retired = retired;
     }
     this._collection.update(docID, { $set: updateData });
   }

@@ -32,6 +32,7 @@ class CourseInstanceCollection extends BaseCollection {
       note: { type: String, optional: true },
       studentID: SimpleSchema.RegEx.Id,
       ice: { type: Object, optional: true, blackbox: true },
+      retired: { type: Boolean, optional: true },
     }));
     this.validGrades = ['', 'A', 'A+', 'A-',
       'B', 'B+', 'B-', 'C', 'C+', 'C-', 'D', 'D+', 'D-', 'F', 'CR', 'NC', '***', 'W', 'TBD', 'OTHER'];
@@ -113,7 +114,7 @@ class CourseInstanceCollection extends BaseCollection {
    * @param note optional.
    * @param ice an object with fields i, c, e (optional)
    */
-  update(docID, { semesterID, verified, fromSTAR, grade, creditHrs, note, ice }) {
+  update(docID, { semesterID, verified, fromSTAR, grade, creditHrs, note, ice, retired }) {
     // console.log('CourseInstances.update', semesterID, verified, fromSTAR, grade, creditHrs, note, ice);
     this.assertDefined(docID);
     const updateData = {};
@@ -140,6 +141,9 @@ class CourseInstanceCollection extends BaseCollection {
     }
     if (ice) {
       updateData.ice = ice;
+    }
+    if (_.isBoolean(retired)) {
+      updateData.retired = retired;
     }
     this._collection.update(docID, { $set: updateData });
   }

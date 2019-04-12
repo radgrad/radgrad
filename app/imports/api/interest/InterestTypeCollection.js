@@ -36,7 +36,7 @@ class InterestTypeCollection extends BaseTypeCollection {
    * @param description the new description (optional).
    * @throws { Meteor.Error } If docID is not defined.
    */
-  update(docID, { name, description }) {
+  update(docID, { name, description, retired }) {
     this.assertDefined(docID);
     const updateData = {};
     if (!_.isNil(name)) {
@@ -44,6 +44,9 @@ class InterestTypeCollection extends BaseTypeCollection {
     }
     if (!_.isNil(description)) {
       updateData.description = description;
+    }
+    if (_.isBoolean(retired)) {
+      updateData.retired = retired;
     }
     this._collection.update(docID, { $set: updateData });
   }

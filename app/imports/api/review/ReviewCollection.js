@@ -31,6 +31,7 @@ class ReviewCollection extends BaseSlugCollection {
       moderated: { type: Boolean },
       visible: { type: Boolean },
       moderatorComments: { type: String, optional: true },
+      retired: { type: Boolean, optional: true },
     }));
     this.COURSE = 'course';
     this.OPPORTUNITY = 'opportunity';
@@ -128,7 +129,7 @@ class ReviewCollection extends BaseSlugCollection {
    * Update the review. Only semester, rating, comments, moderated, visible, and moderatorComments can be updated.
    * @param docID The review docID (required).
    */
-  update(docID, { semester, rating, comments, moderated, visible, moderatorComments }) {
+  update(docID, { semester, rating, comments, moderated, visible, moderatorComments, retired }) {
     this.assertDefined(docID);
     const updateData = {};
     if (semester) {
@@ -149,6 +150,9 @@ class ReviewCollection extends BaseSlugCollection {
     }
     if (moderatorComments) {
       updateData.moderatorComments = moderatorComments;
+    }
+    if (_.isBoolean(retired)) {
+      updateData.retired = retired;
     }
     this._collection.update(docID, { $set: updateData });
   }

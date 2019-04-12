@@ -1,4 +1,5 @@
 import SimpleSchema from 'simpl-schema';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import BaseCollection from '../base/BaseCollection';
 import { buildSimpleName } from './PlanChoiceUtilities';
 
@@ -15,6 +16,7 @@ class PlanChoiceCollection extends BaseCollection {
   constructor() {
     super('PlanChoice', new SimpleSchema({
       choice: { type: String },
+      retired: { type: Boolean, optional: true },
     }));
   }
 
@@ -39,11 +41,14 @@ class PlanChoiceCollection extends BaseCollection {
    * @param docID The docID associated with this plan choice.
    * @param choice the updated choice.
    */
-  update(docID, { choice }) {
+  update(docID, { choice, retired }) {
     this.assertDefined(docID);
     const updateData = {};
     if (choice) {
       updateData.choice = choice;
+    }
+    if (_.isBoolean(retired)) {
+      updateData.retired = retired;
     }
     this._collection.update(docID, { $set: updateData });
   }
