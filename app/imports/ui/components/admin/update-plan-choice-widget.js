@@ -17,6 +17,18 @@ Template.Update_Plan_Choice_Widget.helpers({
   planChoice() {
     return PlanChoices.findDoc(Template.currentData().updateID.get());
   },
+  falseValueRetired() {
+    const plan = PlanChoices.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return !plan.retired;
+  },
+  trueValueRetired() {
+    const plan = PlanChoices.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return plan.retired;
+  },
 });
 
 Template.Update_Plan_Choice_Widget.events({

@@ -32,6 +32,18 @@ Template.Update_Feedback_Instance_Widget.helpers({
   feedbackTypes() {
     return FeedbackInstances.feedbackTypes;
   },
+  falseValueRetired() {
+    const plan = FeedbackInstances.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return !plan.retired;
+  },
+  trueValueRetired() {
+    const plan = FeedbackInstances.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return plan.retired;
+  },
 });
 
 Template.Update_Feedback_Instance_Widget.events({

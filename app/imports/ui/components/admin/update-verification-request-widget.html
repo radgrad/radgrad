@@ -1,0 +1,13 @@
+<template name="Update_Verification_Request_Widget">
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>UPDATE VERIFICATION REQUEST {{name item}}</h4></div>
+    <form class="ui equal width form {{successClass}} {{errorClass}}">
+      <div class="field">
+        {{> Boolean_Form_Field label='Retired' name='retired' trueValue=trueValueRetired falseValue=falseValueRetired errorMessage=(fieldError "retired")}}
+      </div>
+      <button class="ui green basic button" type="submit">Update</button>
+      <button class="ui green basic button jsCancel" type="submit">Cancel</button>
+      {{> Success_Message_Form_Field message="The Verification Request was successfully updated.  Press cancel to continue."}}
+    </form>
+  </div>
+</template>

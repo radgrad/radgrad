@@ -56,7 +56,18 @@ Template.Update_Mentor_Question_Widget.helpers({
     const course = MentorQuestions.findDoc(Template.currentData().updateID.get());
     return !course.visible;
   },
-
+  falseValueRetired() {
+    const plan = MentorQuestions.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return !plan.retired;
+  },
+  trueValueRetired() {
+    const plan = MentorQuestions.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return plan.retired;
+  },
 });
 
 Template.Update_Mentor_Question_Widget.events({

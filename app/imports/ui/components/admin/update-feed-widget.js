@@ -58,6 +58,18 @@ Template.Update_Feed_Widget.helpers({
     const sorted = _.sortBy(students, 'lastName');
     return sorted;
   },
+  falseValueRetired() {
+    const plan = Feeds.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return !plan.retired;
+  },
+  trueValueRetired() {
+    const plan = Feeds.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return plan.retired;
+  },
 });
 
 Template.Update_Feed_Widget.events({

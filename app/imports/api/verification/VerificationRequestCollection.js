@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import SimpleSchema from 'simpl-schema';
 import { moment } from 'meteor/momentjs:moment';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import BaseCollection from '../base/BaseCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection.js';

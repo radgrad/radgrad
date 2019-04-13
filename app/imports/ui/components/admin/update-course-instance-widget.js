@@ -68,6 +68,18 @@ Template.Update_Course_Instance_Widget.helpers({
     const course = CourseInstances.findDoc(Template.currentData().updateID.get());
     return course.courseID;
   },
+  falseValueRetired() {
+    const plan = CourseInstances.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return !plan.retired;
+  },
+  trueValueRetired() {
+    const plan = CourseInstances.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return plan.retired;
+  },
 });
 
 Template.Update_Course_Instance_Widget.events({

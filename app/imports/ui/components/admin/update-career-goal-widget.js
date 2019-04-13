@@ -33,6 +33,18 @@ Template.Update_Career_Goal_Widget.helpers({
     const careerGoal = CareerGoals.findDoc(Template.currentData().updateID.get());
     return careerGoal.interestIDs;
   },
+  falseValueRetired() {
+    const plan = CareerGoals.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return !plan.retired;
+  },
+  trueValueRetired() {
+    const plan = CareerGoals.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return plan.retired;
+  },
 });
 
 Template.Update_Career_Goal_Widget.events({

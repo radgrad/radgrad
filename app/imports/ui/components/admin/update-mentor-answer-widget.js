@@ -33,6 +33,18 @@ Template.Update_Mentor_Answer_Widget.helpers({
     const questions = MentorQuestions.find({}, { sort: { question: 1 } }).fetch();
     return questions;
   },
+  falseValueRetired() {
+    const plan = MentorAnswers.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return !plan.retired;
+  },
+  trueValueRetired() {
+    const plan = MentorAnswers.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return plan.retired;
+  },
 });
 
 Template.Update_Mentor_Answer_Widget.events({

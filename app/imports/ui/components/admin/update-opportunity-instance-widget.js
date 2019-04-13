@@ -56,6 +56,18 @@ Template.Update_Opportunity_Instance_Widget.helpers({
     const opportunity = OpportunityInstances.findDoc(Template.currentData().updateID.get());
     return opportunity.opportunityID;
   },
+  falseValueRetired() {
+    const plan = OpportunityInstances.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return !plan.retired;
+  },
+  trueValueRetired() {
+    const plan = OpportunityInstances.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return plan.retired;
+  },
 });
 
 Template.Update_Opportunity_Instance_Widget.events({

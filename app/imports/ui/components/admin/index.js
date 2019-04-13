@@ -254,6 +254,9 @@ import './update-user-widget-mentor';
 import './update-user-widget-student.html';
 import './update-user-widget-student';
 
+import './update-verification-request-widget.html';
+import './update-verification-request-widget';
+
 import './user-interactions-widget.html';
 import './user-interactions-widget';
 

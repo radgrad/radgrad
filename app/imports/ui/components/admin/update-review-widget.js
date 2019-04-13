@@ -41,18 +41,26 @@ Template.Update_Review_Widget.helpers({
     return reviewRatingsObjects;
   },
   slug() {
-    const review = Reviews.findDoc(Template.currentData().updateID.get());
+    const review = Reviews.findDoc(Template.currentData()
+      .updateID
+      .get());
     return Slugs.findDoc(review.slugID).name;
   },
   student() {
-    const review = Reviews.findDoc(Template.currentData().updateID.get());
+    const review = Reviews.findDoc(Template.currentData()
+      .updateID
+      .get());
     return Users.getProfile(review.studentID).username;
   },
   review() {
-    return Reviews.findDoc(Template.currentData().updateID.get());
+    return Reviews.findDoc(Template.currentData()
+      .updateID
+      .get());
   },
   reviewee() {
-    const review = Reviews.findDoc(Template.currentData().updateID.get());
+    const review = Reviews.findDoc(Template.currentData()
+      .updateID
+      .get());
     let reviewee;
     if (review.reviewType === 'course') {
       reviewee = Slugs.findDoc(Courses.findDoc(review.revieweeID).slugID).name;
@@ -62,11 +70,15 @@ Template.Update_Review_Widget.helpers({
     return reviewee;
   },
   semester() {
-    const review = Reviews.findDoc(Template.currentData().updateID.get());
+    const review = Reviews.findDoc(Template.currentData()
+      .updateID
+      .get());
     return Semesters.findDoc(review.semesterID);
   },
   trueValue(type) {
-    const review = Reviews.findDoc(Template.currentData().updateID.get());
+    const review = Reviews.findDoc(Template.currentData()
+      .updateID
+      .get());
     let trueValue;
     if (type === 'moderated') {
       trueValue = review.moderated;
@@ -76,7 +88,9 @@ Template.Update_Review_Widget.helpers({
     return trueValue;
   },
   falseValue(type) {
-    const review = Reviews.findDoc(Template.currentData().updateID.get());
+    const review = Reviews.findDoc(Template.currentData()
+      .updateID
+      .get());
     let falseValue;
     if (type === 'moderated') {
       falseValue = !(review.moderated);
@@ -84,6 +98,18 @@ Template.Update_Review_Widget.helpers({
       falseValue = !(review.visible);
     }
     return falseValue;
+  },
+  falseValueRetired() {
+    const plan = Reviews.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return !plan.retired;
+  },
+  trueValueRetired() {
+    const plan = Reviews.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return plan.retired;
   },
 });
 

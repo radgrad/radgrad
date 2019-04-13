@@ -23,6 +23,18 @@ Template.Update_Opportunity_Type_Widget.helpers({
     const opportunity = OpportunityTypes.findDoc(Template.currentData().updateID.get());
     return Slugs.findDoc(opportunity.slugID).name;
   },
+  falseValueRetired() {
+    const plan = OpportunityTypes.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return !plan.retired;
+  },
+  trueValueRetired() {
+    const plan = OpportunityTypes.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return plan.retired;
+  },
 });
 
 Template.Update_Opportunity_Type_Widget.events({

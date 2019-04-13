@@ -23,6 +23,18 @@ Template.Update_Help_Message_Widget.helpers({
     // When doing an update, you cannot select a different routeName.
     return [HelpMessages.findDoc(Template.currentData().updateID.get()).routeName];
   },
+  falseValueRetired() {
+    const plan = HelpMessages.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return !plan.retired;
+  },
+  trueValueRetired() {
+    const plan = HelpMessages.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return plan.retired;
+  },
 });
 
 Template.Update_Help_Message_Widget.events({

@@ -28,6 +28,18 @@ Template.Update_Interest_Widget.helpers({
   interestTypes() {
     return InterestTypes.find({}, { sort: { name: 1 } });
   },
+  falseValueRetired() {
+    const plan = Interests.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return !plan.retired;
+  },
+  trueValueRetired() {
+    const plan = Interests.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return plan.retired;
+  },
 });
 
 Template.Update_Interest_Widget.events({

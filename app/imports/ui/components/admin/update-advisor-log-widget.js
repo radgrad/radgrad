@@ -34,6 +34,18 @@ Template.Update_Advisor_Log_Widget.helpers({
     const sorted = _.sortBy(students, student => Users.getFullName(student.username));
     return sorted;
   },
+  falseValueRetired() {
+    const plan = AdvisorLogs.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return !plan.retired;
+  },
+  trueValueRetired() {
+    const plan = AdvisorLogs.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return plan.retired;
+  },
 });
 
 Template.Update_Advisor_Log_Widget.events({
@@ -42,7 +54,9 @@ Template.Update_Advisor_Log_Widget.events({
     const updateData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     instance.context.reset();
     updateSchema.clean(updateData, { mutate: true });
+    updateData.retired = updateData.retired === 'true';
     instance.context.validate(updateData);
+    // console.log('updateData=%o, valid=%o', updateData, instance.context.isValid());
     if (instance.context.isValid()) {
       updateData.id = instance.data.updateID.get();
       updateMethod.call({ collectionName: AdvisorLogs.getCollectionName(), updateData }, (error) => {
