@@ -11,11 +11,12 @@ import { Slugs } from '../../../api/slug/SlugCollection';
 
 const updateSchema = new SimpleSchema({
   question: String,
-  user: String,
+  student: String,
   slug: String,
   moderated: String,
   visible: String,
   moderatorComments: { type: String, optional: true },
+  retired: Boolean,
 }, { tracker: Tracker });
 
 Template.Update_Mentor_Question_Widget.onCreated(function onCreated() {
@@ -76,9 +77,10 @@ Template.Update_Mentor_Question_Widget.events({
     const updateData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     instance.context.reset();
     updateSchema.clean(updateData, { mutate: true });
+    updateData.retired = updateData.retired === 'true';
     instance.context.validate(updateData);
     if (instance.context.isValid()) {
-      FormUtils.renameKey(updateData, 'user', 'student');
+      // FormUtils.renameKey(updateData, 'user', 'student');
       updateData.moderated = (updateData.moderated === 'true');
       updateData.visible = (updateData.visible === 'true');
       updateData.id = instance.data.updateID.get();

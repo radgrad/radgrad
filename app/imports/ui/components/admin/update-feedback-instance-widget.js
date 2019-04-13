@@ -9,10 +9,11 @@ import { ROLE } from '../../../api/role/Role.js';
 import * as FormUtils from '../form-fields/form-field-utilities.js';
 
 const updateSchema = new SimpleSchema({
-  user: String,
+  student: String,
   functionName: String,
   description: String,
   feedbackType: String,
+  retired: Boolean,
 }, { tracker: Tracker });
 
 Template.Update_Feedback_Instance_Widget.onCreated(function onCreated() {
@@ -52,6 +53,7 @@ Template.Update_Feedback_Instance_Widget.events({
     const updateData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     instance.context.reset();
     updateSchema.clean(updateData, { mutate: true });
+    updateData.retired = updateData.retired === 'true';
     instance.context.validate(updateData);
     if (instance.context.isValid()) {
       updateData.id = instance.data.updateID.get();

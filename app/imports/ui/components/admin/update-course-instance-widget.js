@@ -18,10 +18,11 @@ const updateSchema = new SimpleSchema({
   grade: String,
   creditHrs: String,
   note: String,
-  user: String,
+  student: String,
   innovation: { type: Number, optional: false, min: 0, max: 100 },
   competency: { type: Number, optional: false, min: 0, max: 100 },
   experience: { type: Number, optional: false, min: 0, max: 100 },
+  retired: Boolean,
 }, { tracker: Tracker });
 
 Template.Update_Course_Instance_Widget.onCreated(function onCreated() {
@@ -88,6 +89,7 @@ Template.Update_Course_Instance_Widget.events({
     const updateData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     instance.context.reset();
     updateSchema.clean(updateData, { mutate: true });
+    updateData.retired = updateData.retired === 'true';
     instance.context.validate(updateData);
     if (instance.context.isValid()) {
       FormUtils.convertICE(updateData);

@@ -19,6 +19,7 @@ const updateSchema = new SimpleSchema({
   opportunity: { type: String, optional: true },
   course: { type: String, optional: true },
   semester: { type: String, optional: true },
+  retired: Boolean,
 }, { tracker: Tracker });
 
 Template.Update_Feed_Widget.onCreated(function onCreated() {
@@ -78,6 +79,7 @@ Template.Update_Feed_Widget.events({
     const updateData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     instance.context.reset();
     updateSchema.clean(updateData, { mutate: true });
+    updateData.retired = updateData.retired === 'true';
     instance.context.validate(updateData);
     if (instance.context.isValid()) {
       updateData.id = instance.data.updateID.get();

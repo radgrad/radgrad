@@ -21,6 +21,7 @@ const updateSchema = new SimpleSchema({
   moderated: { type: String, optional: true },
   visible: { type: String, optional: true },
   moderatorComments: { type: String, optional: true },
+  retired: Boolean,
 }, { tracker: Tracker });
 
 Template.Update_Review_Widget.onCreated(function onCreated() {
@@ -119,6 +120,7 @@ Template.Update_Review_Widget.events({
     const updateData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     instance.context.reset();
     updateSchema.clean(updateData, { mutate: true });
+    updateData.retired = updateData.retired === 'true';
     instance.context.validate(updateData);
     updateData.moderated = (updateData.moderated === 'true');
     updateData.visible = (updateData.visible === 'true');
