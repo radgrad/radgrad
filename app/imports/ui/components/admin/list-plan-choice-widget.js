@@ -20,6 +20,7 @@ Template.List_Plan_Choice_Widget.helpers({
   descriptionPairs(planChoice) {
     return [
       { label: 'Choice', value: planChoice.choice },
+      { label: 'Retired', value: planChoice.retired ? 'True' : 'False' },
     ];
   },
   name(pc) {

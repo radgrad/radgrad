@@ -40,6 +40,7 @@ Template.List_Mentor_Questions_Widget.helpers({
       { label: 'Moderated', value: question.moderated.toString() },
       { label: 'Visible', value: question.visible.toString() },
       { label: 'Moderator Comments', value: question.moderatorComments },
+      { label: 'Retired', value: question.retired ? 'True' : 'False' },
     ];
   },
   getItemCount() {

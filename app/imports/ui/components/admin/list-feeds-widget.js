@@ -69,6 +69,7 @@ Template.List_Feeds_Widget.helpers({
       { label: 'Opportunity', value: opportunityName },
       { label: 'Course', value: courseName },
       { label: 'Semester', value: semesterName },
+      { label: 'Retired', value: feed.retired ? 'True' : 'False' },
     ];
   },
   getItemCount() {

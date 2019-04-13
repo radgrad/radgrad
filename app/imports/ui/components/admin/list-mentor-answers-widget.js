@@ -41,6 +41,7 @@ Template.List_Mentor_Answers_Widget.helpers({
     return [
       { label: 'Mentor', value: Users.getFullName(MentorProfiles.getProfile(answer.mentorID).username) },
       { label: 'Answer', value: answer.text },
+      { label: 'Retired', value: answer.retired ? 'True' : 'False' },
     ];
   },
   getItemCount() {

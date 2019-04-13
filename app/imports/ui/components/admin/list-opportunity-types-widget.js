@@ -44,6 +44,7 @@ Template.List_Opportunity_Types_Widget.helpers({
       { label: 'Slug', value: `${Slugs.findDoc(opportunityType.slugID).name}` },
       { label: 'Description', value: opportunityType.description },
       { label: 'References', value: `${numReferences(opportunityType)}` },
+      { label: 'Retired', value: opportunityType.retired ? 'True' : 'False' },
     ];
   },
   getItemCount() {

@@ -49,6 +49,7 @@ Template.List_Interests_Widget.helpers({
       { label: 'Description', value: interest.description },
       { label: 'Interest Type', value: InterestTypes.findDoc(interest.interestTypeID).name },
       { label: 'References', value: `${numReferences(interest)}` },
+      { label: 'Retired', value: interest.retired ? 'True' : 'False' },
     ];
   },
   getItemCount() {

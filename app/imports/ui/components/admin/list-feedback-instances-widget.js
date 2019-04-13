@@ -42,6 +42,7 @@ Template.List_Feedback_Instances_Widget.helpers({
       { label: 'Function Name', value: feedbackInstance.functionName },
       { label: 'Description', value: feedbackInstance.description },
       { label: 'Type', value: feedbackInstance.feedbackType },
+      { label: 'Retired', value: feedbackInstance.retired ? 'True' : 'False' },
     ];
   },
   getItemCount() {

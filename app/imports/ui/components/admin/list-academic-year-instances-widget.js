@@ -39,6 +39,7 @@ Template.List_Academic_Year_Instances_Widget.helpers({
     return [
       { label: 'Student', value: Users.getFullName(academicYearInstance.studentID) },
       { label: 'Year', value: `${academicYearInstance.year}` },
+      { label: 'Retired', value: academicYearInstance.retired ? 'True' : 'False' },
     ];
   },
   getItemCount() {

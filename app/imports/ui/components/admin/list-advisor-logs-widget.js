@@ -29,6 +29,7 @@ Template.List_Advisor_Logs_Widget.helpers({
       { label: 'Advisor', value: `${Users.getFullName(advisorLog.advisorID)}` },
       { label: 'Student', value: `${Users.getFullName(advisorLog.studentID)}` },
       { label: 'Text', value: advisorLog.text },
+      { label: 'Retired', value: advisorLog.retired ? 'True' : 'False' },
     ];
   },
   getItemCount() {

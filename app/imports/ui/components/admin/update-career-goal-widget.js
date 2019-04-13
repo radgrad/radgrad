@@ -11,6 +11,7 @@ const updateSchema = new SimpleSchema({
   name: String,
   description: String,
   interests: { type: Array, minCount: 1 }, 'interests.$': String,
+  retired: Boolean,
 }, { tracker: Tracker });
 
 Template.Update_Career_Goal_Widget.onCreated(function onCreated() {

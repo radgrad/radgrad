@@ -57,7 +57,8 @@ Template.List_Academic_Plans_Widget.helpers({
       { label: 'Description', value: academicPlan.description },
       { label: 'Semester', value: Semesters.toString(academicPlan.effectiveSemesterID) },
       { label: 'References', value: `Students: ${numReferences(academicPlan)}` },
-      { label: 'Retired', value: academicPlan.retired ? 'True' : 'False' }];
+      { label: 'Retired', value: academicPlan.retired ? 'True' : 'False' },
+    ];
   },
   retired(academicPlan) {
     // console.log(`retired ${academicPlan.retired}`);
