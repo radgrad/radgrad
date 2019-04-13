@@ -53,6 +53,9 @@ Template.List_Feedback_Instances_Widget.helpers({
   getCollection() {
     return FeedbackInstances;
   },
+  retired(item) {
+    return item.retired;
+  },
 });
 
 Template.List_Feedback_Instances_Widget.events({

@@ -75,6 +75,9 @@ Template.List_Reviews_Widget.helpers({
   getCollection() {
     return Reviews;
   },
+  retired(item) {
+    return item.retired;
+  },
 });
 
 Template.List_Reviews_Widget.events({

@@ -61,6 +61,9 @@ Template.List_Teasers_Widget.helpers({
   getCollection() {
     return Teasers;
   },
+  retired(item) {
+    return item.retired;
+  },
 });
 
 Template.List_Teasers_Widget.events({

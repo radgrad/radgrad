@@ -60,6 +60,9 @@ Template.List_Interests_Widget.helpers({
   getCollection() {
     return Interests;
   },
+  retired(item) {
+    return item.retired;
+  },
 });
 
 Template.List_Interests_Widget.events({

@@ -4,7 +4,7 @@
     <div class="ui grid">
       {{> Admin_Datamodel_Pagination_Widget showItemCount=getItemCount showIndex=getItemIndex collection=getCollection }}
       {{#each feed in feeds}}
-        {{> Admin_DataModel_Accordion name =(name feed) descriptionPairs=(descriptionPairs feed) id=feed._id updateID=updateID deleteDisabled=(deleteDisabled feed)}}
+        {{> Admin_DataModel_Accordion name =(name feed) descriptionPairs=(descriptionPairs feed) id=feed._id updateID=updateID deleteDisabled=(deleteDisabled feed) retired=(retired feed)}}
       {{/each}}
     </div>
   </div>

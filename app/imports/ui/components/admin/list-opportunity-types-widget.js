@@ -55,6 +55,9 @@ Template.List_Opportunity_Types_Widget.helpers({
   getCollection() {
     return OpportunityTypes;
   },
+  retired(item) {
+    return item.retired;
+  },
 });
 
 Template.List_Opportunity_Types_Widget.events({

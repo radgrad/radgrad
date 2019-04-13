@@ -40,6 +40,9 @@ Template.List_Advisor_Logs_Widget.helpers({
   getCollection() {
     return AdvisorLogs;
   },
+  retired(item) {
+    return item.retired;
+  },
 });
 
 Template.List_Advisor_Logs_Widget.events({

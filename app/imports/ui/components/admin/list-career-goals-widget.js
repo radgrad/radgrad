@@ -55,6 +55,9 @@ Template.List_Career_Goals_Widget.helpers({
   getCollection() {
     return CareerGoals;
   },
+  retired(item) {
+    return item.retired;
+  },
 });
 
 Template.List_Career_Goals_Widget.events({

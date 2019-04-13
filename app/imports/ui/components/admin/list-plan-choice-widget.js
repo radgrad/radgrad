@@ -40,6 +40,9 @@ Template.List_Plan_Choice_Widget.helpers({
   getCollection() {
     return PlanChoices;
   },
+  retired(item) {
+    return item.retired;
+  },
 });
 
 Template.List_Plan_Choice_Widget.events({

@@ -60,6 +60,9 @@ Template.List_Verification_Requests_Widget.helpers({
   getCollection() {
     return VerificationRequests;
   },
+  retired(item) {
+    return item.retired;
+  },
 });
 
 Template.List_Verification_Requests_Widget.events({

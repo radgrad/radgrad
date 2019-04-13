@@ -4,7 +4,7 @@
     <div class="ui grid">
       {{> Admin_Datamodel_Pagination_Widget showItemCount=getItemCount showIndex=getItemIndex collection=getCollection }}
       {{#each academicYearInstance in academicYearInstances}}
-        {{> Admin_Datamodel_Academicplan_Accordion academicYearInstance=academicYearInstance name=(name academicYearInstance)  descriptionPairs=(descriptionPairs academicYearInstance) id=academicYearInstance._id updateID=updateID deleteDisabled=(deleteDisabled academicYearInstance)}}
+        {{> Admin_Datamodel_Academicplan_Accordion academicYearInstance=academicYearInstance name=(name academicYearInstance)  descriptionPairs=(descriptionPairs academicYearInstance) id=academicYearInstance._id updateID=updateID deleteDisabled=(deleteDisabled academicYearInstance) retired=(retired academicYearInstance)}}
       {{/each}}
     </div>
   </div>

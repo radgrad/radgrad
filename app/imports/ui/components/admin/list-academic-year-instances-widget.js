@@ -50,4 +50,7 @@ Template.List_Academic_Year_Instances_Widget.helpers({
   getCollection() {
     return AcademicYearInstances;
   },
+  retired(item) {
+    return item.retired;
+  },
 });

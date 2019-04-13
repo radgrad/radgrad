@@ -57,6 +57,9 @@ Template.List_Opportunity_Instances_Widget.helpers({
   getCollection() {
     return OpportunityInstances;
   },
+  retired(item) {
+    return item.retired;
+  },
 });
 
 Template.List_Opportunity_Instances_Widget.events({

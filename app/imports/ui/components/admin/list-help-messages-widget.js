@@ -39,6 +39,9 @@ Template.List_Help_Messages_Widget.helpers({
   getCollection() {
     return HelpMessages;
   },
+  retired(item) {
+    return item.retired;
+  },
 });
 
 Template.List_Help_Messages_Widget.events({

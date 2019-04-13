@@ -62,6 +62,9 @@ Template.List_Course_Instances_Widget.helpers({
   getCollection() {
     return CourseInstances;
   },
+  retired(item) {
+    return item.retired;
+  },
 });
 
 Template.List_Course_Instances_Widget.events({

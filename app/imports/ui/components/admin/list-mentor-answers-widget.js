@@ -52,6 +52,9 @@ Template.List_Mentor_Answers_Widget.helpers({
   getCollection() {
     return MentorAnswers;
   },
+  retired(item) {
+    return item.retired;
+  },
 });
 
 Template.List_Mentor_Answers_Widget.events({

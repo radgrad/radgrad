@@ -80,6 +80,9 @@ Template.List_Feeds_Widget.helpers({
   getCollection() {
     return Feeds;
   },
+  retired(item) {
+    return item.retired;
+  },
 });
 
 Template.List_Feeds_Widget.events({

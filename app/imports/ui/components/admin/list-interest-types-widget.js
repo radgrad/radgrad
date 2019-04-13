@@ -54,6 +54,9 @@ Template.List_Interest_Types_Widget.helpers({
   getCollection() {
     return InterestTypes;
   },
+  retired(item) {
+    return item.retired;
+  },
 });
 
 Template.List_Interest_Types_Widget.events({

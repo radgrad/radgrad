@@ -13,6 +13,7 @@ const updateSchema = new SimpleSchema({
   advisor: String,
   student: String,
   text: String,
+  retired: Boolean,
 }, { tracker: Tracker });
 
 Template.Update_Advisor_Log_Widget.onCreated(function updateadvisorlogwidgetOnCreated() {
