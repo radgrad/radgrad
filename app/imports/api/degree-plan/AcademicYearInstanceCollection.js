@@ -44,7 +44,7 @@ class AcademicYearInstanceCollection extends BaseCollection {
    * @throws {Meteor.Error} If the definition includes an undefined student or a year that is out of bounds.
    * @returns The newly created docID.
    */
-  define({ year, student }) {
+  define({ year, student, retired }) {
     const studentID = Users.getID(student);
     // check for gaps
     const prevYears = this._collection.find({ year: { $lt: year }, studentID }, { $sort: { year: 1 } }).fetch();
@@ -83,7 +83,7 @@ class AcademicYearInstanceCollection extends BaseCollection {
     semesterIDs.push(Semesters.getID(`${Semesters.SUMMER}-${year + 1}`));
 
     // Define and return the docID
-    return this._collection.insert({ year, springYear: year + 1, studentID, semesterIDs });
+    return this._collection.insert({ year, springYear: year + 1, studentID, semesterIDs, retired });
   }
 
   /**
@@ -201,7 +201,8 @@ class AcademicYearInstanceCollection extends BaseCollection {
     const doc = this.findDoc(docID);
     const student = Users.getProfile(doc.studentID).username;
     const year = doc.year;
-    return { student, year };
+    const retired = doc.retired;
+    return { student, year, retired };
   }
 }
 

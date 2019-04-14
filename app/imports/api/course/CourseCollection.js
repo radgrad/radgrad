@@ -64,7 +64,7 @@ class CourseCollection extends BaseSlugCollection {
    */
   define({
       name, shortName = name, slug, number, description, creditHrs = 3,
-      interests = [], syllabus, prerequisites = [], retired = false,
+      interests = [], syllabus, prerequisites = [], retired,
   }) {
     try {
       // Check to see if is defined already.

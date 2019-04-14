@@ -44,7 +44,8 @@ class SemesterCollection extends BaseSlugCollection {
     const doc = this.findDoc(docID);
     const term = doc.term;
     const year = doc.year;
-    return { term, year };
+    const retired = doc.retired;
+    return { term, year, retired };
   }
 
   /**
@@ -58,7 +59,7 @@ class SemesterCollection extends BaseSlugCollection {
    * @throws { Meteor.Error } If the term or year are not correctly specified.
    * @returns The docID for this semester instance.
    */
-  define({ term, year }) {
+  define({ term, year, retired }) {
     // Check that term and year are valid.
     if (this.terms.indexOf(term) < 0) {
       throw new Meteor.Error('Invalid term: ', term, Error().stack);
@@ -94,7 +95,7 @@ class SemesterCollection extends BaseSlugCollection {
       throw new Meteor.Error(`Slug is already defined for undefined semester: ${slug}`, '', Error().stack);
     }
     const slugID = Slugs.define({ name: slug, entityName: 'Semester' });
-    const semesterID = this._collection.insert({ term, year, semesterNumber, slugID });
+    const semesterID = this._collection.insert({ term, year, semesterNumber, slugID, retired });
     Slugs.updateEntityID(slugID, semesterID);
     return semesterID;
   }

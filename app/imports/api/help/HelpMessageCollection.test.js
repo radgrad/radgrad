@@ -24,14 +24,22 @@ if (Meteor.isServer) {
     });
 
     it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne', function test() {
-      let instanceID = HelpMessages.define({ routeName, title, text });
-      expect(HelpMessages.isDefined(instanceID)).to.be.true;
-      const dumpObject = HelpMessages.dumpOne(instanceID);
-      HelpMessages.removeIt(instanceID);
-      expect(HelpMessages.isDefined(instanceID)).to.be.false;
-      instanceID = HelpMessages.restoreOne(dumpObject);
-      expect(HelpMessages.isDefined(instanceID)).to.be.true;
-      HelpMessages.removeIt(instanceID);
+      let docID = HelpMessages.define({ routeName, title, text });
+      expect(HelpMessages.isDefined(docID)).to.be.true;
+      let dumpObject = HelpMessages.dumpOne(docID);
+      expect(dumpObject.retired).to.be.undefined;
+      expect(HelpMessages.findNonRetired().length).to.equal(1);
+      HelpMessages.update(docID, { retired: true });
+      expect(HelpMessages.findNonRetired().length).to.equal(0);
+      HelpMessages.removeIt(docID);
+      expect(HelpMessages.isDefined(docID)).to.be.false;
+      docID = HelpMessages.restoreOne(dumpObject);
+      expect(HelpMessages.isDefined(docID)).to.be.true;
+      HelpMessages.update(docID, { retired: true });
+      dumpObject = HelpMessages.dumpOne(docID);
+      expect(dumpObject.retired).to.be.true;
+      expect(HelpMessages.findNonRetired().length).to.equal(0);
+      HelpMessages.removeIt(docID);
     });
   });
 }

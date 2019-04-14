@@ -31,13 +31,20 @@ if (Meteor.isServer) {
     it('#define, #isDefined, #removeIt #dumpOne, #restoreOne, #checkIntegrity', function test() {
       let docID = AdvisorLogs.define({ advisor, student, text });
       expect(AdvisorLogs.isDefined(docID)).to.be.true;
-      const dumpObject = AdvisorLogs.dumpOne(docID);
+      let dumpObject = AdvisorLogs.dumpOne(docID);
+      expect(dumpObject.retired).to.be.undefined;
+      expect(AdvisorLogs.findNonRetired().length).to.equal(1);
+      AdvisorLogs.update(docID, { retired: true });
+      expect(AdvisorLogs.findNonRetired().length).to.equal(0);
       AdvisorLogs.removeIt(docID);
       expect(AdvisorLogs.isDefined(docID)).to.be.false;
       docID = AdvisorLogs.restoreOne(dumpObject);
       expect(AdvisorLogs.isDefined(docID)).to.be.true;
       const error = AdvisorLogs.checkIntegrity();
       expect(error.length).to.equal(0);
+      AdvisorLogs.update(docID, { retired: true });
+      dumpObject = AdvisorLogs.dumpOne(docID);
+      expect(dumpObject.retired).to.be.true;
       AdvisorLogs.removeIt(docID);
     });
     it('#getAdvisorDoc, #getStudentDoc, #checkIntegrity', function test() {

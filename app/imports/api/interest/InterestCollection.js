@@ -38,19 +38,19 @@ class InterestCollection extends BaseSlugCollection {
    *                    slug: 'software-engineering',
    *                    description: 'Methods for group development of large, high quality software systems',
    *                    interestType: 'cs-disciplines' });
-   * @param { Object } description Object with keys name, slug, description, interestType.
+   * @param { Object } description Object with keys name, slug, description, interestType, retired.
    * Slug must be previously undefined.
    * InterestType must be an InterestType slug or ID.
    * @throws {Meteor.Error} If the interest definition includes a defined slug or undefined interestType.
    * @returns The newly created docID.
    */
-  define({ name, slug, description, interestType }) {
+  define({ name, slug, description, interestType, retired }) {
     // Get InterestTypeID, throw error if not found.
     const interestTypeID = InterestTypes.getID(interestType);
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
     // Define the Interest and get its ID
-    const interestID = this._collection.insert({ name, description, slugID, interestTypeID });
+    const interestID = this._collection.insert({ name, description, slugID, interestTypeID, retired });
     // Connect the Slug to this Interest
     Slugs.updateEntityID(slugID, interestID);
     return interestID;
@@ -62,6 +62,7 @@ class InterestCollection extends BaseSlugCollection {
    * @param name The new name (optional).
    * @param description The new description (optional).
    * @param interestType The new interestType slug or ID (optional).
+   * @param retired the new retired status, (optional).
    * @throws { Meteor.Error } If docID is not defined, or if interestType is not valid.
    */
   update(docID, { name, description, interestType, retired }) {
@@ -162,7 +163,8 @@ class InterestCollection extends BaseSlugCollection {
     const slug = Slugs.getNameFromID(doc.slugID);
     const description = doc.description;
     const interestType = InterestTypes.findSlugByID(doc.interestTypeID);
-    return { name, slug, description, interestType };
+    const retired = doc.retired;
+    return { name, slug, description, interestType, retired };
   }
 }
 

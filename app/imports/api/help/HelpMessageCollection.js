@@ -26,10 +26,11 @@ class HelpMessageCollection extends BaseCollection {
    * @param routeName the route name.
    * @param title the title of the help.
    * @param text the help text.
+   * @param retired the retired status.
    * @return {any} the ID of the help.
    */
-  define({ routeName, title, text }) {
-    return this._collection.insert({ routeName, title, text });
+  define({ routeName, title, text, retired }) {
+    return this._collection.insert({ routeName, title, text, retired });
   }
 
   /**
@@ -38,6 +39,7 @@ class HelpMessageCollection extends BaseCollection {
    * @param routeName The new routeName (optional).
    * @param title The new title (optional)
    * @param text New help text. (optional).
+   * @param retired new retired status. (optional).
    * @throws { Meteor.Error } If docID is not defined.
    */
   update(docID, { routeName, title, text, retired }) {
@@ -113,7 +115,8 @@ class HelpMessageCollection extends BaseCollection {
     const routeName = doc.routeName;
     const title = doc.title;
     const text = doc.text;
-    return { routeName, title, text };
+    const retired = doc.retired;
+    return { routeName, title, text, retired };
   }
 }
 

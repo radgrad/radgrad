@@ -66,7 +66,7 @@ class ReviewCollection extends BaseSlugCollection {
    */
   define({
            slug, student, reviewType, reviewee, semester, rating = 3, comments, moderated = false, visible = true,
-           moderatorComments,
+           moderatorComments, retired,
          }) {
     // Validate student, get studentID.
     const studentID = Users.getID(student);
@@ -79,13 +79,12 @@ class ReviewCollection extends BaseSlugCollection {
       if (!slug) {
         slug = `review-course-${Courses.getSlug(revieweeID)}-${Users.getProfile(studentID).username}`;
       }
-    } else
-      if (reviewType === this.OPPORTUNITY) {
-        revieweeID = Opportunities.getID(reviewee);
-        if (!slug) {
-          slug = `review-opportunity-${Opportunities.getSlug(revieweeID)}-${Users.getProfile(studentID).username}`;
-        }
+    } else if (reviewType === this.OPPORTUNITY) {
+      revieweeID = Opportunities.getID(reviewee);
+      if (!slug) {
+        slug = `review-opportunity-${Opportunities.getSlug(revieweeID)}-${Users.getProfile(studentID).username}`;
       }
+    }
     // Validate semester, get semesterID.
     const semesterID = Semesters.getID(semester);
     // Validate rating.
@@ -98,7 +97,17 @@ class ReviewCollection extends BaseSlugCollection {
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
     // Define the new Review and its Slug.
     const reviewID = this._collection.insert({
-      slugID, studentID, reviewType, revieweeID, semesterID, rating, comments, moderated, visible, moderatorComments,
+      slugID,
+      studentID,
+      reviewType,
+      revieweeID,
+      semesterID,
+      rating,
+      comments,
+      moderated,
+      visible,
+      moderatorComments,
+      retired,
     });
     Slugs.updateEntityID(slugID, reviewID);
     // Return the id to the newly created Review.
@@ -128,6 +137,13 @@ class ReviewCollection extends BaseSlugCollection {
   /**
    * Update the review. Only semester, rating, comments, moderated, visible, and moderatorComments can be updated.
    * @param docID The review docID (required).
+   * @param semester the new semester (optional).
+   * @param rating the new rating (optional).
+   * @param comments the new comments (optional).
+   * @param moderated the new moderated (optional).
+   * @param visible the new visible (optional).
+   * @param moderatorComments the new moderator comments (optional).
+   * @param retired the new retired status (optional).
    */
   update(docID, { semester, rating, comments, moderated, visible, moderatorComments, retired }) {
     this.assertDefined(docID);
@@ -178,8 +194,8 @@ class ReviewCollection extends BaseSlugCollection {
   }
 
   /**
-   * Returns the slug for the given opportunity ID.
-   * @param opportunityID the opportunity ID.
+   * Returns the slug for the given review ID.
+   * @param reviewID the review ID.
    */
   getSlug(reviewID) {
     this.assertDefined(reviewID);
@@ -195,20 +211,21 @@ class ReviewCollection extends BaseSlugCollection {
    */
   checkIntegrity() {
     const problems = [];
-    this.find().forEach(doc => {
-      if (!Slugs.isDefined(doc.slugID)) {
-        problems.push(`Bad slugID: ${doc.slugID}`);
-      }
-      if (!Users.isDefined(doc.studentID)) {
-        problems.push(`Bad studentID: ${doc.studentID}`);
-      }
-      if (!Opportunities.isDefined(doc.revieweeID) && !Courses.isDefined(doc.revieweeID)) {
-        problems.push(`Bad reviewee: ${doc.revieweeID}`);
-      }
-      if (!Semesters.isDefined(doc.semesterID)) {
-        problems.push(`Bad studentID: ${doc.semesterID}`);
-      }
-    });
+    this.find()
+      .forEach(doc => {
+        if (!Slugs.isDefined(doc.slugID)) {
+          problems.push(`Bad slugID: ${doc.slugID}`);
+        }
+        if (!Users.isDefined(doc.studentID)) {
+          problems.push(`Bad studentID: ${doc.studentID}`);
+        }
+        if (!Opportunities.isDefined(doc.revieweeID) && !Courses.isDefined(doc.revieweeID)) {
+          problems.push(`Bad reviewee: ${doc.revieweeID}`);
+        }
+        if (!Semesters.isDefined(doc.semesterID)) {
+          problems.push(`Bad studentID: ${doc.semesterID}`);
+        }
+      });
     return problems;
   }
 
@@ -222,7 +239,7 @@ class ReviewCollection extends BaseSlugCollection {
   updateModerated(reviewID, moderated, visible, moderatorComments) {
     this.assertDefined(reviewID);
     this._collection.update({ _id: reviewID },
-        { $set: { moderated, visible, moderatorComments } });
+      { $set: { moderated, visible, moderatorComments } });
   }
 
   /**
@@ -238,18 +255,29 @@ class ReviewCollection extends BaseSlugCollection {
     let reviewee;
     if (reviewType === this.COURSE) {
       reviewee = Courses.findSlugByID(doc.revieweeID);
-    } else
-      if (reviewType === this.OPPORTUNITY) {
-        reviewee = Opportunities.findSlugByID(doc.revieweeID);
-      }
+    } else if (reviewType === this.OPPORTUNITY) {
+      reviewee = Opportunities.findSlugByID(doc.revieweeID);
+    }
     const semester = Semesters.findSlugByID(doc.semesterID);
     const rating = doc.rating;
     const comments = doc.comments;
     const moderated = doc.moderated;
     const visible = doc.visible;
     const moderatorComments = doc.moderatorComments;
-
-    return { slug, student, reviewType, reviewee, semester, rating, comments, moderated, visible, moderatorComments };
+    const retired = doc.retired;
+    return {
+      slug,
+      student,
+      reviewType,
+      reviewee,
+      semester,
+      rating,
+      comments,
+      moderated,
+      visible,
+      moderatorComments,
+      retired,
+    };
   }
 }
 

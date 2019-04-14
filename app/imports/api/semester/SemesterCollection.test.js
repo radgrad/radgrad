@@ -19,7 +19,8 @@ if (Meteor.isServer) {
     it('#get, #isDefined, #removeIt, #dumpOne, #restoreOne', function test() {
       let docID = Semesters.define({ term: Semesters.FALL, year: 2010 });
       expect(Semesters.isDefined(docID)).to.be.true;
-      const dumpObject = Semesters.dumpOne(docID);
+      let dumpObject = Semesters.dumpOne(docID);
+      expect(dumpObject.retired).to.be.undefined;
       expect(Semesters.findNonRetired().length).to.equal(1);
       Semesters.update(docID, { retired: true });
       expect(Semesters.findNonRetired().length).to.equal(0);
@@ -27,6 +28,9 @@ if (Meteor.isServer) {
       expect(Semesters.isDefined(docID)).to.be.false;
       docID = Semesters.restoreOne(dumpObject);
       expect(Semesters.isDefined(docID)).to.be.true;
+      Semesters.update(docID, { retired: true });
+      dumpObject = Semesters.dumpOne(docID);
+      expect(dumpObject.retired).to.be.true;
       Semesters.removeIt(docID);
     });
 

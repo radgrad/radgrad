@@ -65,7 +65,7 @@ class OpportunityCollection extends BaseSlugCollection {
    * @returns The newly created docID.
    */
   define({ name, slug, description, opportunityType, sponsor, interests, semesters, ice, eventDate = null,
-           retired = false }) {
+           retired }) {
     // Get instances, or throw error
 
     const opportunityTypeID = OpportunityTypes.getID(opportunityType);

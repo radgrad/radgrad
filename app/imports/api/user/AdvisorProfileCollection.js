@@ -27,11 +27,12 @@ class AdvisorProfileCollection extends BaseProfileCollection {
    * @param website The URL to their personal website (optional).
    * @param interests An array of interests. (optional)
    * @param careerGoals An array of career goals. (optional)
+   * @param retired the retired status (optional)
    * @throws { Meteor.Error } If username has been previously defined, or if any interests or careerGoals are invalid.
    * @return { String } The docID of the AdvisorProfile.
    */
   define({ username, firstName, lastName, picture = defaultProfilePicture, website, interests,
-           careerGoals }) {
+           careerGoals, retired }) {
     if (Meteor.isServer) {
       const role = ROLE.ADVISOR;
       const interestIDs = Interests.getIDs(interests);
@@ -39,7 +40,7 @@ class AdvisorProfileCollection extends BaseProfileCollection {
       Slugs.define({ name: username, entityName: this.getType() });
       const profileID = this._collection.insert({
         username, firstName, lastName, role, picture, website, interestIDs,
-        careerGoalIDs, userID: this.getFakeUserId() });
+        careerGoalIDs, userID: this.getFakeUserId(), retired });
       const userID = Users.define({ username, role });
       this._collection.update(profileID, { $set: { userID } });
       return profileID;
@@ -100,7 +101,8 @@ class AdvisorProfileCollection extends BaseProfileCollection {
     const website = doc.website;
     const interests = _.map(doc.interestIDs, interestID => Interests.findSlugByID(interestID));
     const careerGoals = _.map(doc.careerGoalIDs, careerGoalID => CareerGoals.findSlugByID(careerGoalID));
-    return { username, firstName, lastName, picture, website, interests, careerGoals };
+    const retired = doc.retired;
+    return { username, firstName, lastName, picture, website, interests, careerGoals, retired };
   }
 }
 

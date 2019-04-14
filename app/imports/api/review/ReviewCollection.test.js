@@ -34,11 +34,18 @@ if (Meteor.isServer) {
         slug, student, reviewType, reviewee, semester, rating, comments,
       });
       expect(Reviews.isDefined(docID)).to.be.true;
-      const dumpObject = Reviews.dumpOne(docID);
+      let dumpObject = Reviews.dumpOne(docID);
+      expect(dumpObject.retired).to.be.undefined;
+      expect(Reviews.findNonRetired().length).to.equal(1);
+      Reviews.update(docID, { retired: true });
+      expect(Reviews.findNonRetired().length).to.equal(0);
       Reviews.removeIt(docID);
       expect(Reviews.isDefined(slug)).to.be.false;
       docID = Reviews.restoreOne(dumpObject);
       expect(Reviews.isDefined(docID)).to.be.true;
+      Reviews.update(docID, { retired: true });
+      dumpObject = Reviews.dumpOne(docID);
+      expect(dumpObject.retired).to.be.true;
       Reviews.removeIt(docID);
     });
   });

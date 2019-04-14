@@ -38,10 +38,10 @@ class DesiredDegreeCollection extends BaseSlugCollection {
    * @throws { Meteor.Error } If the slug already exists.
    * @returns The newly created docID.
    */
-  define({ name, shortName = name, slug, description }) {
+  define({ name, shortName = name, slug, description, retired }) {
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
-    const desiredDegreeID = this._collection.insert({ name, shortName, slugID, description });
+    const desiredDegreeID = this._collection.insert({ name, shortName, slugID, description, retired });
     // Connect the Slug to this Interest
     Slugs.updateEntityID(slugID, desiredDegreeID);
     return desiredDegreeID;

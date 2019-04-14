@@ -48,7 +48,7 @@ class FeedbackInstanceCollection extends BaseCollection {
    * @returns The newly created docID.
    */
 
-  define({ user, functionName, description, feedbackType }) {
+  define({ user, functionName, description, feedbackType, retired }) {
     // Validate Feedback and user.
     const userID = Users.getID(user);
     if (!_.includes(this.feedbackTypes, feedbackType)) {
@@ -56,17 +56,17 @@ class FeedbackInstanceCollection extends BaseCollection {
         '', Error().stack);
     }
     // Define and return the new FeedbackInstance
-    const feedbackInstanceID = this._collection.insert({ userID, functionName, description, feedbackType });
-    return feedbackInstanceID;
+    return this._collection.insert({ userID, functionName, description, feedbackType, retired });
   }
 
   /**
-   * Update the course instance. Only a subset of fields can be updated.
-   * @param docID
-   * @param user
-   * @param description
-   * @param feedbackType
-   * @param functionName
+   * Update the feedback instance. Only a subset of fields can be updated.
+   * @param docID the docID of the instance to update
+   * @param user the new user, optional
+   * @param description the new description, optional
+   * @param feedbackType the new feedback type, optional
+   * @param functionName the new function name, optional
+   * @param retired the new retired status, optional
    */
   update(docID, { user, description, feedbackType, functionName, retired }) {
     this.assertDefined(docID);
@@ -208,7 +208,8 @@ class FeedbackInstanceCollection extends BaseCollection {
     const functionName = doc.functionName;
     const description = doc.description;
     const feedbackType = doc.feedbackType;
-    return { user, functionName, description, feedbackType };
+    const retired = doc.retired;
+    return { user, functionName, description, feedbackType, retired };
   }
 
 }

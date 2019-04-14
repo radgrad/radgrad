@@ -32,13 +32,20 @@ if (Meteor.isServer) {
     });
 
     it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne', function test() {
-      const docID = Interests.define(interest1);
+      let docID = Interests.define(interest1);
       expect(Interests.isDefined(slug)).to.be.true;
-      const dumpObject = Interests.dumpOne(docID);
+      let dumpObject = Interests.dumpOne(docID);
+      expect(dumpObject.retired).to.be.undefined;
+      expect(Interests.findNonRetired().length).to.equal(1);
+      Interests.update(docID, { retired: true });
+      expect(Interests.findNonRetired().length).to.equal(0);
       Interests.removeIt(slug);
       expect(Interests.isDefined(slug)).to.be.false;
-      Interests.restoreOne(dumpObject);
+      docID = Interests.restoreOne(dumpObject);
       expect(Interests.isDefined(slug)).to.be.true;
+      Interests.update(docID, { retired: true });
+      dumpObject = Interests.dumpOne(docID);
+      expect(dumpObject.retired).to.be.true;
       Interests.removeIt(slug);
     });
 

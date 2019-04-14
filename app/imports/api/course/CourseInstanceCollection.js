@@ -69,7 +69,7 @@ class CourseInstanceCollection extends BaseCollection {
    * @throws {Meteor.Error} If the definition includes an undefined course or student.
    * @returns The newly created docID.
    */
-  define({ semester, course, verified = false, fromSTAR = false, grade = '', note = '', student, creditHrs }) {
+  define({ semester, course, verified = false, fromSTAR = false, grade = '', note = '', student, creditHrs, retired }) {
     // Check arguments
     const semesterID = Semesters.getID(semester);
     const semesterDoc = Semesters.findDoc(semesterID);
@@ -100,7 +100,18 @@ class CourseInstanceCollection extends BaseCollection {
     }
     // Define and return the CourseInstance
     // eslint-disable-next-line max-len
-    return this._collection.insert({ semesterID, courseID, verified, fromSTAR, grade, studentID, creditHrs, note, ice });
+    return this._collection.insert({
+      semesterID,
+      courseID,
+      verified,
+      fromSTAR,
+      grade,
+      studentID,
+      creditHrs,
+      note,
+      ice,
+      retired,
+    });
   }
 
   /**
@@ -292,13 +303,13 @@ class CourseInstanceCollection extends BaseCollection {
         return instance._collection.find({ studentID: this.userId });
       });
       Meteor.publish(this.publicationNames.perStudentAndSemester,
-          function perStudentAndSemester(studentID, semesterID) {  // eslint-disable-line
-            new SimpleSchema({
-              studentID: { type: String },
-              semesterID: { type: String },
-            }).validate({ studentID, semesterID });
-            return instance._collection.find({ studentID, semesterID });
-          });
+        function perStudentAndSemester(studentID, semesterID) {  // eslint-disable-line
+          new SimpleSchema({
+            studentID: { type: String },
+            semesterID: { type: String },
+          }).validate({ studentID, semesterID });
+          return instance._collection.find({ studentID, semesterID });
+        });
       Meteor.publish(this.publicationNames.publicStudent, function publicStudentPublish() {  // eslint-disable-line
         return instance._collection.find({}, { fields: { studentID: 1, semesterID: 1, courseID: 1 } });
       });
@@ -372,17 +383,18 @@ class CourseInstanceCollection extends BaseCollection {
    */
   checkIntegrity() {
     const problems = [];
-    this.find().forEach(doc => {
-      if (!Semesters.isDefined(doc.semesterID)) {
-        problems.push(`Bad semesterID: ${doc.semesterID}`);
-      }
-      if (!Courses.isDefined(doc.courseID)) {
-        problems.push(`Bad courseID: ${doc.courseID}`);
-      }
-      if (!Users.isDefined(doc.studentID)) {
-        problems.push(`Bad studentID: ${doc.studentID}`);
-      }
-    });
+    this.find()
+      .forEach(doc => {
+        if (!Semesters.isDefined(doc.semesterID)) {
+          problems.push(`Bad semesterID: ${doc.semesterID}`);
+        }
+        if (!Courses.isDefined(doc.courseID)) {
+          problems.push(`Bad courseID: ${doc.courseID}`);
+        }
+        if (!Users.isDefined(doc.studentID)) {
+          problems.push(`Bad studentID: ${doc.studentID}`);
+        }
+      });
     return problems;
   }
 
@@ -401,7 +413,8 @@ class CourseInstanceCollection extends BaseCollection {
     const grade = doc.grade;
     const fromSTAR = doc.fromSTAR;
     const student = Users.getProfile(doc.studentID).username;
-    return { semester, course, note, verified, fromSTAR, creditHrs, grade, student };
+    const retired = doc.retired;
+    return { semester, course, note, verified, fromSTAR, creditHrs, grade, student, retired };
   }
 }
 

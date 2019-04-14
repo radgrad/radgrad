@@ -29,11 +29,18 @@ if (Meteor.isServer) {
       const timestamp = Date.now();
       let docID = Feeds.define({ feedType, user, timestamp });
       expect(Feeds.isDefined(docID)).to.be.true;
-      const dumpObject = Feeds.dumpOne(docID);
+      let dumpObject = Feeds.dumpOne(docID);
+      expect(dumpObject.retired).to.be.undefined;
+      expect(Feeds.findNonRetired().length).to.equal(1);
+      Feeds.update(docID, { retired: true });
+      expect(Feeds.findNonRetired().length).to.equal(0);
       Feeds.removeIt(docID);
       expect(Feeds.isDefined(docID)).to.be.false;
       docID = Feeds.restoreOne(dumpObject);
       expect(Feeds.isDefined(docID)).to.be.true;
+      Feeds.update(docID, { retired: true });
+      dumpObject = Feeds.dumpOne(docID);
+      expect(dumpObject.retired).to.be.true;
       Feeds.removeIt(docID);
     });
 

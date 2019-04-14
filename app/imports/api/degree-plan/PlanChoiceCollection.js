@@ -28,12 +28,12 @@ class PlanChoiceCollection extends BaseCollection {
    * @param choice
    * @returns {*}
    */
-  define({ choice }) {
+  define({ choice, retired }) {
     const doc = this._collection.findOne(choice);
     if (doc) {
       return doc._id;
     }
-    return this._collection.insert({ choice });
+    return this._collection.insert({ choice, retired });
   }
 
   /**
@@ -110,7 +110,7 @@ class PlanChoiceCollection extends BaseCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    return { choice: doc.choice };
+    return { choice: doc.choice, retired: doc.retired };
   }
 
 }

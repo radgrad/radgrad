@@ -22,13 +22,20 @@ if (Meteor.isServer) {
     });
 
     it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne, #toStringFromSlug', function test() {
-      const docID = PlanChoices.define({ choice: simple });
+      let docID = PlanChoices.define({ choice: simple });
       expect(PlanChoices.isDefined(docID)).to.be.true;
-      const dumpObject = PlanChoices.dumpOne(docID);
+      let dumpObject = PlanChoices.dumpOne(docID);
+      expect(dumpObject.retired).to.be.undefined;
+      expect(PlanChoices.findNonRetired().length).to.equal(1);
+      PlanChoices.update(docID, { retired: true });
+      expect(PlanChoices.findNonRetired().length).to.equal(0);
       PlanChoices.removeIt(docID);
       expect(PlanChoices.isDefined(docID)).to.be.false;
-      const planID = PlanChoices.restoreOne(dumpObject);
-      expect(PlanChoices.isDefined(planID)).to.be.true;
+      docID = PlanChoices.restoreOne(dumpObject);
+      expect(PlanChoices.isDefined(docID)).to.be.true;
+      PlanChoices.update(docID, { retired: true });
+      dumpObject = PlanChoices.dumpOne(docID);
+      expect(dumpObject.retired).to.be.true;
       const choiceID = PlanChoices.define({ choice });
       expect(PlanChoices.isDefined(choiceID)).to.be.true;
       const complexID = PlanChoices.define({ choice: complex });

@@ -58,7 +58,7 @@ class AcademicPlanCollection extends BaseSlugCollection {
    * @param retired optional, defaults to false, allows for retiring an academic plan.
    * @returns {*}
    */
-  define({ slug, degreeSlug, name, description, semester, coursesPerSemester, courseList, retired = false }) {
+  define({ slug, degreeSlug, name, description, semester, coursesPerSemester, courseList, retired }) {
     const degreeID = Slugs.getEntityID(degreeSlug, 'DesiredDegree');
     const effectiveSemesterID = Semesters.getID(semester);
     const doc = this._collection.findOne({ degreeID, name, effectiveSemesterID });
