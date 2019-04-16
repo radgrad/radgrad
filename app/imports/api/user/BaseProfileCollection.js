@@ -192,6 +192,7 @@ class BaseProfileCollection extends BaseSlugCollection {
    * @param profileID The ID for this profile object.
    */
   removeIt(profileID) {
+    // console.log('BaseProfileCollection.removeIt(%o)', profileID);
     const profile = this._collection.findOne({ _id: profileID });
     const userID = profile.userID;
     if (!Users.isReferenced(userID)) {

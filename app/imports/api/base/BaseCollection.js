@@ -157,6 +157,7 @@ class BaseCollection {
    * @returns true
    */
   removeIt(name) {
+    // console.log('%o.removeIt(%o)', this._collectionName, name);
     const doc = this.findDoc(name);
     check(doc, Object);
     this._collection.remove(doc._id);

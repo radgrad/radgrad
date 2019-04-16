@@ -144,6 +144,20 @@ class StudentProfileCollection extends BaseProfileCollection {
   }
 
   /**
+   * Removes this profile, given its profile ID.
+   * Also removes this user from Meteor Accounts.
+   * @param profileID The ID for this profile object.
+   */
+  removeIt(profileID) {
+    if (this.isDefined(profileID)) {
+      const doc = this.findDoc(profileID);
+      if (doc.declaredSemesterID) {
+        Semesters.removeIt(doc.declaredSemesterID);
+      }
+      super.removeIt(profileID);
+    }
+  }
+    /**
    * Asserts that level is an integer between 1 and 6.
    * @param level The level.
    */
@@ -292,7 +306,7 @@ class StudentProfileCollection extends BaseProfileCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    console.log('StudentProfiles.dumpOne %o', doc);
+    // console.log('StudentProfiles.dumpOne %o', doc);
     const username = doc.username;
     const firstName = doc.firstName;
     const lastName = doc.lastName;
@@ -302,7 +316,7 @@ class StudentProfileCollection extends BaseProfileCollection {
     const careerGoals = _.map(doc.careerGoalIDs, careerGoalID => CareerGoals.findSlugByID(careerGoalID));
     const level = doc.level;
     const academicPlan = doc.academicPlanID && AcademicPlans.findSlugByID(doc.academicPlanID);
-    const declaredSemester = doc.declaredSemesterID && Semesters.findSlugByID(doc.declaredSemesterID);
+    const declaredSemester = doc.declaredSemesterID && Semesters.getSlug(doc.declaredSemesterID);
     const hiddenCourses = _.map(doc.hiddenCourseIDs, hiddenCourseID => Courses.findSlugByID(hiddenCourseID));
     const hiddenOpportunities = _.map(doc.hiddenOpportunityIDs, hiddenOpportunityID =>
         Opportunities.findSlugByID(hiddenOpportunityID));

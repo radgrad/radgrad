@@ -60,6 +60,7 @@ class SemesterCollection extends BaseSlugCollection {
    * @returns The docID for this semester instance.
    */
   define({ term, year, retired }) {
+    // console.log('Semesters.define(term=%o, year=%o, retired=%o)', term, year, retired);
     // Check that term and year are valid.
     if (this.terms.indexOf(term) < 0) {
       throw new Meteor.Error('Invalid term: ', term, Error().stack);
@@ -70,6 +71,7 @@ class SemesterCollection extends BaseSlugCollection {
 
     // Return immediately if semester is already defined.
     const doc = this._collection.findOne({ term, year });
+    // console.log(doc);
     if (doc) {
       return doc._id;
     }
@@ -214,6 +216,8 @@ class SemesterCollection extends BaseSlugCollection {
    * @throws { Meteor.Error } If the passed semester is not a valid semester slug.
    */
   getID(semester) {
+    // console.log('Semesters.getID(%o)', semester);
+    // debugger; // eslint-disable-line
     if (this.isDefined(semester)) {
       return super.getID(semester);
     }

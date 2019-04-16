@@ -1,8 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
+import { moment } from 'meteor/momentjs:moment';
 import { removeAllEntities } from '../base/BaseUtilities';
 import { StudentProfiles } from './StudentProfileCollection';
-import { Semesters } from '../semester/SemesterCollection';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
@@ -18,7 +18,8 @@ if (Meteor.isServer) {
     });
 
     it('#define, #isDefined, #update, #removeIt, #dumpOne, #restoreOne', function test() {
-      const username = 'amytaka@hawaii.edu';
+      const uniqueString = moment().format('YYYYMMDDHHmmssSSSSS');
+      const username = `student-${uniqueString}@hawaii.edu`;
       const firstName = 'Amy';
       const lastName = 'Takayesu';
       const picture = 'amy.jpg';
@@ -27,15 +28,12 @@ if (Meteor.isServer) {
       const careerGoals = [];
       const level = 6;
       const declaredSemester = 'Spring-2017';
-      const semesterID = Semesters.define({ year: 2017, term: Semesters.SPRING });
-      console.log(semesterID, Semesters.findDoc(semesterID));
       let docID = StudentProfiles.define({
         username, firstName, lastName, picture, website, interests,
         careerGoals, level, declaredSemester,
       });
       expect(StudentProfiles.isDefined(docID)).to.be.true;
       let dumpObject = StudentProfiles.dumpOne(docID);
-      console.log(dumpObject);
       expect(dumpObject.retired).to.be.undefined;
       expect(StudentProfiles.findNonRetired().length).to.equal(1);
       StudentProfiles.update(docID, { retired: true });

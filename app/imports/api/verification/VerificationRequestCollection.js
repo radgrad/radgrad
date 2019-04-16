@@ -67,7 +67,7 @@ class VerificationRequestCollection extends BaseCollection {
    */
   define({
     student, opportunityInstance, submittedOn = moment().toDate(), status = this.OPEN, processed = [],
-    semester, opportunity }) {
+    semester, opportunity, retired }) {
     const studentID = Users.getID(student);
     const oppInstance = opportunityInstance ? OpportunityInstances.findDoc(opportunityInstance) :
       OpportunityInstances.findOpportunityInstanceDoc(semester, opportunity, student);
@@ -79,7 +79,7 @@ class VerificationRequestCollection extends BaseCollection {
     const ice = Opportunities.findDoc(oppInstance.opportunityID).ice;
     // Define and return the new VerificationRequest
     const requestID = this._collection.insert({
-      studentID, opportunityInstanceID, submittedOn, status, processed, ice,
+      studentID, opportunityInstanceID, submittedOn, status, processed, ice, retired,
     });
     return requestID;
   }
@@ -290,7 +290,8 @@ class VerificationRequestCollection extends BaseCollection {
     const submittedOn = doc.submittedOn;
     const status = doc.status;
     const processed = doc.processed;
-    return { student, semester, opportunity, submittedOn, status, processed };
+    const retired = doc.retired;
+    return { student, semester, opportunity, submittedOn, status, processed, retired };
   }
 }
 
