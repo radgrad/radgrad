@@ -21,9 +21,11 @@
                         <label>Feedback:</label>
                         <div class="ui action input">
                           <input id="{{request._id}}-feedback" type="text" name="feedback" placeholder="Optional feedback">
-                          <button id="{{request._id}}-Accepted" class="ui tiny green basic button" type="submit">ACCEPT</button>
-                          <button id="{{request._id}}-Rejected" class="ui tiny red basic button" type="submit" style="margin-left: 0.15rem;">DECLINE</button>
                         </div>
+                      </div>
+                      <div class="ui inline field">
+                        <button id="{{request._id}}-Accepted" class="ui tiny green basic button" type="submit">ACCEPT</button>
+                        <button id="{{request._id}}-Rejected" class="ui tiny red basic button" type="submit" style="margin-left: 0.15rem;">DECLINE</button>
                       </div>
                     </form>
                   </div>
