@@ -13,7 +13,7 @@
         {{#if (users studentRole group)}}
           <div class="ui stackable grid">
             {{#each user in (users studentRole group)}}
-              <div class="two wide column" style="padding: 2px;" data-tooltip={{name user true}}>
+              <div class="three wide column" style="padding: 2px;" data-tooltip={{name user true}}>
                 <button id="{{user.username}}" style="padding: 3px;" class="ui basic grey fluid label jsRetrieve">
                     <img class="ui avatar image" src='/images/level-icons/radgrad-level-{{level user}}-icon.png'>
                     {{name user false}}<br>({{studentUsername user}})
