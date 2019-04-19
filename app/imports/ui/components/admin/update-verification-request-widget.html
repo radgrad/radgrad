@@ -2,7 +2,7 @@
   <div class="ui padded container segment">
     <div class="ui dividing header"><h4>UPDATE VERIFICATION REQUEST {{name item}}</h4></div>
     <form class="ui equal width form {{successClass}} {{errorClass}}">
-      <div class="field">
+      <div class="fields">
         {{> Boolean_Form_Field label='Retired' name='retired' trueValue=trueValueRetired falseValue=falseValueRetired errorMessage=(fieldError "retired")}}
       </div>
       <button class="ui green basic button" type="submit">Update</button>

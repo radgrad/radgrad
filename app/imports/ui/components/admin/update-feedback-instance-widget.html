@@ -10,7 +10,7 @@
         {{> Input_Form_Field label="Feedback Function" name="functionName" value=feedbackInstance.functionName errorMessage=(fieldError "functionName") required=true }}
       </div>
       {{> TextArea_Form_Field label="Description" rows=10 name="description" placeholder="Add description of the feed here." value=feedbackInstance.description errorMessage=(fieldError "description")}}
-      <div class="field">
+      <div class="fields">
         {{> Boolean_Form_Field label='Retired' name='retired' trueValue=trueValueRetired falseValue=falseValueRetired errorMessage=(fieldError "retired")}}
       </div>
 

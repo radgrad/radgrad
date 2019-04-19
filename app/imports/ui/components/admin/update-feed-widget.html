@@ -22,7 +22,7 @@
         {{> Opportunity_Form_Field opportunities=opportunities selectedOpportunityID=feed.opportunityID errorMessage=(fieldError "opportunity")}}
         {{> Course_Form_Field courses=courses selectedCourseID=feed.courseID errorMessage=(fieldError "course")}}
       </div>
-      <div class="field">
+      <div class="fields">
         {{> Boolean_Form_Field label='Retired' name='retired' trueValue=trueValueRetired falseValue=falseValueRetired errorMessage=(fieldError "retired")}}
       </div>
 

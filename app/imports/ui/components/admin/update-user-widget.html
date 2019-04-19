@@ -32,7 +32,7 @@
       {{#if isStudent}}
         {{> Update_User_Widget_Student user=user}}
       {{/if}}
-      <div class="field">
+      <div class="fields">
         {{> Boolean_Form_Field label='Retired' name='retired' trueValue=trueValueRetired falseValue=falseValueRetired errorMessage=(fieldError "retired")}}
       </div>
       <button class="ui green basic button" type="submit">Update</button>

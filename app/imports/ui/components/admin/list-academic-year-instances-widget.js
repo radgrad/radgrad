@@ -3,6 +3,8 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { AcademicYearInstances } from '../../../api/degree-plan/AcademicYearInstanceCollection';
 import { Users } from '../../../api/user/UserCollection';
+import * as FormUtils from '../form-fields/form-field-utilities';
+import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 
 function numReferences(academicYearInstance) { // eslint-disable-line
   return 0;
@@ -53,5 +55,18 @@ Template.List_Academic_Year_Instances_Widget.helpers({
   },
   retired(item) {
     return item.retired;
+  },
+});
+
+Template.List_Academic_Year_Instances_Widget.events({
+  'click .jsUpdate': FormUtils.processUpdateButtonClick,
+  'click .jsDelete': function (event, instance) {
+    event.preventDefault();
+    const id = event.target.value;
+    removeItMethod.call({ collectionName: AcademicYearInstances.getCollectionName(), instance: id }, (error) => {
+      if (error) {
+        FormUtils.indicateError(instance, error);
+      }
+    });
   },
 });

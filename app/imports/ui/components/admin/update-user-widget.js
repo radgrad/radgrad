@@ -47,7 +47,7 @@ const updateStudentSchema = new SimpleSchema({
 }, { tracker: Tracker });
 
 const updateMentorSchema = new SimpleSchema({
-  username: { type: String, custom: FormUtils.slugFieldValidator },
+  username: String,
   role: String,
   firstName: String,
   lastName: String,
@@ -155,6 +155,7 @@ Template.Update_User_Widget.events({
     schema.clean(updateData, { mutate: true });
     updateData.retired = updateData.retired === 'true';
     instance.context.validate(updateData);
+    // console.log('update_user_widget updateData=%o context=%o', updateData, instance.context);
     if (instance.context.isValid()) {
       let collectionName;
       switch (profile.role) {
