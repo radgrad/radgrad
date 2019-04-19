@@ -1,21 +1,28 @@
 <template name="Advisor_Student_Configuration_Page">
   <div class="layout-page">
-    <div class="ui stackable grid container">
-      {{> Help_Panel_Widget}}
+    <div class="ui stackable grid">
+      <div class="row">{{> Advisor_Help_Panel_Widget}}</div>
 
-      {{> Student_Selector_Widget dictionary=getDictionary studentID=studentID}}
-
+      <div class="row">
+        <div class="one wide column"></div>
+        <div
+            class="fourteen wide column">{{> Student_Selector_Widget dictionary=getDictionary studentID=studentID}}</div>
+        <div class="one wide column"></div>
+      </div>
       {{#if selectedStudent}}
-        <div class="ten wide stretched column">
-          {{> Update_Student_Widget studentID=studentID}}
-        </div>
-        <div class="six wide stretched column">
-          {{> Advisor_Log_Entry_Widget dictionary=getDictionary studentID=studentID}}
-          {{> Star_Upload_Widget studentID=studentID}}
-          <!--{{> Star_Bulk_Upload_Widget}}-->
+        <div class="row">
+          <div class="one wide column"></div>
+          <div class="nine wide stretched column">
+            {{> Update_Student_Widget studentID=studentID}}
+          </div>
+          <div class="five wide stretched column">
+            {{> Advisor_Log_Entry_Widget dictionary=getDictionary studentID=studentID}}
+            {{> Star_Upload_Widget studentID=studentID}}
+            <!--{{> Star_Bulk_Upload_Widget}}-->
+          </div>
+          <div class="one wide column"></div>
         </div>
       {{/if}}
-
     </div>
   </div>
 </template>
