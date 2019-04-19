@@ -7,12 +7,9 @@
   <div class="ui bottom attached active tab segment" data-tab="students">
     {{> Filter_Student_Widget label='STUDENTS' firstNameRegex=firstNameRegex lastNameRegex=lastNameRegex userNameRegex=userNameRegex }}
     <div class="ui top attached tabular stackable menu">
-      {{#each group in alphabeticalGroups}}
-      <a class="item" data-tab={{group}}>{{group}} ({{usersCount 'STUDENT' group}})</a>
-      {{/each}}
+      <a class="item" data-tab='students'>Students ({{usersCount 'STUDENT' group}})</a>
     </div>
-  {{#each group in alphabeticalGroups}}
-    <div class="ui bottom attached {{isActive group}} tab segment" data-tab={{group}}>
+    <div class="ui bottom attached active tab segment" data-tab={{group}}>
         {{#if (users studentRole group)}}
           <div class="ui stackable grid">
             {{#each user in (users studentRole group)}}
@@ -28,7 +25,6 @@
           <i>No students in this category</i>
         {{/if}}
     </div>
-  {{/each}}
   </div>
   <div class="ui bottom attached tab segment" data-tab="add">
     {{> Add_Student_Widget}}
