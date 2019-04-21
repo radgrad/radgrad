@@ -6,6 +6,15 @@
       "name": "CourseInstanceCollection",
       "contents": [
         {
+          "semester": "Spring-2015",
+          "course": "ics_241",
+          "note": "ICS 241",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A-",
+          "student": "betty@hawaii.edu"
+        },
+        {
           "semester": "Fall-2015",
           "course": "ics_311",
           "note": "ICS 311",
