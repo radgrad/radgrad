@@ -38,11 +38,9 @@ if (Meteor.isServer) {
         .equal(1);
     });
 
-    it('Betty Levels Student', function test(done) {
-      this.timeout(0); // turn off time outs?
-      setTimeout(done, 20000);
+    it('Betty Level 1', function levelOne() {
       defineTestFixtures(['minimal', 'extended.courses.interests', 'betty.student']);
-      let bettyProfile = StudentProfiles.findDoc({ username: 'betty@hawaii.edu' });
+      const bettyProfile = StudentProfiles.findDoc({ username: 'betty@hawaii.edu' });
       expect(bettyProfile).to.exist;
       const level = defaultCalcLevel(bettyProfile.userID);
       expect(level)
@@ -52,40 +50,69 @@ if (Meteor.isServer) {
       expect(defaultCalcLevel(bettyProfile.userID))
         .to
         .equal(1);
+    });
+
+    it('Betty Level 2', function levelTwo() {
       defineTestFixtures(['betty.level2']); // ice [0, 16, 0]
+      const bettyProfile = StudentProfiles.findDoc({ username: 'betty@hawaii.edu' });
       expect(defaultCalcLevel(bettyProfile.userID))
         .to
         .equal(2);
+    });
+
+    it('Betty Level 3', function levelThree() {
       defineTestFixtures(['opportunities', 'extended.opportunities', 'betty.level3']); // [5, 26, 5]
+      const bettyProfile = StudentProfiles.findDoc({ username: 'betty@hawaii.edu' });
       expect(defaultCalcLevel(bettyProfile.userID))
         .to
         .equal(3);
+    });
+
+    it('Betty Level 3 no picture', function noPicture() {
       defineTestFixtures(['betty.level4']); // [30, 36, 35]
+      const bettyProfile = StudentProfiles.findDoc({ username: 'betty@hawaii.edu' });
       expect(defaultCalcLevel(bettyProfile.userID))
         .to
-        .equal(3); // since she doesn't have a picture
+        .equal(3);
+    });
+
+    it('Betty Level 4', function levelFour() {
+      this.timeout(5000);
       removeAllEntities();
       defineTestFixtures(['minimal', 'extended.courses.interests', 'betty.student.picture', 'betty.level1',
         'betty.level2', 'opportunities', 'extended.opportunities', 'betty.level3', 'betty.level4']);
-      bettyProfile = StudentProfiles.findDoc({ username: 'betty@hawaii.edu' });
+      const bettyProfile = StudentProfiles.findDoc({ username: 'betty@hawaii.edu' });
       expect(defaultCalcLevel(bettyProfile.userID))
         .to
-        .equal(4);
-      removeAllEntities();
-      defineTestFixtures(['minimal', 'extended.courses.interests', 'betty.student.picture', 'betty.level1',
-        'betty.level2', 'opportunities', 'extended.opportunities', 'betty.level3', 'betty.level5']);
-      bettyProfile = StudentProfiles.findDoc({ username: 'betty@hawaii.edu' });
-      expect(defaultCalcLevel(bettyProfile.userID))
-        .to
-        .equal(5);
-      removeAllEntities();
-      defineTestFixtures(['minimal', 'extended.courses.interests', 'betty.student.picture', 'betty.level1',
-        'betty.level2', 'opportunities', 'extended.opportunities', 'betty.level3', 'betty.level6']);
-      bettyProfile = StudentProfiles.findDoc({ username: 'betty@hawaii.edu' });
-      expect(defaultCalcLevel(bettyProfile.userID))
-        .to
-        .equal(6);
-      done();
+        .equal(4);  // CAM: This will have to change with issue-302
     });
+
+    //
+    //   expect(defaultCalcLevel(bettyProfile.userID))
+    //     .to
+    //     .equal(3); // since she doesn't have a picture
+    //   removeAllEntities();
+    //   defineTestFixtures(['minimal', 'extended.courses.interests', 'betty.student.picture', 'betty.level1',
+    //     'betty.level2', 'opportunities', 'extended.opportunities', 'betty.level3', 'betty.level4']);
+    //   bettyProfile = StudentProfiles.findDoc({ username: 'betty@hawaii.edu' });
+    //   expect(defaultCalcLevel(bettyProfile.userID))
+    //     .to
+    //     .equal(4);
+    //   removeAllEntities();
+    //   defineTestFixtures(['minimal', 'extended.courses.interests', 'betty.student.picture', 'betty.level1',
+    //     'betty.level2', 'opportunities', 'extended.opportunities', 'betty.level3', 'betty.level5']);
+    //   bettyProfile = StudentProfiles.findDoc({ username: 'betty@hawaii.edu' });
+    //   expect(defaultCalcLevel(bettyProfile.userID))
+    //     .to
+    //     .equal(5);
+    //   removeAllEntities();
+    //   defineTestFixtures(['minimal', 'extended.courses.interests', 'betty.student.picture', 'betty.level1',
+    //     'betty.level2', 'opportunities', 'extended.opportunities', 'betty.level3', 'betty.level6']);
+    //   bettyProfile = StudentProfiles.findDoc({ username: 'betty@hawaii.edu' });
+    //   expect(defaultCalcLevel(bettyProfile.userID))
+    //     .to
+    //     .equal(6);
+    //   done();
+    // });
   });
 }
