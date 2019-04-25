@@ -151,6 +151,9 @@ class UserCollection {
    * @throws {Meteor.Error} If user is not a valid user.
    */
   getFullName(user) {
+    if (user === '') {
+      console.trace('getFullName on empty string');
+    }
     const profile = this.getProfile(user);
     return `${profile.firstName} ${profile.lastName}`;
   }

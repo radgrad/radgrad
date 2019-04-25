@@ -38,6 +38,7 @@ function matchingCourses() {
     const allCourses = availableCourses();
     const matching = [];
     const profile = Users.getProfile(getRouteUserName());
+    // console.log('StudentProfile=%o', profile);
     const userInterests = [];
     let courseInterests = [];
     _.forEach(Users.getInterestIDs(profile.userID), (id) => {

@@ -6,6 +6,9 @@ import { Users } from '../../../api/user/UserCollection.js';
 
 Template.Student_Feed_Modal.helpers({
   fullName(student) {
+    if (student.username === '') {
+      return student.username;
+    }
     return Users.getFullName(student.username);
   },
   userSlug(feed) {

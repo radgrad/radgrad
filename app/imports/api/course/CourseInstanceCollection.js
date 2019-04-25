@@ -76,6 +76,7 @@ class CourseInstanceCollection extends BaseCollection {
     const courseID = Courses.getID(course);
     const studentID = Users.getID(student);
     const profile = Users.getProfile(studentID);
+    // console.log('CourseInstanceDefine profile=%o', profile);
     // ensure the AcademicYearInstance is defined.
     if (semesterDoc.term === Semesters.SPRING || semesterDoc.term === Semesters.SUMMER) {
       AcademicYearInstances.define({ year: semesterDoc.year - 1, student: profile.username });

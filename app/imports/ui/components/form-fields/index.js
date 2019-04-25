@@ -6,6 +6,9 @@ import './academic-plan-form-field';
 import './academic-plan-form-fields.html';
 import './academic-plan-form-fields';
 
+import './boolean-checkbox-field.html';
+import './boolean-checkbox-field';
+
 import './boolean-form-field.html';
 import './boolean-form-field';
 

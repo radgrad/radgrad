@@ -45,7 +45,7 @@ export function defineTestFixture(fixtureName) {
     const loadFileName = `database/modular/${fixtureName}`;
     const loadJSON = JSON.parse(Assets.getText(loadFileName));
     console.log(`    Loaded ${loadFileName}: ${loadJSON.fixtureDescription}`);
-    _.each(RadGrad.collectionLoadSequence, collection => loadCollection(collection, loadJSON, false));
+    _.each(RadGrad.collectionLoadSequence, collection => loadCollection(collection, loadJSON, true));
   }
 }
 

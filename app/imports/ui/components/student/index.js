@@ -102,6 +102,9 @@ import './student-profile-card';
 import './student-semester-card.html';
 import './student-semester-card';
 
+import './student-share-info-widget.html';
+import './student-share-info-widget';
+
 import './student-teaser-widget.html';
 import './student-teaser-widget.js';
 
