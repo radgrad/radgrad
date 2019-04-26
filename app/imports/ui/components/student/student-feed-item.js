@@ -28,6 +28,17 @@ Template.Student_Feed_Item.helpers({
     });
     return students;
   },
+  picture(feed) {
+    // console.log('Student_Feed_Item userIDs = %o', feed.userIDs);
+    if (feed.userIDs.length === 0) {
+      return feed.picture;
+    }
+    const profile = Users.getProfile(feed.userIDs[0]);
+    if (profile.picture !== '') {
+      return profile.picture;
+    }
+    return '/images/default-profile-picture.png';
+  },
 });
 
 Template.Student_Feed_Item.onRendered(function studentFeedItemOnRendered() {
