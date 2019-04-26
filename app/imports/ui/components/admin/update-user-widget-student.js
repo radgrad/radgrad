@@ -45,6 +45,54 @@ Template.Update_User_Widget_Student.helpers({
   trueValueAlumni() {
     return Template.currentData().user.isAlumni;
   },
+  trueValueUsername() {
+    return Template.currentData().user.shareUsername;
+  },
+  falseValueUsername() {
+    return !Template.currentData().user.shareUsername;
+  },
+  trueValuePicture() {
+    return Template.currentData().user.sharePicture;
+  },
+  falseValuePicture() {
+    return !Template.currentData().user.sharePicture;
+  },
+  trueValueWebsite() {
+    return Template.currentData().user.shareWebsite;
+  },
+  falseValueWebsite() {
+    return !Template.currentData().user.shareWebsite;
+  },
+  trueValueCareerGoals() {
+    return Template.currentData().user.shareCareerGoals;
+  },
+  falseValueCareerGoals() {
+    return !Template.currentData().user.shareCareerGoals;
+  },
+  trueValueInterests() {
+    return Template.currentData().user.shareInterests;
+  },
+  falseValueInterests() {
+    return !Template.currentData().user.shareInterests;
+  },
+  trueValueAcademicPlan() {
+    return Template.currentData().user.shareAcademicPlan;
+  },
+  falseValueAcademicPlan() {
+    return !Template.currentData().user.shareAcademicPlan;
+  },
+  trueValueCourses() {
+    return Template.currentData().user.shareCourses;
+  },
+  falseValueCourses() {
+    return !Template.currentData().user.shareCourses;
+  },
+  trueValueOpportunities() {
+    return Template.currentData().user.shareOpportunities;
+  },
+  falseValueOpportunities() {
+    return !Template.currentData().user.shareOpportunities;
+  },
 });
 
 Template.Update_User_Widget_Student.events({

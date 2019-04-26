@@ -43,6 +43,14 @@ const updateStudentSchema = new SimpleSchema({
   level: String,
   declaredSemester: { type: String, optional: true },
   academicPlan: { type: String, optional: true },
+  shareUsername: Boolean,
+  sharePicture: Boolean,
+  shareWebsite: Boolean,
+  shareCareerGoals: Boolean,
+  shareInterests: Boolean,
+  shareAcademicPlan: Boolean,
+  shareCourses: Boolean,
+  shareOpportunities: Boolean,
   retired: Boolean,
 }, { tracker: Tracker });
 
@@ -154,6 +162,14 @@ Template.Update_User_Widget.events({
     instance.context.reset();
     schema.clean(updateData, { mutate: true });
     updateData.retired = updateData.retired === 'true';
+    updateData.shareUsername = updateData.shareUsername === 'true';
+    updateData.sharePicture = updateData.sharePicture === 'true';
+    updateData.shareWebsite = updateData.shareWebsite === 'true';
+    updateData.shareCareerGoals = updateData.shareCareerGoals === 'true';
+    updateData.shareInterests = updateData.shareInterests === 'true';
+    updateData.shareAcademicPlan = updateData.shareAcademicPlan === 'true';
+    updateData.shareCourses = updateData.shareCourses === 'true';
+    updateData.shareOpportunities = updateData.shareOpportunities === 'true';
     instance.context.validate(updateData);
     // console.log('update_user_widget updateData=%o context=%o', updateData, instance.context);
     if (instance.context.isValid()) {

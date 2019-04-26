@@ -32,27 +32,29 @@ Template.Student_Update_Picture_Widget.events({
   'submit .picture': function submitPicture(event) {
     event.preventDefault();
     const profile = Users.getProfile(getRouteUserName());
-    // const collectionName = StudentProfiles.getCollectionName();
+    const collectionName = StudentProfiles.getCollectionName();
     const updateData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     updateData.id = profile._id;
     console.log('Student_Update_Picture_Widget %o', updateData);
-    // updateData.picture = event.target.picture.value || defaultProfilePicture;
-    // updateMethod.call({ collectionName, updateData }, (error) => {
-    //   if (error) {
-    //     console.log('Error during Student profile picture update', error);
-    //   } else {
-    //    alert('Picture update successful.');
-        // let level;
-        // if (RadGrad.calcLevel) {
-        //   level = RadGrad.calcLevel(profile.userID);
-        // } else {
-        //   level = defaultCalcLevel(profile.userID);
-        // }
-        // updateData.level = level;
+    if (updateData.picture === '') {
+      updateData.picture = defaultProfilePicture;
+    }
+    updateMethod.call({ collectionName, updateData }, (error) => {
+      if (error) {
+        console.log('Error during Student profile picture update', error);
+      } else {
+       // alert('Picture update successful.');
+        let level;
+        if (RadGrad.calcLevel) {
+          level = RadGrad.calcLevel(profile.userID);
+        } else {
+          level = defaultCalcLevel(profile.userID);
+        }
+        updateData.level = level;
         // console.log(`submit picture ${level}`);
-        // updateMethod.call({ collectionName, updateData });
-      // }
-    // });
+        updateMethod.call({ collectionName, updateData });
+      }
+    });
   },
   'click #image-upload-widget': function clickUpload(event) {
     event.preventDefault();

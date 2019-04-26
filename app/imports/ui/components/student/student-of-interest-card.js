@@ -14,7 +14,7 @@ import {
 } from '../../utilities/template-helpers';
 
 function interestedStudentsHelper(item, type) {
-  console.log('interestedStudents(%o, %o)', item, type);
+  // console.log('interestedStudents(%o, %o)', item, type);
   const interested = [];
   let instances;
   if (type === 'courses') {
@@ -26,7 +26,7 @@ function interestedStudentsHelper(item, type) {
       opportunityID: item._id,
     }).fetch();
   }
-  console.log(instances.length);
+  // console.log(instances.length);
   _.forEach(instances, (c) => {
     if (!_.includes(interested, c.studentID)) {
       interested.push(c.studentID);

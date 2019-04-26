@@ -2,6 +2,7 @@ import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Users } from '../../../api/user/UserCollection.js';
 import { dateDiffInDays } from '../../utilities/template-helpers';
+import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 
 Template.Student_Feed_Item.helpers({
   feedTimestamp(feed) {
@@ -37,7 +38,7 @@ Template.Student_Feed_Item.helpers({
     if (profile.picture !== '') {
       return profile.picture;
     }
-    return '/images/default-profile-picture.png';
+    return defaultProfilePicture;
   },
 });
 
