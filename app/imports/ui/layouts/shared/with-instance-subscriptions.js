@@ -20,7 +20,7 @@ const instanceSubs = new SubsManager({ cacheLimit: 20, expireIn: 30 });
 Template.With_Instance_Subscriptions.onCreated(function withInstanceSubscriptionsOnCreated() {
   const self = this;
   self.ready = new ReactiveVar();
-  console.log('With_Instance_Subscriptions', getUserIdFromRoute());
+  // console.log('With_Instance_Subscriptions', getUserIdFromRoute());
   this.autorun(function () {
     if (getUserIdFromRoute()) {  // if logged out don't subscribe
       instanceSubs.subscribe(AcademicYearInstances.publicationNames.PerStudentID, getUserIdFromRoute());
