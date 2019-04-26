@@ -378,7 +378,7 @@ class StudentProfileCollection extends BaseProfileCollection {
                 $or: [
                   { $ifNull: ['$shareUsername', false] },
                   { $eq: [userID, '$userID'] },
-                  { $eq: [Roles.userIsInRole(userID, [ROLE.ADMIN]), true] },
+                  { $eq: [Roles.userIsInRole(userID, [ROLE.ADMIN, ROLE.ADVISOR]), true] },
                 ],
               }, '$username', ''],
             },
@@ -390,7 +390,7 @@ class StudentProfileCollection extends BaseProfileCollection {
                 $or: [
                   { $ifNull: ['$sharePicture', false] },
                   { $eq: [userID, '$userID'] },
-                  { $eq: [Roles.userIsInRole(userID, [ROLE.ADMIN]), true] },
+                  { $eq: [Roles.userIsInRole(userID, [ROLE.ADMIN, ROLE.ADVISOR]), true] },
                 ],
               }, '$picture', '/images/default-profile-picture.png'],
             },
@@ -399,7 +399,7 @@ class StudentProfileCollection extends BaseProfileCollection {
                 $or: [
                   { $ifNull: ['$shareWebsite', false] },
                   { $eq: [userID, '$userID'] },
-                  { $eq: [Roles.userIsInRole(userID, [ROLE.ADMIN]), true] },
+                  { $eq: [Roles.userIsInRole(userID, [ROLE.ADMIN, ROLE.ADVISOR]), true] },
                 ],
               }, '$website', ''],
             },
@@ -408,7 +408,7 @@ class StudentProfileCollection extends BaseProfileCollection {
                 $or: [
                   { $ifNull: ['$shareInterests', false] },
                   { $eq: [userID, '$userID'] },
-                  { $eq: [Roles.userIsInRole(userID, [ROLE.ADMIN]), true] },
+                  { $eq: [Roles.userIsInRole(userID, [ROLE.ADMIN, ROLE.ADVISOR]), true] },
                 ],
               }, '$interestIDs', []],
             },
@@ -417,7 +417,7 @@ class StudentProfileCollection extends BaseProfileCollection {
                 $or: [
                   { $ifNull: ['$shareCareerGoals', false] },
                   { $eq: [userID, '$userID'] },
-                  { $eq: [Roles.userIsInRole(userID, [ROLE.ADMIN]), true] },
+                  { $eq: [Roles.userIsInRole(userID, [ROLE.ADMIN, ROLE.ADVISOR]), true] },
                 ],
               }, '$careerGoalIDs', []],
             },
@@ -429,7 +429,7 @@ class StudentProfileCollection extends BaseProfileCollection {
                 $or: [
                   { $ifNull: ['$shareAcademicPlan', false] },
                   { $eq: [userID, '$userID'] },
-                  { $eq: [Roles.userIsInRole(userID, [ROLE.ADMIN]), true] },
+                  { $eq: [Roles.userIsInRole(userID, [ROLE.ADMIN, ROLE.ADVISOR]), true] },
                 ],
               }, '$academicPlanID', ''],
             },

@@ -111,5 +111,8 @@ import './student-teaser-widget.js';
 import './student-teaser-widget-video.html';
 import './student-teaser-widget-video.js';
 
+import './student-update-picture-widget.html';
+import './student-update-picture-widget';
+
 import './student-user-card.html';
 import './student-user-card';

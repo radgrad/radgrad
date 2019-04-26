@@ -146,34 +146,4 @@ Template.Student_About_Me_Widget.events({
       }
     });
   },
-
-  'submit .picture': function submitPicture(event) {
-    event.preventDefault();
-    const profile = Users.getProfile(getRouteUserName());
-    const collectionName = StudentProfiles.getCollectionName();
-    const updateData = {};
-    updateData.id = profile._id;
-    updateData.picture = event.target.picture.value || defaultProfilePicture;
-    updateMethod.call({ collectionName, updateData }, (error) => {
-      if (error) {
-        console.log('Error during Student profile picture update', error);
-      } else {
-//        alert('Picture update successful.');
-        let level;
-        if (RadGrad.calcLevel) {
-          level = RadGrad.calcLevel(profile.userID);
-        } else {
-          level = defaultCalcLevel(profile.userID);
-        }
-        updateData.level = level;
-        // console.log(`submit picture ${level}`);
-        updateMethod.call({ collectionName, updateData });
-      }
-    });
-  },
-
-  'click #image-upload-widget': function clickUpload(event) {
-    event.preventDefault();
-    openCloudinaryWidget('picture');
-  },
 });
