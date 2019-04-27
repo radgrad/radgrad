@@ -9,7 +9,7 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 if (Meteor.isClient) {
   describe('StudentProfileCollection Meteor Methods ', function test() {
     const collectionName = StudentProfiles.getCollectionName();
-    const username = 'amytaka';
+    const username = 'amytaka@foo.com';
     const firstName = 'Amy';
     const lastName = 'Takayesu';
     const picture = 'amytaka.jpg';
@@ -27,6 +27,8 @@ if (Meteor.isClient) {
       await withRadGradSubscriptions();
       const definitionData = { username, firstName, lastName, picture, website, interests, careerGoals, level };
       await defineMethod.callPromise({ collectionName, definitionData });
+      const profile = StudentProfiles.findDoc({ username });
+      console.log(profile);
     });
 
     it('Update Method', async function () {
