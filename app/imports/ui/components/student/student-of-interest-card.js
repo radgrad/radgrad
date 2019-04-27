@@ -117,6 +117,7 @@ Template.Student_Of_Interest_Card.helpers({
     if (studentID === 'elispsis') {
       return '';
     }
+    // console.log(Users.getFullName(studentID));
     return Users.getFullName(studentID);
   },
   typeCourse() {
@@ -182,6 +183,5 @@ Template.Student_Of_Interest_Card.events({
 });
 
 Template.Student_Of_Interest_Card.onRendered(function interestCardOnRendered() {
-  this.$('.ui .img')
-    .popup();
+  this.$('.ui.image').popup();
 });
