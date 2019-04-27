@@ -107,8 +107,9 @@ class StudentProfileCollection extends BaseProfileCollection {
         shareOpportunities,
       });
       const userID = Users.define({ username, role });
-      console.log('StudentProfile userID=%o', userID);
+      // console.log('StudentProfile userID=%o', userID);
       this._collection.update(profileID, { $set: { userID } });
+      // console.log(this._collection.find({ _id: profileID }).fetch());
       return profileID;
     }
     return undefined;
