@@ -19,7 +19,7 @@ Template.Student_User_Card.helpers({
   desiredDegree() {
     if (Template.instance().user) {
       const profile = Template.instance().data.user;
-      console.log(profile);
+      // console.log(profile);
       if (profile.academicPlanID) {
         const plan = AcademicPlans.findDoc(profile.academicPlanID);
         return DesiredDegrees.findDoc(plan.degreeID).shortName;
@@ -83,6 +83,7 @@ Template.Student_User_Card.helpers({
   },
   picture() {
     if (Template.instance().user) {
+      console.log(Template.instance().user.picture);
       if (Template.instance().user.picture) {
         return Template.instance().user.picture;
       }

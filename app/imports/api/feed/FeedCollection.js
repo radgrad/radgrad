@@ -301,7 +301,7 @@ class FeedCollection extends BaseCollection {
     const description = `${Users.getFullName(userID)} 
       has added a course review for [${c.name}](./explorer/courses/${Slugs.getNameFromID(c.slugID)})`;
     picture = Users.getProfile(userID).picture;
-    if (!picture) {
+    if (!picture || picture === '') {
       picture = defaultProfilePicture;
     }
     return this._collection.insert({
@@ -339,7 +339,7 @@ class FeedCollection extends BaseCollection {
       has added an opportunity review for 
       [${o.name}](./explorer/opportunities/${Slugs.getNameFromID(o.slugID)})`;
     picture = Users.getProfile(userID).picture;
-    if (!picture) {
+    if (!picture || picture === '') {
       picture = defaultProfilePicture;
     }
     return this._collection.insert({
@@ -377,7 +377,7 @@ class FeedCollection extends BaseCollection {
     const description = `${Users.getFullName(userID)}  
       has achieved level ${level}.`;
     picture = Users.getProfile(userID).picture;
-    if (!picture) {
+    if (!picture || picture === '') {
       picture = defaultProfilePicture;
     }
     return this._collection.insert({
@@ -456,7 +456,7 @@ class FeedCollection extends BaseCollection {
     const description = `${Users.getFullName(userIDs[0])} 
       and ${userIDs.length - 1} others have joined RadGrad.`;
     let picture = Users.getProfile(userIDs[0]).picture;
-    if (!picture) {
+    if (!picture || picture === '') {
       picture = defaultProfilePicture;
     }
     this._collection.update(existingFeedID, { $set: { userIDs, description, picture } });
@@ -471,7 +471,7 @@ class FeedCollection extends BaseCollection {
     const description = `${Users.getFullName(userIDs[0])} 
       and ${userIDs.length - 1} others have achieved level ${level}.`;
     let picture = Users.getProfile(userIDs[0]).picture;
-    if (!picture) {
+    if (!picture || picture === '') {
       picture = defaultProfilePicture;
     }
     this._collection.update(existingFeedID, { $set: { userIDs, description, picture } });

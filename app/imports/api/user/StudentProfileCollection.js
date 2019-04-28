@@ -34,6 +34,7 @@ class StudentProfileCollection extends BaseProfileCollection {
       shareAcademicPlan: { type: Boolean, optional: true },
       shareOpportunities: { type: Boolean, optional: true },
       shareCourses: { type: Boolean, optional: true },
+      shareLevel: { type: Boolean, optional: true },
     }));
   }
 
@@ -62,7 +63,7 @@ class StudentProfileCollection extends BaseProfileCollection {
            username, firstName, lastName, picture = defaultProfilePicture, website, interests,
            careerGoals, level, academicPlan, declaredSemester, hiddenCourses = [], hiddenOpportunities = [],
            isAlumni = false, retired, shareUsername, sharePicture, shareWebsite, shareInterests, shareCareerGoals,
-           shareAcademicPlan, shareCourses, shareOpportunities,
+           shareAcademicPlan, shareCourses, shareOpportunities, shareLevel,
          }) {
     if (Meteor.isServer) {
       // Validate parameters.
@@ -105,6 +106,7 @@ class StudentProfileCollection extends BaseProfileCollection {
         shareAcademicPlan,
         shareCourses,
         shareOpportunities,
+        shareLevel,
       });
       const userID = Users.define({ username, role });
       // console.log('StudentProfile userID=%o', userID);
@@ -133,7 +135,7 @@ class StudentProfileCollection extends BaseProfileCollection {
   update(docID, {
     firstName, lastName, picture, website, interests, careerGoals, level, academicPlan, declaredSemester,
     hiddenCourses, hiddenOpportunities, isAlumni, retired, shareUsername, sharePicture, shareWebsite, shareInterests,
-    shareCareerGoals, shareAcademicPlan, shareCourses, shareOpportunities,
+    shareCareerGoals, shareAcademicPlan, shareCourses, shareOpportunities, shareLevel,
   }) {
     this.assertDefined(docID);
     const updateData = {};
@@ -197,6 +199,9 @@ class StudentProfileCollection extends BaseProfileCollection {
     }
     if (_.isBoolean(shareOpportunities)) {
       updateData.shareOpportunities = shareOpportunities;
+    }
+    if (_.isBoolean(shareLevel)) {
+      updateData.shareLevel = shareLevel;
     }
     // console.log('StudentProfile.update %o', updateData);
     this._collection.update(docID, { $set: updateData });
@@ -425,7 +430,15 @@ class StudentProfileCollection extends BaseProfileCollection {
             },
             userID: 1,
             retired: 1,
-            level: 1,
+            level: {
+              $cond: [{
+                $or: [
+                  { $ifNull: ['$shareLevel', false] },
+                  { $eq: [userID, '$userID'] },
+                  { $eq: [Roles.userIsInRole(userID, [ROLE.ADMIN, ROLE.ADVISOR]), true] },
+                ],
+              }, '$level', 0],
+            },
             academicPlanID: {
               $cond: [{
                 $or: [
@@ -447,6 +460,7 @@ class StudentProfileCollection extends BaseProfileCollection {
             shareAcademicPlan: 1,
             shareOpportunities: 1,
             shareCourses: 1,
+            shareLevel: 1,
           },
         }]);
       });
@@ -483,10 +497,11 @@ class StudentProfileCollection extends BaseProfileCollection {
     const shareCareerGoals = doc.shareCareerGoals;
     const shareOpportunities = doc.shareOpportunities;
     const shareCourses = doc.shareCourses;
+    const shareLevel = doc.shareLevel;
     return {
       username, firstName, lastName, picture, website, interests, careerGoals, level, academicPlan,
       declaredSemester, hiddenCourses, hiddenOpportunities, isAlumni, retired, shareUsername, sharePicture,
-      shareWebsite, shareInterests, shareCareerGoals, shareOpportunities, shareCourses,
+      shareWebsite, shareInterests, shareCareerGoals, shareOpportunities, shareCourses, shareLevel,
     };
   }
 }

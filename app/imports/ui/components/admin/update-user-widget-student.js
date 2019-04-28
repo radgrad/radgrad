@@ -93,6 +93,12 @@ Template.Update_User_Widget_Student.helpers({
   falseValueOpportunities() {
     return !Template.currentData().user.shareOpportunities;
   },
+  trueValueLevel() {
+    return Template.currentData().user.shareLevel;
+  },
+  falseValueLevel() {
+    return !Template.currentData().user.shareLevel;
+  },
 });
 
 Template.Update_User_Widget_Student.events({

@@ -15,6 +15,7 @@ const updateSharingSchema = new SimpleSchema({
   shareAcademicPlan: Boolean,
   shareCourses: Boolean,
   shareOpportunities: Boolean,
+  shareLevel: Boolean,
 });
 
 Template.Student_Share_Info_Widget.onCreated(function studentShareInfoWidgetOnCreated() {
@@ -134,6 +135,20 @@ Template.Student_Share_Info_Widget.helpers({
     }
     return null;
   },
+  trueValueLevel() {
+    if (getRouteUserName()) {
+      const profile = Users.getProfile(getRouteUserName());
+      return profile.shareLevel;
+    }
+    return null;
+  },
+  falseValueLevel() {
+    if (getRouteUserName()) {
+      const profile = Users.getProfile(getRouteUserName());
+      return !profile.shareLevel;
+    }
+    return null;
+  },
 });
 
 Template.Student_Share_Info_Widget.events({
@@ -155,6 +170,7 @@ Template.Student_Share_Info_Widget.events({
     updateData.shareAcademicPlan = updateData.shareAcademicPlan === 'true';
     updateData.shareCourses = updateData.shareCourses === 'true';
     updateData.shareOpportunities = updateData.shareOpportunities === 'true';
+    updateData.shareLevel = updateData.shareLevel === 'true';
     updateMethod.call({ collectionName, updateData }, (error) => {
       if (error) {
         console.error('Error during student profile sharing update', error);

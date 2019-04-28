@@ -51,6 +51,7 @@ const updateStudentSchema = new SimpleSchema({
   shareAcademicPlan: Boolean,
   shareCourses: Boolean,
   shareOpportunities: Boolean,
+  shareLevel: Boolean,
   retired: Boolean,
 }, { tracker: Tracker });
 
@@ -170,8 +171,9 @@ Template.Update_User_Widget.events({
     updateData.shareAcademicPlan = updateData.shareAcademicPlan === 'true';
     updateData.shareCourses = updateData.shareCourses === 'true';
     updateData.shareOpportunities = updateData.shareOpportunities === 'true';
+    updateData.shareLevel = updateData.shareLevel === 'true';
     instance.context.validate(updateData);
-    // console.log('update_user_widget updateData=%o context=%o', updateData, instance.context);
+    console.log('update_user_widget updateData=%o context=%o', updateData, instance.context);
     if (instance.context.isValid()) {
       let collectionName;
       switch (profile.role) {
