@@ -54,6 +54,18 @@ class StudentProfileCollection extends BaseProfileCollection {
    * @param hiddenCourses An optional array of course slugs indicating the hidden ones.
    * @param hiddenOpportunities An optional array of opportunity slugs indicating the hidden opportunities.
    * @param isAlumni An optional boolean indicating if this student has graduated. Defaults to false.
+   * @param shareUsername An optional boolean indicating if this student is sharing their username. Defaults to false.
+   * @param sharePicture An optional boolean indicating if this student is sharing their picture. Defaults to false.
+   * @param shareWebsite An optional boolean indicating if this student is sharing their website. Defaults to false.
+   * @param shareInterests An optional boolean indicating if this student is sharing their interests. Defaults to false.
+   * @param shareCareerGoals An optional boolean indicating if this student is sharing their career goals. Defaults to
+   * false.
+   * @param shareAcademicPlan An optional boolean indicating if this student is sharing their academic plans. Defaults
+   * to false.
+   * @param shareCourses An optional boolean indicating if this student is sharing their courses. Defaults to false.
+   * @param shareOpportunities An optional boolean indicating if this student is sharing their opportunities. Defaults
+   * to false.
+   * @param shareLevel An optional boolean indicating if this student is sharing their level. Defaults to false.
    * @param retired the retired status (optional).
    * @throws { Meteor.Error } If username has been previously defined, or if any interests, careerGoals, level,
    * academicPlan, declaredSemester, hiddenCourses, or hiddenOpportunities are invalid.
@@ -62,8 +74,9 @@ class StudentProfileCollection extends BaseProfileCollection {
   define({
            username, firstName, lastName, picture = defaultProfilePicture, website, interests,
            careerGoals, level, academicPlan, declaredSemester, hiddenCourses = [], hiddenOpportunities = [],
-           isAlumni = false, retired, shareUsername, sharePicture, shareWebsite, shareInterests, shareCareerGoals,
-           shareAcademicPlan, shareCourses, shareOpportunities, shareLevel,
+           isAlumni = false, retired, shareUsername = false, sharePicture = false, shareWebsite = false,
+           shareInterests = false, shareCareerGoals = false, shareAcademicPlan = false, shareCourses = false,
+           shareOpportunities = false, shareLevel = false,
          }) {
     if (Meteor.isServer) {
       // Validate parameters.
