@@ -93,6 +93,7 @@ Template.List_Users_Widget.helpers({
       pairs.push({ label: 'LinkedIn', value: user.linkedin });
       pairs.push({ label: 'Motivation', value: user.motivation });
     }
+    pairs.push({ label: 'Retired', value: user.retired ? 'True' : 'False' });
     return pairs;
   },
   alumniRole() {
@@ -173,6 +174,9 @@ Template.List_Users_Widget.helpers({
   },
   userNameRegex() {
     return Template.instance().userNameRegex;
+  },
+  retired(item) {
+    return item.retired;
   },
 });
 

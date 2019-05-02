@@ -29,7 +29,7 @@
         <textarea rows="5" name="description" value="{{course.description}}"></textarea>
         {{> Form_Error_Message errorMessage=(fieldError 'description')}}
       </div>
-      <div class="field">
+      <div class="fields">
         {{> Boolean_Form_Field label='Retired' name='retired' trueValue=trueValueRetired falseValue=falseValueRetired errorMessage=(fieldError "retired")}}
       </div>
       <button class="ui green basic button" type="submit">Update</button>

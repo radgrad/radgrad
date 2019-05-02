@@ -43,6 +43,7 @@ Template.List_Interest_Types_Widget.helpers({
       { label: 'Slug', value: `${Slugs.findDoc(interestType.slugID).name}` },
       { label: 'Description', value: interestType.description },
       { label: 'References', value: `${numReferences(interestType)}` },
+      { label: 'Retired', value: interestType.retired ? 'True' : 'False' },
     ];
   },
   getItemCount() {
@@ -53,6 +54,9 @@ Template.List_Interest_Types_Widget.helpers({
   },
   getCollection() {
     return InterestTypes;
+  },
+  retired(item) {
+    return item.retired;
   },
 });
 

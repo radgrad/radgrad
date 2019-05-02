@@ -4,7 +4,7 @@
     <div class="ui grid">
       {{> Admin_Datamodel_Pagination_Widget showItemCount=getItemCount showIndex=getItemIndex collection=getCollection }}
       {{#each opportunityType in opportunityTypes}}
-        {{> Admin_DataModel_Accordion name=opportunityType.name slug=(slugName opportunityType.slugID) descriptionPairs=(descriptionPairs opportunityType) id=opportunityType._id updateID=updateID deleteDisabled=(deleteDisabled opportunityType)}}
+        {{> Admin_DataModel_Accordion name=opportunityType.name slug=(slugName opportunityType.slugID) descriptionPairs=(descriptionPairs opportunityType) id=opportunityType._id updateID=updateID deleteDisabled=(deleteDisabled opportunityType) retired=(retired opportunityType)}}
       {{/each}}
     </div>
   </div>

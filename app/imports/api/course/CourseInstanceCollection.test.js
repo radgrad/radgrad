@@ -31,14 +31,21 @@ if (Meteor.isServer) {
     });
 
     it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne', function test() {
-      let courseInstanceID = CourseInstances.define({ semester, course, verified, grade, student });
-      expect(CourseInstances.isDefined(courseInstanceID)).to.be.true;
-      const dumpObject = CourseInstances.dumpOne(courseInstanceID);
-      CourseInstances.removeIt(courseInstanceID);
-      expect(CourseInstances.isDefined(courseInstanceID)).to.be.false;
-      courseInstanceID = CourseInstances.restoreOne(dumpObject);
-      expect(CourseInstances.isDefined(courseInstanceID)).to.be.true;
-      CourseInstances.removeIt(courseInstanceID);
+      let docID = CourseInstances.define({ semester, course, verified, grade, student });
+      expect(CourseInstances.isDefined(docID)).to.be.true;
+      let dumpObject = CourseInstances.dumpOne(docID);
+      expect(dumpObject.retired).to.be.undefined;
+      expect(CourseInstances.findNonRetired().length).to.equal(1);
+      CourseInstances.update(docID, { retired: true });
+      expect(CourseInstances.findNonRetired().length).to.equal(0);
+      CourseInstances.removeIt(docID);
+      expect(CourseInstances.isDefined(docID)).to.be.false;
+      docID = CourseInstances.restoreOne(dumpObject);
+      expect(CourseInstances.isDefined(docID)).to.be.true;
+      CourseInstances.update(docID, { retired: true });
+      dumpObject = CourseInstances.dumpOne(docID);
+      expect(dumpObject.retired).to.be.true;
+      CourseInstances.removeIt(docID);
     });
 
     it('#findCourseName, #toString', function test() {

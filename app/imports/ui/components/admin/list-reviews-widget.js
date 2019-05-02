@@ -64,6 +64,7 @@ Template.List_Reviews_Widget.helpers({
       { label: 'Moderated', value: review.moderated.toString() },
       { label: 'Visible', value: review.visible.toString() },
       { label: 'Moderator Comments', value: review.moderatorComments },
+      { label: 'Retired', value: review.retired ? 'True' : 'False' },
     ];
   },
   getItemCount() {
@@ -74,6 +75,9 @@ Template.List_Reviews_Widget.helpers({
   },
   getCollection() {
     return Reviews;
+  },
+  retired(item) {
+    return item.retired;
   },
 });
 

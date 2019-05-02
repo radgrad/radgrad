@@ -5,7 +5,7 @@
       <div class="ui grid">
         {{> Admin_Datamodel_Pagination_Widget showItemCount=getItemCount showIndex=getItemIndex collection=getCollection }}
         {{#each feedbackInstance in feedbackInstances}}
-          {{> Admin_DataModel_Accordion name=(name feedbackInstance) descriptionPairs=(descriptionPairs feedbackInstance) id=feedbackInstance._id updateID=updateID deleteDisabled=(deleteDisabled feedbackInstance)}}
+          {{> Admin_DataModel_Accordion name=(name feedbackInstance) descriptionPairs=(descriptionPairs feedbackInstance) id=feedbackInstance._id updateID=updateID deleteDisabled=(deleteDisabled feedbackInstance) retired=(retired feedbackInstance)}}
         {{/each}}
       </div>
     </div>

@@ -11,6 +11,7 @@ const updateSchema = new SimpleSchema({
   name: String,
   description: String,
   interestType: String,
+  retired: Boolean,
 }, { tracker: Tracker });
 
 Template.Update_Interest_Widget.onCreated(function onCreated() {
@@ -28,6 +29,18 @@ Template.Update_Interest_Widget.helpers({
   interestTypes() {
     return InterestTypes.find({}, { sort: { name: 1 } });
   },
+  falseValueRetired() {
+    const plan = Interests.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return !plan.retired;
+  },
+  trueValueRetired() {
+    const plan = Interests.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return plan.retired;
+  },
 });
 
 Template.Update_Interest_Widget.events({
@@ -36,6 +49,7 @@ Template.Update_Interest_Widget.events({
     const updateData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     instance.context.reset();
     updateSchema.clean(updateData, { mutate: true });
+    updateData.retired = updateData.retired === 'true';
     instance.context.validate(updateData);
     if (instance.context.isValid()) {
       updateData.id = instance.data.updateID.get();

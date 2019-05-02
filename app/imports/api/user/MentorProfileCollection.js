@@ -39,11 +39,12 @@ class MentorProfileCollection extends BaseProfileCollection {
    * @param location The mentor's location.
    * @param linkedin The mentor's LinkedIn user ID. (optional)
    * @param motivation The reason why the user mentors.
+   * @param retired the retired status (optional).
    * @throws { Meteor.Error } If username has been previously defined, or if any interests or careerGoals are invalid.
    * @return { String } The docID of the MentorProfile.
    */
   define({ username, firstName, lastName, picture = defaultProfilePicture, website, interests,
-           careerGoals, company, career, location, linkedin, motivation }) {
+           careerGoals, company, career, location, linkedin, motivation, retired }) {
     if (Meteor.isServer) {
       const role = ROLE.MENTOR;
       const interestIDs = Interests.getIDs(interests);
@@ -51,7 +52,7 @@ class MentorProfileCollection extends BaseProfileCollection {
       Slugs.define({ name: username, entityName: this.getType() });
       const profileID = this._collection.insert({
         username, firstName, lastName, role, picture, website, interestIDs, company, career, location, linkedin,
-        motivation, careerGoalIDs, userID: this.getFakeUserId() });
+        motivation, careerGoalIDs, userID: this.getFakeUserId(), retired });
       const userID = Users.define({ username, role });
       this._collection.update(profileID, { $set: { userID } });
       return profileID;
@@ -70,10 +71,10 @@ class MentorProfileCollection extends BaseProfileCollection {
    * @param motivation the motivation (optional).
    */
   update(docID, { firstName, lastName, picture, website, interests, careerGoals, company, career, location, linkedin,
-    motivation }) {
+    motivation, retired }) {
     this.assertDefined(docID);
     const updateData = {};
-    this._updateCommonFields(updateData, { firstName, lastName, picture, website, interests, careerGoals });
+    this._updateCommonFields(updateData, { firstName, lastName, picture, website, interests, careerGoals, retired });
     if (company) {
       updateData.company = company;
     }
@@ -139,8 +140,9 @@ class MentorProfileCollection extends BaseProfileCollection {
     const location = doc.location;
     const linkedin = doc.linkedin;
     const motivation = doc.motivation;
+    const retired = doc.retired;
     return { username, firstName, lastName, picture, website, interests, careerGoals, company, career, location,
-      linkedin, motivation };
+      linkedin, motivation, retired };
   }
 }
 

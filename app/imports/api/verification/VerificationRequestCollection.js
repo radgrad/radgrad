@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import SimpleSchema from 'simpl-schema';
 import { moment } from 'meteor/momentjs:moment';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import BaseCollection from '../base/BaseCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection.js';
@@ -40,6 +41,7 @@ class VerificationRequestCollection extends BaseCollection {
       status: String,
       processed: [ProcessedSchema],
       ice: { type: Object, optional: true, blackbox: true },
+      retired: { type: Boolean, optional: true },
     }));
     this.ACCEPTED = 'Accepted';
     this.REJECTED = 'Rejected';
@@ -65,7 +67,7 @@ class VerificationRequestCollection extends BaseCollection {
    */
   define({
     student, opportunityInstance, submittedOn = moment().toDate(), status = this.OPEN, processed = [],
-    semester, opportunity }) {
+    semester, opportunity, retired }) {
     const studentID = Users.getID(student);
     const oppInstance = opportunityInstance ? OpportunityInstances.findDoc(opportunityInstance) :
       OpportunityInstances.findOpportunityInstanceDoc(semester, opportunity, student);
@@ -77,7 +79,7 @@ class VerificationRequestCollection extends BaseCollection {
     const ice = Opportunities.findDoc(oppInstance.opportunityID).ice;
     // Define and return the new VerificationRequest
     const requestID = this._collection.insert({
-      studentID, opportunityInstanceID, submittedOn, status, processed, ice,
+      studentID, opportunityInstanceID, submittedOn, status, processed, ice, retired,
     });
     return requestID;
   }
@@ -196,6 +198,19 @@ class VerificationRequestCollection extends BaseCollection {
   }
 
   /**
+   * Updates the retired flag for docID.
+   * @param docID the ID of the verification request.
+   * @param retired the retired status.
+   */
+  update(docID, { retired }) {
+    this.assertDefined(docID);
+    const updateData = {};
+    if (_.isBoolean(retired)) {
+      updateData.retired = retired;
+    }
+    this._collection.update(docID, { $set: updateData });
+  }
+         /**
    * Updates the VerificationRequest's status and processed array.
    * @param requestID The VerificationRequest ID.
    * @param status The new Status.
@@ -275,7 +290,8 @@ class VerificationRequestCollection extends BaseCollection {
     const submittedOn = doc.submittedOn;
     const status = doc.status;
     const processed = doc.processed;
-    return { student, semester, opportunity, submittedOn, status, processed };
+    const retired = doc.retired;
+    return { student, semester, opportunity, submittedOn, status, processed, retired };
   }
 }
 

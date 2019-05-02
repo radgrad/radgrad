@@ -9,6 +9,7 @@ import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollec
 const updateSchema = new SimpleSchema({
   name: String,
   description: String,
+  retired: Boolean,
 }, { tracker: Tracker });
 
 Template.Update_Opportunity_Type_Widget.onCreated(function onCreated() {
@@ -23,6 +24,18 @@ Template.Update_Opportunity_Type_Widget.helpers({
     const opportunity = OpportunityTypes.findDoc(Template.currentData().updateID.get());
     return Slugs.findDoc(opportunity.slugID).name;
   },
+  falseValueRetired() {
+    const plan = OpportunityTypes.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return !plan.retired;
+  },
+  trueValueRetired() {
+    const plan = OpportunityTypes.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return plan.retired;
+  },
 });
 
 Template.Update_Opportunity_Type_Widget.events({
@@ -31,6 +44,7 @@ Template.Update_Opportunity_Type_Widget.events({
     const updateData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     instance.context.reset();
     updateSchema.clean(updateData, { mutate: true });
+    updateData.retired = updateData.retired === 'true';
     instance.context.validate(updateData);
     if (instance.context.isValid()) {
       updateData.id = instance.data.updateID.get();

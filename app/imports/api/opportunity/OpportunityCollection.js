@@ -65,7 +65,7 @@ class OpportunityCollection extends BaseSlugCollection {
    * @returns The newly created docID.
    */
   define({ name, slug, description, opportunityType, sponsor, interests, semesters, ice, eventDate = null,
-           retired = false }) {
+           retired }) {
     // Get instances, or throw error
 
     const opportunityTypeID = OpportunityTypes.getID(opportunityType);
@@ -139,7 +139,7 @@ class OpportunityCollection extends BaseSlugCollection {
       assertICE(ice);
       updateData.ice = ice;
     }
-    if (retired) {
+    if (_.isBoolean(retired)) {
       updateData.retired = retired;
     }
     this._collection.update(docID, { $set: updateData });

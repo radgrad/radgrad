@@ -25,6 +25,7 @@ const updateSchema = new SimpleSchema({
   website: { type: String, optional: true },
   careerGoals: { type: Array }, 'careerGoals.$': String,
   interests: { type: Array }, 'interests.$': String,
+  retired: Boolean,
 }, { tracker: Tracker });
 
 const updateStudentSchema = new SimpleSchema({
@@ -42,10 +43,11 @@ const updateStudentSchema = new SimpleSchema({
   level: String,
   declaredSemester: { type: String, optional: true },
   academicPlan: { type: String, optional: true },
+  retired: Boolean,
 }, { tracker: Tracker });
 
 const updateMentorSchema = new SimpleSchema({
-  username: { type: String, custom: FormUtils.slugFieldValidator },
+  username: String,
   role: String,
   firstName: String,
   lastName: String,
@@ -60,6 +62,7 @@ const updateMentorSchema = new SimpleSchema({
   location: { type: String, optional: true },
   linkedin: { type: String, optional: true },
   motivation: { type: String, optional: true },
+  retired: Boolean,
 }, { tracker: Tracker });
 
 Template.Update_User_Widget.onCreated(function onCreated() {
@@ -126,6 +129,14 @@ Template.Update_User_Widget.helpers({
   userID() {
     return Template.currentData().updateID;
   },
+  falseValueRetired() {
+    const profile = Users.getProfile(Template.currentData().updateID.get());
+    return !profile.retired;
+  },
+  trueValueRetired() {
+    const profile = Users.getProfile(Template.currentData().updateID.get());
+    return profile.retired;
+  },
 });
 
 Template.Update_User_Widget.events({
@@ -142,7 +153,9 @@ Template.Update_User_Widget.events({
     const updateData = FormUtils.getSchemaDataFromEvent(schema, event);
     instance.context.reset();
     schema.clean(updateData, { mutate: true });
+    updateData.retired = updateData.retired === 'true';
     instance.context.validate(updateData);
+    // console.log('update_user_widget updateData=%o context=%o', updateData, instance.context);
     if (instance.context.isValid()) {
       let collectionName;
       switch (profile.role) {

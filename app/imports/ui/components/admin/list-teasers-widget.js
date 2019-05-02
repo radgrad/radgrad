@@ -50,6 +50,7 @@ Template.List_Teasers_Widget.helpers({
       { label: 'Interests', value: _.sortBy(Interests.findNames(teaser.interestIDs)) },
       { label: 'URL', value: makeLink(teaser.url) },
       { label: 'Opportunity', value: opportunity(teaser) },
+      { label: 'Retired', value: teaser.retired ? 'True' : 'False' },
     ];
   },
   getItemCount() {
@@ -60,6 +61,9 @@ Template.List_Teasers_Widget.helpers({
   },
   getCollection() {
     return Teasers;
+  },
+  retired(item) {
+    return item.retired;
   },
 });
 

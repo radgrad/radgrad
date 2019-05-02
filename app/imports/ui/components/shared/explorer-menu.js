@@ -83,7 +83,11 @@ Template.Explorer_Menu.helpers({
     return ret;
   },
   courseName(course) {
-    return course.shortName;
+    const countStr = `x${course.count}`;
+    if (course.count > 1) {
+      return `${course.item.shortName} ${countStr}`;
+    }
+    return `${course.item.shortName}`;
   },
   coursesCardRouteName() {
     const group = FlowRouter.current().route.group.name;
@@ -192,11 +196,19 @@ Template.Explorer_Menu.helpers({
     return type === value;
   },
   itemName(item) {
-    return item.name;
+    const countStr = `x${item.count}`;
+    if (item.count > 1) {
+      return `${item.item.name} ${countStr}`;
+    }
+    return `${item.item.name}`;
   },
   opportunityItemName(item) {
-    const iceString = `(${item.ice.i}/${item.ice.c}/${item.ice.e})`;
-    return `${item.name} ${iceString}`;
+    const countStr = `x${item.count}`;
+    const iceString = `(${item.item.ice.i}/${item.item.ice.c}/${item.item.ice.e})`;
+    if (item.count > 1) {
+      return `${item.item.name} ${iceString} ${countStr}`;
+    }
+    return `${item.item.name} ${iceString}`;
   },
   opportunitiesCardRouteName() {
     const group = FlowRouter.current().route.group.name;

@@ -5,6 +5,7 @@
 
             <div class="fields">
                 {{> Input_Form_Field label="Choice" name="choice" value=planChoice.choice errorMessage=(fieldError "choice") required=true}}
+                {{> Boolean_Form_Field label='Retired' name='retired' trueValue=trueValueRetired falseValue=falseValueRetired errorMessage=(fieldError "retired")}}
             </div>
             <button class="ui green basic button" type="submit">Update</button>
             <button class="ui green basic button jsCancel" type="submit">Cancel</button>

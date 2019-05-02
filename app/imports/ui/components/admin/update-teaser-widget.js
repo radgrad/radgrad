@@ -16,6 +16,7 @@ const updateSchema = new SimpleSchema({
   duration: { type: String, optional: true },
   interests: { type: Array, minCount: 1 }, 'interests.$': String,
   opportunity: String,
+  retired: Boolean,
 }, { tracker: Tracker });
 
 Template.Update_Teaser_Widget.onCreated(function onCreated() {
@@ -44,6 +45,18 @@ Template.Update_Teaser_Widget.helpers({
   opportunities() {
     return Opportunities.find().fetch();
   },
+  falseValueRetired() {
+    const plan = Teasers.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return !plan.retired;
+  },
+  trueValueRetired() {
+    const plan = Teasers.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return plan.retired;
+  },
 });
 
 Template.Update_Teaser_Widget.events({
@@ -52,6 +65,7 @@ Template.Update_Teaser_Widget.events({
     const updateData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     instance.context.reset();
     updateSchema.clean(updateData, { mutate: true });
+    updateData.retired = updateData.retired === 'true';
     instance.context.validate(updateData);
     if (instance.context.isValid()) {
       updateData.id = instance.data.updateID.get();

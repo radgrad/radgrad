@@ -28,6 +28,7 @@ Template.List_Help_Messages_Widget.helpers({
       { label: 'Route Name', value: helpMessage.routeName },
       { label: 'Title', value: helpMessage.title },
       { label: 'Text', value: helpMessage.text },
+      { label: 'Retired', value: helpMessage.retired ? 'True' : 'False' },
     ];
   },
   getItemCount() {
@@ -38,6 +39,9 @@ Template.List_Help_Messages_Widget.helpers({
   },
   getCollection() {
     return HelpMessages;
+  },
+  retired(item) {
+    return item.retired;
   },
 });
 

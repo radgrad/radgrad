@@ -5,14 +5,14 @@
       <tbody>
       {{#each course in icsCourses}}
         <tr id="{{@index}}" data-position="top center" class="courseInstance clickEnabled" style="color: rgba(0,0,0,.55);">
-          <td style="border-top: none;"><strong data-position="right center" data-tooltip={{courseName course}}>{{course.note}}</strong></td>
+          <td style="border-top: none;"><strong data-position="right center" data-tooltip={{courseName course}}><div class="ui basic green label">{{course.note}}</div></strong></td>
           <!--<td style="border-top: none;"><strong>{{course.grade}}</strong></td>-->
         </tr>
       {{/each}}
       {{#each opportunity in semesterOpportunities}}
         <tr id="{{@index}}" class="opportunityInstance clickEnabled" style="color: rgba(0,0,0,.55);">
           <td style="border-top: none;" colspan="2">
-            <strong data-position="right center" data-html="<div class='ui tiny circular labels radgrad-ice-header'>{{#if opportunity.verified}}<i class=' green large check circle outline icon'></i>{{else}}<i class='red large question circle outline icon'></i>{{/if}}<div class='ui label' style='margin: 0;'>{{opportunityI opportunity}}</div><div class='ui label' style='margin: 0'>{{opportunityC opportunity}}</div><div class='ui label' style='margin: 0 5px 0 0;'>{{opportunityE opportunity}}</div></div>">{{opportunity.name}}</strong>
+            <strong data-position="right center" data-html="<div class='ui tiny circular labels radgrad-ice-header'>{{#if opportunity.verified}}<i class=' green large check circle outline icon'></i>{{else}}<i class='red large question circle outline icon'></i>{{/if}}<div class='ui label' style='margin: 0;'>{{opportunityI opportunity}}</div><div class='ui label' style='margin: 0'>{{opportunityC opportunity}}</div><div class='ui label' style='margin: 0 5px 0 0;'>{{opportunityE opportunity}}</div></div>"><div class="ui basic green label">{{opportunity.name}}</div></strong>
           </td>
         </tr>
       {{/each}}

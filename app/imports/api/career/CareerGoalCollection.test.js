@@ -23,15 +23,26 @@ if (Meteor.isServer) {
 
     it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne, #getSlug, #findNames', function test() {
       const interests = [makeSampleInterest()];
-      const docID = CareerGoals.define({ name, slug, description, interests });
+      let docID = CareerGoals.define({ name, slug, description, interests }); // without retired flag
       expect(CareerGoals.isDefined(slug)).to.be.true;
       expect(CareerGoals.getSlug(docID)).to.equal(slug);
+      expect(CareerGoals.findNonRetired().length).to.equal(1);
       expect(CareerGoals.findNames([docID])[0]).to.equal(name);
-      const dumpObject = CareerGoals.dumpOne(docID);
+      let dumpObject = CareerGoals.dumpOne(docID);
       CareerGoals.removeIt(slug);
       expect(CareerGoals.isDefined(slug)).to.be.false;
-      CareerGoals.restoreOne(dumpObject);
+      docID = CareerGoals.restoreOne(dumpObject);
       expect(CareerGoals.isDefined(slug)).to.be.true;
+      let doc = CareerGoals.findDocBySlug(slug);
+      expect(doc.retired).to.be.undefined;
+      CareerGoals.update(docID, { retired: true });
+      expect(CareerGoals.findNonRetired().length).to.equal(0);
+      dumpObject = CareerGoals.dumpOne(docID);
+      CareerGoals.removeIt(slug);
+      expect(CareerGoals.isDefined(slug)).to.be.false;
+      docID = CareerGoals.restoreOne(dumpObject);
+      doc = CareerGoals.findDoc(docID);
+      expect(doc.retired).to.be.true;
     });
   });
 }

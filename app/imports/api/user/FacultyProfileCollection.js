@@ -31,7 +31,7 @@ class FacultyProfileCollection extends BaseProfileCollection {
    * @return { String } The docID of the FacultyProfile.
    */
   define({ username, firstName, lastName, picture = defaultProfilePicture, website, interests,
-           careerGoals }) {
+           careerGoals, retired }) {
     if (Meteor.isServer) {
       const role = ROLE.FACULTY;
       const interestIDs = Interests.getIDs(interests);
@@ -39,7 +39,7 @@ class FacultyProfileCollection extends BaseProfileCollection {
       Slugs.define({ name: username, entityName: this.getType() });
       const profileID = this._collection.insert({
         username, firstName, lastName, role, picture, website, interestIDs,
-        careerGoalIDs, userID: this.getFakeUserId() });
+        careerGoalIDs, userID: this.getFakeUserId(), retired });
       const userID = Users.define({ username, role });
       this._collection.update(profileID, { $set: { userID } });
       return profileID;
@@ -52,10 +52,10 @@ class FacultyProfileCollection extends BaseProfileCollection {
    * You cannot change the username or role once defined.
    * @param docID the id of the FacultyProfile.
    */
-  update(docID, { firstName, lastName, picture, website, interests, careerGoals }) {
+  update(docID, { firstName, lastName, picture, website, interests, careerGoals, retired }) {
     this.assertDefined(docID);
     const updateData = {};
-    this._updateCommonFields(updateData, { firstName, lastName, picture, website, interests, careerGoals });
+    this._updateCommonFields(updateData, { firstName, lastName, picture, website, interests, careerGoals, retired });
     this._collection.update(docID, { $set: updateData });
   }
 
@@ -101,7 +101,8 @@ class FacultyProfileCollection extends BaseProfileCollection {
     const website = doc.website;
     const interests = _.map(doc.interestIDs, interestID => Interests.findSlugByID(interestID));
     const careerGoals = _.map(doc.careerGoalIDs, careerGoalID => CareerGoals.findSlugByID(careerGoalID));
-    return { username, firstName, lastName, picture, website, interests, careerGoals };
+    const retired = doc.retired;
+    return { username, firstName, lastName, picture, website, interests, careerGoals, retired };
   }
 }
 

@@ -519,7 +519,7 @@ Template.Generate_Newsletter_Widget.events({
         const emailData = {};
         emailData.to = sendList;
         emailData.bcc = bccListArray;
-        emailData.from = 'donotreply@mailgun.radgrad.org';
+        emailData.from = 'Philip Johnson <donotreply@mailgun.radgrad.org>';
         emailData.replyTo = 'radgrad@hawaii.edu';
         emailData.subject = `Newsletter View For ${student.firstName} ${student.lastName}`;
         emailData.templateData = {
@@ -583,7 +583,7 @@ Template.Generate_Newsletter_Widget.events({
           console.log(`Sending email to ${email}`);
           emailData.to = email;
           emailData.bcc = bccListArray;
-          emailData.from = 'donotreply@mailgun.radgrad.org';
+          emailData.from = 'Philip Johnson <donotreply@mailgun.radgrad.org>';
           emailData.replyTo = 'radgrad@hawaii.edu';
           emailData.subject = subject;
           emailData.templateData = {
@@ -643,7 +643,7 @@ Template.Generate_Newsletter_Widget.events({
           console.log(`Sending email to ${email}`);
           emailData.to = email;
           emailData.bcc = bccListArray;
-          emailData.from = 'donotreply@mailgun.radgrad.org';
+          emailData.from = 'Philip Johnson <donotreply@mailgun.radgrad.org>';
           emailData.replyTo = 'radgrad@hawaii.edu';
           emailData.subject = subject;
           emailData.templateData = {

@@ -4,7 +4,7 @@
     <div class="ui grid">
       {{> Admin_Datamodel_Pagination_Widget showItemCount=getItemCount showIndex=getItemIndex collection=getCollection }}
       {{#each teaser in teasers}}
-        {{> Admin_DataModel_Accordion name=teaser.title slug=(slugName teaser.slugID) descriptionPairs=(descriptionPairs teaser) id=teaser._id updateID=updateID deleteDisabled=(deleteDisabled teaser)}}
+        {{> Admin_DataModel_Accordion name=teaser.title slug=(slugName teaser.slugID) descriptionPairs=(descriptionPairs teaser) id=teaser._id updateID=updateID deleteDisabled=(deleteDisabled teaser) retired=(retired teaser)}}
       {{/each}}
     </div>
   </div>

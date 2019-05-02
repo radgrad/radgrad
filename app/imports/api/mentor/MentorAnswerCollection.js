@@ -1,4 +1,5 @@
 import SimpleSchema from 'simpl-schema';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import BaseCollection from '../base/BaseCollection';
 import { MentorQuestions } from '../mentor/MentorQuestionCollection';
 import { ROLE } from '../role/Role';
@@ -19,6 +20,7 @@ class MentorAnswerCollection extends BaseCollection {
       questionID: { type: SimpleSchema.RegEx.Id },
       mentorID: { type: SimpleSchema.RegEx.Id },
       text: { type: String },
+      retired: { type: Boolean, optional: true },
     }));
   }
 
@@ -36,23 +38,27 @@ class MentorAnswerCollection extends BaseCollection {
    * @return { String } The docID of the answer.
    * @throws { Meteor.Error } If question or mentor is undefined.
    */
-  define({ question, mentor, text }) {
+  define({ question, mentor, text, retired }) {
     const questionID = MentorQuestions.getID(question);
     const mentorID = Users.getID(mentor);
     Users.assertInRole(mentorID, ROLE.MENTOR);
-    return this._collection.insert({ questionID, mentorID, text });
+    return this._collection.insert({ questionID, mentorID, text, retired });
   }
 
   /**
    * Updates the mentor answer.
    * @param docID the docID of the mentor answer.
-   * @param text the updated text.
+   * @param text the updated text (optional).
+   * @param retired the new retired status (optional).
    */
-  update(docID, { text }) {
+  update(docID, { text, retired }) {
     this.assertDefined(docID);
     const updateData = {};
     if (text) {
       updateData.text = text;
+    }
+    if (_.isBoolean(retired)) {
+      updateData.retired = retired;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -157,7 +163,8 @@ class MentorAnswerCollection extends BaseCollection {
     const question = MentorQuestions.findSlugByID(doc.questionID);
     const mentor = Users.getProfile(doc.mentorID).username;
     const text = doc.text;
-    return { question, mentor, text };
+    const retired = doc.retired;
+    return { question, mentor, text, retired };
   }
 }
 

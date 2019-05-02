@@ -4,7 +4,7 @@
     <div class="ui grid">
       {{> Admin_Datamodel_Pagination_Widget showItemCount=getItemCount showIndex=getItemIndex collection=getCollection }}
       {{#each mentorQuestion in mentorQuestions}}
-        {{> Admin_DataModel_Accordion name=(title mentorQuestion) descriptionPairs=(descriptionPairs mentorQuestion) id=mentorQuestion._id updateID=updateID deleteDisabled=false}}
+        {{> Admin_DataModel_Accordion name=(title mentorQuestion) descriptionPairs=(descriptionPairs mentorQuestion) id=mentorQuestion._id updateID=updateID deleteDisabled=false retired=(retired mentorQuestion)}}
       {{/each}}
     </div>
   </div>

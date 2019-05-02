@@ -51,6 +51,7 @@ Template.List_Course_Instances_Widget.helpers({
       { label: 'Student', value: Users.getFullName(courseInstance.studentID) },
       { label: 'ICE', value: `${courseInstance.ice.i}, ${courseInstance.ice.c}, 
         ${courseInstance.ice.e}` },
+      { label: 'Retired', value: courseInstance.retired ? 'True' : 'False' },
     ];
   },
   getItemCount() {
@@ -61,6 +62,9 @@ Template.List_Course_Instances_Widget.helpers({
   },
   getCollection() {
     return CourseInstances;
+  },
+  retired(item) {
+    return item.retired;
   },
 });
 

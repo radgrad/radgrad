@@ -25,7 +25,11 @@ if (Meteor.isServer) {
       const year = 2016;
       let docID = AcademicYearInstances.define({ year, student });
       expect(AcademicYearInstances.isDefined(docID)).to.be.true;
-      const dumpObject = AcademicYearInstances.dumpOne(docID);
+      let dumpObject = AcademicYearInstances.dumpOne(docID);
+      expect(dumpObject.retired).to.be.undefined;
+      expect(AcademicYearInstances.findNonRetired().length).to.equal(1);
+      AcademicYearInstances.update(docID, { retired: true });
+      expect(AcademicYearInstances.findNonRetired().length).to.equal(0);
       AcademicYearInstances.removeIt(docID);
       expect(AcademicYearInstances.isDefined(docID)).to.be.false;
       docID = AcademicYearInstances.restoreOne(dumpObject);
@@ -33,6 +37,10 @@ if (Meteor.isServer) {
       expect(AcademicYearInstances.toString(docID)).to.equal(`[AY 2016-2017 ${student}]`);
       const errors = AcademicYearInstances.checkIntegrity();
       expect(errors.length).to.equal(0);
+      AcademicYearInstances.update(docID, { retired: true });
+      dumpObject = AcademicYearInstances.dumpOne(docID);
+      expect(dumpObject.retired).to.be.true;
+      expect(AcademicYearInstances.findNonRetired().length).to.equal(0);
       // Create a gap in the future to see if it gets filled in.
       const futureYear = AcademicYearInstances.define({ year: 2019, student });
       expect(AcademicYearInstances.isDefined(futureYear)).to.be.true;

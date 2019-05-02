@@ -25,6 +25,10 @@
 
       {{> TextArea_Form_Field label="Moderator Comments" rows=5 value=review.moderatorComments name="moderatorComments" placeholder="Add moderator comments here." errorMessage=(fieldError "moderatorComments") }}
 
+      <div class="fields">
+        {{> Boolean_Form_Field label='Retired' name='retired' trueValue=trueValueRetired falseValue=falseValueRetired errorMessage=(fieldError "retired")}}
+      </div>
+
       <button class="ui green basic button" type="submit">Update</button>
       <button class="ui green basic button jsCancel" type="submit">Cancel</button>
 

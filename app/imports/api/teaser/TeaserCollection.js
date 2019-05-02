@@ -25,6 +25,7 @@ class TeaserCollection extends BaseSlugCollection {
       interestIDs: [SimpleSchema.RegEx.Id],
       opportunityID: SimpleSchema.RegEx.Id,
       duration: { type: String, optional: true },
+      retired: { type: Boolean, optional: true },
     }));
   }
 
@@ -53,7 +54,7 @@ class TeaserCollection extends BaseSlugCollection {
    * if the slug is already defined, or if the opportunity is supplied and not found.
    * @returns The newly created docID.
    */
-  define({ title, slug, author, url, description, duration, interests, opportunity }) {
+  define({ title, slug, author, url, description, duration, interests, opportunity, retired }) {
     // Get InterestIDs, throw error if any of them are not found.
     const interestIDs = Interests.getIDs(interests);
     // Get SlugID, throw error if found.
@@ -61,7 +62,7 @@ class TeaserCollection extends BaseSlugCollection {
     // Get OpportunityID, throw error if not found.
     const opportunityID = Opportunities.getID(opportunity);
     const teaserID = this._collection.insert({ title, slugID, author, url, description, duration, interestIDs,
-      opportunityID });
+      opportunityID, retired });
     // Connect the Slug to this teaser
     Slugs.updateEntityID(slugID, teaserID);
     return teaserID;
@@ -72,7 +73,7 @@ class TeaserCollection extends BaseSlugCollection {
    * @param docID The docID to be updated.
    * @throws { Meteor.Error } If docID is not defined, or if any interest or opportunity is undefined.
    */
-  update(docID, { title, opportunity, interests, author, url, description, duration }) {
+  update(docID, { title, opportunity, interests, author, url, description, duration, retired }) {
     this.assertDefined(docID);
     const updateData = {};
     if (title) {
@@ -95,6 +96,9 @@ class TeaserCollection extends BaseSlugCollection {
     }
     if (duration) {
       updateData.duration = duration;
+    }
+    if (_.isBoolean(retired)) {
+      updateData.retired = retired;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -179,7 +183,8 @@ class TeaserCollection extends BaseSlugCollection {
     if (doc.opportunityID) {
       opportunity = Opportunities.findSlugByID(doc.opportunityID);
     }
-    return { title, slug, author, url, description, duration, interests, opportunity };
+    const retired = doc.retired;
+    return { title, slug, author, url, description, duration, interests, opportunity, retired };
   }
 }
 

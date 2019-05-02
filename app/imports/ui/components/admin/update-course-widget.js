@@ -69,11 +69,7 @@ Template.Update_Course_Widget.events({
     const updateData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     instance.context.reset();
     updateSchema.clean(updateData, { mutate: true });
-    if (updateData.retired === 'true') {
-      updateData.retired = true;
-    } else {
-      updateData.retired = false;
-    }
+    updateData.retired = updateData.retired === 'true';
     instance.context.validate(updateData);
     if (instance.context.isValid()) {
       updateData.id = instance.data.updateID.get();

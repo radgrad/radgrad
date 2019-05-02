@@ -49,6 +49,7 @@ Template.List_Verification_Requests_Widget.helpers({
       { label: 'Submitted on', value: vr.submittedOn.toString() },
       { label: 'Status', value: vr.status },
       { label: 'ICE', value: `${vr.ice.i}, ${vr.ice.c}, ${vr.ice.e}` },
+      { label: 'Retired', value: vr.retired ? 'True' : 'False' },
     ];
   },
   getItemCount() {
@@ -59,6 +60,9 @@ Template.List_Verification_Requests_Widget.helpers({
   },
   getCollection() {
     return VerificationRequests;
+  },
+  retired(item) {
+    return item.retired;
   },
 });
 

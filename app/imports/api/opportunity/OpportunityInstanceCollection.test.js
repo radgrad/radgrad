@@ -32,13 +32,20 @@ if (Meteor.isServer) {
       let docID = OpportunityInstances.define({ semester, opportunity, verified, student });
       expect(OpportunityInstances.isOpportunityInstance(semester, opportunity, student)).to.be.true;
       expect(OpportunityInstances.isOpportunityInstance(semester, opportunity, faculty)).to.be.false;
-      const dumpObject = OpportunityInstances.dumpOne(docID);
+      let dumpObject = OpportunityInstances.dumpOne(docID);
       expect(OpportunityInstances.isDefined(docID)).to.be.true;
+      expect(dumpObject.retired).to.be.undefined;
+      expect(OpportunityInstances.findNonRetired().length).to.equal(1);
+      OpportunityInstances.update(docID, { retired: true });
+      expect(OpportunityInstances.findNonRetired().length).to.equal(0);
       OpportunityInstances.toString(docID);
       OpportunityInstances.removeIt(docID);
       expect(OpportunityInstances.isDefined(docID)).to.be.false;
       docID = OpportunityInstances.restoreOne(dumpObject);
       expect(OpportunityInstances.isDefined(docID)).to.be.true;
+      OpportunityInstances.update(docID, { retired: true });
+      dumpObject = OpportunityInstances.dumpOne(docID);
+      expect(dumpObject.retired).to.be.true;
       OpportunityInstances.removeIt(docID);
     });
     it('dangling VR', function test() {

@@ -12,35 +12,35 @@
     <div class="ui bottom attached tab segment" data-tab="advisors">
       <div class="ui stackable grid">
         {{#each user in users advisorRole}}
-          {{> Admin_DataModel_Accordion name=(fullName user) slug=(slugName user.slugID) descriptionPairs=(descriptionPairs user) id=user.userID updateID=updateID deleteDisabled=(deleteDisabled user)}}
+          {{> Admin_DataModel_Accordion name=(fullName user) slug=(slugName user.slugID) descriptionPairs=(descriptionPairs user) id=user.userID updateID=updateID deleteDisabled=(deleteDisabled user) retired=(retired user)}}
         {{/each}}
       </div>
     </div>
     <div class="ui bottom attached tab segment" data-tab="faculty">
       <div class="ui stackable grid">
         {{#each user in users facultyRole}}
-          {{> Admin_DataModel_Accordion name=(fullName user) slug=(slugName user.slugID) descriptionPairs=(descriptionPairs user) id=user.userID updateID=updateID deleteDisabled=(deleteDisabled user)}}
+          {{> Admin_DataModel_Accordion name=(fullName user) slug=(slugName user.slugID) descriptionPairs=(descriptionPairs user) id=user.userID updateID=updateID deleteDisabled=(deleteDisabled user) retired=(retired user)}}
         {{/each}}
       </div>
     </div>
     <div class="ui bottom attached tab segment" data-tab="mentors">
       <div class="ui stackable grid">
         {{#each user in users mentorRole}}
-          {{> Admin_DataModel_Accordion name=(fullName user) slug=(slugName user.slugID) descriptionPairs=(descriptionPairs user) id=user.userID updateID=updateID deleteDisabled=(deleteDisabled user)}}
+          {{> Admin_DataModel_Accordion name=(fullName user) slug=(slugName user.slugID) descriptionPairs=(descriptionPairs user) id=user.userID updateID=updateID deleteDisabled=(deleteDisabled user) retired=(retired user)}}
         {{/each}}
       </div>
     </div>
     <div class="ui bottom attached active tab segment" data-tab="students">
       <div class="ui stackable grid">
         {{#each user in users studentRole}}
-          {{> Admin_DataModel_Accordion name=(fullName user) slug=(slugName user.slugID) descriptionPairs=(descriptionPairs user) id=user.userID updateID=updateID deleteDisabled=(deleteDisabled user)}}
+          {{> Admin_DataModel_Accordion name=(fullName user) slug=(slugName user.slugID) descriptionPairs=(descriptionPairs user) id=user.userID updateID=updateID deleteDisabled=(deleteDisabled user) retired=(retired user)}}
         {{/each}}
       </div>
     </div>
     <div class="ui bottom attached tab segment" data-tab="alumni">
       <div class="ui stackable grid">
         {{#each user in users alumniRole}}
-          {{> Admin_DataModel_Accordion name=(fullName user) slug=(slugName user.slugID) descriptionPairs=(descriptionPairs user) id=user.userID updateID=updateID deleteDisabled=(deleteDisabled user)}}
+          {{> Admin_DataModel_Accordion name=(fullName user) slug=(slugName user.slugID) descriptionPairs=(descriptionPairs user) id=user.userID updateID=updateID deleteDisabled=(deleteDisabled user) retired=(retired user)}}
         {{/each}}
       </div>
     </div>

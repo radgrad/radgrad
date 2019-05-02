@@ -13,7 +13,7 @@ Template.List_Advisor_Logs_Widget.onCreated(function listAdvisorLogsOnCreated() 
 
 Template.List_Advisor_Logs_Widget.helpers({
   advisorLogs() {
-    const items = AdvisorLogs.find({}, { sort: { createdOn: 1 } });
+    const items = AdvisorLogs.find({}, { sort: { createdOn: 1 } }).fetch();
     const startIndex = Template.instance().itemIndex.get();
     const endIndex = startIndex + Template.instance().itemCount.get();
     return _.slice(items, startIndex, endIndex);
@@ -29,6 +29,7 @@ Template.List_Advisor_Logs_Widget.helpers({
       { label: 'Advisor', value: `${Users.getFullName(advisorLog.advisorID)}` },
       { label: 'Student', value: `${Users.getFullName(advisorLog.studentID)}` },
       { label: 'Text', value: advisorLog.text },
+      { label: 'Retired', value: advisorLog.retired ? 'True' : 'False' },
     ];
   },
   getItemCount() {
@@ -39,6 +40,9 @@ Template.List_Advisor_Logs_Widget.helpers({
   },
   getCollection() {
     return AdvisorLogs;
+  },
+  retired(item) {
+    return item.retired;
   },
 });
 

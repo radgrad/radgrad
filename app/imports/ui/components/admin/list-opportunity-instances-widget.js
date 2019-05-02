@@ -40,6 +40,7 @@ Template.List_Opportunity_Instances_Widget.helpers({
       { label: 'Student', value: Users.getFullName(opportunityInstance.studentID) },
       { label: 'ICE', value: `${opportunityInstance.ice.i}, ${opportunityInstance.ice.c}, 
         ${opportunityInstance.ice.e}` },
+      { label: 'Retired', value: opportunityInstance.retired ? 'True' : 'False' },
     ];
   },
   name(oi) {
@@ -56,6 +57,9 @@ Template.List_Opportunity_Instances_Widget.helpers({
   },
   getCollection() {
     return OpportunityInstances;
+  },
+  retired(item) {
+    return item.retired;
   },
 });
 

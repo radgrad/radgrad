@@ -5,7 +5,7 @@
     <div class="ui grid">
       {{> Admin_Datamodel_Pagination_Widget showItemCount=getItemCount showIndex=getItemIndex collection=getCollection }}
       {{#each advisorLog in advisorLogs}}
-        {{> Admin_DataModel_Accordion advisorLog=advisorLog name=(name advisorLog) descriptionPairs=(descriptionPairs advisorLog) id=advisorLog._id updateID=updateID deleteDisabled=true}}
+        {{> Admin_DataModel_Accordion advisorLog=advisorLog name=(name advisorLog) descriptionPairs=(descriptionPairs advisorLog) id=advisorLog._id updateID=updateID deleteDisabled=true retired=(retired advisorLog)}}
       {{/each}}
     </div>
   </div>

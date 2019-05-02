@@ -149,7 +149,7 @@ Template.Explorer_Interests_Page.helpers({
   addedCareerInterests() {
     const profile = Users.getProfile(getRouteUserName());
     const allInterests = Users.getInterestIDsByType(profile.userID);
-    return _.map(allInterests[1], (interest) => Interests.findDoc(interest));
+    return _.map(allInterests[1], (interest) => ({ item: Interests.findDoc(interest), count: 1 }));
   },
   addedInterests() {
     const addedInterests = [];
@@ -157,7 +157,7 @@ Template.Explorer_Interests_Page.helpers({
     const profile = Users.getProfile(getRouteUserName());
     _.forEach(allInterests, (interest) => {
       if (_.includes(profile.interestIDs, interest._id)) {
-        addedInterests.push(interest);
+        addedInterests.push({ item: interest, count: 1 });
       }
     });
     return addedInterests;

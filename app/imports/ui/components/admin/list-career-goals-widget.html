@@ -5,7 +5,7 @@
     <div class="ui grid">
       {{> Admin_Datamodel_Pagination_Widget showItemCount=getItemCount showIndex=getItemIndex collection=getCollection }}
       {{#each careerGoal in careerGoals}}
-        {{> Admin_DataModel_Accordion name=careerGoal.name slug=(slugName careerGoal.slugID) descriptionPairs=(descriptionPairs careerGoal) id=careerGoal._id updateID=updateID deleteDisabled=(deleteDisabled careerGoal)}}
+        {{> Admin_DataModel_Accordion name=careerGoal.name slug=(slugName careerGoal.slugID) descriptionPairs=(descriptionPairs careerGoal) id=careerGoal._id updateID=updateID deleteDisabled=(deleteDisabled careerGoal) retired=(retired careerGoal)}}
       {{/each}}
     </div>
   </div>

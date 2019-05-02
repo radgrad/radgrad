@@ -208,8 +208,6 @@ Template.Past_Semester_List.events({
       template.state.set(plannerKeys.detailICE, ci.ice);
       template.state.set(plannerKeys.detailOpportunity, null);
       template.state.set(plannerKeys.detailOpportunityInstance, null);
-      template.state.set(plannerKeys.selectedInspectorTab, true);
-      template.state.set(plannerKeys.selectedPlanTab, false);
     } else
       if (firstClass === 'opportunityInstance') {
         const oi = template.data.semesterOpportunities[target.id];
@@ -218,9 +216,9 @@ Template.Past_Semester_List.events({
         template.state.set(plannerKeys.detailICE, oi.ice);
         template.state.set(plannerKeys.detailCourse, null);
         template.state.set(plannerKeys.detailCourseInstance, null);
-        template.state.set(plannerKeys.selectedInspectorTab, true);
-        template.state.set(plannerKeys.selectedPlanTab, false);
       }
+    template.state.set(plannerKeys.selectedInspectorTab, true);
+    template.state.set(plannerKeys.selectedPlanTab, false);
   },
 });
 

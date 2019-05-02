@@ -2,6 +2,9 @@
 import './advisor-log-viewer.html';
 import './advisor-log-viewer.js';
 
+import './advisor-help-panel-widget.html';
+import './advisor-help-panel-widget';
+
 import './back-to-top-button.html';
 import './back-to-top-button.js';
 import './back-to-top-button.css';

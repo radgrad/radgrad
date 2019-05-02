@@ -35,7 +35,8 @@ if (Meteor.isServer) {
         name, slug, description, opportunityType, sponsor, interests, semesters, ice,
       });
       expect(Opportunities.isDefined(docID)).to.be.true;
-      const dumpObject = Opportunities.dumpOne(docID);
+      let dumpObject = Opportunities.dumpOne(docID);
+      expect(dumpObject.retired).to.be.undefined;
       expect(Opportunities.findNonRetired().length).to.equal(1);
       Opportunities.update(docID, { retired: true });
       expect(Opportunities.findNonRetired().length).to.equal(0);
@@ -43,6 +44,9 @@ if (Meteor.isServer) {
       expect(Opportunities.isDefined(slug)).to.be.false;
       docID = Opportunities.restoreOne(dumpObject);
       expect(Opportunities.isDefined(docID)).to.be.true;
+      Opportunities.update(docID, { retired: true });
+      dumpObject = Opportunities.dumpOne(docID);
+      expect(dumpObject.retired).to.be.true;
       Opportunities.removeIt(docID);
     });
   });

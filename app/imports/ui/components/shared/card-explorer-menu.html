@@ -32,18 +32,18 @@
           </div>
           <div class="divider"></div>
           {{#each listItem in menuAddedList}}
-            <a class="{{classType (slugName listItem) 'course'}}" data-tab="tab-name"
-               href="{{pathFor coursesRouteName username=routeUserName course=(slugName listItem)}}"><i
-                class="{{userCourses listItem}}"></i>{{courseName listItem}}</a>
+            <a class="{{classType (slugName listItem.item) 'course'}}" data-tab="tab-name"
+               href="{{pathFor coursesRouteName username=routeUserName course=(slugName listItem.item)}}"><i
+                class="{{userCourses listItem.item}}"></i>{{courseName listItem}}</a>
           {{/each}}
           <div class="header">
             ALL OTHER COURSES
           </div>
           <div class="divider"></div>
           {{#each listItem in menuNonAddedList}}
-            <a class="{{classType (slugName listItem) 'course'}}" data-tab="tab-name"
-               href="{{pathFor coursesRouteName username=routeUserName course=(slugName listItem)}}"><i
-                class="{{userCourses listItem}}"></i>{{courseName listItem}}</a>
+            <a class="{{classType (slugName listItem.item) 'course'}}" data-tab="tab-name"
+               href="{{pathFor coursesRouteName username=routeUserName course=(slugName listItem.item)}}"><i
+                class="{{userCourses listItem.item}}"></i>{{courseName listItem}}</a>
           {{/each}}
         {{else}}
           {{#if isType type 'careerGoals'}}
@@ -52,18 +52,18 @@
             </div>
             <div class="divider"></div>
             {{#each listItem in menuAddedList}}
-              <a class="{{classType (slugName listItem) 'careerGoal'}}" data-tab="tab-name"
-                 href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=(slugName listItem)}}"><i
-                  class="{{userCareerGoals listItem}}"></i>{{itemName listItem}}</a>
+              <a class="{{classType (slugName listItem.item) 'careerGoal'}}" data-tab="tab-name"
+                 href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=(slugName listItem.item)}}"><i
+                  class="{{userCareerGoals listItem.item}}"></i>{{itemName listItem}}</a>
             {{/each}}
             <div class="header">
               ALL OTHER CAREER GOALS
             </div>
             <div class="divider"></div>
             {{#each listItem in menuNonAddedList}}
-              <a class="{{classType (slugName listItem) 'careerGoal'}}" data-tab="tab-name"
-                 href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=(slugName listItem)}}"><i
-                  class="{{userCareerGoals listItem}}"></i>{{itemName listItem}}</a>
+              <a class="{{classType (slugName listItem.item) 'careerGoal'}}" data-tab="tab-name"
+                 href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=(slugName listItem.item)}}"><i
+                  class="{{userCareerGoals listItem.item}}"></i>{{itemName listItem}}</a>
             {{/each}}
           {{else}}
             {{#if isType type 'degrees'}}
@@ -72,18 +72,18 @@
               </div>
               <div class="divider"></div>
               {{#each listItem in menuAddedList}}
-                <a class="{{classType (slugName listItem) 'degree'}}" data-tab="tab-name"
-                   href="{{pathFor degreesRouteName username=routeUserName degree=(slugName listItem)}}"><i
-                    class="{{userDegrees listItem}}"></i>{{itemName listItem}}</a>
+                <a class="{{classType (slugName listItem.item) 'degree'}}" data-tab="tab-name"
+                   href="{{pathFor degreesRouteName username=routeUserName degree=(slugName listItem.item)}}"><i
+                    class="{{userDegrees listItem.item}}"></i>{{itemName listItem}}</a>
               {{/each}}
               <div class="header">
                 ALL OTHER DEGREES
               </div>
               <div class="divider"></div>
               {{#each listItem in menuNonAddedList}}
-                <a class="{{classType (slugName listItem) 'degree'}}" data-tab="tab-name"
-                   href="{{pathFor degreesRouteName username=routeUserName degree=(slugName listItem)}}"><i
-                    class="{{userDegrees listItem}}"></i>{{itemName listItem}}</a>
+                <a class="{{classType (slugName listItem.item) 'degree'}}" data-tab="tab-name"
+                   href="{{pathFor degreesRouteName username=routeUserName degree=(slugName listItem.item)}}"><i
+                    class="{{userDegrees listItem.item}}"></i>{{itemName listItem}}</a>
               {{/each}}
             {{else}}
               {{#if isType type 'opportunities'}}
@@ -92,9 +92,9 @@
                 </div>
                 <div class="divider"></div>
                 {{#each listItem in menuAddedList}}
-                  <a class="{{classType (slugName listItem) 'opportunity'}}" data-tab="tab-name"
-                     href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(slugName listItem)}}"><i
-                      class="{{userOpportunities listItem}}"></i>{{itemName listItem}}</a>
+                  <a class="{{classType (slugName listItem.item) 'opportunity'}}" data-tab="tab-name"
+                     href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(slugName listItem.item)}}"><i
+                      class="{{userOpportunities listItem.item}}"></i>{{itemName listItem}}</a>
                 {{/each}}
                 <div class="header">
                   ALL OTHER OPPORTUNITIES
@@ -112,18 +112,18 @@
                   </div>
                   <div class="divider"></div>
                   {{#each listItem in menuAddedList}}
-                    <a class="{{classType (slugName listItem) 'interest'}}" data-tab="tab-name"
-                       href="{{pathFor interestsRouteName username=routeUserName interest=(slugName listItem)}}"><i
-                        class="{{userInterests listItem}}"></i>{{itemName listItem}}</a>
+                    <a class="{{classType (slugName listItem.item) 'interest'}}" data-tab="tab-name"
+                       href="{{pathFor interestsRouteName username=routeUserName interest=(slugName listItem.item)}}"><i
+                        class="{{userInterests listItem.item}}"></i>{{itemName listItem}}</a>
                   {{/each}}
                   <div class="header">
                     CAREER GOAL INTERESTS
                   </div>
                   <div class="divider"></div>
                   {{#each listItem in menuCareerList}}
-                    <a class="{{classType (slugName listItem) 'interest'}}" data-tab="tab-name"
-                       href="{{pathFor interestsRouteName username=routeUserName interest=(slugName listItem)}}"><i
-                        class="{{userInterests listItem}}"></i>{{itemName listItem}}</a>
+                    <a class="{{classType (slugName listItem.item) 'interest'}}" data-tab="tab-name"
+                       href="{{pathFor interestsRouteName username=routeUserName interest=(slugName listItem.item)}}"><i
+                        class="{{userInterests listItem.item}}"></i>{{itemName listItem}}</a>
                   {{/each}}
                   <div class="header">
                     ALL OTHER INTERESTS
@@ -141,9 +141,9 @@
                     </div>
                     <div class="divider"></div>
                     {{#each listItem in menuAddedList}}
-                      <a class="{{classType (slugName listItem) 'plan'}}" data-tab="tab-name"
-                         href="{{pathFor academicPlansRouteName username=routeUserName plan=(slugName listItem)}}"><i
-                          class="{{userPlans listItem}}"></i>{{itemName listItem}}</a>
+                      <a class="{{classType (slugName listItem.item) 'plan'}}" data-tab="tab-name"
+                         href="{{pathFor academicPlansRouteName username=routeUserName plan=(slugName listItem.item)}}"><i
+                          class="{{userPlans listItem.item}}"></i>{{itemName listItem}}</a>
                     {{/each}}
                     <div class="header">
                       ALL OTHER PLANS
@@ -171,9 +171,9 @@
           COURSES IN MY PLAN
         </h4>
         {{#each listItem in menuAddedList}}
-          <a class="{{classType (slugName listItem) 'course'}}" data-tab="tab-name"
-             href="{{pathFor coursesRouteName username=routeUserName course=(slugName listItem)}}"><i
-              style="position: absolute; margin-left: -20px;" class="{{userCourses listItem}}"></i>{{courseName
+          <a class="{{classType (slugName listItem.item) 'course'}}" data-tab="tab-name"
+             href="{{pathFor coursesRouteName username=routeUserName course=(slugName listItem.item)}}"><i
+              style="position: absolute; margin-left: -20px;" class="{{userCourses listItem.item}}"></i>{{courseName
               listItem}}</a>
         {{/each}}
       {{/if}}
@@ -191,9 +191,9 @@
           MY CAREER GOALS
         </h4>
         {{#each listItem in menuAddedList}}
-          <a class="{{classType (slugName listItem) 'careerGoal'}}" data-tab="tab-name"
-             href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=(slugName listItem)}}"><i
-              style="position: absolute; margin-left: -20px;" class="{{userCareerGoals listItem}}"></i>{{itemName
+          <a class="{{classType (slugName listItem.item) 'careerGoal'}}" data-tab="tab-name"
+             href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=(slugName listItem.item)}}"><i
+              style="position: absolute; margin-left: -20px;" class="{{userCareerGoals listItem.item}}"></i>{{itemName
               listItem}}</a>
         {{/each}}
         {{#each listItem in menuFilteredNonAddedList}}
@@ -207,9 +207,9 @@
           {{#if isInRole 'student'}}
           {{/if}}
           {{#each listItem in menuNonAddedList}}
-            <a class="{{classType (slugName listItem) 'degree'}}" data-tab="tab-name"
-               href="{{pathFor degreesRouteName username=routeUserName degree=(slugName listItem)}}"><i
-                style="position: absolute; margin-left: -20px;" class="{{userDegrees listItem}}"></i>{{itemName
+            <a class="{{classType (slugName listItem.item) 'degree'}}" data-tab="tab-name"
+               href="{{pathFor degreesRouteName username=routeUserName degree=(slugName listItem.item)}}"><i
+                style="position: absolute; margin-left: -20px;" class="{{userDegrees listItem.item}}"></i>{{itemName
                 listItem}}</a>
           {{/each}}
         {{else}}
@@ -227,10 +227,10 @@
               {{/if}}
             {{/if}}
             {{#each listItem in menuAddedList}}
-              <a class="{{classType (slugName listItem) 'opportunity'}}" data-tab="tab-name"
-                 href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(slugName listItem)}}"><i
+              <a class="{{classType (slugName listItem.item) 'opportunity'}}" data-tab="tab-name"
+                 href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(slugName listItem.item)}}"><i
                   style="position: absolute; margin-left: -20px;"
-                  class="{{userOpportunities listItem}}"></i>{{opportunityItemName listItem}}</a>
+                  class="{{userOpportunities listItem.item}}"></i>{{opportunityItemName listItem}}</a>
             {{/each}}
             {{#each listItem in menuFilteredNonAddedList}}
               <a class="{{classType (slugName listItem) 'opportunity'}}" data-tab="tab-name"
@@ -245,18 +245,18 @@
                 MY INTERESTS
               </h4>
               {{#each listItem in menuAddedList}}
-                <a class="{{classType (slugName listItem) 'interest'}}" data-tab="tab-name"
-                   href="{{pathFor interestsRouteName username=routeUserName interest=(slugName listItem)}}"><i
-                    style="position: absolute; margin-left: -20px;" class="{{userInterests listItem}}"></i>{{itemName
+                <a class="{{classType (slugName listItem.item) 'interest'}}" data-tab="tab-name"
+                   href="{{pathFor interestsRouteName username=routeUserName interest=(slugName listItem.item)}}"><i
+                    style="position: absolute; margin-left: -20px;" class="{{userInterests listItem.item}}"></i>{{itemName
                     listItem}}</a>
               {{/each}}
               <h4 class="ui dividing header">
                 CAREER GOAL INTERESTS
               </h4>
               {{#each listItem in menuCareerList}}
-                <a class="{{classType (slugName listItem) 'interest'}}" data-tab="tab-name"
-                   href="{{pathFor interestsRouteName username=routeUserName interest=(slugName listItem)}}"><i
-                    style="position: absolute; margin-left: -20px;" class="{{userInterests listItem}}"></i>{{itemName
+                <a class="{{classType (slugName listItem.item) 'interest'}}" data-tab="tab-name"
+                   href="{{pathFor interestsRouteName username=routeUserName interest=(slugName listItem.item)}}"><i
+                    style="position: absolute; margin-left: -20px;" class="{{userInterests listItem.item}}"></i>{{itemName
                     listItem}}</a>
               {{/each}}
             {{else}}
@@ -266,9 +266,9 @@
                     MY ACADEMIC PLAN
                   </div>
                   {{#each listItem in menuAddedList}}
-                    <a class="{{classType (slugName listItem) 'plan'}}" data-tab="tab-name"
-                       href="{{pathFor academicPlansRouteName username=routeUserName plan=(slugName listItem)}}"><i
-                        class="{{userPlans listItem}}"></i>{{itemName listItem}}</a>
+                    <a class="{{classType (slugName listItem.item) 'plan'}}" data-tab="tab-name"
+                       href="{{pathFor academicPlansRouteName username=routeUserName plan=(slugName listItem.item)}}"><i
+                        class="{{userPlans listItem.item}}"></i>{{itemName listItem}}</a>
                   {{/each}}
                 {{/if}}
               {{/if}}

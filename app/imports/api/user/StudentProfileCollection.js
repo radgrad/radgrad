@@ -49,13 +49,14 @@ class StudentProfileCollection extends BaseProfileCollection {
    * @param hiddenCourses An optional array of course slugs indicating the hidden ones.
    * @param hiddenOpportunities An optional array of opportunity slugs indicating the hidden opportunities.
    * @param isAlumni An optional boolean indicating if this student has graduated. Defaults to false.
+   * @param retired the retired status (optional).
    * @throws { Meteor.Error } If username has been previously defined, or if any interests, careerGoals, level,
    * academicPlan, declaredSemester, hiddenCourses, or hiddenOpportunities are invalid.
    * @return { String } The docID of the StudentProfile.
    */
   define({ username, firstName, lastName, picture = defaultProfilePicture, website, interests,
            careerGoals, level, academicPlan, declaredSemester, hiddenCourses = [], hiddenOpportunities = [],
-           isAlumni = false }) {
+           isAlumni = false, retired }) {
     if (Meteor.isServer) {
       // Validate parameters.
       const interestIDs = Interests.getIDs(interests);
@@ -75,7 +76,7 @@ class StudentProfileCollection extends BaseProfileCollection {
       const profileID = this._collection.insert({
         username, firstName, lastName, role, picture, website, interestIDs, careerGoalIDs,
         level, academicPlanID, declaredSemesterID, hiddenCourseIDs, hiddenOpportunityIDs, isAlumni,
-        userID: this.getFakeUserId() });
+        userID: this.getFakeUserId(), retired });
       const userID = Users.define({ username, role });
       this._collection.update(profileID, { $set: { userID } });
       return profileID;
@@ -89,16 +90,20 @@ class StudentProfileCollection extends BaseProfileCollection {
    * Users in ROLE.STUDENT cannot change their level or isAlumni setting.
    * @param docID the id of the StudentProfile.
    * @param company the company (optional).
-   * @param career the career (optional).
-   * @param location the location (optional).
-   * @param linkedin LinkedIn user ID (optional).
-   * @param motivation the motivation (optional).
+   * @param careerGoals the career (optional).
+   * @param level the level (optional).
+   * @param academicPlan the chosen academic plan (optional).
+   * @param declaredSemester the semester they declared their major (optional).
+   * @param hiddenCourses an array of courses they chose to not see (optional).
+   * @param hiddenOpportunities an array of opportunities they chose to not see (optional).
+   * @param isAlumni their alumni status (optional).
+   * @param retired their retired status (optional).
    */
   update(docID, { firstName, lastName, picture, website, interests, careerGoals, level, academicPlan, declaredSemester,
-      hiddenCourses, hiddenOpportunities, isAlumni }) {
+      hiddenCourses, hiddenOpportunities, isAlumni, retired }) {
     this.assertDefined(docID);
     const updateData = {};
-    this._updateCommonFields(updateData, { firstName, lastName, picture, website, interests, careerGoals });
+    this._updateCommonFields(updateData, { firstName, lastName, picture, website, interests, careerGoals, retired });
     if (academicPlan) {
       updateData.academicPlanID = AcademicPlans.getID(academicPlan);
     }
@@ -113,7 +118,7 @@ class StudentProfileCollection extends BaseProfileCollection {
     }
     // Only Admins and Advisors can update the isAlumni and level fields.
     // Or if no one is logged in when this is executed (i.e. for testing) then it's cool.
-    if (!Meteor.userId() || this._hasRole(Meteor.userId(), [ROLE.ADMIN, ROLE.ADVISOR])) {
+    if (Meteor.isTest || !Meteor.userId() || this._hasRole(Meteor.userId(), [ROLE.ADMIN, ROLE.ADVISOR])) {
       const userID = this.findDoc(docID).userID;
       if (_.isBoolean(isAlumni)) {
         updateData.isAlumni = isAlumni;
@@ -131,11 +136,28 @@ class StudentProfileCollection extends BaseProfileCollection {
         this.assertValidLevel(level);
         updateData.level = level;
       }
+      if (_.isBoolean(retired)) {
+        updateData.retired = retired;
+      }
     }
     this._collection.update(docID, { $set: updateData });
   }
 
   /**
+   * Removes this profile, given its profile ID.
+   * Also removes this user from Meteor Accounts.
+   * @param profileID The ID for this profile object.
+   */
+  removeIt(profileID) {
+    if (this.isDefined(profileID)) {
+      const doc = this.findDoc(profileID);
+      if (doc.declaredSemesterID) {
+        Semesters.removeIt(doc.declaredSemesterID);
+      }
+      super.removeIt(profileID);
+    }
+  }
+    /**
    * Asserts that level is an integer between 1 and 6.
    * @param level The level.
    */
@@ -284,6 +306,7 @@ class StudentProfileCollection extends BaseProfileCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
+    // console.log('StudentProfiles.dumpOne %o', doc);
     const username = doc.username;
     const firstName = doc.firstName;
     const lastName = doc.lastName;
@@ -293,13 +316,14 @@ class StudentProfileCollection extends BaseProfileCollection {
     const careerGoals = _.map(doc.careerGoalIDs, careerGoalID => CareerGoals.findSlugByID(careerGoalID));
     const level = doc.level;
     const academicPlan = doc.academicPlanID && AcademicPlans.findSlugByID(doc.academicPlanID);
-    const declaredSemester = doc.declaredSemesterID && Semesters.findSlugByID(doc.declaredSemesterID);
+    const declaredSemester = doc.declaredSemesterID && Semesters.getSlug(doc.declaredSemesterID);
     const hiddenCourses = _.map(doc.hiddenCourseIDs, hiddenCourseID => Courses.findSlugByID(hiddenCourseID));
     const hiddenOpportunities = _.map(doc.hiddenOpportunityIDs, hiddenOpportunityID =>
         Opportunities.findSlugByID(hiddenOpportunityID));
     const isAlumni = doc.isAlumni;
+    const retired = doc.retired;
     return { username, firstName, lastName, picture, website, interests, careerGoals, level, academicPlan,
-      declaredSemester, hiddenCourses, hiddenOpportunities, isAlumni };
+      declaredSemester, hiddenCourses, hiddenOpportunities, isAlumni, retired };
   }
 }
 

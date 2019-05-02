@@ -7,6 +7,7 @@ import { PlanChoices } from '../../../api/degree-plan/PlanChoiceCollection';
 
 const updateSchema = new SimpleSchema({
   choice: { type: String },
+  retired: Boolean,
 }, { tracker: Tracker });
 
 Template.Update_Plan_Choice_Widget.onCreated(function updatePlanChoiceWidgetOnCreated() {
@@ -17,6 +18,18 @@ Template.Update_Plan_Choice_Widget.helpers({
   planChoice() {
     return PlanChoices.findDoc(Template.currentData().updateID.get());
   },
+  falseValueRetired() {
+    const plan = PlanChoices.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return !plan.retired;
+  },
+  trueValueRetired() {
+    const plan = PlanChoices.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return plan.retired;
+  },
 });
 
 Template.Update_Plan_Choice_Widget.events({
@@ -25,6 +38,7 @@ Template.Update_Plan_Choice_Widget.events({
     const updateData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     instance.context.reset();
     updateSchema.clean(updateData, { mutate: true });
+    updateData.retired = updateData.retired === 'true';
     instance.context.validate(updateData);
     if (instance.context.isValid()) {
       FormUtils.convertICE(updateData);

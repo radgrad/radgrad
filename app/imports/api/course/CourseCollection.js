@@ -64,7 +64,7 @@ class CourseCollection extends BaseSlugCollection {
    */
   define({
       name, shortName = name, slug, number, description, creditHrs = 3,
-      interests = [], syllabus, prerequisites = [], retired = false,
+      interests = [], syllabus, prerequisites = [], retired,
   }) {
     try {
       // Check to see if is defined already.
@@ -145,10 +145,8 @@ class CourseCollection extends BaseSlugCollection {
       });
       updateData.prerequisites = prerequisites;
     }
-    if (retired) {
+    if (_.isBoolean(retired)) {
       updateData.retired = retired;
-    } else {
-      updateData.retired = false;
     }
     this._collection.update(docID, { $set: updateData });
   }

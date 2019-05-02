@@ -24,6 +24,7 @@ class BaseSlugCollection extends BaseCollection {
    * @throws { Meteor.Error } If instance is not a docID or a slug.
    */
   getID(instance) {
+    // console.log('BaseSlugCollection.getID(%o)', instance);
     let id;
     // If we've been passed a document, check to see if it has an _id field and make instance the value of _id.
     if (_.isObject(instance) && instance._id) {
@@ -71,6 +72,7 @@ class BaseSlugCollection extends BaseCollection {
    * @throws { Meteor.Error} If the instance (and its associated slug) cannot be found.
    */
   removeIt(instance) {
+    // console.log('%o.removeIt(%o)', this._type, instance);
     const docID = this.getID(instance);
     const doc = super.findDoc(docID);
     check(doc, Object);

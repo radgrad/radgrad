@@ -19,6 +19,7 @@ const updateSchema = new SimpleSchema({
   opportunity: { type: String, optional: true },
   course: { type: String, optional: true },
   semester: { type: String, optional: true },
+  retired: Boolean,
 }, { tracker: Tracker });
 
 Template.Update_Feed_Widget.onCreated(function onCreated() {
@@ -58,6 +59,18 @@ Template.Update_Feed_Widget.helpers({
     const sorted = _.sortBy(students, 'lastName');
     return sorted;
   },
+  falseValueRetired() {
+    const plan = Feeds.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return !plan.retired;
+  },
+  trueValueRetired() {
+    const plan = Feeds.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return plan.retired;
+  },
 });
 
 Template.Update_Feed_Widget.events({
@@ -66,6 +79,7 @@ Template.Update_Feed_Widget.events({
     const updateData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     instance.context.reset();
     updateSchema.clean(updateData, { mutate: true });
+    updateData.retired = updateData.retired === 'true';
     instance.context.validate(updateData);
     if (instance.context.isValid()) {
       updateData.id = instance.data.updateID.get();

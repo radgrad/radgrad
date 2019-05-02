@@ -3972,8 +3972,8 @@
           "semester": "Fall-2017",
           "course": "ics_111",
           "note": "ICS 111",
-          "verified": false,
-          "fromSTAR": false,
+          "verified": true,
+          "fromSTAR": true,
           "creditHrs": 4,
           "grade": "A",
           "student": "samplestudent@hawaii.edu"
@@ -3982,8 +3982,8 @@
           "semester": "Fall-2017",
           "course": "ics_141",
           "note": "ICS 141",
-          "verified": false,
-          "fromSTAR": false,
+          "verified": true,
+          "fromSTAR": true,
           "creditHrs": 3,
           "grade": "B",
           "student": "samplestudent@hawaii.edu"
@@ -3992,8 +3992,8 @@
           "semester": "Spring-2018",
           "course": "ics_211",
           "note": "ICS 211",
-          "verified": false,
-          "fromSTAR": false,
+          "verified": true,
+          "fromSTAR": true,
           "creditHrs": 4,
           "grade": "A",
           "student": "samplestudent@hawaii.edu"
@@ -4002,8 +4002,8 @@
           "semester": "Spring-2018",
           "course": "ics_241",
           "note": "ICS 241",
-          "verified": false,
-          "fromSTAR": false,
+          "verified": true,
+          "fromSTAR": true,
           "creditHrs": 3,
           "grade": "B",
           "student": "samplestudent@hawaii.edu"
@@ -4012,8 +4012,8 @@
           "semester": "Fall-2018",
           "course": "ics_311",
           "note": "ICS 311",
-          "verified": false,
-          "fromSTAR": false,
+          "verified": true,
+          "fromSTAR": true,
           "creditHrs": 4,
           "grade": "A",
           "student": "samplestudent@hawaii.edu"
@@ -4022,8 +4022,8 @@
           "semester": "Fall-2018",
           "course": "ics_314",
           "note": "ICS 314",
-          "verified": false,
-          "fromSTAR": false,
+          "verified": true,
+          "fromSTAR": true,
           "creditHrs": 3,
           "grade": "B",
           "student": "samplestudent@hawaii.edu"
@@ -4033,9 +4033,9 @@
           "course": "ics_212",
           "note": "ICS 212",
           "verified": false,
-          "fromSTAR": false,
+          "fromSTAR": true,
           "creditHrs": 3,
-          "grade": "A",
+          "grade": "***",
           "student": "samplestudent@hawaii.edu"
         },
         {
@@ -4043,9 +4043,9 @@
           "course": "ics_321",
           "note": "ICS 321",
           "verified": false,
-          "fromSTAR": false,
+          "fromSTAR": true,
           "creditHrs": 3,
-          "grade": "B",
+          "grade": "***",
           "student": "samplestudent@hawaii.edu"
         },
         {
@@ -4055,7 +4055,7 @@
           "verified": false,
           "fromSTAR": false,
           "creditHrs": 3,
-          "grade": "A",
+          "grade": "***",
           "student": "samplestudent@hawaii.edu"
         },
         {
@@ -4065,7 +4065,7 @@
           "verified": false,
           "fromSTAR": false,
           "creditHrs": 3,
-          "grade": "B",
+          "grade": "***",
           "student": "samplestudent@hawaii.edu"
         },
         {
@@ -4075,7 +4075,7 @@
           "verified": false,
           "fromSTAR": false,
           "creditHrs": 3,
-          "grade": "A",
+          "grade": "***",
           "student": "samplestudent@hawaii.edu"
         },
         {
@@ -4085,7 +4085,7 @@
           "verified": false,
           "fromSTAR": false,
           "creditHrs": 3,
-          "grade": "B",
+          "grade": "***",
           "student": "samplestudent@hawaii.edu"
         },
         {
@@ -4095,7 +4095,7 @@
           "verified": false,
           "fromSTAR": false,
           "creditHrs": 3,
-          "grade": "A",
+          "grade": "***",
           "student": "samplestudent@hawaii.edu"
         },
         {
@@ -4105,7 +4105,7 @@
           "verified": false,
           "fromSTAR": false,
           "creditHrs": 3,
-          "grade": "B",
+          "grade": "***",
           "student": "samplestudent@hawaii.edu"
         },
         {
@@ -4115,7 +4115,7 @@
           "verified": false,
           "fromSTAR": false,
           "creditHrs": 3,
-          "grade": "A",
+          "grade": "***",
           "student": "samplestudent@hawaii.edu"
         },
         {
@@ -4125,7 +4125,7 @@
           "verified": false,
           "fromSTAR": false,
           "creditHrs": 3,
-          "grade": "B",
+          "grade": "***",
           "student": "samplestudent@hawaii.edu"
         }
       ]
@@ -7626,7 +7626,7 @@
         {
           "semester": "Fall-2018",
           "opportunity": "acm-manoa",
-          "verified": false,
+          "verified": true,
           "student": "samplestudent@hawaii.edu",
           "sponsor": "johnson@hawaii.edu"
         },
@@ -7640,14 +7640,14 @@
         {
           "semester": "Fall-2017",
           "opportunity": "acm-manoa",
-          "verified": false,
+          "verified": true,
           "student": "samplestudent@hawaii.edu",
           "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Spring-2018",
           "opportunity": "acm-manoa",
-          "verified": false,
+          "verified": true,
           "student": "samplestudent@hawaii.edu",
           "sponsor": "johnson@hawaii.edu"
         },

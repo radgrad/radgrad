@@ -11,6 +11,7 @@ const updateSchema = new SimpleSchema({
   name: String,
   description: String,
   interests: { type: Array, minCount: 1 }, 'interests.$': String,
+  retired: Boolean,
 }, { tracker: Tracker });
 
 Template.Update_Career_Goal_Widget.onCreated(function onCreated() {
@@ -32,6 +33,18 @@ Template.Update_Career_Goal_Widget.helpers({
     const careerGoal = CareerGoals.findDoc(Template.currentData().updateID.get());
     return careerGoal.interestIDs;
   },
+  falseValueRetired() {
+    const plan = CareerGoals.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return !plan.retired;
+  },
+  trueValueRetired() {
+    const plan = CareerGoals.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return plan.retired;
+  },
 });
 
 Template.Update_Career_Goal_Widget.events({
@@ -40,6 +53,7 @@ Template.Update_Career_Goal_Widget.events({
     const updateData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     instance.context.reset();
     updateSchema.clean(updateData, { mutate: true });
+    updateData.retired = updateData.retired === 'true';
     instance.context.validate(updateData);
     if (instance.context.isValid()) {
       updateData.id = instance.data.updateID.get();

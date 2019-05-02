@@ -5,7 +5,7 @@
     <div class="ui grid">
       {{> Admin_Datamodel_Pagination_Widget showItemCount=getItemCount showIndex=getItemIndex collection=getCollection }}
       {{#each helpMessage in helpMessages}}
-        {{> Admin_DataModel_Accordion name=helpMessage.routeName descriptionPairs=(descriptionPairs helpMessage) id=helpMessage._id updateID=updateID deleteDisabled=(deleteDisabled helpMessage)}}
+        {{> Admin_DataModel_Accordion name=helpMessage.routeName descriptionPairs=(descriptionPairs helpMessage) id=helpMessage._id updateID=updateID deleteDisabled=(deleteDisabled helpMessage) retired=(retired helpMessage)}}
       {{/each}}
     </div>
   </div>

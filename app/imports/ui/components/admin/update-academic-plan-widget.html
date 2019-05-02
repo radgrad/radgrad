@@ -18,7 +18,7 @@
       {{> TextArea_Form_Field label="Number of Courses per Semester" rows=5 name="coursesPerSemester" value=(coursesPerSemester academicPlan) errorMessage=(fieldError "coursesPerSemester") required=true}}
       {{> TextArea_Form_Field label="Course List" rows=5 name="courseList" value=(courseList academicPlan) errorMessage=(fieldError "courseList") required=true}}
 
-      <div class="field">
+      <div class="fields">
         {{> Boolean_Form_Field label='Retired' name='retired' trueValue=trueValueRetired falseValue=falseValueRetired errorMessage=(fieldError "retired")}}
       </div>
       {{> Academic_Plan_Viewer_Component plan=getPlan }}

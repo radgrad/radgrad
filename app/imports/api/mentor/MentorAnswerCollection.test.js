@@ -23,16 +23,29 @@ if (Meteor.isServer) {
       removeAllEntities();
     });
 
-    it('#define, #isDefined, #removeIt', function test() {
+    it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne', function test() {
       // Define mentor and the question.
       const mentor = makeSampleUser(ROLE.MENTOR);
       const student = makeSampleUser(ROLE.STUDENT);
       MentorQuestions.define({ question: 'Sample Question', slug: questionSlug, student });
       // Now define an answer, passing the defined question and the defined mentor.
-      const instanceID = MentorAnswers.define({ question: questionSlug, mentor, text });
-      expect(MentorAnswers.isDefined(instanceID)).to.be.true;
-      MentorAnswers.removeIt(instanceID);
-      expect(MentorAnswers.isDefined(instanceID)).to.be.false;
+      let docID = MentorAnswers.define({ question: questionSlug, mentor, text });
+      expect(MentorAnswers.isDefined(docID)).to.be.true;
+      let dumpObject = MentorAnswers.dumpOne(docID);
+      expect(dumpObject.retired).to.be.undefined;
+      expect(MentorAnswers.findNonRetired().length).to.equal(1);
+      MentorAnswers.update(docID, { retired: true });
+      expect(MentorAnswers.findNonRetired().length).to.equal(0);
+      MentorAnswers.removeIt(docID);
+      expect(MentorAnswers.isDefined(docID)).to.be.false;
+      docID = MentorAnswers.define(dumpObject);
+      expect(MentorAnswers.isDefined(docID)).to.be.true;
+      MentorAnswers.update(docID, { retired: true });
+      dumpObject = MentorAnswers.dumpOne(docID);
+      expect(dumpObject.retired).to.be.true;
+      MentorAnswers.removeIt(docID);
+      docID = MentorAnswers.define(dumpObject);
+      expect(MentorAnswers.isDefined(docID)).to.be.true;
     });
 
     it('#removeQuestion, #removeUser', function test() {

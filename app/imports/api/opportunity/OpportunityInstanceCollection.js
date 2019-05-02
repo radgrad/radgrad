@@ -29,6 +29,7 @@ class OpportunityInstanceCollection extends BaseCollection {
       studentID: { type: SimpleSchema.RegEx.Id },
       sponsorID: { type: SimpleSchema.RegEx.Id },
       ice: { type: Object, optional: true, blackbox: true },
+      retired: { type: Boolean, optional: true },
     }));
     this.publicationNames = {
       student: this._collectionName,
@@ -55,7 +56,7 @@ class OpportunityInstanceCollection extends BaseCollection {
    * @returns The newly created docID.
    */
 
-  define({ semester, opportunity, sponsor = undefined, verified = false, student }) {
+  define({ semester, opportunity, sponsor = undefined, verified = false, student, retired }) {
     // Validate semester, opportunity, verified, and studentID
     const semesterID = Semesters.getID(semester);
     const semesterDoc = Semesters.findDoc(semesterID);
@@ -82,15 +83,15 @@ class OpportunityInstanceCollection extends BaseCollection {
     }
     const ice = Opportunities.findDoc(opportunityID).ice;
     // Define and return the new OpportunityInstance
-    const opportunityInstanceID = this._collection.insert({
+    return this._collection.insert({
       semesterID,
       opportunityID,
       verified,
       studentID,
       sponsorID,
       ice,
+      retired,
     });
-    return opportunityInstanceID;
   }
 
   /**
@@ -98,9 +99,10 @@ class OpportunityInstanceCollection extends BaseCollection {
    * @param docID The course instance docID (required).
    * @param semesterID the semesterID for the course instance optional.
    * @param verified boolean optional.
-   * @param ice an object with fields i, c, e (optional)
+   * @param ice an object with fields i, c, e (optional).
+   * @param retired the new retired status (optional).
    */
-  update(docID, { semesterID, verified, ice }) {
+  update(docID, { semesterID, verified, ice, retired }) {
     this.assertDefined(docID);
     const updateData = {};
     if (semesterID) {
@@ -111,6 +113,9 @@ class OpportunityInstanceCollection extends BaseCollection {
     }
     if (ice) {
       updateData.ice = ice;
+    }
+    if (_.isBoolean(retired)) {
+      updateData.retired = retired;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -323,7 +328,8 @@ class OpportunityInstanceCollection extends BaseCollection {
     const verified = doc.verified;
     const student = Users.getProfile(doc.studentID).username;
     const sponsor = Users.getProfile(doc.sponsorID).username;
-    return { semester, opportunity, verified, student, sponsor };
+    const retired = doc.retired;
+    return { semester, opportunity, verified, student, sponsor, retired };
   }
 }
 

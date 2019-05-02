@@ -2,11 +2,11 @@
 
   {{#if Template.subscriptionsReady}}
     {{#Admin_DataModel_Layout}}
-      <!--{{#if displayUpdateWidget}}-->
-        <!--{{> Update_Verification_Request_Widget updateID=updateID}}-->
+      {{#if displayUpdateWidget}}
+        {{> Update_Verification_Request_Widget updateID=updateID}}
       <!--{{else}}-->
         <!--{{> Add_Verification_Request_Widget }}-->
-      <!--{{/if}}-->
+      {{/if}}
       {{> List_Verification_Requests_Widget updateID=updateID}}
     {{/Admin_DataModel_Layout}}
   {{else}}

@@ -96,21 +96,26 @@ if (Meteor.isServer) {
     it('#define, #isDefined, #findIdBySlug, #removeIt, #dumpOne, #restoreOne #checkIntegrity', function test() {
       Semesters.define({ term: 'Spring', year: 2017 });
       DesiredDegrees.define({ name, shortName, slug: degreeSlug, description });
-      const docID = AcademicPlans.define({
+      let docID = AcademicPlans.define({
         slug, degreeSlug, name: description, description, semester, coursesPerSemester, courseList,
       });
       expect(AcademicPlans.isDefined(docID)).to.be.true;
       expect(AcademicPlans.findIdBySlug(slug)).to.be.a('string');
-      const dumpObject = AcademicPlans.dumpOne(docID);
+      let dumpObject = AcademicPlans.dumpOne(docID);
+      expect(dumpObject.retired).to.be.undefined;
       expect(AcademicPlans.findNonRetired().length).to.equal(1);
       AcademicPlans.update(docID, { retired: true });
       expect(AcademicPlans.findNonRetired().length).to.equal(0);
       AcademicPlans.removeIt(docID);
       expect(AcademicPlans.isDefined(docID)).to.be.false;
-      const planID = AcademicPlans.restoreOne(dumpObject);
-      expect(AcademicPlans.isDefined(planID)).to.be.true;
-      AcademicPlans.removeIt(planID);
-      expect(AcademicPlans.isDefined(planID)).to.be.false;
+      docID = AcademicPlans.restoreOne(dumpObject);
+      expect(AcademicPlans.isDefined(docID)).to.be.true;
+      expect(AcademicPlans.findNonRetired().length).to.equal(1);
+      AcademicPlans.update(docID, { retired: true });
+      dumpObject = AcademicPlans.dumpOne(docID);
+      expect(dumpObject.retired).to.be.true;
+      AcademicPlans.removeIt(docID);
+      expect(AcademicPlans.isDefined(docID)).to.be.false;
       const anotherID = AcademicPlans.define({
         slug, degreeSlug, name: description, description, semester: notDefinedSemester, coursesPerSemester, courseList,
       });

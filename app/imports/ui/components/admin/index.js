@@ -188,6 +188,9 @@ import './students-summary-widget.js';
 import './update-academic-plan-widget.html';
 import './update-academic-plan-widget';
 
+import './update-academic-year-instance-widget.html';
+import './update-academic-year-instance-widget';
+
 import './update-advisor-log-widget.html';
 import './update-advisor-log-widget';
 
@@ -253,6 +256,9 @@ import './update-user-widget-mentor';
 
 import './update-user-widget-student.html';
 import './update-user-widget-student';
+
+import './update-verification-request-widget.html';
+import './update-verification-request-widget';
 
 import './user-interactions-widget.html';
 import './user-interactions-widget';
