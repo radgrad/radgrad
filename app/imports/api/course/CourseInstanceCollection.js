@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Roles } from 'meteor/alanning:roles';
 import SimpleSchema from 'simpl-schema';
+import { ReactiveAggregate } from 'meteor/jcbernack:reactive-aggregate';
 import { Courses } from '../course/CourseCollection';
 import { AcademicYearInstances } from '../degree-plan/AcademicYearInstanceCollection';
 import { ROLE } from '../role/Role';
@@ -10,6 +11,7 @@ import { Users } from '../user/UserCollection';
 import { Slugs } from '../slug/SlugCollection';
 import BaseCollection from '../base/BaseCollection';
 import { makeCourseICE } from '../ice/IceProcessor';
+import { StudentProfiles } from '../user/StudentProfileCollection';
 
 
 /**
@@ -76,6 +78,7 @@ class CourseInstanceCollection extends BaseCollection {
     const courseID = Courses.getID(course);
     const studentID = Users.getID(student);
     const profile = Users.getProfile(studentID);
+    // console.log('CourseInstanceDefine profile=%o', profile);
     // ensure the AcademicYearInstance is defined.
     if (semesterDoc.term === Semesters.SPRING || semesterDoc.term === Semesters.SUMMER) {
       AcademicYearInstances.define({ year: semesterDoc.year - 1, student: profile.username });
@@ -310,8 +313,23 @@ class CourseInstanceCollection extends BaseCollection {
           }).validate({ studentID, semesterID });
           return instance._collection.find({ studentID, semesterID });
         });
-      Meteor.publish(this.publicationNames.publicStudent, function publicStudentPublish() {  // eslint-disable-line
-        return instance._collection.find({}, { fields: { studentID: 1, semesterID: 1, courseID: 1 } });
+      Meteor.publish(this.publicationNames.publicStudent, function publicStudentPublish() {
+        const userID = Meteor.userId();
+        const willingToShare = [];
+        const profiles = StudentProfiles.find().fetch();
+        _.forEach(profiles, (p) => {
+          if (p.shareCourses) {
+            willingToShare.push(p.userID);
+          }
+        });
+        // console.log(willingToShare);
+        ReactiveAggregate(this, instance._collection, [
+          { $match: { $expr: { $or: [
+            { $in: ['$studentID', willingToShare] },
+            { $eq: [Roles.userIsInRole(userID, [ROLE.ADMIN, ROLE.ADVISOR]), true] }] } } },
+          { $project: { studentID: 1, semesterID: 1, courseID: 1 } },
+        ]);
+        // return instance._collection.find({}, { fields: { studentID: 1, semesterID: 1, courseID: 1 } });
       });
       Meteor.publish(this.publicationNames.publicSlugStudent, function publicSlugPublish(courseSlug) {  // eslint-disable-line
         // check the courseID.

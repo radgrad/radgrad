@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { Promise } from 'meteor/promise';
 import { DDP } from 'meteor/ddp-client';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
@@ -119,3 +120,14 @@ export function withLoggedInUser({ username = 'radgrad@hawaii.edu', password = '
     });
   });
 }
+
+// Convert an NPM-style function returning a callback to one that returns a Promise.
+export const denodeify = f => (...args) => new Promise((resolve, reject) => {
+  f(...args, (err, val) => {
+    if (err) {
+      reject(err);
+    } else {
+      resolve(val);
+    }
+  });
+});

@@ -20,17 +20,22 @@ const instanceSubs = new SubsManager({ cacheLimit: 20, expireIn: 30 });
 Template.With_Instance_Subscriptions.onCreated(function withInstanceSubscriptionsOnCreated() {
   const self = this;
   self.ready = new ReactiveVar();
+  // console.log('With_Instance_Subscriptions', getUserIdFromRoute());
   this.autorun(function () {
     if (getUserIdFromRoute()) {  // if logged out don't subscribe
+      // get your information
       instanceSubs.subscribe(AcademicYearInstances.publicationNames.PerStudentID, getUserIdFromRoute());
       instanceSubs.subscribe(CourseInstances.publicationNames.studentID, getUserIdFromRoute());
+      instanceSubs.subscribe(OpportunityInstances.publicationNames.studentID, getUserIdFromRoute());
     }
+    // get public information
     instanceSubs.subscribe(AdvisorLogs.getPublicationName());
+    instanceSubs.subscribe(CourseInstances.publicationNames.publicStudent);
     instanceSubs.subscribe(FeedbackInstances.getPublicationName());
     instanceSubs.subscribe(Feeds.getPublicationName());
     instanceSubs.subscribe(MentorAnswers.getPublicationName());
     instanceSubs.subscribe(MentorQuestions.getPublicationName());
-    instanceSubs.subscribe(OpportunityInstances.publicationNames.student);
+    instanceSubs.subscribe(OpportunityInstances.publicationNames.publicStudent);
     instanceSubs.subscribe(VerificationRequests.getPublicationName());
     self.ready.set(instanceSubs.ready());
   });

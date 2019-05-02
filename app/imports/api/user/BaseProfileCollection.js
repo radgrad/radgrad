@@ -45,6 +45,11 @@ class BaseProfileCollection extends BaseSlugCollection {
       careerGoalIDs: [SimpleSchema.RegEx.Id],
       userID: SimpleSchema.RegEx.Id,
       retired: { type: Boolean, optional: true },
+      shareUsername: { type: Boolean, optional: true },
+      sharePicture: { type: Boolean, optional: true },
+      shareWebsite: { type: Boolean, optional: true },
+      shareInterests: { type: Boolean, optional: true },
+      shareCareerGoals: { type: Boolean, optional: true },
     })));
   }
 

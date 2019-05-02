@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Roles } from 'meteor/alanning:roles';
 import SimpleSchema from 'simpl-schema';
+import { ReactiveAggregate } from 'meteor/jcbernack:reactive-aggregate';
 import { Opportunities } from '../opportunity/OpportunityCollection';
 import { ROLE } from '../role/Role';
 import { AcademicYearInstances } from '../degree-plan/AcademicYearInstanceCollection';
@@ -9,6 +10,7 @@ import { Semesters } from '../semester/SemesterCollection';
 import { Users } from '../user/UserCollection';
 import BaseCollection from '../base/BaseCollection';
 import { VerificationRequests } from '../verification/VerificationRequestCollection';
+import { StudentProfiles } from '../user/StudentProfileCollection';
 
 
 /**
@@ -35,6 +37,7 @@ class OpportunityInstanceCollection extends BaseCollection {
       student: this._collectionName,
       perStudentAndSemester: `${this._collectionName}.PerStudentAndSemester`,
       studentID: `${this._collectionName}.studentID`,
+      publicStudent: `${this._collectionName}.publicStudent`,
     };
     if (Meteor.server) {
       this._collection._ensureIndex({ _id: 1, studentID: 1, semesterID: 1 });
@@ -250,6 +253,23 @@ class OpportunityInstanceCollection extends BaseCollection {
           studentID: { type: String },
         }).validate({ studentID });
         return instance._collection.find({ studentID });
+      });
+      Meteor.publish(this.publicationNames.publicStudent, function publicStudent() {
+        const userID = Meteor.userId();
+        const willingToShare = [];
+        const profiles = StudentProfiles.find().fetch();
+        _.forEach(profiles, (p) => {
+          if (p.shareOpportunities) {
+            willingToShare.push(p.userID);
+          }
+        });
+        // console.log('sharing Opporutnities = %o', willingToShare);
+        ReactiveAggregate(this, instance._collection, [
+          { $match: { $expr: { $or: [
+                  { $in: ['$studentID', willingToShare] },
+                  { $eq: [Roles.userIsInRole(userID, [ROLE.ADMIN, ROLE.ADVISOR]), true] }] } } },
+          { $project: { studentID: 1, semesterID: 1, opportunityID: 1 } },
+        ]);
       });
     }
   }

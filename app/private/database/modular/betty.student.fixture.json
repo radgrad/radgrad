@@ -19,7 +19,13 @@
           "level": 5,
           "hiddenCourses": [],
           "hiddenOpportunities": [],
-          "isAlumni": false
+          "isAlumni": false,
+          "shareUsername": true,
+          "sharePicture": true,
+          "shareWebsite": true,
+          "shareInterests": true,
+          "shareCareerGoals": true,
+          "shareAcademicPlan": true
         }
       ]
     }

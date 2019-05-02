@@ -9036,7 +9036,8 @@
           "academicPlan": "bs-cs-2016",
           "hiddenCourses": [],
           "hiddenOpportunities": [],
-          "isAlumni": false
+          "isAlumni": false,
+          "shareInterests": true
         },
         {
           "username": "cmoore@hawaii.edu",
@@ -9055,7 +9056,8 @@
           "academicPlan": "bs-cs-2016",
           "hiddenCourses": [],
           "hiddenOpportunities": [],
-          "isAlumni": false
+          "isAlumni": false,
+          "shareInterests": true
         },
         {
           "username": "abi@hawaii.edu",
@@ -9075,7 +9077,12 @@
           "declaredSemester": "Fall-2014",
           "hiddenCourses": [],
           "hiddenOpportunities": [],
-          "isAlumni": false
+          "isAlumni": false,
+          "shareInterests": true,
+          "sharePicture": true,
+          "shareWebsite": true,
+          "shareUsername": true,
+          "shareCareerGoals": true
         },
         {
           "username": "ahlim@hawaii.edu",
@@ -9113,7 +9120,12 @@
           "academicPlan": "bs-cs-2016",
           "hiddenCourses": [],
           "hiddenOpportunities": [],
-          "isAlumni": false
+          "isAlumni": false,
+          "shareInterests": true,
+          "sharePicture": true,
+          "shareWebsite": true,
+          "shareUsername": true,
+          "shareCareerGoals": true
         },
         {
           "username": "betty@hawaii.edu",
@@ -9134,7 +9146,12 @@
           "academicPlan": "bs-cs-2016",
           "hiddenCourses": [],
           "hiddenOpportunities": [],
-          "isAlumni": false
+          "isAlumni": false,
+          "shareInterests": true,
+          "sharePicture": true,
+          "shareWebsite": true,
+          "shareUsername": true,
+          "shareCareerGoals": true
         },
         {
           "username": "brianmay@hawaii.edu",

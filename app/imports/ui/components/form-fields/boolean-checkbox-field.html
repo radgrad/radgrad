@@ -1,0 +1,10 @@
+<template name="Boolean_Checkbox_Field">
+  <div class="{{#if required}}required{{/if}} inline field">
+    <div class="field">
+      <div class="ui toggle checkbox {{#if trueValue}}checked{{/if}}">
+        <input type="checkbox" name="{{name}}" checked="{{#if trueValue}}checked{{/if}}" value="{{trueValue}}">
+        <label>{{label}}</label>
+      </div>
+    </div>
+  </div>
+</template>

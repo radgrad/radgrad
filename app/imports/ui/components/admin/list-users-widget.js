@@ -85,6 +85,7 @@ Template.List_Users_Widget.helpers({
         label: 'Declared Semester',
         value: (user.declaredSemesterID) ? Semesters.toString(user.declaredSemesterID) : '',
       });
+      // pairs.push({ label: 'Share Email', value: user.shareUsername ? 'True' : 'False' });
     }
     if (user.role === ROLE.MENTOR) {
       pairs.push({ label: 'Company', value: user.company });
