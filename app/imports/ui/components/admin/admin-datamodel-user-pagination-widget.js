@@ -1,18 +1,19 @@
 import { Template } from 'meteor/templating';
+import { Users } from '../../../api/user/UserCollection';
 import { AcademicYearInstances } from '../../../api/degree-plan/AcademicYearInstanceCollection';
 
-Template.Admin_Datamodel_Pagination_Widget.onCreated(function admindatamodelpaginationwidgetOnCreated() {
+Template.Admin_Datamodel_User_Pagination_Widget.onCreated(function adminDatamodelUserPaginationWidgetOnCreated() {
   // console.log('onCreated data=%o', this.data);
   if (this.data) {
     this.showItemCount = this.data.showItemCount;
     this.showIndex = this.data.showIndex;
-    this.collection = this.data.collection;
+    this.role = this.data.role;
   }
 });
 
-Template.Admin_Datamodel_Pagination_Widget.helpers({
+Template.Admin_Datamodel_User_Pagination_Widget.helpers({
   paginationLabel() {
-    const count = Template.instance().collection.count();
+    const count = Users.findProfilesWithRole(Template.instance().role, {}, { sort: { lastName: 1 } }).length;
     if (count < Template.instance().showItemCount.get()) {
       return 'Showing all';
     }
@@ -38,7 +39,7 @@ Template.Admin_Datamodel_Pagination_Widget.helpers({
   },
 });
 
-Template.Admin_Datamodel_Pagination_Widget.events({
+Template.Admin_Datamodel_User_Pagination_Widget.events({
   'click .jsFirst': function jsFirst(event, instance) {
     event.preventDefault();
     instance.showIndex.set(0);

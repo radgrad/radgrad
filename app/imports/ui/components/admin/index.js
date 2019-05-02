@@ -96,6 +96,9 @@ import './admin-datamodel-menu.js';
 import './admin-datamodel-pagination-widget.html';
 import './admin-datamodel-pagination-widget';
 
+import './admin-datamodel-user-pagination-widget.html';
+import './admin-datamodel-user-pagination-widget';
+
 import './datamodel-utilities.js';
 
 import './list-academic-plans-widget.html';
