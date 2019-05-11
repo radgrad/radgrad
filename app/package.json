@@ -25,7 +25,7 @@
     "chromedriver": "^2.38.2",
     "meteor-node-stubs": "^0.2.11",
     "node-balanced": "0.0.14",
-    "npm": "^6.4.1",
+    "npm": "^6.9.0",
     "selenium-webdriver": "^3.6.0",
     "simpl-schema": "^0.3.2",
     "webdriverio": "^4.13.2"
@@ -41,7 +41,7 @@
     "eslint-plugin-jsx-a11y": "^5.0.3",
     "eslint-plugin-meteor": "^4.2.1",
     "eslint-plugin-react": "^7.7.0",
-    "jsdoc": "^3.4.0",
+    "jsdoc": "^3.6.1",
     "nightmare": "^2.10.0",
     "radgrad-jsdoc-template": "^1.1.3"
   }
