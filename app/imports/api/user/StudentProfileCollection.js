@@ -383,8 +383,8 @@ class StudentProfileCollection extends BaseProfileCollection {
   }
 
   /**
-   * Depending on the logged in user publish only their CourseInstances. If
-   * the user is in the Role.ADMIN then publish all CourseInstances.
+   * Depending on the logged in user publish only their StudentProfile information if they opt-in. If
+   * the user is in the Role.ADMIN or ADVISOR then publish all information.
    */
   publish() {
     if (Meteor.isServer) {

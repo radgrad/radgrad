@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import SimpleSchema from 'simpl-schema';
+import { ReactiveAggregate } from 'meteor/jcbernack:reactive-aggregate';
 import BaseCollection from '../base/BaseCollection';
 
 /* eslint no-useless-escape: 0 */
@@ -12,12 +13,13 @@ import BaseCollection from '../base/BaseCollection';
  * @memberOf api/slug
  */
 export default function slugify(text) {
-  return text.toString().toLowerCase()
-      .replace(/\s+/g, '-')           // Replace spaces with -
-      .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
-      .replace(/\-\-+/g, '-')         // Replace multiple - with single -
-      .replace(/^-+/, '')             // Trim - from start of text
-      .replace(/-+$/, '');            // Trim - from end of text
+  return text.toString()
+    .toLowerCase()
+    .replace(/\s+/g, '-')           // Replace spaces with -
+    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+    .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+    .replace(/^-+/, '')             // Trim - from start of text
+    .replace(/-+$/, '');            // Trim - from end of text
 }
 
 /**
@@ -59,6 +61,63 @@ class SlugCollection extends BaseCollection {
     const docID = this._collection.insert({ name, entityName });
     return docID;
   }
+
+  /**
+   * Default publication method for entities.
+   * It publishes the entire collection.
+   */
+  publish() {
+    if (Meteor.isServer) {
+      const inst = this;
+      Meteor.publish(this._collectionName, function () {
+        // return inst._collection.find();
+        ReactiveAggregate(this, inst._collection, [
+          {
+            $match: {
+              $expr: {
+                $or: [
+                  { $ne: ['$entityName', 'StudentProfiles'] },
+                ],
+              },
+            },
+          },
+          { $project: { name: 1, entityName: 1, entityID: 1 } },
+        ]);
+      });
+    }
+  }
+
+  //     const inst = this;
+  //     Meteor.publish(this._collectionName, function () {
+  //       const userID = Meteor.userId();
+  //       const willingToShare = [];
+  //       const profiles = StudentProfiles.find().fetch();
+  //       const currentStudent = StudentProfiles.find({ userID }).fetch();
+  //       let currentUsername = '';
+  //       if (currentStudent.length === 1) {
+  //         currentUsername = currentStudent[0].username;
+  //       }
+  //       _.forEach(profiles, (p) => {
+  //         if (p.shareUsername) {
+  //           willingToShare.push(p.username);
+  //         }
+  //       });
+  //       ReactiveAggregate(this, inst._collection, [
+  //         { $match: { $expr: { $or: [
+  //                 { $ne: ['$entityName', 'StudentProfile'] },
+  //                 { $in: ['$name', willingToShare] },
+  //                 { $eq: [Roles.userIsInRole(userID, [ROLE.ADMIN, ROLE.ADVISOR]), true] },
+  //                 { $eq: ['$name', currentUsername] }] } } },
+  //         { $project: {
+  //           name: 1,
+  //           entityName: 1,
+  //           entityID: 1,
+  //         } },
+  //       ]);
+  //     });
+  //   }
+  // }
+
 
   /**
    * Returns true if slugName is syntactically valid (i.e. consists of a-zA-Z0-9 or dash or underscore.)

@@ -83,7 +83,7 @@ Template.Student_User_Card.helpers({
   },
   picture() {
     if (Template.instance().user) {
-      console.log(Template.instance().user.picture);
+      // console.log(Template.instance().user.picture);
       if (Template.instance().user.picture) {
         return Template.instance().user.picture;
       }
