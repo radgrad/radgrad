@@ -474,6 +474,21 @@ class StudentProfileCollection extends BaseProfileCollection {
             shareOpportunities: 1,
             shareCourses: 1,
             shareLevel: 1,
+            optedIn: {
+              $cond: [{
+                $or: [
+                  '$shareUsername',
+                  '$sharePicture',
+                  '$shareWebsite',
+                  '$shareInterests',
+                  '$shareCareerGoals',
+                  '$shareAcademicPlan',
+                  '$shareOpportunities',
+                  '$shareCourses',
+                  '$shareLevel',
+                ],
+              }, true, false],
+            },
           },
         }]);
       });

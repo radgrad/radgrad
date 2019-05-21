@@ -326,7 +326,7 @@ class CourseInstanceCollection extends BaseCollection {
         ReactiveAggregate(this, instance._collection, [
           { $match: { $expr: { $or: [
             { $in: ['$studentID', willingToShare] },
-            { $eq: [Roles.userIsInRole(userID, [ROLE.ADMIN, ROLE.ADVISOR]), true] }] } } },
+            { $eq: [Roles.userIsInRole(userID, [ROLE.ADMIN, ROLE.ADVISOR, ROLE.FACULTY]), true] }] } } },
           { $project: { studentID: 1, semesterID: 1, courseID: 1 } },
         ]);
         // return instance._collection.find({}, { fields: { studentID: 1, semesterID: 1, courseID: 1 } });
