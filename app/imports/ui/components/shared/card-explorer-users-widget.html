@@ -39,7 +39,11 @@
     </div>
     <div class="ui bottom attached active tab segment" data-tab="students">
       <div class="ui stackable grid">
-
+        <div class="row">
+          <div class="ui center aligned column">
+            <div class="ui message">Only showing students who have opted to share their information.</div>
+          </div>
+        </div>
         <div style="max-height: 750px; overflow-x:hidden; overflow-y:scroll; margin-top: 10px;"
              class="ui stackable three cards">
           {{#each user in users studentRole}}

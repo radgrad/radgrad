@@ -40,7 +40,10 @@ Template.Card_Explorer_Users_Widget.helpers({
     return ROLE.STUDENT;
   },
   users(role) {
-    const users = Users.findProfilesWithRole(role, {}, { sort: { lastName: 1 } });
+    let users = Users.findProfilesWithRole(role, {}, { sort: { lastName: 1 } });
+    if (role === ROLE.STUDENT) {
+      users = _.filter(users, (u) => u.optedIn);
+    }
     if (getRouteUserName()) {
       const profile = Users.getProfile(getRouteUserName());
       const filtered = _.filter(users, (u) => u.username !== profile.username);
