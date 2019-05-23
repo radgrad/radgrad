@@ -76,7 +76,7 @@ class SlugCollection extends BaseCollection {
             $match: {
               $expr: {
                 $or: [
-                  { $ne: ['$entityName', 'StudentProfiles'] },
+                  { $ne: ['$entityName', 'StudentProfile'] },
                 ],
               },
             },

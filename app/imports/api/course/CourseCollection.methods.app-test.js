@@ -47,7 +47,7 @@ if (Meteor.isClient) {
       });
     });
 
-    it('getFutureEnrollment Methods', async function () {
+    it.skip('getFutureEnrollment Methods', async function () {
       // First, just call this expecting that there is no future enrollment data.
       let id = Courses.findIdBySlug(definitionData.slug);
       let data = await getFutureEnrollmentMethod.callPromise(id);
