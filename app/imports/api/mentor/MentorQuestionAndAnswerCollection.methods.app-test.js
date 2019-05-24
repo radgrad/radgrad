@@ -64,6 +64,7 @@ if (Meteor.isClient) {
 
     it('Answer Update Method', async function () {
       const questionID = MentorQuestions.findIdBySlug(questionDefinition.slug);
+      console.log(questionID);
       const id = MentorAnswers.findDoc({ questionID })._id;
       const text = 'updated answer text';
       await updateMethod.callPromise({ collectionName: answerCollectionName, updateData: { id, text } });
@@ -74,9 +75,9 @@ if (Meteor.isClient) {
     it('Question & Answer Remove Methods', async function () {
       const questionID = MentorQuestions.findIdBySlug(questionDefinition.slug);
       const answerID = MentorAnswers.findDoc({ questionID })._id;
-      await removeItMethod.callPromise({ collectionName: answerCollectionName, answerID });
+      await removeItMethod.callPromise({ collectionName: answerCollectionName, instance: answerID });
       expect(MentorAnswers.isDefined(answerID)).to.be.false;
-      await removeItMethod.callPromise({ collectionName: questionCollectionName, questionID });
+      await removeItMethod.callPromise({ collectionName: questionCollectionName, instance: questionID });
       expect(MentorQuestions.isDefined(questionID)).to.be.false;
     });
   });

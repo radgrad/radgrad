@@ -42,7 +42,7 @@ class UserInteractionCollection extends BaseCollection {
    * @param timestamp The time of interaction.
    */
   define({ username, type, typeData, timestamp = moment().toDate() }) {
-    this._collection.insert({ username, type, typeData, timestamp });
+    return this._collection.insert({ username, type, typeData, timestamp });
   }
 
   /**
