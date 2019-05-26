@@ -44,6 +44,7 @@ class CourseInstanceCollection extends BaseCollection {
       publicStudent: `${this._collectionName}.PublicStudent`,
       publicSlugStudent: `${this._collectionName}.PublicSlugStudent`,
       studentID: `${this._collectionName}.studentID`,
+      scoreboard: `${this._collectionName}.Scoreboard`,
     };
     if (Meteor.server) {
       this._collection._ensureIndex({ _id: 1, studentID: 1, courseID: 1 });
@@ -330,6 +331,20 @@ class CourseInstanceCollection extends BaseCollection {
           { $project: { studentID: 1, semesterID: 1, courseID: 1 } },
         ]);
         // return instance._collection.find({}, { fields: { studentID: 1, semesterID: 1, courseID: 1 } });
+      });
+      Meteor.publish(this.publicationNames.scoreboard, function publishCourseScoreboard() {
+        ReactiveAggregate(this, instance._collection, [
+          {
+            $addFields: { courseTerm: { $concat: ['$courseID', ' ', '$semesterID'] } },
+          },
+          {
+            $group: {
+              _id: '$courseTerm',
+              count: { $sum: 1 },
+            },
+          },
+          { $project: { count: 1, termID: 1, courseID: 1 } },
+        ], { clientCollection: 'CourseScoreboard' });
       });
       Meteor.publish(this.publicationNames.publicSlugStudent, function publicSlugPublish(courseSlug) {  // eslint-disable-line
         // check the courseID.

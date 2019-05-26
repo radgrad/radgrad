@@ -1,0 +1,26 @@
+<template name="Course_Scoreboard_Widget">
+    <div class="ui dividing header">Future Course Scoreboard</div>
+    <div class="ui celled table">
+      <thead>
+      <tr>
+        <th>Course</th>
+        {{#each semester in semesters}}
+          <th>{{semesterName semester}}</th>
+        {{/each}}
+      </tr>
+      </thead>
+      <tbody>
+      {{#each course in courses}}
+        <tr>
+          <td><div class="ui label">{{course.number}}</div></td>
+          {{#each semester in semesters}}
+            <td class="{{#if highlight course semester}}negative{{/if}} ">
+              {{#if important course semester}}<i class="attention icon"></i> {{/if}}
+              {{semesterScore course semester}}
+            </td>
+          {{/each}}
+        </tr>
+      {{/each}}
+      </tbody>
+    </div>
+</template>
