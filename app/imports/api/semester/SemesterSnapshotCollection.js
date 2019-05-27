@@ -24,7 +24,7 @@ class SemesterSnapshotCollection extends BaseCollection {
   }
   define({ semesterID, timestamp = moment().toDate(), year1, year2, year3, year4, year5, radGradActive,
            radGradInactive, copActive, copInactive }) {
-    this._collection.insert({ semesterID, timestamp, year1, year2, year3, year4, year5,
+    return this._collection.insert({ semesterID, timestamp, year1, year2, year3, year4, year5,
       radGradActive, radGradInactive, copActive, copInactive });
   }
   /**

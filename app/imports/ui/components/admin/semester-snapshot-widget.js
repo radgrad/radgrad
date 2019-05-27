@@ -2,7 +2,7 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { SemesterSnapshots } from '../../../api/semester/SemesterSnapshotCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
-import { UserInteractions } from '../../../api/log/UserInteractionCollection';
+import { UserInteractions } from '../../../api/analytic/UserInteractionCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
