@@ -22,6 +22,7 @@ class FeedbackInstanceCollection extends BaseCollection {
       functionName: String,
       description: String,
       feedbackType: String,
+      retired: { type: Boolean, optional: true },
     }));
     this.WARNING = 'Warning';
     this.RECOMMENDATION = 'Recommendation';
@@ -47,15 +48,68 @@ class FeedbackInstanceCollection extends BaseCollection {
    * @returns The newly created docID.
    */
 
-  define({ user, functionName, description, feedbackType }) {
+  define({ user, functionName, description, feedbackType, retired }) {
     // Validate Feedback and user.
     const userID = Users.getID(user);
     if (!_.includes(this.feedbackTypes, feedbackType)) {
-      throw new Meteor.Error(`FeedbackInstances.define passed illegal feedbackType: ${feedbackType}`);
+      throw new Meteor.Error(`FeedbackInstances.define passed illegal feedbackType: ${feedbackType}`,
+        '', Error().stack);
     }
     // Define and return the new FeedbackInstance
-    const feedbackInstanceID = this._collection.insert({ userID, functionName, description, feedbackType });
-    return feedbackInstanceID;
+    return this._collection.insert({ userID, functionName, description, feedbackType, retired });
+  }
+
+  /**
+   * Update the feedback instance. Only a subset of fields can be updated.
+   * @param docID the docID of the instance to update
+   * @param user the new user, optional
+   * @param description the new description, optional
+   * @param feedbackType the new feedback type, optional
+   * @param functionName the new function name, optional
+   * @param retired the new retired status, optional
+   */
+  update(docID, { user, description, feedbackType, functionName, retired }) {
+    this.assertDefined(docID);
+    const updateData = {};
+    if (user) {
+      updateData.userID = user;
+    }
+    if (description) {
+      updateData.description = description;
+    }
+    if (feedbackType) {
+      updateData.feedbackType = feedbackType;
+    }
+    if (functionName) {
+      updateData.functionName = functionName;
+    }
+    if (_.isBoolean(retired)) {
+      updateData.retired = retired;
+    }
+    this._collection.update(docID, { $set: updateData });
+  }
+
+  /**
+   * Returns the FeedbackInstance associated with the given user, functionName, and feedbackType.
+   * @param user The user (slug or ID)
+   * @param functionName The feedback function name.
+   * @param feedbackType The feedback type.
+   * @returns {any}
+   */
+  findFeedbackInstance(user, functionName, feedbackType) {
+    const userID = Users.getID(user);
+    return this._collection.findOne({ userID, functionName, feedbackType });
+  }
+
+  /**
+   * Returns true if there exists a FeedbackInstance for the given user, functionName and feedbackType.
+   * @param user the user (slug or ID)
+   * @param functionName the feedback function name
+   * @param feedbackType the feedback type.
+   * @returns {boolean}
+   */
+  isFeedbackInstance(user, functionName, feedbackType) {
+    return !!this.findFeedbackInstance(user, functionName, feedbackType);
   }
 
   /**
@@ -134,11 +188,12 @@ class FeedbackInstanceCollection extends BaseCollection {
    */
   checkIntegrity() {
     const problems = [];
-    this.find().forEach(doc => {
-      if (!Users.isDefined(doc.userID)) {
-        problems.push(`Bad userID: ${doc.userID}`);
-      }
-    });
+    this.find()
+      .forEach(doc => {
+        if (!Users.isDefined(doc.userID)) {
+          problems.push(`Bad userID: ${doc.userID}`);
+        }
+      });
     return problems;
   }
 
@@ -153,7 +208,8 @@ class FeedbackInstanceCollection extends BaseCollection {
     const functionName = doc.functionName;
     const description = doc.description;
     const feedbackType = doc.feedbackType;
-    return { user, functionName, description, feedbackType };
+    const retired = doc.retired;
+    return { user, functionName, description, feedbackType, retired };
   }
 
 }

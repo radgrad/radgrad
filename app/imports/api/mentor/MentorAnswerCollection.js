@@ -1,4 +1,5 @@
 import SimpleSchema from 'simpl-schema';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import BaseCollection from '../base/BaseCollection';
 import { MentorQuestions } from '../mentor/MentorQuestionCollection';
 import { ROLE } from '../role/Role';
@@ -19,6 +20,7 @@ class MentorAnswerCollection extends BaseCollection {
       questionID: { type: SimpleSchema.RegEx.Id },
       mentorID: { type: SimpleSchema.RegEx.Id },
       text: { type: String },
+      retired: { type: Boolean, optional: true },
     }));
   }
 
@@ -36,23 +38,27 @@ class MentorAnswerCollection extends BaseCollection {
    * @return { String } The docID of the answer.
    * @throws { Meteor.Error } If question or mentor is undefined.
    */
-  define({ question, mentor, text }) {
+  define({ question, mentor, text, retired }) {
     const questionID = MentorQuestions.getID(question);
     const mentorID = Users.getID(mentor);
     Users.assertInRole(mentorID, ROLE.MENTOR);
-    return this._collection.insert({ questionID, mentorID, text });
+    return this._collection.insert({ questionID, mentorID, text, retired });
   }
 
   /**
    * Updates the mentor answer.
    * @param docID the docID of the mentor answer.
-   * @param text the updated text.
+   * @param text the updated text (optional).
+   * @param retired the new retired status (optional).
    */
-  update(docID, { text }) {
+  update(docID, { text, retired }) {
     this.assertDefined(docID);
     const updateData = {};
     if (text) {
       updateData.text = text;
+    }
+    if (_.isBoolean(retired)) {
+      updateData.retired = retired;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -83,6 +89,30 @@ class MentorAnswerCollection extends BaseCollection {
   removeUser(user) {
     const mentorID = Users.getID(user);
     this._collection.remove({ mentorID });
+  }
+
+  /**
+   * Returns the MentorAnswer document associated with question and mentor.
+   * @param question The question (slug or ID)
+   * @param mentor The mentor (slug or ID)
+   * @return { Object } Returns the document or null if not found.
+   * @throws { Meteor.Error } If question or mentor does not exist.
+   */
+  findMentorAnswerDoc(question, mentor) {
+    const questionID = MentorQuestions.getID(question);
+    const mentorID = Users.getID(mentor);
+    return this._collection.findOne({ questionID, mentorID });
+  }
+
+  /**
+   * Returns true if there exists a MentorAnswer for the question and mentor.
+   * @param question The question (slug or ID)
+   * @param mentor The mentor (slug or ID)
+   * @return { Object } True if the MentorAnswer exists.
+   * @throws { Meteor.Error } If question or mentor does not exist.
+   */
+  isMentorAnswer(question, mentor) {
+    return !!this.findMentorAnswerDoc(question, mentor);
   }
 
   /**
@@ -133,7 +163,8 @@ class MentorAnswerCollection extends BaseCollection {
     const question = MentorQuestions.findSlugByID(doc.questionID);
     const mentor = Users.getProfile(doc.mentorID).username;
     const text = doc.text;
-    return { question, mentor, text };
+    const retired = doc.retired;
+    return { question, mentor, text, retired };
   }
 }
 

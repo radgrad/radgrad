@@ -20,32 +20,8 @@
       </div>
 
       <div class="row">
-        <div class="two wide column">
-          <p><b>Picture</b> (<a id="image-upload-widget" href="">Upload</a>)</p>
-        </div>
-        <div class="six wide column">
-          <form class="ui form picture">
-            <div class="fluid field">
-              <div class="ui action input">
-                <input type="text" name="picture" placeholder="Enter picture url" value="{{picture}}">
-                <button class="ui basic green button picture" type="submit">Update</button>
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="two wide column">
-          <b>Website</b>
-        </div>
-        <div class="six wide column">
-          <form class="ui form website">
-            <div class="fluid field">
-              <div class="ui action input">
-                <input id="website" type="text" name="website" placeholder="Enter website url" value="{{website}}">
-                <button class="ui basic green button website" type="submit">Update</button>
-              </div>
-            </div>
-          </form>
-        </div>
+        {{> Student_Update_Picture_Widget}}
+        {{> Student_Update_Website_Widget}}
       </div>
 
       <div class="row">
@@ -64,7 +40,7 @@
             <p style="margin-bottom: 0px">No career goals added yet.</p>
           {{/if}}
           <a href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=firstCareerGoal}}">Edit in
-          career explorer</a>
+            career explorer</a>
         </div>
         <div class="two wide column">
           <p><b>Interests</b></p>
@@ -81,13 +57,13 @@
             <p style="margin-bottom: 0px">No interests added yet.</p>
           {{/if}}
           <a href="{{pathFor interestsRouteName username=routeUserName interest=firstInterest}}">Edit in interest
-          explorer</a>
+            explorer</a>
         </div>
       </div>
 
       <div class="row">
         <div class="two wide column">
-          <b>Desired Degree</b>
+          <b>Desired Academic Plan</b>
         </div>
         <div class="six wide column">
           <p style="margin-bottom: 0">
@@ -98,5 +74,6 @@
         </div>
       </div>
     </div>
+    {{> Student_Share_Info_Widget}}
   </div>
 </template>

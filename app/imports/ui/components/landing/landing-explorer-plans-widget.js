@@ -11,7 +11,7 @@ Template.Landing_Explorer_Plans_Widget.helpers({
     return string.toUpperCase();
   },
   plans() {
-    return AcademicPlans.find().fetch();
+    return AcademicPlans.findNonRetired({ }, { sort: { name: 1 } });
   },
   planVar() {
     return Template.instance().planVar;
@@ -27,8 +27,3 @@ Template.Landing_Explorer_Plans_Widget.helpers({
 Template.Landing_Explorer_Plans_Widget.onRendered(function studentExplorerPlansWidgetOnRendered() {
   Template.instance().planVar.set(Template.instance().data.item);
 });
-
-Template.Landing_Explorer_Plans_Widget.onDestroyed(function studentExplorerPlansWidgetOnDestroyed() {
-  // add your statement here
-});
-

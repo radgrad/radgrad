@@ -1,0 +1,31 @@
+<template name="Update_Academic_Plan_Widget">
+
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>UPDATE ACADEMIC PLAN</h4></div>
+    <form class="ui equal width form {{successClass}} {{errorClass}}">
+
+      <div class="fields">
+        {{> Input_Form_Field label='Name' name='name' value=academicPlan.name errorMessage=(fieldError 'name') required=true}}
+        {{> Input_Form_Field label='Slug' name='slug' value=slug errorMessage=(fieldError 'slug') disabled=true}}
+        {{> Semesters_Single_Form_Field semesters=semesters selectedSemesterID=selectedSemesterID errorMessage=(fieldError "semesters")}}
+      </div>
+
+      <div class="required field">
+        <label>Description</label>
+        <textarea rows="5" name="description" value="{{academicPlan.description}}"></textarea>
+        {{> Form_Error_Message errorMessage=(fieldError 'description')}}
+      </div>
+      {{> TextArea_Form_Field label="Number of Courses per Semester" rows=5 name="coursesPerSemester" value=(coursesPerSemester academicPlan) errorMessage=(fieldError "coursesPerSemester") required=true}}
+      {{> TextArea_Form_Field label="Course List" rows=5 name="courseList" value=(courseList academicPlan) errorMessage=(fieldError "courseList") required=true}}
+
+      <div class="fields">
+        {{> Boolean_Form_Field label='Retired' name='retired' trueValue=trueValueRetired falseValue=falseValueRetired errorMessage=(fieldError "retired")}}
+      </div>
+      {{> Academic_Plan_Viewer_Component plan=getPlan }}
+      <button class="ui green basic button" type="submit">Update</button>
+      <button class="ui green basic button jsCancel" type="submit">Cancel</button>
+      {{> Success_Message_Form_Field message="The Academic Plan was successfully updated.  Press cancel to continue."}}
+    </form>
+  </div>
+
+</template>

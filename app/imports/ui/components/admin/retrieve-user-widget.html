@@ -1,11 +1,15 @@
 <template name="Retrieve_User_Widget">
   <div class="ui padded container segment">
     <div class="ui dividing header"><h4>RETRIEVE USER</h4></div>
+    <div class="ui segment">
+      {{> Filter_Student_Widget label='USERS' firstNameRegex=firstNameRegex lastNameRegex=lastNameRegex userNameRegex=userNameRegex }}
+    </div>
     <div class="ui top attached tabular stackable menu">
       <a class="item" data-tab="advisors">Advisors ({{advisorCount}})</a>
       <a class="item" data-tab="faculty">Faculty ({{facultyCount}})</a>
       <a class="item" data-tab="mentors">Mentors ({{mentorCount}})</a>
       <a class="active item" data-tab="students">Students ({{studentCount}})</a>
+      <a class="item" data-tab="alumni">Alumni ({{alumniCount}})</a>
     </div>
     <div class="ui bottom attached tab segment" data-tab="advisors">
       <div class="ui stackable grid">
@@ -43,7 +47,19 @@
         {{/each}}
       </div>
       <div class="ui divider"></div>
-      <button class="ui basic green button">Update Student Levels</button>
+      <button class="ui basic green button jsUpdateLevel">Update Student Levels</button>
+      {{#if updateResult}}
+        <div class="ui message">{{updateResult}}</div>
+      {{/if}}
+    </div>
+    <div class="ui bottom attached tab segment" data-tab="alumni">
+      <div class="ui stackable grid">
+        {{#each user in users alumniRole}}
+          <div class="two wide column" style="padding: 2px;">
+            <a class="ui basic grey fluid label" target="_blank" href="{{url user}}">{{label user}}</a>
+          </div>
+        {{/each}}
+      </div>
     </div>
   </div>
 </template>

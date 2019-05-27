@@ -1,0 +1,271 @@
+{
+  "timestamp": "2017-03-10T20:04:41.798Z",
+  "fixtureDescription": "Betty's course instances for level 4. Requires betty.student, extended.courses.interests, opportunities, betty.level1, betty.level2, betty.level3. [30,36,35] Spring-2015",
+  "collections": [
+    {
+      "name": "CourseInstanceCollection",
+      "contents": [
+        {
+          "semester": "Spring-2015",
+          "course": "ics_241",
+          "note": "ICS 241",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A-",
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "ics_311",
+          "note": "ICS 311",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "ics_314",
+          "note": "ICS 314",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics_212",
+          "note": "ICS 212",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics_321",
+          "note": "ICS 321",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics_313",
+          "note": "ICS 313",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics_331",
+          "note": "ICS 331",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2017",
+          "course": "ics_332",
+          "note": "ICS 332",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2017",
+          "course": "ics_422",
+          "note": "ICS 422",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2017",
+          "course": "ics_414",
+          "note": "ICS 414",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2017",
+          "course": "ics_471",
+          "note": "ICS 471",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2018",
+          "course": "ics_475",
+          "note": "ICS 475",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2018",
+          "course": "ics_484",
+          "note": "ICS 484",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty@hawaii.edu"
+        }
+      ]
+    },
+    {
+      "name": "OpportunityInstanceCollection",
+      "contents": [
+        {
+          "semester": "Summer-2014",
+          "opportunity": "google-summer-of-code",
+          "verified": true,
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2014",
+          "opportunity": "greyhats",
+          "verified": true,
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2014",
+          "opportunity": "dahi-internship",
+          "verified": true,
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2015",
+          "opportunity": "greyhats",
+          "verified": true,
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Summer-2015",
+          "opportunity": "sarp-internship",
+          "verified": true,
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2015",
+          "opportunity": "generic-project",
+          "verified": true,
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2015",
+          "opportunity": "greyhats",
+          "verified": true,
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2016",
+          "opportunity": "shidler-bpc",
+          "verified": true,
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2016",
+          "opportunity": "greyhats",
+          "verified": true,
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Summer-2016",
+          "opportunity": "generic-project",
+          "verified": true,
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Summer-2016",
+          "opportunity": "sarp-internship",
+          "verified": true,
+          "student": "betty@hawaii.edu"
+        }
+      ]
+    },
+    {
+      "name": "ReviewCollection",
+      "contents": [
+        {
+          "slug": "review-course-ics111-aaronvil",
+          "student": "betty@hawaii.edu",
+          "reviewType": "course",
+          "reviewee": "ics_111",
+          "semester": "Fall-2014",
+          "rating": 4,
+          "comments": "The course was very fun in learning how to do the projects we did in ICS 111. The projects weren't hard for beginner programmers and were interesting to get them to have more fun with programming. The only downside was that the class didn't fully prepare you for ICS 211 where the fun little projects became assignments focused on the next stage of programming. There isn't much new students can do in terms of preparing for ICS 211 from ICS 111 since it is based on what you learn, but the things that you do learn may prove useful.",
+          "moderated": true,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics141-aaronvil",
+          "student": "betty@hawaii.edu",
+          "reviewType": "course",
+          "reviewee": "ics_141",
+          "semester": "Spring-2016",
+          "rating": 3,
+          "comments": "The weakness I would say for this course is that there are a lot of concepts to go over, a bit that I felt didn't build on or connect with other chapters. So it felt that I was learning a new subject every few chapters which can be confusing to remember everything come exam time. The strength I feel would depend if you get a good TA or not, but the recitations were really helpful in better understanding the concepts and asking question on concepts you didn't understand. For future students I would utilize the recitations to better understand concepts and other students outside of class time for help as well.",
+          "moderated": true,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics211-aaronvil",
+          "student": "betty@hawaii.edu",
+          "reviewType": "course",
+          "reviewee": "ics_211",
+          "semester": "Spring-2016",
+          "rating": 5,
+          "comments": "The one good point of the course was that it brought the challenge of programming that you do not get in ICS 111. Some of the assignments are a little difficult, but doable, especially if you utilized the TA. Another thing, at least with the professor I took it with is having to write code on paper. It really proved helpful in knowing the syntax of the code without the help of an IDE to tell you what would work and what wouldn't. I would say future students should really get into this practice as soon as possible, because it can help you later in a job interview and also knowing the syntax of a language better. I can't really say there were any weakness to the course.",
+          "moderated": true,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics241-alfred",
+          "student": "betty@hawaii.edu",
+          "reviewType": "course",
+          "reviewee": "ics_241",
+          "semester": "Spring-2014",
+          "rating": 3,
+          "comments": "I understand how Discrete Math relates to Information and Computer Science, but I still didn't enjoy this course-- the content, that is. Initially the homework problems were, to me, difficult. Fortunately, the professor tried very hard to teach the concepts well, and I received a lot of help from the TA and the professor during office hours.",
+          "moderated": true,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics311-alfred",
+          "student": "betty@hawaii.edu",
+          "reviewType": "course",
+          "reviewee": "ics_311",
+          "semester": "Fall-2014",
+          "rating": 4,
+          "comments": "I've heard a lot about how this course is the bottleneck for progressing through the ICS program. Compared to all the courses I've taken before, this has to be the most time consuming. It's not that the concepts are difficult to understand nor is the courseload that heavy, but I found myself having to put more time to review and understand everything. The class structure for this was inverted, so we watched video lectures in our own time and used class time to do actual problems. I thought it was a better use of class time.",
+          "moderated": true,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics311-joshuajw",
+          "student": "betty@hawaii.edu",
+          "reviewType": "course",
+          "reviewee": "ics_331",
+          "semester": "Fall-2016",
+          "rating": 4,
+          "comments": "The use of Logisim, the program we used to build digital circuits, played a very important role in the learning and understanding of creating and making different circuits. Logisim gave me a visual interactive experience that I thoroughly enjoyed by turning an ordinary assignment into a fun challenge for me to overcome. A weakness this class has is the transition from circuits to assembly code. During my class, I felt this transition into assembly code could have been a bit smoother. I had a relatively hard time understanding assembly.",
+          "moderated": true,
+          "visible": true
+        }
+
+      ]
+    }
+  ]
+}

@@ -24,11 +24,19 @@ if (Meteor.isServer) {
       const feedbackType = FeedbackInstances.WARNING;
       let docID = FeedbackInstances.define({ user, functionName, description, feedbackType });
       expect(FeedbackInstances.isDefined(docID)).to.be.true;
-      const dumpObject = FeedbackInstances.dumpOne(docID);
+      let dumpObject = FeedbackInstances.dumpOne(docID);
+      expect(dumpObject.retired).to.be.undefined;
+      expect(FeedbackInstances.findNonRetired().length).to.equal(1);
+      FeedbackInstances.update(docID, { retired: true });
+      expect(FeedbackInstances.findNonRetired().length).to.equal(0);
       FeedbackInstances.removeIt(docID);
       expect(FeedbackInstances.isDefined(docID)).to.be.false;
       docID = FeedbackInstances.restoreOne(dumpObject);
       expect(FeedbackInstances.isDefined(docID)).to.be.true;
+      FeedbackInstances.update(docID, { retired: true });
+      dumpObject = FeedbackInstances.dumpOne(docID);
+      expect(dumpObject.retired).to.be.true;
+      expect(FeedbackInstances.findNonRetired().length).to.equal(0);
       FeedbackInstances.removeIt(docID);
     });
 

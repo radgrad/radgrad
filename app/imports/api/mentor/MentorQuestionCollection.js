@@ -23,6 +23,7 @@ class MentorQuestionCollection extends BaseSlugCollection {
       moderated: { type: Boolean },
       visible: { type: Boolean },
       moderatorComments: { type: String, optional: true },
+      retired: { type: Boolean, optional: true },
     }));
   }
 
@@ -33,12 +34,22 @@ class MentorQuestionCollection extends BaseSlugCollection {
    * @param student The student that asked this question.
    * @param moderated If the question is moderated. Defaults to false.
    * @param visible If the question is visible. Defaults to false.
+   * @param moderatorComments comments (optional).
+   * @param retired the retired status (optional).
    * @return { String } the docID of this question.
    */
-  define({ question, slug, student, moderated = false, visible = false, moderatorComments = '' }) {
+  define({ question, slug, student, moderated = false, visible = false, moderatorComments = '', retired }) {
     const studentID = Users.getID(student);
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
-    const docID = this._collection.insert({ question, slugID, studentID, moderated, visible, moderatorComments });
+    const docID = this._collection.insert({
+      question,
+      slugID,
+      studentID,
+      moderated,
+      visible,
+      moderatorComments,
+      retired,
+    });
     Slugs.updateEntityID(slugID, docID);
     return docID;
   }
@@ -51,8 +62,9 @@ class MentorQuestionCollection extends BaseSlugCollection {
    * @param moderated boolean (optional).
    * @param visible boolean (optional).
    * @param moderatorComments string (optional).
+   * @param retired the new retired status (optional).
    */
-  update(instance, { question, student, moderated, visible, moderatorComments }) {
+  update(instance, { question, student, moderated, visible, moderatorComments, retired }) {
     const docID = this.getID(instance);
     const updateData = {};
     if (question) {
@@ -69,6 +81,9 @@ class MentorQuestionCollection extends BaseSlugCollection {
     }
     if (moderatorComments) {
       updateData.moderatorComments = moderatorComments;
+    }
+    if (_.isBoolean(retired)) {
+      updateData.retired = retired;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -97,7 +112,9 @@ class MentorQuestionCollection extends BaseSlugCollection {
   }
 
   getQuestions() {
-    return this._collection.find({}).fetch().reverse();
+    return this._collection.find({})
+      .fetch()
+      .reverse();
   }
 
   /**
@@ -106,16 +123,17 @@ class MentorQuestionCollection extends BaseSlugCollection {
    */
   checkIntegrity() { // eslint-disable-line class-methods-use-this
     const problems = [];
-    this.find().forEach(doc => {
-      if (doc.slugID) {
-        if (!Slugs.isDefined(doc.slugID)) {
-          problems.push(`Bad slugID: ${doc.slugID}`);
+    this.find()
+      .forEach(doc => {
+        if (doc.slugID) {
+          if (!Slugs.isDefined(doc.slugID)) {
+            problems.push(`Bad slugID: ${doc.slugID}`);
+          }
         }
-      }
-      if (!Users.isDefined(doc.studentID)) {
-        problems.push(`Bad studentID: ${doc.studentID}`);
-      }
-    });
+        if (!Users.isDefined(doc.studentID)) {
+          problems.push(`Bad studentID: ${doc.studentID}`);
+        }
+      });
     return problems;
   }
 
@@ -135,7 +153,8 @@ class MentorQuestionCollection extends BaseSlugCollection {
     const moderated = doc.moderated;
     const visible = doc.visible;
     const moderatorComments = doc.moderatorComments;
-    return { question, slug, student, moderated, visible, moderatorComments };
+    const retired = doc.retired;
+    return { question, slug, student, moderated, visible, moderatorComments, retired };
   }
 }
 

@@ -37,6 +37,9 @@ Template.First_Menu.helpers({
     }
     return defaultProfilePicture;
   },
+  icePopUpText(planned, earned) {
+    return `${earned}/${planned}`;
+  },
 });
 
 Template.First_Menu.events({

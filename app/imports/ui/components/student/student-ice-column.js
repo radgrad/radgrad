@@ -48,7 +48,7 @@ function getEventsHelper(iceType, type, earned, semester) {
 }
 
 const availableCourses = () => {
-  const courses = Courses.find({}).fetch();
+  const courses = Courses.findNonRetired({});
   if (courses.length > 0) {
     const filtered = _.filter(courses, function filter(course) {
       if (course.number === 'ICS 499') {
@@ -93,7 +93,7 @@ function matchingCourses() {
 }
 
 function matchingOpportunities() {
-  const allOpportunities = Opportunities.find().fetch();
+  const allOpportunities = Opportunities.findNonRetired();
   const matching = [];
   const profile = Users.getProfile(getRouteUserName());
   const userInterests = [];

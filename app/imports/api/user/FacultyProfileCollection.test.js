@@ -24,15 +24,22 @@ if (Meteor.isServer) {
       const website = 'http://esb.github.io';
       const interests = [];
       const careerGoals = [];
-      const docID = FacultyProfiles.define({ username, firstName, lastName, picture, website, interests, careerGoals });
+      let docID = FacultyProfiles.define({ username, firstName, lastName, picture, website, interests, careerGoals });
       expect(FacultyProfiles.isDefined(docID)).to.be.true;
-      const dumpObject = FacultyProfiles.dumpOne(docID);
+      let dumpObject = FacultyProfiles.dumpOne(docID);
+      expect(dumpObject.retired).to.be.undefined;
+      expect(FacultyProfiles.findNonRetired().length).to.equal(1);
+      FacultyProfiles.update(docID, { retired: true });
+      expect(FacultyProfiles.findNonRetired().length).to.equal(0);
       FacultyProfiles.removeIt(docID);
       expect(FacultyProfiles.isDefined(docID)).to.be.false;
       FacultyProfiles.restoreOne(dumpObject);
-      const id = FacultyProfiles.getID(username);
-      expect(FacultyProfiles.isDefined(id)).to.be.true;
-      FacultyProfiles.removeIt(id);
+      docID = FacultyProfiles.getID(username);
+      expect(FacultyProfiles.isDefined(docID)).to.be.true;
+      FacultyProfiles.update(docID, { retired: true });
+      dumpObject = FacultyProfiles.dumpOne(docID);
+      expect(dumpObject.retired).to.be.true;
+      FacultyProfiles.removeIt(docID);
     });
   });
 }

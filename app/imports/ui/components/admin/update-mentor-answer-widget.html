@@ -1,0 +1,23 @@
+<template name="Update_Mentor_Answer_Widget">
+
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>UPDATE MENTOR ANSWER</h4></div>
+    <form class="ui equal width form {{successClass}} {{errorClass}}">
+
+      <div class="fields">
+        {{> User_Form_Field label="Mentor" users=mentors selectedUserID=mentorAnswer.mentorID errorMessage=(fieldError "mentor")  disabled=true}}
+        {{> Mentor_Question_Form_Field questions=questions selectedQuestionID=mentorAnswer.questionID errorMessage=(fieldError "question") required=true disabled=true}}
+      </div>
+
+      {{> TextArea_Form_Field label="Text" name="text" rows=20 value=mentorAnswer.text errorMessage=(fieldError "text") required=true}}
+      <div class="fields">
+        {{> Boolean_Form_Field label='Retired' name='retired' trueValue=trueValueRetired falseValue=falseValueRetired errorMessage=(fieldError "retired")}}
+      </div>
+
+      <button class="ui green basic button" type="submit">Update</button>
+      <button class="ui green basic button jsCancel" type="submit">Cancel</button>
+      {{> Success_Message_Form_Field message="The mentor answer was successfully updated.  Press cancel to continue."}}
+    </form>
+  </div>
+
+</template>

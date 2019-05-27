@@ -17,7 +17,7 @@ if (Meteor.isServer) {
       removeAllEntities();
     });
 
-    it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne', function test() {
+    it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne, #update', function test() {
       const name = 'Algorithms';
       const slug = 'ics311';
       const number = 'ICS 311';
@@ -27,7 +27,15 @@ if (Meteor.isServer) {
       const docID = Courses.define({ name, slug, number, description, creditHrs, interests });
       expect(Courses.isDefined(slug)).to.be.true;
       expect(Courses.findDoc(docID).shortName).to.equal(name);
-      const dumpObject = Courses.dumpOne(docID);
+      let dumpObject = Courses.dumpOne(docID);
+      expect(dumpObject.retired).to.be.undefined;
+      expect(Courses.findNonRetired().length).to.equal(1);
+      Courses.update(docID, { retired: true });
+      expect(Courses.findNonRetired().length).to.equal(0);
+      expect(Courses.count()).to.equal(1);
+      expect(Courses.countNonRetired()).to.equal(0);
+      dumpObject = Courses.dumpOne(docID);
+      expect(dumpObject.retired).to.be.true;
       Courses.removeIt(slug);
       expect(Courses.isDefined(slug)).to.be.false;
       Courses.restoreOne(dumpObject);

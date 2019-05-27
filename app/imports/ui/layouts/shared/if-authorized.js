@@ -40,7 +40,7 @@ Template.If_Authorized.helpers({
       return true;
     }
     // 2. If not landing page, then prohibit non-logged in clients.
-    if (!Meteor.user()) {
+    if (!Meteor.user(true)) {
       // console.log('isAuthorized', 'not logged in');
       return false;
     }
@@ -48,8 +48,8 @@ Template.If_Authorized.helpers({
     const pathUserName = FlowRouter.getParam('username');
     const pathRole = FlowRouter.current().route.group.name;
     // Determine the user and role who is logged in right now.
-    const userName = Meteor.user().username;
-    const userRole = Meteor.user().roles[0];
+    const userName = Meteor.user('username').username;
+    const userRole = Meteor.user('roles').roles[0];
     // console.log('isAuthorized', pathUserName, pathRole, userName, userRole);
 
     // 4. Make sure the URL is correctly constructed; that the user associated with pageUserName actually has
@@ -82,5 +82,8 @@ Template.If_Authorized.helpers({
     // 8. Otherwise don't allow access.
     // console.log('isAuthorized', 'default deny');
     return false;
+  },
+  notLoggedIn() {
+    return !Meteor.user(true);
   },
 });

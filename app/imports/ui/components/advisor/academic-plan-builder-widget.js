@@ -9,7 +9,7 @@ import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection
 import { PlanChoices } from '../../../api/degree-plan/PlanChoiceCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import slugify, { Slugs } from '../../../api/slug/SlugCollection';
-import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 import { buildSimpleName } from '../../../api/degree-plan/PlanChoiceUtilities';
 import { getAllElementsWithAttribute, removeElement } from '../../../ui/utilities/dom-utilities';
 
@@ -30,7 +30,7 @@ Template.Academic_Plan_Builder_Widget.onCreated(function academicPlanWidgetOnCre
 
 Template.Academic_Plan_Builder_Widget.helpers({
   academicYears() {
-    const semesters = Semesters.find({}, { sort: { semesterNumber: 1 } }).fetch();
+    const semesters = Semesters.findNonRetired({}, { sort: { semesterNumber: 1 } });
     const years = _.uniqBy(semesters, (s) => s.year);
     return _.map(years, (y) => y.year);
   },
@@ -51,7 +51,7 @@ Template.Academic_Plan_Builder_Widget.helpers({
     return _.map(choices, (c) => c.choice);
   },
   desiredDegrees() {
-    return DesiredDegrees.find({}, { sort: { name: 1 } });
+    return DesiredDegrees.findNonRetired({}, { sort: { name: 1 } });
   },
   displayFieldError(fieldName) {
     const errorKeys = Template.instance().context.validationErrors();
@@ -67,7 +67,7 @@ Template.Academic_Plan_Builder_Widget.helpers({
     return Template.instance().successClass.get() ? 'success' : '';
   },
   years() {
-    return ['Year 1', 'Year 2', 'Year 3', 'Year 4'];
+    return ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'];
   },
   selectedDesiredDegreeID() {
     return '';

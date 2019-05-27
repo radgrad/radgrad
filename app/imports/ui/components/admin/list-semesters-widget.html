@@ -1,0 +1,11 @@
+<template name="List_Semesters_Widget">
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>SEMESTERS ({{ count }})</h4></div>
+    <div class="ui grid">
+      {{> Admin_Datamodel_Pagination_Widget showItemCount=getItemCount showIndex=getItemIndex collection=getCollection }}
+      {{#each semester in semesters}}
+        {{> Admin_DataModel_Accordion name=(name semester) descriptionPairs=(descriptionPairs semester) id=semester._id updateID=updateID deleteDisabled=(deleteDisabled semester) retired=(retired semester)}}
+      {{/each}}
+    </div>
+  </div>
+</template>

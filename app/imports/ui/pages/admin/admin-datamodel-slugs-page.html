@@ -1,0 +1,16 @@
+<template name="Admin_DataModel_Slugs_Page">
+
+  {{#if Template.subscriptionsReady}}
+    {{#Admin_DataModel_Layout}}
+      <!--{{#if displayUpdateWidget}}-->
+        <!--{{> Update_Slug_Widget updateID=updateID}}-->
+      <!--{{else}}-->
+        <!--{{> Add_Slug_Widget }}-->
+      <!--{{/if}}-->
+      {{> List_Slugs_Widget updateID=updateID}}
+    {{/Admin_DataModel_Layout}}
+  {{else}}
+    {{> Loading message="Waiting for subscriptions."}}
+  {{/if}}
+
+</template>

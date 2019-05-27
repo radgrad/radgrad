@@ -1,8 +1,9 @@
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { $ } from 'meteor/jquery';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
-import { defineMethod, updateMethod } from '../../../api/base/BaseCollection.methods';
+import { defineMethod, removeItMethod, updateMethod } from '../../../api/base/BaseCollection.methods';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
@@ -12,6 +13,7 @@ import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 import { plannerKeys } from './academic-plan';
 import { getFutureEnrollmentMethod } from '../../../api/course/CourseCollection.methods';
+import { userInteractionDefineMethod } from '../../../api/analytic/UserInteractionCollection.methods';
 
 Template.Semester_List_2.onCreated(function semesterListOnCreate() {
   if (this.data) {
@@ -23,6 +25,10 @@ Template.Semester_List_2.onCreated(function semesterListOnCreate() {
 Template.Semester_List_2.helpers({
   dictionary() {
     return Template.instance().state;
+  },
+  courseName(courseInstance) {
+    const course = Courses.findDoc(courseInstance.courseID);
+    return course.name;
   },
   icsCourses() {
     const ret = [];
@@ -37,6 +43,18 @@ Template.Semester_List_2.helpers({
   },
   localState() {
     return Template.instance().localState;
+  },
+  opportunityI(opportunityInstance) {
+    const opp = Opportunities.findDoc(opportunityInstance.opportunityID);
+    return opp.ice.i;
+  },
+  opportunityC(opportunityInstance) {
+    const opp = Opportunities.findDoc(opportunityInstance.opportunityID);
+    return opp.ice.c;
+  },
+  opportunityE(opportunityInstance) {
+    const opp = Opportunities.findDoc(opportunityInstance.opportunityID);
+    return opp.ice.e;
   },
   opportunityName(opportunityID) {
     const opp = OpportunityInstances.findDoc({ _id: opportunityID });
@@ -96,7 +114,7 @@ Template.Semester_List_2.events({
             verified: false,
             fromSTAR: false,
             note: course.number,
-            grade: 'B',
+            grade: '***',
             student: username,
           };
           const semesterID = Template.instance().localState.get('semester')._id;
@@ -117,6 +135,12 @@ Template.Semester_List_2.events({
                     if (courseID === result.courseID) {
                       instance.state.set(plannerKeys.plannedEnrollment, result);
                     }
+                });
+                const interactionData = { username, type: 'addCourse', typeData: slug };
+                userInteractionDefineMethod.call(interactionData, (err) => {
+                  if (err) {
+                    console.log('Error creating UserInteraction', err);
+                  }
                 });
               }
             });
@@ -139,6 +163,12 @@ Template.Semester_List_2.events({
                   FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
                   FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
                   FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+                  const interactionData = { username, type: 'addOpportunity', typeData: slug };
+                  userInteractionDefineMethod.call(interactionData, (err) => {
+                    if (err) {
+                      console.log('Error creating UserInteraction', err);
+                    }
+                  });
                 }
               });
             }
@@ -254,6 +284,50 @@ Template.Semester_List_2.events({
         template.state.set(plannerKeys.detailCourse, null);
         template.state.set(plannerKeys.detailCourseInstance, null);
       }
+    template.state.set(plannerKeys.selectedInspectorTab, true);
+    template.state.set(plannerKeys.selectedPlanTab, false);
+  },
+  'click .jsDelCourse': function clickJsDelCourse(event) {
+    event.preventDefault();
+    // console.log(event.target);
+    const instance = event.target.id;
+    console.log(`removing CourseInstance ${instance}`);
+    const collectionName = CourseInstances.getCollectionName();
+    removeItMethod.call({ collectionName, instance }, (error) => {
+      if (error) {
+        console.warn('Error removing CourseInstance %o', error);
+      }
+    });
+    const template = Template.instance();
+    template.state.set(plannerKeys.selectedPlanTab, true);
+    template.state.set(plannerKeys.selectedInspectorTab, false);
+    template.state.set(plannerKeys.detailCourse, null);
+    template.state.set(plannerKeys.detailCourseInstance, null);
+    template.state.set(plannerKeys.detailICE, null);
+    template.state.set(plannerKeys.detailOpportunity, null);
+    template.state.set(plannerKeys.detailOpportunityInstance, null);
+    template.state.set(plannerKeys.detailICE, null);
+  },
+  'click .jsDelOpp': function clickJsDelOpp(event) {
+    event.preventDefault();
+    // console.log(event.target);
+    const instance = event.target.id;
+    console.log(`removing OpportunityInstance ${instance}`);
+    const collectionName = OpportunityInstances.getCollectionName();
+    removeItMethod.call({ collectionName, instance }, (error) => {
+      if (error) {
+        console.warn('Error removing OpportunityInstance %o', error);
+      }
+    });
+    const template = Template.instance();
+    template.state.set(plannerKeys.selectedPlanTab, true);
+    template.state.set(plannerKeys.selectedInspectorTab, false);
+    template.state.set(plannerKeys.detailCourse, null);
+    template.state.set(plannerKeys.detailCourseInstance, null);
+    template.state.set(plannerKeys.detailICE, null);
+    template.state.set(plannerKeys.detailOpportunity, null);
+    template.state.set(plannerKeys.detailOpportunityInstance, null);
+    template.state.set(plannerKeys.detailICE, null);
   },
 });
 
@@ -262,4 +336,5 @@ Template.Semester_List_2.onRendered(function semesterListOnRendered() {
     this.localState.set('semester', this.data.semester);
     this.localState.set('currentSemester', this.data.currentSemester);
   }
+  $('strong').popup();
 });

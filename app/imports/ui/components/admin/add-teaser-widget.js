@@ -1,10 +1,11 @@
 import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
+
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
-import * as FormUtils from './form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 
 const addSchema = new SimpleSchema({
   title: String,
@@ -26,8 +27,7 @@ Template.Add_Teaser_Widget.helpers({
     return Interests.find({}, { sort: { name: 1 } });
   },
   opportunities() {
-    const opportunities = Opportunities.find().fetch();
-    return opportunities;
+    return Opportunities.findNonRetired({}, { sort: { name: 1 } });
   },
 });
 

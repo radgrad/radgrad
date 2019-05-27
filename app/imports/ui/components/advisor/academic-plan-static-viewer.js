@@ -26,6 +26,10 @@ Template.Academic_Plan_Static_Viewer.helpers({
     return numCoursesList[(3 * yearNum) + 2] !== 0;
   },
   years() {
+    const plan = Template.instance().data.plan;
+    if (plan.coursesPerSemester.length === 15) {
+      return ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'];
+    }
     return ['Year 1', 'Year 2', 'Year 3', 'Year 4'];
   },
 });

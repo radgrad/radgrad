@@ -1,0 +1,5 @@
+<template name="Explorer_Plans_Page">
+  {{#Explorer_Layout addedList=addedPlans nonAddedList=nonAddedPlans type='plans'}}
+    {{> Explorer_Plans_Widget name=plan.name slug=(slugName plan.slugID) descriptionPairs=(descriptionPairs plan) socialPairs=(socialPairs plan) id=plan._id updateID=updateID item=plan}}
+  {{/Explorer_Layout}}
+</template>

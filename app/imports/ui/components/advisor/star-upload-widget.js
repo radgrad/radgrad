@@ -7,7 +7,7 @@ import { updateLevelMethod } from '../../../api/level/LevelProcessor.methods';
 import { starLoadDataMethod } from '../../../api/star/StarProcessor.methods';
 import { Users } from '../../../api/user/UserCollection';
 import { getRouteUserName } from '../shared/route-user-name';
-import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 
 /* global FileReader */
 

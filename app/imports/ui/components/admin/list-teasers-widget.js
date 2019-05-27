@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Teasers } from '../../../api/teaser/TeaserCollection';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
@@ -6,7 +7,7 @@ import { Interests } from '../../../api/interest/InterestCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { makeLink } from './datamodel-utilities';
-import * as FormUtils from './form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 
 function numReferences() {
   // currently nothing refers to a Teaser, but maybe in future something will.
@@ -20,9 +21,17 @@ function opportunity(teaser) {
   return '';
 }
 
+Template.List_Teasers_Widget.onCreated(function listTeasersOnCreated() {
+  this.itemCount = new ReactiveVar(25);
+  this.itemIndex = new ReactiveVar(0);
+});
+
 Template.List_Teasers_Widget.helpers({
   teasers() {
-    return Teasers.find({}, { sort: { title: 1 } });
+    const items = Teasers.find({}, { sort: { title: 1 } }).fetch();
+    const startIndex = Template.instance().itemIndex.get();
+    const endIndex = startIndex + Template.instance().itemCount.get();
+    return _.slice(items, startIndex, endIndex);
   },
   count() {
     return Teasers.count();
@@ -41,7 +50,20 @@ Template.List_Teasers_Widget.helpers({
       { label: 'Interests', value: _.sortBy(Interests.findNames(teaser.interestIDs)) },
       { label: 'URL', value: makeLink(teaser.url) },
       { label: 'Opportunity', value: opportunity(teaser) },
+      { label: 'Retired', value: teaser.retired ? 'True' : 'False' },
     ];
+  },
+  getItemCount() {
+    return Template.instance().itemCount;
+  },
+  getItemIndex() {
+    return Template.instance().itemIndex;
+  },
+  getCollection() {
+    return Teasers;
+  },
+  retired(item) {
+    return item.retired;
   },
 });
 

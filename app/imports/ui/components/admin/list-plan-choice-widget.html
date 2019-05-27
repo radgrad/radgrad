@@ -1,8 +1,11 @@
 <template name="List_Plan_Choice_Widget">
-    <div class="ui padded container segment">
-        <div class="ui dividing header"><h4>PLAN CHOICES ({{ count }})</h4></div>
-        {{#each planChoice in planChoices}}
-            {{> Admin_DataModel_Accordion name=(name planChoice) descriptionPairs=(descriptionPairs planChoice) id=planChoice._id updateID=updateID deleteDisabled=(deleteDisabled planChoice)}}
-        {{/each}}
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>PLAN CHOICES ({{ count }})</h4></div>
+    <div class="ui grid">
+      {{> Admin_Datamodel_Pagination_Widget showItemCount=getItemCount showIndex=getItemIndex collection=getCollection }}
+      {{#each planChoice in planChoices}}
+        {{> Admin_DataModel_Accordion name=(name planChoice) descriptionPairs=(descriptionPairs planChoice) id=planChoice._id updateID=updateID deleteDisabled=(deleteDisabled planChoice) retired=(retired planChoice)}}
+      {{/each}}
     </div>
+  </div>
 </template>

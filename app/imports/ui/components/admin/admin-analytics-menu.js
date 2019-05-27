@@ -11,4 +11,16 @@ Template.Admin_Analytics_Menu.helpers({
   semesterSnapshotRouteName() {
     return RouteNames.adminAnalyticsSemesterSnapshotPageRouteName;
   },
+  activityMonitorRouteName() {
+    return RouteNames.adminAnalyticsActivityMonitorPageRouteName;
+  },
+  studentsRouteName() {
+    return RouteNames.adminAnalyticsStudentsPageRouteName;
+  },
+  overheadAnalysisRouteName() {
+    return RouteNames.adminAnalyticsOverheadAnalysisPageRouteName;
+  },
+  newsletterRouteName() {
+    return RouteNames.adminAnalyticsNewsletterPageRouteName;
+  },
 });

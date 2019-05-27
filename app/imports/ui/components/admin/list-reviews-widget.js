@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
@@ -7,12 +8,17 @@ import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { Users } from '../../../api/user/UserCollection';
-import * as FormUtils from './form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 
 function numReferences() {
   // currently nothing refers to a Teaser, but maybe in future something will.
   return 0;
 }
+
+Template.List_Reviews_Widget.onCreated(function listReviewsOnCreated() {
+  this.itemCount = new ReactiveVar(25);
+  this.itemIndex = new ReactiveVar(0);
+});
 
 Template.List_Reviews_Widget.helpers({
   reviews() {
@@ -25,9 +31,12 @@ Template.List_Reviews_Widget.helpers({
       }
       return '';
     });
-    return _.sortBy(sortByReviewee, function (review) {
+    const items = _.sortBy(sortByReviewee, function (review) {
       return Users.getFullName(review.studentID);
     });
+    const startIndex = Template.instance().itemIndex.get();
+    const endIndex = startIndex + Template.instance().itemCount.get();
+    return _.slice(items, startIndex, endIndex);
   },
   count() {
     return Reviews.count();
@@ -55,7 +64,20 @@ Template.List_Reviews_Widget.helpers({
       { label: 'Moderated', value: review.moderated.toString() },
       { label: 'Visible', value: review.visible.toString() },
       { label: 'Moderator Comments', value: review.moderatorComments },
+      { label: 'Retired', value: review.retired ? 'True' : 'False' },
     ];
+  },
+  getItemCount() {
+    return Template.instance().itemCount;
+  },
+  getItemIndex() {
+    return Template.instance().itemIndex;
+  },
+  getCollection() {
+    return Reviews;
+  },
+  retired(item) {
+    return item.retired;
   },
 });
 

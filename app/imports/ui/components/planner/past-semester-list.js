@@ -1,6 +1,7 @@
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { $ } from 'meteor/jquery';
 import { plannerKeys } from './academic-plan';
 import { defineMethod, updateMethod } from '../../../api/base/BaseCollection.methods';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
@@ -11,6 +12,8 @@ import { Slugs } from '../../../api/slug/SlugCollection';
 import { getRouteUserName } from '../shared/route-user-name';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getFutureEnrollmentMethod } from '../../../api/course/CourseCollection.methods';
+import { userInteractionDefineMethod } from '../../../api/analytic/UserInteractionCollection.methods';
+import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 
 Template.Past_Semester_List.onCreated(function pastSemesterListOnCreated() {
   if (this.data) {
@@ -18,6 +21,25 @@ Template.Past_Semester_List.onCreated(function pastSemesterListOnCreated() {
     this.state = this.data.dictionary;
   }
   this.localState = new ReactiveDict();
+});
+Template.Past_Semester_List.helpers({
+  courseName(courseInstance) {
+    const course = Courses.findDoc(courseInstance.courseID);
+    // console.log('courseName %o, %o', courseInstance, course);
+    return course.name;
+  },
+  opportunityI(opportunityInstance) {
+    const opp = Opportunities.findDoc(opportunityInstance.opportunityID);
+    return opp.ice.i;
+  },
+  opportunityC(opportunityInstance) {
+    const opp = Opportunities.findDoc(opportunityInstance.opportunityID);
+    return opp.ice.c;
+  },
+  opportunityE(opportunityInstance) {
+    const opp = Opportunities.findDoc(opportunityInstance.opportunityID);
+    return opp.ice.e;
+  },
 });
 
 Template.Past_Semester_List.events({
@@ -56,6 +78,8 @@ Template.Past_Semester_List.events({
                 instance.state.set(plannerKeys.detailCourse, null);
                 instance.state.set(plannerKeys.detailCourseInstance, ci);
                 instance.state.set(plannerKeys.detailICE, ci.ice);
+                instance.state.set(plannerKeys.selectedInspectorTab, true);
+                instance.state.set(plannerKeys.selectedPlanTab, false);
                 getFutureEnrollmentMethod.call(courseID, (err, result) => {
                   if (err) {
                     console.log('Error in getting future enrollment', error);
@@ -63,6 +87,12 @@ Template.Past_Semester_List.events({
                     if (courseID === result.courseID) {
                       instance.state.set(plannerKeys.plannedEnrollment, result);
                     }
+                });
+                const interactionData = { username, type: 'addCourse', typeData: slug };
+                userInteractionDefineMethod.call(interactionData, (err) => {
+                  if (err) {
+                    console.log('Error creating UserInteraction', err);
+                  }
                 });
               }
             });
@@ -91,6 +121,14 @@ Template.Past_Semester_List.events({
                   instance.state.set(plannerKeys.detailICE, null);
                   instance.state.set(plannerKeys.detailOpportunityInstance, oi);
                   instance.state.set(plannerKeys.detailOpportunity, null);
+                  instance.state.set(plannerKeys.selectedInspectorTab, true);
+                  instance.state.set(plannerKeys.selectedPlanTab, false);
+                  const interactionData = { username, type: 'addOpportunity', typeData: slug };
+                  userInteractionDefineMethod.call(interactionData, (err) => {
+                    if (err) {
+                      console.log('Error creating UserInteraction', err);
+                    }
+                  });
                 }
               });
             }
@@ -179,6 +217,8 @@ Template.Past_Semester_List.events({
         template.state.set(plannerKeys.detailCourse, null);
         template.state.set(plannerKeys.detailCourseInstance, null);
       }
+    template.state.set(plannerKeys.selectedInspectorTab, true);
+    template.state.set(plannerKeys.selectedPlanTab, false);
   },
 });
 
@@ -187,4 +227,5 @@ Template.Past_Semester_List.onRendered(function pastSememsterListOnRendered() {
     this.localState.set('semester', this.data.semester);
     this.localState.set('currentSemester', this.data.currentSemester);
   }
+  $('strong').popup();
 });

@@ -1,3 +1,4 @@
+import '/imports/api/analytic';
 import '/imports/api/base';
 import '/imports/api/career';
 import '/imports/api/course';
@@ -25,3 +26,4 @@ import '/imports/api/verification';
 
 import '/imports/startup/server';
 import '/imports/startup/both';
+

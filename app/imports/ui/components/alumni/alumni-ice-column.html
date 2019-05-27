@@ -1,0 +1,34 @@
+<template name="Alumni_Ice_Column">
+  <div class="ui styled fluid accordion">
+    <!-- Earned -->
+    <div class="title">
+      <i class="dropdown icon"></i>
+      Verified <div class="ui right floated {{#with getTypeColors}}{{color}}{{/with}}">{{points earnedICE}} pts</div>
+    </div>
+
+    <div class="content">
+      {{#if matchingPoints (points earnedICE) 0}}
+        <p>You have no verified {{type}} points.</p>
+      {{else}}
+        <p>You have {{points earnedICE}} verified {{type}} points for the following:</p>
+        <div class="ui very relaxed list">
+          {{#each year in years}}
+            {{#each semester in semesters year}}
+              {{#if hasEvents true semester}}
+                <div class="item">
+                  <div class="header">{{printSemester semester}}</div>
+                  {{#each event in getEvents 'opportunity' true semester}}
+                    <b>+{{points (eventIce event)}}</b> {{ opportunityName event }}<br>
+                  {{/each}}
+                  {{#each event in getEvents 'course' true semester}}
+                    <b>+{{points (eventIce event)}}</b> {{ courseName event }}<br>
+                  {{/each}}
+                </div>
+              {{/if}}
+            {{/each}}
+          {{/each}}
+        </div>
+      {{/if}}
+    </div>
+  </div>
+</template>

@@ -1,0 +1,96 @@
+<template name="Alumni_About_Me_Widget">
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>ALUMNI ABOUT ME</h4></div>
+
+    <div class="ui stackable grid">
+
+      <div class="row">
+        <div class="two wide column">
+          <b>Name</b>
+        </div>
+        <div class="six wide column">
+          {{name}}
+        </div>
+        <div class="two wide column">
+          <b>Email</b>
+        </div>
+        <div class="six wide column">
+          {{email}}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="two wide column">
+          <p><b>Picture</b> (<a id="image-upload-widget" href="">Upload</a>)</p>
+        </div>
+        <div class="six wide column">
+          <form class="ui form picture">
+            <div class="fluid field">
+              <div class="ui action input">
+                <input type="text" name="picture" placeholder="Enter picture url" value="{{picture}}">
+                <button class="ui basic green button picture" type="submit">Update</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="two wide column">
+          <b>Website</b>
+        </div>
+        <div class="six wide column">
+          <form class="ui form website">
+            <div class="fluid field">
+              <div class="ui action input">
+                <input id="website" type="text" name="website" placeholder="Enter website url" value="{{website}}">
+                <button class="ui basic green button website" type="submit">Update</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="two wide column">
+          <p><b>Career Goals</b></p>
+        </div>
+        <div class="six wide column">
+          {{#if careerGoals}}
+            {{#each goal in careerGoals}}
+              <a class="ui tiny label"
+                 href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=(slugName goal)}}"><i
+                  class="fitted suitcase icon"></i>{{goalName goal}}</a>
+            {{/each}}
+            <br>
+          {{else}}
+            <p style="margin-bottom: 0px">No career goals added yet.</p>
+          {{/if}}
+        </div>
+        <div class="two wide column">
+          <p><b>Interests</b></p>
+        </div>
+        <div class="five wide column">
+          {{#if interests}}
+            {{#each interest in interests}}
+              <a class="ui tiny label"
+                 href="{{pathFor interestsRouteName username=routeUserName interest=(slugName interest)}}"><i
+                  class="fitted star icon"></i>{{interestName interest}}</a>
+            {{/each}}
+            <br>
+          {{else}}
+            <p style="margin-bottom: 0px">No interests added yet.</p>
+          {{/if}}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="two wide column">
+          <b>Academic Plan</b>
+        </div>
+        <div class="six wide column">
+          <p style="margin-bottom: 0">
+            {{desiredDegree}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

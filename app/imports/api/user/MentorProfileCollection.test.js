@@ -29,18 +29,25 @@ if (Meteor.isServer) {
       const location = 'San Francisco, CA';
       const linkedin = 'robertsbrewer';
       const motivation = 'Help future students.';
-      const docID = MentorProfiles.define({
+      let docID = MentorProfiles.define({
         username, firstName, lastName, picture, website, interests,
         careerGoals, company, career, location, linkedin, motivation,
       });
       expect(MentorProfiles.isDefined(docID)).to.be.true;
-      const dumpObject = MentorProfiles.dumpOne(docID);
+      let dumpObject = MentorProfiles.dumpOne(docID);
+      expect(dumpObject.retired).to.be.undefined;
+      expect(MentorProfiles.findNonRetired().length).to.equal(1);
+      MentorProfiles.update(docID, { retired: true });
+      expect(MentorProfiles.findNonRetired().length).to.equal(0);
       MentorProfiles.removeIt(docID);
       expect(MentorProfiles.isDefined(docID)).to.be.false;
       MentorProfiles.restoreOne(dumpObject);
-      const id = MentorProfiles.getID(username);
-      expect(MentorProfiles.isDefined(id)).to.be.true;
-      MentorProfiles.removeIt(id);
+      docID = MentorProfiles.getID(username);
+      expect(MentorProfiles.isDefined(docID)).to.be.true;
+      MentorProfiles.update(docID, { retired: true });
+      dumpObject = MentorProfiles.dumpOne(docID);
+      expect(dumpObject.retired).to.be.true;
+      MentorProfiles.removeIt(docID);
     });
   });
 }

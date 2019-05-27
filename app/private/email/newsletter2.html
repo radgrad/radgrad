@@ -1,0 +1,120 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>RadGrad Newsletter</title>
+  <style>
+    .body-table {
+      background-color: #f7f7f7;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 16px;
+    }
+
+    .content-table {
+      max-width: 800px;
+    }
+
+    .logo {
+      width: 160px;
+    }
+
+    .rec-logo {
+      width: 300px;
+    }
+
+    .message-header-td {
+      background-color: #595959;
+      text-align: center;
+      padding-top: 20px;
+    }
+
+    .message-content-td a {
+      color: #8ACA68;
+    }
+
+    .todo-header-td {
+      background-color: #ffffff;
+      text-align: center;
+      padding-top: 20px;
+    }
+
+    .message-content-td {
+      background-color: #595959;
+      color: white;
+      padding: 0px 35px 15px 35px;
+    }
+
+    .rec-content-td {
+      color: #4d4d4d;
+      padding: 5px 35px 10px 35px;
+    }
+
+    .todo-header-td h3,
+    .message-header-td h3 {
+      margin-bottom: 0px;
+    }
+
+  </style>
+</head>
+
+<body itemscope itemtype="http://schema.org/EmailMessage">
+<table cellpadding="0" cellspacing="0" height="100%" width="100%" class="body-table">
+  <tr>
+    <td align="center">
+      <table cellspacing="0" cellpadding="0" width="100%" class="content-table">
+        <tr>
+          <td class="message-header-td">
+            <img class="logo" src="https://radgrad.ics.hawaii.edu/images/radgrad-email-logo.png" />
+          </td>
+        </tr>
+        <tr>
+          <td class="message-content-td">
+            <p>Aloha {{firstName}}!</p>
+            <p>
+              {{{adminMessage}}}
+            </p>
+            <p>- The RadGrad Team</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <table cellspacing="0" cellpadding="0" width="100%" class="rec-table">
+              <tr>
+                <td class="todo-header-td">
+                  <img class="rec-logo" src="https://radgrad.ics.hawaii.edu/images/radgrad-email-logo-2.png"/>                </td>
+              </tr>
+              <tr>
+                <td style="padding-top: 0px; background-color: #ffffff;" class="rec-content-td">
+                  <h3 style="text-decoration: underline;" class="rec-header-td">
+                    {{{firstRec.header}}}
+                  </h3>
+                  {{{firstRec.info}}}
+                </td>
+              </tr>
+              <tr>
+                <td style="background-color: #e2e2e2;" class="rec-content-td">
+                  <h3 style="text-decoration: underline;" class="rec-header-td">
+                    {{{secondRec.header}}}
+                  </h3>
+                  {{{secondRec.info}}}
+                </td>
+              </tr>
+              <tr>
+                <td style="background-color: #ffffff; padding-bottom: 35px;" class="rec-content-td">
+                  <h3 style="text-decoration: underline;" class="rec-header-td">
+                    {{{thirdRec.header}}}
+                  </h3>
+                  {{{thirdRec.info}}}
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+
+</html>

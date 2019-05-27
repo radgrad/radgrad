@@ -45,7 +45,7 @@ export function assertRole(role) {
   const roleArray = (Array.isArray(role)) ? role : [role];
   roleArray.forEach((theRole) => {
     if (!isRole(theRole)) {
-      throw new Meteor.Error(`${role} is not defined, or includes at least one undefined role.`);
+      throw new Meteor.Error(`${role} is not defined, or includes at least one undefined role.`, '', Error().stack);
     }
   });
 }

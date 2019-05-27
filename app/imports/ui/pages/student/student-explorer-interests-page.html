@@ -1,5 +1,0 @@
-<template name="Student_Explorer_Interests_Page">
-  {{#Student_Explorer_Layout addedList = addedInterests nonAddedList = nonAddedInterests careerList = addedCareerInterests type = 'interests'}}
-    {{> Student_Explorer_Interests_Widget name=interest.name slug=(slugName interest.slugID) descriptionPairs=(descriptionPairs interest) socialPairs=(socialPairs interest) id=interest._id updateID=updateID item=interest}}
-  {{/Student_Explorer_Layout}}
-</template>

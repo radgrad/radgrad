@@ -2,6 +2,7 @@ import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Users } from '../../../api/user/UserCollection.js';
 import { dateDiffInDays } from '../../utilities/template-helpers';
+import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 
 Template.Student_Feed_Item.helpers({
   feedTimestamp(feed) {
@@ -27,6 +28,17 @@ Template.Student_Feed_Item.helpers({
       students.push(Users.getProfile(userID));
     });
     return students;
+  },
+  picture(feed) {
+    // console.log('Student_Feed_Item userIDs = %o', feed.userIDs);
+    if (feed.userIDs.length === 0) {
+      return feed.picture;
+    }
+    const profile = Users.getProfile(feed.userIDs[0]);
+    if (profile.picture !== '') {
+      return profile.picture;
+    }
+    return defaultProfilePicture;
   },
 });
 

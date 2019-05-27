@@ -1,0 +1,24 @@
+<template name="Update_Opportunity_Type_Widget">
+
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>UPDATE OPPORTUNITY TYPE</h4></div>
+    <form class="ui equal width form {{successClass}} {{errorClass}}">
+
+      <div class="fields">
+        {{> Input_Form_Field label="Name" name="name" value=opportunity.name errorMessage=(fieldError "name") required=true}}
+        {{> Input_Form_Field label="Slug" name="slug" value=slug errorMessage=(fieldError "slug") disabled=true}}
+      </div>
+
+      {{> TextArea_Form_Field label="Description" rows=5 name="description" value=opportunity.description errorMessage=(fieldError "description") required=true}}
+
+      <div class="fields">
+        {{> Boolean_Form_Field label='Retired' name='retired' trueValue=trueValueRetired falseValue=falseValueRetired errorMessage=(fieldError "retired")}}
+      </div>
+
+      <button class="ui green basic button" type="submit">Update</button>
+      <button class="ui green basic button jsCancel" type="submit">Cancel</button>
+      {{> Success_Message_Form_Field message="The Opportunity Type was successfully updated.  Press cancel to continue."}}
+    </form>
+  </div>
+
+</template>

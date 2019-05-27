@@ -10,25 +10,25 @@ Template.Landing_Section_2.helpers({
     return RouteNames.landingExplorerPlansPageRouteName;
   },
   careerGoalsRouteName() {
-    return RouteNames.landingExplorerCareerGoalsPageRouteName;
+    return RouteNames.landingCardExplorerCareerGoalsPageRouteName;
   },
   coursesRouteName() {
-    return RouteNames.landingExplorerCoursesPageRouteName;
+    return RouteNames.landingCardExplorerCoursesPageRouteName;
   },
   degreesRouteName() {
-    return RouteNames.landingExplorerDegreesPageRouteName;
+    return RouteNames.landingCardExplorerDegreesPageRouteName;
   },
   firstCourse() {
     let ret = 'ics_361';
-    const courses = Courses.find({}, { sort: { shortName: 1 } }).fetch();
-    if (courses.length > 0) {
-      ret = Slugs.findDoc(courses[0].slugID).name;
+    const notRetired = Courses.findNonRetired({}, { sort: { shortName: 1 } });
+    if (notRetired.length > 0) {
+      ret = Slugs.findDoc(notRetired[0].slugID).name;
     }
     return ret;
   },
   firstDegree() {
     let ret = 'ba-ics';
-    const degrees = DesiredDegrees.find({}, { sort: { name: 1 } }).fetch();
+    const degrees = DesiredDegrees.findNonRetired({}, { sort: { name: 1 } });
     if (degrees.length > 0) {
       ret = Slugs.findDoc(degrees[0].slugID).name;
     }

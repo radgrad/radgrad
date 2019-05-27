@@ -23,6 +23,7 @@ class AcademicYearInstanceCollection extends BaseCollection {
       springYear: { type: Number },
       studentID: { type: SimpleSchema.RegEx.Id },
       semesterIDs: [SimpleSchema.RegEx.Id],
+      retired: { type: Boolean, optional: true },
     }));
     this.publicationNames = {
       Public: this._collectionName,
@@ -43,7 +44,7 @@ class AcademicYearInstanceCollection extends BaseCollection {
    * @throws {Meteor.Error} If the definition includes an undefined student or a year that is out of bounds.
    * @returns The newly created docID.
    */
-  define({ year, student }) {
+  define({ year, student, retired }) {
     const studentID = Users.getID(student);
     // check for gaps
     const prevYears = this._collection.find({ year: { $lt: year }, studentID }, { $sort: { year: 1 } }).fetch();
@@ -82,42 +83,19 @@ class AcademicYearInstanceCollection extends BaseCollection {
     semesterIDs.push(Semesters.getID(`${Semesters.SUMMER}-${year + 1}`));
 
     // Define and return the docID
-    return this._collection.insert({ year, springYear: year + 1, studentID, semesterIDs });
+    return this._collection.insert({ year, springYear: year + 1, studentID, semesterIDs, retired });
   }
 
   /**
    * Update an AcademicYear.
    * @param docID The docID associated with this academic year.
-   * @param year the fall year.
-   * @param springYear the spring year
-   * @param studentID the student's ID.
-   * @param semesterIDs the 3 semesters in the year.
+   * @param retired if the instance is retired.
    */
-  update(docID, { year, springYear, studentID, semesterIDs }) {
+  update(docID, { retired }) {
     this.assertDefined(docID);
     const updateData = {};
-    if (_.isNumber(year)) {
-      updateData.year = year;
-    }
-    if (_.isNumber(springYear)) {
-      updateData.springYear = springYear;
-    }
-    if (studentID) {
-      if (!Users.isDefined(studentID)) {
-        throw new Meteor.Error(`StudentID ${studentID} is not a defined user.`);
-      }
-      updateData.studentID = studentID;
-    }
-    if (semesterIDs) {
-      if (!Array.isArray(semesterIDs)) {
-        throw new Meteor.Error(`SemesterIDs ${semesterIDs} is not an Array.`);
-      }
-      _.forEach(semesterIDs, sem => {
-        if (!Semesters.isDefined(sem)) {
-          throw new Meteor.Error(`SemesterID ${sem} is not a SemesterID.`);
-        }
-      });
-      updateData.semesterIDs = semesterIDs;
+    if (_.isBoolean(retired)) {
+      updateData.retired = retired;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -173,6 +151,9 @@ class AcademicYearInstanceCollection extends BaseCollection {
         new SimpleSchema({
           studentID: { type: String },
         }).validate({ studentID });
+        if (Roles.userIsInRole(this.userId, [ROLE.ADMIN])) {
+          return instance._collection.find();
+        }
         return instance._collection.find({ studentID });
       });
     }
@@ -220,7 +201,8 @@ class AcademicYearInstanceCollection extends BaseCollection {
     const doc = this.findDoc(docID);
     const student = Users.getProfile(doc.studentID).username;
     const year = doc.year;
-    return { student, year };
+    const retired = doc.retired;
+    return { student, year, retired };
   }
 }
 

@@ -9,7 +9,8 @@ import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
-import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
+import { updateLevelMethod } from '../../../api/level/LevelProcessor.methods';
 
 
 const noSlugSchema = new SimpleSchema({
@@ -125,7 +126,12 @@ Template.Moderation.events({
       const visible = item.visible;
       if (split[1] === 'review') {
         const updateData = { id: itemID, moderated, visible, moderatorComments };
-        updateMethod.call({ collectionName: Reviews.getCollectionName(), updateData });
+        updateMethod.call({ collectionName: Reviews.getCollectionName(), updateData }, (error) => {
+          if (!error) {
+            const studentID = item.studentID;
+            updateLevelMethod.call({ studentID });
+          }
+        });
       } else {
         const updateData = { id: itemID, moderated, visible, moderatorComments };
         updateMethod.call({ collectionName: MentorQuestions.getCollectionName(), updateData });

@@ -6,7 +6,7 @@ import { Courses } from '../../../api/course/CourseCollection';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
-import * as FormUtils from './form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 
 const updateSchema = new SimpleSchema({
   name: String,
@@ -17,6 +17,7 @@ const updateSchema = new SimpleSchema({
   description: String,
   interests: { type: Array, minCount: 1 }, 'interests.$': String,
   prerequisites: { type: Array }, 'prerequisites.$': String,
+  retired: Boolean,
 }, { tracker: Tracker });
 
 Template.Update_Course_Widget.onCreated(function onCreated() {
@@ -35,7 +36,7 @@ Template.Update_Course_Widget.helpers({
     return Interests.find({}, { sort: { name: 1 } });
   },
   courses() {
-    return Courses.find({}, { sort: { number: 1 } });
+    return Courses.findNonRetired({}, { sort: { number: 1 } });
   },
   selectedInterestIDs() {
     const course = Courses.findDoc(Template.currentData().updateID.get());
@@ -46,7 +47,19 @@ Template.Update_Course_Widget.helpers({
     return _.map(course.prerequisites, prerequisite => Courses.findIdBySlug(prerequisite));
   },
   prerequisites() {
-    return Courses.find({}, { sort: { number: 1 } });
+    return Courses.findNonRetired({}, { sort: { number: 1 } });
+  },
+  falseValueRetired() {
+    const course = Courses.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return !course.retired;
+  },
+  trueValueRetired() {
+    const course = Courses.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return course.retired;
   },
 });
 
@@ -56,6 +69,7 @@ Template.Update_Course_Widget.events({
     const updateData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     instance.context.reset();
     updateSchema.clean(updateData, { mutate: true });
+    updateData.retired = updateData.retired === 'true';
     instance.context.validate(updateData);
     if (instance.context.isValid()) {
       updateData.id = instance.data.updateID.get();
@@ -67,6 +81,7 @@ Template.Update_Course_Widget.events({
         }
       });
     } else {
+      console.log(`Error ${instance.context._validationErrors}`);
       FormUtils.indicateError(instance);
     }
   },

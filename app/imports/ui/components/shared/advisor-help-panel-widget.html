@@ -1,0 +1,23 @@
+<template name="Advisor_Help_Panel_Widget">
+  {{#if helpText}}
+    <div class="one wide column"></div>
+    <div class="{{#if noHelpClass}} {{else}}radgrad-help{{/if}} fourteen wide column">
+      <div class="ui info floating message">
+        <div class="ui accordion">
+          <div class="radgrad-help-title {{#if open}}active{{/if}} title header">
+            <i class="dropdown icon"></i>
+            <span>{{helpTitle}}</span>
+          </div>
+          <div class="{{#if open}}active{{/if}} content">
+            {{#markdown}}{{helpText}}
+
+              #### Need more help?
+              If you have additional questions, please email [radgrad@hawaii.edu](mailto:radgrad@hawaii.edu).
+            {{/markdown}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="one wide column"></div>
+  {{/if}}
+</template>

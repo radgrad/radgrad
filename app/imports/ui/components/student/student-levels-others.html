@@ -2,10 +2,12 @@
   <div class="ui padded stretched segment">
     <div class="ui dividing header"><h4>OTHER {{studentLevelName}} STUDENTS</h4></div>
     {{#if (studentsExist (students studentLevelNumber))}}
-      <div class="ui circular mini images">
+      <div class="ui circular mini images" style="min-height: 50%">
           {{#each student in students studentLevelNumber}}
           <a href="{{pathFor usersRouteName username=routeUserName explorerUserName=(userUsername student)}}" data-position="bottom left" data-tooltip="{{fullName student}}"><img style="height:30px; width: auto;" class="ui image" src={{studentPicture student}}></a>
           {{/each}}
+        <p></p>
+        <p></p>
       </div>
     {{else}}
       <i>No students to display</i>

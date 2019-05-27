@@ -5,7 +5,7 @@ import { Courses } from '../../../api/course/CourseCollection';
 import { Feeds } from '../../../api/feed/FeedCollection';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
-import * as FormUtils from './form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 
 const addSchema = new SimpleSchema({
   name: String,
@@ -29,7 +29,7 @@ Template.Add_Course_Widget.helpers({
     return Interests.find({}, { sort: { name: 1 } });
   },
   courses() {
-    return Courses.find({}, { sort: { number: 1 } });
+    return Courses.findNonRetired({}, { sort: { number: 1 } });
   },
 });
 

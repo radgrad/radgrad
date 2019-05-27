@@ -5,6 +5,7 @@ import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { RadGrad } from '../radgrad/RadGrad';
 import { ROLE } from '../role/Role';
+import { loadCollectionNewDataOnly } from '../utilities/load-fixtures';
 
 /**
  * Allows admins to create and return a JSON object to the client representing a snapshot of the RadGrad database.
@@ -15,10 +16,10 @@ export const dumpDatabaseMethod = new ValidatedMethod({
   validate: null,
   run() {
     if (!this.userId) {
-      throw new Meteor.Error('unauthorized', 'You must be logged in to dump the database..');
+      throw new Meteor.Error('unauthorized', 'You must be logged in to dump the database..', '', Error().stack);
     } else
       if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN])) {
-        throw new Meteor.Error('unauthorized', 'You must be an admin to dump the database.');
+        throw new Meteor.Error('unauthorized', 'You must be an admin to dump the database.', '', Error().stack);
       }
     // Don't do the dump except on server side (disable client-side simulation).
     // Return an object with fields timestamp and collections.
@@ -29,6 +30,32 @@ export const dumpDatabaseMethod = new ValidatedMethod({
       return { timestamp, collections };
     }
     return null;
+  },
+});
+
+export const loadFixtureMethod = new ValidatedMethod({
+  name: 'base.loadFixture',
+  validate: null,
+  run(fixtureData) {
+    if (!this.userId) {
+      throw new Meteor.Error('unauthorized', 'You must be logged in to load a fixture.', '', Error().stack);
+    } else
+    if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN])) {
+      throw new Meteor.Error('unauthorized', 'You must be an admin to load a fixture.', '', Error().stack);
+    }
+    if (Meteor.isServer) {
+      let ret = '';
+      _.each(RadGrad.collectionLoadSequence, collection => {
+        ret = `${ret} ${loadCollectionNewDataOnly(collection, fixtureData, true)}`;
+      });
+      // console.log(`loadFixtureMethod ${ret}`);
+      const trimmed = ret.trim();
+      if (trimmed.length === 0) {
+        ret = 'Defined no new instances.';
+      }
+      return ret;
+    }
+    return '';
   },
 });
 

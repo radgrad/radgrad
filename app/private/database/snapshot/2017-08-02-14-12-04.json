@@ -354,7 +354,8 @@
             "ee_496-1",
             "ee_300+,ics_300+-2",
             "cee_270,me_311,cee_300+,me_300+,oe_300+,be_300+-1"
-          ]
+          ],
+          "retired": true
         },
         {
           "slug": "bs-cs-2015",
@@ -838,7 +839,8 @@
           "description": "Forces, resultants, and equilibrium; analysis of trusses, frames, and machines; centroids, moments of inertia; friction.",
           "creditHrs": 3,
           "interests": [],
-          "prerequisites": []
+          "prerequisites": [],
+          "retired": true
         },
         {
           "name": "Programming for Engineers",
@@ -848,7 +850,8 @@
           "description": "Introductory course on computer programming and modern computing environments in C with an emphasis on algorithm and program design, implementation, and debugging. Includes a hands-on laboratory to develop and practice programming skills.",
           "creditHrs": 4,
           "interests": [],
-          "prerequisites": []
+          "prerequisites": [],
+          "retired": true
         },
         {
           "name": "Object Oriented Programming",
@@ -860,7 +863,8 @@
           "interests": [],
           "prerequisites": [
             "ee_160"
-          ]
+          ],
+          "retired": true
         },
         {
           "name": "Basic Circuit Analysis I",
@@ -870,7 +874,8 @@
           "description": "Linear passive circuits, time domain analysis, transient and steady-state responses, phasors, impedance and admittance; power and energy, frequency responses, resonance.",
           "creditHrs": 4,
           "interests": [],
-          "prerequisites": []
+          "prerequisites": [],
+          "retired": true
         },
         {
           "name": "Basic Circuit Analysis II",
@@ -882,7 +887,8 @@
           "interests": [],
           "prerequisites": [
             "ee_211"
-          ]
+          ],
+          "retired": true
         },
         {
           "name": "Introduction to Digital Design",
@@ -894,7 +900,8 @@
           "interests": [],
           "prerequisites": [
             "ee_160"
-          ]
+          ],
+          "retired": true
         },
         {
           "name": "Sophomore Project",
@@ -904,7 +911,8 @@
           "description": "Sophomore level individual or team project under EE faculty direction and guidance. The project provides design experience and develops practical skills.",
           "creditHrs": 3,
           "interests": [],
-          "prerequisites": []
+          "prerequisites": [],
+          "retired": true
         },
         {
           "name": "Signal and Systems Analysis",
@@ -916,7 +924,8 @@
           "interests": [],
           "prerequisites": [
             "ee_213"
-          ]
+          ],
+          "retired": true
         },
         {
           "name": "Microelectronic Circuits I",
@@ -928,7 +937,8 @@
           "interests": [],
           "prerequisites": [
             "ee_213"
-          ]
+          ],
+          "retired": true
         },
         {
           "name": "Physical Electronics",
@@ -938,7 +948,8 @@
           "description": "Review of quantum mechanics fundamentals, H-atom, and chemical bonding. Introduction to band structure models and materials. Semiconductor doping, charge carrier statistics and charge transport, including ambipolar transport. Metal-semiconductor and PN junctions.",
           "creditHrs": 3,
           "interests": [],
-          "prerequisites": []
+          "prerequisites": [],
+          "retired": true
         },
         {
           "name": "Probability and Statistics",
@@ -950,7 +961,8 @@
           "interests": [],
           "prerequisites": [
             "ee_315"
-          ]
+          ],
+          "retired": true
         },
         {
           "name": "Digital Systems and Computer Design",
@@ -963,7 +975,8 @@
           "prerequisites": [
             "ee_160",
             "ee_260"
-          ]
+          ],
+          "retired": true
         },
         {
           "name": "Discrete Math for Engineers",
@@ -976,7 +989,8 @@
           "prerequisites": [
             "ee_160",
             "ee_260"
-          ]
+          ],
+          "retired": true
         },
         {
           "name": "Computer Data Structures and Algorithms",
@@ -989,7 +1003,8 @@
           "prerequisites": [
             "ee_205",
             "ics_141"
-          ]
+          ],
+          "retired": true
         },
         {
           "name": "Engineering Electromagnetics I",
@@ -1001,7 +1016,8 @@
           "interests": [],
           "prerequisites": [
             "ee_213"
-          ]
+          ],
+          "retired": true
         },
         {
           "name": "Junior Project",
@@ -1013,7 +1029,8 @@
           "interests": [],
           "prerequisites": [
             "ee_296"
-          ]
+          ],
+          "retired": true
         },
         {
           "name": "Introduction to Computer and Network Security",
@@ -1025,7 +1042,8 @@
           "interests": [],
           "prerequisites": [
             "ee_367"
-          ]
+          ],
+          "retired": true
         },
         {
           "name": "Object-oriented Software Engineering",
@@ -1037,7 +1055,8 @@
           "interests": [],
           "prerequisites": [
             "ee_367"
-          ]
+          ],
+          "retired": true
         },
         {
           "name": "Introduction to Operating Systems",
@@ -1050,7 +1069,8 @@
           "prerequisites": [
             "ee_361",
             "ee_367"
-          ]
+          ],
+          "retired": true
         },
         {
           "name": "Ethics in Electrical Engineering",
@@ -1060,7 +1080,8 @@
           "description": "Equip electrical engineers with the necessary background for ethical reasoning, as it pertains to technology, society, workplace issues, and the environment.",
           "creditHrs": 1,
           "interests": [],
-          "prerequisites": []
+          "prerequisites": [],
+          "retired": true
         },
         {
           "name": "Capstone Design Project",
@@ -1070,7 +1091,8 @@
           "description": "Significant project integrating the design content of previous courses and incorporating engineering standards and realistic constraints. Written report must document all aspects of the design process: reliability, safety, economics, ethics.",
           "creditHrs": 1,
           "interests": [],
-          "prerequisites": []
+          "prerequisites": [],
+          "retired": true
         },
         {
           "name": "Digital Tools for the Information World",
@@ -1993,7 +2015,8 @@
           "description": "Basic laws, closed and open systems. Work, heat, concept of entropy. Properties of pure simple substances. Ideal gases. Introduction to power and refrigeration cycles.",
           "creditHrs": 4,
           "interests": [],
-          "prerequisites": []
+          "prerequisites": [],
+          "retired": true
         },
         {
           "name": "Non Computer Science Course",
@@ -3402,7 +3425,8 @@
           "name": "B.S. in Computer Engineering",
           "shortName": "B.S. CE",
           "slug": "bs-ce",
-          "description": "The Department of Information and Computer Sciences and the Department of Electrical Engineering offer a joint Bachelor of Science degree in Computer Engineering (BSCE).  The BSCE degree program provides you with the opportunity to learn about computer hardware and software, computer organization and architecture, computer security, software engineering, computer networks and Internet technology, embedded systems, computer-aided design, multi-core and parallel computing, wireless networks, and other topics."
+          "description": "The Department of Information and Computer Sciences and the Department of Electrical Engineering offer a joint Bachelor of Science degree in Computer Engineering (BSCE).  The BSCE degree program provides you with the opportunity to learn about computer hardware and software, computer organization and architecture, computer security, software engineering, computer networks and Internet technology, embedded systems, computer-aided design, multi-core and parallel computing, wireless networks, and other topics.",
+          "retired": true
         },
         {
           "name": "B.S. in Computer Science",
@@ -3987,6 +4011,10 @@
           "text": "This page provides a browser for the users currently registered with RadGrad.\n\nRadGrad is not an open system. In order for someone to login to RadGrad, they must have been explicitly registered by a RadGrad advisor or admin.\n\nIf there is someone who you believe should have a RadGrad account, or if you believe there is a RadGrad user who should no longer have access to the system, please contact a RadGrad administrator."
         }
       ]
+    },
+    {
+      "name": "IceSnapshotCollection",
+      "contents": []
     },
     {
       "name": "InterestCollection",
@@ -7060,85 +7088,127 @@
           "choice": "ics_400+"
         },
         {
-          "choice": "ee_160"
+          "choice": "ics_500"
         },
         {
-          "choice": "ee_205"
+          "choice": "ics_606"
         },
         {
-          "choice": "ee_211"
+          "choice": "ics_611"
         },
         {
-          "choice": "ee_213"
+          "choice": "ics_612"
         },
         {
-          "choice": "ee_260"
+          "choice": "ics_613"
         },
         {
-          "choice": "ee_296"
+          "choice": "ics_614"
         },
         {
-          "choice": "ee_315"
+          "choice": "ics_616"
         },
         {
-          "choice": "ee_323"
+          "choice": "ics_621"
         },
         {
-          "choice": "ee_324"
+          "choice": "ics_622"
         },
         {
-          "choice": "ee_342"
+          "choice": "ics_623"
         },
         {
-          "choice": "ee_361"
+          "choice": "ics_624"
         },
         {
-          "choice": "ee_362"
+          "choice": "ics_632"
         },
         {
-          "choice": "ee_367"
+          "choice": "ics_635"
         },
         {
-          "choice": "ee_371"
+          "choice": "ics_636"
         },
         {
-          "choice": "ee_396"
+          "choice": "ics_641"
         },
         {
-          "choice": "ee_406"
+          "choice": "ics_643"
         },
         {
-          "choice": "ee_467"
+          "choice": "ics_651"
         },
         {
-          "choice": "ee_468"
+          "choice": "ics_655"
         },
         {
-          "choice": "ee_495"
+          "choice": "ics_660"
         },
         {
-          "choice": "ee_496"
+          "choice": "ics_661"
         },
         {
-          "choice": "ee_300+"
+          "choice": "ics_663"
         },
         {
-          "choice": "cee_270"
+          "choice": "ics_664"
         },
         {
-          "choice": "me_311"
+          "choice": "ics_665"
         },
         {
-          "choice": "cee_300+"
+          "choice": "ics_667"
         },
         {
-          "choice": "me_300+"
+          "choice": "ics_668"
         },
         {
-          "choice": "oe_300+"
+          "choice": "ics_669"
         },
         {
-          "choice": "be_300+"
+          "choice": "ics_674"
+        },
+        {
+          "choice": "ics_675"
+        },
+        {
+          "choice": "ics_676"
+        },
+        {
+          "choice": "ics_681"
+        },
+        {
+          "choice": "ics_682"
+        },
+        {
+          "choice": "ics_683"
+        },
+        {
+          "choice": "ics_685"
+        },
+        {
+          "choice": "ics_686"
+        },
+        {
+          "choice": "ics_690"
+        },
+        {
+          "choice": "ics_691"
+        },
+        {
+          "choice": "ics_695"
+        },
+        {
+          "choice": "ics_699"
+        },
+        {
+          "choice": "ics_600+"
+        },
+        {
+          "choice": "ics_700"
+        },
+        {
+          "choice": "ics_800"
         }
       ]
     },

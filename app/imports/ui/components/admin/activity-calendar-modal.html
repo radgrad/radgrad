@@ -1,0 +1,48 @@
+<template name="Activity_Calendar_Modal">
+  <div class="ui modal" id="{{day}}">
+    <div class="ui padded container segment">
+      <h4 class="ui dividing header">USER ACTIVITY ON {{date month day}}</h4>
+      <div class="ui top attached tabular stackable menu">
+        {{#each role in activeUsers}}
+          <a class="{{activeTab role.role}} item" data-tab="{{role.role}}">{{role.role}} ({{role.userCount}})</a>
+        {{/each}}
+      </div>
+      {{#each role in activeUsers}}
+        <div class="ui bottom attached {{activeTab role.role}} tab segment" data-tab="{{role.role}}">
+          {{#each user in interactionResults role.users}}
+            <div class="ui styled fluid accordion">
+              <div class="title">
+                <i class="dropdown icon"></i>
+                {{user.name}} ({{user.interactionCount}})
+              </div>
+              <div class="content">
+                <div class="ui stackable grid">
+                  <div style="height: 300px; overflow-x: scroll;">
+                    <table class="ui celled padded table">
+                      <thead>
+                      <tr>
+                        <th>Type</th>
+                        <th>Type Data</th>
+                        <th>Timestamp</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      {{#each interaction in user.interactions}}
+                        <tr>
+                          <td>{{interaction.type}}</td>
+                          <td>{{interaction.typeData}}</td>
+                          <td>{{interaction.timestamp}}</td>
+                        </tr>
+                      {{/each}}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</template>

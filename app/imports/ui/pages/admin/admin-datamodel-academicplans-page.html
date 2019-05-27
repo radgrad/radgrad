@@ -1,0 +1,16 @@
+<template name="Admin_DataModel_AcademicPlans_Page">
+
+  {{#if Template.subscriptionsReady}}
+    {{#Admin_DataModel_Layout}}
+      {{#if displayUpdateWidget}}
+        {{> Update_Academic_Plan_Widget updateID=updateID}}
+      {{else}}
+        {{> Add_Academic_Plan_Widget }}
+      {{/if}}
+      {{> List_Academic_Plans_Widget updateID=updateID}}
+    {{/Admin_DataModel_Layout}}
+  {{else}}
+    {{> Loading message="Waiting for subscriptions."}}
+  {{/if}}
+
+</template>

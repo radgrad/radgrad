@@ -4,7 +4,7 @@ import { Roles } from 'meteor/alanning:roles';
 import { Meteor } from 'meteor/meteor';
 import { $ } from 'meteor/jquery';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { userInteractionDefineMethod } from '../../api/log/UserInteractionCollection.methods';
+import { userInteractionDefineMethod } from '../../api/analytic/UserInteractionCollection.methods';
 import { ROLE } from '../../api/role/Role';
 
 /*
@@ -29,20 +29,18 @@ function removeBodyClass() {
 // Currently only used for student routes
 function trackPath() {
   if (Roles.userIsInRole(Meteor.userId(), [ROLE.STUDENT])) {
-    const userID = Meteor.userId();
-    const type = 'pageView';
     const path = FlowRouter.current().path;
+    const username = Meteor.user('username').username;
+    const type = 'pageView';
     const typeData = path.substr(path.indexOf('/', 9) + 1);
-    userInteractionDefineMethod.call({ userID, type, typeData }, (error) => {
+    const interactionData = { username, type, typeData };
+    userInteractionDefineMethod.call(interactionData, (error) => {
       if (error) {
         console.log('Error creating UserInteraction.', error);
       }
     });
   }
 }
-
-/*                        APP LOGGING                        */
-
 
 /*                        ADMIN ROUTES                       */
 
@@ -70,6 +68,30 @@ adminRoutes.route('/datamodel', {
   },
 });
 
+export const adminDataModelAcademicPlansPageRouteName = 'Admin_DataModel_AcademicPlans_Page';
+adminRoutes.route('/datamodel/academic-plans', {
+  name: adminDataModelAcademicPlansPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataModelAcademicPlansPageRouteName });
+  },
+});
+
+export const adminDataModelAcademicYearInstancesPageRouteName = 'Admin_DataModel_Academic_Year_Instances_Page';
+adminRoutes.route('/datamodel/academic-year-instances', {
+  name: adminDataModelAcademicYearInstancesPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataModelAcademicYearInstancesPageRouteName });
+  },
+});
+
+export const adminDataModelAdvisorLogsPageRouteName = 'Admin_DataModel_Advisor_Logs_Page';
+adminRoutes.route('/datamodel/advisor-logs', {
+  name: adminDataModelAdvisorLogsPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataModelAdvisorLogsPageRouteName });
+  },
+});
+
 export const adminDataModelCareerGoalsPageRouteName = 'Admin_DataModel_CareerGoals_Page';
 adminRoutes.route('/datamodel/career-goals', {
   name: adminDataModelCareerGoalsPageRouteName,
@@ -94,6 +116,30 @@ adminRoutes.route('/datamodel/courses', {
   },
 });
 
+export const adminDataModelDesiredDegreesPageRouteName = 'Admin_DataModel_DesiredDegrees_Page';
+adminRoutes.route('/datamodel/desired-degrees', {
+  name: adminDataModelDesiredDegreesPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataModelDesiredDegreesPageRouteName });
+  },
+});
+
+export const adminDataModelFeedsPageRouteName = 'Admin_DataModel_Feeds_Page';
+adminRoutes.route('/datamodel/feeds', {
+  name: adminDataModelFeedsPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataModelFeedsPageRouteName });
+  },
+});
+
+export const adminDataModelFeedbackInstancesPageRouteName = 'Admin_DataModel_Feedback_Instances_Page';
+adminRoutes.route('/datamodel/feedback-instances', {
+  name: adminDataModelFeedbackInstancesPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataModelFeedbackInstancesPageRouteName });
+  },
+});
+
 export const adminDataModelHelpMessagesPageRouteName = 'Admin_DataModel_HelpMessages_Page';
 adminRoutes.route('/datamodel/help-messages', {
   name: adminDataModelHelpMessagesPageRouteName,
@@ -110,6 +156,31 @@ adminRoutes.route('/datamodel/interests', {
   },
 });
 
+export const adminDataModelInterestTypesPageRouteName = 'Admin_DataModel_Interest_Types_Page';
+adminRoutes.route('/datamodel/interest-types', {
+  name: adminDataModelInterestTypesPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataModelInterestTypesPageRouteName });
+  },
+});
+
+export const adminDataModelMentorAnswersPageRouteName = 'Admin_DataModel_Mentor_Answers_Page';
+adminRoutes.route('/datamodel/mentor-answers', {
+  name: adminDataModelMentorAnswersPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataModelMentorAnswersPageRouteName });
+  },
+});
+
+export const adminDataModelMentorQuestionsPageRouteName = 'Admin_DataModel_Mentor_Questions_Page';
+adminRoutes.route('/datamodel/mentor-questions', {
+  name: adminDataModelMentorQuestionsPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataModelMentorQuestionsPageRouteName });
+  },
+});
+
+
 export const adminDataModelOpportunitiesPageRouteName = 'Admin_DataModel_Opportunities_Page';
 adminRoutes.route('/datamodel/opportunities', {
   name: adminDataModelOpportunitiesPageRouteName,
@@ -123,6 +194,14 @@ adminRoutes.route('/datamodel/opportunity-instances', {
   name: adminDataModelOpportunityInstancesPageRouteName,
   action() {
     BlazeLayout.render('Admin_Layout', { main: adminDataModelOpportunityInstancesPageRouteName });
+  },
+});
+
+export const adminDataModelOpportunityTypesPageRouteName = 'Admin_DataModel_Opportunity_Types_Page';
+adminRoutes.route('/datamodel/opportunity-types', {
+  name: adminDataModelOpportunityTypesPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataModelOpportunityTypesPageRouteName });
   },
 });
 
@@ -142,6 +221,22 @@ adminRoutes.route('/datamodel/reviews', {
   },
 });
 
+export const adminDataModelSemestersPageRouteName = 'Admin_DataModel_Semesters_Page';
+adminRoutes.route('/datamodel/semesters', {
+  name: adminDataModelSemestersPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataModelSemestersPageRouteName });
+  },
+});
+
+export const adminDataModelSlugsPageRouteName = 'Admin_DataModel_Slugs_Page';
+adminRoutes.route('/datamodel/slugs', {
+  name: adminDataModelSlugsPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataModelSlugsPageRouteName });
+  },
+});
+
 export const adminDataModelTeasersPageRouteName = 'Admin_DataModel_Teasers_Page';
 adminRoutes.route('/datamodel/teasers', {
   name: adminDataModelTeasersPageRouteName,
@@ -155,6 +250,14 @@ adminRoutes.route('/datamodel/users', {
   name: adminDataModelUsersPageRouteName,
   action() {
     BlazeLayout.render('Admin_Layout', { main: adminDataModelUsersPageRouteName });
+  },
+});
+
+export const adminDataModelVerificationRequestsPageRouteName = 'Admin_DataModel_Verification_Requests_Page';
+adminRoutes.route('/datamodel/verification-requests', {
+  name: adminDataModelVerificationRequestsPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataModelVerificationRequestsPageRouteName });
   },
 });
 
@@ -196,6 +299,38 @@ adminRoutes.route('/analytics', {
   name: adminAnalyticsHomePageRouteName,
   action() {
     BlazeLayout.render('Admin_Layout', { main: adminAnalyticsHomePageRouteName });
+  },
+});
+
+export const adminAnalyticsActivityMonitorPageRouteName = 'Admin_Analytics_Activity_Monitor_Page';
+adminRoutes.route('/analytics/activity-monitor', {
+  name: adminAnalyticsActivityMonitorPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminAnalyticsActivityMonitorPageRouteName });
+  },
+});
+
+export const adminAnalyticsNewsletterPageRouteName = 'Admin_Analytics_Newsletter_Page';
+adminRoutes.route('/analytics/newsletter', {
+  name: adminAnalyticsNewsletterPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminAnalyticsNewsletterPageRouteName });
+  },
+});
+
+export const adminAnalyticsOverheadAnalysisPageRouteName = 'Admin_Analytics_Overhead_Analytics_Page';
+adminRoutes.route('/analytics/overhead-analysis', {
+  name: adminAnalyticsOverheadAnalysisPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminAnalyticsOverheadAnalysisPageRouteName });
+  },
+});
+
+export const adminAnalyticsStudentsPageRouteName = 'Admin_Analytics_Students_Page';
+adminRoutes.route('/analytics/students/summary', {
+  name: adminAnalyticsStudentsPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminAnalyticsStudentsPageRouteName });
   },
 });
 
@@ -289,6 +424,22 @@ advisorRoutes.route('/course-scoreboard', {
   },
 });
 
+/*                        ALUMNI ROUTES                        */
+
+const alumniRoutes = FlowRouter.group({
+  prefix: '/alumni/:username',
+  name: 'alumni',
+  triggersEnter: [addBodyClass],
+  triggersExit: [removeBodyClass],
+});
+
+export const alumniHomePageRouteName = 'Alumni_Home_Page';
+alumniRoutes.route('/home', {
+  name: alumniHomePageRouteName,
+  action() {
+    BlazeLayout.render('Alumni_Layout', { main: alumniHomePageRouteName });
+  },
+});
 
 /*                        FACULTY ROUTES                       */
 
@@ -312,7 +463,15 @@ export const facultyExplorerPageRouteName = 'Faculty_Explorer_Page';
 facultyRoutes.route('/explorer', {
   name: facultyExplorerPageRouteName,
   action() {
-    BlazeLayout.render('Faculty_Layout', { main: facultyExplorerPageRouteName });
+    BlazeLayout.render('Faculty_Layout', { main: 'Explorer_Page' });
+  },
+});
+
+export const facultyCardExplorerCareerGoalsPageRouteName = 'Faculty_Card_Explorer_CareerGoals_Page';
+facultyRoutes.route('/explorer/career-goals/', {
+  name: facultyCardExplorerCareerGoalsPageRouteName,
+  action() {
+    BlazeLayout.render('Faculty_Layout', { main: 'Card_Explorer_CareerGoals_Page' });
   },
 });
 
@@ -320,7 +479,15 @@ export const facultyExplorerCareerGoalsPageRouteName = 'Faculty_Explorer_CareerG
 facultyRoutes.route('/explorer/career-goals/:careerGoal', {
   name: facultyExplorerCareerGoalsPageRouteName,
   action() {
-    BlazeLayout.render('Faculty_Layout', { main: facultyExplorerCareerGoalsPageRouteName });
+    BlazeLayout.render('Faculty_Layout', { main: 'Explorer_CareerGoals_Page' });
+  },
+});
+
+export const facultyCardExplorerCoursesPageRouteName = 'Faculty_Card_Explorer_Courses_Page';
+facultyRoutes.route('/explorer/courses/', {
+  name: facultyCardExplorerCoursesPageRouteName,
+  action() {
+    BlazeLayout.render('Faculty_Layout', { main: 'Card_Explorer_Courses_Page' });
   },
 });
 
@@ -328,7 +495,15 @@ export const facultyExplorerCoursesPageRouteName = 'Faculty_Explorer_Courses_Pag
 facultyRoutes.route('/explorer/courses/:course', {
   name: facultyExplorerCoursesPageRouteName,
   action() {
-    BlazeLayout.render('Faculty_Layout', { main: facultyExplorerCoursesPageRouteName });
+    BlazeLayout.render('Faculty_Layout', { main: 'Explorer_Courses_Page' });
+  },
+});
+
+export const facultyCardExplorerDegreesPageRouteName = 'Faculty_Card_Explorer_Degrees_Page';
+facultyRoutes.route('/explorer/degrees/', {
+  name: facultyCardExplorerDegreesPageRouteName,
+  action() {
+    BlazeLayout.render('Faculty_Layout', { main: 'Card_Explorer_Degrees_Page' });
   },
 });
 
@@ -336,15 +511,15 @@ export const facultyExplorerDegreesPageRouteName = 'Faculty_Explorer_Degrees_Pag
 facultyRoutes.route('/explorer/degrees/:degree', {
   name: facultyExplorerDegreesPageRouteName,
   action() {
-    BlazeLayout.render('Faculty_Layout', { main: facultyExplorerDegreesPageRouteName });
+    BlazeLayout.render('Faculty_Layout', { main: 'Explorer_Degrees_Page' });
   },
 });
 
-export const facultyExplorerPlansPageRouteName = 'Faculty_Explorer_Plans_Page';
-facultyRoutes.route('/explorer/plans/:plan', {
-  name: facultyExplorerPlansPageRouteName,
+export const facultyCardExplorerInterestsPageRouteName = 'Faculty_Card_Explorer_Interests_Page';
+facultyRoutes.route('/explorer/interests/', {
+  name: facultyCardExplorerInterestsPageRouteName,
   action() {
-    BlazeLayout.render('Faculty_Layout', { main: facultyExplorerPlansPageRouteName });
+    BlazeLayout.render('Faculty_Layout', { main: 'Card_Explorer_Interests_Page' });
   },
 });
 
@@ -352,7 +527,15 @@ export const facultyExplorerInterestsPageRouteName = 'Faculty_Explorer_Interests
 facultyRoutes.route('/explorer/interests/:interest', {
   name: facultyExplorerInterestsPageRouteName,
   action() {
-    BlazeLayout.render('Faculty_Layout', { main: facultyExplorerInterestsPageRouteName });
+    BlazeLayout.render('Faculty_Layout', { main: 'Explorer_Interests_Page' });
+  },
+});
+
+export const facultyCardExplorerOpportunitiesPageRouteName = 'Faculty_Card_Explorer_Opportunities_Page';
+facultyRoutes.route('/explorer/opportunities/', {
+  name: facultyCardExplorerOpportunitiesPageRouteName,
+  action() {
+    BlazeLayout.render('Faculty_Layout', { main: 'Card_Explorer_Opportunities_Page' });
   },
 });
 
@@ -360,15 +543,31 @@ export const facultyExplorerOpportunitiesPageRouteName = 'Faculty_Explorer_Oppor
 facultyRoutes.route('/explorer/opportunities/:opportunity', {
   name: facultyExplorerOpportunitiesPageRouteName,
   action() {
-    BlazeLayout.render('Faculty_Layout', { main: facultyExplorerOpportunitiesPageRouteName });
+    BlazeLayout.render('Faculty_Layout', { main: 'Explorer_Opportunities_Page' });
   },
 });
 
-export const facultyExplorerUsersPageRouteName = 'Faculty_Explorer_Users_Page';
-facultyRoutes.route('/explorer/users/:explorerUserName', {
-  name: facultyExplorerUsersPageRouteName,
+export const facultyCardExplorerPlansPageRouteName = 'Faculty_Card_Explorer_Plans_Page';
+facultyRoutes.route('/explorer/plans/', {
+  name: facultyCardExplorerPlansPageRouteName,
   action() {
-    BlazeLayout.render('Faculty_Layout', { main: facultyExplorerUsersPageRouteName });
+    BlazeLayout.render('Faculty_Layout', { main: 'Card_Explorer_Plans_Page' });
+  },
+});
+
+export const facultyExplorerPlansPageRouteName = 'Faculty_Explorer_Plans_Page';
+facultyRoutes.route('/explorer/plans/:plan', {
+  name: facultyExplorerPlansPageRouteName,
+  action() {
+    BlazeLayout.render('Faculty_Layout', { main: 'Explorer_Plans_Page' });
+  },
+});
+
+export const facultyCardExplorerUsersPageRouteName = 'Faculty_Card_Explorer_Users_Page';
+facultyRoutes.route('/explorer/users/', {
+  name: facultyCardExplorerUsersPageRouteName,
+  action() {
+    BlazeLayout.render('Faculty_Layout', { main: 'Card_Explorer_Users_Page' });
   },
 });
 
@@ -422,11 +621,27 @@ FlowRouter.route('/explorer', {
   },
 });
 
+export const landingCardExplorerCareerGoalsPageRouteName = 'Landing_Card_Explorer_CareerGoals_Page';
+FlowRouter.route('/explorer/career-goals/', {
+  name: landingCardExplorerCareerGoalsPageRouteName,
+  action() {
+    BlazeLayout.render('Landing_Dynamic_Layout', { main: landingCardExplorerCareerGoalsPageRouteName });
+  },
+});
+
 export const landingExplorerCareerGoalsPageRouteName = 'Landing_Explorer_CareerGoals_Page';
 FlowRouter.route('/explorer/career-goals/:careerGoal', {
   name: landingExplorerCareerGoalsPageRouteName,
   action() {
     BlazeLayout.render('Landing_Dynamic_Layout', { main: landingExplorerCareerGoalsPageRouteName });
+  },
+});
+
+export const landingCardExplorerCoursesPageRouteName = 'Landing_Card_Explorer_Courses_Page';
+FlowRouter.route('/explorer/courses/', {
+  name: landingCardExplorerCoursesPageRouteName,
+  action() {
+    BlazeLayout.render('Landing_Dynamic_Layout', { main: landingCardExplorerCoursesPageRouteName });
   },
 });
 
@@ -438,11 +653,27 @@ FlowRouter.route('/explorer/courses/:course', {
   },
 });
 
+export const landingCardExplorerDegreesPageRouteName = 'Landing_Card_Explorer_Degrees_Page';
+FlowRouter.route('/explorer/degrees/', {
+  name: landingCardExplorerDegreesPageRouteName,
+  action() {
+    BlazeLayout.render('Landing_Dynamic_Layout', { main: landingCardExplorerDegreesPageRouteName });
+  },
+});
+
 export const landingExplorerDegreesPageRouteName = 'Landing_Explorer_Degrees_Page';
 FlowRouter.route('/explorer/degrees/:degree', {
   name: landingExplorerDegreesPageRouteName,
   action() {
     BlazeLayout.render('Landing_Dynamic_Layout', { main: landingExplorerDegreesPageRouteName });
+  },
+});
+
+export const landingCardExplorerPlansPageRouteName = 'Landing_Card_Explorer_Plans_Page';
+FlowRouter.route('/explorer/plans/', {
+  name: landingCardExplorerPlansPageRouteName,
+  action() {
+    BlazeLayout.render('Landing_Dynamic_Layout', { main: landingCardExplorerPlansPageRouteName });
   },
 });
 
@@ -454,11 +685,27 @@ FlowRouter.route('/explorer/plans/:plan', {
   },
 });
 
+export const landingCardExplorerInterestsPageRouteName = 'Landing_Card_Explorer_Interests_Page';
+FlowRouter.route('/explorer/interests/', {
+  name: landingCardExplorerInterestsPageRouteName,
+  action() {
+    BlazeLayout.render('Landing_Dynamic_Layout', { main: landingCardExplorerInterestsPageRouteName });
+  },
+});
+
 export const landingExplorerInterestsPageRouteName = 'Landing_Explorer_Interests_Page';
 FlowRouter.route('/explorer/interests/:interest', {
   name: landingExplorerInterestsPageRouteName,
   action() {
     BlazeLayout.render('Landing_Dynamic_Layout', { main: landingExplorerInterestsPageRouteName });
+  },
+});
+
+export const landingCardExplorerOpportunitiesPageRouteName = 'Landing_Card_Explorer_Opportunities_Page';
+FlowRouter.route('/explorer/opportunities/', {
+  name: landingCardExplorerOpportunitiesPageRouteName,
+  action() {
+    BlazeLayout.render('Landing_Dynamic_Layout', { main: landingCardExplorerOpportunitiesPageRouteName });
   },
 });
 
@@ -547,7 +794,15 @@ export const mentorExplorerPageRouteName = 'Mentor_Explorer_Page';
 mentorRoutes.route('/explorer', {
   name: mentorExplorerPageRouteName,
   action() {
-    BlazeLayout.render('Mentor_Layout', { main: mentorExplorerPageRouteName });
+    BlazeLayout.render('Mentor_Layout', { main: 'Explorer_Page' });
+  },
+});
+
+export const mentorCardExplorerCareerGoalsPageRouteName = 'Mentor_Card_Explorer_CareerGoals_Page';
+mentorRoutes.route('/explorer/career-goals/', {
+  name: mentorCardExplorerCareerGoalsPageRouteName,
+  action() {
+    BlazeLayout.render('Mentor_Layout', { main: 'Card_Explorer_CareerGoals_Page' });
   },
 });
 
@@ -555,7 +810,15 @@ export const mentorExplorerCareerGoalsPageRouteName = 'Mentor_Explorer_CareerGoa
 mentorRoutes.route('/explorer/career-goals/:careerGoal', {
   name: mentorExplorerCareerGoalsPageRouteName,
   action() {
-    BlazeLayout.render('Mentor_Layout', { main: mentorExplorerCareerGoalsPageRouteName });
+    BlazeLayout.render('Mentor_Layout', { main: 'Explorer_CareerGoals_Page' });
+  },
+});
+
+export const mentorCardExplorerCoursesPageRouteName = 'Mentor_Card_Explorer_Courses_Page';
+mentorRoutes.route('/explorer/courses/', {
+  name: mentorCardExplorerCoursesPageRouteName,
+  action() {
+    BlazeLayout.render('Mentor_Layout', { main: 'Card_Explorer_Courses_Page' });
   },
 });
 
@@ -563,15 +826,15 @@ export const mentorExplorerCoursesPageRouteName = 'Mentor_Explorer_Courses_Page'
 mentorRoutes.route('/explorer/courses/:course', {
   name: mentorExplorerCoursesPageRouteName,
   action() {
-    BlazeLayout.render('Mentor_Layout', { main: mentorExplorerCoursesPageRouteName });
+    BlazeLayout.render('Mentor_Layout', { main: 'Explorer_Courses_Page' });
   },
 });
 
-export const mentorExplorerPlansPageRouteName = 'Mentor_Explorer_Plans_Page';
-mentorRoutes.route('/explorer/plans/:plan', {
-  name: mentorExplorerPlansPageRouteName,
+export const mentorCardExplorerDegreesPageRouteName = 'Mentor_Card_Explorer_Degrees_Page';
+mentorRoutes.route('/explorer/degrees/', {
+  name: mentorCardExplorerDegreesPageRouteName,
   action() {
-    BlazeLayout.render('Mentor_Layout', { main: mentorExplorerPlansPageRouteName });
+    BlazeLayout.render('Mentor_Layout', { main: 'Card_Explorer_Degrees_Page' });
   },
 });
 
@@ -579,7 +842,15 @@ export const mentorExplorerDegreesPageRouteName = 'Mentor_Explorer_Degrees_Page'
 mentorRoutes.route('/explorer/degrees/:degree', {
   name: mentorExplorerDegreesPageRouteName,
   action() {
-    BlazeLayout.render('Mentor_Layout', { main: mentorExplorerDegreesPageRouteName });
+    BlazeLayout.render('Mentor_Layout', { main: 'Explorer_Degrees_Page' });
+  },
+});
+
+export const mentorCardExplorerInterestsPageRouteName = 'Mentor_Card_Explorer_Interests_Page';
+mentorRoutes.route('/explorer/interests/', {
+  name: mentorCardExplorerInterestsPageRouteName,
+  action() {
+    BlazeLayout.render('Mentor_Layout', { main: 'Card_Explorer_Interests_Page' });
   },
 });
 
@@ -587,7 +858,15 @@ export const mentorExplorerInterestsPageRouteName = 'Mentor_Explorer_Interests_P
 mentorRoutes.route('/explorer/interests/:interest', {
   name: mentorExplorerInterestsPageRouteName,
   action() {
-    BlazeLayout.render('Mentor_Layout', { main: mentorExplorerInterestsPageRouteName });
+    BlazeLayout.render('Mentor_Layout', { main: 'Explorer_Interests_Page' });
+  },
+});
+
+export const mentorCardExplorerOpportunitiesPageRouteName = 'Mentor_Card_Explorer_Opportunities_Page';
+mentorRoutes.route('/explorer/opportunities/', {
+  name: mentorCardExplorerOpportunitiesPageRouteName,
+  action() {
+    BlazeLayout.render('Mentor_Layout', { main: 'Card_Explorer_Opportunities_Page' });
   },
 });
 
@@ -595,15 +874,31 @@ export const mentorExplorerOpportunitiesPageRouteName = 'Mentor_Explorer_Opportu
 mentorRoutes.route('/explorer/opportunities/:opportunity', {
   name: mentorExplorerOpportunitiesPageRouteName,
   action() {
-    BlazeLayout.render('Mentor_Layout', { main: mentorExplorerOpportunitiesPageRouteName });
+    BlazeLayout.render('Mentor_Layout', { main: 'Explorer_Opportunities_Page' });
   },
 });
 
-export const mentorExplorerUsersPageRouteName = 'Mentor_Explorer_Users_Page';
-mentorRoutes.route('/explorer/users/:explorerUserName', {
-  name: mentorExplorerUsersPageRouteName,
+export const mentorCardExplorerPlansPageRouteName = 'Mentor_Card_Explorer_Plans_Page';
+mentorRoutes.route('/explorer/plans/', {
+  name: mentorCardExplorerPlansPageRouteName,
   action() {
-    BlazeLayout.render('Mentor_Layout', { main: mentorExplorerUsersPageRouteName });
+    BlazeLayout.render('Mentor_Layout', { main: 'Card_Explorer_Plans_Page' });
+  },
+});
+
+export const mentorExplorerPlansPageRouteName = 'Mentor_Explorer_Plans_Page';
+mentorRoutes.route('/explorer/plans/:plan', {
+  name: mentorExplorerPlansPageRouteName,
+  action() {
+    BlazeLayout.render('Mentor_Layout', { main: 'Explorer_Plans_Page' });
+  },
+});
+
+export const mentorCardExplorerUsersPageRouteName = 'Mentor_Card_Explorer_Users_Page';
+mentorRoutes.route('/explorer/users/', {
+  name: mentorCardExplorerUsersPageRouteName,
+  action() {
+    BlazeLayout.render('Mentor_Layout', { main: 'Card_Explorer_Users_Page' });
   },
 });
 
@@ -629,12 +924,21 @@ const studentRoutes = FlowRouter.group({
   triggersExit: [removeBodyClass],
 });
 
+export const studentCardExplorerCareerGoalsPageRouteName = 'Student_Card_Explorer_CareerGoals_Page';
+studentRoutes.route('/explorer/career-goals/', {
+  name: studentCardExplorerCareerGoalsPageRouteName,
+  triggersEnter: [trackPath],
+  action() {
+    BlazeLayout.render('Student_Layout', { main: 'Card_Explorer_CareerGoals_Page' });
+  },
+});
+
 export const studentExplorerCareerGoalsPageRouteName = 'Student_Explorer_CareerGoals_Page';
 studentRoutes.route('/explorer/career-goals/:careerGoal', {
   name: studentExplorerCareerGoalsPageRouteName,
   triggersEnter: [trackPath],
   action() {
-    BlazeLayout.render('Student_Layout', { main: studentExplorerCareerGoalsPageRouteName });
+    BlazeLayout.render('Student_Layout', { main: 'Explorer_CareerGoals_Page' });
   },
 });
 
@@ -643,7 +947,25 @@ studentRoutes.route('/explorer/courses/:course', {
   name: studentExplorerCoursesPageRouteName,
   triggersEnter: [trackPath],
   action() {
-    BlazeLayout.render('Student_Layout', { main: studentExplorerCoursesPageRouteName });
+    BlazeLayout.render('Student_Layout', { main: 'Explorer_Courses_Page' });
+  },
+});
+
+export const studentCardExplorerCoursesPageRouteName = 'Student_Card_Explorer_Courses_Page';
+studentRoutes.route('/explorer/courses/', {
+  name: studentCardExplorerCoursesPageRouteName,
+  triggersEnter: [trackPath],
+  action() {
+    BlazeLayout.render('Student_Layout', { main: 'Card_Explorer_Courses_Page' });
+  },
+});
+
+export const studentCardExplorerDegreesPageRouteName = 'Student_Card_Explorer_Degrees_Page';
+studentRoutes.route('/explorer/degrees/', {
+  name: studentCardExplorerDegreesPageRouteName,
+  triggersEnter: [trackPath],
+  action() {
+    BlazeLayout.render('Student_Layout', { main: 'Card_Explorer_Degrees_Page' });
   },
 });
 
@@ -652,16 +974,16 @@ studentRoutes.route('/explorer/degrees/:degree', {
   name: studentExplorerDegreesPageRouteName,
   triggersEnter: [trackPath],
   action() {
-    BlazeLayout.render('Student_Layout', { main: studentExplorerDegreesPageRouteName });
+    BlazeLayout.render('Student_Layout', { main: 'Explorer_Degrees_Page' });
   },
 });
 
-export const studentExplorerPlansPageRouteName = 'Student_Explorer_Plans_Page';
-studentRoutes.route('/explorer/plans/:plan', {
-  name: studentExplorerPlansPageRouteName,
+export const studentCardExplorerInterestsPageRouteName = 'Student_Card_Explorer_Interests_Page';
+studentRoutes.route('/explorer/interests/', {
+  name: studentCardExplorerInterestsPageRouteName,
   triggersEnter: [trackPath],
   action() {
-    BlazeLayout.render('Student_Layout', { main: studentExplorerPlansPageRouteName });
+    BlazeLayout.render('Student_Layout', { main: 'Card_Explorer_Interests_Page' });
   },
 });
 
@@ -670,7 +992,16 @@ studentRoutes.route('/explorer/interests/:interest', {
   name: studentExplorerInterestsPageRouteName,
   triggersEnter: [trackPath],
   action() {
-    BlazeLayout.render('Student_Layout', { main: studentExplorerInterestsPageRouteName });
+    BlazeLayout.render('Student_Layout', { main: 'Explorer_Interests_Page' });
+  },
+});
+
+export const studentCardExplorerOpportunitiesPageRouteName = 'Student_Card_Explorer_Opportunities_Page';
+studentRoutes.route('/explorer/opportunities/', {
+  name: studentCardExplorerOpportunitiesPageRouteName,
+  triggersEnter: [trackPath],
+  action() {
+    BlazeLayout.render('Student_Layout', { main: 'Card_Explorer_Opportunities_Page' });
   },
 });
 
@@ -679,16 +1010,34 @@ studentRoutes.route('/explorer/opportunities/:opportunity', {
   name: studentExplorerOpportunitiesPageRouteName,
   triggersEnter: [trackPath],
   action() {
-    BlazeLayout.render('Student_Layout', { main: studentExplorerOpportunitiesPageRouteName });
+    BlazeLayout.render('Student_Layout', { main: 'Explorer_Opportunities_Page' });
   },
 });
 
-export const studentExplorerUsersPageRouteName = 'Student_Explorer_Users_Page';
-studentRoutes.route('/explorer/users/:explorerUserName', {
-  name: studentExplorerUsersPageRouteName,
+export const studentCardExplorerPlansPageRouteName = 'Student_Card_Explorer_Plans_Page';
+studentRoutes.route('/explorer/plans/', {
+  name: studentCardExplorerPlansPageRouteName,
   triggersEnter: [trackPath],
   action() {
-    BlazeLayout.render('Student_Layout', { main: studentExplorerUsersPageRouteName });
+    BlazeLayout.render('Student_Layout', { main: 'Card_Explorer_Plans_Page' });
+  },
+});
+
+export const studentExplorerPlansPageRouteName = 'Student_Explorer_Plans_Page';
+studentRoutes.route('/explorer/plans/:plan', {
+  name: studentExplorerPlansPageRouteName,
+  triggersEnter: [trackPath],
+  action() {
+    BlazeLayout.render('Student_Layout', { main: 'Explorer_Plans_Page' });
+  },
+});
+
+export const studentCardExplorerUsersPageRouteName = 'Student_Card_Explorer_Users_Page';
+studentRoutes.route('/explorer/users/', {
+  name: studentCardExplorerUsersPageRouteName,
+  triggersEnter: [trackPath],
+  action() {
+    BlazeLayout.render('Student_Layout', { main: 'Card_Explorer_Users_Page' });
   },
 });
 
@@ -760,7 +1109,7 @@ studentRoutes.route('/explorer', {
   name: studentExplorerPageRouteName,
   triggersEnter: [trackPath],
   action() {
-    BlazeLayout.render('Student_Layout', { main: studentExplorerPageRouteName });
+    BlazeLayout.render('Student_Layout', { main: 'Explorer_Page' });
   },
 });
 

@@ -1,0 +1,50 @@
+<template name="Student_User_Card">
+  <div class="ui fluid card">
+    <div class="content">
+      <img class="right floated tiny ui image" src="{{picture}}" style="width: 90px; margin-bottom: 0;">
+      <div class="header">
+        {{name}}
+      </div>
+      <div class="meta">
+        {{role}}<br>
+        {{#if or isStudent isAlumni}}{{desiredDegree}} <br>
+          <img class="ui mini image" src='/images/level-icons/radgrad-level-{{level}}-icon.png'>
+        {{/if}}
+        {{#if website}}
+          {{#if isAdvisor}}
+            <a class="ui compact basic mini green button" href="{{website}}">
+              WEBSITE
+            </a><br>
+          {{/if}}
+          {{#if isMentor}}
+            <a class="ui compact basic mini green button" href="{{website}}">
+              WEBSITE
+            </a><br>
+          {{/if}}
+          {{#if isFaculty}}
+            <a class="ui compact basic mini green button" href="{{website}}">
+              WEBSITE
+            </a><br>
+          {{/if}}
+        {{/if}}
+        {{#if isAdvisor}}
+          {{email}}
+        {{/if}}
+        {{#if isMentor}}
+          {{email}}
+        {{/if}}
+        {{#if isFaculty}}
+          {{email}}
+        {{/if}}
+      </div>
+    </div>
+    {{#if isMentor}}
+      <div class="content">
+        {{> User_Answers_Component userID=userID}}
+      </div>
+    {{/if}}
+    <div class="extra content">
+      {{> Interest_List item=user size='mini'}}
+    </div>
+  </div>
+</template>

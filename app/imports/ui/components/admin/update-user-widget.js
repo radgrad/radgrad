@@ -13,7 +13,7 @@ import { MentorProfiles } from '../../../api/user/MentorProfileCollection';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { ROLE, ROLES } from '../../../api/role/Role.js';
-import * as FormUtils from './form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 
 const updateSchema = new SimpleSchema({
   username: String,
@@ -25,6 +25,7 @@ const updateSchema = new SimpleSchema({
   website: { type: String, optional: true },
   careerGoals: { type: Array }, 'careerGoals.$': String,
   interests: { type: Array }, 'interests.$': String,
+  retired: Boolean,
 }, { tracker: Tracker });
 
 const updateStudentSchema = new SimpleSchema({
@@ -42,10 +43,20 @@ const updateStudentSchema = new SimpleSchema({
   level: String,
   declaredSemester: { type: String, optional: true },
   academicPlan: { type: String, optional: true },
+  shareUsername: Boolean,
+  sharePicture: Boolean,
+  shareWebsite: Boolean,
+  shareCareerGoals: Boolean,
+  shareInterests: Boolean,
+  shareAcademicPlan: Boolean,
+  shareCourses: Boolean,
+  shareOpportunities: Boolean,
+  shareLevel: Boolean,
+  retired: Boolean,
 }, { tracker: Tracker });
 
 const updateMentorSchema = new SimpleSchema({
-  username: { type: String, custom: FormUtils.slugFieldValidator },
+  username: String,
   role: String,
   firstName: String,
   lastName: String,
@@ -60,6 +71,7 @@ const updateMentorSchema = new SimpleSchema({
   location: { type: String, optional: true },
   linkedin: { type: String, optional: true },
   motivation: { type: String, optional: true },
+  retired: Boolean,
 }, { tracker: Tracker });
 
 Template.Update_User_Widget.onCreated(function onCreated() {
@@ -114,7 +126,7 @@ Template.Update_User_Widget.helpers({
     return profile.declaredSemesterID;
   },
   semesters() {
-    return Semesters.find({});
+    return Semesters.findNonRetired({}, { sort: { semesterNumber: 1 } });
   },
   slug() {
     const profile = Users.getProfile(Template.currentData().updateID.get());
@@ -125,6 +137,14 @@ Template.Update_User_Widget.helpers({
   },
   userID() {
     return Template.currentData().updateID;
+  },
+  falseValueRetired() {
+    const profile = Users.getProfile(Template.currentData().updateID.get());
+    return !profile.retired;
+  },
+  trueValueRetired() {
+    const profile = Users.getProfile(Template.currentData().updateID.get());
+    return profile.retired;
   },
 });
 
@@ -142,7 +162,18 @@ Template.Update_User_Widget.events({
     const updateData = FormUtils.getSchemaDataFromEvent(schema, event);
     instance.context.reset();
     schema.clean(updateData, { mutate: true });
+    updateData.retired = updateData.retired === 'true';
+    updateData.shareUsername = updateData.shareUsername === 'true';
+    updateData.sharePicture = updateData.sharePicture === 'true';
+    updateData.shareWebsite = updateData.shareWebsite === 'true';
+    updateData.shareCareerGoals = updateData.shareCareerGoals === 'true';
+    updateData.shareInterests = updateData.shareInterests === 'true';
+    updateData.shareAcademicPlan = updateData.shareAcademicPlan === 'true';
+    updateData.shareCourses = updateData.shareCourses === 'true';
+    updateData.shareOpportunities = updateData.shareOpportunities === 'true';
+    updateData.shareLevel = updateData.shareLevel === 'true';
     instance.context.validate(updateData);
+    console.log('update_user_widget updateData=%o context=%o', updateData, instance.context);
     if (instance.context.isValid()) {
       let collectionName;
       switch (profile.role) {

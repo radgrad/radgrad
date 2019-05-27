@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import BaseSlugCollection from '../base/BaseSlugCollection';
 import { AcademicPlans } from './AcademicPlanCollection';
 import { Slugs } from '../slug/SlugCollection';
@@ -20,6 +21,7 @@ class DesiredDegreeCollection extends BaseSlugCollection {
       shortName: { type: String },
       slugID: { type: SimpleSchema.RegEx.Id },
       description: { type: String },
+      retired: { type: Boolean, optional: true },
     }));
   }
 
@@ -36,10 +38,10 @@ class DesiredDegreeCollection extends BaseSlugCollection {
    * @throws { Meteor.Error } If the slug already exists.
    * @returns The newly created docID.
    */
-  define({ name, shortName = name, slug, description }) {
+  define({ name, shortName = name, slug, description, retired }) {
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
-    const desiredDegreeID = this._collection.insert({ name, shortName, slugID, description });
+    const desiredDegreeID = this._collection.insert({ name, shortName, slugID, description, retired });
     // Connect the Slug to this Interest
     Slugs.updateEntityID(slugID, desiredDegreeID);
     return desiredDegreeID;
@@ -52,7 +54,7 @@ class DesiredDegreeCollection extends BaseSlugCollection {
    * @param shortName the short name of this degree.
    * @param description the description of this degree.
    */
-  update(instance, { name, shortName, description }) {
+  update(instance, { name, shortName, description, retired }) {
     const docID = this.getID(instance);
     const updateData = {};
     if (name) {
@@ -63,6 +65,9 @@ class DesiredDegreeCollection extends BaseSlugCollection {
     }
     if (description) {
       updateData.description = description;
+    }
+    if (_.isBoolean(retired)) {
+      updateData.retired = true;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -76,11 +81,13 @@ class DesiredDegreeCollection extends BaseSlugCollection {
   removeIt(instance) {
     const desiredDegreeID = this.getID(instance);
     // Check that this is not referenced by any AcademicPlans.
-    AcademicPlans.find().map(function (plan) {  // eslint-disable-line array-callback-return
-      if (plan.degreeID === desiredDegreeID) {
-        throw new Meteor.Error(`DesiredDegree ${instance} is referenced by a academic plan ${plan}.`);
-      }
-    });
+    AcademicPlans.find()
+      .map(function (plan) {  // eslint-disable-line array-callback-return
+        if (plan.degreeID === desiredDegreeID) {
+          throw new Meteor.Error(`DesiredDegree ${instance} is referenced by a academic plan ${plan}.`,
+            '', Error().stack);
+        }
+      });
     super.removeIt(desiredDegreeID);
   }
 
@@ -92,11 +99,12 @@ class DesiredDegreeCollection extends BaseSlugCollection {
    */
   checkIntegrity() {
     const problems = [];
-    this.find().forEach(doc => {
-      if (!Slugs.isDefined(doc.slugID)) {
-        problems.push(`Bad slugID: ${doc.slugID}`);
-      }
-    });
+    this.find()
+      .forEach(doc => {
+        if (!Slugs.isDefined(doc.slugID)) {
+          problems.push(`Bad slugID: ${doc.slugID}`);
+        }
+      });
     return problems;
   }
 
@@ -111,7 +119,8 @@ class DesiredDegreeCollection extends BaseSlugCollection {
     const shortName = doc.shortName;
     const slug = Slugs.getNameFromID(doc.slugID);
     const description = doc.description;
-    return { name, shortName, slug, description };
+    const retired = doc.retired;
+    return { name, shortName, slug, description, retired };
   }
 }
 

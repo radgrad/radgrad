@@ -31,13 +31,20 @@ if (Meteor.isServer) {
       const duration = '1:32:14';
       const interests = [makeSampleInterest()];
       const opportunity = makeSampleOpportunity(makeSampleUser(ROLE.FACULTY));
-      let instanceID = Teasers.define({ title, slug, author, url, description, duration, interests, opportunity });
-      expect(Teasers.isDefined(instanceID)).to.be.true;
-      const dumpObject = Teasers.dumpOne(instanceID);
-      Teasers.removeIt(instanceID);
-      expect(Teasers.isDefined(instanceID)).to.be.false;
-      instanceID = Teasers.restoreOne(dumpObject);
+      let docID = Teasers.define({ title, slug, author, url, description, duration, interests, opportunity });
+      expect(Teasers.isDefined(docID)).to.be.true;
+      let dumpObject = Teasers.dumpOne(docID);
+      expect(dumpObject.retired).to.be.undefined;
+      expect(Teasers.findNonRetired().length).to.equal(1);
+      Teasers.update(docID, { retired: true });
+      expect(Teasers.findNonRetired().length).to.equal(0);
+      Teasers.removeIt(docID);
+      expect(Teasers.isDefined(docID)).to.be.false;
+      docID = Teasers.restoreOne(dumpObject);
       expect(Teasers.isDefined(slug)).to.be.true;
+      Teasers.update(docID, { retired: true });
+      dumpObject = Teasers.dumpOne(docID);
+      expect(dumpObject.retired).to.be.true;
     });
   });
 }

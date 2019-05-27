@@ -1,0 +1,16 @@
+<template name="Admin_DataModel_Opportunity_Types_Page">
+
+  {{#if Template.subscriptionsReady}}
+    {{#Admin_DataModel_Layout}}
+      {{#if displayUpdateWidget}}
+        {{> Update_Opportunity_Type_Widget updateID=updateID}}
+      {{else}}
+        {{> Add_Opportunity_Type_Widget }}
+      {{/if}}
+      {{> List_Opportunity_Types_Widget updateID=updateID}}
+    {{/Admin_DataModel_Layout}}
+  {{else}}
+    {{> Loading message="Waiting for subscriptions."}}
+  {{/if}}
+
+</template>

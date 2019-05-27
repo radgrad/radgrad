@@ -1,0 +1,36 @@
+<template name="Activity_Calendar_Widget">
+  <div class="ui padded container segment">
+    <h4 class="ui dividing header">ACTIVITY MONITOR</h4>
+    <div class="ui three column grid">
+      <div class="center aligned column">
+        <div class="ui mini button prev">PREV</div>
+      </div>
+      <div class="center aligned column" style="padding-top: 20px;">
+        <div class="ui centered header"><h3>{{month}}</h3></div>
+      </div>
+      <div class="center aligned column">
+        <div class="ui mini button next">NEXT</div>
+      </div>
+    </div>
+    <div class="ui celled seven column grid">
+      <div class="grey row">
+        {{#each day in daysOfWeek}}
+          <div class="center aligned column"><strong>{{day}}</strong></div>
+        {{/each}}
+      </div>
+      {{#each week in monthArray}}
+        <div class="row">
+          {{test week}}
+          {{#each day in week}}
+            <div class="column">
+              <div class="ui one column grid">
+                {{test day}}
+                {{day}}
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</template>

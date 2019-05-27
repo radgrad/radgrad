@@ -1,0 +1,21 @@
+<template name="Update_Semester_Widget">
+
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>UPDATE SEMESTER</h4></div>
+    <form class="ui equal width form {{successClass}} {{errorClass}}">
+
+      <div class="fields">
+        {{> Input_Form_Field label='Term' name='term' value=semester.term errorMessage=(fieldError 'term') disabled=true}}
+        {{> Input_Form_Field label='Year' name='year' value=semester.year errorMessage=(fieldError 'year') disabled=true}}
+      </div>
+      <div class="fields">
+        {{> Boolean_Form_Field label='Retired' name='retired' trueValue=trueValueRetired falseValue=falseValueRetired errorMessage=(fieldError "retired")}}
+      </div>
+
+      <button class="ui green basic button" type="submit">Update</button>
+      <button class="ui green basic button jsCancel" type="submit">Cancel</button>
+      {{> Success_Message_Form_Field message="The Semester was successfully updated.  Press cancel to continue."}}
+    </form>
+  </div>
+
+</template>

@@ -3,7 +3,7 @@ import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
 import { InterestTypes } from '../../../api/interest/InterestTypeCollection.js';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
-import * as FormUtils from './form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 
 const addSchema = new SimpleSchema({
   name: String,

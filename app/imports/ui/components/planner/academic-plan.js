@@ -20,10 +20,13 @@ export const plannerKeys = {
   detailOpportunityInstance: 'detailOpportunityInstance',
   detailICE: 'detailICE',
   plannedEnrollment: 'plannedEnrollment',
+  selectedPlanTab: 'plan',
+  selectedInspectorTab: 'inspector',
 };
 
 Template.Academic_Plan.onCreated(function academicPlanOnCreated() {
   this.state = new ReactiveDict();
+  this.state.set(plannerKeys.selectedPlanTab, true);
   this.startYearIndex = new ReactiveVar();
 });
 

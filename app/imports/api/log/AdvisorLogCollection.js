@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { moment } from 'meteor/momentjs:moment';
 import { Roles } from 'meteor/alanning:roles';
 import SimpleSchema from 'simpl-schema';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
 import { Users } from '../user/UserCollection';
@@ -23,6 +24,7 @@ class AdvisorLogCollection extends BaseCollection {
       advisorID: { type: SimpleSchema.RegEx.Id },
       text: { type: String },
       createdOn: { type: Date },
+      retired: { type: Boolean, optional: true },
     }));
   }
 
@@ -37,11 +39,25 @@ class AdvisorLogCollection extends BaseCollection {
    * @param advisor The advisor's username.
    * @param student The student's username.
    * @param text The contents of the session.
+   * @param createdOn the Date the log was created (optional).
+   * @param retired the retired status (optional).
    */
-  define({ advisor, student, text, createdOn = moment().toDate() }) {
+  define({ advisor, student, text, createdOn = moment().toDate(), retired }) {
     const advisorID = Users.getID(advisor);
     const studentID = Users.getID(student);
-    this._collection.insert({ advisorID, studentID, text, createdOn });
+    return this._collection.insert({ advisorID, studentID, text, createdOn, retired });
+  }
+
+  update(docID, { text, retired }) {
+    this.assertDefined(docID);
+    const updateData = {};
+    if (text) {
+      updateData.text = text;
+    }
+    if (_.isBoolean(retired)) {
+      updateData.retired = retired;
+    }
+    this._collection.update(docID, { $set: updateData });
   }
 
   /**
@@ -126,7 +142,8 @@ class AdvisorLogCollection extends BaseCollection {
     const advisor = Users.getProfile(doc.advisorID).username;
     const text = doc.text;
     const createdOn = doc.createdOn;
-    return { student, advisor, text, createdOn };
+    const retired = doc.retired;
+    return { student, advisor, text, createdOn, retired };
   }
 }
 
@@ -136,4 +153,3 @@ class AdvisorLogCollection extends BaseCollection {
  * @memberOf api/log
  */
 export const AdvisorLogs = new AdvisorLogCollection();
-

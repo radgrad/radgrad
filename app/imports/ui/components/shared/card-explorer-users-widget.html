@@ -1,0 +1,56 @@
+<template name="Card_Explorer_Users_Widget">
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>USERS</h4></div>
+    <div class="ui top attached tabular stackable menu">
+      <a class="item" data-tab="advisors">Advisors</a>
+      <a class="item" data-tab="faculty">Faculty</a>
+      <a class="item" data-tab="mentors">Mentors</a>
+      <a class="active item" data-tab="students">Students</a>
+    </div>
+    <div class="ui bottom attached tab segment" data-tab="advisors">
+      <div class="ui stackable grid">
+        <div style="max-height: 750px; overflow-x:hidden; overflow-y:scroll; margin-top: 10px;"
+             class="ui stackable three cards">
+          {{#each user in users advisorRole}}
+            {{> Student_User_Card user=user}}
+          {{/each}}
+        </div>
+      </div>
+    </div>
+    <div class="ui bottom attached tab segment" data-tab="faculty">
+      <div class="ui stackable grid">
+        <div style="max-height: 750px; overflow-x:hidden; overflow-y:scroll; margin-top: 10px;"
+             class="ui stackable three cards">
+          {{#each user in users facultyRole}}
+            {{> Student_User_Card user=user}}
+          {{/each}}
+        </div>
+      </div>
+    </div>
+    <div class="ui bottom attached tab segment" data-tab="mentors">
+      <div class="ui stackable grid">
+        <div style="max-height: 750px; overflow-x:hidden; overflow-y:scroll; margin-top: 10px;"
+             class="ui stackable three cards">
+          {{#each user in users mentorRole}}
+            {{> Student_User_Card user=user}}
+          {{/each}}
+        </div>
+      </div>
+    </div>
+    <div class="ui bottom attached active tab segment" data-tab="students">
+      <div class="ui stackable grid">
+        <div class="row">
+          <div class="ui center aligned column">
+            <div class="ui message">Only showing students who have opted to share their information.</div>
+          </div>
+        </div>
+        <div style="max-height: 750px; overflow-x:hidden; overflow-y:scroll; margin-top: 10px;"
+             class="ui stackable three cards">
+          {{#each user in users studentRole}}
+            {{> Student_User_Card user=user}}
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

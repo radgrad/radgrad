@@ -26,8 +26,9 @@ class AcademicPlanCollection extends BaseSlugCollection {
       effectiveSemesterID: SimpleSchema.RegEx.Id,
       semesterNumber: Number,
       year: Number,
-      coursesPerSemester: { type: Array, minCount: 12, maxCount: 12 }, 'coursesPerSemester.$': Number,
+      coursesPerSemester: { type: Array, minCount: 12, maxCount: 15 }, 'coursesPerSemester.$': Number,
       courseList: [String],
+      retired: { type: Boolean, optional: true },
     }));
     if (Meteor.server) {
       this._collection._ensureIndex({ _id: 1, degreeID: 1, effectiveSemesterID: 1 });
@@ -54,9 +55,10 @@ class AcademicPlanCollection extends BaseSlugCollection {
    * @param semester the slug for the semester.
    * @param coursesPerSemester an array of the number of courses to take in each semester.
    * @param courseList an array of PlanChoices. The choices for each course.
+   * @param retired optional, defaults to false, allows for retiring an academic plan.
    * @returns {*}
    */
-  define({ slug, degreeSlug, name, description, semester, coursesPerSemester, courseList }) {
+  define({ slug, degreeSlug, name, description, semester, coursesPerSemester, courseList, retired }) {
     const degreeID = Slugs.getEntityID(degreeSlug, 'DesiredDegree');
     const effectiveSemesterID = Semesters.getID(semester);
     const doc = this._collection.findOne({ degreeID, name, effectiveSemesterID });
@@ -69,7 +71,8 @@ class AcademicPlanCollection extends BaseSlugCollection {
     const semesterNumber = semesterDoc.semesterNumber;
     const year = semesterDoc.year;
     const planID = this._collection.insert({
-      slugID, degreeID, name, description, effectiveSemesterID, semesterNumber, year, coursesPerSemester, courseList,
+      slugID, degreeID, name, description, effectiveSemesterID, semesterNumber, year, coursesPerSemester,
+      courseList, retired,
     });
     // Connect the Slug to this AcademicPlan.
     Slugs.updateEntityID(slugID, planID);
@@ -84,8 +87,9 @@ class AcademicPlanCollection extends BaseSlugCollection {
    * @param semester the first semester this plan is effective.
    * @param coursesPerSemester an array of the number of courses per semester.
    * @param courseList an array of PlanChoices, the choices for each course.
+   * @param retired a boolean true if the academic plan is retired.
    */
-  update(instance, { degreeSlug, name, semester, coursesPerSemester, courseList }) {
+  update(instance, { degreeSlug, name, semester, coursesPerSemester, courseList, retired }) {
     const docID = this.getID(instance);
     const updateData = {};
     if (degreeSlug) {
@@ -95,29 +99,35 @@ class AcademicPlanCollection extends BaseSlugCollection {
       updateData.name = name;
     }
     if (semester) {
-      updateData.effectiveSemesterID = Semesters.getID(semester);
+      const sem = Semesters.findDoc(Semesters.getID(semester));
+      updateData.effectiveSemesterID = sem._id;
+      updateData.year = sem.year;
+      updateData.semesterNumber = sem.semesterNumber;
     }
     if (coursesPerSemester) {
       if (!Array.isArray(coursesPerSemester)) {
-        throw new Meteor.Error(`CoursesPerSemester ${coursesPerSemester} is not an Array.`);
+        throw new Meteor.Error(`CoursesPerSemester ${coursesPerSemester} is not an Array.`, '', Error().stack);
       }
       _.forEach(coursesPerSemester, (cps) => {
         if (!_.isNumber(cps)) {
-          throw new Meteor.Error(`CoursePerSemester ${cps} is not a Number.`);
+          throw new Meteor.Error(`CoursePerSemester ${cps} is not a Number.`, '', Error().stack);
         }
       });
       updateData.coursesPerSemester = coursesPerSemester;
     }
     if (courseList) {
       if (!Array.isArray(courseList)) {
-        throw new Meteor.Error(`CourseList ${courseList} is not an Array.`);
+        throw new Meteor.Error(`CourseList ${courseList} is not an Array.`, '', Error().stack);
       }
       _.forEach(courseList, (pc) => {
         if (!_.isString(pc)) {
-          throw new Meteor.Error(`CourseList ${pc} is not a PlanChoice.`);
+          throw new Meteor.Error(`CourseList ${pc} is not a PlanChoice.`, '', Error().stack);
         }
       });
       updateData.courseList = courseList;
+    }
+    if (_.isBoolean(retired)) {
+      updateData.retired = retired;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -132,7 +142,7 @@ class AcademicPlanCollection extends BaseSlugCollection {
     // Check that no student is using this AcademicPlan.
     const isReferenced = Users.someProfiles(profile => profile.academicPlanID === academicPlanID);
     if (isReferenced) {
-      throw new Meteor.Error(`AcademicPlan ${instance} is referenced.`);
+      throw new Meteor.Error(`AcademicPlan ${instance} is referenced.`, '', Error().stack);
     }
     super.removeIt(academicPlanID);
   }
@@ -179,11 +189,20 @@ class AcademicPlanCollection extends BaseSlugCollection {
   }
 
   /**
+   * Returns an array of the latest AcademicPlans.
+   * @return {array}
+   */
+  getLatestPlans() {
+    const semesterNumber = this.getLatestSemesterNumber();
+    return this.findNonRetired({ semesterNumber });
+  }
+
+  /**
    * Returns the largest semester number.
    * @return {number}
    */
   getLatestSemesterNumber() {
-    const plans = this._collection.find().fetch();
+    const plans = this.findNonRetired();
     let max = 0;
     _.forEach(plans, (p) => {
       if (max < p.semesterNumber) {
@@ -220,7 +239,8 @@ class AcademicPlanCollection extends BaseSlugCollection {
     const semester = Slugs.findDoc(semesterDoc.slugID).name;
     const coursesPerSemester = doc.coursesPerSemester;
     const courseList = doc.courseList;
-    return { slug, degreeSlug, name, description, semester, coursesPerSemester, courseList };
+    const retired = doc.retired;
+    return { slug, degreeSlug, name, description, semester, coursesPerSemester, courseList, retired };
   }
 
 }

@@ -107,7 +107,7 @@ class PublicStatsCollection extends BaseCollection {
   }
 
   coursesTotal() {
-    const count = Courses.find().count();
+    const count = Courses.findNonRetired().length;
     this._collection.upsert({ key: this.coursesTotalKey }, { $set: { value: `${count}` } });
   }
 
@@ -118,12 +118,12 @@ class PublicStatsCollection extends BaseCollection {
   }
 
   desiredDegreesTotal() {
-    const count = DesiredDegrees.find().count();
+    const count = DesiredDegrees.findNonRetired().length;
     this._collection.upsert({ key: this.desiredDegreesTotalKey }, { $set: { value: `${count}` } });
   }
 
   desiredDegreesList() {
-    const degrees = DesiredDegrees.find().fetch();
+    const degrees = DesiredDegrees.findNonRetired();
     const names = _.map(degrees, 'name');
     this._collection.upsert({ key: this.desiredDegreesListKey }, { $set: { value: names.join(', ') } });
   }
@@ -140,20 +140,22 @@ class PublicStatsCollection extends BaseCollection {
   }
 
   opportunitiesTotal() {
-    const numOpps = Opportunities.find().count();
+    const notRetired = Opportunities.findNonRetired();
+    const numOpps = notRetired.length;
     this._collection.upsert({ key: this.opportunitiesTotalKey }, { $set: { value: `${numOpps}` } });
   }
 
   opportunitiesProjectsTotal() {
     const projectType = OpportunityTypes.findDoc({ name: 'Project' });
-    const numProjects = Opportunities.find({ opportunityTypeID: projectType._id }).count();
+    const opps = Opportunities.findNonRetired({ opportunityTypeID: projectType._id });
+    const numProjects = opps.length;
     this._collection.upsert({ key: this.opportunitiesProjectsTotalKey }, { $set: { value: `${numProjects}` } });
   }
 
   opportunitiesProjectsList() {
     const projectType = OpportunityTypes.findDoc({ name: 'Project' });
-    const projects = Opportunities.find({ opportunityTypeID: projectType._id }).fetch();
-    const names = _.map(projects, 'name');
+    const notRetired = Opportunities.findNonRetired({ opportunityTypeID: projectType._id });
+    const names = _.map(notRetired, 'name');
     this._collection.upsert({ key: this.opportunitiesProjectsListKey }, { $set: { value: names.join(', ') } });
   }
 
@@ -230,7 +232,7 @@ class PublicStatsCollection extends BaseCollection {
     let courseNumbers = [];
     _.forEach(courseReviews, (review) => {
       const course = Courses.findDoc(review.revieweeID);
-      courseNumbers.push(course.number);
+      courseNumbers.push(course.number); // CAM: should we filter retired courses?
     });
     courseNumbers = _.union(courseNumbers);
     if (courseNumbers) {
@@ -265,9 +267,9 @@ class PublicStatsCollection extends BaseCollection {
   }
 
   firstOpportunity() {
-    const interests = Opportunities.find({}, { sort: { name: 1 } }).fetch();
-    if (interests.length > 0) {
-      const name = Slugs.findDoc(interests[0].slugID).name;
+    const opps = Opportunities.findNonRetired({}, { sort: { name: 1 } });
+    if (opps.length > 0) {
+      const name = Slugs.findDoc(opps[0].slugID).name;
       this._collection.upsert({ key: this.firstOpportunityKey }, { $set: { value: name } });
     }
   }

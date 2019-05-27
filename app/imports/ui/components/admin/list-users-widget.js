@@ -1,6 +1,7 @@
 import { Template } from 'meteor/templating';
 import { Roles } from 'meteor/alanning:roles';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { ReactiveVar } from 'meteor/reactive-var';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { ROLE } from '../../../api/role/Role';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
@@ -10,20 +11,106 @@ import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { makeLink } from './datamodel-utilities';
-import * as FormUtils from './form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 import { AdvisorProfiles } from '../../../api/user/AdvisorProfileCollection';
 import { FacultyProfiles } from '../../../api/user/FacultyProfileCollection';
 import { MentorProfiles } from '../../../api/user/MentorProfileCollection';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 
+Template.List_Users_Widget.onCreated(function listUsersWidgetOnCreated() {
+  this.advisorItemCount = new ReactiveVar(25);
+  this.advisorItemIndex = new ReactiveVar(0);
+  this.alumniItemCount = new ReactiveVar(25);
+  this.alumniItemIndex = new ReactiveVar(0);
+  this.facultyItemCount = new ReactiveVar(25);
+  this.facultyItemIndex = new ReactiveVar(0);
+  this.mentorItemCount = new ReactiveVar(25);
+  this.mentorItemIndex = new ReactiveVar(0);
+  this.studentItemCount = new ReactiveVar(25);
+  this.studentItemIndex = new ReactiveVar(0);
+});
+
 Template.List_Users_Widget.helpers({
-  users() {
-    return _.sortBy(Users.findProfiles({}, { sort: { lastName: 1 } }), function (u) {
-      return u.lastName;
-    });
+  users(role) {
+    let regex;
+    const profiles = Users.findProfilesWithRole(role, {}, { sort: { lastName: 1 } });
+    regex = RegExp(Template.instance()
+      .firstNameRegex
+      .get());
+    let filtered = _.filter(profiles, p => regex.test(p.firstName));
+    regex = RegExp(Template.instance()
+      .lastNameRegex
+      .get());
+    filtered = _.filter(filtered, p => regex.test(p.lastName));
+    regex = RegExp(Template.instance()
+      .userNameRegex
+      .get());
+    filtered = _.filter(filtered, p => regex.test(p.username));
+    let startIndex;
+    let endIndex;
+    switch (role) {
+      case ROLE.ADVISOR:
+        startIndex = Template.instance()
+          .advisorItemIndex
+          .get();
+        endIndex = startIndex + Template.instance()
+          .advisorItemCount
+          .get();
+        break;
+      case ROLE.ALUMNI:
+        startIndex = Template.instance()
+          .alumniItemIndex
+          .get();
+        endIndex = startIndex + Template.instance()
+          .alumniItemCount
+          .get();
+        break;
+      case ROLE.FACULTY:
+        startIndex = Template.instance()
+          .facultyItemIndex
+          .get();
+        endIndex = startIndex + Template.instance()
+          .facultyItemCount
+          .get();
+        break;
+      case ROLE.MENTOR:
+        startIndex = Template.instance()
+          .mentorItemIndex
+          .get();
+        endIndex = startIndex + Template.instance()
+          .mentorItemCount
+          .get();
+        break;
+      case ROLE.STUDENT:
+        startIndex = Template.instance()
+          .studentItemIndex
+          .get();
+        endIndex = startIndex + Template.instance()
+          .studentItemCount
+          .get();
+        break;
+      default:
+        startIndex = 0;
+        endIndex = 10;
+    }
+    return _.slice(filtered, startIndex, endIndex);
   },
   count() {
-    return Users.findProfiles().length;
+    let regex;
+    const profiles = Users.findProfiles();
+    regex = RegExp(Template.instance()
+      .firstNameRegex
+      .get());
+    let filtered = _.filter(profiles, p => regex.test(p.firstName));
+    regex = RegExp(Template.instance()
+      .lastNameRegex
+      .get());
+    filtered = _.filter(filtered, p => regex.test(p.lastName));
+    regex = RegExp(Template.instance()
+      .userNameRegex
+      .get());
+    filtered = _.filter(filtered, p => regex.test(p.username));
+    return filtered.length;
   },
   deleteDisabled(user) {
     // TODO We have a race condition? the user profile is valid, but Users.getID fails.
@@ -70,6 +157,7 @@ Template.List_Users_Widget.helpers({
         label: 'Declared Semester',
         value: (user.declaredSemesterID) ? Semesters.toString(user.declaredSemesterID) : '',
       });
+      // pairs.push({ label: 'Share Email', value: user.shareUsername ? 'True' : 'False' });
     }
     if (user.role === ROLE.MENTOR) {
       pairs.push({ label: 'Company', value: user.company });
@@ -78,7 +166,156 @@ Template.List_Users_Widget.helpers({
       pairs.push({ label: 'LinkedIn', value: user.linkedin });
       pairs.push({ label: 'Motivation', value: user.motivation });
     }
+    pairs.push({ label: 'Retired', value: user.retired ? 'True' : 'False' });
     return pairs;
+  },
+  alumniRole() {
+    return ROLE.ALUMNI;
+  },
+  studentRole() {
+    return ROLE.STUDENT;
+  },
+  mentorRole() {
+    return ROLE.MENTOR;
+  },
+  advisorRole() {
+    return ROLE.ADVISOR;
+  },
+  facultyRole() {
+    return ROLE.FACULTY;
+  },
+  alumniCount() {
+    let regex;
+    const profiles = Users.findProfilesWithRole(ROLE.ALUMNI, {}, { sort: { lastName: 1 } });
+    regex = RegExp(Template.instance()
+      .firstNameRegex
+      .get());
+    let filtered = _.filter(profiles, p => regex.test(p.firstName));
+    regex = RegExp(Template.instance()
+      .lastNameRegex
+      .get());
+    filtered = _.filter(filtered, p => regex.test(p.lastName));
+    regex = RegExp(Template.instance()
+      .userNameRegex
+      .get());
+    filtered = _.filter(filtered, p => regex.test(p.username));
+    return filtered.length;
+  },
+  studentCount() {
+    let regex;
+    const profiles = Users.findProfilesWithRole(ROLE.STUDENT, {}, { sort: { lastName: 1 } });
+    regex = RegExp(Template.instance()
+      .firstNameRegex
+      .get());
+    let filtered = _.filter(profiles, p => regex.test(p.firstName));
+    regex = RegExp(Template.instance()
+      .lastNameRegex
+      .get());
+    filtered = _.filter(filtered, p => regex.test(p.lastName));
+    regex = RegExp(Template.instance()
+      .userNameRegex
+      .get());
+    filtered = _.filter(filtered, p => regex.test(p.username));
+    return filtered.length;
+  },
+  mentorCount() {
+    let regex;
+    const profiles = Users.findProfilesWithRole(ROLE.MENTOR, {}, { sort: { lastName: 1 } });
+    regex = RegExp(Template.instance()
+      .firstNameRegex
+      .get());
+    let filtered = _.filter(profiles, p => regex.test(p.firstName));
+    regex = RegExp(Template.instance()
+      .lastNameRegex
+      .get());
+    filtered = _.filter(filtered, p => regex.test(p.lastName));
+    regex = RegExp(Template.instance()
+      .userNameRegex
+      .get());
+    filtered = _.filter(filtered, p => regex.test(p.username));
+    return filtered.length;
+  },
+  facultyCount() {
+    let regex;
+    const profiles = Users.findProfilesWithRole(ROLE.FACULTY, {}, { sort: { lastName: 1 } });
+    regex = RegExp(Template.instance()
+      .firstNameRegex
+      .get());
+    let filtered = _.filter(profiles, p => regex.test(p.firstName));
+    regex = RegExp(Template.instance()
+      .lastNameRegex
+      .get());
+    filtered = _.filter(filtered, p => regex.test(p.lastName));
+    regex = RegExp(Template.instance()
+      .userNameRegex
+      .get());
+    filtered = _.filter(filtered, p => regex.test(p.username));
+    return filtered.length;
+  },
+  advisorCount() {
+    let regex;
+    const profiles = Users.findProfilesWithRole(ROLE.ADVISOR, {}, { sort: { lastName: 1 } });
+    regex = RegExp(Template.instance()
+      .firstNameRegex
+      .get());
+    let filtered = _.filter(profiles, p => regex.test(p.firstName));
+    regex = RegExp(Template.instance()
+      .lastNameRegex
+      .get());
+    filtered = _.filter(filtered, p => regex.test(p.lastName));
+    regex = RegExp(Template.instance()
+      .userNameRegex
+      .get());
+    filtered = _.filter(filtered, p => regex.test(p.username));
+    return filtered.length;
+  },
+  firstNameRegex() {
+    return Template.instance().firstNameRegex;
+  },
+  lastNameRegex() {
+    return Template.instance().lastNameRegex;
+  },
+  userNameRegex() {
+    return Template.instance().userNameRegex;
+  },
+  retired(item) {
+    return item.retired;
+  },
+  getAdvisorItemCount() {
+    return Template.instance().advisorItemCount;
+  },
+  getAdvisorItemIndex() {
+    return Template.instance().advisorItemIndex;
+  },
+  getAdvisorProfileCollection() {
+    return AdvisorProfiles;
+  },
+  getFacultyItemCount() {
+    return Template.instance().facultyItemCount;
+  },
+  getFacultyItemIndex() {
+    return Template.instance().facultyItemIndex;
+  },
+  getFacultyProfileCollection() {
+    return FacultyProfiles;
+  },
+  getMentorItemCount() {
+    return Template.instance().mentorItemCount;
+  },
+  getMentorItemIndex() {
+    return Template.instance().mentorItemIndex;
+  },
+  getMentorProfileCollection() {
+    return MentorProfiles;
+  },
+  getStudentItemCount() {
+    return Template.instance().studentItemCount;
+  },
+  getStudentItemIndex() {
+    return Template.instance().studentItemIndex;
+  },
+  getStudentProfileCollection() {
+    return StudentProfiles;
   },
 });
 
@@ -108,4 +345,15 @@ Template.List_Users_Widget.events({
       }
     });
   },
+});
+
+Template.List_Users_Widget.onCreated(function adminListUsersOnCreated() {
+  this.firstNameRegex = new ReactiveVar();
+  this.lastNameRegex = new ReactiveVar();
+  this.userNameRegex = new ReactiveVar();
+});
+
+Template.List_Users_Widget.onRendered(function adminListUsersOnRendered() {
+  this.$('.menu .item')
+    .tab();
 });

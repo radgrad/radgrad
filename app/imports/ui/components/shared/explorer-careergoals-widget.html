@@ -1,0 +1,60 @@
+<template name="Explorer_CareerGoals_Widget">
+
+    <div class="ui segments" style="background-color: white;">
+      <div class="ui padded segment container">
+
+        <div class="ui clearing basic segment" style="margin: 0; padding: 0;">
+          <h4 class="ui left floated header vertically aligned">{{toUpper name}}</h4>
+            {{#if userStatus item}}
+              <button value="{{id}}" class="ui basic green mini right floated button deleteItem" style="margin-bottom: 1rem;">REMOVE FROM CAREER GOALS</button>
+            {{else}}
+              <button value="{{id}}" class="ui basic green mini right floated button addItem mobile hidden" style="margin-bottom: 1rem;">ADD TO CAREER GOALS</button>
+            {{/if}}
+        </div>
+
+        <div class="ui divider" style="margin-top: 0;"></div>
+
+        <div class="ui stackable grid">
+          <div class="column">
+            {{#each descriptionPair in descriptionPairs}}
+
+              {{#if isLabel descriptionPair.label 'Description'}}
+                <b>{{descriptionPair.label}}:</b>
+                {{#if descriptionPair.value}} {{{markdownify descriptionPair.value}}}
+                  {{else}}
+                    N/A <br>
+                {{/if}}
+              {{/if}}
+
+              {{#if isLabel descriptionPair.label 'Interests'}}
+                <div style="margin-top: 5px">
+                  {{> Interest_List item=item size='mini'}}
+                  <!--{{#each interest in descriptionPair.value}}-->
+                    <!--<a class="ui right aligned mini label" href="{{pathFor interestsRouteName username=routeUserName interest = (interestSlugName interest)}}"><i class="fitted star icon"></i>{{interest}}</a>-->
+                  <!--{{/each}}-->
+                </div>
+              {{/if}}
+
+            {{/each}}
+          </div>
+        </div>
+      </div>
+
+      <div class="ui segment" style="padding-left: 0; padding-right: 0;">
+        <div class="ui internally celled stackable grid">
+          {{#each socialPair in socialPairs}}
+            <div class="ui center aligned column" style="min-width: 25%;">
+                <h5>{{toUpper socialPair.label}} {{> Widget_Header_Number inputValue = socialPair.amount}}</h5>
+
+              <div class="ui circular mini bordered images" style="overflow: visible;">
+                {{#each user in socialPair.value}}
+                  <a href="{{pathFor usersRouteName username=routeUserName explorerUserName=(userUsername user)}}" data-position="bottom left" data-tooltip="{{fullName user}}"><img style="height:30px; width: auto;" class="ui image" src={{userPicture user}}></a>
+                {{/each}}
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+
+</template>

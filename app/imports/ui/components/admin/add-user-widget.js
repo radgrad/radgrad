@@ -14,7 +14,7 @@ import { AdvisorProfiles } from '../../../api/user/AdvisorProfileCollection';
 import { FacultyProfiles } from '../../../api/user/FacultyProfileCollection';
 import { MentorProfiles } from '../../../api/user/MentorProfileCollection';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
-import * as FormUtils from './form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 
 
 const addSchema = new SimpleSchema({
@@ -92,7 +92,7 @@ Template.Add_User_Widget.helpers({
     return ROLE.STUDENT;
   },
   semesters() {
-    return Semesters.find({}, { sort: { semesterNumber: -1 } });
+    return Semesters.findNonRetired({}, { sort: { semesterNumber: -1 } });
   },
 });
 

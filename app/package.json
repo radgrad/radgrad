@@ -8,28 +8,32 @@
     "lint-loud": "eslint ./imports",
     "pretest": "npm run lint",
     "test": "TEST_BROWSER_DRIVER=nightmare meteor test --once --driver-package dispatch:mocha --no-release-check --port 3100",
+    "test-debug": "TEST_BROWSER_DRIVER=nightmare meteor test --once --driver-package dispatch:mocha --no-release-check --port 3100 --inspect-brk=5858",
     "test-app": "METEOR_NO_RELEASE_CHECK=1 TEST_BROWSER_DRIVER=nightmare meteor test --full-app --once --driver-package dispatch:mocha --port 3100",
     "test-watch": "TEST_WATCH=1 TEST_BROWSER_DRIVER=nightmare meteor test --driver-package dispatch:mocha --no-release-check --port 3100",
+    "pretest-win": "npm run lint",
+    "test-win": "meteor test --once --driver-package dispatch:mocha --no-release-check --port 3100",
+    "test-app-win": "meteor test --full-app --once --driver-package dispatch:mocha --no-release-check --port 3100",
     "coverage-cam": "meteor test --driver-package practicalmeteor:mocha --port 3100 --no-release-check --settings ../config/settings.coverage.cam.json",
     "jsdoc": "./node_modules/.bin/jsdoc -c ./jsdoc.json -r .",
     "deploy": "DEPLOY_HOSTNAME=galaxy.meteor.com meteor deploy radgrad.meteorapp.com --settings ../config/settings.production.json"
   },
   "dependencies": {
-    "@babel/runtime": "^7.0.0-beta.46",
+    "@babel/runtime": "^7.1.2",
     "babel-runtime": "^6.26.0",
     "bcrypt": "^0.8.7",
-    "chromedriver": "^2.38.0",
+    "chromedriver": "^2.38.2",
     "meteor-node-stubs": "^0.2.11",
     "node-balanced": "0.0.14",
-    "npm": "^5.8.0",
+    "npm": "^6.9.0",
     "selenium-webdriver": "^3.6.0",
     "simpl-schema": "^0.3.2",
-    "webdriverio": "^4.12.0"
+    "webdriverio": "^4.13.2"
   },
   "devDependencies": {
     "chai": "*",
     "docdash": "^0.3.0",
-    "electron": "^1.8.4",
+    "electron": "^4.0.5",
     "es6-enum": "^1.0.3",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^15.0.1",
@@ -37,7 +41,7 @@
     "eslint-plugin-jsx-a11y": "^5.0.3",
     "eslint-plugin-meteor": "^4.2.1",
     "eslint-plugin-react": "^7.7.0",
-    "jsdoc": "^3.4.0",
+    "jsdoc": "^3.6.1",
     "nightmare": "^2.10.0",
     "radgrad-jsdoc-template": "^1.1.3"
   }

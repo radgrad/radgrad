@@ -2,12 +2,15 @@ import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Roles } from 'meteor/alanning:roles';
 import SimpleSchema from 'simpl-schema';
+import { ReactiveAggregate } from 'meteor/jcbernack:reactive-aggregate';
 import { Opportunities } from '../opportunity/OpportunityCollection';
 import { ROLE } from '../role/Role';
 import { AcademicYearInstances } from '../degree-plan/AcademicYearInstanceCollection';
 import { Semesters } from '../semester/SemesterCollection';
 import { Users } from '../user/UserCollection';
 import BaseCollection from '../base/BaseCollection';
+import { VerificationRequests } from '../verification/VerificationRequestCollection';
+import { StudentProfiles } from '../user/StudentProfileCollection';
 
 
 /**
@@ -28,11 +31,13 @@ class OpportunityInstanceCollection extends BaseCollection {
       studentID: { type: SimpleSchema.RegEx.Id },
       sponsorID: { type: SimpleSchema.RegEx.Id },
       ice: { type: Object, optional: true, blackbox: true },
+      retired: { type: Boolean, optional: true },
     }));
     this.publicationNames = {
       student: this._collectionName,
       perStudentAndSemester: `${this._collectionName}.PerStudentAndSemester`,
       studentID: `${this._collectionName}.studentID`,
+      publicStudent: `${this._collectionName}.publicStudent`,
     };
     if (Meteor.server) {
       this._collection._ensureIndex({ _id: 1, studentID: 1, semesterID: 1 });
@@ -46,7 +51,7 @@ class OpportunityInstanceCollection extends BaseCollection {
    *                               opportunity: 'hack2015',
    *                               verified: false,
    *                               student: 'joesmith',
-    *                              sponsor: 'johnson' });
+   *                              sponsor: 'johnson' });
    * @param { Object } description Semester, opportunity, and student must be slugs or IDs. Verified defaults to false.
    * Sponsor defaults to the opportunity sponsor.
    * Note that only one opportunity instance can be defined for a given semester, opportunity, and student.
@@ -54,7 +59,7 @@ class OpportunityInstanceCollection extends BaseCollection {
    * @returns The newly created docID.
    */
 
-  define({ semester, opportunity, sponsor = undefined, verified = false, student }) {
+  define({ semester, opportunity, sponsor = undefined, verified = false, student, retired }) {
     // Validate semester, opportunity, verified, and studentID
     const semesterID = Semesters.getID(semester);
     const semesterDoc = Semesters.findDoc(semesterID);
@@ -74,21 +79,22 @@ class OpportunityInstanceCollection extends BaseCollection {
       AcademicYearInstances.define({ year: semesterDoc.year, student: studentProfile.username });
     }
     if ((typeof verified) !== 'boolean') {
-      throw new Meteor.Error(`${verified} is not a boolean.`);
+      throw new Meteor.Error(`${verified} is not a boolean.`, '', Error().stack);
     }
     if (this.isOpportunityInstance(semester, opportunity, student)) {
       return this.findOpportunityInstanceDoc(semester, opportunity, student)._id;
     }
     const ice = Opportunities.findDoc(opportunityID).ice;
     // Define and return the new OpportunityInstance
-    const opportunityInstanceID = this._collection.insert({ semesterID,
+    return this._collection.insert({
+      semesterID,
       opportunityID,
       verified,
       studentID,
       sponsorID,
       ice,
+      retired,
     });
-    return opportunityInstanceID;
   }
 
   /**
@@ -96,9 +102,10 @@ class OpportunityInstanceCollection extends BaseCollection {
    * @param docID The course instance docID (required).
    * @param semesterID the semesterID for the course instance optional.
    * @param verified boolean optional.
-   * @param ice an object with fields i, c, e (optional)
+   * @param ice an object with fields i, c, e (optional).
+   * @param retired the new retired status (optional).
    */
-  update(docID, { semesterID, verified, ice }) {
+  update(docID, { semesterID, verified, ice, retired }) {
     this.assertDefined(docID);
     const updateData = {};
     if (semesterID) {
@@ -110,6 +117,9 @@ class OpportunityInstanceCollection extends BaseCollection {
     if (ice) {
       updateData.ice = ice;
     }
+    if (_.isBoolean(retired)) {
+      updateData.retired = retired;
+    }
     this._collection.update(docID, { $set: updateData });
   }
 
@@ -119,7 +129,12 @@ class OpportunityInstanceCollection extends BaseCollection {
    */
   removeIt(docID) {
     this.assertDefined(docID);
-    // OK, clear to delete.
+    // find any VerificationRequests associated with docID and remove them.
+    const requests = VerificationRequests.find({ opportunityInstanceID: docID })
+      .fetch();
+    _.forEach(requests, (vr) => {
+      VerificationRequests.removeIt(vr._id);
+    });
     super.removeIt(docID);
   }
 
@@ -226,18 +241,35 @@ class OpportunityInstanceCollection extends BaseCollection {
         return instance._collection.find({ sponsorID: this.userId });
       });
       Meteor.publish(this.publicationNames.perStudentAndSemester,
-          function perStudentAndSemester(studentID, semesterID) {  // eslint-disable-line
-            new SimpleSchema({
-              studentID: { type: String },
-              semesterID: { type: String },
-            }).validate({ studentID, semesterID });
-            return instance._collection.find({ studentID, semesterID });
-          });
+        function perStudentAndSemester(studentID, semesterID) {  // eslint-disable-line
+          new SimpleSchema({
+            studentID: { type: String },
+            semesterID: { type: String },
+          }).validate({ studentID, semesterID });
+          return instance._collection.find({ studentID, semesterID });
+        });
       Meteor.publish(this.publicationNames.studentID, function filterStudentID(studentID) { // eslint-disable-line
         new SimpleSchema({
           studentID: { type: String },
         }).validate({ studentID });
         return instance._collection.find({ studentID });
+      });
+      Meteor.publish(this.publicationNames.publicStudent, function publicStudent() {
+        const userID = Meteor.userId();
+        const willingToShare = [];
+        const profiles = StudentProfiles.find().fetch();
+        _.forEach(profiles, (p) => {
+          if (p.shareOpportunities) {
+            willingToShare.push(p.userID);
+          }
+        });
+        // console.log('sharing Opporutnities = %o', willingToShare);
+        ReactiveAggregate(this, instance._collection, [
+          { $match: { $expr: { $or: [
+                  { $in: ['$studentID', willingToShare] },
+                  { $eq: [Roles.userIsInRole(userID, [ROLE.ADMIN, ROLE.ADVISOR, ROLE.FACULTY]), true] }] } } },
+          { $project: { studentID: 1, semesterID: 1, opportunityID: 1 } },
+        ]);
       });
     }
   }
@@ -286,20 +318,21 @@ class OpportunityInstanceCollection extends BaseCollection {
    */
   checkIntegrity() {
     const problems = [];
-    this.find().forEach(doc => {
-      if (!Semesters.isDefined(doc.semesterID)) {
-        problems.push(`Bad semesterID: ${doc.semesterID}`);
-      }
-      if (!Opportunities.isDefined(doc.opportunityID)) {
-        problems.push(`Bad opportunityID: ${doc.opportunityID}`);
-      }
-      if (!Users.isDefined(doc.studentID)) {
-        problems.push(`Bad studentID: ${doc.studentID}`);
-      }
-      if (!Users.isDefined(doc.sponsorID)) {
-        problems.push(`Bad sponsorID: ${doc.sponsorID}`);
-      }
-    });
+    this.find()
+      .forEach(doc => {
+        if (!Semesters.isDefined(doc.semesterID)) {
+          problems.push(`Bad semesterID: ${doc.semesterID}`);
+        }
+        if (!Opportunities.isDefined(doc.opportunityID)) {
+          problems.push(`Bad opportunityID: ${doc.opportunityID}`);
+        }
+        if (!Users.isDefined(doc.studentID)) {
+          problems.push(`Bad studentID: ${doc.studentID}`);
+        }
+        if (!Users.isDefined(doc.sponsorID)) {
+          problems.push(`Bad sponsorID: ${doc.sponsorID}`);
+        }
+      });
     return problems;
   }
 
@@ -315,7 +348,8 @@ class OpportunityInstanceCollection extends BaseCollection {
     const verified = doc.verified;
     const student = Users.getProfile(doc.studentID).username;
     const sponsor = Users.getProfile(doc.sponsorID).username;
-    return { semester, opportunity, verified, student, sponsor };
+    const retired = doc.retired;
+    return { semester, opportunity, verified, student, sponsor, retired };
   }
 }
 

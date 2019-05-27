@@ -1,0 +1,143 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta name="viewport" content="width=device-width"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <title>RadGrad Newsletter</title>
+  <style>
+    p,
+    li {
+      color: #4F4F4F;
+    }
+
+    .body-table {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 15px;
+    }
+
+    .logo {
+      margin-top: 8px;
+      width: 150px;
+    }
+
+    .logo-stack-td {
+      background-color: #C0E5D9;
+      height: 70px;
+    }
+
+    .header-stack-td {
+      background-color: #63BA9F;
+      font-size: 20px;
+      padding-left: 12px;
+    }
+
+    .header-stack-td p {
+      color: white;
+      margin: 0px;
+    }
+
+    .rec-header {
+      text-decoration: underline;
+      color: #4F4F4F;
+      margin-bottom: 10px;
+    }
+
+    .main-table {
+      max-width: 960px;
+    }
+
+    .main-table .block-td {
+      background-color: #F9F9F9;
+      padding: 20px 50px;
+    }
+
+    .main-table .block-td-alt {
+      background-color: #E2E2E2;
+      padding: 20px 50px;
+    }
+
+    /* Media query for mobile*/
+
+    @media only screen and (max-width: 600px) {
+      .logo-stack-td,
+      .header-stack-td {
+        padding: 10px 0px;
+        display: block;
+        width: 100%;
+        text-align: center;
+        height: 100%;
+      }
+    }
+
+  </style>
+</head>
+<body itemscope itemtype="http://schema.org/EmailMessage">
+<table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" class="body-table">
+  <tr>
+    <td align="center">
+      <table cellspacing="0" cellpadding="0" width="100%" class="main-table">
+        <tr>
+          <td>
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+              <tr>
+                <td width="175" align="center" class="logo-stack-td"><img class="logo"
+                                                                          src="https://radgrad.ics.hawaii.edu/images/radgrad-email-logo.png"/>
+                </td>
+                <td align="left" class="header-stack-td">
+                  <p>MESSAGE FROM THE ADMINS</p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td class="block-td" style="padding-bottom: 20px;">
+            <p>Aloha {{firstName}}!</p>
+            {{{adminMessage}}}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+              <tr>
+                <td width="175" align="center" class="logo-stack-td"><img class="logo"
+                                                                          src="https://radgrad.ics.hawaii.edu/images/radgrad-email-logo.png"/>
+                </td>
+                <td align="left" class="header-stack-td">
+                  <p>WHAT TO DO RIGHT NOW</p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td class="block-td">
+            <h4 class="rec-header">
+              {{{firstRec.header}}}
+            </h4>
+            {{{firstRec.info}}}
+          </td>
+        </tr>
+        <tr>
+          <td class="block-td-alt">
+            <h4 class="rec-header">
+              {{{secondRec.header}}}
+            </h4>
+            {{{secondRec.info}}}
+          </td>
+        </tr>
+        <tr>
+          <td class="block-td">
+            <h4 class="rec-header">
+              {{{thirdRec.header}}}
+            </h4>
+            {{{thirdRec.info}}}
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+
+</html>

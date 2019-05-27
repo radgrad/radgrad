@@ -7,11 +7,12 @@ import { AdvisorProfiles } from '../user/AdvisorProfileCollection';
 import { CareerGoals } from '../career/CareerGoalCollection';
 import { Courses } from '../course/CourseCollection';
 import { CourseInstances } from '../course/CourseInstanceCollection';
-import { FacultyProfiles } from '../user/FacultyProfileCollection';
-import { Feeds } from '../feed/FeedCollection';
-import { FeedbackInstances } from '../feedback/FeedbackInstanceCollection';
-import { HelpMessages } from '../help/HelpMessageCollection';
 import { DesiredDegrees } from '../degree-plan/DesiredDegreeCollection';
+import { FacultyProfiles } from '../user/FacultyProfileCollection';
+import { FeedbackInstances } from '../feedback/FeedbackInstanceCollection';
+import { Feeds } from '../feed/FeedCollection';
+import { HelpMessages } from '../help/HelpMessageCollection';
+import { IceSnapshots } from '../analytic/IceSnapshotCollection';
 import { Interests } from '../interest/InterestCollection';
 import { InterestTypes } from '../interest/InterestTypeCollection';
 import { MentorAnswers } from '../mentor/MentorAnswerCollection';
@@ -28,7 +29,7 @@ import { SemesterSnapshots } from '../semester/SemesterSnapshotCollection';
 import { Slugs } from '../slug/SlugCollection';
 import { StudentProfiles } from '../user/StudentProfileCollection';
 import { Teasers } from '../teaser/TeaserCollection';
-import { UserInteractions } from '../log/UserInteractionCollection';
+import { UserInteractions } from '../analytic/UserInteractionCollection';
 import { VerificationRequests } from '../verification/VerificationRequestCollection';
 
 /**
@@ -54,6 +55,7 @@ class RadGradClass {
       FeedbackInstances,
       HelpMessages,
       DesiredDegrees,
+      IceSnapshots,
       Interests,
       InterestTypes,
       MentorAnswers,
@@ -103,6 +105,7 @@ class RadGradClass {
       VerificationRequests,
       Feeds,
       AdvisorLogs,
+      IceSnapshots,
       UserInteractions,
       SemesterSnapshots,
       MentorQuestions,
@@ -129,7 +132,8 @@ class RadGradClass {
   getCollection(collectionName) {
     const collection = this.collectionAssociation[collectionName];
     if (!collection) {
-      throw new Meteor.Error(`Called RadGrad.getCollection with unknown collection name: ${collectionName}`);
+      throw new Meteor.Error(`Called RadGrad.getCollection with unknown collection name: ${collectionName}`,
+        '', Error().stack);
     }
     return collection;
   }

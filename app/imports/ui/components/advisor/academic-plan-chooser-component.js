@@ -21,7 +21,7 @@ Template.Academic_Plan_Chooser_Component.onCreated(function academicPlanChooserC
 Template.Academic_Plan_Chooser_Component.helpers({
   names() {
     const chosen = parseInt(Template.instance().chosenYear.get(), 10);
-    const plans = AcademicPlans.find().fetch();
+    const plans = AcademicPlans.findNonRetired();
     let name = _.filter(plans, (p) => {
       const year = Semesters.findDoc(p.effectiveSemesterID).year;
       return chosen === year;
@@ -54,7 +54,7 @@ Template.Academic_Plan_Chooser_Component.helpers({
       const decSem = Semesters.findDoc(profile.declaredSemesterID);
       declaredYear = decSem.year;
     }
-    let plans = AcademicPlans.find().fetch();
+    let plans = AcademicPlans.findNonRetired();
     plans = _.uniqBy(plans, (p) => Semesters.findDoc(p.effectiveSemesterID).year);
     plans = _.filter(plans, (p) => {
       const year = Semesters.findDoc(p.effectiveSemesterID).year;

@@ -8,16 +8,17 @@ import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
-import * as FormUtils from './form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 
 const updateSchema = new SimpleSchema({
   semester: String,
   opportunity: String,
   verified: String,
-  user: String,
+  student: String,
   innovation: { type: Number, min: 0, max: 100 },
   competency: { type: Number, min: 0, max: 100 },
   experience: { type: Number, min: 0, max: 100 },
+  retired: Boolean,
 }, { tracker: Tracker });
 
 Template.Update_Opportunity_Instance_Widget.onCreated(function onCreated() {
@@ -26,7 +27,7 @@ Template.Update_Opportunity_Instance_Widget.onCreated(function onCreated() {
 
 Template.Update_Opportunity_Instance_Widget.helpers({
   semesters() {
-    return Semesters.find({});
+    return Semesters.findNonRetired({}, { sort: { semesterNumber: 1 } });
   },
   students() {
     const students = Roles.getUsersInRole([ROLE.STUDENT]).fetch();
@@ -56,6 +57,18 @@ Template.Update_Opportunity_Instance_Widget.helpers({
     const opportunity = OpportunityInstances.findDoc(Template.currentData().updateID.get());
     return opportunity.opportunityID;
   },
+  falseValueRetired() {
+    const plan = OpportunityInstances.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return !plan.retired;
+  },
+  trueValueRetired() {
+    const plan = OpportunityInstances.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return plan.retired;
+  },
 });
 
 Template.Update_Opportunity_Instance_Widget.events({
@@ -64,6 +77,7 @@ Template.Update_Opportunity_Instance_Widget.events({
     const updateData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     instance.context.reset();
     updateSchema.clean(updateData, { mutate: true });
+    updateData.retired = updateData.retired === 'true';
     instance.context.validate(updateData);
     if (instance.context.isValid()) {
       FormUtils.convertICE(updateData);

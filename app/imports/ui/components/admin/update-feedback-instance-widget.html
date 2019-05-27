@@ -1,0 +1,24 @@
+<template name="Update_Feedback_Instance_Widget">
+
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>UPDATE FEEDBACK INSTANCE</h4></div>
+    <form class="ui equal width form {{successClass}} {{errorClass}}">
+
+      <div class="fields">
+        {{> User_Form_Field label="Student" users=students selectedUserID=feedbackInstance.userID errorMessage=(fieldError "student")  disabled=true}}
+        {{> FeedbackType_Form_Field label="FeedbackType" feedbackTypes=feedbackTypes selectedFeedbackType=feedbackInstance.feedbackType errorMessage=(fieldError "feedbackType") required=true}}
+        {{> Input_Form_Field label="Feedback Function" name="functionName" value=feedbackInstance.functionName errorMessage=(fieldError "functionName") required=true }}
+      </div>
+      {{> TextArea_Form_Field label="Description" rows=10 name="description" placeholder="Add description of the feed here." value=feedbackInstance.description errorMessage=(fieldError "description")}}
+      <div class="fields">
+        {{> Boolean_Form_Field label='Retired' name='retired' trueValue=trueValueRetired falseValue=falseValueRetired errorMessage=(fieldError "retired")}}
+      </div>
+
+      <button class="ui green basic button" type="submit">Update</button>
+      <button class="ui green basic button jsCancel" type="submit">Cancel</button>
+      {{> Success_Message_Form_Field message="The Feedback Instance was successfully updated.  Press cancel to continue."}}
+      {{> Form_Error_Message errorMessage="The Feedback Instance could not be updated."}}
+    </form>
+  </div>
+
+</template>

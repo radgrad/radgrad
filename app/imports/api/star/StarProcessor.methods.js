@@ -24,7 +24,8 @@ function processStudentStarDefinitions(advisor, student, definitions) {
   // console.log(definitions);
   const studentID = Users.getID(student);
   // console.log(student, studentID);
-  const oldInstances = CourseInstances.find({ studentID, fromSTAR: true }).fetch();
+  const oldInstances = CourseInstances.find({ studentID, fromSTAR: true })
+    .fetch();
   _.forEach(oldInstances, (instance) => {
     CourseInstances.removeIt(instance._id);
   });
@@ -46,16 +47,17 @@ function processStudentStarDefinitions(advisor, student, definitions) {
       numInterstingCourses += 1;
       const courseID = Courses.findIdBySlug(definition.course);
       // console.log('courseID', courseID);
-      const planning = CourseInstances.find({ studentID, semesterID, courseID, verified: false }).fetch();
+      const planning = CourseInstances.find({ studentID, semesterID, courseID, verified: false })
+        .fetch();
       // console.log('planning', planning);
-      if (planning.length > 0) {
-        CourseInstances.removeIt(planning[0]._id);
-      }
+      planning.forEach((c) => {
+        CourseInstances.removeIt(c._id);
+      });
     } else {
       // numOtherCourses += 1;
     }
     definition.fromSTAR = true; // eslint-disable-line
-    if (definition.grade === '***') {
+    if (definition.grade === '***' || definition.grade === 'TBD') {
       definition.grade = 'B';  // eslint-disable-line
       definition.verified = false; // eslint-disable-line
     }
@@ -118,7 +120,7 @@ export const starLoadDataMethod = new ValidatedMethod({
   validate: null,
   run(data) {
     if (!this.userId) {
-      throw new Meteor.Error('unauthorized', 'You must be logged in to define Star data.');
+      throw new Meteor.Error('unauthorized', 'You must be logged in to define Star data.', '', Error().stack);
     }
     processStudentStarCsvData(data.advisor, data.student, data.csvData);
   },
@@ -133,7 +135,8 @@ export const starLoadJsonDataMethod = new ValidatedMethod({
   validate: null,
   run(data) {
     if (!this.userId) {
-      throw new Meteor.Error('unauthorized', 'You must be logged in to define Star data.');
+      throw new Meteor.Error('unauthorized', 'You must be logged in to define Star data.',
+        Error().stack);
     }
     processStudentStarJsonData(data.advisor, data.student, data.jsonData);
   },
@@ -208,7 +211,8 @@ export const starBulkLoadDataMethod = new ValidatedMethod({
   validate: null,
   run(data) {
     if (!this.userId) {
-      throw new Meteor.Error('unauthorized', 'You must be logged in to define Star data.');
+      throw new Meteor.Error('unauthorized', 'You must be logged in to define Star data.',
+        Error().stack);
     }
     return processBulkStarData(data.advisor, data.csvData);
   },
@@ -219,9 +223,27 @@ export const starBulkLoadJsonDataMethod = new ValidatedMethod({
   validate: null,
   run(data) {
     if (!this.userId) {
-      throw new Meteor.Error('unauthorized', 'You must be logged in to define Star data.');
+      throw new Meteor.Error('unauthorized', 'You must be logged in to define Star data.',
+        Error().stack);
     }
-    return processBulkStarDataJson(data.advisor, data.jsonData);
+    if (Meteor.isServer) {
+      return processBulkStarDataJson(data.advisor, data.jsonData);
+    }
+    return false;
   },
 });
 
+export const testBulkLoadErrorMethod = new ValidatedMethod({
+  name: 'StarProcess.testBulkLoadError',
+  validate: null,
+  run(data) {
+    if (!this.userId) {
+      throw new Meteor.Error('unauthorized', 'You must be logged in to define Star data.',
+         Error().stack);
+    }
+    if (Meteor.isServer) {
+      return Users.getID(data);
+    }
+    return 'ok';
+  },
+});

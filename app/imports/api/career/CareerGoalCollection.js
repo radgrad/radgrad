@@ -22,6 +22,7 @@ class CareerGoalCollection extends BaseSlugCollection {
       slugID: { type: SimpleSchema.RegEx.Id },
       description: { type: String },
       interestIDs: [SimpleSchema.RegEx.Id],
+      retired: { type: Boolean, optional: true },
     }));
   }
 
@@ -40,12 +41,12 @@ class CareerGoalCollection extends BaseSlugCollection {
    * @throws { Meteor.Error } If the slug already exists.
    * @returns The newly created docID.
    */
-  define({ name, slug, description, interests }) {
+  define({ name, slug, description, interests, retired }) {
     // Get Interests, throw error if any of them are not found.
     const interestIDs = Interests.getIDs(interests);
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
-    const docID = this._collection.insert({ name, slugID, description, interestIDs });
+    const docID = this._collection.insert({ name, slugID, description, interestIDs, retired });
     // Connect the Slug to this Interest
     Slugs.updateEntityID(slugID, docID);
     return docID;
@@ -80,7 +81,7 @@ class CareerGoalCollection extends BaseSlugCollection {
    * @param interests A new list of interest slugs or IDs. (optional).
    * @throws { Meteor.Error } If docID is not defined, or if any interest is not a defined slug or ID.
    */
-  update(docID, { name, description, interests }) {
+  update(docID, { name, description, interests, retired }) {
     this.assertDefined(docID);
     const updateData = {};
     if (name) {
@@ -92,6 +93,9 @@ class CareerGoalCollection extends BaseSlugCollection {
     if (interests) {
       const interestIDs = Interests.getIDs(interests);
       updateData.interestIDs = interestIDs;
+    }
+    if (_.isBoolean(retired)) {
+      updateData.retired = retired;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -106,7 +110,7 @@ class CareerGoalCollection extends BaseSlugCollection {
     // Check that this is not referenced by any User.
     const isReferenced = Users.someProfiles(profile => _.includes(profile.careerGoalIDs, careerGoalID));
     if (isReferenced) {
-      throw new Meteor.Error(`Career Goal ${instance} is referenced.`);
+      throw new Meteor.Error(`Career Goal ${instance} is referenced.`, '', Error().stack);
     }
     // OK, clear to delete.
     super.removeIt(careerGoalID);
@@ -157,7 +161,8 @@ class CareerGoalCollection extends BaseSlugCollection {
     const slug = Slugs.getNameFromID(doc.slugID);
     const description = doc.description;
     const interests = _.map(doc.interestIDs, interestID => Interests.findSlugByID(interestID));
-    return { name, slug, interests, description };
+    const retired = doc.retired;
+    return { name, slug, interests, description, retired };
   }
 }
 

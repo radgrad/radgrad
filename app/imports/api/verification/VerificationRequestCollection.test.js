@@ -31,11 +31,19 @@ if (Meteor.isServer) {
       expect(VerificationRequests.isDefined(docID)).to.be.true;
       expect(VerificationRequests.findOne({ opportunityInstanceID: opportunityInstance })).to.exist;
       VerificationRequests.toString(docID);
-      const dumpObject = VerificationRequests.dumpOne(docID);
+      let dumpObject = VerificationRequests.dumpOne(docID);
+      expect(dumpObject.retired).to.be.undefined;
+      expect(VerificationRequests.findNonRetired().length).to.equal(1);
+      VerificationRequests.update(docID, { retired: true });
+      expect(VerificationRequests.findNonRetired().length).to.equal(0);
       VerificationRequests.removeIt(docID);
       expect(VerificationRequests.isDefined(docID)).to.be.false;
       docID = VerificationRequests.restoreOne(dumpObject);
       expect(VerificationRequests.isDefined(docID)).to.be.true;
+      VerificationRequests.update(docID, { retired: true });
+      dumpObject = VerificationRequests.dumpOne(docID);
+      expect(dumpObject.retired).to.be.true;
+      expect(VerificationRequests.findNonRetired().length).to.equal(0);
       VerificationRequests.removeIt(docID);
     });
 

@@ -1,0 +1,26 @@
+<template name="Add_Academic_Plan_Widget">
+
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>ADD ACADEMIC PLAN</h4></div>
+    <form class="ui equal width form {{successClass}} {{errorClass}}">
+
+      <div class="fields">
+        {{> Input_Form_Field label="Slug" name="slug" placeholder="bs" errorMessage=(fieldError "slug") required=true }}
+        {{> Degree_Form_Field name="degreeSlug" desiredDegrees=desiredDegrees selectedDesiredDegreeID=selectedDesiredDegreeID errorMessage=(fieldError "degreeSlug") required=true}}
+      </div>
+      <div class="fields">
+        {{> Input_Form_Field label="Name" name="name" placeholder="Bachelor of Science" errorMessage=(fieldError "name") required=true }}
+        {{> Semesters_Single_Form_Field name="semester" semesters=semesters selectedSemesterID=selectedSemesterID errorMessage=(fieldError "semester") }}
+      </div>
+
+      {{> TextArea_Form_Field label="Description" rows=5 name="description" placeholder="Describe the desired degree here" errorMessage=(fieldError "description") required=true}}
+
+      {{> TextArea_Form_Field label="Number of Courses per Semester" rows=5 name="coursesPerSemester" placeholder="2, 2, 0, 2, 2, 0, 2, 2, 0, 2, 2, 0" errorMessage=(fieldError "coursesPerSemester") required=true}}
+      {{> TextArea_Form_Field label="Course List" rows=5 name="courseList" placeholder="ics_111-1, ics_141-1, ..." errorMessage=(fieldError "courseList") required=true}}
+
+      <button class="ui green basic button" type="submit">Add</button>
+      {{> Success_Message_Form_Field message="The Academic Plan was successfully added."}}
+    </form>
+  </div>
+
+</template>

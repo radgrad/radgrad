@@ -94,7 +94,8 @@ class UserCollection {
   assertInRole(user, role) {
     const userID = this.getID(user);
     if (!Roles.userIsInRole(userID, role)) {
-      throw new Meteor.Error(`${userID} (${this.getProfile(userID).username}) is not in role ${role}.`);
+      throw new Meteor.Error(`${userID} (${this.getProfile(userID).username}) is not in role ${role}.`,
+        '', Error().stack);
     }
   }
 
@@ -121,7 +122,7 @@ class UserCollection {
     const userDoc = (Meteor.users.findOne({ _id: user })) || (Meteor.users.findOne({ username: user }));
     if (!userDoc) {
       console.log('Error: user is not defined: ', user);
-      throw new Meteor.Error(`Error: user ${user} is not defined.`);
+      throw new Meteor.Error(`Error: user '${user}' is not defined.`, 'Not Defined', Error().stack);
     }
     return userDoc._id;
   }
@@ -137,7 +138,8 @@ class UserCollection {
     try {
       ids = (users) ? users.map((instance) => this.getID(instance)) : [];
     } catch (err) {
-      throw new Meteor.Error(`Error in getIDs(): Failed to convert one of ${users} to an ID.`);
+      throw new Meteor.Error(`Error in getIDs(): Failed to convert one of ${users} to an ID.`,
+        'Not Defined', Error().stack);
     }
     return ids;
   }
@@ -149,6 +151,9 @@ class UserCollection {
    * @throws {Meteor.Error} If user is not a valid user.
    */
   getFullName(user) {
+    if (user === '') {
+      console.trace('getFullName on empty string');
+    }
     const profile = this.getProfile(user);
     return `${profile.firstName} ${profile.lastName}`;
   }
@@ -200,6 +205,10 @@ class UserCollection {
   findProfileFromUsername(username) {
     return StudentProfiles.findByUsername(username) || FacultyProfiles.findByUsername(username)
         || MentorProfiles.findByUsername(username) || AdvisorProfiles.findByUsername(username);
+  }
+
+  count() {
+    return StudentProfiles.count() + FacultyProfiles.count() + MentorProfiles.count() + AdvisorProfiles.count();
   }
 
   /**
@@ -255,7 +264,7 @@ class UserCollection {
     const profile = this.hasProfile(user);
     if (!profile) {
       console.log(`No profile found for user ${user}`);
-      throw new Meteor.Error(`No profile found for user ${user}`);
+      throw new Meteor.Error(`No profile found for user ${user}`, '', Error().stack);
     }
     return profile;
   }
@@ -269,7 +278,8 @@ class UserCollection {
     if (!this.isReferenced(userID)) {
       Meteor.users.remove(userID);
     } else {
-      throw new Meteor.Error(`Attempt to remove ${user} while references to public entities remain.`);
+      throw new Meteor.Error(`Attempt to remove ${user} while references to public entities remain.`,
+        '', Error().stack);
     }
   }
 
@@ -337,7 +347,7 @@ class UserCollection {
       return this._getAdminID();
     }
     console.log(`Unknown role: ${role}`);
-    throw new Meteor.Error(`Unknown role: ${role}`);
+    throw new Meteor.Error(`Unknown role: ${role}`, '', Error().stack);
   }
 
   /**

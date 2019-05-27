@@ -16,7 +16,7 @@ Template.Student_Of_Interest_Widget.onCreated(function studentOfInterestWidgetOn
 });
 
 const availableCourses = () => {
-  const courses = Courses.find({}).fetch();
+  const courses = Courses.findNonRetired({});
   if (courses.length > 0) {
     const filtered = _.filter(courses, function filter(course) {
       if (course.number === 'ICS 499') {
@@ -38,6 +38,7 @@ function matchingCourses() {
     const allCourses = availableCourses();
     const matching = [];
     const profile = Users.getProfile(getRouteUserName());
+    // console.log('StudentProfile=%o', profile);
     const userInterests = [];
     let courseInterests = [];
     _.forEach(Users.getInterestIDs(profile.userID), (id) => {
@@ -85,10 +86,10 @@ function hiddenCoursesHelper() {
 }
 
 const availableOpps = () => {
-  const opps = Opportunities.find({}).fetch();
+  const notRetired = Opportunities.findNonRetired({});
   const currentSemester = Semesters.getCurrentSemesterDoc();
-  if (opps.length > 0) {
-    const filteredBySem = _.filter(opps, function filter(opp) {
+  if (notRetired.length > 0) {
+    const filteredBySem = _.filter(notRetired, function filter(opp) {
       const oi = OpportunityInstances.find({
         studentID: getUserIdFromRoute(),
         opportunityID: opp._id,

@@ -34,7 +34,17 @@ class BaseCollection {
    * @returns { Number } The number of elements in this collection.
    */
   count() {
-    return this._collection.find().count();
+    return this._collection.find()
+      .count();
+  }
+
+  /**
+   * Returns the number of non-retired documents in this collection.
+   * @returns { Number } The number of non-retired elements in this collection.
+   */
+  countNonRetired() {
+    return _.filter(this._collection.find()
+      .fetch(), doc => !doc.retired).length;
   }
 
   /**
@@ -65,15 +75,15 @@ class BaseCollection {
    */
   findDoc(name) {
     const doc = (
-    this._collection.findOne(name) ||
-    this._collection.findOne({ name }) ||
-    this._collection.findOne({ _id: name }) ||
-    this._collection.findOne({ username: name }));
+      this._collection.findOne(name) ||
+      this._collection.findOne({ name }) ||
+      this._collection.findOne({ _id: name }) ||
+      this._collection.findOne({ username: name }));
     if (!doc) {
       if (typeof name !== 'string') {
-        throw new Meteor.Error(`${JSON.stringify(name)} is not a defined ${this._type}`);
+        throw new Meteor.Error(`${JSON.stringify(name)} is not a defined ${this._type}`, '', Error().stack);
       } else {
-        throw new Meteor.Error(`${name} is not a defined ${this._type}`);
+        throw new Meteor.Error(`${name} is not a defined ${this._type}`, '', Error().stack);
       }
     }
     return doc;
@@ -89,6 +99,19 @@ class BaseCollection {
   find(selector, options) {
     const theSelector = (typeof selector === 'undefined') ? {} : selector;
     return this._collection.find(theSelector, options);
+  }
+
+  /**
+   * Runs find on this collection and returns the non-retired documents.
+   * @see {@link http://docs.meteor.com/#/full/find|Meteor Docs on Mongo Find}
+   * @param selector { Object } A MongoDB selector.
+   * @param options { Object } MongoDB options.
+   * @returns { Array } non-retired documents.
+   */
+  findNonRetired(selector, options) {
+    const theSelector = (typeof selector === 'undefined') ? {} : selector;
+    return _.filter(this._collection.find(theSelector, options)
+      .fetch(), doc => !doc.retired);
   }
 
   /**
@@ -122,10 +145,13 @@ class BaseCollection {
    * @returns {boolean} True if name exists in this collection.
    */
   isDefined(name) {
+    if (_.isUndefined(name)) {
+      return false;
+    }
     return (
-    !!this._collection.findOne(name) ||
-    !!this._collection.findOne({ name }) ||
-    !!this._collection.findOne({ _id: name }));
+      !!this._collection.findOne(name) ||
+      !!this._collection.findOne({ name }) ||
+      !!this._collection.findOne({ _id: name }));
   }
 
   /**
@@ -134,6 +160,7 @@ class BaseCollection {
    * @returns true
    */
   removeIt(name) {
+    // console.log('%o.removeIt(%o)', this._collectionName, name);
     const doc = this.findDoc(name);
     check(doc, Object);
     this._collection.remove(doc._id);
@@ -148,7 +175,8 @@ class BaseCollection {
    * @returns true
    */
   removeAll() {
-    const items = this._collection.find().fetch();
+    const items = this._collection.find()
+      .fetch();
     const instance = this;
     _.forEach(items, (i) => {
       instance.removeIt(i._id);
@@ -185,7 +213,8 @@ class BaseCollection {
    * @returns {String}
    */
   toString() {
-    return this._collection.find().fetch();
+    return this._collection.find()
+      .fetch();
   }
 
   /**
@@ -195,7 +224,7 @@ class BaseCollection {
    */
   assertDefined(name) {
     if (!this.isDefined(name)) {
-      throw new Meteor.Error(`${name} is not a valid instance of ${this._type}.`);
+      throw new Meteor.Error(`${name} is not a valid instance of ${this._type}.`, '', Error().stack);
     }
   }
 
@@ -206,7 +235,7 @@ class BaseCollection {
    */
   assertAllDefined(names) {
     if (!_.isArray(names)) {
-      throw new Meteor.Error(`${names} is not an array.`);
+      throw new Meteor.Error(`${names} is not an array.`, '', Error().stack);
     }
     names.map(name => this.assertDefined(name));
   }
@@ -221,11 +250,10 @@ class BaseCollection {
    */
   _assertRole(userId, roles) {  // eslint-disable-line class-methods-use-this
     if (!userId) {
-      throw new Meteor.Error('unauthorized', 'You must be logged in.');
-    } else
-      if (!Roles.userIsInRole(userId, roles)) {
-        throw new Meteor.Error('unauthorized', `You must be one of the following roles: ${roles}`);
-      }
+      throw new Meteor.Error('unauthorized', 'You must be logged in.', '', Error().stack);
+    } else if (!Roles.userIsInRole(userId, roles)) {
+      throw new Meteor.Error('unauthorized', `You must be one of the following roles: ${roles}`, '', Error().stack);
+    }
     return true;
   }
 
@@ -269,7 +297,11 @@ class BaseCollection {
    * @returns {Object} An object representing the contents of this collection.
    */
   dumpAll() {
-    const dumpObject = { name: this._collectionName, contents: this.find().map(docID => this.dumpOne(docID)) };
+    const dumpObject = {
+      name: this._collectionName,
+      contents: this.find()
+        .map(docID => this.dumpOne(docID)),
+    };
     // If a collection doesn't want to be dumped, it can just return null from dumpOne.
     dumpObject.contents = _.without(dumpObject.contents, null);
     // sort the contents array by slug (if present)
@@ -286,7 +318,7 @@ class BaseCollection {
    * @returns { Object } An object representing this document.
    */
   dumpOne(docID) { // eslint-disable-line
-    throw new Meteor.Error(`Default dumpOne method invoked by collection ${this._collectionName}`);
+    throw new Meteor.Error(`Default dumpOne method invoked by collection ${this._collectionName}`, '', Error().stack);
   }
 
   /**

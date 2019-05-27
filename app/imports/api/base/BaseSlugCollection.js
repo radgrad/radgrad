@@ -24,6 +24,7 @@ class BaseSlugCollection extends BaseCollection {
    * @throws { Meteor.Error } If instance is not a docID or a slug.
    */
   getID(instance) {
+    // console.log('BaseSlugCollection.getID(%o)', instance);
     let id;
     // If we've been passed a document, check to see if it has an _id field and make instance the value of _id.
     if (_.isObject(instance) && instance._id) {
@@ -38,7 +39,8 @@ class BaseSlugCollection extends BaseCollection {
     try {
       id = (this._collection.findOne({ _id: instance })) ? instance : this.findIdBySlug(instance);
     } catch (err) {
-      throw new Meteor.Error(`Error in ${this._collectionName} getID(): Failed to convert ${instance} to an ID.`);
+      throw new Meteor.Error(`Error in ${this._collectionName} getID(): Failed to convert ${instance} to an ID.`,
+        '', Error().stack);
     }
     return id;
   }
@@ -56,7 +58,7 @@ class BaseSlugCollection extends BaseCollection {
     try {
       ids = (instances) ? instances.map((instance) => this.getID(instance)) : [];
     } catch (err) {
-      throw new Meteor.Error(`Error in getIDs(): Failed to convert one of ${instances} to an ID.`);
+      throw new Meteor.Error(`Error in getIDs(): Failed to convert one of ${instances} to an ID.`, '', Error().stack);
     }
     return ids;
   }
@@ -70,6 +72,7 @@ class BaseSlugCollection extends BaseCollection {
    * @throws { Meteor.Error} If the instance (and its associated slug) cannot be found.
    */
   removeIt(instance) {
+    // console.log('%o.removeIt(%o)', this._type, instance);
     const docID = this.getID(instance);
     const doc = super.findDoc(docID);
     check(doc, Object);

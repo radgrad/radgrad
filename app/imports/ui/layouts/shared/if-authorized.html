@@ -6,9 +6,15 @@
       {{#if isAuthorized}}
         {{> UI.contentBlock }}
       {{else}}
+        {{#if notLoggedIn}}
         <div style="padding-top: 40px" class="ui text container">
-          <p>You are not authorized to view this page.</p>
+          You need to be logged in to view this page. Please {{> RadGrad_Login_Buttons}}
         </div>
+        {{else}}
+          <div style="padding-top: 40px" class="ui text container">
+            <p>You are not authorized to view this page.</p>
+          </div>
+        {{/if}}
       {{/if}}
     {{/if}}
   {{/if}}

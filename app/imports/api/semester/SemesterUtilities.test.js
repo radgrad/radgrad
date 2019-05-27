@@ -29,7 +29,7 @@ if (Meteor.isServer) {
       expect(count).to.be.equal(18);
       const upComing = upComingSemesters();
       // console.log(upComing);
-      expect(upComing.length).to.be.equal(7); // TODO This will change over time unless we change defineSemesters.
+      expect(upComing.length).to.be.equal(3); // TODO This will change over time unless we change defineSemesters.
     });
   });
 }

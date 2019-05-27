@@ -1,0 +1,114 @@
+<template name="Generate_Newsletter_Widget">
+  <div class="ui padded container segment">
+    <h4 class="ui dividing header">NEWSLETTER OPTIONS</h4>
+    <div class="ui padded stackable grid">
+      <div class="row">
+        <div class="eight wide column">
+          <form class="ui form preview">
+            <div class="required field">
+              <label>Input admin message in markdown format</label>
+              <textarea name="message"></textarea>
+            </div>
+            <button class="ui green basic button" type="submit">Preview And Save</button>
+          </form>
+        </div>
+        <div class="eight wide column">
+          <form class="ui form">
+            <div class="field">
+              <label>Message Preview</label>
+            </div>
+            <p>Aloha Student!</p>
+            <div class="markdown">
+              {{#markdown}}{{adminMessage}}{{/markdown}}
+            </div>
+            <p>- The RadGrad Team</p>
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column">
+          <div class="ui form">
+            <div class="field">
+              <label>Bcc recipients</label>
+              <input id="bcc-list" type="text" placeholder="Input comma separated list of bcc recipients">
+            </div>
+            <div class="required field">
+              <label>Subject line</label>
+              <input id="subject-field" type="text" placeholder="Input email subject line">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h4 class="ui dividing header">SEND NEWSLETTER</h4>
+    <div class="ui padded stackable grid">
+      <div class="row">
+        <div class="column">
+          <form class="ui form test">
+            <div class="field">
+              <label>Generate student newsletters and send to admin</label>
+              <input name="text" type="text" placeholder="Input student emails separated by commas">
+            </div>
+            <div class="field">
+              <div class="ui checkbox">
+                <input name="student-checkbox" type="checkbox" tabindex="0" class="hidden">
+                <label>Send to students too</label>
+              </div>
+            </div>
+            <button class="ui basic green {{#if adminWorking}}loading{{/if}} button" type="submit">Send To Admin
+            </button>
+            <div><span style="color: crimson;">{{testEmailStatus}}</span></div>
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column">
+          <form class="ui form level">
+            <div class="field">
+              <label>Generate and send newsletters to students of the specified level</label>
+              <div class="ui selection dropdown" style="max-width: 25%;">
+                <input type="hidden" name="level-dropdown">
+                <i class="dropdown icon"></i>
+                <div class="default text">Level</div>
+                <div class="menu">
+                  <div class="item" data-value="1"><strong>Level 1</strong> ({{levelCount 1}} students)</div>
+                  <div class="item" data-value="2"><strong>Level 2</strong> ({{levelCount 2}} students)</div>
+                  <div class="item" data-value="3"><strong>Level 3</strong> ({{levelCount 3}} students)</div>
+                  <div class="item" data-value="4"><strong>Level 4</strong> ({{levelCount 4}} students)</div>
+                  <div class="item" data-value="5"><strong>Level 5</strong> ({{levelCount 5}} students)</div>
+                  <div class="item" data-value="6"><strong>Level 6</strong> ({{levelCount 6}} students)</div>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui checkbox">
+                <input name="confirm-checkbox" type="checkbox" tabindex="0" class="hidden">
+                <label>Check to confirm send</label>
+              </div>
+            </div>
+            <button class="ui basic green {{#if studentsWorking}}loading{{/if}} button" type="submit">Send To Students
+            </button>
+            <div><span style="color: crimson;">{{levelEmailStatus}}</span></div>
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column">
+          <form class="ui form all">
+            <div class="field">
+              <label>Generate and send newsletters to ALL students</label>
+              <div class="ui checkbox">
+                <input name="confirm-checkbox" type="checkbox" tabindex="0" class="hidden">
+                <label>Check to confirm send</label>
+              </div>
+            </div>
+            <button class="ui basic green {{#if allStudentsWorking}}loading{{/if}} button" type="submit">Send To All
+              Students
+            </button>
+            <div><span style="color: crimson;">{{sendAllEmailStatus}}</span></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

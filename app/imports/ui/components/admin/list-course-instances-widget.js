@@ -1,14 +1,17 @@
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Courses } from '../../../api/course/CourseCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection';
-import * as FormUtils from './form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 
 Template.List_Course_Instances_Widget.onCreated(function onCreated() {
   this.subscribe(CourseInstances.getPublicationName());
+  this.itemCount = new ReactiveVar(25);
+  this.itemIndex = new ReactiveVar(0);
 });
 
 Template.List_Course_Instances_Widget.helpers({
@@ -17,9 +20,12 @@ Template.List_Course_Instances_Widget.helpers({
     const sortBySemester = _.sortBy(allCourseInstances, function (ci) {
       return Semesters.toString(ci.semesterID, true);
     });
-    return _.sortBy(sortBySemester, function (ci) {
+    const items = _.sortBy(sortBySemester, function (ci) {
       return Users.getProfile(ci.studentID).username;
     });
+    const startIndex = Template.instance().itemIndex.get();
+    const endIndex = startIndex + Template.instance().itemCount.get();
+    return _.slice(items, startIndex, endIndex);
   },
   count() {
     return CourseInstances.count();
@@ -45,7 +51,20 @@ Template.List_Course_Instances_Widget.helpers({
       { label: 'Student', value: Users.getFullName(courseInstance.studentID) },
       { label: 'ICE', value: `${courseInstance.ice.i}, ${courseInstance.ice.c}, 
         ${courseInstance.ice.e}` },
+      { label: 'Retired', value: courseInstance.retired ? 'True' : 'False' },
     ];
+  },
+  getItemCount() {
+    return Template.instance().itemCount;
+  },
+  getItemIndex() {
+    return Template.instance().itemIndex;
+  },
+  getCollection() {
+    return CourseInstances;
+  },
+  retired(item) {
+    return item.retired;
   },
 });
 

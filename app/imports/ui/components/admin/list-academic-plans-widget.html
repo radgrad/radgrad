@@ -1,0 +1,11 @@
+<template name="List_Academic_Plans_Widget">
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>ACADEMIC PLANS ({{ count }})</h4></div>
+    <div class="ui grid">
+      {{> Admin_Datamodel_Pagination_Widget showItemCount=getItemCount showIndex=getItemIndex collection=getCollection }}
+      {{#each academicPlan in academicPlans}}
+        {{> Admin_Datamodel_Academicplan_Accordion academicPlan=academicPlan degreePlanner=false name=academicPlan.name slug=(slugName academicPlan.slugID) descriptionPairs=(descriptionPairs academicPlan) id=academicPlan._id updateID=updateID deleteDisabled=(deleteDisabled academicPlan) retired=(retired academicPlan)}}
+      {{/each}}
+    </div>
+  </div>
+</template>

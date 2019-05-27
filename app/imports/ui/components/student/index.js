@@ -7,20 +7,14 @@ import './explorer-choose-user-widget.js';
 import './student-home-menu.html';
 import './student-home-menu.js';
 
-import './student-explorer-courses-widget.html';
-import './student-explorer-courses-widget.js';
+import './student-card-explorer-menu.html';
+import './student-card-explorer-menu';
 
 import './student-explorer-courses-widget-button.html';
 import './student-explorer-courses-widget-button.js';
 
-import './student-explorer-careergoals-widget.html';
-import './student-explorer-careergoals-widget.js';
-
 import './student-explorer-degrees-widget.html';
 import './student-explorer-degrees-widget.js';
-
-import './student-explorer-interests-widget.html';
-import './student-explorer-interests-widget.js';
 
 import './student-explorer-menu.html';
 import './student-explorer-menu.js';
@@ -33,12 +27,6 @@ import './student-explorer-edit-review-widget.js';
 
 import './student-explorer-review-widget.html';
 import './student-explorer-review-widget.js';
-
-import './student-explorer-plans-widget.html';
-import './student-explorer-plans-widget';
-
-import './student-explorer-opportunities-widget.html';
-import './student-explorer-opportunities-widget.js';
 
 import './student-explorer-opportunities-widget-button.html';
 import './student-explorer-opportunities-widget-button.js';
@@ -102,8 +90,32 @@ import './student-of-interest-card.js';
 import './student-of-interest-widget.html';
 import './student-of-interest-widget.js';
 
+import './student-profile-add.html';
+import './student-profile-add';
+
+import './student-plan-card.html';
+import './student-plan-card';
+
+import './student-profile-card.html';
+import './student-profile-card';
+
+import './student-semester-card.html';
+import './student-semester-card';
+
+import './student-share-info-widget.html';
+import './student-share-info-widget';
+
 import './student-teaser-widget.html';
 import './student-teaser-widget.js';
 
 import './student-teaser-widget-video.html';
 import './student-teaser-widget-video.js';
+
+import './student-update-picture-widget.html';
+import './student-update-picture-widget';
+
+import './student-update-website-widget.html';
+import './student-update-website-widget';
+
+import './student-user-card.html';
+import './student-user-card';

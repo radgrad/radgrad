@@ -3,6 +3,7 @@ import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection
 import { Semesters } from '../../../api/semester/SemesterCollection';
 
 Template.Academic_Plan_Viewer_Component.onCreated(function academicPlanViewerWidgetOnCreated() {
+  // console.log(this.data.plan.get());
   if (this.data) {
     this.plan = this.data.plan;
   }
@@ -71,6 +72,12 @@ Template.Academic_Plan_Viewer_Component.helpers({
     return '';
   },
   years() {
+    if (Template.instance().plan.get()) {
+      const plan = Template.instance().plan.get();
+      if (plan.coursesPerSemester.length === 15) {
+        return ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'];
+      }
+    }
     return ['Year 1', 'Year 2', 'Year 3', 'Year 4'];
   },
 });

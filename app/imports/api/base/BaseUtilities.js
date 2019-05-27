@@ -19,7 +19,7 @@ export function removeAllEntities() {
     // Users is not part of RadGrad collections, so must deal with it individually.
     Users.removeAll();
   } else {
-    throw new Meteor.Error('removeAllEntities not called in testing mode.');
+    throw new Meteor.Error('removeAllEntities not called in testing mode.', '', Error().stack);
   }
   return true;
 }

@@ -8,7 +8,7 @@ import { Feeds } from '../../../api/feed/FeedCollection';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { reviewRatingsObjects } from '../shared/review-ratings';
-import * as FormUtils from './form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 
 
 // TODO Slug should be auto-generated, student and reviewee should be dropdowns, Schema should have validators
@@ -32,7 +32,7 @@ Template.Add_Review_Widget.onCreated(function onCreated() {
 
 Template.Add_Review_Widget.helpers({
   semesters() {
-    return Semesters.find({});
+    return Semesters.findNonRetired({}, { sort: { semesterNumber: 1 } });
   },
   students() {
     const students = Roles.getUsersInRole([ROLE.STUDENT]).fetch();

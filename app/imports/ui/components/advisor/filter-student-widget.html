@@ -1,0 +1,13 @@
+<template name="Filter_Student_Widget">
+  <div>
+    <div class="ui dividing header"><h4>FILTER {{label}}</h4></div>
+    <div class="ui form">
+      <div class="inline fields">
+        {{> Input_Form_Field label='First Name'}}
+        {{> Input_Form_Field label='Last Name'}}
+        {{> Input_Form_Field label='Username'}}
+        <button class="ui basic green button jsClear" type="submit">Clear Filter</button>
+      </div>
+    </div>
+  </div>
+</template>

@@ -9,4 +9,17 @@
     {{> Semesters_Single_Form_Field semesters=semesters selectedSemesterID=selectedSemester errorMessage=(fieldError "semesters") name="declaredSemester" label="Declared Semester"}}
     {{> Academic_Plan_Form_Field plans=plans selectedPlan=selectedPlan}}
   </div>
+  <div class="ui dividing header"><h5>Share information fields</h5></div>
+  <div class="fields">
+    {{> Boolean_Form_Field label='Email' name='shareUsername' trueValue=trueValueUsername falseValue=falseValueUsername errorMessage=(fieldError "shareUsername")}}
+    {{> Boolean_Form_Field label='Picture' name='sharePicture' trueValue=trueValuePicture falseValue=falseValuePicture errorMessage=(fieldError "sharePicture")}}
+    {{> Boolean_Form_Field label='Website' name='shareWebsite' trueValue=trueValueWebsite falseValue=falseValueWebsite errorMessage=(fieldError "shareWebsite")}}
+    {{> Boolean_Form_Field label='Career Goals' name='shareCareerGoals' trueValue=trueValueCareerGoals falseValue=falseValueCareerGoals errorMessage=(fieldError "shareCareerGoals")}}
+    {{> Boolean_Form_Field label='Interests' name='shareInterests' trueValue=trueValueInterests falseValue=falseValueInterests errorMessage=(fieldError "shareInterests")}}
+    {{> Boolean_Form_Field label='Academic Plan' name='shareAcademicPlan' trueValue=trueValueAcademicPlan falseValue=falseValueAcademicPlan errorMessage=(fieldError "shareAcademicPlan")}}
+    {{> Boolean_Form_Field label='Courses' name='shareCourses' trueValue=trueValueCourses falseValue=falseValueCourses errorMessage=(fieldError "shareCourses")}}
+    {{> Boolean_Form_Field label='Opportunities' name='shareOpportunities' trueValue=trueValueOpportunities falseValue=falseValueOpportunities errorMessage=(fieldError "shareOpportunities")}}
+    {{> Boolean_Form_Field label='Level' name='shareLevel' trueValue=trueValueLevel falseValue=falseValueLevel errorMessage=(fieldError "shareLevel")}}
+  </div>
+
 </template>

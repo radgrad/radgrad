@@ -24,15 +24,22 @@ if (Meteor.isServer) {
       const website = 'http://glau.github.io';
       const interests = [];
       const careerGoals = [];
-      const docID = AdvisorProfiles.define({ username, firstName, lastName, picture, website, interests, careerGoals });
+      let docID = AdvisorProfiles.define({ username, firstName, lastName, picture, website, interests, careerGoals });
       expect(AdvisorProfiles.isDefined(docID)).to.be.true;
-      const dumpObject = AdvisorProfiles.dumpOne(docID);
+      let dumpObject = AdvisorProfiles.dumpOne(docID);
+      expect(dumpObject.retired).to.be.undefined;
+      expect(AdvisorProfiles.findNonRetired().length).to.equal(1);
+      AdvisorProfiles.update(docID, { retired: true });
+      expect(AdvisorProfiles.findNonRetired().length).to.equal(0);
       AdvisorProfiles.removeIt(docID);
       expect(AdvisorProfiles.isDefined(docID)).to.be.false;
       AdvisorProfiles.restoreOne(dumpObject);
-      const id = AdvisorProfiles.getID(username);
-      expect(AdvisorProfiles.isDefined(id)).to.be.true;
-      AdvisorProfiles.removeIt(id);
+      docID = AdvisorProfiles.getID(username);
+      expect(AdvisorProfiles.isDefined(docID)).to.be.true;
+      AdvisorProfiles.update(docID, { retired: true });
+      dumpObject = AdvisorProfiles.dumpOne(docID);
+      expect(dumpObject.retired).to.be.true;
+      AdvisorProfiles.removeIt(docID);
     });
   });
 }

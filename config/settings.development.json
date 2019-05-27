@@ -10,7 +10,8 @@
       "popupWidth": 810,
       "popupHeight": 610
     },
-    "databaseRestoreFileName": "database/snapshot/2017-08-02-14-12-04.json",
+    "fixUserInteractions": false,
+    "databaseRestoreFileName": "database/snapshot/cam-student.json",
     "appLogging": { "enable": true, "filter": ["*"], "client": true, "server": true },
     "admin": { "username": "radgrad@hawaii.edu", "development": true },
     "cloudinary": {"cloud_name": "radgrad", "upload_preset": "CHANGEME"},
@@ -21,5 +22,8 @@
       "three": {"i": 1, "c": 24, "e": 1, "reviews": 0},
       "two": {"i": 0, "c": 12, "e": 0, "reviews": 0}
     }
+  },
+  "env": {
+    "MAIL_URL": "Insert MAIL_URL variable here"
   }
 }

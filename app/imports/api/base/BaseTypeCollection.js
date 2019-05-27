@@ -21,6 +21,7 @@ class BaseTypeCollection extends BaseCollection {
       name: { type: String },
       slugID: { type: SimpleSchema.RegEx.Id },
       description: { type: String },
+      retired: { type: Boolean, optional: true },
     }));
   }
 
@@ -31,9 +32,9 @@ class BaseTypeCollection extends BaseCollection {
    * @throws { Meteor.Error } If the slug already exists.
    * @returns The newly created docID.
    */
-  define({ name, slug, description }) {
+  define({ name, slug, description, retired }) {
     const slugID = Slugs.define({ name: slug, entityName: this._type });
-    const baseTypeID = this._collection.insert({ name, description, slugID });
+    const baseTypeID = this._collection.insert({ name, description, slugID, retired });
     Slugs.updateEntityID(slugID, baseTypeID);
     return baseTypeID;
   }
@@ -54,7 +55,8 @@ class BaseTypeCollection extends BaseCollection {
     try {
       id = (this._collection.findOne({ _id: instance })) ? instance : this.findIdBySlug(instance);
     } catch (err) {
-      throw new Meteor.Error(`Error in ${this._collectionName} getID(): Failed to convert ${instance} to an ID.`);
+      throw new Meteor.Error(`Error in ${this._collectionName} getID(): Failed to convert ${instance} to an ID.`,
+        '', Error().stack);
     }
     return id;
   }
@@ -71,7 +73,7 @@ class BaseTypeCollection extends BaseCollection {
     try {
       ids = (instances) ? instances.map((instance) => this.getID(instance)) : [];
     } catch (err) {
-      throw new Meteor.Error(`Error in getIDs(): Failed to convert one of ${instances} to an ID.`);
+      throw new Meteor.Error(`Error in getIDs(): Failed to convert one of ${instances} to an ID.`, '', Error().stack);
     }
     return ids;
   }
@@ -186,7 +188,8 @@ class BaseTypeCollection extends BaseCollection {
     const name = doc.name;
     const slug = Slugs.getNameFromID(doc.slugID);
     const description = doc.description;
-    return { name, slug, description };
+    const retired = doc.retired;
+    return { name, slug, description, retired };
   }
 }
 

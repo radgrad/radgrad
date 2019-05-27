@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
 /**
@@ -82,6 +83,30 @@ export function complexChoiceToArray(planChoice) {
   });
 }
 
+export function complexChoiceToComplexArray(planChoice) {
+  let exp = stripCounter(planChoice);
+  const ret = [];
+  while (exp.length > 0) {
+    if (exp[0] === '(') {
+      const endIndex = exp.indexOf(')');
+      if (endIndex === -1) {
+        throw new Meteor.Error('Bad planChoice %o', planChoice);
+      }
+      ret.push(exp.substring(1, endIndex));
+      exp = exp.substring(endIndex + 2);
+    } else {
+      const commaIndex = exp.indexOf(',');
+      if (commaIndex === -1) {
+        ret.push(exp);
+        exp = '';
+      } else {
+        ret.push(exp.substring(0, commaIndex));
+        exp = exp.substring(commaIndex + 1);
+      }
+    }
+  }
+  return ret;
+}
 /**
  * Creates the course name from the slug. Course names have department in all caps.
  * @param slug the course slug.
@@ -100,6 +125,7 @@ export function buildCourseSlugName(slug) {
  * @memberOf api/degree-plan
  */
 export function buildSimpleName(slug) {
+  // console.log(`buildSimpleName(${slug})`);
   const splits = slug.split(',');
   let ret = '';
   _.forEach(splits, (s) => {

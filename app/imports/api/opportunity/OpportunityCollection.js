@@ -36,7 +36,8 @@ class OpportunityCollection extends BaseSlugCollection {
       // Optional data
       eventDate: { type: Date, optional: true },
       ice: { type: Object, optional: true, blackbox: true },
-      copActive: { type: Boolean },
+      copActive: { type: Boolean, optional: true },
+      retired: { type: Boolean, optional: true },
     }));
   }
 
@@ -59,11 +60,13 @@ class OpportunityCollection extends BaseSlugCollection {
    * Semesters must be a (possibly empty) array of semester slugs or IDs.
    * Sponsor must be a User with role 'FACULTY', 'ADVISOR', or 'ADMIN'.
    * ICE must be a valid ICE object.
+   * retired a boolean optional defaults to false.
    * @throws {Meteor.Error} If the definition includes a defined slug or undefined interest, sponsor, opportunityType,
    * or startActive or endActive are not valid.
    * @returns The newly created docID.
    */
-  define({ name, slug, description, opportunityType, sponsor, interests, semesters, ice, eventDate = null }) {
+  define({ name, slug, description, opportunityType, sponsor, interests, semesters, ice, eventDate = null,
+           copActive = false, retired = false }) {
     // Get instances, or throw error
 
     const opportunityTypeID = OpportunityTypes.getID(opportunityType);
@@ -79,11 +82,11 @@ class OpportunityCollection extends BaseSlugCollection {
       // Define the new Opportunity and its Slug.
       opportunityID = this._collection.insert({
         name, slugID, description, opportunityTypeID, sponsorID,
-        interestIDs, semesterIDs, ice, eventDate });
+        interestIDs, semesterIDs, ice, eventDate, retired, copActive });
     } else {
       opportunityID = this._collection.insert({
         name, slugID, description, opportunityTypeID, sponsorID,
-        interestIDs, semesterIDs, ice });
+        interestIDs, semesterIDs, ice, retired, copActive });
     }
     Slugs.updateEntityID(slugID, opportunityID);
 
@@ -102,8 +105,9 @@ class OpportunityCollection extends BaseSlugCollection {
    * @param semesters optional
    * @param eventDate a Date. (optional)
    * @param ice An ICE object (optional).
+   * @param retired a boolean (optional).
    */
-  update(instance, { name, description, opportunityType, sponsor, interests, semesters, eventDate, ice }) {
+  update(instance, { name, description, opportunityType, sponsor, interests, semesters, eventDate, ice, retired, copActive }) {
     const docID = this.getID(instance);
     const updateData = {};
     if (name) {
@@ -136,26 +140,34 @@ class OpportunityCollection extends BaseSlugCollection {
       assertICE(ice);
       updateData.ice = ice;
     }
+    if (_.isBoolean(retired)) {
+      updateData.retired = retired;
+    }
+    if (_.isBoolean(copActive)) {
+      updateData.copActive = copActive;
+    }
     this._collection.update(docID, { $set: updateData });
   }
 
   /**
-   * Remove the Course.
+   * Remove the Opportunity.
    * @param instance The docID or slug of the entity to be removed.
-   * @throws { Meteor.Error } If docID is not a Course, or if this course has any associated course instances.
+   * @throws { Meteor.Error } If docID is not a Opportunity, or if this opportunity has any associated opportunity
+   * instances.
    */
   removeIt(instance) {
     const docID = this.getID(instance);
     // Check that this opportunity is not referenced by any Opportunity Instance.
     OpportunityInstances.find().map(function (opportunityInstance) {  // eslint-disable-line array-callback-return
       if (opportunityInstance.opportunityID === docID) {
-        throw new Meteor.Error(`Opportunity ${instance} referenced by a opportunity instance ${opportunityInstance}.`);
+        throw new Meteor.Error(`Opportunity ${instance} referenced by a opportunity instance ${opportunityInstance}.`,
+          '', Error().stack);
       }
     });
     // Check that this opportunity is not referenced by any Teaser.
     Teasers.find().map(function (teaser) {  // eslint-disable-line array-callback-return
       if (Teasers.hasOpportunity(teaser, docID)) {
-        throw new Meteor.Error(`Opportunity ${instance} referenced by a teaser ${teaser}.`);
+        throw new Meteor.Error(`Opportunity ${instance} referenced by a teaser ${teaser}.`, '', Error().stack);
       }
     });
     // OK to delete. First remove any Feeds that reference this opportunity.
@@ -260,7 +272,21 @@ class OpportunityCollection extends BaseSlugCollection {
     const interests = _.map(doc.interestIDs, interestID => Interests.findSlugByID(interestID));
     const semesters = _.map(doc.semesterIDs, semesterID => Semesters.findSlugByID(semesterID));
     const eventDate = doc.eventDate;
-    return { name, slug, description, opportunityType, sponsor, ice, interests, semesters, eventDate };
+    const retired = doc.retired;
+    const copActive = doc.copActive;
+    return {
+      name,
+      slug,
+      description,
+      opportunityType,
+      sponsor,
+      ice,
+      interests,
+      semesters,
+      eventDate,
+      retired,
+      copActive,
+    };
   }
 }
 

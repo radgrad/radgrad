@@ -6,7 +6,7 @@ import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection
 
 Template.Landing_Explorer_Degrees_Page.helpers({
   addedDegrees() {
-    return DesiredDegrees.find({}, { sort: { name: 1 } }).fetch();
+    return DesiredDegrees.findNonRetired({}, { sort: { name: 1 } });
   },
   degree() {
     const degreeSlugName = FlowRouter.getParam('degree');

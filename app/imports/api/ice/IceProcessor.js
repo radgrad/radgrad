@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Courses } from '../../api/course/CourseCollection';
 
 /**
@@ -43,7 +44,7 @@ export function isICE(obj) {
  */
 export function assertICE(obj) {
   if ((obj === null) || (typeof obj !== 'object') || !(isICE(obj))) {
-    throw new Meteor.Error(`${obj} was not an ICE object.`);
+    throw new Meteor.Error(`${obj} was not an ICE object.`, '', Error().stack);
   }
 }
 
@@ -52,7 +53,7 @@ export function assertICE(obj) {
  * Students only earn ICE competency points for 'interesting' courses. Interesting
  * courses are courses that have non other slugs.
  * If an A, then return 9 competency points.
- * If a B, then return 5 competency points.
+ * If a B, then return 6 competency points.
  * Otherwise return zero points.
  * @param course The course slug. If it's the "uninteresting" slug, then disregard it.
  * @param grade The grade
@@ -68,12 +69,15 @@ export function makeCourseICE(course, grade) {
     return { i, c, e };
   }
   // Courses get competency points only if you get an A or a B.
-  if (grade.includes('B')) {
+  if (_.includes(['B+', 'B', 'B-'], grade)) {
     c = gradeCompetency.B;
   } else
-    if (grade.includes('A')) {
+    if (_.includes(['A+', 'A', 'A-'], grade)) {
       c = gradeCompetency.A;
-    }
+    } else
+      if (_.includes(['*', '**', '***'], grade)) {
+        c = 9;
+      }
   return { i, c, e };
 }
 
@@ -88,7 +92,7 @@ export function getEarnedICE(docs) {
   const total = { i: 0, c: 0, e: 0 };
   docs.forEach((instance) => {
     if (!(isICE(instance.ice))) {
-      throw new Meteor.Error(`getEarnedICE passed ${instance} without a valid .ice field.`);
+      throw new Meteor.Error(`getEarnedICE passed ${instance} without a valid .ice field.`, '', Error().stack);
     }
     if (instance.verified === true) {
       total.i += instance.ice.i;
@@ -111,12 +115,13 @@ export function getProjectedICE(docs) {
   const total = { i: 0, c: 0, e: 0 };
   docs.forEach((instance) => {
     if (!(isICE(instance.ice))) {
-      throw new Meteor.Error(`getProjectedICE passed ${instance} without a valid .ice field.`);
+      throw new Meteor.Error(`getProjectedICE passed ${instance} without a valid .ice field.`, '', Error().stack);
     }
     total.i += instance.ice.i;
     total.c += instance.ice.c;
     total.e += instance.ice.e;
     return null;
   });
+  total.c = Math.floor(total.c);
   return total;
 }

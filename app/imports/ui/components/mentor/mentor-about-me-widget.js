@@ -3,7 +3,7 @@ import { ReactiveDict } from 'meteor/reactive-dict';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import SimpleSchema from 'simpl-schema';
 import * as RouteNames from '../../../startup/client/router.js';
-import * as FormUtils from '../../components/admin/form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Interests } from '../../../api/interest/InterestCollection';
@@ -90,7 +90,7 @@ Template.Mentor_About_Me_Widget.helpers({
   },
   firstDegree() {
     let ret;
-    const degrees = DesiredDegrees.find({}, { sort: { name: 1 } }).fetch();
+    const degrees = DesiredDegrees.findNonRetired({}, { sort: { name: 1 } });
     if (degrees.length > 0) {
       ret = Slugs.findDoc(degrees[0].slugID).name;
     }

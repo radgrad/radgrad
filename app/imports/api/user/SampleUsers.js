@@ -90,5 +90,5 @@ export function makeSampleUser(role = ROLE.STUDENT) {
   if (role === ROLE.MENTOR) {
     return makeSampleMentor();
   }
-  throw new Meteor.Error(`Unexpected role: ${role}`);
+  throw new Meteor.Error(`Unexpected role: ${role}`, '', Error().stack);
 }

@@ -10,19 +10,19 @@ function getAnswers(mentorID) {
 
 Template.User_Answers_Component.helpers({
   count() {
-    if (Template.instance().userID && Template.instance().userID.get()) {
-      const userID = Template.instance().userID.get();
+    if (Template.instance().userID) {
+      const userID = Template.instance().userID;
       return getAnswers(userID).length;
     }
     return 0;
   },
   questionName(answer) {
     const question = MentorQuestions.findDoc(answer.questionID);
-    return question.title;
+    return question.question;
   },
   answers() {
-    if (Template.instance().userID && Template.instance().userID.get()) {
-      const userID = Template.instance().userID.get();
+    if (Template.instance().userID) {
+      const userID = Template.instance().userID;
       return getAnswers(userID);
     }
     return null;

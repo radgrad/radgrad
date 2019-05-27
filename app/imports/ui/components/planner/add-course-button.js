@@ -5,8 +5,10 @@ import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { buildSimpleName } from '../../../api/degree-plan/PlanChoiceUtilities';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
+import { getRouteUserName } from '../shared/route-user-name';
 import { plannerKeys } from './academic-plan';
 import { getFutureEnrollmentMethod } from '../../../api/course/CourseCollection.methods';
+import { userInteractionDefineMethod } from '../../../api/analytic/UserInteractionCollection.methods';
 
 Template.Add_Course_Button.onCreated(function addCourseButtonOnCreated() {
   this.state = this.data.dictionary;
@@ -57,6 +59,13 @@ Template.Add_Course_Button.events({
               instance.state.set(plannerKeys.plannedEnrollment, result);
             }
         });
+      }
+    });
+    const interactionData = { username: getRouteUserName(), type: 'removeCourse',
+      typeData: Slugs.getNameFromID(course.slugID) };
+    userInteractionDefineMethod.call(interactionData, (err) => {
+      if (err) {
+        console.log('Error creating UserInteraction', err);
       }
     });
   },

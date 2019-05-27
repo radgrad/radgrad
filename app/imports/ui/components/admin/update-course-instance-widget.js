@@ -8,7 +8,7 @@ import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { ROLE } from '../../../api/role/Role.js';
 import { Semesters } from '../../../api/semester/SemesterCollection';
-import * as FormUtils from './form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 
 const updateSchema = new SimpleSchema({
   semester: String,
@@ -18,10 +18,11 @@ const updateSchema = new SimpleSchema({
   grade: String,
   creditHrs: String,
   note: String,
-  user: String,
+  student: String,
   innovation: { type: Number, optional: false, min: 0, max: 100 },
   competency: { type: Number, optional: false, min: 0, max: 100 },
   experience: { type: Number, optional: false, min: 0, max: 100 },
+  retired: Boolean,
 }, { tracker: Tracker });
 
 Template.Update_Course_Instance_Widget.onCreated(function onCreated() {
@@ -30,7 +31,7 @@ Template.Update_Course_Instance_Widget.onCreated(function onCreated() {
 
 Template.Update_Course_Instance_Widget.helpers({
   semesters() {
-    return Semesters.find({});
+    return Semesters.findNonRetired({}, { sort: { semesterNumber: 1 } });
   },
   students() {
     const students = Roles.getUsersInRole([ROLE.STUDENT]).fetch();
@@ -62,11 +63,23 @@ Template.Update_Course_Instance_Widget.helpers({
     return !course.fromSTAR;
   },
   courses() {
-    return Courses.find({}, { sort: { number: 1 } });
+    return Courses.findNonRetired({}, { sort: { number: 1 } });
   },
   course() {
     const course = CourseInstances.findDoc(Template.currentData().updateID.get());
     return course.courseID;
+  },
+  falseValueRetired() {
+    const plan = CourseInstances.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return !plan.retired;
+  },
+  trueValueRetired() {
+    const plan = CourseInstances.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return plan.retired;
   },
 });
 
@@ -76,6 +89,7 @@ Template.Update_Course_Instance_Widget.events({
     const updateData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     instance.context.reset();
     updateSchema.clean(updateData, { mutate: true });
+    updateData.retired = updateData.retired === 'true';
     instance.context.validate(updateData);
     if (instance.context.isValid()) {
       FormUtils.convertICE(updateData);

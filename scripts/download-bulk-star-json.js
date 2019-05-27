@@ -6,8 +6,27 @@ const moment = require('moment');
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
-function getStarArrivalTime() {
-  const emailData = fs.readFileSync('./emails.txt');
+function splitEmails(emails, key, emailsPerFile) {
+  const emailData = fs.readFileSync(`./${emails}`);
+  const emailArr = emailData.toString().split('\n')
+  const numEmails = emailArr.length;
+  let count = 1;
+  let start = 0;
+  let end = emailsPerFile;
+  const retVal = {};
+  retVal.keys = [];
+  while (end < numEmails + emailsPerFile) {
+    retVal.keys.push(`${key}-${count}`);
+    fs.writeFileSync(`emails${key}-${count}.txt`, emailArr.slice(start, end).join('\n'));
+    count++;
+    start += emailsPerFile;
+    end += emailsPerFile;
+  }
+  return retVal.keys;
+}
+
+function getStarArrivalTime(emails) {
+  const emailData = fs.readFileSync(`./${emails}`);
   const numEmails = emailData.toString().split('\n').length;
   const arrivalTime = moment().add(numEmails * 10, 's');
   // eslint-disable-next-line
@@ -15,16 +34,16 @@ function getStarArrivalTime() {
 }
 
 /**
- * Read emails.txt which is a newline delimited list of UH email addresses
+ * Read emails file which is a newline delimited list of UH email addresses
  * Pass email list as part of the url encoded form to the STAR-RadGrad api
  * Return the response which should be a JSON object
  */
-function getCourseData(username, password) {
+function getCourseData(username, password, emails) {
   const params = {
     form: {
       uid: username,
       password: password,
-      emails: fs.readFileSync('./emails.txt'),
+      emails: fs.readFileSync(`./${emails}`),
     },
   };
 
@@ -37,12 +56,17 @@ function getCourseData(username, password) {
   });
 }
 
+function courseIsInteresting(courseName) {
+  return courseName.match(/ics/i);
+}
+
 /**
  * Determine if a student's data represents an alumni.
  * This is heuristically determined by checking to see if there are no ICS or EE courses in their course data.
  * If an alumni is detected, then put them into the alumni.txt file and remove their data from the json file.
  */
-function filterAlumni(contents) {
+function filterAlumni(contents, key) {
+  // console.log(contents);
   const re = /ics|ee/i;
   const alumniEmail = [];
   const data = JSON.parse(contents);
@@ -70,16 +94,17 @@ function filterAlumni(contents) {
     });
     return student;
   });
-  fs.writeFile('alumni.txt', alumniEmail.join('\n'), 'utf8', (err) => {
+  fs.writeFile(`alumni${key}.txt`, alumniEmail.join('\n'), 'utf8', (err) => {
     if (err) {
-      console.log(`Error writing alumni.txt ${err.message}`);
+      console.log(`Error writing alumni${key}.txt ${err.message}`);
     }
   });
   return JSON.stringify(filtered, null, ' ');
 }
 
 /**
- * Main function. Ask for the admin's username, password, and file to put the json data into.
+ * Main function. Ask for the admin's username, password, the name of the email list file
+ * and file to put the json data into.
  * Then call getCourseData to get the data from STAR.
  * @returns {Promise<void>}
  */
@@ -98,18 +123,40 @@ async function downloadStarData() {
       validate: value => (value.length ? true : 'Please enter your password'),
     },
     {
-      name: 'filename',
+      name: 'key',
       type: 'input',
-      message: 'Enter the file name where the data will be saved:',
-      validate: value => (value.length ? true : 'Please enter the file name.'),
+      message: 'Enter the emails list key: (e.g. emails{key}.txt',
+      validate: value => (value.length ? true : 'Please enter the email list file name'),
+    },
+    {
+      name: 'emailsPerFile',
+      type: 'input',
+      message: 'Enter the number of emails per file: ',
+      validate: value => {
+        const num = parseInt(value, 10);
+        return (num > 0 ? true : 'Please enter a positive number');
+      },
     },
   ];
 
   const userParams = await inquirer.prompt(questions);
-  console.log(getStarArrivalTime());
-  getCourseData(userParams.username, userParams.password)
-      .then(res => fs.writeFileSync(userParams.filename, filterAlumni(res.body)))
-      .catch(err => console.log(err));
+  const emailFileName = `emails${userParams.key}.txt`;
+  const numEmailsPerFile = parseInt(userParams.emailsPerFile, 10);
+  const key = userParams.key;
+  const keys = splitEmails(emailFileName, key, numEmailsPerFile);
+  _.forEach(keys, (k) => {
+    const eFileName = `emails${k}.txt`;
+    const sFileName = `star${k}.json`;
+    console.log(getStarArrivalTime(eFileName));
+    getCourseData(userParams.username, userParams.password, eFileName)
+        .then(res => fs.writeFileSync(sFileName, filterAlumni(res.body, k)))
+        .catch(err => console.log(err));
+  });
+  // const starFilenName = `star${userParams.key}.json`;
+  // console.log(getStarArrivalTime(emailFileName));
+  // getCourseData(userParams.username, userParams.password, emailFileName)
+  //     .then(res => fs.writeFileSync(starFilenName, filterAlumni(res.body, userParams.key)))
+  //     .catch(err => console.log(err));
 }
 
 /**

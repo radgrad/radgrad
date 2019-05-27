@@ -14,6 +14,7 @@ import {
 } from '../../utilities/template-helpers';
 
 function interestedStudentsHelper(item, type) {
+  // console.log('interestedStudents(%o, %o)', item, type);
   const interested = [];
   let instances;
   if (type === 'courses') {
@@ -25,6 +26,7 @@ function interestedStudentsHelper(item, type) {
       opportunityID: item._id,
     }).fetch();
   }
+  // console.log(instances.length);
   _.forEach(instances, (c) => {
     if (!_.includes(interested, c.studentID)) {
       interested.push(c.studentID);
@@ -111,6 +113,13 @@ Template.Student_Of_Interest_Card.helpers({
     }
     return Users.getProfile(studentID).picture;
   },
+  studentFullName(studentID) {
+    if (studentID === 'elispsis') {
+      return '';
+    }
+    // console.log(Users.getFullName(studentID));
+    return Users.getFullName(studentID);
+  },
   typeCourse() {
     return (this.type === 'courses');
   },
@@ -118,7 +127,7 @@ Template.Student_Of_Interest_Card.helpers({
     return Users.getProfile(studentID).username;
   },
   usersRouteName() {
-    return RouteNames.studentExplorerUsersPageRouteName;
+    return RouteNames.studentCardExplorerUsersPageRouteName;
   },
   yearSemesters(year) {
     const semesters = [`Spring ${year}`, `Summer ${year}`, `Fall ${year}`];
@@ -171,4 +180,8 @@ Template.Student_Of_Interest_Card.events({
       }
     });
   },
+});
+
+Template.Student_Of_Interest_Card.onRendered(function interestCardOnRendered() {
+  this.$('.ui.image').popup();
 });

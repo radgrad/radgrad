@@ -2,8 +2,11 @@
   <div class="ui padded container segment">
     <div class="ui dividing header"><h4>HELP MESSAGES ({{ count }})</h4></div>
 
-    {{#each helpMessage in helpMessages}}
-      {{> Admin_DataModel_Accordion name=helpMessage.routeName descriptionPairs=(descriptionPairs helpMessage) id=helpMessage._id updateID=updateID deleteDisabled=(deleteDisabled helpMessage)}}
-    {{/each}}
+    <div class="ui grid">
+      {{> Admin_Datamodel_Pagination_Widget showItemCount=getItemCount showIndex=getItemIndex collection=getCollection }}
+      {{#each helpMessage in helpMessages}}
+        {{> Admin_DataModel_Accordion name=helpMessage.routeName descriptionPairs=(descriptionPairs helpMessage) id=helpMessage._id updateID=updateID deleteDisabled=(deleteDisabled helpMessage) retired=(retired helpMessage)}}
+      {{/each}}
+    </div>
   </div>
 </template>

@@ -6,6 +6,7 @@ import { Interests } from '../interest/InterestCollection';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { Feeds } from '../feed/FeedCollection';
 import BaseSlugCollection from '../base/BaseSlugCollection';
+import { isSingleChoice } from '../degree-plan/PlanChoiceUtilities';
 
 
 /**
@@ -31,6 +32,7 @@ class CourseCollection extends BaseSlugCollection {
       // Optional data
       syllabus: { type: String, optional: true },
       prerequisites: [String],
+      retired: { type: Boolean, optional: true },
     }));
     this.unInterestingSlug = 'other';
   }
@@ -56,23 +58,30 @@ class CourseCollection extends BaseSlugCollection {
    * Interests is a (possibly empty) array of defined interest slugs or interestIDs.
    * Syllabus is optional. If supplied, should be a URL.
    * Prerequisites is optional. If supplied, must be an array of previously defined Course slugs or courseIDs.
+   * retired is optional defaults to false.
    * @throws {Meteor.Error} If the definition includes a defined slug or undefined interest or invalid creditHrs.
    * @returns The newly created docID.
    */
   define({
       name, shortName = name, slug, number, description, creditHrs = 3,
-      interests = [], syllabus, prerequisites = [],
+      interests = [], syllabus, prerequisites = [], retired,
   }) {
+    try {
+      // Check to see if is defined already.
+      return Slugs.getEntityID(slug, this.getType());
+    } catch (e) {
+      // try to create the Course
+    }
     // Get Interests, throw error if any of them are not found.
     const interestIDs = Interests.getIDs(interests);
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
     // Make sure creditHrs is a number between 1 and 15.
     if (!(typeof creditHrs) === 'number' || (creditHrs < 1) || (creditHrs > 15)) {
-      throw new Meteor.Error(`CreditHrs ${creditHrs} is not a number between 1 and 15.`);
+      throw new Meteor.Error(`CreditHrs ${creditHrs} is not a number between 1 and 15.`, '', Error().stack);
     }
     if (!Array.isArray(prerequisites)) {
-      throw new Meteor.Error(`Prerequisites ${prerequisites} is not an array.`);
+      throw new Meteor.Error(`Prerequisites ${prerequisites} is not an array.`, '', Error().stack);
     }
     // Currently we don't dump the DB is a way that prevents forward referencing of prereqs, so we
     // can't check the validity of prereqs during a define, such as with:
@@ -80,7 +89,7 @@ class CourseCollection extends BaseSlugCollection {
     // Instead, we check that prereqs are valid as part of checkIntegrity.
     const courseID =
         this._collection.insert({
-          name, shortName, slugID, number, description, creditHrs, interestIDs, syllabus, prerequisites,
+          name, shortName, slugID, number, description, creditHrs, interestIDs, syllabus, prerequisites, retired,
         });
     // Connect the Slug to this Interest
     Slugs.updateEntityID(slugID, courseID);
@@ -98,8 +107,9 @@ class CourseCollection extends BaseSlugCollection {
    * @param interests An array of interestIDs or slugs (optional)
    * @param syllabus optional
    * @param prerequisites An array of course slugs. (optional)
+   * @param retired boolean (optional)
    */
-  update(instance, { name, shortName, number, description, creditHrs, interests, prerequisites, syllabus }) {
+  update(instance, { name, shortName, number, description, creditHrs, interests, prerequisites, syllabus, retired }) {
     const docID = this.getID(instance);
     const updateData = {};
     if (name) {
@@ -126,14 +136,17 @@ class CourseCollection extends BaseSlugCollection {
     }
     if (prerequisites) {
       if (!Array.isArray(prerequisites)) {
-        throw new Meteor.Error(`Prerequisites ${prerequisites} is not an Array.`);
+        throw new Meteor.Error(`Prerequisites ${prerequisites} is not an Array.`, '', Error().stack);
       }
       _.forEach(prerequisites, prereq => {
         if (!this.hasSlug(prereq)) {
-          throw new Meteor.Error(`Prerequisite ${prereq} is not a slug for a course.`);
+          throw new Meteor.Error(`Prerequisite ${prereq} is not a slug for a course.`, '', Error().stack);
         }
       });
       updateData.prerequisites = prerequisites;
+    }
+    if (_.isBoolean(retired)) {
+      updateData.retired = retired;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -148,7 +161,8 @@ class CourseCollection extends BaseSlugCollection {
     // Check that this is not referenced by any Course Instance.
     CourseInstances.find().map(function (courseInstance) {  // eslint-disable-line array-callback-return
       if (courseInstance.courseID === docID) {
-        throw new Meteor.Error(`Course ${instance} is referenced by a course instance ${courseInstance}.`);
+        throw new Meteor.Error(`Course ${instance} is referenced by a course instance ${courseInstance}.`,
+          '', Error().stack);
       }
     });
     // OK to delete. First remove any Feeds that reference this course.
@@ -196,8 +210,17 @@ class CourseCollection extends BaseSlugCollection {
         }
       });
       _.forEach(doc.prerequisites, prereq => {
-        if (!this.hasSlug(prereq)) {
-          problems.push(`Bad course prerequisite slug: ${prereq}`);
+        if (isSingleChoice(prereq)) {
+          if (!this.hasSlug(prereq)) {
+            problems.push(`Bad course prerequisite slug: ${prereq}`);
+          }
+        } else {
+          const slugs = prereq.split(',');
+          _.forEach(slugs, (slug) => {
+            if (!this.hasSlug(slug)) {
+              problems.push(`Bad course prerequisite slug: ${slug}`);
+            }
+          });
         }
       });
     });
@@ -220,8 +243,9 @@ class CourseCollection extends BaseSlugCollection {
     const interests = _.map(doc.interestIDs, interestID => Interests.findSlugByID(interestID));
     const syllabus = doc.syllabus;
     const prerequisites = doc.prerequisites;
+    const retired = doc.retired;
     return { name, shortName, slug, number, description, creditHrs, interests, syllabus,
-      prerequisites };
+      prerequisites, retired };
   }
 }
 
