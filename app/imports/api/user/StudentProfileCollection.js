@@ -383,6 +383,15 @@ class StudentProfileCollection extends BaseProfileCollection {
   }
 
   /**
+   * Updates the user's sharePicture value. If they have set their picture then they want to share the picture.
+   * @param user The user (username or userID).
+   */
+  setSharePicture(user) {
+    const id = this.getID(user);
+    this._collection.update({ _id: id }, { $set: { sharePicture: this.hasSetPicture(user) } });
+  }
+
+  /**
    * Depending on the logged in user publish only their StudentProfile information if they opt-in. If
    * the user is in the Role.ADMIN or ADVISOR then publish all information.
    */

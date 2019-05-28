@@ -5,6 +5,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { ROLE } from '../../../api/role/Role.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { updateAllStudentLevelsMethod } from '../../../api/level/LevelProcessor.methods';
+import { updateStudentSharingInfoMethod } from '../../../api/user/StudentProfileCollection.methods';
 
 Template.Retrieve_User_Widget.onCreated(function retrieveUserOnCreated() {
   this.firstNameRegex = new ReactiveVar();
@@ -115,6 +116,16 @@ Template.Retrieve_User_Widget.events({
     updateAllStudentLevelsMethod.call((error, result) => {
       if (error) {
         console.log('There was an error updating the student levels', error);
+      }
+      console.log(result);
+      instance.updateResult.set(result);
+    });
+  },
+  'click .jsUpdateSharePicture': function clickUpdateSharePicture(event, instance) {
+    event.preventDefault();
+    updateStudentSharingInfoMethod.call({}, (error, result) => {
+      if (error) {
+        console.error('There was an error updating student sharing.', error);
       }
       console.log(result);
       instance.updateResult.set(result);

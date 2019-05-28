@@ -29,7 +29,7 @@ if (Meteor.isClient) {
       defineTestFixturesMethod.call(['minimal', 'abi.student', 'rbrewer.mentor'], done);
     });
 
-    it('Define Method (Question)', async function () {
+    it('Define (Question, Answer)', async function () {
       await withLoggedInUser();
       await withRadGradSubscriptions();
       const questionID = await defineMethod.callPromise({
@@ -37,9 +37,6 @@ if (Meteor.isClient) {
         definitionData: questionDefinition,
       });
       expect(MentorQuestions.isDefined(questionID)).to.be.true;
-    });
-
-    it('Define Method (Answer)', async function () {
       const answerID = await defineMethod.callPromise({
         collectionName: answerCollectionName,
         definitionData: answerDefinition,
