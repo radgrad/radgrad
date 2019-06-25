@@ -42,10 +42,10 @@ Template.Landing_Section_2.helpers({
     return '';
   },
   interestsRouteName() {
-    return RouteNames.landingExplorerInterestsPageRouteName;
+    return RouteNames.landingCardExplorerInterestsPageRouteName;
   },
   opportunitiesRouteName() {
-    return RouteNames.landingExplorerOpportunitiesPageRouteName;
+    return RouteNames.landingCardExplorerOpportunitiesPageRouteName;
   },
 });
 
