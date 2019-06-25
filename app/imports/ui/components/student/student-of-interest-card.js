@@ -12,6 +12,7 @@ import * as RouteNames from '../../../startup/client/router.js';
 import {
   opportunitySemesters,
 } from '../../utilities/template-helpers';
+import { CourseAndOpportunityEnrollments } from '../../../api/public-stats/CourseAndOpportunityEnrollmentCollection';
 
 function interestedStudentsHelper(item, type) {
   // console.log('interestedStudents(%o, %o)', item, type);
@@ -26,7 +27,7 @@ function interestedStudentsHelper(item, type) {
       opportunityID: item._id,
     }).fetch();
   }
-  // console.log(instances.length);
+  console.log(item.name, instances.length);
   _.forEach(instances, (c) => {
     if (!_.includes(interested, c.studentID)) {
       interested.push(c.studentID);
@@ -91,7 +92,9 @@ Template.Student_Of_Interest_Card.helpers({
     return nextYears;
   },
   numberStudents(course) {
-    return interestedStudentsHelper(course, this.type).length;
+    const enrollment = CourseAndOpportunityEnrollments.findDoc({itemID: course._id});
+    // console.log(enrollment);
+    return enrollment.itemCount;
   },
   opportunitiesRouteName() {
     return RouteNames.studentExplorerOpportunitiesPageRouteName;

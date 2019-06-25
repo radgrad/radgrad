@@ -15,6 +15,7 @@ import {
   isInRole,
   opportunitySemesters,
 } from '../../utilities/template-helpers';
+import { CourseAndOpportunityEnrollments } from '../../../api/public-stats/CourseAndOpportunityEnrollmentCollection';
 
 function interestedStudentsHelper(item, type) {
   let instances;
@@ -104,6 +105,8 @@ Template.Semester_Card.helpers({
     return nextYears;
   },
   numberStudents(course) {
+    console.log(course);
+    // const countSummary = CourseAndOpportunityEnrollments.findDoc()
     return interestedStudentsHelper(course, this.type).length;
   },
   opportunitiesRouteName() {

@@ -23,6 +23,7 @@ import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollecti
 import { OpportunityTypes } from '../opportunity/OpportunityTypeCollection';
 import { PlanChoices } from '../degree-plan/PlanChoiceCollection';
 import { PublicStats } from '../public-stats/PublicStatsCollection';
+import { CourseAndOpportunityEnrollments } from '../public-stats/CourseAndOpportunityEnrollmentCollection';
 import { Reviews } from '../review/ReviewCollection';
 import { Semesters } from '../semester/SemesterCollection';
 import { Slugs } from '../slug/SlugCollection';
@@ -47,6 +48,7 @@ class RadGradClass {
       AdvisorLogs,
       AdvisorProfiles,
       CareerGoals,
+      CourseAndOpportunityEnrollments,
       Courses,
       CourseInstances,
       FacultyProfiles,

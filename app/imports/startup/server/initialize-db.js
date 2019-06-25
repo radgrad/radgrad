@@ -14,6 +14,7 @@ import { loadCollection } from '../../api/test/test-utilities';
 import { removeAllEntities } from '../../api/base/BaseUtilities';
 import { checkIntegrity } from '../../api/integrity/IntegrityChecker';
 import { ROLE } from '../../api/role/Role';
+import { CourseAndOpportunityEnrollments } from '../../api/public-stats/CourseAndOpportunityEnrollmentCollection';
 
 /* global Assets */
 /* eslint no-console: "off" */
@@ -110,7 +111,19 @@ function startupPublicStats() {
       PublicStats.generateStats();
     },
   });
-  SyncedCron.start();
+}
+
+function startupCourseAndOpportunityEnrollment() {
+  CourseAndOpportunityEnrollments.upsertEnrollmentData();
+  SyncedCron.add({
+    name: 'Run CourseAndOpportunityEnrollments.upsertEnrollmentData',
+    schedule(parser) {
+      return parser.text('every 24 hours');
+    },
+    job() {
+      CourseAndOpportunityEnrollments.upsertEnrollmentData();
+    }
+  });
 }
 
 /**
@@ -220,6 +233,8 @@ Meteor.startup(() => {
     loadDatabase();
     startupCheckIntegrity();
     startupPublicStats();
+    startupCourseAndOpportunityEnrollment();
     fixUserInteractions();
+    SyncedCron.start();
   }
 });
