@@ -21,18 +21,24 @@ function interestedStudentsHelper(item, type) {
   if (type === 'courses') {
     instances = CourseInstances.find({
       courseID: item._id,
-    }).fetch();
+    })
+      .fetch();
   } else {
     instances = OpportunityInstances.find({
       opportunityID: item._id,
-    }).fetch();
+    })
+      .fetch();
   }
-  console.log(item.name, instances.length);
+  // console.log(item.name, instances.length);
   _.forEach(instances, (c) => {
     if (!_.includes(interested, c.studentID)) {
       interested.push(c.studentID);
     }
   });
+  // only allow 50 students randomly selected.
+  for (let i = interested.length - 1; i >= 50; i--) {
+    interested.splice(Math.floor(Math.random() * interested.length), 1);
+  }
   return interested;
 }
 
@@ -47,10 +53,9 @@ Template.Student_Of_Interest_Card.helpers({
       if (_.includes(profile.hiddenCourseIDs, this.item._id)) {
         ret = 'grey';
       }
-    } else
-      if (_.includes(profile.hiddenOpportunityIDs, this.item._id)) {
-        ret = 'grey';
-      }
+    } else if (_.includes(profile.hiddenOpportunityIDs, this.item._id)) {
+      ret = 'grey';
+    }
     return ret;
   },
   interestedStudents(course) {
@@ -92,7 +97,7 @@ Template.Student_Of_Interest_Card.helpers({
     return nextYears;
   },
   numberStudents(course) {
-    const enrollment = CourseAndOpportunityEnrollments.findDoc({itemID: course._id});
+    const enrollment = CourseAndOpportunityEnrollments.findDoc({ itemID: course._id });
     // console.log(enrollment);
     return enrollment.itemCount;
   },
@@ -108,7 +113,8 @@ Template.Student_Of_Interest_Card.helpers({
     });
     fourRecentSem = array.slice(0, 4);
     const semString = fourRecentSem.join(' - ');
-    return semString.replace(/Summer/g, 'Sum').replace(/Spring/g, 'Spr');
+    return semString.replace(/Summer/g, 'Sum')
+      .replace(/Spring/g, 'Spr');
   },
   studentPicture(studentID) {
     if (studentID === 'elipsis') {
@@ -186,5 +192,6 @@ Template.Student_Of_Interest_Card.events({
 });
 
 Template.Student_Of_Interest_Card.onRendered(function interestCardOnRendered() {
-  this.$('.ui.image').popup();
+  this.$('.ui.image')
+    .popup();
 });

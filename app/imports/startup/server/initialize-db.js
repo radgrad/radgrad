@@ -122,7 +122,7 @@ function startupCourseAndOpportunityEnrollment() {
     },
     job() {
       CourseAndOpportunityEnrollments.upsertEnrollmentData();
-    }
+    },
   });
 }
 

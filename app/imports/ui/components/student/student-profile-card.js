@@ -27,6 +27,10 @@ function interestedStudentsHelper(item, type) {
       interested.push(p.userID);
     }
   });
+  // only allow 50 students randomly selected.
+  for (let i = interested.length - 1; i >= 50; i--) {
+    interested.splice(Math.floor(Math.random() * interested.length), 1);
+  }
   // console.log(interested);
   return interested;
 }

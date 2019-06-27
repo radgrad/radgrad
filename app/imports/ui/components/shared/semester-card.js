@@ -2,8 +2,6 @@ import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
-import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
-import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
@@ -16,20 +14,6 @@ import {
   opportunitySemesters,
 } from '../../utilities/template-helpers';
 import { CourseAndOpportunityEnrollments } from '../../../api/public-stats/CourseAndOpportunityEnrollmentCollection';
-
-function interestedStudentsHelper(item, type) {
-  let instances;
-  if (type === 'courses') {
-    instances = CourseInstances.find({
-      courseID: item._id,
-    }).fetch();
-  } else {
-    instances = OpportunityInstances.find({
-      opportunityID: item._id,
-    }).fetch();
-  }
-  return _.uniqBy(instances, i => i.studentID);
-}
 
 Template.Semester_Card.helpers({
   coursesRouteName() {
@@ -54,9 +38,6 @@ Template.Semester_Card.helpers({
       ret = 'grey';
     }
     return ret;
-  },
-  interestedStudents(course) {
-    return interestedStudentsHelper(course, this.type);
   },
   isInRole,
   isType(type, value) {
@@ -105,9 +86,9 @@ Template.Semester_Card.helpers({
     return nextYears;
   },
   numberStudents(course) {
-    console.log(course);
-    // const countSummary = CourseAndOpportunityEnrollments.findDoc()
-    return interestedStudentsHelper(course, this.type).length;
+    const enrollment = CourseAndOpportunityEnrollments.findDoc({ itemID: course._id });
+    // console.log(course.name, enrollment.itemCount);
+    return enrollment.itemCount;
   },
   opportunitiesRouteName() {
     const group = FlowRouter.current().route.group.name;

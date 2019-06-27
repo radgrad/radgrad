@@ -80,7 +80,8 @@ class CourseAndOpportunityEnrollmentCollection extends BaseCollection {
         if (!Courses.isDefined(doc.itemID) && !Opportunities.isDefined(doc.itemID)) {
           problems.push(`Bad itemID. ${doc.itemID} is neither a Course or Opportunity ID.`);
         }
-        if (!Slugs.isSlugForEntity(doc.itemSlug, Courses.getType()) && !Slugs.isSlugForEntity(doc.itemSlug, Opportunities.getType())) {
+        if (!Slugs.isSlugForEntity(doc.itemSlug, Courses.getType()) &&
+          !Slugs.isSlugForEntity(doc.itemSlug, Opportunities.getType())) {
           problems.push(`Bad itemSlug. ${doc.itemSlug} is neither a Course or Opportunity slug.`);
         }
       });
