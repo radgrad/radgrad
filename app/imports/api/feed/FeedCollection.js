@@ -172,7 +172,10 @@ class FeedCollection extends BaseCollection {
     const userIDs = Users.getIDs(users);
     const description = `${Users.getFullName(userIDs[0])} 
     has joined RadGrad${(userIDs.length > 1) ? ' along with some others.' : '.'}`;
-    const picture = Users.getProfile(userIDs[0]).picture;
+    let picture = Users.getProfile(userIDs[0]).picture;
+    if (!picture) {
+      picture = '/images/default-profile-picture.png';
+    }
     return this._collection.insert({ userIDs, description, feedType, timestamp, picture, retired });
   }
 
