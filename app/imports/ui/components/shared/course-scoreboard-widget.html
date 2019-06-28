@@ -1,26 +1,53 @@
 <template name="Course_Scoreboard_Widget">
+  <div class="ui segment">
     <div class="ui dividing header">Future Course Scoreboard</div>
-    <div class="ui celled table">
-      <thead>
-      <tr>
-        <th>Course</th>
-        {{#each semester in semesters}}
-          <th>{{semesterName semester}}</th>
-        {{/each}}
-      </tr>
-      </thead>
-      <tbody>
-      {{#each course in courses}}
-        <tr>
-          <td><div class="ui label">{{course.number}}</div></td>
-          {{#each semester in semesters}}
-            <td class="{{#if highlight course semester}}negative{{/if}} ">
-              {{#if important course semester}}<i class="attention icon"></i> {{/if}}
-              {{semesterScore course semester}}
-            </td>
-          {{/each}}
-        </tr>
-      {{/each}}
-      </tbody>
+    <div class="ui centered grid">
+      <div class="row">
+        <div class="ui fourteen wide column">
+          <div class="ui fixed celled table fixed_header">
+            <thead>
+            <tr>
+              <th>
+                <div class="ui label">Course</div>
+              </th>
+              {{#each semester in semesters}}
+                <th>{{semesterName semester}}</th>
+              {{/each}}
+            </tr>
+            </thead>
+            <tbody>
+            {{#each course in courses}}
+              <tr>
+                <td>
+                  <div class="ui label">{{course.number}}</div>
+                </td>
+                {{#each semester in semesters}}
+                  <td class="{{#if highlight course semester}}negative{{/if}} ">
+                    {{#if important course semester}}<i class="attention icon"></i> {{/if}}
+                    {{semesterScore course semester}}
+                  </td>
+                {{/each}}
+              </tr>
+            {{/each}}
+            </tbody>
+          </div>
+        </div>
+      </div>
     </div>
+    <div class="padded row" style="margin-top: 10px">
+      <button class="ui basic green {{#if saveWorking}}loading {{/if}}button jsSaveCSV">Save as CSV</button>
+
+      <div style="margin-top: 10px" class="ui {{ hidden }} {{ successOrError }} message">
+        <div style="margin-bottom: 10px" class="header">
+          Course Scoreboard CSV
+        </div>
+        <pre>
+{{results}}
+        </pre>
+
+        {{ errorMessage }}
+      </div>
+
+    </div>
+  </div>
 </template>

@@ -1,12 +1,17 @@
 <template name="Admin_Course_Scoreboard_Page">
-    <div class="layout-page">
-        <div class="ui container stackable grid ">
-            <div class="row">
-                {{> Help_Panel_Widget }}
-            </div>
-            <div class="ui container segment">
-              {{> Course_Scoreboard_Widget}}
-            </div>
+  <div class="layout-page">
+    <div class="ui stackable centered grid ">
+      <div class="row">
+        {{> Help_Panel_Widget }}
+      </div>
+      <div class="row">
+        <div class="one wide column"></div>
+        <div class="ui fourteen wide column segment">
+          {{> Course_Scoreboard_Widget}}
         </div>
+      </div>
+      <div class="one wide column"></div>
+
     </div>
+  </div>
 </template>

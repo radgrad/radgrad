@@ -1,0 +1,16 @@
+.fixed_header tbody {
+  display: inline-block;
+  overflow-y: scroll;
+  height: 500px;
+  /*width: 100%;*/
+}
+
+.fixed_header tbody td {
+  /*display: table-cell;*/
+  width: 84px;
+}
+
+.fixed_header thead th {
+  /*display: block;*/
+  width: 84px;
+}

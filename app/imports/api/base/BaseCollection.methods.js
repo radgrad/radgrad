@@ -6,6 +6,8 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { RadGrad } from '../radgrad/RadGrad';
 import { ROLE } from '../role/Role';
 import { loadCollectionNewDataOnly } from '../utilities/load-fixtures';
+import { Semesters } from '../semester/SemesterCollection';
+import { Courses } from '../course/CourseCollection';
 
 /**
  * Allows admins to create and return a JSON object to the client representing a snapshot of the RadGrad database.
