@@ -1,6 +1,8 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { moment } from 'meteor/momentjs:moment';
+import { _ } from 'meteor/erasaur:meteor-lodash';
+import { ZipZap } from 'meteor/udondan:zipzap';
 
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Courses } from '../../../api/course/CourseCollection';
@@ -78,7 +80,7 @@ Template.Course_Scoreboard_Widget.helpers({
     return Template.instance()
       .saveWorking
       .get();
-  }
+  },
 });
 
 // Must match the format in the server-side startup/server/fixtures.js
@@ -119,7 +121,7 @@ Template.Course_Scoreboard_Widget.events({
     zip.file(fileName, result);
     zip.saveAs(`${dir}.zip`);
     instance.saveWorking.set(false);
-  }
+  },
 });
 
 Template.Course_Scoreboard_Widget.onRendered(function courseScoreboardWidgetOnRendered() {
