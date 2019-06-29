@@ -30,13 +30,13 @@ Template.With_Instance_Subscriptions.onCreated(function withInstanceSubscription
     }
     // get public information
     instanceSubs.subscribe(AdvisorLogs.getPublicationName());
-    instanceSubs.subscribe(CourseInstances.publicationNames.publicStudent);
+    // instanceSubs.subscribe(CourseInstances.publicationNames.publicStudent);
     instanceSubs.subscribe(CourseInstances.publicationNames.scoreboard);
     instanceSubs.subscribe(FeedbackInstances.getPublicationName());
     instanceSubs.subscribe(Feeds.getPublicationName());
     instanceSubs.subscribe(MentorAnswers.getPublicationName());
     instanceSubs.subscribe(MentorQuestions.getPublicationName());
-    instanceSubs.subscribe(OpportunityInstances.publicationNames.publicStudent);
+    // instanceSubs.subscribe(OpportunityInstances.publicationNames.publicStudent);
     instanceSubs.subscribe(OpportunityInstances.publicationNames.scoreboard);
     instanceSubs.subscribe(VerificationRequests.getPublicationName());
     self.ready.set(instanceSubs.ready());
