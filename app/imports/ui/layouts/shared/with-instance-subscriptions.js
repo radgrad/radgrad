@@ -37,6 +37,7 @@ Template.With_Instance_Subscriptions.onCreated(function withInstanceSubscription
     instanceSubs.subscribe(MentorAnswers.getPublicationName());
     instanceSubs.subscribe(MentorQuestions.getPublicationName());
     instanceSubs.subscribe(OpportunityInstances.publicationNames.publicStudent);
+    instanceSubs.subscribe(OpportunityInstances.publicationNames.scoreboard);
     instanceSubs.subscribe(VerificationRequests.getPublicationName());
     self.ready.set(instanceSubs.ready());
   });

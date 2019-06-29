@@ -1,0 +1,53 @@
+<template name="Opportunity_Scoreboard_Widget">
+  <div class="ui segment">
+    <div class="ui dividing header">Future Opportunity Scoreboard</div>
+    <div class="ui centered grid">
+      <div class="row">
+        <div class="ui fourteen wide column">
+          <div class="ui fixed celled table fixed_header">
+            <thead>
+            <tr>
+              <th>
+                <div class="ui label">Opportunity</div>
+              </th>
+              {{#each semester in semesters}}
+                <th>{{semesterName semester}}</th>
+              {{/each}}
+            </tr>
+            </thead>
+            <tbody>
+            {{#each opp in opportunities}}
+              <tr>
+                <td>
+                  <div class="ui label">{{opportunityName opp}}</div>
+                </td>
+                {{#each semester in semesters}}
+                  <td class="{{#if highlight opp semester}}negative{{/if}} ">
+                    {{#if important opp semester}}<i class="attention icon"></i> {{/if}}
+                    {{semesterScore opp semester}}
+                  </td>
+                {{/each}}
+              </tr>
+            {{/each}}
+            </tbody>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="padded row" style="margin-top: 10px">
+      <button class="ui basic green {{#if saveWorking}}loading {{/if}}button jsSaveOppCSV">Save as CSV</button>
+
+      <div style="margin-top: 10px" class="ui {{ hidden }} {{ successOrError }} message">
+        <div style="margin-bottom: 10px" class="header">
+          Opportunity Scoreboard CSV
+        </div>
+        <pre>
+          {{results}}
+        </pre>
+
+        {{ errorMessage }}
+      </div>
+
+    </div>
+  </div>
+</template>

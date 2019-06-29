@@ -77,6 +77,9 @@ import './moderation.js';
 import './observe-interactions.html';
 import './observe-interactions';
 
+import './opportunity-scoreboard-widget.html';
+import './opportunity-scoreboard-widget';
+
 import './plan-card.html';
 import './plan-card';
 
