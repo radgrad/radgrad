@@ -342,11 +342,31 @@ adminRoutes.route('/analytics/user-interactions', {
   },
 });
 
+const scoreboardPage = 'Scoreboard_Page';
+const courseScoreboardPage = 'Course_Scoreboard_Page';
+const opportunityScoreboardPage = 'Opportunity_Scoreboard_Page';
+
+export const adminScoreboardPageRouteName = 'Admin_Scoreboard_Page';
+adminRoutes.route('/scoreboard', {
+  name: adminScoreboardPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: scoreboardPage });
+  },
+});
+
 export const adminCourseScoreboardPageRouteName = 'Admin_Course_Scoreboard_Page';
-adminRoutes.route('/course-scoreboard', {
+adminRoutes.route('/scoreboard/course', {
   name: adminCourseScoreboardPageRouteName,
   action() {
-    BlazeLayout.render('Admin_Layout', { main: adminCourseScoreboardPageRouteName });
+    BlazeLayout.render('Admin_Layout', { main: courseScoreboardPage });
+  },
+});
+
+export const adminOpportunityScoreboardPageRouteName = 'Admin_Opportunity_Scoreboard_Page';
+adminRoutes.route('/scoreboard/opportunity', {
+  name: adminOpportunityScoreboardPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: opportunityScoreboardPage });
   },
 });
 
@@ -409,11 +429,27 @@ advisorRoutes.route('/academic-plan', {
   },
 });
 
+export const advisorScoreboardPageRouteName = 'Advisor_Scoreboard_Page';
+advisorRoutes.route('/scoreboard', {
+  name: advisorScoreboardPageRouteName,
+  action() {
+    BlazeLayout.render('Advisor_Layout', { main: scoreboardPage });
+  },
+});
+
 export const advisorCourseScoreboardPageRouteName = 'Advisor_Course_Scoreboard_Page';
-advisorRoutes.route('/course-scoreboard', {
+advisorRoutes.route('/scoreboard/course', {
   name: advisorCourseScoreboardPageRouteName,
   action() {
-    BlazeLayout.render('Advisor_Layout', { main: advisorCourseScoreboardPageRouteName });
+    BlazeLayout.render('Advisor_Layout', { main: courseScoreboardPage });
+  },
+});
+
+export const advisorOpportunityScoreboardPageRouteName = 'Advisor_Opportunity_Scoreboard_Page';
+advisorRoutes.route('/scoreboard/opportunity', {
+  name: advisorOpportunityScoreboardPageRouteName,
+  action() {
+    BlazeLayout.render('Advisor_Layout', { main: opportunityScoreboardPage });
   },
 });
 
@@ -588,11 +624,27 @@ facultyRoutes.route('/manage-opportunities', {
   },
 });
 
-export const facultyCourseScoreboardPageRouteName = 'Course_Scoreboard_Page';
-facultyRoutes.route('/course-scoreboard', {
+export const facultyScoreboardPageRouteName = 'Faculty_Scoreboard_Page';
+facultyRoutes.route('/scoreboard', {
+  name: facultyScoreboardPageRouteName,
+  action() {
+    BlazeLayout.render('Faculty_Layout', { main: scoreboardPage });
+  },
+});
+
+export const facultyCourseScoreboardPageRouteName = 'Faculty_Course_Scoreboard_Page';
+facultyRoutes.route('/scoreboard/course', {
   name: facultyCourseScoreboardPageRouteName,
   action() {
-    BlazeLayout.render('Faculty_Layout', { main: facultyCourseScoreboardPageRouteName });
+    BlazeLayout.render('Faculty_Layout', { main: courseScoreboardPage });
+  },
+});
+
+export const facultyOpportunityScoreboardPageRouteName = 'Faculty_Opportunity_Scoreboard_Page';
+facultyRoutes.route('/scoreboard/opportunity', {
+  name: facultyOpportunityScoreboardPageRouteName,
+  action() {
+    BlazeLayout.render('Faculty_Layout', { main: opportunityScoreboardPage });
   },
 });
 

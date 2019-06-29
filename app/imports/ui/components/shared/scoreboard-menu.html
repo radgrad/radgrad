@@ -1,0 +1,6 @@
+<template name="Scoreboard_Menu">
+  <div  class="ui left vertical text menu">
+    <a class="{{isActiveRoute courseScoreboardRouteName}} item" href="{{pathFor courseScoreboardRouteName username=routeUserName}}">Course Scoreboard</a>
+    <a class="{{isActiveRoute opportunityScoreboardRouteName}} item" href="{{pathFor opportunityScoreboardRouteName username=routeUserName}}">Opportunity Scoreboard</a>
+  </div>
+</template>

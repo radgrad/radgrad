@@ -24,6 +24,8 @@ import './page-not-found.html';
 
 import './radgrad-logo-text.html';
 
+import './scoreboard-layout.html';
+
 import './second-menu.html';
 import './second-menu.js';
 

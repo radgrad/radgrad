@@ -1,8 +1,11 @@
-<template name="Admin_DataModel_Layout">
+<template name="Scoreboard_Layout">
   <div class="layout-page">
     <div class="ui container stackable grid ">
+      <div class="row">
+        {{> Help_Panel_Widget }}
+      </div>
       <div class="three wide column">
-        {{> Admin_DataModel_Menu}}
+        {{> Scoreboard_Menu }}
       </div>
       <div class="thirteen wide column">
         {{> Template.contentBlock}}

@@ -93,6 +93,9 @@ import './review-ratings.js';
 
 import './route-user-name.js';
 
+import './scoreboard-menu.html';
+import './scoreboard-menu';
+
 import './semester-add.html';
 import './semester-add';
 

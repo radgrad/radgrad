@@ -1,0 +1,11 @@
+<template name="Scoreboard_Page">
+  {{#if Template.subscriptionsReady}}
+    {{#Scoreboard_Layout}}
+      <div class="ui floating message">
+        Click on a page in the menu to the left.
+      </div>
+    {{/Scoreboard_Layout}}
+  {{else}}
+    {{> Loading message="Waiting for subscriptions."}}
+  {{/if}}
+</template>

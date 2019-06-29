@@ -18,7 +18,7 @@ Template.Admin_Layout.helpers({
       { label: 'Data Base', route: RouteNames.adminDataBasePageRouteName, regex: 'database' },
       { label: moderationLabel, route: RouteNames.adminModerationPageRouteName, regex: 'moderation' },
       { label: 'Analytics', route: RouteNames.adminAnalyticsHomePageRouteName, regex: 'analytics' },
-      { label: 'Course Scoreboard', route: RouteNames.adminCourseScoreboardPageRouteName, regex: 'course-scoreboard' },
+      { label: 'Scoreboard', route: RouteNames.adminScoreboardPageRouteName, regex: 'scoreboard' },
     ];
   },
   secondMenuLength() {

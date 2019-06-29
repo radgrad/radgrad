@@ -20,6 +20,8 @@ import './card-explorer-plans-page';
 
 import './card-explorer-users-page.html';
 
+import './course-scoreboard-page.html';
+
 import './explorer-careergoals-page.html';
 import './explorer-careergoals-page.js';
 
@@ -35,7 +37,11 @@ import './explorer-interests-page.js';
 import './explorer-opportunities-page.html';
 import './explorer-opportunities-page';
 
+import './explorer-page.html';
+
 import './explorer-plans-page.html';
 import './explorer-plans-page';
 
-import './explorer-page.html';
+import './opportunity-scoreboard-page.html';
+
+import './scoreboard-page.html';
