@@ -9,6 +9,7 @@ import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { Users } from '../../../api/user/UserCollection';
 import * as RouteNames from '../../../startup/client/router';
 import { isInRole } from '../../utilities/template-helpers';
+import { StudentParticipation } from '../../../api/public-stats/StudentParticipationCollection';
 
 Template.Profile_Card.onCreated(function profileCardOnCreated() {
   this.hidden = new ReactiveVar(true);
@@ -62,7 +63,8 @@ Template.Profile_Card.helpers({
     return RouteNames.mentorExplorerInterestsPageRouteName;
   },
   interestedStudents(course) {
-    return interestedStudentsHelper(course, this.type);
+    const item = StudentParticipation.findOne({ itemID: course._id });
+    return item.itemCount;
   },
   isInRole,
   itemName(item) {

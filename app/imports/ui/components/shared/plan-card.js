@@ -5,6 +5,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import * as RouteNames from '../../../startup/client/router';
 import { Slugs } from '../../../api/slug/SlugCollection';
+import { StudentParticipation } from '../../../api/public-stats/StudentParticipationCollection';
 
 function interestedStudentsHelper(item, type) {
   const interested = [];
@@ -45,7 +46,8 @@ Template.Plan_Card.helpers({
     return Slugs.findDoc(item.slugID).name;
   },
   numberStudents(course) {
-    return interestedStudentsHelper(course, this.type).length;
+    const item = StudentParticipation.findOne({ itemID: course._id });
+    return item.itemCount;
   },
   plansRouteName() {
     const group = FlowRouter.current().route.group.name;
