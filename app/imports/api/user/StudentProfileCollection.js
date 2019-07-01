@@ -16,6 +16,7 @@ import { Users } from '../user/UserCollection';
 import { Slugs } from '../slug/SlugCollection';
 import { ROLE } from '../role/Role';
 import { getProjectedICE, getEarnedICE } from '../ice/IceProcessor';
+import { StudentParticipation } from '../public-stats/StudentParticipationCollection';
 
 /**
  * Represents a Student Profile.
@@ -151,10 +152,17 @@ class StudentProfileCollection extends BaseProfileCollection {
     shareCareerGoals, shareAcademicPlan, shareCourses, shareOpportunities, shareLevel,
   }) {
     this.assertDefined(docID);
+    const profile = this.findDoc(docID);
     const updateData = {};
     this._updateCommonFields(updateData, { firstName, lastName, picture, website, interests, careerGoals, retired });
     if (academicPlan) {
       updateData.academicPlanID = AcademicPlans.getID(academicPlan);
+      if (profile.academicPlanID !== updateData.academicPlanID) {
+        const oldItem = StudentParticipation.findOne({ itemID: profile.academicPlanID });
+        if (oldItem) {
+          // update the old and new AcademicPlan participation
+        }
+      }
     }
     if (declaredSemester) {
       updateData.declaredSemesterID = Semesters.getID(declaredSemester);

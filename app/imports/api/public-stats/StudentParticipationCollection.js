@@ -8,6 +8,10 @@ import { Slugs } from '../slug/SlugCollection';
 import { Courses } from '../course/CourseCollection';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
+import { StudentProfiles } from '../user/StudentProfileCollection';
+import { AcademicPlans } from '../degree-plan/AcademicPlanCollection';
+import { CareerGoals } from '../career/CareerGoalCollection';
+import { Interests } from '../interest/InterestCollection';
 
 class StudentParticipationCollection extends BaseCollection {
   constructor() {
@@ -103,6 +107,7 @@ class StudentParticipationCollection extends BaseCollection {
 
   upsertEnrollmentData() {
     if (Meteor.isServer) {
+      // Courses
       const courses = Courses.findNonRetired();
       _.forEach(courses, (c) => {
         const itemID = c._id;
@@ -111,11 +116,41 @@ class StudentParticipationCollection extends BaseCollection {
         const itemCount = _.uniqBy(items, (i) => i.studentID).length;
         this._collection.upsert({ itemSlug }, { $set: { itemID, itemSlug, itemCount } });
       });
+      // Opportunities
       _.forEach(Opportunities.findNonRetired(), (o) => {
         const itemID = o._id;
         const itemSlug = Slugs.getNameFromID(o.slugID);
         const items = OpportunityInstances.find({ opportunityID: itemID }).fetch();
         const itemCount = _.uniqBy(items, (i) => i.studentID).length;
+        this._collection.upsert({ itemSlug }, { $set: { itemID, itemSlug, itemCount } });
+      });
+      const students = StudentProfiles.findNonRetired({ isAlumni: false });
+      // AcademicPlans
+      const academicPlans = AcademicPlans.findNonRetired();
+      _.forEach(academicPlans, (p) => {
+        const itemID = p._id;
+        const itemSlug = Slugs.getNameFromID(p.slugID);
+        const filterd = _.filter(students, (s) => s.academicPlanID === itemID);
+        // console.log('students with academicplan %o = %o', itemID, filterd);
+        const itemCount = filterd.length;
+        this._collection.upsert({ itemSlug }, { $set: { itemID, itemSlug, itemCount } });
+      });
+      // CareerGoals
+      const careerGoals = CareerGoals.findNonRetired();
+      _.forEach(careerGoals, (c) => {
+        const itemID = c._id;
+        const itemSlug = Slugs.getNameFromID(c.slugID);
+        const filtered = _.filter(students, (s) => _.includes(s.careerGoalIDs, itemID));
+        // console.log('students with careerGoal %o = %o', itemID, filtered);
+        const itemCount = filtered.length;
+        this._collection.upsert({ itemSlug }, { $set: { itemID, itemSlug, itemCount } });
+      });
+      const interests = Interests.findNonRetired();
+      _.forEach(interests, (i) => {
+        const itemID = i._id;
+        const itemSlug = Slugs.getNameFromID(i.slugID);
+        const filterd = _.filter(students, (s) => _.includes(s.interestIDs, itemID));
+        const itemCount = filterd.length;
         this._collection.upsert({ itemSlug }, { $set: { itemID, itemSlug, itemCount } });
       });
     }
