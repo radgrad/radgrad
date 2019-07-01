@@ -13,7 +13,7 @@ import {
   isInRole,
   opportunitySemesters,
 } from '../../utilities/template-helpers';
-import { CourseAndOpportunityEnrollments } from '../../../api/public-stats/CourseAndOpportunityEnrollmentCollection';
+import { StudentParticipation } from '../../../api/public-stats/StudentParticipationCollection';
 
 Template.Semester_Card.helpers({
   coursesRouteName() {
@@ -86,7 +86,7 @@ Template.Semester_Card.helpers({
     return nextYears;
   },
   numberStudents(course) {
-    const enrollment = CourseAndOpportunityEnrollments.findDoc({ itemID: course._id });
+    const enrollment = StudentParticipation.findDoc({ itemID: course._id });
     // console.log(course.name, enrollment.itemCount);
     return enrollment.itemCount;
   },

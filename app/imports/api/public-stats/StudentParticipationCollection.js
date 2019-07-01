@@ -9,9 +9,9 @@ import { Courses } from '../course/CourseCollection';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
 
-class CourseAndOpportunityEnrollmentCollection extends BaseCollection {
+class StudentParticipationCollection extends BaseCollection {
   constructor() {
-    super('CourseAndOpportunityEnrollment', new SimpleSchema({
+    super('StudentParticipation', new SimpleSchema({
       itemID: SimpleSchema.RegEx.Id,
       itemSlug: String,
       itemCount: SimpleSchema.Integer,
@@ -122,4 +122,4 @@ class CourseAndOpportunityEnrollmentCollection extends BaseCollection {
   }
 }
 
-export const CourseAndOpportunityEnrollments = new CourseAndOpportunityEnrollmentCollection();
+export const StudentParticipation = new StudentParticipationCollection();

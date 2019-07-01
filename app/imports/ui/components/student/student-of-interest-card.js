@@ -12,7 +12,7 @@ import * as RouteNames from '../../../startup/client/router.js';
 import {
   opportunitySemesters,
 } from '../../utilities/template-helpers';
-import { CourseAndOpportunityEnrollments } from '../../../api/public-stats/CourseAndOpportunityEnrollmentCollection';
+import { StudentParticipation } from '../../../api/public-stats/StudentParticipationCollection';
 
 function interestedStudentsHelper(item, type) {
   // console.log('interestedStudents(%o, %o)', item, type);
@@ -97,7 +97,7 @@ Template.Student_Of_Interest_Card.helpers({
     return nextYears;
   },
   numberStudents(course) {
-    const enrollment = CourseAndOpportunityEnrollments.findDoc({ itemID: course._id });
+    const enrollment = StudentParticipation.findDoc({ itemID: course._id });
     // console.log(enrollment);
     return enrollment.itemCount;
   },

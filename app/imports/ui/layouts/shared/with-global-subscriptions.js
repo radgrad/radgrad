@@ -20,7 +20,7 @@ import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Teasers } from '../../../api/teaser/TeaserCollection';
 import { Users } from '../../../api/user/UserCollection';
-import { CourseAndOpportunityEnrollments } from '../../../api/public-stats/CourseAndOpportunityEnrollmentCollection';
+import { StudentParticipation } from '../../../api/public-stats/StudentParticipationCollection';
 
 /* eslint-disable object-shorthand */
 
@@ -42,7 +42,7 @@ Template.With_Global_Subscriptions.onCreated(function onCreated() {
     globalSubs.subscribe(AcademicPlans.getPublicationName());
     globalSubs.subscribe(AdvisorProfiles.getPublicationName());
     globalSubs.subscribe(CareerGoals.getPublicationName());
-    globalSubs.subscribe(CourseAndOpportunityEnrollments.getPublicationName());
+    globalSubs.subscribe(StudentParticipation.getPublicationName());
     globalSubs.subscribe(Courses.getPublicationName());
     globalSubs.subscribe(DesiredDegrees.getPublicationName());
     globalSubs.subscribe(FacultyProfiles.getPublicationName());
