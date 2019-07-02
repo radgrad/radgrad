@@ -13,6 +13,7 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { ROLE } from '../../../api/role/Role.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 import { getRouteUserName } from '../../components/shared/route-user-name.js';
+import { StudentParticipation } from '../../../api/public-stats/StudentParticipationCollection';
 
 function coursesHelper(interest) {
   const allCourses = Courses.findNonRetired();
@@ -134,6 +135,11 @@ function numUsers(interest, role) {
   return interestedUsers(interest, role).length;
 }
 
+function numStudents(interest) {
+  const item = StudentParticipation.findOne({ itemID: interest._id });
+  return item.itemCount;
+}
+
 function careerGoals(interest) {
   const allCareerGoals = CareerGoals.find().fetch();
   const matching = [];
@@ -192,7 +198,7 @@ Template.Explorer_Interests_Page.helpers({
   },
   socialPairs(interest) {
     return [
-      { label: 'students', amount: numUsers(interest, ROLE.STUDENT),
+      { label: 'students', amount: numStudents(interest),
         value: interestedUsers(interest, ROLE.STUDENT) },
       { label: 'faculty members', amount: numUsers(interest, ROLE.FACULTY),
         value: interestedUsers(interest, ROLE.FACULTY) },

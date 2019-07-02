@@ -81,11 +81,18 @@ class StudentParticipationCollection extends BaseCollection {
     const problems = [];
     this.find()
       .forEach(doc => {
-        if (!Courses.isDefined(doc.itemID) && !Opportunities.isDefined(doc.itemID)) {
+        if (!Courses.isDefined(doc.itemID) &&
+          !Opportunities.isDefined(doc.itemID) &&
+          !AcademicPlans.isDefined(doc.itemID) &&
+          !CareerGoals.isDefined(doc.itemID) &&
+          !Interests.isDefined(doc.itemID)) {
           problems.push(`Bad itemID. ${doc.itemID} is neither a Course or Opportunity ID.`);
         }
         if (!Slugs.isSlugForEntity(doc.itemSlug, Courses.getType()) &&
-          !Slugs.isSlugForEntity(doc.itemSlug, Opportunities.getType())) {
+          !Slugs.isSlugForEntity(doc.itemSlug, Opportunities.getType()) &&
+          !Slugs.isSlugForEntity(doc.itemSlug, AcademicPlans.getType()) &&
+          !Slugs.isSlugForEntity(doc.itemSlug, CareerGoals.getType()) &&
+          !Slugs.isSlugForEntity(doc.itemSlug, Interests.getType())) {
           problems.push(`Bad itemSlug. ${doc.itemSlug} is neither a Course or Opportunity slug.`);
         }
       });
@@ -112,7 +119,8 @@ class StudentParticipationCollection extends BaseCollection {
       _.forEach(courses, (c) => {
         const itemID = c._id;
         const itemSlug = Slugs.getNameFromID(c.slugID);
-        const items = CourseInstances.find({ courseID: itemID }).fetch();
+        const items = CourseInstances.find({ courseID: itemID })
+          .fetch();
         const itemCount = _.uniqBy(items, (i) => i.studentID).length;
         this._collection.upsert({ itemSlug }, { $set: { itemID, itemSlug, itemCount } });
       });
@@ -120,7 +128,8 @@ class StudentParticipationCollection extends BaseCollection {
       _.forEach(Opportunities.findNonRetired(), (o) => {
         const itemID = o._id;
         const itemSlug = Slugs.getNameFromID(o.slugID);
-        const items = OpportunityInstances.find({ opportunityID: itemID }).fetch();
+        const items = OpportunityInstances.find({ opportunityID: itemID })
+          .fetch();
         const itemCount = _.uniqBy(items, (i) => i.studentID).length;
         this._collection.upsert({ itemSlug }, { $set: { itemID, itemSlug, itemCount } });
       });
@@ -145,6 +154,7 @@ class StudentParticipationCollection extends BaseCollection {
         const itemCount = filtered.length;
         this._collection.upsert({ itemSlug }, { $set: { itemID, itemSlug, itemCount } });
       });
+      // Interests
       const interests = Interests.findNonRetired();
       _.forEach(interests, (i) => {
         const itemID = i._id;

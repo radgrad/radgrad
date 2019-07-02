@@ -8,6 +8,8 @@ import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { ROLE } from '../../../api/role/Role.js';
 import { getRouteUserName } from '../../components/shared/route-user-name.js';
+import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
+import { StudentParticipation } from '../../../api/public-stats/StudentParticipationCollection';
 
 
 function interestedUsers(careerGoal, role) {
@@ -18,11 +20,16 @@ function interestedUsers(careerGoal, role) {
       interested.push(profile);
     }
   });
-  return interested;
+  return _.filter(interested, (profile) => profile.picture && profile.picture !== defaultProfilePicture);
 }
 
 function numUsers(careerGoal, role) {
   return interestedUsers(careerGoal, role).length;
+}
+
+function numStudents(careerGoal) {
+  const item = StudentParticipation.findOne({ itemID: careerGoal._id });
+  return item.itemCount;
 }
 
 Template.Explorer_CareerGoals_Page.helpers({
@@ -65,7 +72,7 @@ Template.Explorer_CareerGoals_Page.helpers({
   },
   socialPairs(careerGoal) {
     return [
-      { label: 'students', amount: numUsers(careerGoal, ROLE.STUDENT),
+      { label: 'students', amount: numStudents(careerGoal),
         value: interestedUsers(careerGoal, ROLE.STUDENT) },
       { label: 'faculty members', amount: numUsers(careerGoal, ROLE.FACULTY),
         value: interestedUsers(careerGoal, ROLE.FACULTY) },

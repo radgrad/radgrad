@@ -10,6 +10,7 @@ import { Users } from '../../../api/user/UserCollection';
 import * as RouteNames from '../../../startup/client/router';
 import { isInRole } from '../../utilities/template-helpers';
 import { StudentParticipation } from '../../../api/public-stats/StudentParticipationCollection';
+import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 
 Template.Profile_Card.onCreated(function profileCardOnCreated() {
   this.hidden = new ReactiveVar(true);
@@ -17,12 +18,15 @@ Template.Profile_Card.onCreated(function profileCardOnCreated() {
 
 function interestedStudentsHelper(item, type) {
   const interested = [];
-  let instances = StudentProfiles.find({}).fetch();
+  let instances = StudentProfiles.findNonRetired();
+  // console.log(item, type, instances);
   if (type === 'careergoals') {
     instances = _.filter(instances, (profile) => _.includes(profile.careerGoalIDs, item._id));
   } else if (type === 'interests') {
     instances = _.filter(instances, (profile) => _.includes(profile.interestIDs, item._id));
   }
+  // console.log(instances);
+  instances = _.filter(instances, (profile) => profile.picture && profile.picture !== defaultProfilePicture);
   // console.log(instances);
   _.forEach(instances, (p) => {
     if (!_.includes(interested, p.userID)) {
@@ -63,8 +67,7 @@ Template.Profile_Card.helpers({
     return RouteNames.mentorExplorerInterestsPageRouteName;
   },
   interestedStudents(course) {
-    const item = StudentParticipation.findOne({ itemID: course._id });
-    return item.itemCount;
+    return interestedStudentsHelper(course, this.type);
   },
   isInRole,
   itemName(item) {
@@ -84,7 +87,8 @@ Template.Profile_Card.helpers({
     return Slugs.findDoc(item.slugID).name;
   },
   numberStudents(course) {
-    return interestedStudentsHelper(course, this.type).length;
+    const item = StudentParticipation.findOne({ itemID: course._id });
+    return item.itemCount;
   },
   replaceSemString(array) {
     // console.log('array', array);
