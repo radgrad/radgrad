@@ -91,8 +91,8 @@ if (Meteor.isServer) {
         .equal(4);  // CAM: This will have to change with issue-302
     });
 
-    it('Betty Level 5', function levelFive() {
-      this.timeout(5000);
+    it('Betty Level 5', function levelFive(done) {
+      this.timeout(15000);
       removeAllEntities();
       defineTestFixtures(['minimal', 'extended.courses.interests', 'betty.student.picture', 'betty.level1',
         'betty.level2', 'opportunities', 'extended.opportunities', 'betty.level3', 'betty.level5']);
@@ -100,10 +100,11 @@ if (Meteor.isServer) {
       expect(defaultCalcLevel(bettyProfile.userID))
         .to
         .equal(5);  // CAM: This will have to change with issue-302
+      done();
     });
 
-    it('Betty Level 6', function levelSix() {
-      this.timeout(5000);
+    it('Betty Level 6', function levelSix(done) {
+      this.timeout(15000);
       removeAllEntities();
       defineTestFixtures(['minimal', 'extended.courses.interests', 'betty.student.picture', 'betty.level1',
         'betty.level2', 'opportunities', 'extended.opportunities', 'betty.level3', 'betty.level6']);
@@ -111,6 +112,7 @@ if (Meteor.isServer) {
       expect(defaultCalcLevel(bettyProfile.userID))
         .to
         .equal(6);  // CAM: This will have to change with issue-302
+      done();
     });
   });
 }

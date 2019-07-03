@@ -8,10 +8,8 @@ import { AcademicYearInstances } from '../degree-plan/AcademicYearInstanceCollec
 import { ROLE } from '../role/Role';
 import { Semesters } from '../semester/SemesterCollection';
 import { Users } from '../user/UserCollection';
-import { Slugs } from '../slug/SlugCollection';
 import BaseCollection from '../base/BaseCollection';
 import { makeCourseICE } from '../ice/IceProcessor';
-import { StudentProfiles } from '../user/StudentProfileCollection';
 
 
 /**
@@ -39,12 +37,8 @@ class CourseInstanceCollection extends BaseCollection {
     this.validGrades = ['', 'A', 'A+', 'A-',
       'B', 'B+', 'B-', 'C', 'C+', 'C-', 'D', 'D+', 'D-', 'F', 'CR', 'NC', '***', 'W', 'TBD', 'OTHER'];
     this.publicationNames = {
-      student: this._collectionName,
-      perStudentAndSemester: `${this._collectionName}.PerStudentAndSemester`,
-      publicStudent: `${this._collectionName}.PublicStudent`,
-      publicSlugStudent: `${this._collectionName}.PublicSlugStudent`,
       studentID: `${this._collectionName}.studentID`,
-      scoreboard: `${this._collectionName}.Scoreboard`,
+      scoreboard: `${this._collectionName}.scoreboard`,
     };
     if (Meteor.server) {
       this._collection._ensureIndex({ _id: 1, studentID: 1, courseID: 1 });
@@ -297,41 +291,6 @@ class CourseInstanceCollection extends BaseCollection {
   publish() {
     if (Meteor.isServer) {
       const instance = this;
-      Meteor.publish(this.publicationNames.student, function publish() {
-        if (!this.userId) {  // https://github.com/meteor/meteor/issues/9619
-          return this.ready();
-        }
-        if (Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR, ROLE.FACULTY])) {
-          return instance._collection.find();
-        }
-        return instance._collection.find({ studentID: this.userId });
-      });
-      Meteor.publish(this.publicationNames.perStudentAndSemester,
-        function perStudentAndSemester(studentID, semesterID) {  // eslint-disable-line
-          new SimpleSchema({
-            studentID: { type: String },
-            semesterID: { type: String },
-          }).validate({ studentID, semesterID });
-          return instance._collection.find({ studentID, semesterID });
-        });
-      Meteor.publish(this.publicationNames.publicStudent, function publicStudentPublish() {
-        const userID = Meteor.userId();
-        const willingToShare = [];
-        const profiles = StudentProfiles.find().fetch();
-        _.forEach(profiles, (p) => {
-          if (p.shareCourses) {
-            willingToShare.push(p.userID);
-          }
-        });
-        // console.log(willingToShare);
-        ReactiveAggregate(this, instance._collection, [
-          { $match: { $expr: { $or: [
-            { $in: ['$studentID', willingToShare] },
-            { $eq: [Roles.userIsInRole(userID, [ROLE.ADMIN, ROLE.ADVISOR, ROLE.FACULTY]), true] }] } } },
-          { $project: { studentID: 1, semesterID: 1, courseID: 1 } },
-        ]);
-        // return instance._collection.find({}, { fields: { studentID: 1, semesterID: 1, courseID: 1 } });
-      });
       Meteor.publish(this.publicationNames.scoreboard, function publishCourseScoreboard() {
         ReactiveAggregate(this, instance._collection, [
           {
@@ -346,23 +305,12 @@ class CourseInstanceCollection extends BaseCollection {
           { $project: { count: 1, termID: 1, courseID: 1 } },
         ], { clientCollection: 'CourseScoreboard' });
       });
-      Meteor.publish(this.publicationNames.publicSlugStudent, function publicSlugPublish(courseSlug) {  // eslint-disable-line
-        // check the courseID.
-        const slug = Slugs.findDoc({ name: courseSlug });
-        const course = Courses.findDoc({ slugID: slug._id });
-        const courseID = course._id;
-        new SimpleSchema({
-          courseID: { type: String },
-        }).validate({ courseID });
-
-        return instance._collection.find({ courseID }, { fields: { studentID: 1, semesterID: 1, courseID: 1 } });
-      });
       Meteor.publish(this.publicationNames.studentID, function filterStudentID(studentID) { // eslint-disable-line
         new SimpleSchema({
           studentID: { type: String },
         }).validate({ studentID });
-        // console.log(Roles.userIsInRole(studentID, [ROLE.ADMIN, ROLE.ADVISOR, ROLE.FACULTY]));
-        if (Roles.userIsInRole(studentID, [ROLE.ADMIN, ROLE.ADVISOR, ROLE.FACULTY])) {
+        // console.log('publish studentID %o is admin = %o', studentID, Roles.userIsInRole(studentID, [ROLE.ADMIN]));
+        if (Roles.userIsInRole(studentID, [ROLE.ADMIN])) {
           return instance._collection.find();
         }
         return instance._collection.find({ studentID });

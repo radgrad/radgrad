@@ -9,7 +9,6 @@ import { Users } from '../../../api/user/UserCollection';
 import * as FormUtils from '../form-fields/form-field-utilities.js';
 
 Template.List_Course_Instances_Widget.onCreated(function onCreated() {
-  this.subscribe(CourseInstances.getPublicationName());
   this.itemCount = new ReactiveVar(25);
   this.itemIndex = new ReactiveVar(0);
 });
