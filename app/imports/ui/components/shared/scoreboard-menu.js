@@ -6,7 +6,7 @@ import * as RouteNames from '../../../startup/client/router';
 Template.Scoreboard_Menu.helpers({
   courseScoreboardRouteName() {
     const group = FlowRouter.current().route.group.name;
-    console.log('group=%o', group);
+    // console.log('group=%o', group);
     if (group === 'admin') {
       return RouteNames.adminCourseScoreboardPageRouteName;
     }
