@@ -56,7 +56,7 @@ class VerificationRequestCollection extends BaseCollection {
    * or
    * VerificationRequests.define({ student: 'joesmith',
    *                               opportunity: 'TechHui',
-    *                              semester: 'Fall-2015'});
+   *                              semester: 'Fall-2015'});
    * @param { Object } student and opportunity must be slugs or IDs. SubmittedOn defaults to now.
    * status defaults to OPEN, and processed defaults to an empty array.
    * You can either pass the opportunityInstanceID or pass the opportunity and semester slugs. If opportunityInstance
@@ -66,8 +66,10 @@ class VerificationRequestCollection extends BaseCollection {
    * @returns The newly created docID.
    */
   define({
-    student, opportunityInstance, submittedOn = moment().toDate(), status = this.OPEN, processed = [],
-    semester, opportunity, retired }) {
+           student, opportunityInstance, submittedOn = moment()
+      .toDate(), status = this.OPEN, processed = [],
+           semester, opportunity, retired,
+         }) {
     const studentID = Users.getID(student);
     const oppInstance = opportunityInstance ? OpportunityInstances.findDoc(opportunityInstance) :
       OpportunityInstances.findOpportunityInstanceDoc(semester, opportunity, student);
@@ -185,14 +187,18 @@ class VerificationRequestCollection extends BaseCollection {
   publish() {
     if (Meteor.isServer) {
       const instance = this;
-      Meteor.publish(this._collectionName, function publish() {
+      // eslint-disable-next-line meteor/audit-argument-checks
+      Meteor.publish(this._collectionName, function publish(studentID) {
         if (!this.userId) {  // https://github.com/meteor/meteor/issues/9619
           return this.ready();
         }
-        if (Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR, ROLE.FACULTY])) {
+        if (Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
           return instance._collection.find();
         }
-        return instance._collection.find({ studentID: this.userId });
+        if (Roles.userIsInRole(this.userId, [ROLE.FACULTY])) {
+          return instance._collection.find({ sponsorID: studentID });
+        }
+        return instance._collection.find({ studentID });
       });
     }
   }
@@ -210,7 +216,8 @@ class VerificationRequestCollection extends BaseCollection {
     }
     this._collection.update(docID, { $set: updateData });
   }
-         /**
+
+  /**
    * Updates the VerificationRequest's status and processed array.
    * @param requestID The VerificationRequest ID.
    * @param status The new Status.
@@ -262,17 +269,18 @@ class VerificationRequestCollection extends BaseCollection {
    */
   checkIntegrity() {
     const problems = [];
-    this.find().forEach(doc => {
-      if (!Users.isDefined(doc.studentID)) {
-        problems.push(`Bad studentID: ${doc.studentID}`);
-      }
-      if (!OpportunityInstances.isDefined(doc.opportunityInstanceID)) {
-        problems.push(`Bad opportunityInstanceID: ${doc.opportunityInstanceID}`);
-      }
-      if (!Semesters.isDefined(doc.semesterID)) {
-        problems.push(`Bad semesterID: ${doc.semesterID}`);
-      }
-    });
+    this.find()
+      .forEach(doc => {
+        if (!Users.isDefined(doc.studentID)) {
+          problems.push(`Bad studentID: ${doc.studentID}`);
+        }
+        if (!OpportunityInstances.isDefined(doc.opportunityInstanceID)) {
+          problems.push(`Bad opportunityInstanceID: ${doc.opportunityInstanceID}`);
+        }
+        if (!Semesters.isDefined(doc.semesterID)) {
+          problems.push(`Bad semesterID: ${doc.semesterID}`);
+        }
+      });
     return problems;
   }
 

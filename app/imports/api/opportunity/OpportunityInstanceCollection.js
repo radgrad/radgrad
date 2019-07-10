@@ -33,7 +33,6 @@ class OpportunityInstanceCollection extends BaseCollection {
       retired: { type: Boolean, optional: true },
     }));
     this.publicationNames = {
-      studentID: `${this._collectionName}.studentID`,
       scoreboard: `${this._collectionName}.Scoreboard`,
     };
     if (Meteor.server) {
@@ -226,10 +225,10 @@ class OpportunityInstanceCollection extends BaseCollection {
   publish() {
     if (Meteor.isServer) {
       const instance = this;
-      Meteor.publish(this.publicationNames.studentID, function filterStudentID(studentID) { // eslint-disable-line
-        new SimpleSchema({
-          studentID: { type: String },
-        }).validate({ studentID });
+      Meteor.publish(this._collectionName, function filterStudentID(studentID) { // eslint-disable-line
+        if (!studentID) {
+          return this.ready();
+        }
         if (Roles.userIsInRole(studentID, [ROLE.ADMIN])) {
           return instance._collection.find();
         }

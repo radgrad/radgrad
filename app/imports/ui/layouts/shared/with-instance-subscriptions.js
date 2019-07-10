@@ -6,37 +6,30 @@ import { AcademicYearInstances } from '../../../api/degree-plan/AcademicYearInst
 import { AdvisorLogs } from '../../../api/log/AdvisorLogCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { FeedbackInstances } from '../../../api/feedback/FeedbackInstanceCollection';
-import { Feeds } from '../../../api/feed/FeedCollection';
-import { MentorAnswers } from '../../../api/mentor/MentorAnswerCollection';
-import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection';
 
 /* eslint-disable object-shorthand */
 
 // expireLimit set to 30 minutes because: why not.
-const instanceSubs = new SubsManager({ cacheLimit: 20, expireIn: 30 });
+const instanceSubs = new SubsManager({ cacheLimit: 10, expireIn: 30 });
 
 Template.With_Instance_Subscriptions.onCreated(function withInstanceSubscriptionsOnCreated() {
   const self = this;
   self.ready = new ReactiveVar();
-  // console.log('With_Instance_Subscriptions', getUserIdFromRoute());
+  console.log('With_Instance_Subscriptions', getUserIdFromRoute());
   this.autorun(function () {
-    if (getUserIdFromRoute()) {  // if logged out don't subscribe
+    const userID = getUserIdFromRoute();
+    if (userID) {  // if logged out don't subscribe
       // get your information
-      instanceSubs.subscribe(AcademicYearInstances.publicationNames.PerStudentID, getUserIdFromRoute());
-      instanceSubs.subscribe(CourseInstances.publicationNames.studentID, getUserIdFromRoute());
-      instanceSubs.subscribe(OpportunityInstances.publicationNames.studentID, getUserIdFromRoute());
+      instanceSubs.subscribe(AcademicYearInstances.getPublicationName(), userID);
+      instanceSubs.subscribe(CourseInstances.getPublicationName(), userID);
+      instanceSubs.subscribe(OpportunityInstances.getPublicationName(), userID);
+      instanceSubs.subscribe(FeedbackInstances.getPublicationName(), userID);
+      instanceSubs.subscribe(VerificationRequests.getPublicationName(), userID);
+      instanceSubs.subscribe(AdvisorLogs.getPublicationName(), userID);
     }
     // get public information
-    instanceSubs.subscribe(AdvisorLogs.getPublicationName());
-    instanceSubs.subscribe(CourseInstances.publicationNames.scoreboard);
-    instanceSubs.subscribe(FeedbackInstances.getPublicationName());
-    instanceSubs.subscribe(Feeds.getPublicationName());
-    instanceSubs.subscribe(MentorAnswers.getPublicationName());
-    instanceSubs.subscribe(MentorQuestions.getPublicationName());
-    instanceSubs.subscribe(OpportunityInstances.publicationNames.scoreboard);
-    instanceSubs.subscribe(VerificationRequests.getPublicationName());
     self.ready.set(instanceSubs.ready());
   });
 });

@@ -21,6 +21,11 @@ import { Slugs } from '../../../api/slug/SlugCollection';
 import { Teasers } from '../../../api/teaser/TeaserCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { StudentParticipation } from '../../../api/public-stats/StudentParticipationCollection';
+import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
+import { Feeds } from '../../../api/feed/FeedCollection';
+import { MentorAnswers } from '../../../api/mentor/MentorAnswerCollection';
+import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection';
+import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 
 /* eslint-disable object-shorthand */
 
@@ -33,7 +38,7 @@ import { StudentParticipation } from '../../../api/public-stats/StudentParticipa
 
 // cacheLimit default is 10, so increased to handle all our subscriptions.
 // expireLimit set to 30 minutes because: why not.
-const globalSubs = new SubsManager({ cacheLimit: 21, expireIn: 30 });
+const globalSubs = new SubsManager({ cacheLimit: 26, expireIn: 30 });
 
 Template.With_Global_Subscriptions.onCreated(function onCreated() {
   const self = this;
@@ -42,19 +47,24 @@ Template.With_Global_Subscriptions.onCreated(function onCreated() {
     globalSubs.subscribe(AcademicPlans.getPublicationName());
     globalSubs.subscribe(AdvisorProfiles.getPublicationName());
     globalSubs.subscribe(CareerGoals.getPublicationName());
-    globalSubs.subscribe(StudentParticipation.getPublicationName());
+    globalSubs.subscribe(CourseInstances.publicationNames.scoreboard);
     globalSubs.subscribe(Courses.getPublicationName());
     globalSubs.subscribe(DesiredDegrees.getPublicationName());
     globalSubs.subscribe(FacultyProfiles.getPublicationName());
+    globalSubs.subscribe(Feeds.getPublicationName());
     globalSubs.subscribe(HelpMessages.getPublicationName());
     globalSubs.subscribe(Interests.getPublicationName());
     globalSubs.subscribe(InterestTypes.getPublicationName());
+    globalSubs.subscribe(MentorAnswers.getPublicationName());
     globalSubs.subscribe(MentorProfiles.getPublicationName());
+    globalSubs.subscribe(MentorQuestions.getPublicationName());
     globalSubs.subscribe(Opportunities.getPublicationName());
+    globalSubs.subscribe(OpportunityInstances.publicationNames.scoreboard);
     globalSubs.subscribe(OpportunityTypes.getPublicationName());
     globalSubs.subscribe(PlanChoices.getPublicationName());
     globalSubs.subscribe(Reviews.getPublicationName());
     globalSubs.subscribe(Semesters.getPublicationName());
+    globalSubs.subscribe(StudentParticipation.getPublicationName());
     globalSubs.subscribe(StudentProfiles.getPublicationName());
     globalSubs.subscribe(Slugs.getPublicationName());
     globalSubs.subscribe(Teasers.getPublicationName());

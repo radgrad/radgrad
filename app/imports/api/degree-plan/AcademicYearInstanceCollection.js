@@ -25,10 +25,6 @@ class AcademicYearInstanceCollection extends BaseCollection {
       semesterIDs: [SimpleSchema.RegEx.Id],
       retired: { type: Boolean, optional: true },
     }));
-    this.publicationNames = {
-      Public: this._collectionName,
-      PerStudentID: `${this._collectionName}.studentID`,
-    };
     if (Meteor.server) {
       this._collection._ensureIndex({ studentID: 1 });
     }
@@ -138,19 +134,10 @@ class AcademicYearInstanceCollection extends BaseCollection {
   publish() {
     if (Meteor.isServer) {
       const instance = this;
-      Meteor.publish(this.publicationNames.Public, function publish() {
-        if (!this.userId) {  // https://github.com/meteor/meteor/issues/9619
+      Meteor.publish(this._collectionName, function filterStudentID(studentID) { // eslint-disable-line
+        if (!studentID) {
           return this.ready();
         }
-        if (Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
-          return instance._collection.find();
-        }
-        return instance._collection.find({ studentID: this.userId });
-      });
-      Meteor.publish(this.publicationNames.PerStudentID, function filterStudentID(studentID) { // eslint-disable-line
-        new SimpleSchema({
-          studentID: { type: String },
-        }).validate({ studentID });
         if (Roles.userIsInRole(this.userId, [ROLE.ADMIN])) {
           return instance._collection.find();
         }
