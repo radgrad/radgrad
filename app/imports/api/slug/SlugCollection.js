@@ -87,38 +87,6 @@ class SlugCollection extends BaseCollection {
     }
   }
 
-  //     const inst = this;
-  //     Meteor.publish(this._collectionName, function () {
-  //       const userID = Meteor.userId();
-  //       const willingToShare = [];
-  //       const profiles = StudentProfiles.find().fetch();
-  //       const currentStudent = StudentProfiles.find({ userID }).fetch();
-  //       let currentUsername = '';
-  //       if (currentStudent.length === 1) {
-  //         currentUsername = currentStudent[0].username;
-  //       }
-  //       _.forEach(profiles, (p) => {
-  //         if (p.shareUsername) {
-  //           willingToShare.push(p.username);
-  //         }
-  //       });
-  //       ReactiveAggregate(this, inst._collection, [
-  //         { $match: { $expr: { $or: [
-  //                 { $ne: ['$entityName', 'StudentProfile'] },
-  //                 { $in: ['$name', willingToShare] },
-  //                 { $eq: [Roles.userIsInRole(userID, [ROLE.ADMIN, ROLE.ADVISOR]), true] },
-  //                 { $eq: ['$name', currentUsername] }] } } },
-  //         { $project: {
-  //           name: 1,
-  //           entityName: 1,
-  //           entityID: 1,
-  //         } },
-  //       ]);
-  //     });
-  //   }
-  // }
-
-
   /**
    * Returns true if slugName is syntactically valid (i.e. consists of a-zA-Z0-9 or dash or underscore.)
    * @param slugName The slug name.

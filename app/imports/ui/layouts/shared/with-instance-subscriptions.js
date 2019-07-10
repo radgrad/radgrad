@@ -17,7 +17,7 @@ const instanceSubs = new SubsManager({ cacheLimit: 10, expireIn: 30 });
 Template.With_Instance_Subscriptions.onCreated(function withInstanceSubscriptionsOnCreated() {
   const self = this;
   self.ready = new ReactiveVar();
-  console.log('With_Instance_Subscriptions', getUserIdFromRoute());
+  // console.log('With_Instance_Subscriptions', getUserIdFromRoute());
   this.autorun(function () {
     const userID = getUserIdFromRoute();
     if (userID) {  // if logged out don't subscribe

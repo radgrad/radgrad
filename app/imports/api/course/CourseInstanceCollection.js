@@ -312,7 +312,7 @@ class CourseInstanceCollection extends BaseCollection {
         if (Roles.userIsInRole(studentID, [ROLE.ADMIN])) {
           return instance._collection.find();
         }
-        return instance._collection.find({ studentID });
+        return instance._collection.find({ studentID, retired: { $not: { $eq: true } } });
       });
     }
   }

@@ -39,9 +39,9 @@ const updateSchema = new SimpleSchema({
 Template.Update_Student_Widget.onCreated(function updateDegreePlanWidgetOnCreated() {
   FormUtils.setupFormWidget(this, updateSchema);
   this.autorun(() => {
-    this.subscribe(CourseInstances.publicationNames.studentID, this.data.studentID.get());
-    this.subscribe(AcademicYearInstances.publicationNames.PerStudentID, this.data.studentID.get());
-    this.subscribe(OpportunityInstances.publicationNames.studentID, this.data.studentID.get());
+    this.subscribe(CourseInstances.getPublicationName(), this.data.studentID.get());
+    this.subscribe(AcademicYearInstances.getPublicationName(), this.data.studentID.get());
+    this.subscribe(OpportunityInstances.getPublicationName(), this.data.studentID.get());
   });
 });
 

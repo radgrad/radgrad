@@ -141,7 +141,7 @@ class AcademicYearInstanceCollection extends BaseCollection {
         if (Roles.userIsInRole(this.userId, [ROLE.ADMIN])) {
           return instance._collection.find();
         }
-        return instance._collection.find({ studentID });
+        return instance._collection.find({ studentID, retired: { $not: { $eq: true } } });
       });
     }
   }

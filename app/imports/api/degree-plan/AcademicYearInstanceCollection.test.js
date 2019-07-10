@@ -53,27 +53,6 @@ if (Meteor.isServer) {
       expect(years.length).to.equal(6);
       AcademicYearInstances.removeIt(docID);
     });
-
-    // In Meteor 1.6.1, this fails with UnhandledPromiseRejectionWarning..
-    // it('#publish', function test(done) {
-    //   const studentID = makeSampleUser();
-    //   const collector = new PublicationCollector({ userID: studentID });
-    //   const student = Users.getProfile(studentID).username;
-    //   const year = 2016;
-    //   AcademicYearInstances.define({ year, student });
-    //   AcademicYearInstances.publish();
-    //   collector.collect(AcademicYearInstances.publicationNames.Public, (collections) => {
-    //     expect(collections).to.be.an('object');
-    //     expect(collections[AcademicYearInstances.publicationNames.Public]).to.be.an('array');
-    //     expect(collections[AcademicYearInstances.publicationNames.Public].length).to.equal(0);
-    //   });
-    //   collector.collect(AcademicYearInstances.publicationNames.PerStudentID, studentID, (collections) => {
-    //     expect(collections).to.be.an('object');
-    //     expect(collections[AcademicYearInstances.publicationNames.Public]).to.be.an('array');
-    //     expect(collections[AcademicYearInstances.publicationNames.Public].length).to.equal(1);
-    //   });
-    //   done();
-    // });
   });
 }
 

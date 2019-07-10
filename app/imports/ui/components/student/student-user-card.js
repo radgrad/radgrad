@@ -11,7 +11,7 @@ Template.Student_User_Card.onCreated(function studentusercardOnCreated() {
     if (this.data.user) {
       this.user = this.data.user;
     }
-    // this.subscribe(CourseInstances.publicationNames.studentID, getExplorerUserID());
+    // this.subscribe(CourseInstances.getPublicationName(), getExplorerUserID());
   });
 });
 

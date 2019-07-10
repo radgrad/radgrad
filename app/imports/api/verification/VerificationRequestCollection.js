@@ -192,13 +192,16 @@ class VerificationRequestCollection extends BaseCollection {
         if (!this.userId) {  // https://github.com/meteor/meteor/issues/9619
           return this.ready();
         }
-        if (Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
+        if (Roles.userIsInRole(this.userId, [ROLE.ADMIN])) {
           return instance._collection.find();
         }
-        if (Roles.userIsInRole(this.userId, [ROLE.FACULTY])) {
-          return instance._collection.find({ sponsorID: studentID });
+        if (Roles.userIsInRole(this.userId, [ROLE.ADVISOR])) {
+          return instance._collection.find({ retired: { $not: { $eq: true } } });
         }
-        return instance._collection.find({ studentID });
+        if (Roles.userIsInRole(this.userId, [ROLE.FACULTY])) {
+          return instance._collection.find({ sponsorID: studentID, retired: { $not: { $eq: true } } });
+        }
+        return instance._collection.find({ studentID, retired: { $not: { $eq: true } } });
       });
     }
   }

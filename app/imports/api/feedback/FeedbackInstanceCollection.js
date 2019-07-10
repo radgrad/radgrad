@@ -180,7 +180,7 @@ class FeedbackInstanceCollection extends BaseCollection {
         if (Roles.userIsInRole(this.userId, [ROLE.ADMIN])) {
           return instance._collection.find();
         }
-        return instance._collection.find({ userID });
+        return instance._collection.find({ userID, retired: { $not: { $eq: true } } });
       });
     }
   }
