@@ -110,7 +110,7 @@ class AdvisorLogCollection extends BaseCollection {
         if (Roles.userIsInRole(this.userId, [ROLE.ADMIN])) {
           return instance._collection.find();
         }
-        if (Roles.userIsInRole((this.userId, [ROLE.ADVISOR]))) {
+        if (Roles.userIsInRole(this.userId, [ROLE.ADVISOR])) {
           return instance._collection.find({ retired: { $not: { $eq: true } } });
         }
         return instance._collection.find({ studentID, retired: { $not: { $eq: true } } });
