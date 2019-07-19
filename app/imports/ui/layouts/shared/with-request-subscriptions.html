@@ -1,0 +1,7 @@
+<template name="With_Request_Subscriptions">
+  {{#if subsReady}}
+    {{> UI.contentBlock }}
+  {{else}}
+    {{> Loading message="Loading verification request data"}}
+  {{/if}}
+</template>

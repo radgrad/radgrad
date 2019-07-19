@@ -14,12 +14,20 @@ import { updateLevelMethod } from '../../../api/level/LevelProcessor.methods';
 
 Template.Verification_Requests_Pending.helpers({
   opportunityName(request) {
-    const opportunity = VerificationRequests.getOpportunityDoc(request._id);
-    return opportunity.name;
+    try {
+      const opportunity = VerificationRequests.getOpportunityDoc(request._id);
+      return opportunity.name;
+    } catch (e) {
+      return 'Retired Opportunity';
+    }
   },
   ownerName(request) {
-    const sponsor = VerificationRequests.getSponsorDoc(request._id);
-    return Users.getFullName(sponsor.userID);
+    try {
+      const sponsor = VerificationRequests.getSponsorDoc(request._id);
+      return Users.getFullName(sponsor.userID);
+    } catch (e) {
+      return '';
+    }
   },
   pendingRequests() {
     const group = FlowRouter.current().route.group.name;

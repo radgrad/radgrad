@@ -34,6 +34,7 @@ class OpportunityInstanceCollection extends BaseCollection {
     }));
     this.publicationNames = {
       scoreboard: `${this._collectionName}.Scoreboard`,
+      verification: `${this._collectionName}.Verification`,
     };
     if (Meteor.server) {
       this._collection._ensureIndex({ _id: 1, studentID: 1, semesterID: 1 });
@@ -247,6 +248,13 @@ class OpportunityInstanceCollection extends BaseCollection {
           },
           { $project: { count: 1, termID: 1, opportunityID: 1 } },
         ], { clientCollection: 'OpportunityScoreboard' });
+      });
+      // eslint-disable-next-line
+      Meteor.publish(this.publicationNames.verification, function publishVerificationOpportunities(studentIDs) {
+        if (Meteor.isAppTest) {
+          return instance._collection.find();
+        }
+        return instance._collection.find({ studentID: { $in: studentIDs } });
       });
     }
   }

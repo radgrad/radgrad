@@ -25,11 +25,19 @@ Template.Verification_Requests_Completed.helpers({
     return openRequests;
   },
   opportunityName(verification) {
-    return VerificationRequests.getOpportunityDoc(verification._id).name;
+    try {
+      return VerificationRequests.getOpportunityDoc(verification._id).name;
+    } catch (e) {
+      return 'Retired Opportunity';
+    }
   },
   ownerName(verification) {
-    const sponsor = VerificationRequests.getSponsorDoc(verification._id);
-    return Users.getFullName(sponsor.userID);
+    try {
+      const sponsor = VerificationRequests.getSponsorDoc(verification._id);
+      return Users.getFullName(sponsor.userID);
+    } catch (e) {
+      return '';
+    }
   },
   processedDate(date) {
     const processed = moment(date);

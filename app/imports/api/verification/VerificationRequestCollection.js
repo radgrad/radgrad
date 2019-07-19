@@ -164,7 +164,7 @@ class VerificationRequestCollection extends BaseCollection {
   getSponsorDoc(instanceID) {
     this.assertDefined(instanceID);
     const instance = this._collection.findOne({ _id: instanceID });
-    const opportunity = OpportunityInstances.getOpportunityDoc(instance.opportunityInstanceID);
+    const opportunity = OpportunityInstances.findDoc(instance.opportunityInstanceID);
     return Users.getProfile(opportunity.sponsorID);
   }
 

@@ -40,3 +40,6 @@ import './with-global-subscriptions.js';
 
 import './with-instance-subscriptions.html';
 import './with-instance-subscriptions.js';
+
+import './with-request-subscriptions.html';
+import './with-request-subscriptions';
