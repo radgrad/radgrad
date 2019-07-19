@@ -519,7 +519,7 @@ Template.Generate_Newsletter_Widget.events({
         const emailData = {};
         emailData.to = sendList;
         emailData.bcc = bccListArray;
-        emailData.from = 'Philip Johnson <donotreply@mailgun.radgrad.org>';
+        emailData.from = 'RadGrad Administrator <donotreply@mailgun.radgrad.org>';
         emailData.replyTo = 'radgrad@hawaii.edu';
         emailData.subject = `Newsletter View For ${student.firstName} ${student.lastName}`;
         emailData.templateData = {
