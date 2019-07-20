@@ -1,5 +1,8 @@
+import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { Roles } from 'meteor/alanning:roles';
+import { ReactiveAggregate } from 'meteor/jcbernack:reactive-aggregate';
 import BaseCollection from '../base/BaseCollection';
 import { Courses } from '../course/CourseCollection';
 import { Users } from '../user/UserCollection';
@@ -66,6 +69,36 @@ class FavoriteCourseCollection extends BaseCollection {
   }
 
   /**
+   * Publish CourseFavorites. If logged in as ADMIN get all, otherwise only get the CourseFavorites for the studentID.
+   * Also publishes the CourseFavorites scoreboard.
+   */
+  publish() {
+    if (Meteor.isServer) {
+      const instance = this;
+      Meteor.publish(this._collectionName, function filterStudentID(studentID) { // eslint-disable-line
+        if (!studentID) {
+          return this.ready();
+        }
+        if (Roles.userIsInRole(studentID, [ROLE.ADMIN])) {
+          return instance._collection.find();
+        }
+        return instance._collection.find({ studentID, retired: { $not: { $eq: true } } });
+      });
+      Meteor.publish(this.publicationNames.scoreboard, function publishCourseScoreboard() {
+        ReactiveAggregate(this, instance._collection, [
+          {
+            $group: {
+              _id: '$courseID',
+              count: { $sum: 1 },
+            },
+          },
+          { $project: { count: 1, courseID: 1 } },
+        ], { clientCollection: 'CourseFavoritesScoreboard' });
+      });
+    }
+  }
+
+  /**
    * Implementation of assertValidRoleForMethod. Asserts that userId is logged in as an Admin, Advisor or
    * Student.
    * This is used in the define, update, and removeIt Meteor methods associated with each class.
@@ -116,7 +149,7 @@ class FavoriteCourseCollection extends BaseCollection {
    * @param instanceID the FavoriteCourse id.
    * @returns {*}
    */
-  getStudentSlug(instanceID) {
+  getStudentUsername(instanceID) {
     this.assertDefined(instanceID);
     const instance = this._collection.findOne({ _id: instanceID });
     return Users.getProfile(instance.studentID).username;
@@ -143,8 +176,8 @@ class FavoriteCourseCollection extends BaseCollection {
   }
 
   /**
-   * Returns an object representing the CourseInstance docID in a format acceptable to define().
-   * @param docID The docID of a CourseInstance.
+   * Returns an object representing the FavoriteCourse docID in a format acceptable to define().
+   * @param docID The docID of a FavoriteCourse.
    * @returns { Object } An object representing the definition of docID.
    */
   dumpOne(docID) {
