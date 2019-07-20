@@ -1,1 +1,2 @@
 import './FavoriteCourseCollection';
+import './FavoriteOpportunityCollection';
