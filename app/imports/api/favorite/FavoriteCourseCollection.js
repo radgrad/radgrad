@@ -129,7 +129,7 @@ class FavoriteCourseCollection extends BaseCollection {
   getCourseSlug(instanceID) {
     this.assertDefined(instanceID);
     const instance = this._collection.findOne({ _id: instanceID });
-    return Courses.getSlug(instance.courseID);
+    return Courses.findSlugByID(instance.courseID);
   }
 
   /**
