@@ -3,6 +3,7 @@
     <div class="ui container">
       {{#if Template.subscriptionsReady}}
         {{> Moderation }}
+        {{> Back_To_Top_Button}}
       {{else}}
         {{> Loading message="Waiting for subscriptions."}}
       {{/if}}
