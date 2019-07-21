@@ -1,5 +1,6 @@
 <template name="Explorer_Opportunities_Page">
   {{#Explorer_Layout addedList=addedOpportunities nonAddedList=nonAddedOpportunities type='opportunities'}}
     {{> Explorer_Opportunities_Widget name=opportunity.name slug=(slugName opportunity.slugID) descriptionPairs=(descriptionPairs opportunity) socialPairs=(socialPairs opportunity) id=opportunity._id updateID=updateID item=opportunity completed=completed reviewed=(reviewed opportunity)}}
+    {{> Back_To_Top_Button}}
   {{/Explorer_Layout}}
 </template>

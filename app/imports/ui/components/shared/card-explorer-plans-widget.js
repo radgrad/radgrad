@@ -21,6 +21,9 @@ function availableAcademicPlans() {
           name: 1,
         },
       }).fetch(), (ap) => !ap.retired);
+      if (plans.length === 0) {
+        plans = AcademicPlans.getLatestPlans();
+      }
     }
     if (profile.academicPlanID) {
       return _.filter(plans, p => profile.academicPlanID !== p._id);

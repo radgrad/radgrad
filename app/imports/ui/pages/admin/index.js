@@ -11,9 +11,6 @@ import './admin-analytics-activity-monitor-page';
 
 import './admin-analytics-newsletter-page.html';
 
-import './admin-course-scoreboard-page.html';
-import './admin-course-scoreboard-page';
-
 import './admin-database-dump-page.html';
 import './admin-database-dump-page.js';
 
