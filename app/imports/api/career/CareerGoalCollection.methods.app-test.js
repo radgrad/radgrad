@@ -28,7 +28,7 @@ if (Meteor.isClient) {
       await withRadGradSubscriptions();
       const careerGoalID = await defineMethod.callPromise({ collectionName, definitionData });
       expect(CareerGoals.isDefined(careerGoalID)).to.be.true;
-      const id = CareerGoals.findIdBySlug(definitionData.slug);
+      const id = careerGoalID;
       const name = 'updated CareerGoal name';
       const description = 'updated CareerGoal description';
       const interests = ['algorithms', 'java'];
