@@ -8,11 +8,11 @@
         </h4>
         {{#if userStatus item}}
           <button value="{{id}}" class="ui green basic right floated mini button deleteItem"
-                  style="margin-bottom: 1rem;">REMOVE FROM INTERESTS
+                  style="margin-bottom: 1rem;"><i class="red heart outline icon"></i><i class="minus icon"></i> REMOVE FROM FAVORITES
           </button>
         {{else}}
           <button value="{{id}}" class="ui green basic right floated mini button addItem" style="margin-bottom: 1rem;">
-            ADD TO INTERESTS
+            <i class="red heart icon"></i><i class="plus icon"></i> ADD TO FAVORITES
           </button>
         {{/if}}
 

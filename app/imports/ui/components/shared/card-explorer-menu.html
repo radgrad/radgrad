@@ -48,7 +48,7 @@
         {{else}}
           {{#if isType type 'careerGoals'}}
             <div class="header">
-              MY CAREER GOALS
+              MY FAVORITE CAREER GOALS
             </div>
             <div class="divider"></div>
             {{#each listItem in menuAddedList}}
@@ -108,7 +108,7 @@
               {{else}}
                 {{#if isType type 'interests'}}
                   <div class="header">
-                    MY INTERESTS
+                    MY FAVORITE INTERESTS
                   </div>
                   <div class="divider"></div>
                   {{#each listItem in menuAddedList}}
@@ -137,7 +137,7 @@
                 {{else}}
                   {{#if isType type 'plans'}}
                     <div class="header">
-                      MY ACADEMIC PLAN
+                      MY FAVORITE ACADEMIC PLAN
                     </div>
                     <div class="divider"></div>
                     {{#each listItem in menuAddedList}}
@@ -188,7 +188,7 @@
       {{#if isType type 'careerGoals'}}
         <a href="mailto:{{adminEmail}}?subject=New%20Career%20Goal%20Suggestion">Suggest a new Career Goal</a>
         <h4 class="ui dividing header">
-          MY CAREER GOALS
+          MY FAVORITE CAREER GOALS
         </h4>
         {{#each listItem in menuAddedList}}
           <a class="{{classType (slugName listItem.item) 'careerGoal'}}" data-tab="tab-name"
@@ -242,7 +242,7 @@
             {{#if isType type 'interests'}}
               <a href="mailto:{{adminEmail}}?subject=New%20Interest%20Suggestion">Suggest a new Interest</a>
               <h4 class="ui dividing header">
-                MY INTERESTS
+                MY FAVORITE INTERESTS
               </h4>
               {{#each listItem in menuAddedList}}
                 <a class="{{classType (slugName listItem.item) 'interest'}}" data-tab="tab-name"
@@ -263,7 +263,7 @@
               {{#if isType type 'plans'}}
                 {{#if isInRole 'student'}}
                   <div class="ui dividing header">
-                    MY ACADEMIC PLAN
+                    MY FAVORITE ACADEMIC PLAN
                   </div>
                   {{#each listItem in menuAddedList}}
                     <a class="{{classType (slugName listItem.item) 'plan'}}" data-tab="tab-name"
