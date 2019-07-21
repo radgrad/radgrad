@@ -28,7 +28,7 @@
       <div class="menu">
         {{#if isType type 'courses'}}
           <div class="header">
-            COURSES IN MY PLAN
+            MY FAVORITE COURSES
           </div>
           <div class="divider"></div>
           {{#each listItem in menuAddedList}}
@@ -168,7 +168,7 @@
     {{#if isType type 'courses'}}
       {{#if isInRole 'student'}}
         <h4 class="ui dividing header">
-          COURSES IN MY PLAN
+          MY FAVORITE COURSES
         </h4>
         {{#each listItem in menuAddedList}}
           <a class="{{classType (slugName listItem.item) 'course'}}" data-tab="tab-name"

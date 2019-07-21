@@ -27,7 +27,7 @@
       <div class="menu">
         {{#if isType type 'courses'}}
           <div class="header">
-            COURSES IN MY PLAN
+            MY FAVORITE COURSES
           </div>
           <div class="divider"></div>
           {{#each listItem in menuAddedList}}
@@ -111,11 +111,11 @@
 
   <div class="ui vertical text menu mobile hidden">
     {{#if isType type 'courses'}}
+      <a class="ui button" href="{{pathFor coursesCardRouteName username=routeUserName}}"><i
+          class="chevron circle left icon"></i><br>Back to Courses</a>
       {{#if isInRole 'student'}}
-        <a class="ui button" href="{{pathFor coursesCardRouteName username=routeUserName}}"><i
-            class="chevron circle left icon"></i><br>Back to Courses</a>
         <h4 class="ui dividing header">
-          COURSES IN MY PLAN
+          MY FAVORITE COURSES
         </h4>
         {{#each listItem in menuAddedList}}
           <a class="{{classType (slugName listItem.item) 'course'}}" data-tab="tab-name"
