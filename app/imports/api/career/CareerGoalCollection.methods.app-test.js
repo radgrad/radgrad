@@ -23,14 +23,11 @@ if (Meteor.isClient) {
         'extended.courses.interests', 'academicplan', 'abi.courseinstances'], done);
     });
 
-    it('Define Method', async function () {
+    it('Define, Update Methods', async function () {
       await withLoggedInUser();
       await withRadGradSubscriptions();
       const careerGoalID = await defineMethod.callPromise({ collectionName, definitionData });
       expect(CareerGoals.isDefined(careerGoalID)).to.be.true;
-    });
-
-    it('Update Method', async function () {
       const id = CareerGoals.findIdBySlug(definitionData.slug);
       const name = 'updated CareerGoal name';
       const description = 'updated CareerGoal description';
