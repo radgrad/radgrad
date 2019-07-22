@@ -8,9 +8,11 @@ import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getUserIdFromRoute } from './get-user-id-from-route';
 import { getRouteUserName } from './route-user-name';
-import { updateMethod } from '../../../api/base/BaseCollection.methods';
+import { defineMethod, removeItMethod, updateMethod } from '../../../api/base/BaseCollection.methods';
 import { isInRole } from '../../utilities/template-helpers';
 import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
+import { FavoriteAcademicPlans } from '../../../api/favorite/FavoriteAcademicPlanCollection';
+import { Slugs } from '../../../api/slug/SlugCollection';
 
 Template.Explorer_Plans_Widget.onCreated(function studentExplorerPlansWidgetOnCreated() {
   this.planVar = new ReactiveVar();
@@ -47,7 +49,7 @@ Template.Explorer_Plans_Widget.helpers({
   },
   userStatus(plan) {
     const profile = Users.getProfile(getRouteUserName());
-    return profile.academicPlanID !== plan._id;
+    return profile.academicPlanID === plan._id;
   },
   userUsername(user) {
     if (getUserIdFromRoute() !== user._id) {
@@ -85,7 +87,7 @@ Template.Explorer_Plans_Widget.events({
     event.preventDefault();
     const profile = Users.getProfile(getRouteUserName());
     const updateData = {};
-    const collectionName = StudentProfiles.getCollectionName();
+    let collectionName = StudentProfiles.getCollectionName();
     updateData.id = profile._id;
     updateData.academicPlan = instance.data.id;
     updateMethod.call({ collectionName, updateData }, (error) => {
@@ -93,7 +95,27 @@ Template.Explorer_Plans_Widget.events({
         console.log(`Error updating ${getRouteUserName()}'s academic plan ${JSON.stringify(error)}`);
       }
     });
+    collectionName = FavoriteAcademicPlans.getCollectionName();
+    const doc = AcademicPlans.findDoc(instance.data.id);
+    const definitionData = {};
+    definitionData.student = getRouteUserName();
+    definitionData.academicPlan = Slugs.findNameFromID(doc.slugID);
+    defineMethod.call({ collectionName, definitionData }, (error) => {
+      if (error) {
+        console.error('Failed to define favorite', error);
+      }
+    })
   },
+  'click .deleteItem': function deleteAcademicPlan(event, instance) {
+    event.preventDefault();
+    const collectionName = FavoriteAcademicPlans.getCollectionName();
+    const favorite = FavoriteAcademicPlans.findDoc({ academicPlanID: instance.data.id });
+    removeItMethod.call({ collectionName, instance: favorite._id }, (error) => {
+      if (error) {
+        console.error('Failed to remove favorite', error);
+      }
+    })
+  }
 });
 
 Template.Explorer_Plans_Widget.onRendered(function studentExplorerPlansWidgetOnRendered() {
