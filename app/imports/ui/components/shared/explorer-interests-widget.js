@@ -126,7 +126,7 @@ Template.Explorer_Interests_Widget.events({
       if (error) {
         console.error('Failed defining faborites', error);
       }
-    })
+    });
   },
   'click .deleteItem': function clickRemoveItem(event) {
     event.preventDefault();
@@ -158,6 +158,6 @@ Template.Explorer_Interests_Widget.events({
       if (error) {
         console.error('Failed deleting favorites', error);
       }
-    })
+    });
   },
 });

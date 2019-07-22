@@ -108,6 +108,6 @@ Template.Explorer_CareerGoals_Widget.events({
       if (error) {
         console.error('Failed to remove favorite', error);
       }
-    })
+    });
   },
 });

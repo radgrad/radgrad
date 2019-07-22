@@ -5,11 +5,10 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import * as RouteNames from '../../../startup/client/router.js';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
-import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getUserIdFromRoute } from './get-user-id-from-route';
 import { getRouteUserName } from './route-user-name';
-import { defineMethod, removeItMethod, updateMethod } from '../../../api/base/BaseCollection.methods';
+import { defineMethod, removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { isInRole } from '../../utilities/template-helpers';
 import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 import { FavoriteAcademicPlans } from '../../../api/favorite/FavoriteAcademicPlanCollection';
@@ -50,7 +49,8 @@ Template.Explorer_Plans_Widget.helpers({
   },
   userStatus(plan) {
     const profile = Users.getProfile(getRouteUserName());
-    const plans = _.map(FavoriteAcademicPlans.find({ studentID: profile.userID }).fetch(), (p) => AcademicPlans.findDoc(p.academicPlanID)._id);
+    const plans = _.map(FavoriteAcademicPlans.find({ studentID: profile.userID }).fetch(),
+      (p) => AcademicPlans.findDoc(p.academicPlanID)._id);
     return _.includes(plans, plan._id);
   },
   userUsername(user) {
@@ -96,7 +96,7 @@ Template.Explorer_Plans_Widget.events({
       if (error) {
         console.error('Failed to define favorite', error);
       }
-    })
+    });
   },
   'click .deleteItem': function deleteAcademicPlan(event, instance) {
     event.preventDefault();
@@ -106,8 +106,8 @@ Template.Explorer_Plans_Widget.events({
       if (error) {
         console.error('Failed to remove favorite', error);
       }
-    })
-  }
+    });
+  },
 });
 
 Template.Explorer_Plans_Widget.onRendered(function studentExplorerPlansWidgetOnRendered() {

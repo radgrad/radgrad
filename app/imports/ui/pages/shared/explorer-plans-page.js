@@ -30,7 +30,7 @@ Template.Explorer_Plans_Page.helpers({
   addedPlans() {
     const studentID = getUserIdFromRoute();
     const favorites = FavoriteAcademicPlans.find({ studentID }).fetch();
-    const plans = _.map(favorites, (p) => ({ item: AcademicPlans.findDoc(p.academicPlanID), count: 1}));
+    const plans = _.map(favorites, (p) => ({ item: AcademicPlans.findDoc(p.academicPlanID), count: 1 }));
     return plans;
   },
   descriptionPairs(plan) {

@@ -285,7 +285,8 @@ Template.Explorer_Menu.helpers({
   userPlans(plan) {
     let ret = '';
     const studentID = getUserIdFromRoute();
-    const favorites = _.map(FavoriteAcademicPlans.find({ studentID }).fetch(), (p) => AcademicPlans.findDoc(p.academicPlanID)._id);
+    const favorites = _.map(FavoriteAcademicPlans.find({ studentID }).fetch(),
+      (p) => AcademicPlans.findDoc(p.academicPlanID)._id);
     if (_.includes(favorites, plan._id)) {
       ret = 'check green circle outline icon';
     }
