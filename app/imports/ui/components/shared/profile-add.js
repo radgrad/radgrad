@@ -4,9 +4,13 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { getRouteUserName } from '../shared/route-user-name';
 import { Users } from '../../../api/user/UserCollection';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
-import { updateMethod } from '../../../api/base/BaseCollection.methods';
+import { defineMethod, updateMethod } from '../../../api/base/BaseCollection.methods';
 import { FacultyProfiles } from '../../../api/user/FacultyProfileCollection';
 import { MentorProfiles } from '../../../api/user/MentorProfileCollection';
+import { FavoriteCareerGoals } from '../../../api/favorite/FavoriteCareerGoalCollection';
+import { Slugs } from '../../../api/slug/SlugCollection';
+import { FavoriteInterests } from '../../../api/favorite/FavoriteInterestCollection';
+import { FavoriteAcademicPlans } from '../../../api/favorite/FavoriteAcademicPlanCollection';
 
 Template.Profile_Add.helpers({
   isPlan(type) {
@@ -42,6 +46,23 @@ Template.Profile_Add.events({
       updateMethod.call({ collectionName, updateData }, (error) => {
         if (error) {
           console.log('Error updating user ', error);
+        }
+      });
+      const definitionData = {};
+      definitionData.student = getRouteUserName();
+      if (instance.data.type === 'careergoals') {
+        collectionName = FavoriteCareerGoals.getCollectionName();
+        definitionData.careerGoal = Slugs.getNameFromID(instance.data.item.slugID);
+      } else if (instance.data.type === 'interests') {
+        collectionName = FavoriteInterests.getCollectionName();
+        definitionData.interest = Slugs.getNameFromID(instance.data.item.slugID);
+      } else if (instance.data.type === 'plans') {
+        collectionName = FavoriteAcademicPlans.getCollectionName();
+        definitionData.academicPlan = Slugs.getNameFromID(instance.data.item.slugID);
+      }
+      defineMethod.call({ collectionName, definitionData }, (error) => {
+        if (error) {
+          console.error('Error defining favorites', error);
         }
       });
     }
