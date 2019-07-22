@@ -7,6 +7,8 @@ import { ROLE } from '../../../api/role/Role.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from '../../components/shared/route-user-name.js';
+import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
+import { FavoriteAcademicPlans } from '../../../api/favorite/FavoriteAcademicPlanCollection';
 
 function interestedUsers(plan) {
   const interested = [];
@@ -26,11 +28,10 @@ function numUsers(plan) {
 
 Template.Explorer_Plans_Page.helpers({
   addedPlans() {
-    const profile = Users.getProfile(getRouteUserName());
-    if (profile.academicPlanID) {
-      return [{ item: AcademicPlans.findDoc(profile.academicPlanID), count: 1 }];
-    }
-    return [];
+    const studentID = getUserIdFromRoute();
+    const favorites = FavoriteAcademicPlans.find({ studentID }).fetch();
+    const plans = _.map(favorites, (p) => ({ item: AcademicPlans.findDoc(p.academicPlanID), count: 1}));
+    return plans;
   },
   descriptionPairs(plan) {
     const degree = DesiredDegrees.findDoc(plan.degreeID);

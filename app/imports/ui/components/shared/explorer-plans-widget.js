@@ -1,6 +1,7 @@
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import * as RouteNames from '../../../startup/client/router.js';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
@@ -49,7 +50,8 @@ Template.Explorer_Plans_Widget.helpers({
   },
   userStatus(plan) {
     const profile = Users.getProfile(getRouteUserName());
-    return profile.academicPlanID === plan._id;
+    const plans = _.map(FavoriteAcademicPlans.find({ studentID: profile.userID }).fetch(), (p) => AcademicPlans.findDoc(p.academicPlanID)._id);
+    return _.includes(plans, plan._id);
   },
   userUsername(user) {
     if (getUserIdFromRoute() !== user._id) {
@@ -85,21 +87,11 @@ Template.Explorer_Plans_Widget.helpers({
 Template.Explorer_Plans_Widget.events({
   'click .addItem': function selectAcademicPlan(event, instance) {
     event.preventDefault();
-    const profile = Users.getProfile(getRouteUserName());
-    const updateData = {};
-    let collectionName = StudentProfiles.getCollectionName();
-    updateData.id = profile._id;
-    updateData.academicPlan = instance.data.id;
-    updateMethod.call({ collectionName, updateData }, (error) => {
-      if (error) {
-        console.log(`Error updating ${getRouteUserName()}'s academic plan ${JSON.stringify(error)}`);
-      }
-    });
-    collectionName = FavoriteAcademicPlans.getCollectionName();
+    const collectionName = FavoriteAcademicPlans.getCollectionName();
     const doc = AcademicPlans.findDoc(instance.data.id);
     const definitionData = {};
     definitionData.student = getRouteUserName();
-    definitionData.academicPlan = Slugs.findNameFromID(doc.slugID);
+    definitionData.academicPlan = Slugs.getNameFromID(doc.slugID);
     defineMethod.call({ collectionName, definitionData }, (error) => {
       if (error) {
         console.error('Failed to define favorite', error);
