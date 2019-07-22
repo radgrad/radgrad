@@ -9,8 +9,9 @@ import { getRouteUserName } from './route-user-name';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { isLabel } from '../../utilities/template-helpers';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
-import { updateMethod } from '../../../api/base/BaseCollection.methods';
+import { defineMethod, removeItMethod, updateMethod } from '../../../api/base/BaseCollection.methods';
 import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
+import { FavoriteCareerGoals } from '../../../api/favorite/FavoriteCareerGoalCollection';
 
 Template.Explorer_CareerGoals_Widget.helpers({
   careerGoalName(careerGoalSlugName) {
@@ -64,7 +65,7 @@ Template.Explorer_CareerGoals_Widget.events({
     const profile = Users.getProfile(getRouteUserName());
     const id = event.target.value;
     const studentItems = profile.careerGoalIDs;
-    const collectionName = StudentProfiles.getCollectionNameForProfile(profile);
+    let collectionName = StudentProfiles.getCollectionNameForProfile(profile);
     const updateData = {};
     updateData.id = profile._id;
     studentItems.push(id);
@@ -74,13 +75,23 @@ Template.Explorer_CareerGoals_Widget.events({
         console.log('Error updating career goals', error);
       }
     });
+    collectionName = FavoriteCareerGoals.getCollectionName();
+    const definitionData = {};
+    definitionData.student = getRouteUserName();
+    const doc = CareerGoals.findDoc(id);
+    definitionData.careerGoal = Slugs.getNameFromID(doc.slugID);
+    defineMethod.call({ collectionName, definitionData }, (error) => {
+      if (error) {
+        console.error('Failed to define favorite', error);
+      }
+    });
   },
   'click .deleteItem': function clickRemoveItem(event) {
     event.preventDefault();
     const profile = Users.getProfile(getRouteUserName());
     const id = event.target.value;
     let studentItems = profile.careerGoalIDs;
-    const collectionName = StudentProfiles.getCollectionNameForProfile(profile);
+    let collectionName = StudentProfiles.getCollectionNameForProfile(profile);
     const updateData = {};
     updateData.id = profile._id;
     studentItems = _.without(studentItems, id);
@@ -90,5 +101,13 @@ Template.Explorer_CareerGoals_Widget.events({
         console.log('Error updating career goals', error);
       }
     });
+    collectionName = FavoriteCareerGoals.getCollectionName();
+    const favorite = FavoriteCareerGoals.findDoc({ careerGoalID: id });
+    const instance = favorite._id;
+    removeItMethod.call({ collectionName, instance }, (error) => {
+      if (error) {
+        console.error('Failed to remove favorite', error);
+      }
+    })
   },
 });
