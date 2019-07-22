@@ -32,6 +32,10 @@ class FavoriteInterestCollection extends BaseCollection {
   define({ interest, student, retired = false }) {
     const interestID = Interests.getID(interest);
     const studentID = Users.getID(student);
+    const doc = this._collection.findOne({ studentID, interestID });
+    if (doc) {
+      return doc._id;
+    }
     return this._collection.insert({ interestID, studentID, retired });
   }
 

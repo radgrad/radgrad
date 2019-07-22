@@ -32,6 +32,10 @@ class FavoriteCareerGoalCollection extends BaseCollection {
   define({ careerGoal, student, retired = false }) {
     const careerGoalID = CareerGoals.getID(careerGoal);
     const studentID = Users.getID(student);
+    const doc = this._collection.findOne({ studentID, careerGoalID });
+    if (doc) {
+      return doc._id;
+    }
     return this._collection.insert({ careerGoalID, studentID, retired });
   }
 

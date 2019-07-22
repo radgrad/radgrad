@@ -32,6 +32,10 @@ class FavoriteOpportunityCollection extends BaseCollection {
   define({ opportunity, student, retired = false }) {
     const opportunityID = Opportunities.getID(opportunity);
     const studentID = Users.getID(student);
+    const doc = this._collection.findOne({ studentID, opportunityID });
+    if (doc) {
+      return doc._id;
+    }
     return this._collection.insert({ opportunityID, studentID, retired });
   }
 

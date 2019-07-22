@@ -32,6 +32,10 @@ class FavoriteAcademicPlanCollection extends BaseCollection {
   define({ academicPlan, student, retired = false }) {
     const academicPlanID = AcademicPlans.getID(academicPlan);
     const studentID = Users.getID(student);
+    const doc = this._collection.findOne({ studentID, academicPlanID });
+    if (doc) {
+      return doc._id;
+    }
     return this._collection.insert({ academicPlanID, studentID, retired });
   }
 
