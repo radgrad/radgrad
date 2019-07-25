@@ -1,4 +1,4 @@
-<template name="Semester_Card">
+<template name="Favorite_Card">
   <div class="ui card radgrad-interest-card">
     <div class="content">
       <div class="header">{{itemName item}}
@@ -31,7 +31,7 @@
       {{/if}}
       {{#if isStudent}}
         {{#if canAdd}}
-          {{> Semester_Add item=item type=type}}
+          {{> Favorite_Add item=item type=type}}
         {{/if}}
 
         {{#if hidden}}

@@ -15,7 +15,7 @@ import {
 } from '../../utilities/template-helpers';
 import { StudentParticipation } from '../../../api/public-stats/StudentParticipationCollection';
 
-Template.Semester_Card.helpers({
+Template.Favorite_Card.helpers({
   coursesRouteName() {
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
@@ -148,7 +148,7 @@ Template.Semester_Card.helpers({
   },
 });
 
-Template.Semester_Card.events({
+Template.Favorite_Card.events({
   'click .hide': function clickItemHide(event) {
     event.preventDefault();
     const profile = Users.getProfile(getRouteUserName());
@@ -195,6 +195,6 @@ Template.Semester_Card.events({
   },
 });
 
-Template.Semester_Card.onRendered(function semesterCardOnRendered() {
+Template.Favorite_Card.onRendered(function semesterCardOnRendered() {
   this.$('.ui .image').popup();
 });

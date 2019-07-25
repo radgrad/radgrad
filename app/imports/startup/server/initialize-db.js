@@ -243,7 +243,7 @@ function favoriteCareerGoals(profile) {
     const doc = CareerGoals.findDoc(id);
     const careerGoal = Slugs.getNameFromID(doc.slugID);
     FavoriteCareerGoals.define({ student, careerGoal });
-  })
+  });
 }
 function ensureFavorites() {
   let profiles = AdvisorProfiles.findNonRetired();

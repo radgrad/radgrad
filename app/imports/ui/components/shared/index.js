@@ -60,6 +60,12 @@ import './explorer-opportunities-widget.js';
 import './explorer-plans-widget.html';
 import './explorer-plans-widget';
 
+import './favorite-add.html';
+import './favorite-add';
+
+import './favorite-card.html';
+import './favorite-card';
+
 import './get-user-id-from-route';
 
 import './help-panel-widget.html';
@@ -95,12 +101,6 @@ import './route-user-name.js';
 
 import './scoreboard-menu.html';
 import './scoreboard-menu';
-
-import './semester-add.html';
-import './semester-add';
-
-import './semester-card.html';
-import './semester-card';
 
 import '../advisor/student-selector-widget.html';
 import '../advisor/student-selector-widget.js';

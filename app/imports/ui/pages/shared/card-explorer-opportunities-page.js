@@ -3,30 +3,14 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
-import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
+import { FavoriteOpportunities } from '../../../api/favorite/FavoriteOpportunityCollection';
 
 Template.Card_Explorer_Opportunities_Page.helpers({
   addedOpportunities() {
-    const addedOpportunities = [];
-    const allOpportunities = Opportunities.findNonRetired({}, { sort: { name: 1 } });
-    const userID = getUserIdFromRoute();
-    const group = FlowRouter.current().route.group.name;
-    if (group === 'faculty') {
-      return _.filter(allOpportunities, o => o.sponsorID === userID);
-    } else if (group === 'student') {
-      _.forEach(allOpportunities, (opportunity) => {
-        const oi = OpportunityInstances.find({
-          studentID: userID,
-          opportunityID: opportunity._id,
-        })
-          .fetch();
-        if (oi.length > 0) {
-          addedOpportunities.push({ item: opportunity, count: oi.length });
-        }
-      });
-    }
-    return addedOpportunities;
+    const studentID = getUserIdFromRoute();
+    const favorites = FavoriteOpportunities.find({ studentID }).fetch();
+    return _.map(favorites, (f) => ({ item: Opportunities.findDoc(f.opportunityID), count: 1 }));
   },
   nonAddedOpportunities() {
     const allOpportunities = Opportunities.findNonRetired({}, { sort: { name: 1 } });
@@ -35,16 +19,10 @@ Template.Card_Explorer_Opportunities_Page.helpers({
     if (group === 'faculty') {
       return _.filter(allOpportunities, o => o.sponsorID !== userID);
     } else if (group === 'student') {
+      const favorites = FavoriteOpportunities.find({ studentID: userID }).fetch();
+      const favoriteIDs = _.map(favorites, (f) => f.opportunityID);
       const nonAddedOpportunities = _.filter(allOpportunities, function (opportunity) {
-        const oi = OpportunityInstances.find({
-          studentID: userID,
-          opportunityID: opportunity._id,
-        })
-          .fetch();
-        if (oi.length > 0) {
-          return false;
-        }
-        return true;
+        return !_.includes(favoriteIDs, opportunity._id);
       });
       return nonAddedOpportunities;
     }
