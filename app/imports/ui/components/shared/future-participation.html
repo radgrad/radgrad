@@ -1,0 +1,21 @@
+<template name="Future_Participation">
+  <div class="ui fixed celled table">
+    <thead>
+    <tr>
+      {{#each semester in semesters}}
+        <th>{{semesterName semester}}</th>
+      {{/each}}
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      {{#each semester in semesters}}
+        <td class="{{#if highlight item semester}}negative{{/if}} ">
+          {{#if important item semester}}<i class="attention icon"></i> {{/if}}
+          {{semesterScore item semester}}
+        </td>
+      {{/each}}
+    </tr>
+    </tbody>
+  </div>
+</template>

@@ -5,10 +5,17 @@
         {{#if typeOpportunity}}
           {{> ICE_header ice=item.ice}}
         {{/if}}
+        {{#if takenCourse item}}
+          {{> ICE_header ice=(courseICE item)}}
+        {{/if}}
       </div>
       <div class="meta">
-        {{#if itemSemesters}}
-          {{replaceSemString itemSemesters}}
+        {{#if inPlan item}}
+          In Plan: {{planSemesters item}}
+        {{else}}
+          {{#if itemSemesters}}
+            {{replaceSemString itemSemesters}}
+          {{/if}}
         {{/if}}
       </div>
     </div>
@@ -18,6 +25,11 @@
     </div>
     <div class="content">
       <span>STUDENTS PARTICIPATING {{> Widget_Header_Number inputValue = (numberStudents item)}}</span>
+      {{#if futureItem item}}
+        {{> Future_Participation type=type item=item}}
+        {{else}}
+        <h4>Already taken</h4>
+      {{/if}}
     </div>
 
     <div class="radgrad-home-buttons ui center aligned three bottom attached {{hidden}} buttons">

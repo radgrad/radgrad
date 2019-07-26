@@ -66,6 +66,9 @@ import './favorite-add';
 import './favorite-card.html';
 import './favorite-card';
 
+import './future-participation.html';
+import './future-participation';
+
 import './get-user-id-from-route';
 
 import './help-panel-widget.html';
