@@ -32,7 +32,7 @@
           {{#if careerGoals}}
             {{#each goal in careerGoals}}
               <a class="ui tiny label"
-                 href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=(slugName goal)}}"><i
+                 href="{{pathFor careerGoalRouteName username=routeUserName careerGoal=(slugName goal)}}"><i
                   class="fitted suitcase icon"></i>{{goalName goal}}</a>
             {{/each}}
             <br>
@@ -49,14 +49,14 @@
           {{#if interests}}
             {{#each interest in interests}}
               <a class="ui tiny label"
-                 href="{{pathFor interestsRouteName username=routeUserName interest=(slugName interest)}}"><i
+                 href="{{pathFor interestRouteName username=routeUserName interest=(slugName interest)}}"><i
                   class="fitted star icon"></i>{{interestName interest}}</a>
             {{/each}}
             <br>
           {{else}}
             <p style="margin-bottom: 0px">No interests favorited yet.</p>
           {{/if}}
-          <a href="{{pathFor interestsRouteName username=routeUserName interest=firstInterest}}">Update in interest
+          <a href="{{pathFor interestsRouteName username=routeUserName}}">Update in interest
             explorer</a>
         </div>
       </div>
@@ -68,7 +68,7 @@
         <div class="six wide column">
           {{#if desiredDegrees}}
             {{#each plan in desiredDegrees}}
-              <a class="ui tiny label" href="{{pathFor degreesRouteName username=routeUserName plan=(slugName plan)}}"><i class="fitted map outline icon"></i>{{planName plan}}</a>
+              <a class="ui tiny label" href="{{pathFor degreeRouteName username=routeUserName plan=(slugName plan)}}"><i class="fitted map outline icon"></i>{{planName plan}}</a>
             {{/each}}
           {{else}}
             <p style="margin-bottom: 0px">No academic plans favorited yet.</p>

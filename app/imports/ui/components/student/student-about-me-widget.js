@@ -22,8 +22,14 @@ Template.Student_About_Me_Widget.helpers({
     }
     return ret;
   },
+  careerGoalRouteName() {
+    return RouteNames.studentExplorerCareerGoalsPageRouteName;
+  },
   careerGoalsRouteName() {
     return RouteNames.studentCardExplorerCareerGoalsPageRouteName;
+  },
+  degreeRouteName() {
+    return RouteNames.studentExplorerPlansPageRouteName;
   },
   degreesRouteName() {
     return RouteNames.studentCardExplorerPlansPageRouteName;
@@ -62,14 +68,6 @@ Template.Student_About_Me_Widget.helpers({
     }
     return ret;
   },
-  firstInterest() {
-    let ret;
-    const interests = Interests.find({}, { sort: { name: 1 } }).fetch();
-    if (interests.length > 0) {
-      ret = Slugs.findDoc(interests[0].slugID).name;
-    }
-    return ret;
-  },
   getDictionary() {
     return Template.instance().state;
   },
@@ -88,6 +86,9 @@ Template.Student_About_Me_Widget.helpers({
       });
     }
     return ret;
+  },
+  interestRouteName() {
+    return RouteNames.studentExplorerInterestsPageRouteName;
   },
   interestsRouteName() {
     return RouteNames.studentCardExplorerInterestsPageRouteName;
