@@ -1,0 +1,15 @@
+<template name="Favorite_Button">
+  {{#if typeCourse}}
+    {{#if favoriteCourse item}}
+      <div class="ui right floated basic green tiny button jsRemoveCourse"><i class="red heart outline icon"></i><i class="minus icon"></i><br>Remove from Favorites</div>
+    {{else}}
+      <div class="ui right floated basic green tiny button jsAddCourse"><i class="red heart icon"></i><i class="plus icon"></i><br>Add to Favorites</div>
+    {{/if}}
+  {{else}}
+    {{#if favoriteOpportunity item}}
+      <div class="ui right floated basic green tiny button jsRemoveOpportunity"><i class="red heart outline icon"></i><i class="minus icon"></i><br>Remove from Favorites</div>
+    {{else}}
+      <div class="ui right floated basic green tiny button jsAddOpportunity"><i class="red heart icon"></i><i class="plus icon"></i><br>Add to Favorites</div>
+    {{/if}}
+  {{/if}}
+</template>

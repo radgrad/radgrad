@@ -63,6 +63,9 @@ import './explorer-plans-widget';
 import './favorite-add.html';
 import './favorite-add';
 
+import './favorite-button.html';
+import './favorite-button';
+
 import './favorite-card.html';
 import './favorite-card';
 

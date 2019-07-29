@@ -5,10 +5,6 @@ import { Slugs } from '../../../api/slug/SlugCollection';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { FavoriteCourses } from '../../../api/favorite/FavoriteCourseCollection';
 
-Template.Favorite_Add.onCreated(function favoriteAddOnCreated() {
-  // add your statement here
-});
-
 Template.Favorite_Add.helpers({
   typeCourse() {
     return (this.type === 'courses');
@@ -44,12 +40,3 @@ Template.Favorite_Add.events({
     });
   },
 });
-
-Template.Favorite_Add.onRendered(function favoriteAddOnRendered() {
-  // add your statement here
-});
-
-Template.Favorite_Add.onDestroyed(function favoriteAddOnDestroyed() {
-  // add your statement here
-});
-

@@ -10,6 +10,7 @@ import { makeLink } from '../../components/admin/datamodel-utilities';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 import { isSingleChoice } from '../../../api/degree-plan/PlanChoiceUtilities';
+import { FavoriteCourses } from '../../../api/favorite/FavoriteCourseCollection';
 
 
 function passedCourseHelper(courseSlugName) {
@@ -75,23 +76,9 @@ function prerequisites(course) {
 
 Template.Explorer_Courses_Page.helpers({
   addedCourses() {
-    const addedCourses = [];
-    const allCourses = _.filter(Courses.find({}, { sort: { shortName: 1 } })
-      .fetch(), (c) => !c.retired);
-    const userID = getUserIdFromRoute();
-    _.forEach(allCourses, (course) => {
-      const ci = CourseInstances.find({
-        studentID: userID,
-        courseID: course._id,
-      })
-        .fetch();
-      if (ci.length > 0) {
-        if (course.shortName !== 'Non-CS Course') {
-          addedCourses.push({ item: course, count: ci.length });
-        }
-      }
-    });
-    return addedCourses;
+    const studentID = getUserIdFromRoute();
+    const favorites = FavoriteCourses.find({ studentID }).fetch();
+    return _.map(favorites, (f) => ({ item: Courses.findDoc(f.courseID), count: 1 }));
   },
   completed() {
     let ret = false;
@@ -120,22 +107,12 @@ Template.Explorer_Courses_Page.helpers({
     ];
   },
   nonAddedCourses() {
-    const allCourses = _.filter(Courses.find({}, { sort: { shortName: 1 } })
-      .fetch(), (c) => !c.retired);
-    const userID = getUserIdFromRoute();
+    const allCourses = Courses.findNonRetired({}, { sort: { shortName: 1 } });
+    const studentID = getUserIdFromRoute();
+    const favoriteIDs = _.map(FavoriteCourses.find({ studentID }).fetch(), (f) => f.courseID);
+
     const nonAddedCourses = _.filter(allCourses, function (course) {
-      const ci = CourseInstances.find({
-        studentID: userID,
-        courseID: course._id,
-      })
-        .fetch();
-      if (ci.length > 0) {
-        return false;
-      }
-      if (course.shortName === 'Non-CS Course') {
-        return false;
-      }
-      return true;
+      return !_.includes(favoriteIDs, course._id);
     });
     return nonAddedCourses;
   },
