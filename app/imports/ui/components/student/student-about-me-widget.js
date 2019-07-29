@@ -8,6 +8,8 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection.js';
 import { getRouteUserName } from '../../components/shared/route-user-name.js';
+import { FavoriteAcademicPlans } from '../../../api/favorite/FavoriteAcademicPlanCollection';
+import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
 Template.Student_About_Me_Widget.helpers({
   careerGoals() {
@@ -26,14 +28,14 @@ Template.Student_About_Me_Widget.helpers({
   degreesRouteName() {
     return RouteNames.studentCardExplorerPlansPageRouteName;
   },
-  desiredDegree() {
-    let ret = 'Not yet specified.';
-    if (getRouteUserName()) {
-      const profile = Users.getProfile(getRouteUserName());
-      if (profile.academicPlanID) {
-        const plan = AcademicPlans.findDoc(profile.academicPlanID);
-        ret = plan.name;
-      }
+  desiredDegrees() {
+    const ret = [];
+    if (getUserIdFromRoute()) {
+      const studentID = getUserIdFromRoute();
+      const favorites = FavoriteAcademicPlans.findNonRetired({ studentID });
+      _.forEach(favorites, (f) => {
+        ret.push(AcademicPlans.findDoc(f.academicPlanID));
+      });
     }
     return ret;
   },
@@ -102,6 +104,9 @@ Template.Student_About_Me_Widget.helpers({
       return profile.picture;
     }
     return '';
+  },
+  planName(plan) {
+    return plan.name;
   },
   slugName(item) {
     return Slugs.findDoc(item.slugID).name;
