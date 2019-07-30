@@ -8,6 +8,9 @@ import './add-course-button.js';
 import './add-opportunity-button.html';
 import './add-opportunity-button.js';
 
+import './favorite-academic-plan-viewer-widget.html';
+import './favorite-academic-plan-viewer-widget';
+
 import './future-enrollment-widget.html';
 import './future-enrollment-widget';
 
