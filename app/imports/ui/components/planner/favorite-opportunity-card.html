@@ -1,0 +1,60 @@
+<template name="Favorite_Opportunity_Card">
+  <div class="card">
+    <div class="content">
+      <div class="header">
+        <h4>{{> ICE_header ice=ice }} {{name}}</h4>
+      </div>
+    </div>
+    <div class="content">
+      {{#if isInPlan}}
+        {{#if futureInstance}}
+          {{> Add_Opportunity_Button buttonType='remove' dictionary=dictionary opportunity=opportunity}}
+        {{else}}
+          {{#if unverified}}
+            {{> Add_Opportunity_Button buttonType='remove' dictionary=dictionary opportunity=opportunity}}
+          {{/if}}
+        {{/if}}
+      {{/if}}
+      <div class="content">
+        {{> Add_Opportunity_Button buttonType='add' dictionary=dictionary opportunity=opportunity}}
+        {{#if isInPlan}}
+          <b>In Plan: </b> {{semesters}}
+          {{else}}
+          <b>Not in plan</b>
+        {{/if}}
+      </div>
+      {{> Future_Participation type='opportunities' item=opportunity}}
+      <p>
+        <b>Description: </b>{{#markdown}}{{description}}{{/markdown}} <br>
+      </p>
+      {{> Interest_List item=opportunity size='mini'}}
+      <p style="text-align: right;">
+        <a href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=opportunitySlug}}"
+           target="_blank">
+          View in Explorer <i class="arrow right icon"></i>
+        </a>
+      </p>
+
+      {{#if isPastInstance}}
+        <div class="ui divider"></div>
+        <div style="text-align: center;">
+          <button class="ui tiny green basic button verifyInstance center aligned" id="{{instanceID}}">
+            Request Verification
+          </button>
+        </div>
+      {{/if}}
+      {{#if hasRequest}}
+        <div class="ui divider"></div>
+        <h4 class="ui center aligned header">REQUEST STATUS</h4>
+        <strong>Date Submitted:</strong> {{requestWhenSubmitted}} <br>
+        <strong>Status: </strong>{{requestStatus}}
+        <p>
+          {{#each processed in requestHistory}}
+            <span>Processed: {{processed.date}} by {{processed.verifier}}
+              ({{processed.status}}) <em>{{processed.feedback}}</em></span><br>
+          {{/each}}
+        </p>
+      {{/if}}
+    </div>
+  </div>
+</template>

@@ -1,8 +1,9 @@
 import { Template } from 'meteor/templating';
-import { ReactiveVar } from "meteor/reactive-var";
+import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { $ } from 'meteor/jquery';
+import * as RouteNames from '../../../startup/client/router.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
-import { Users } from '../../../api/user/UserCollection';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { FavoriteAcademicPlans } from '../../../api/favorite/FavoriteAcademicPlanCollection';
 
@@ -17,15 +18,19 @@ Template.Favorite_Academic_Plan_Viewer_Widget.helpers({
     return _.map(favorites, (f) => AcademicPlans.findDoc(f.academicPlanID));
   },
   getPlan() {
-    console.log(Template.instance());
-    return '';
+    return Template.instance().plan;
+  },
+  planExplorerRouteName() {
+    return RouteNames.studentExplorerPlansPageRouteName;
   },
 });
 
 Template.Favorite_Academic_Plan_Viewer_Widget.events({
-  focus: function focus(event, instance) {
+  'change [name=academicPlan]': function changePlan(event) {
     event.preventDefault();
-    console.log(event, instance);
+    const plan = AcademicPlans.findDoc($(event.target).val());
+    console.log(plan);
+    Template.instance().plan.set(plan);
   },
 });
 

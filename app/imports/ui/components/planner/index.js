@@ -11,6 +11,21 @@ import './add-opportunity-button.js';
 import './favorite-academic-plan-viewer-widget.html';
 import './favorite-academic-plan-viewer-widget';
 
+import './favorite-course-card.html';
+import './favorite-course-card';
+
+import './favorite-courses-widget.html';
+import './favorite-courses-widget';
+
+import './favorite-opportunities-widget.html';
+import './favorite-opportunities-widget';
+
+import './favorite-opportunity-card.html';
+import './favorite-opportunity-card';
+
+import './favorite-tabs.html';
+import './favorite-tabs';
+
 import './future-enrollment-widget.html';
 import './future-enrollment-widget';
 

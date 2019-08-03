@@ -26,7 +26,8 @@ export const plannerKeys = {
 
 Template.Academic_Plan.onCreated(function academicPlanOnCreated() {
   this.state = new ReactiveDict();
-  this.state.set(plannerKeys.selectedPlanTab, true);
+  // this.state.set(plannerKeys.selectedPlanTab, true);
+  this.state.set('opportunities', true);
   this.startYearIndex = new ReactiveVar();
 });
 
