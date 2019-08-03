@@ -1,10 +1,9 @@
 <template name="Favorite_Tabs">
   <div class="ui segment">
-    <div class="ui dividing header">FAVORITES <i class="red heart icon"></i></div>
     <div class="ui top attached tabular stackable menu">
-      <a class="{{#if showOpportunity}}active{{/if}} item jsInspectorTab" data-tab={{opportunityName}}>OPPORTUNITIES</a>
-      <a class="{{#if showPlan}}active{{/if}} item jsInspectorTab" data-tab={{academicPlanName}}>ACADEMIC PLANS</a>
-      <a class="{{#if showCourse}}active{{/if}} item jsInspectorTab" data-tab={{coursesName}}>COURSES</a>
+      <a class="{{#if showOpportunity}}active{{/if}} item jsInspectorTab" data-tab={{opportunityName}}><i class="red heart icon"></i> OPPORTUNITIES</a>
+      <a class="{{#if showPlan}}active{{/if}} item jsInspectorTab" data-tab={{academicPlanName}}><i class="red heart icon"></i> ACADEMIC PLANS</a>
+      <a class="{{#if showCourse}}active{{/if}} item jsInspectorTab" data-tab={{coursesName}}><i class="red heart icon"></i> COURSES</a>
     </div>
     <div class="ui bottom attached {{#if showOpportunity}}active{{/if}} tab segment" data-tab={{opportunityName}}>
       {{> Favorite_Opportunities_Widget dictionary=getDictionary}}
