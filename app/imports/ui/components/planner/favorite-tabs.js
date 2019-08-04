@@ -4,6 +4,7 @@ export const favoriteKeys = {
   academicPlans: 'academicPlans',
   courses: 'courses',
   opportunities: 'opportunities',
+  details: 'details',
 };
 
 Template.Favorite_Tabs.onCreated(function favoriteTabsOnCreated() {
@@ -20,11 +21,17 @@ Template.Favorite_Tabs.helpers({
   coursesName() {
     return favoriteKeys.courses;
   },
+  detailsName() {
+    return favoriteKeys.details;
+  },
   opportunityName() {
     return favoriteKeys.opportunities;
   },
   showCourse() {
     return Template.instance().state.get(favoriteKeys.courses);
+  },
+  showDetails() {
+    return Template.instance().state.get(favoriteKeys.details);
   },
   showOpportunity() {
     return Template.instance().state.get(favoriteKeys.opportunities);
