@@ -1,11 +1,11 @@
 import { Template } from 'meteor/templating';
+import {
+  plannerKeys,
+  selectDetailsTab, selectFavoriteAcademicPlansTab,
+  selectFavoriteCoursesTab,
+  selectFavoriteOpportunitiesTab,
+} from './academic-plan';
 
-export const favoriteKeys = {
-  academicPlans: 'academicPlans',
-  courses: 'courses',
-  opportunities: 'opportunities',
-  details: 'details',
-};
 
 Template.Favorite_Tabs.onCreated(function favoriteTabsOnCreated() {
   this.state = this.data.dictionary;
@@ -16,38 +16,51 @@ Template.Favorite_Tabs.helpers({
     return Template.instance().state;
   },
   academicPlanName() {
-    return favoriteKeys.academicPlans;
+    return plannerKeys.selectedPlans;
   },
   coursesName() {
-    return favoriteKeys.courses;
+    return plannerKeys.selectedCourses;
   },
   detailsName() {
-    return favoriteKeys.details;
+    return plannerKeys.selectedDetails;
   },
   opportunityName() {
-    return favoriteKeys.opportunities;
+    return plannerKeys.selectedOpportunities;
   },
   showCourse() {
-    return Template.instance().state.get(favoriteKeys.courses);
+    return Template.instance().state.get(plannerKeys.selectedCourses);
   },
   showDetails() {
-    return Template.instance().state.get(favoriteKeys.details);
+    return Template.instance().state.get(plannerKeys.selectedDetails);
   },
   showOpportunity() {
-    return Template.instance().state.get(favoriteKeys.opportunities);
+    return Template.instance().state.get(plannerKeys.selectedOpportunities);
   },
   showPlan() {
-    return Template.instance().state.get(favoriteKeys.academicPlans);
+    return Template.instance().state.get(plannerKeys.selectedPlans);
   },
 });
 
 Template.Favorite_Tabs.events({
   'click .jsInspectorTab': function clickInspectorTab(event) {
     const tabName = event.target.dataset.tab;
-    const template = Template.instance();
-    template.state.set(favoriteKeys.academicPlans, tabName === favoriteKeys.academicPlans);
-    template.state.set(favoriteKeys.courses, tabName === favoriteKeys.courses);
-    template.state.set(favoriteKeys.opportunities, tabName === favoriteKeys.opportunities);
+    const state = Template.instance().state;
+    switch (tabName) {
+      case plannerKeys.selectedCourses:
+        selectFavoriteCoursesTab(state);
+        break;
+      case plannerKeys.selectedDetails:
+        selectDetailsTab(state);
+        break;
+      case plannerKeys.selectedOpportunities:
+        selectFavoriteOpportunitiesTab(state);
+        break;
+      case plannerKeys.selectedPlans:
+        selectFavoriteAcademicPlansTab(state);
+        break;
+      default:
+        selectFavoriteOpportunitiesTab(state);
+    }
   },
 });
 

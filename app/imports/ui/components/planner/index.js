@@ -8,6 +8,12 @@ import './add-course-button.js';
 import './add-opportunity-button.html';
 import './add-opportunity-button.js';
 
+import './detail-course-card.html';
+import './detail-course-card';
+
+import './details-card.html';
+import './details-card';
+
 import './favorite-academic-plan-viewer-widget.html';
 import './favorite-academic-plan-viewer-widget';
 

@@ -7,6 +7,7 @@ import { PlanChoices } from '../../../api/degree-plan/PlanChoiceCollection';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { satisfiesPlanChoice } from '../../../api/degree-plan/PlanChoiceUtilities';
+import { Semesters } from '../../../api/semester/SemesterCollection';
 
 Template.Favorite_Course_Card.onCreated(function favoriteCourseCardOnCreated() {
   // add your statement here
@@ -39,6 +40,13 @@ Template.Favorite_Course_Card.helpers({
   },
   interests() {
     return Template.instance().data.course.interestIDs;
+  },
+  instanceSemester() {
+    const studentID = getUserIdFromRoute();
+    const courseID = Template.instance().data.course._id;
+    const instances = CourseInstances.findNonRetired({ studentID, courseID });
+    const semesterNames = _.map(instances, (i) => Semesters.toString(i.semesterID, false));
+    return semesterNames.join(', ');
   },
   name() {
     const course = Template.instance().data.course;

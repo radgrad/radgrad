@@ -443,9 +443,7 @@ Template.Inspector.events({
     event.preventDefault();
     const course = Courses.findDoc(event.target.id);
     Template.instance().state.set(plannerKeys.detailCourse, course);
-    Template.instance().state.set(plannerKeys.detailCourseInstance, null);
     Template.instance().state.set(plannerKeys.detailOpportunity, null);
-    Template.instance().state.set(plannerKeys.detailOpportunityInstance, null);
     const instance = Template.instance();
     getFutureEnrollmentMethod.call(event.target.id, (error, result) => {
       if (error) {
@@ -460,7 +458,6 @@ Template.Inspector.events({
     event.preventDefault();
     const opportunity = Opportunities.findDoc(event.target.id);
     Template.instance().state.set(plannerKeys.detailCourse, null);
-    Template.instance().state.set(plannerKeys.detailCourseInstance, null);
     Template.instance().state.set(plannerKeys.detailOpportunity, opportunity);
     Template.instance().state.set(plannerKeys.detailOpportunityInstance, null);
   },

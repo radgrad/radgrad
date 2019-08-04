@@ -14,20 +14,62 @@ import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 
 export const plannerKeys = {
-  detailCourse: 'detailCourse',
-  detailCourseInstance: 'detailCourseInstance',
-  detailOpportunity: 'detailOpportunity',
-  detailOpportunityInstance: 'detailOpportunityInstance',
-  detailICE: 'detailICE',
-  plannedEnrollment: 'plannedEnrollment',
-  selectedPlanTab: 'plan',
-  selectedInspectorTab: 'inspector',
+  detailsCourse: 'detailsCourse',
+  detailsOpportunity: 'detailsOpportunity',
+  detailsICE: 'detailsICE',
+  selectedOpportunities: 'opportunities',
+  selectedCourses: 'courses',
+  selectedPlans: 'academicPlans',
+  selectedDetails: 'details',
 };
+
+export function selectFavoriteOpportunitiesTab(state) {
+  state.set(plannerKeys.selectedOpportunities, true);
+  state.set(plannerKeys.selectedCourses, false);
+  state.set(plannerKeys.selectedPlans, false);
+  state.set(plannerKeys.selectedDetails, false);
+}
+
+export function selectFavoriteAcademicPlansTab(state) {
+  state.set(plannerKeys.selectedOpportunities, false);
+  state.set(plannerKeys.selectedCourses, false);
+  state.set(plannerKeys.selectedPlans, true);
+  state.set(plannerKeys.selectedDetails, false);
+}
+
+export function selectFavoriteCoursesTab(state) {
+  state.set(plannerKeys.selectedOpportunities, false);
+  state.set(plannerKeys.selectedCourses, true);
+  state.set(plannerKeys.selectedPlans, false);
+  state.set(plannerKeys.selectedDetails, false);
+}
+
+export function selectDetailsTab(state) {
+  state.set(plannerKeys.selectedOpportunities, false);
+  state.set(plannerKeys.selectedCourses, false);
+  state.set(plannerKeys.selectedPlans, false);
+  state.set(plannerKeys.selectedDetails, true);
+}
+
+export function showCourseDetails(state, courseInstance) {
+  // console.log('showCourseDetails', courseInstance);
+  state.set(plannerKeys.detailsCourse, courseInstance);
+  state.set(plannerKeys.detailsOpportunity, null);
+  state.set(plannerKeys.detailsICE, courseInstance.ice);
+  selectDetailsTab(state);
+}
+
+export function showOpportunityDetails(state, opportunityInstance) {
+  // console.log('showOpportunityDetails', opportunityInstance);
+  state.set(plannerKeys.detailsCourse, null);
+  state.set(plannerKeys.detailsOpportunity, opportunityInstance);
+  state.set(plannerKeys.detailsICE, opportunityInstance.ice);
+  selectDetailsTab(state);
+}
 
 Template.Academic_Plan.onCreated(function academicPlanOnCreated() {
   this.state = new ReactiveDict();
-  // this.state.set(plannerKeys.selectedPlanTab, true);
-  this.state.set('opportunities', true);
+  selectFavoriteOpportunitiesTab(this.state);
   this.startYearIndex = new ReactiveVar();
 });
 

@@ -12,7 +12,7 @@ Template.Favorite_Courses_Widget.helpers({
   getCourses() {
     const studentID = getUserIdFromRoute();
     const favorites = FavoriteCourses.findNonRetired({ studentID });
-    console.log(favorites);
+    // console.log(favorites);
     return _.map(favorites, (f) => Courses.findDoc(f.courseID));
   },
 });
