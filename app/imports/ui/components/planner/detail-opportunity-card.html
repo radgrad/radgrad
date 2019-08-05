@@ -1,0 +1,12 @@
+<template name="Detail_Opportunity_Card">
+  <div class="card">
+    <div class="content">
+      <h4>{{> ICE_header ice=ice }} {{name}}</h4>
+    </div>
+    <div class="content">
+      {{#if futureInstance}}
+        {{> Add_Opportunity_Button buttonType='remove' dictionary=dictionary opportunity=opportunity}}
+      {{/if}}
+    </div>
+  </div>
+</template>

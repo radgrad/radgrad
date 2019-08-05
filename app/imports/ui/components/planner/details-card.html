@@ -4,7 +4,7 @@
       {{> Detail_Course_Card dictionary=getDictionary}}
     {{/if}}
     {{#if selectedOpportunity}}
-      Opportunity Instance
+      {{> Detail_Opportunity_Card dictionary=getDictionary}}
     {{/if}}
   {{else}}
     <div class="ui message">No course or opportunity selected. Please click on a course or opportunity to the left.

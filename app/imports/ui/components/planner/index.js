@@ -11,6 +11,9 @@ import './add-opportunity-button.js';
 import './detail-course-card.html';
 import './detail-course-card';
 
+import './detail-opportunity-card.html';
+import './detail-opportunity-card';
+
 import './details-card.html';
 import './details-card';
 
