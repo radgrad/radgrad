@@ -10,9 +10,12 @@
     <tbody>
     <tr>
       {{#each semester in semesters}}
-        <td class="{{#if highlight item semester}}negative{{/if}} ">
-          {{#if important item semester}}<i class="attention icon"></i> {{/if}}
-          {{semesterScore item semester}}
+        <td>
+          {{#if highlightString item semester}}
+            <div class="ui {{highlightString item semester}} label ">{{semesterScore item semester}}</div>
+          {{else}}
+            {{semesterScore item semester}}
+          {{/if}}
         </td>
       {{/each}}
     </tr>

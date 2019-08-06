@@ -20,6 +20,24 @@ Template.Future_Participation.helpers({
     }
     return false;
   },
+  highlightString(course, semester) {
+    const id = `${course._id} ${semester._id}`;
+    let scoreItem;
+    if (this.type === 'courses') {
+      scoreItem = CourseScoreboard.findOne({ _id: id });
+    } else {
+      scoreItem = OpportunityScoreboard.findOne({ _id: id });
+    }
+    if (scoreItem) {
+      if (scoreItem.count > 29) {
+        return 'green';
+      }
+      if (scoreItem.count > 10) {
+        return 'yellow';
+      }
+    }
+    return '';
+  },
   important(course, semester) {
     const id = `${course._id} ${semester._id}`;
     let scoreItem;

@@ -25,11 +25,7 @@
     </div>
     <div class="content">
       <span>STUDENTS PARTICIPATING {{> Widget_Header_Number inputValue = (numberStudents item)}}</span>
-      {{#if futureItem item}}
-        {{> Future_Participation type=type item=item}}
-        {{else}}
-        <h4>Already taken</h4>
-      {{/if}}
+      {{> Future_Participation type=type item=item}}
     </div>
 
     <div class="radgrad-home-buttons ui center aligned three bottom attached {{hidden}} buttons">
@@ -41,17 +37,17 @@
            href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(itemSlug item)}}"><i
             class="chevron circle right icon"></i><br>View More</a>
       {{/if}}
-      {{#if isStudent}}
-        {{#if canAdd}}
-          {{> Favorite_Add item=item type=type}}
-        {{/if}}
+        <!--      {{#if isStudent}}-->
+        <!--        {{#if canAdd}}-->
+        <!--          {{> Favorite_Add item=item type=type}}-->
+          <!--        {{/if}}-->
 
-        {{#if hidden}}
-          <div class="ui button unhide"><i class="unhide icon"></i><br>Unhide</div>
-        {{else}}
-          <div class="ui button hide"><i class="hide icon"></i><br>Hide</div>
-        {{/if}}
-      {{/if}}
+        <!--        {{#if hidden}}-->
+        <!--          <div class="ui button unhide"><i class="unhide icon"></i><br>Unhide</div>-->
+          <!--        {{else}}-->
+        <!--          <div class="ui button hide"><i class="hide icon"></i><br>Hide</div>-->
+          <!--        {{/if}}-->
+        <!--      {{/if}}-->
     </div>
   </div>
 </template>
