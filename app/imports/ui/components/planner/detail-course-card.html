@@ -15,31 +15,6 @@
       {{else}}
         <p><b>Taken:</b> {{semester}}</p>
       {{/if}}
-      {{#if prerequisites}}
-      <p><b>Prerequisites:</b>
-        <div class="ui bulleted list" style="margin-top: 0; margin-left: 25px;">
-          {{#each prerequisite in prerequisites}}
-            <div class="ui item">
-              <a href="{{pathFor coursesRouteName username=routeUserName course=prerequisite}}"
-                 target="_blank"
-                 style="text-transform: uppercase;">{{prereqName prerequisite}}
-                {{#if missingPrerequisite prerequisite}}
-                  <i class="red warning icon"></i>
-                {{else}}
-                  <i class="green checkmark icon"></i>
-                {{/if}}
-              </a>
-            </div>
-          {{/each}}
-        </div>
-        </p>
-      {{/if}}
-      <p>
-        <b>Catalog Description:</b> {{#markdown}}{{description}}{{/markdown}}
-      </p>
-      {{#if interests}}
-        {{> Interest_List item=course size='mini'}}
-      {{/if}}
       <p style="text-align: right;">
         <a href="{{pathFor coursesRouteName username=routeUserName course=courseSlug}}"
            target="_blank">

@@ -12,10 +12,6 @@
         {{/if}}
       {{/if}}
       <p><b>When: </b> {{semester}}</p>
-      <p>
-        <b>Description: </b>{{#markdown}}{{description}}{{/markdown}} <br>
-      </p>
-      {{> Interest_List item=opportunity size='mini'}}
       <p style="text-align: right;">
         <a href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=opportunitySlug}}">
           View in Explorer <i class="arrow right icon"></i>

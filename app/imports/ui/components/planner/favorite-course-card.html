@@ -23,42 +23,10 @@
       {{else}}
         {{> Add_Course_Button buttonType='add' dictionary=dictionary course=course}}
       {{/if}}
-
-      {{#each recommendationStars}}
-        <i style="margin: 0px 0px 3px; font-size: 18px; width: 19px; line-height: 1.5em"
-           class="yellow star icon"></i>
-      {{/each}}
       <b>Scheduled:</b> {{#if instanceSemester}} {{instanceSemester}} {{else}} N/A {{/if}}
       {{> Future_Participation type='courses' item=course}}
-    <p><b>Prerequisites:</b>
-      {{#if prerequisites}}
-        <div class="ui bulleted list" style="margin-top: 0; margin-left: 25px;">
-          {{#each prerequisite in prerequisites}}
-            <div class="ui item">
-              <a href="{{pathFor coursesRouteName username=routeUserName course=prerequisite}}"
-                 target="_blank"
-                 style="text-transform: uppercase;">{{prereqName prerequisite}}
-                {{#if missingPrerequisite prerequisite}}
-                  <i class="red warning icon"></i>
-                {{else}}
-                  <i class="green checkmark icon"></i>
-                {{/if}}
-              </a>
-            </div>
-          {{/each}}
-        </div>
-      {{else}}
-        N/A
-      {{/if}}
-      </p>
-      <p>
-        <b>Catalog Description:</b> {{#markdown}}{{description}}{{/markdown}}
-      </p>
       {{#if courseEnrollmentData}}
         {{> Future_Enrollment_Widget dictionary=dictionary}}
-      {{/if}}
-      {{#if interests}}
-        {{> Interest_List item=course size='mini'}}
       {{/if}}
       <p style="text-align: right;">
         <a href="{{pathFor coursesRouteName username=routeUserName course=courseSlug}}"
