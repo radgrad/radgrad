@@ -73,50 +73,24 @@
       <div style="margin-top: 0" class="ui stackable grid">
         <div class="column">
           {{#each descriptionPair in descriptionPairs}}
-
             {{#if isLabel descriptionPair.label 'Prerequisites'}}
               {{#if descriptionPair.value}}
-                <h4 class="ui horizontal divider header">
-                  {{descriptionPair.label}}
-                </h4>
+                <b>{{descriptionPair.label}}:</b>
                 {{#if isInRole 'student'}}
-                  <div class="ui three column stackable padded celled grid">
-                    <div class="row">
-                      {{#each table in descriptionPair.value}}
-                        <div class="column" style="text-align: center; background-color: {{color table}}">
-                          {{{getTableTitle @index table}}}
-                          {{#if length table}}
-                            {{#each prerequisite in table}}
-                              {{#if isSingleChoice prerequisite}}
-                                <a class="{{isActiveRoute coursesRouteName}} item"
-                                   href="{{pathFor coursesRouteName username=routeUserName
-                                                   course = prerequisite.course}}">{{courseNameFromSlug
-                                    prerequisite.course}}</a>
-                                <br>
-                              {{else}}
-                                {{#each choice in (choices prerequisite)}}
-                                  {{#if isFirst @index}}
-                                    <a class="{{isActiveRoute coursesRouteName}} item"
-                                       href="{{pathFor coursesRouteName username=routeUserName
-                                                       course = choice}}">{{courseNameFromSlug
-                                        choice}}</a>
-                                  {{else}}
-                                    or <a class="{{isActiveRoute coursesRouteName}} item"
-                                       href="{{pathFor coursesRouteName username=routeUserName
-                                                       course = choice}}">{{courseNameFromSlug
-                                        choice}}</a>
-                                  {{/if}}
-                                {{/each}}
-                              {{/if}}
-                            {{/each}}
-                          {{else}}
-                            <a class="item" style="color: grey">
-                              None
-                            </a>
-                          {{/if}}
-                        </div>
-                      {{/each}}
-                    </div>
+                  <div class="ui horizontal bulleted list">
+                    {{#each prerequisiteList in descriptionPair.value}}
+                      {{#let index=@index}}
+                        {{#each prereq in prerequisiteList}}
+                          <a class="item">
+                            <a class="{{isActiveRoute coursesRouteName}} item"
+                               href="{{pathFor coursesRouteName username=routeUserName
+                                               course=prereq.course}}"
+                               data-tooltip="{{getStatusTooltip index}}"
+                               data-position="right center">{{courseNameFromSlug prereq.course}} <i
+                                class="{{getStatusIconName index}}"></i></a> </a>
+                        {{/each}}
+                      {{/let}}
+                    {{/each}}
                   </div>
                 {{else}}
                   <div class="ui horizontal bulleted list">
@@ -135,6 +109,22 @@
           {{/each}}
         </div>
       </div>
+
+      <div style="margin-top: 0" class="ui stackable grid">
+        <div class="column">
+          <b>Status:</b>
+          {{#if courseSemesters item}}
+            {{courseSemesters item}}
+          {{else}}
+            Not in Plan
+            {{> Future_Participation type='courses' item=item}}
+          {{/if}}
+          {{#if futureInstance item}}
+            {{> Future_Participation type='courses' item=item}}
+          {{/if}}
+        </div>
+      </div>
+
     </div>
   </div>
 

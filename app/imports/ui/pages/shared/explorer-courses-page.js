@@ -11,6 +11,7 @@ import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 import { isSingleChoice } from '../../../api/degree-plan/PlanChoiceUtilities';
 import { FavoriteCourses } from '../../../api/favorite/FavoriteCourseCollection';
+// import { Teasers } from '../../../api/teaser/TeaserCollection';
 
 
 function passedCourseHelper(courseSlugName) {
@@ -71,8 +72,13 @@ function prerequisites(course) {
   if (complete.length === 0 && incomplete.length === 0 && notInPlan.length === 0) {
     return null;
   }
+  // console.log(complete, incomplete, notInPlan);
   return [complete, incomplete, notInPlan];
 }
+// function teaser(course) {
+//   const teaser = Teasers.find({ opportunityID: course._id }).fetch();
+//   return teaser[0];
+// }
 
 Template.Explorer_Courses_Page.helpers({
   addedCourses() {
@@ -104,6 +110,7 @@ Template.Explorer_Courses_Page.helpers({
       { label: 'Syllabus', value: makeLink(course.syllabus) },
       { label: 'Interests', value: _.sortBy(Interests.findNames(course.interestIDs)) },
       { label: 'Prerequisites', value: prerequisites(course) },
+      // { label: 'Teaser', value: teaser(course) }, TODO: CAM need to add support for non opportunity teasers.
     ];
   },
   nonAddedCourses() {
