@@ -122,7 +122,7 @@ Template.Detail_Opportunity_Card.helpers({
     return !Template.instance()
       .state
       .get(plannerKeys.detailsOpportunity).verified;
-  }
+  },
 });
 
 Template.Detail_Opportunity_Card.events({

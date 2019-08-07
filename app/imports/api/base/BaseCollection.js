@@ -53,9 +53,7 @@ class BaseCollection {
    */
   publish() {
     if (Meteor.isServer) {
-      Meteor.publish(this._collectionName, () => {
-        return this._collection.find();
-      });
+      Meteor.publish(this._collectionName, () => this._collection.find());
     }
   }
 
