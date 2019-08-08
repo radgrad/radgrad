@@ -36,12 +36,19 @@ Template.List_Opportunity_Types_Widget.helpers({
     return (numReferences(interest) > 0) ? 'disabled' : '';
   },
   slugName(slugID) {
-    return Slugs.findDoc(slugID).name;
+    if (Slugs.isDefined(slugID)) {
+      return Slugs.findDoc(slugID).name;
+    }
+    return '';
   },
   descriptionPairs(opportunityType) {
+    let slug = '';
+    if (opportunityType && Slugs.isDefined(opportunityType.slugID)) {
+      slug = Slugs.findDoc(opportunityType.slugID).name;
+    }
     return [
       { label: 'Name', value: opportunityType.name },
-      { label: 'Slug', value: `${Slugs.findDoc(opportunityType.slugID).name}` },
+      { label: 'Slug', value: `${slug}` },
       { label: 'Description', value: opportunityType.description },
       { label: 'References', value: `${numReferences(opportunityType)}` },
       { label: 'Retired', value: opportunityType.retired ? 'True' : 'False' },

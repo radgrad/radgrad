@@ -10,7 +10,10 @@ Template.Landing_Interest_List.helpers({
     return Template.currentData().item;
   },
   itemInterests(item) {
-    return _.map(item.interestIDs, (id) => Interests.findDoc(id));
+    if (!_.isUndefined(item)) {
+      return _.map(item.interestIDs, (id) => Interests.findDoc(id));
+    }
+    return [];
   },
   size() {
     return Template.currentData().size;

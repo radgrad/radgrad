@@ -35,12 +35,19 @@ Template.List_Interest_Types_Widget.helpers({
     return (numReferences(interest) > 0) ? 'disabled' : '';
   },
   slugName(slugID) {
-    return Slugs.findDoc(slugID).name;
+    if (Slugs.isDefined(slugID)) {
+      return Slugs.findDoc(slugID).name;
+    }
+    return '';
   },
   descriptionPairs(interestType) {
+    let slug = '';
+    if (interestType && Slugs.isDefined(interestType.slugID)) {
+      slug = Slugs.findDoc(interestType.slugID).name;
+    }
     return [
       { label: 'Name', value: interestType.name },
-      { label: 'Slug', value: `${Slugs.findDoc(interestType.slugID).name}` },
+      { label: 'Slug', value: `${slug}` },
       { label: 'Description', value: interestType.description },
       { label: 'References', value: `${numReferences(interestType)}` },
       { label: 'Retired', value: interestType.retired ? 'True' : 'False' },

@@ -121,7 +121,7 @@ Template.List_Users_Widget.helpers({
     }
   },
   slugName(slugID) {
-    return slugID && Slugs.findDoc(slugID).name;
+    return slugID && Slugs.hasSlug(slugID) && Slugs.findDoc(slugID).name;
   },
 
   fullName(user) {

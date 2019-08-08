@@ -35,7 +35,10 @@ Template.List_Mentor_Answers_Widget.helpers({
     return MentorAnswers.count();
   },
   slugName(slugID) {
-    return Slugs.findDoc(slugID).name;
+    if (Slugs.isDefined(slugID)) {
+      return Slugs.findDoc(slugID).name;
+    }
+    return '';
   },
   descriptionPairs(answer) {
     return [

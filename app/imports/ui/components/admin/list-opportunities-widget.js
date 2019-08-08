@@ -62,7 +62,10 @@ Template.List_Opportunities_Widget.helpers({
     return Opportunities.find({ sponsorID: getUserIdFromRoute() }).count();
   },
   slugName(slugID) {
-    return Slugs.findDoc(slugID).name;
+    if (Slugs.isDefined(slugID)) {
+      return Slugs.findDoc(slugID).name;
+    }
+    return '';
   },
   isInRole,
   updateDisabled(opportunity) {

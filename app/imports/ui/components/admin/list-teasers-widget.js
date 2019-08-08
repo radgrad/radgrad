@@ -40,7 +40,7 @@ Template.List_Teasers_Widget.helpers({
     return (numReferences(teaser) > 0) ? 'disabled' : '';
   },
   slugName(slugID) {
-    return Slugs.findDoc(slugID).name;
+    return slugID && Slugs.hasSlug(slugID) && Slugs.findDoc(slugID).name;
   },
   descriptionPairs(teaser) {
     return [
