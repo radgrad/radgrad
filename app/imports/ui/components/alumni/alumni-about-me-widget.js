@@ -54,7 +54,7 @@ Template.Alumni_About_Me_Widget.helpers({
   },
   firstCareerGoal() {
     let ret;
-    const careerGoals = CareerGoals.find({}, { sort: { name: 1 } }).fetch();
+    const careerGoals = CareerGoals.findNonRetired({}, { sort: { name: 1 } });
     if (careerGoals.length > 0) {
       ret = Slugs.findDoc(careerGoals[0].slugID).name;
     }
@@ -70,7 +70,7 @@ Template.Alumni_About_Me_Widget.helpers({
   },
   firstInterest() {
     let ret;
-    const interests = Interests.find({}, { sort: { name: 1 } }).fetch();
+    const interests = Interests.findNonRetired({}, { sort: { name: 1 } });
     if (interests.length > 0) {
       ret = Slugs.findDoc(interests[0].slugID).name;
     }

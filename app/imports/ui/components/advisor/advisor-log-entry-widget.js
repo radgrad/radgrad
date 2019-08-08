@@ -10,7 +10,7 @@ Template.Advisor_Log_Entry_Widget.helpers({
   advisorLogs() {
     if (Template.currentData().studentID.get()) {
       const studentID = Template.currentData().studentID.get();
-      return AdvisorLogs.find({ studentID }, { sort: { createdOn: -1 } }).fetch();
+      return AdvisorLogs.findNonRetired({ studentID }, { sort: { createdOn: -1 } });
     }
     return null;
   },

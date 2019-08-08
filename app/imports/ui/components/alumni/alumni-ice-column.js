@@ -16,12 +16,12 @@ function getEventsHelper(iceType, type, earned, semester) {
     let allInstances = [];
     const iceInstances = [];
     if (type === 'course') {
-      const courseInstances = CourseInstances.find({ semesterID: semester._id, studentID: profile.userID,
-        verified: earned }).fetch();
+      const courseInstances = CourseInstances.findNonRetired({ semesterID: semester._id, studentID: profile.userID,
+        verified: earned });
       courseInstances.forEach(courseInstance => allInstances.push(courseInstance));
     } else {
-      allInstances = OpportunityInstances.find({ semesterID: semester._id, studentID: profile.userID,
-        verified: earned }).fetch();
+      allInstances = OpportunityInstances.findNonRetired({ semesterID: semester._id, studentID: profile.userID,
+        verified: earned });
     }
     allInstances.forEach((instance) => {
       if (iceType === 'Innovation') {
@@ -54,8 +54,8 @@ Template.Alumni_Ice_Column.helpers({
   earnedICE() {
     if (getUserIdFromRoute()) {
       const profile = Users.getProfile(getUserIdFromRoute());
-      const courseInstances = CourseInstances.find({ studentID: profile.userID, verified: true }).fetch();
-      const oppInstances = OpportunityInstances.find({ studentID: profile.userID, verified: true }).fetch();
+      const courseInstances = CourseInstances.findNonRetired({ studentID: profile.userID, verified: true });
+      const oppInstances = OpportunityInstances.findNonRetired({ studentID: profile.userID, verified: true });
       const earnedInstances = courseInstances.concat(oppInstances);
       return getEarnedICE(earnedInstances);
     }
@@ -128,20 +128,7 @@ Template.Alumni_Ice_Column.helpers({
   },
   years() {
     const studentID = getUserIdFromRoute();
-    const ay = AcademicYearInstances.find({ studentID }, { sort: { year: 1 } }).fetch();
+    const ay = AcademicYearInstances.findNonRetired({ studentID }, { sort: { year: 1 } });
     return ay;
   },
 });
-
-Template.Alumni_Ice_Column.events({
-  // add your events here
-});
-
-Template.Alumni_Ice_Column.onRendered(function alumniIceColumnOnRendered() {
-  // add your statement here
-});
-
-Template.Alumni_Ice_Column.onDestroyed(function alumniIceColumnOnDestroyed() {
-  // add your statement here
-});
-

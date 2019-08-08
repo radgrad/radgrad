@@ -9,8 +9,8 @@ Template.Alumni_Ice_Widget.helpers({
   earnedICE() {
     if (getUserIdFromRoute()) {
       const profile = Users.getProfile(getUserIdFromRoute());
-      const courseInstances = CourseInstances.find({ studentID: profile.userID, verified: true }).fetch();
-      const oppInstances = OpportunityInstances.find({ studentID: profile.userID, verified: true }).fetch();
+      const courseInstances = CourseInstances.findNonRetired({ studentID: profile.userID, verified: true });
+      const oppInstances = OpportunityInstances.findNonRetired({ studentID: profile.userID, verified: true });
       const earnedInstances = courseInstances.concat(oppInstances);
       // console.log(earnedInstances);
       return getEarnedICE(earnedInstances);

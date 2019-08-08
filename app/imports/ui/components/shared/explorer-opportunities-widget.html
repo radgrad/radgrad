@@ -63,25 +63,46 @@
         </div>
       </div>
       <div class="ui stackable grid">
+        {{#if hasTeaser item}}
+          <div style="margin-top: 0" class="eleven wide column">
+            {{#each descriptionPair in descriptionPairs}}
+              {{#if isLabel descriptionPair.label 'Description'}}
+                <b>{{descriptionPair.label}}:</b>
+                {{#if descriptionPair.value}} {{{markdownify descriptionPair.value}}}
+                {{else}}
+                  N/A
+                {{/if}}
+              {{/if}}
+            {{/each}}
+          </div>
+          <div style="margin-top: 0" class="five wide column">
+            {{#each descriptionPair in descriptionPairs}}
+              {{#if isLabel descriptionPair.label 'Teaser' }}
+                {{#if descriptionPair.value}}
+                  {{> Student_Explorer_Opportunities_Widget_Teaser item=item}}
+                {{else}}
+                  <p></p>
+                {{/if}}
+              {{/if}}
+            {{/each}}
+          </div>
+        {{else}}
+          <div style="margin-top: 0" class="column">
+            {{#each descriptionPair in descriptionPairs}}
+              {{#if isLabel descriptionPair.label 'Description'}}
+                <b>{{descriptionPair.label}}:</b>
+                {{#if descriptionPair.value}} {{{markdownify descriptionPair.value}}}
+                {{else}}
+                  N/A
+                {{/if}}
+              {{/if}}
+            {{/each}}
+          </div>
+        {{/if}}
+      </div>
+      <div class="ui stackable grid">
         <div style="margin-top: 0" class="column">
           {{#each descriptionPair in descriptionPairs}}
-            {{#if isLabel descriptionPair.label 'Description'}}
-              <b>{{descriptionPair.label}}:</b>
-              {{#if descriptionPair.value}} {{{markdownify descriptionPair.value}}}
-              {{else}}
-                N/A
-              {{/if}}
-            {{/if}}
-
-            {{#if isLabel descriptionPair.label 'Teaser' }}
-              <b>{{descriptionPair.label}}:</b>
-              {{#if descriptionPair.value}}
-                {{> Student_Explorer_Opportunities_Widget_Teaser item=item}}
-              {{else}}
-                <p>N/A</p>
-              {{/if}}
-            {{/if}}
-
             {{#if isLabel descriptionPair.label 'Interests'}}
               <div style="margin-top: 5px">
                 {{> Interest_List item=item size='mini'}}
@@ -91,6 +112,20 @@
         </div>
       </div>
 
+      <div class="ui stackable grid">
+        <div class="column">
+          <b>Status:</b>
+          {{#if opportunitySemesters item}}
+            {{opportunitySemesters item}}
+          {{else}}
+            Not in Plan
+            {{> Future_Participation item=item type='opportunities'}}
+          {{/if}}
+          {{#if futureInstance item}}
+            {{> Future_Participation type='opportunities' item=item}}
+          {{/if}}
+        </div>
+      </div>
     </div>
   </div>
 

@@ -44,7 +44,7 @@ Template.Explorer_Courses_Widget.helpers({
       }
       return `In plan ${Semesters.toString(ci.semesterID, false)}`;
     });
-    return semesterNames.join(',');
+    return semesterNames.join(', ');
   },
   futureInstance(course) {
     let ret = false;

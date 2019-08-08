@@ -137,8 +137,7 @@ Template.Academic_Plan_Semester.helpers({
     const planCourses = Template.instance().data.plan.courseList;
     const studentID = getUserIdFromRoute();
     if (Roles.userIsInRole(studentID, [ROLE.STUDENT])) {
-      const courses = CourseInstances.find({ studentID })
-        .fetch();
+      const courses = CourseInstances.findNonRetired({ studentID });
       const courseSlugs = takenSlugs(courses);
       inPlan = checkIfPlanSlugIsSatisfied(courseSlugs, planCourses, planSlug);
     } else {
@@ -169,7 +168,7 @@ Template.Academic_Plan_Semester.helpers({
       const planCourses = Template.instance().data.plan.courseList;
       const studentID = getUserIdFromRoute();
       if (Roles.userIsInRole(studentID, [ROLE.STUDENT])) {
-        const courses = CourseInstances.find({ studentID }).fetch();
+        const courses = CourseInstances.findNonRetired({ studentID });
         const courseSlugs = takenSlugs(courses);
         return checkIfPlanSlugIsSatisfied(courseSlugs, planCourses, course);
       }
@@ -191,8 +190,7 @@ Template.Academic_Plan_Semester.events({
       const courseID = Slugs.getEntityID(slug, 'Course');
       const course = Courses.findDoc(courseID);
       const instance = Template.instance();
-      const ci = CourseInstances.find({ courseID, studentID: getUserIdFromRoute() })
-        .fetch();
+      const ci = CourseInstances.findNonRetired({ courseID, studentID: getUserIdFromRoute() });
       if (ci.length > 0) {
         instance.state.set('detailCourse', null);
         instance.state.set('detailCourseInstance', ci[0]);

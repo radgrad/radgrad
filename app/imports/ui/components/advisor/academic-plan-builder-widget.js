@@ -47,7 +47,7 @@ Template.Academic_Plan_Builder_Widget.helpers({
     return '';
   },
   courses() {
-    const choices = PlanChoices.find().fetch();
+    const choices = PlanChoices.findNonRetired();
     return _.map(choices, (c) => c.choice);
   },
   desiredDegrees() {

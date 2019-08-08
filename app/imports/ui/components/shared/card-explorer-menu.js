@@ -183,7 +183,6 @@ Template.Card_Explorer_Menu.helpers({
     return type === value;
   },
   itemName(item) {
-    console.log(item);
     const countStr = `x${item.count}`;
     if (item.count > 1) {
       return `${item.item.name} ${countStr}`;
