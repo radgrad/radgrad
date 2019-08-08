@@ -119,7 +119,12 @@ Template.Landing_Explorer_Menu.helpers({
     return _.some(page);
   },
   slugName(item) {
-    return Slugs.findDoc(item.slugID).name;
+    try {
+      return Slugs.findDoc(item.slugID).name;
+    } catch (e) {
+      // console.log(item);
+      return '';
+    }
   },
 });
 

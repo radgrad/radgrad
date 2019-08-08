@@ -46,26 +46,42 @@
         </div>
       </div>
       <div class="ui stackable grid">
-        <div style="margin-top: 0" class="column">
-          {{#each descriptionPair in descriptionPairs}}
-            {{#if isLabel descriptionPair.label 'Description'}}
-              <b>{{descriptionPair.label}}:</b>
-              {{#if descriptionPair.value}} {{{markdownify descriptionPair.value}}}
-              {{else}}
-                N/A
+        {{#if hasTeaser item}}
+          <div style="margin-top: 0" class="eleven wide column">
+            {{#each descriptionPair in descriptionPairs}}
+              {{#if isLabel descriptionPair.label 'Description'}}
+                <b>{{descriptionPair.label}}:</b>
+                {{#if descriptionPair.value}} {{{markdownify descriptionPair.value}}}
+                {{else}}
+                  N/A
+                {{/if}}
               {{/if}}
-            {{/if}}
-
-            {{#if isLabel descriptionPair.label 'Teaser' }}
-              <b>{{descriptionPair.label}}:</b>
-              {{#if descriptionPair.value}}
-                {{> Landing_Explorer_Opportunities_Widget_Teaser item=item}}
-              {{else}}
-                <p>N/A</p>
+            {{/each}}
+          </div>
+          <div style="margin-top: 0" class="five wide column">
+            {{#each descriptionPair in descriptionPairs}}
+              {{#if isLabel descriptionPair.label 'Teaser' }}
+                {{#if descriptionPair.value}}
+                  {{> Landing_Explorer_Opportunities_Widget_Teaser item=item}}
+                {{else}}
+                  <p>N/A</p>
+                {{/if}}
               {{/if}}
-            {{/if}}
-          {{/each}}
-        </div>
+            {{/each}}
+          </div>
+        {{else}}
+          <div style="margin-top: 0" class="column">
+            {{#each descriptionPair in descriptionPairs}}
+              {{#if isLabel descriptionPair.label 'Description'}}
+                <b>{{descriptionPair.label}}:</b>
+                {{#if descriptionPair.value}} {{{markdownify descriptionPair.value}}}
+                {{else}}
+                  N/A
+                {{/if}}
+              {{/if}}
+            {{/each}}
+          </div>
+        {{/if}}
       </div>
       <div class="ui dividing header">Opportunity Interests</div>
       {{> Landing_Interest_List item=item size='small'}}

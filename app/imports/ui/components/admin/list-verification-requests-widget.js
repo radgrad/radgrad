@@ -39,7 +39,7 @@ Template.List_Verification_Requests_Widget.helpers({
     return `${student}: ${opportunityName} - ${semester}`; // eslint-disable-line
   },
   slugName(slugID) {
-    return Slugs.findDoc(slugID).name;
+    return slugID && Slugs.hasSlug(slugID) && Slugs.findDoc(slugID).name;
   },
   descriptionPairs(vr) {
     return [

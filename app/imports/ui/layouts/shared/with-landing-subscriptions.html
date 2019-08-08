@@ -1,0 +1,7 @@
+<template name="With_Landing_Subscriptions">
+  {{#if subsReady}}
+    {{> UI.contentBlock }}
+  {{else}}
+    {{> Loading message="Loading data"}}
+  {{/if}}
+</template>

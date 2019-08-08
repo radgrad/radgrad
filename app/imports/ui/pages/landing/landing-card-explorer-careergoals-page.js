@@ -3,7 +3,7 @@ import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 
 Template.Landing_Card_Explorer_CareerGoals_Page.helpers({
   addedCareerGoals() {
-    return CareerGoals.find({}, { sort: { name: 1 } }).fetch();
+    return CareerGoals.findNonRetired({}, { sort: { name: 1 } });
   },
   nonAddedCareerGoals() {
     return [];

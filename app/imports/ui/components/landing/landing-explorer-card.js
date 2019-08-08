@@ -29,7 +29,10 @@ Template.Landing_Explorer_Card.helpers({
     return description;
   },
   itemSlug(item) {
-    return Slugs.findDoc(item.slugID).name;
+    if (Slugs.isDefined(item.slugID)) {
+      return Slugs.findDoc(item.slugID).name;
+    }
+    return '';
   },
   opportunityRouteName() {
     return RouteNames.landingExplorerOpportunitiesPageRouteName;

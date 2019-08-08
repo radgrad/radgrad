@@ -46,6 +46,7 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 const globalSubs = new SubsManager({ cacheLimit: 31, expireIn: 30 });
 
 Template.With_Global_Subscriptions.onCreated(function onCreated() {
+  console.trace('with global subs');
   const self = this;
   self.ready = new ReactiveVar();
   self.autorun(function () {

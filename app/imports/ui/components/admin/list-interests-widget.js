@@ -42,7 +42,10 @@ Template.List_Interests_Widget.helpers({
     return (numReferences(interest) > 0) ? 'disabled' : '';
   },
   slugName(slugID) {
-    return Slugs.findDoc(slugID).name;
+    if (Slugs.isDefined(slugID)) {
+      return Slugs.findDoc(slugID).name;
+    }
+    return '';
   },
   descriptionPairs(interest) {
     return [

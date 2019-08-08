@@ -28,7 +28,10 @@ Template.List_Desired_Degrees_Widget.helpers({
     return `${desiredDegree.name}: ${desiredDegree.shortName}`;
   },
   slugName(slugID) {
-    return Slugs.findDoc(slugID).name;
+    if (Slugs.isDefined(slugID)) {
+      return Slugs.findDoc(slugID).name;
+    }
+    return '';
   },
   deleteDisabled(desiredDegree) {
     return (numReferences(desiredDegree) > 0) ? 'disabled' : '';
