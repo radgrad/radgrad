@@ -12,8 +12,7 @@ import { Slugs } from '../../../api/slug/SlugCollection';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 import {
-  plannerKeys,
-  selectFavoriteOpportunitiesTab,
+  plannerKeys, resetDetails,
   showCourseDetails,
   showOpportunityDetails,
 } from './academic-plan';
@@ -287,7 +286,7 @@ Template.Semester_List_2.events({
       }
     });
     const template = Template.instance();
-    selectFavoriteOpportunitiesTab(template.state); // TODO: CAM is this the right behavior? or go to academic plan tab?
+    resetDetails(template.state);
   },
   'click .jsDelOpp': function clickJsDelOpp(event) {
     event.preventDefault();
@@ -301,7 +300,7 @@ Template.Semester_List_2.events({
       }
     });
     const template = Template.instance();
-    selectFavoriteOpportunitiesTab(template.state); // TODO: CAM I think this is the right behavior.
+    resetDetails(template.state);
   },
 });
 

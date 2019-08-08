@@ -51,6 +51,12 @@ export function selectDetailsTab(state) {
   state.set(plannerKeys.selectedDetails, true);
 }
 
+export function resetDetails(state) {
+  state.set(plannerKeys.detailsCourse, null);
+  state.set(plannerKeys.detailsOpportunity, null);
+  state.set(plannerKeys.detailsICE, null);
+}
+
 export function showCourseDetails(state, courseInstance) {
   // console.log('showCourseDetails', courseInstance);
   state.set(plannerKeys.detailsCourse, courseInstance);
