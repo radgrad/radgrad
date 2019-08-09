@@ -15,7 +15,7 @@ const updateSchema = new SimpleSchema({
   description: String,
   duration: { type: String, optional: true },
   interests: { type: Array, minCount: 1 }, 'interests.$': String,
-  opportunity: String,
+  targetSlug: String,
   retired: Boolean,
 }, { tracker: Tracker });
 
@@ -44,6 +44,13 @@ Template.Update_Teaser_Widget.helpers({
   },
   opportunities() {
     return Opportunities.find().fetch();
+  },
+  targetSlugID() {
+    const teaser = Teasers.findDoc(Template.currentData().updateID.get());
+    return teaser.targetSlugID;
+  },
+  slugs() {
+    return Slugs.findNonRetired({}, { sort: { name: 1 } });
   },
   falseValueRetired() {
     const plan = Teasers.findDoc(Template.currentData()

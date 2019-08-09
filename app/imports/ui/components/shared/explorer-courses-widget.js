@@ -10,6 +10,7 @@ import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js
 import { getUserIdFromRoute } from './get-user-id-from-route';
 import { isInRole, isLabel } from '../../utilities/template-helpers';
 import { isSingleChoice } from '../../../api/degree-plan/PlanChoiceUtilities';
+import { Teasers } from '../../../api/teaser/TeaserCollection';
 
 Template.Explorer_Courses_Widget.helpers({
   choices(prerequisite) {
@@ -80,6 +81,10 @@ Template.Explorer_Courses_Widget.helpers({
       default:
         return 'Not in Plan';
     }
+  },
+  hasTeaser(item) {
+    const teaser = Teasers.find({ targetSlugID: item.slugID }).fetch();
+    return teaser.length > 0;
   },
   isInRole,
   isLabel,

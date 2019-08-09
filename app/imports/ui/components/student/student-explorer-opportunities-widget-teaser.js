@@ -5,8 +5,8 @@ import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Teasers } from '../../../api/teaser/TeaserCollection.js';
 
 function teaserUrlHelper(opportunitySlug) {
-  const opportunityID = Slugs.getEntityID(opportunitySlug, 'Opportunity');
-  const oppTeaser = Teasers.find({ opportunityID }).fetch();
+  const targetSlugID = Slugs.getEntityID(opportunitySlug, 'Opportunity');
+  const oppTeaser = Teasers.find({ targetSlugID }).fetch();
   return oppTeaser && oppTeaser[0] && oppTeaser[0].url;
 }
 

@@ -4,7 +4,6 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Teasers } from '../../../api/teaser/TeaserCollection';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection';
-import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { makeLink } from './datamodel-utilities';
 import * as FormUtils from '../form-fields/form-field-utilities.js';
@@ -15,8 +14,8 @@ function numReferences() {
 }
 
 function opportunity(teaser) {
-  if (teaser.opportunityID) {
-    return Opportunities.findDoc(teaser.opportunityID).name;
+  if (teaser.targetSlugID) {
+    return Slugs.findDoc(teaser.targetSlugID).name;
   }
   return '';
 }
@@ -49,7 +48,7 @@ Template.List_Teasers_Widget.helpers({
       { label: 'Duration', value: teaser.duration },
       { label: 'Interests', value: _.sortBy(Interests.findNames(teaser.interestIDs)) },
       { label: 'URL', value: makeLink(teaser.url) },
-      { label: 'Opportunity', value: opportunity(teaser) },
+      { label: 'Target Slug', value: opportunity(teaser) },
       { label: 'Retired', value: teaser.retired ? 'True' : 'False' },
     ];
   },

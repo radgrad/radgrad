@@ -50,17 +50,38 @@
       </div>
 
       <div style="margin-top: 0" class="ui stackable grid">
+        {{#if hasTeaser item}}
+          <div style="margin-top: 0" class="eleven wide column">
+            {{#each descriptionPair in descriptionPairs}}
+              {{#if isLabel descriptionPair.label 'Description'}}
+                <b>{{descriptionPair.label}}:</b>
+                {{#if descriptionPair.value}} {{{markdownify descriptionPair.value}}}
+                {{else}}
+                  N/A
+                {{/if}}
+              {{/if}}
+            {{/each}}
+          </div>
+          <div style="margin-top: 0" class="five wide column">
+            {{> Teaser_Widget}}
+          </div>
+        {{else}}
+          <div style="margin-top: 0" class="column">
+            {{#each descriptionPair in descriptionPairs}}
+              {{#if isLabel descriptionPair.label 'Description'}}
+                <b>{{descriptionPair.label}}:</b>
+                {{#if descriptionPair.value}} {{{markdownify descriptionPair.value}}}
+                {{else}}
+                  N/A
+                {{/if}}
+              {{/if}}
+            {{/each}}
+          </div>
+        {{/if}}
+      </div>
+      <div style="margin-top: 0" class="ui stackable grid">
         <div class="column">
           {{#each descriptionPair in descriptionPairs}}
-
-            {{#if isLabel descriptionPair.label 'Description'}}
-              <b>{{descriptionPair.label}}:</b>
-              {{#if descriptionPair.value}} {{{markdownify descriptionPair.value}}} <br>
-              {{else}}
-                N/A <br>
-              {{/if}}
-            {{/if}}
-
             {{#if isLabel descriptionPair.label 'Interests'}}
               <div style="margin-top: 5px">
                 {{> Interest_List item=item size='mini'}}

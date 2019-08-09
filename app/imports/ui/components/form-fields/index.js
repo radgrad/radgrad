@@ -80,6 +80,9 @@ import './role-form-field';
 import './routename-form-field.html';
 import './routename-form-field';
 
+import './select-form-field.html';
+import './select-form-field';
+
 import './semesters-form-field.html';
 import './semesters-form-field';
 

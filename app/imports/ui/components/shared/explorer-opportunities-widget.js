@@ -35,7 +35,7 @@ Template.Explorer_Opportunities_Widget.helpers({
     return ret;
   },
   hasTeaser(opportunity) {
-    const teaser = Teasers.find({ opportunityID: opportunity._id }).fetch();
+    const teaser = Teasers.find({ targetSlugID: opportunity.slugID }).fetch();
     return teaser.length > 0;
   },
   isInRole,

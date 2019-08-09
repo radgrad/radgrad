@@ -14,6 +14,7 @@ import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 import { FacultyProfiles } from '../../../api/user/FacultyProfileCollection';
 import { MentorProfiles } from '../../../api/user/MentorProfileCollection';
 import { FavoriteInterests } from '../../../api/favorite/FavoriteInterestCollection';
+import { Teasers } from '../../../api/teaser/TeaserCollection';
 
 Template.Explorer_Interests_Widget.onCreated(function explorerInterestsWidgetOnCreated() {
   // console.log(this.data);
@@ -48,6 +49,10 @@ Template.Explorer_Interests_Widget.helpers({
       default:
         return 'ERROR: More than one table.';
     }
+  },
+  hasTeaser(item) {
+    const teaser = Teasers.find({ targetSlugID: item.slugID }).fetch();
+    return teaser.length > 0;
   },
   isInRole,
   isLabel,

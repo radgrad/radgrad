@@ -76,15 +76,7 @@
             {{/each}}
           </div>
           <div style="margin-top: 0" class="five wide column">
-            {{#each descriptionPair in descriptionPairs}}
-              {{#if isLabel descriptionPair.label 'Teaser' }}
-                {{#if descriptionPair.value}}
-                  {{> Student_Explorer_Opportunities_Widget_Teaser item=item}}
-                {{else}}
-                  <p></p>
-                {{/if}}
-              {{/if}}
-            {{/each}}
+            {{> Teaser_Widget}}
           </div>
         {{else}}
           <div style="margin-top: 0" class="column">

@@ -12,6 +12,7 @@ import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { defineMethod, removeItMethod, updateMethod } from '../../../api/base/BaseCollection.methods';
 import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 import { FavoriteCareerGoals } from '../../../api/favorite/FavoriteCareerGoalCollection';
+import { Teasers } from '../../../api/teaser/TeaserCollection';
 
 Template.Explorer_CareerGoals_Widget.helpers({
   careerGoalName(careerGoalSlugName) {
@@ -21,6 +22,11 @@ Template.Explorer_CareerGoals_Widget.helpers({
   },
   fullName(user) {
     return Users.getFullName(user);
+  },
+  hasTeaser(item) {
+    const teaser = Teasers.find({ targetSlugID: item.slugID }).fetch();
+    console.log(item, teaser);
+    return teaser.length > 0;
   },
   interestsRouteName() {
     return RouteNames.studentExplorerInterestsPageRouteName;

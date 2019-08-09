@@ -108,6 +108,9 @@ import './route-user-name.js';
 import './scoreboard-menu.html';
 import './scoreboard-menu';
 
+import './teaser-widget.html';
+import './teaser-widget';
+
 import '../advisor/student-selector-widget.html';
 import '../advisor/student-selector-widget.js';
 

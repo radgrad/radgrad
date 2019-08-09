@@ -13,7 +13,7 @@ Template.Landing_Explorer_Opportunities_Widget.helpers({
     return semString.replace(/Summer/g, 'Sum').replace(/Spring/g, 'Spr');
   },
   hasTeaser(opportunity) {
-    const teaser = Teasers.findNonRetired({ opportunityID: opportunity._id });
+    const teaser = Teasers.findNonRetired({ targetSlugID: opportunity.slugID });
     return teaser.length > 0;
   },
   isLabel,

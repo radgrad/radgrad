@@ -8,7 +8,8 @@
         </h4>
         {{#if userStatus item}}
           <button value="{{id}}" class="ui green basic right floated mini button deleteItem"
-                  style="margin-bottom: 1rem;"><i class="red heart outline icon"></i><i class="minus icon"></i> REMOVE FROM FAVORITES
+                  style="margin-bottom: 1rem;"><i class="red heart outline icon"></i><i class="minus icon"></i> REMOVE
+            FROM FAVORITES
           </button>
         {{else}}
           <button value="{{id}}" class="ui green basic right floated mini button addItem" style="margin-bottom: 1rem;">
@@ -20,19 +21,34 @@
       <div class="ui divider" style="margin-top: 0;"></div>
 
       <div class="ui stackable grid">
-        <div class="column">
-          {{#each descriptionPair in descriptionPairs}}
-
-            {{#if isLabel descriptionPair.label 'Description'}}
-              <b>{{descriptionPair.label}}:</b>
-              {{#if descriptionPair.value}} {{{markdownify descriptionPair.value}}} <br> <br>
-              {{else}}
-                N/A <br> <br>
+        {{#if hasTeaser item}}
+          <div style="margin-top: 0" class="eleven wide column">
+            {{#each descriptionPair in descriptionPairs}}
+              {{#if isLabel descriptionPair.label 'Description'}}
+                <b>{{descriptionPair.label}}:</b>
+                {{#if descriptionPair.value}} {{{markdownify descriptionPair.value}}}
+                {{else}}
+                  N/A
+                {{/if}}
               {{/if}}
-            {{/if}}
-
-          {{/each}}
-        </div>
+            {{/each}}
+          </div>
+          <div style="margin-top: 0" class="five wide column">
+            {{> Teaser_Widget}}
+          </div>
+        {{else}}
+          <div style="margin-top: 0" class="column">
+            {{#each descriptionPair in descriptionPairs}}
+              {{#if isLabel descriptionPair.label 'Description'}}
+                <b>{{descriptionPair.label}}:</b>
+                {{#if descriptionPair.value}} {{{markdownify descriptionPair.value}}}
+                {{else}}
+                  N/A
+                {{/if}}
+              {{/if}}
+            {{/each}}
+          </div>
+        {{/if}}
       </div>
     </div>
   </div>

@@ -11,7 +11,8 @@
       </div>
 
       <div class="fields">
-        {{> Opportunity_Form_Field opportunities=opportunities selectedOpportunityID=opportunity errorMessage=(fieldError "opportunity") required=true}}
+<!--        {{> Opportunity_Form_Field opportunities=opportunities selectedOpportunityID=opportunity errorMessage=(fieldError "opportunity") required=true}}-->
+        {{> Select_Form_Field label="Target Slug" name="targetSlug" items=slugs selectedItemID=targetSlugID errorMessage=(fieldError "targetSlug") required=true}}
         {{> Input_Form_Field label="URL" name="url" value=teaser.url errorMessage=(fieldError "url") required="true" }}
         {{> Input_Form_Field label="Duration" name="duration" value=teaser.duration errorMessage=(fieldError "duration") }}
       </div>

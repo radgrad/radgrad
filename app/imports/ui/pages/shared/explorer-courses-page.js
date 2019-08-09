@@ -75,10 +75,6 @@ function prerequisites(course) {
   // console.log(complete, incomplete, notInPlan);
   return [complete, incomplete, notInPlan];
 }
-// function teaser(course) {
-//   const teaser = Teasers.find({ opportunityID: course._id }).fetch();
-//   return teaser[0];
-// }
 
 Template.Explorer_Courses_Page.helpers({
   addedCourses() {
