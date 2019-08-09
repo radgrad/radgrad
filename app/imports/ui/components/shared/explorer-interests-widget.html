@@ -22,7 +22,7 @@
 
       <div class="ui stackable grid">
         {{#if hasTeaser item}}
-          <div style="margin-top: 0" class="eleven wide column">
+          <div style="margin-top: 0" class="nine wide column">
             {{#each descriptionPair in descriptionPairs}}
               {{#if isLabel descriptionPair.label 'Description'}}
                 <b>{{descriptionPair.label}}:</b>
@@ -33,7 +33,7 @@
               {{/if}}
             {{/each}}
           </div>
-          <div style="margin-top: 0" class="five wide column">
+          <div style="margin-top: 0" class="seven wide column">
             {{> Teaser_Widget}}
           </div>
         {{else}}
