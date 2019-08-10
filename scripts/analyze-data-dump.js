@@ -137,6 +137,65 @@ const userAnalysis = (username, startString, endString) => {
   return results;
 }
 
+const sessionInformation = (username, startStr, endStr) => {
+  const interactions = getInteractionsPerUserBetween(username, startStr, endStr);
+  let sessions = 0;
+  const sessionLength = [];
+  let lastTimeStamp;
+  let sessionStart;
+  let sessionEnd;
+  _.forEach(interactions, (i) => {
+    if (_.isUndefined(lastTimeStamp)) {
+      // console.log('init');
+      lastTimeStamp = moment(i.timestamp);
+      sessionStart = lastTimeStamp;
+      sessionEnd = sessionStart;
+    } else {
+      // console.log('next');
+      const currentTimestamp = moment(i.timestamp);
+      if (currentTimestamp.diff(lastTimeStamp, 'hours', true) > 1) {
+        sessions++;
+        sessionLength.push(sessionEnd.diff(sessionStart, 'minutes'));
+        sessionStart = currentTimestamp;
+        sessionEnd = currentTimestamp;
+      } else {
+        sessionEnd = currentTimestamp;
+      }
+      lastTimeStamp = currentTimestamp;
+    }
+  });
+  const retVal = {};
+  retVal.sessionCount = sessions;
+  retVal.sessionLength = sessionLength;
+  return retVal;
+}
+
+const pageViewsBetween = (startStr, endStr) => {
+  const pageViews = getInteractionsByTypeBetween('pageView', startStr, endStr);
+  const pageViewsByPage = _.groupBy(pageViews, (p) => p.typeData[0]);
+  return _.mapValues(pageViewsByPage, (value) => value.length);
+}
+
+const coursePageViewsBetween = (startStr, endStr) => {
+  const views = pageViewsBetween(startStr, endStr);
+  return _.pickBy(views, (value, key) => key.includes('courses'));
+}
+
+const opportunityPageViewsBetween = (startStr, endStr) => {
+  const views = pageViewsBetween(startStr, endStr);
+  return _.pickBy(views, (value, key) => key.includes('opportunities'));
+}
+
+const degreePlanPageViewsBetween = (startStr, endStr) => {
+  const views = pageViewsBetween(startStr, endStr);
+  return _.pickBy(views, (value, key) => key.includes('degree'));
+}
+
+const explorerPageViewsBetween = (startStr, endStr) => {
+  const views = pageViewsBetween(startStr, endStr);
+  return _.pickBy(views, (value, key) => key.includes('explorer'));
+}
+
 const initDataDump = () => {
   const argv = process.argv;
   // console.log(argv);
@@ -149,21 +208,20 @@ const initDataDump = () => {
   }
 }
 
+
+
 const analyzeData = () => {
   initDataDump();
   // console.log(getLoginsBetween('2019-01-01', '2019-05-31').length);
   // console.log(getLoginsBetweenWoRadgrad('2019-01-01', '2019-05-31').length);
   // console.log(getUniqLoginsBetween('2019-01-01', '2019-05-31').length);
   // console.log(getUniqLoginsBetweenWoRadgrad('2019-01-01', '2019-05-31').length);
-  loginAnalysis('2018-08-01', '2018-12-31');
-  loginAnalysis('2019-01-01', '2019-05-31');
-  console.log('Name, logins');
-  console.log(userAnalysis('mirabela@hawaii.edu', '2019-01-01', '2019-05-31'));
-  console.log(getInteractionsPerUserBetween('mirabela@hawaii.edu', '2019-01-01', '2019-05-31').length);
-  const pageViews = getInteractionsByTypeBetween('pageView', '2019-01-01', '2019-05-31');
-  const pageViewsByPage = _.groupBy(pageViews, (p) => p.typeData[0]);
-  const pageViewCount = _.mapValues(pageViewsByPage, (value) => value.length);
-  console.log(pageViewCount);
+  // loginAnalysis('2018-08-01', '2018-12-31');
+  // loginAnalysis('2019-01-01', '2019-05-31');
+  // console.log('Name, logins');
+  // console.log(userAnalysis('mirabela@hawaii.edu', '2019-01-01', '2019-05-31'));
+  console.log(sessionInformation('mirabela@hawaii.edu', '2019-01-01', '2019-05-31'));
+  console.log(explorerPageViewsBetween('2019-01-01', '2019-05-31'));
 }
 
 analyzeData();
