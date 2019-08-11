@@ -13,14 +13,29 @@ const getUserProfile = (username) => {
   return _.find(studentProfiles, (p) => p.username === username);
 }
 
+const getRegisteredStudentUsernames = () => {
+  const studentProfiles = getCollectionData('StudentProfileCollection');
+  const students = _.filter(studentProfiles, (p) => p.isAlumni === false);
+  return _.map(students, (s) => s.username);
+}
+
 const getFullName = (username) => {
   const profile = getUserProfile(username);
-  return `${profile.firstName} ${profile.lastName}`;
+  if (profile) {
+    return `${profile.firstName} ${profile.lastName}`;
+  }
+  return '';
 }
 
 const getIceSnapshot = (profile) => {
-  const iceSnapshots = _.find(radgradDump.collections, (c) => c.name === 'IceSnapshotCollection');
+  const iceSnapshots = getCollectionData('IceSnapshotCollection');
   const ice = _.find(iceSnapshots.contents, (i) => i.username === profile.username);
+  return ice;
+}
+
+const getStudentIce = (username) => {
+  const iceSnapshots = getCollectionData('IceSnapshotCollection');
+  const ice = _.find(iceSnapshots, (i) => i.username === username);
   return ice;
 }
 
@@ -38,6 +53,32 @@ const getUserInteractionsBetween = (startStr, endStr) => {
     return lTime.isBetween(start, end, null, '[]');
   });
   return between;
+}
+
+const getActiveStudentsBetween = (startStr, endStr) => {
+  const interactions = getUserInteractionsBetween(startStr, endStr);
+  let users = _.map(interactions, (i) => i.username);
+  users = _.uniq(users);
+  return _.filter(users, (u) => u.username !== 'radgrad@hawaii.edu');
+}
+
+const getActiveStudentNamesBetween = (startStr, endStr) => {
+  const activeStudents = getActiveStudentsBetween(startStr, endStr);
+  // console.log(activeStudents);
+  const names = _.map(activeStudents, (u) => {
+    // console.log(u, getFullName(u));
+    let ice = getStudentIce(u);
+    if (_.isUndefined(ice)) {
+      ice = {};
+      ice.i = 0;
+      ice.c = 0;
+      ice.e = 0;
+    }
+    // console.log(ice);
+    return `${getFullName(u)}: ${getUserLoginsBetween(u,startStr, endStr).length} [${ice.i}, ${ice.c}, ${ice.e}]`;
+  });
+  // console.log(names);
+  return names;
 }
 
 const getInteractionsPerUser = (username) => {
@@ -137,6 +178,39 @@ const userAnalysis = (username, startString, endString) => {
   return results;
 }
 
+const sessionInformationBetween = (startStr, endStr) => {
+  const usernames = getActiveStudentsBetween(startStr, endStr);
+  // console.log(usernames);
+  let sessions = 0;
+  let sessionTime = 0;
+  let lastTimeStamp;
+  let sessionStart;
+  let sessionEnd;
+  let minSessions = 1000;
+  let maxSessions = 0;
+  _.forEach(usernames, (username, index) => {
+    const sessionInfo = sessionInformation(username, startStr, endStr);
+    sessions += sessionInfo.sessionCount;
+    sessionTime += sessionInfo.totalSessionTime;
+    if (minSessions > sessionInfo.sessionCount) {
+      minSessions = sessionInfo.sessionCount;
+    }
+    if (maxSessions < sessionInfo.sessionCount) {
+      maxSessions = sessionInfo.sessionCount;
+    }
+    if (index % 10 === 0) {
+      console.log('working %o', index);
+    }
+  });
+  const retVal = {};
+  retVal.sessionCount = sessions;
+  retVal.minSessions = minSessions;
+  retVal.maxSessions = maxSessions;
+  retVal.totalSessionTime = sessionTime;
+  retVal.averageSessionTime = sessionTime / sessions;
+  return retVal;
+}
+
 const sessionInformation = (username, startStr, endStr) => {
   const interactions = getInteractionsPerUserBetween(username, startStr, endStr);
   let sessions = 0;
@@ -164,9 +238,26 @@ const sessionInformation = (username, startStr, endStr) => {
       lastTimeStamp = currentTimestamp;
     }
   });
+  let totalSessionTime = 0;
+  if (sessionLength.length > 0) {
+    totalSessionTime = sessionLength.reduce((total, num) => total + num);
+    const retVal = {};
+    retVal.sessionCount = sessions;
+    retVal.sessionLength = sessionLength;
+    retVal.shortestSession = Math.min(...sessionLength);
+    retVal.longestSession = Math.max(...sessionLength);
+    retVal.totalSessionTime = totalSessionTime;
+    retVal.averageSession = totalSessionTime / sessions;
+    return retVal;
+  }
+  // console.log(totalSessionTime);
   const retVal = {};
-  retVal.sessionCount = sessions;
-  retVal.sessionLength = sessionLength;
+  retVal.sessionCount = 0;
+  retVal.sessionLength = 0;
+  retVal.shortestSession = 0;
+  retVal.longestSession = 0;
+  retVal.totalSessionTime = 0;
+  retVal.averageSession = 0;
   return retVal;
 }
 
@@ -208,20 +299,27 @@ const initDataDump = () => {
   }
 }
 
-
+const opportunityICE = () => {
+  const opportunities = getCollectionData('OpportunityCollection');
+  const info = _.map(opportunities, (o) => {
+    if (o.retired) {
+      return `${o.name}: [${o.ice.i}, ${o.ice.c}, ${o.ice.e}] Retired`;
+    }
+    return `${o.name}: [${o.ice.i}, ${o.ice.c}, ${o.ice.e}]`;
+  });
+  return info;
+}
 
 const analyzeData = () => {
   initDataDump();
-  // console.log(getLoginsBetween('2019-01-01', '2019-05-31').length);
-  // console.log(getLoginsBetweenWoRadgrad('2019-01-01', '2019-05-31').length);
-  // console.log(getUniqLoginsBetween('2019-01-01', '2019-05-31').length);
-  // console.log(getUniqLoginsBetweenWoRadgrad('2019-01-01', '2019-05-31').length);
-  // loginAnalysis('2018-08-01', '2018-12-31');
+  // console.log('# Registered students: %o', getRegisteredStudentUsernames().length);
+  // console.log('# Active students Spring 19: %o', getActiveStudentsBetween('2019-01-01', '2019-05-31').length);
+  // const names = getActiveStudentNamesBetween('2019-01-01', '2019-05-31');
+  // console.log(names.join(', '));
   // loginAnalysis('2019-01-01', '2019-05-31');
-  // console.log('Name, logins');
-  // console.log(userAnalysis('mirabela@hawaii.edu', '2019-01-01', '2019-05-31'));
-  console.log(sessionInformation('mirabela@hawaii.edu', '2019-01-01', '2019-05-31'));
-  console.log(explorerPageViewsBetween('2019-01-01', '2019-05-31'));
+  // console.log(sessionInformationBetween('2019-01-01', '2019-05-31'));
+  // console.log(pageViewsBetween('2019-01-01', '2019-05-31'));
+  console.log(opportunityICE());
 }
 
 analyzeData();
