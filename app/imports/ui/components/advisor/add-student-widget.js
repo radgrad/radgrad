@@ -72,7 +72,12 @@ Template.Add_Student_Widget.events({
           FormUtils.indicateError(instance, error);
         } else {
           const feedData = { feedType: Feeds.NEW_USER, user: newData.username };
-          defineMethod.call({ collectionName: Feeds.getCollectionName(), definitionData: feedData });
+          defineMethod.call({ collectionName: Feeds.getCollectionName(), definitionData: feedData }, (err) => {
+            if (err) {
+              console.error('Error creating Feed', err);
+              FormUtils.indicateError(instance, err);
+            }
+          });
           FormUtils.indicateSuccess(instance, event);
         }
       });
