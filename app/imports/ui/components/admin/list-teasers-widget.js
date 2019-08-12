@@ -47,7 +47,7 @@ Template.List_Teasers_Widget.helpers({
       { label: 'Author', value: teaser.author },
       { label: 'Duration', value: teaser.duration },
       { label: 'Interests', value: _.sortBy(Interests.findNames(teaser.interestIDs)) },
-      { label: 'URL', value: makeLink(teaser.url) },
+      { label: 'Youtube ID', value: makeLink(teaser.url) },
       { label: 'Target Slug', value: opportunity(teaser) },
       { label: 'Retired', value: teaser.retired ? 'True' : 'False' },
     ];
