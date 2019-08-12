@@ -11,6 +11,9 @@
           {{> Add_Opportunity_Button buttonType='remove' dictionary=dictionary opportunity=opportunity}}
         {{/if}}
       {{/if}}
+    </div>
+    <div class="content">
+      {{> Add_Opportunity_Button buttonType='add' dictionary=dictionary opportunity=opportunity}}
       <p><b>When: </b> {{semester}}</p>
       <p style="text-align: right;">
         <a href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=opportunitySlug}}">
