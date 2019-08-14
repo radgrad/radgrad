@@ -1,24 +1,13 @@
 <template name="Future_Participation">
-  <div class="ui fixed celled table">
-    <thead>
-    <tr>
-      {{#each semester in semesters}}
-        <th>{{semesterName semester}}</th>
-      {{/each}}
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      {{#each semester in semesters}}
-        <td>
-          {{#if highlightString item semester}}
-            <div class="ui {{highlightString item semester}} label ">{{semesterScore item semester}}</div>
-          {{else}}
-            {{semesterScore item semester}}
-          {{/if}}
-        </td>
-      {{/each}}
-    </tr>
-    </tbody>
+  <div class="ui table">
+  </div>
+  <div class="ui equal width padded grid" style="margin: 4px 4px 4px 0px">
+    {{#each semester in semesters}}
+      <div class="{{highlightString item semester}} column">
+        <b>{{semesterName semester}}</b>
+        <br/>
+        {{semesterScore item semester}}
+      </div>
+    {{/each}}
   </div>
 </template>

@@ -1,12 +1,12 @@
 <template name="Favorite_Academic_Plan_Viewer_Widget">
-  {{#if getPlans}}
-    <div class="segment">
+  <div class="segment">
+    {{#if getPlans}}
       {{> Academic_Plan_Form_Field name='plans' plans=getPlans}}
       {{> Academic_Plan_Viewer_Component plan=getPlan degreePlanner=degreePlanner dictionary=dictionary}}
-    </div>
-  {{else}}
-    <p style="margin-bottom: 0px">No academic plans favorited yet.</p>
-    <p><a href="{{pathFor planExplorerRouteName username=routeUserName}}">Update in academic plan
-      explorer</a></p>
-  {{/if}}
+    {{else}}
+      <p style="margin-bottom: 0px">No academic plans favorited yet.</p>
+      <p><a href="{{pathFor planExplorerRouteName username=routeUserName}}">Update in academic plan
+        explorer</a></p>
+    {{/if}}
+  </div>
 </template>

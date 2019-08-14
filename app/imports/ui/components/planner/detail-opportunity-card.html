@@ -15,6 +15,7 @@
     <div class="content">
       {{> Add_Opportunity_Button buttonType='add' dictionary=dictionary opportunity=opportunity}}
       <p><b>When: </b> {{semester}}</p>
+      {{> Future_Participation type='opportunities' item=opportunity}}
       <p style="text-align: right;">
         <a href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=opportunitySlug}}">
           View in Explorer <i class="arrow right icon"></i>
