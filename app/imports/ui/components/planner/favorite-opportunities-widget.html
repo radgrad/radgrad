@@ -1,6 +1,6 @@
 <template name="Favorite_Opportunities_Widget">
   {{#if getOpportunities}}
-    <div class="ui one cards" style="overflow-y: auto; height: 400px">
+    <div class="ui one cards segment" style="overflow-y: auto; height: 400px">
       {{#each opportunity in getOpportunities}}
         {{> Favorite_Opportunity_Card opportunity=opportunity}}
       {{/each}}

@@ -1,21 +1,21 @@
 <template name="Favorite_Tabs">
   <div class="ui segment">
-    <div class="ui top attached tabular stackable menu">
-      <a class="{{#if showOpportunity}}active{{/if}} item jsInspectorTab" data-tab={{opportunityName}}><i class="red heart icon"></i>OPPS</a>
-      <a class="{{#if showPlan}}active{{/if}} item jsInspectorTab" data-tab={{academicPlanName}}><i class="red heart icon"></i>PLAN</a>
-      <a class="{{#if showCourse}}active{{/if}} item jsInspectorTab" data-tab={{coursesName}}><i class="red heart icon"></i>COUR</a>
-      <a class="{{#if showDetails}}active{{/if}} item jsInspectorTab" data-tab={{detailsName}}>DETAILS</a>
+    <div class="ui top attached stackable tabular menu">
+      <a class="{{#if showOpportunity}}active{{/if}} item jsInspectorTab" data-tab={{opportunityName}} style="{padding: 5px;}"><i class="red heart icon"></i>OPPS</a>
+      <a class="{{#if showPlan}}active{{/if}} item jsInspectorTab" data-tab={{academicPlanName}} style="{padding: 5px;}"><i class="red heart icon"></i>PLAN</a>
+      <a class="{{#if showCourse}}active{{/if}} item jsInspectorTab" data-tab={{coursesName}} style="{padding: 5px;}"><i class="red heart icon"></i>COUR</a>
+      <a class="{{#if showDetails}}active{{/if}} item jsInspectorTab" data-tab={{detailsName}} style="{padding: 5px;}">DETAILS</a>
     </div>
-    <div class="ui bottom attached {{#if showOpportunity}}active{{/if}} tab segment" data-tab={{opportunityName}}>
+    <div class="ui bottom attached {{#if showOpportunity}}active{{/if}} tab" data-tab={{opportunityName}}>
       {{> Favorite_Opportunities_Widget dictionary=getDictionary}}
     </div>
-    <div class="ui bottom attached {{#if showPlan}}active{{/if}} tab segment" data-tab={{academicPlanName}}>
+    <div class="ui bottom attached {{#if showPlan}}active{{/if}} tab" data-tab={{academicPlanName}}>
       {{> Favorite_Academic_Plan_Viewer_Widget degreePlanner=true dictionary=getDictionary}}
     </div>
-    <div class="ui bottom attached {{#if showCourse}}active{{/if}} tab segment" data-tab={{coursesName}}>
+    <div class="ui bottom attached {{#if showCourse}}active{{/if}} tab" data-tab={{coursesName}}>
       {{> Favorite_Courses_Widget dictionary=getDictionary}}
     </div>
-    <div class="ui bottom attached {{#if showDetails}}active{{/if}} tab segment" data-tab={{detailsName}}>
+    <div class="ui bottom attached {{#if showDetails}}active{{/if}} tab" data-tab={{detailsName}}>
       {{> Details_Card dictionary=getDictionary}}
     </div>
   </div>

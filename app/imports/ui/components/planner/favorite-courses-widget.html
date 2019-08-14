@@ -1,6 +1,6 @@
 <template name="Favorite_Courses_Widget">
   {{#if getCourses}}
-    <div class="ui one cards" style="overflow-y: auto; height: 400px">
+    <div class="ui one cards segment" style="overflow-y: auto; height: 400px">
       {{#each course in getCourses}}
         {{> Favorite_Course_Card course=course}}
       {{/each}}
