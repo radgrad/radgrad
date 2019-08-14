@@ -29,7 +29,7 @@ Template.Favorite_Academic_Plan_Viewer_Widget.events({
   'change [name=academicPlan]': function changePlan(event) {
     event.preventDefault();
     const plan = AcademicPlans.findDoc($(event.target).val());
-    console.log(plan);
+    // console.log(plan);
     Template.instance().plan.set(plan);
   },
 });
