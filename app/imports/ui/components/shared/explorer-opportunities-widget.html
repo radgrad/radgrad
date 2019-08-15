@@ -15,57 +15,32 @@
         {{/if}}
       </div>
       <div class="ui divider" style="margin-top: 0;"></div>
-
-      <div class="ui stackable two column grid">
-        <div class="five wide column">
-          {{#each descriptionPair in descriptionPairs}}
-
-            {{#if isLabel descriptionPair.label 'Opportunity Type'}}
-              <b>{{descriptionPair.label}}:</b>
-              {{#if descriptionPair.value}} {{descriptionPair.value}} <br>
-              {{else}}
-                N/A <br>
-              {{/if}}
-            {{/if}}
-
-            {{#if isLabel descriptionPair.label 'Sponsor'}}
-              <b>{{descriptionPair.label}}:</b>
-              {{#if descriptionPair.value}} <span style="word-wrap: break-word;">{{descriptionPair.value}}</span> <br>
-              {{else}}
-                N/A <br>
-              {{/if}}
-            {{/if}}
-
-          {{/each}}
-        </div>
-
-        <div class="eleven wide column">
-          {{#each descriptionPair in descriptionPairs}}
-
-            {{#if isLabel descriptionPair.label 'Semesters'}}
-              <b>{{descriptionPair.label}}:</b>
-              {{#if descriptionPair.value}}
-                <span style="word-wrap: break-word;">{{replaceSemString descriptionPair.value}}</span> <br>
-              {{else}}
-                N/A <br>
-              {{/if}}
-            {{/if}}
-
-            {{#if isLabel descriptionPair.label 'Event Date'}}
-              <b>{{descriptionPair.label}}:</b>
-              {{#if descriptionPair.value}} <span style="word-wrap: break-word;">{{descriptionPair.value}}</span> <br>
-              {{else}}
-                N/A <br>
-              {{/if}}
-            {{/if}}
-
-          {{/each}}
-        </div>
-      </div>
-      <div class="ui stackable grid">
-        {{#if hasTeaser item}}
-          <div style="margin-top: 0" class="nine wide column">
+      {{#if hasTeaser item}}
+        <div class="ui stackable two column grid">
+          <div class="nine wide column">
             {{#each descriptionPair in descriptionPairs}}
+              {{#if isLabel descriptionPair.label 'Opportunity Type'}}
+                <b>{{descriptionPair.label}}:</b>
+                {{#if descriptionPair.value}} {{descriptionPair.value}} <br>
+                {{else}}
+                  N/A <br>
+                {{/if}}
+              {{/if}}
+              {{#if isLabel descriptionPair.label 'Sponsor'}}
+                <b>{{descriptionPair.label}}:</b>
+                {{#if descriptionPair.value}} <span style="word-wrap: break-word;">{{descriptionPair.value}}</span> <br>
+                {{else}}
+                  N/A <br>
+                {{/if}}
+              {{/if}}
+              {{#if isLabel descriptionPair.label 'Semesters'}}
+                <b>{{descriptionPair.label}}:</b>
+                {{#if descriptionPair.value}}
+                  <span style="word-wrap: break-word;">{{replaceSemString descriptionPair.value}}</span> <br>
+                {{else}}
+                  N/A <br>
+                {{/if}}
+              {{/if}}
               {{#if isLabel descriptionPair.label 'Description'}}
                 <b>{{descriptionPair.label}}:</b>
                 {{#if descriptionPair.value}} {{{markdownify descriptionPair.value}}}
@@ -75,49 +50,139 @@
               {{/if}}
             {{/each}}
           </div>
-          <div style="margin-top: 0" class="seven wide column">
+          <div class="seven wide column">
+            {{#each descriptionPair in descriptionPairs}}
+              {{#if isLabel descriptionPair.label 'Event Date'}}
+                <b>{{descriptionPair.label}}:</b>
+                {{#if descriptionPair.value}} <span style="word-wrap: break-word;">{{descriptionPair.value}}</span> <br>
+                {{else}}
+                  N/A <br>
+                {{/if}}
+              {{/if}}
+            {{/each}}
             {{> Teaser_Widget}}
+            {{#each descriptionPair in descriptionPairs}}
+              {{#if isLabel descriptionPair.label 'Interests'}}
+                <div style="margin-top: 5px">
+                  {{> Interest_List item=item size='mini'}}
+                </div>
+              {{/if}}
+            {{/each}}
+            <b>Status:</b>
+            {{#if opportunitySemesters item}}
+              {{opportunitySemesters item}}
+            {{else}}
+              Not in Plan
+              {{> Future_Participation item=item type='opportunities'}}
+            {{/if}}
+            {{#if futureInstance item}}
+              {{> Future_Participation type='opportunities' item=item}}
+            {{/if}}
           </div>
-        {{else}}
+        </div>
+      {{else}}
+        <div class="ui stackable two column grid">
+          <div class="five wide column">
+            {{#each descriptionPair in descriptionPairs}}
+
+              {{#if isLabel descriptionPair.label 'Opportunity Type'}}
+                <b>{{descriptionPair.label}}:</b>
+                {{#if descriptionPair.value}} {{descriptionPair.value}} <br>
+                {{else}}
+                  N/A <br>
+                {{/if}}
+              {{/if}}
+
+              {{#if isLabel descriptionPair.label 'Sponsor'}}
+                <b>{{descriptionPair.label}}:</b>
+                {{#if descriptionPair.value}} <span style="word-wrap: break-word;">{{descriptionPair.value}}</span> <br>
+                {{else}}
+                  N/A <br>
+                {{/if}}
+              {{/if}}
+
+            {{/each}}
+          </div>
+
+          <div class="eleven wide column">
+            {{#each descriptionPair in descriptionPairs}}
+
+              {{#if isLabel descriptionPair.label 'Semesters'}}
+                <b>{{descriptionPair.label}}:</b>
+                {{#if descriptionPair.value}}
+                  <span style="word-wrap: break-word;">{{replaceSemString descriptionPair.value}}</span> <br>
+                {{else}}
+                  N/A <br>
+                {{/if}}
+              {{/if}}
+
+              {{#if isLabel descriptionPair.label 'Event Date'}}
+                <b>{{descriptionPair.label}}:</b>
+                {{#if descriptionPair.value}} <span style="word-wrap: break-word;">{{descriptionPair.value}}</span> <br>
+                {{else}}
+                  N/A <br>
+                {{/if}}
+              {{/if}}
+
+            {{/each}}
+          </div>
+        </div>
+        <div class="ui stackable grid">
+          {{#if hasTeaser item}}
+            <div style="margin-top: 0" class="nine wide column">
+              {{#each descriptionPair in descriptionPairs}}
+                {{#if isLabel descriptionPair.label 'Description'}}
+                  <b>{{descriptionPair.label}}:</b>
+                  {{#if descriptionPair.value}} {{{markdownify descriptionPair.value}}}
+                  {{else}}
+                    N/A
+                  {{/if}}
+                {{/if}}
+              {{/each}}
+            </div>
+            <div style="margin-top: 0" class="seven wide column">
+              {{> Teaser_Widget}}
+            </div>
+          {{else}}
+            <div style="margin-top: 0" class="column">
+              {{#each descriptionPair in descriptionPairs}}
+                {{#if isLabel descriptionPair.label 'Description'}}
+                  <b>{{descriptionPair.label}}:</b>
+                  {{#if descriptionPair.value}} {{{markdownify descriptionPair.value}}}
+                  {{else}}
+                    N/A
+                  {{/if}}
+                {{/if}}
+              {{/each}}
+            </div>
+          {{/if}}
+        </div>
+        <div class="ui stackable grid">
           <div style="margin-top: 0" class="column">
             {{#each descriptionPair in descriptionPairs}}
-              {{#if isLabel descriptionPair.label 'Description'}}
-                <b>{{descriptionPair.label}}:</b>
-                {{#if descriptionPair.value}} {{{markdownify descriptionPair.value}}}
-                {{else}}
-                  N/A
-                {{/if}}
+              {{#if isLabel descriptionPair.label 'Interests'}}
+                <div style="margin-top: 5px">
+                  {{> Interest_List item=item size='mini'}}
+                </div>
               {{/if}}
             {{/each}}
           </div>
-        {{/if}}
-      </div>
-      <div class="ui stackable grid">
-        <div style="margin-top: 0" class="column">
-          {{#each descriptionPair in descriptionPairs}}
-            {{#if isLabel descriptionPair.label 'Interests'}}
-              <div style="margin-top: 5px">
-                {{> Interest_List item=item size='mini'}}
-              </div>
+        </div>
+        <div class="ui stackable grid">
+          <div class="column">
+            <b>Status:</b>
+            {{#if opportunitySemesters item}}
+              {{opportunitySemesters item}}
+            {{else}}
+              Not in Plan
+              {{> Future_Participation item=item type='opportunities'}}
             {{/if}}
-          {{/each}}
+            {{#if futureInstance item}}
+              {{> Future_Participation type='opportunities' item=item}}
+            {{/if}}
+          </div>
         </div>
-      </div>
-
-      <div class="ui stackable grid">
-        <div class="column">
-          <b>Status:</b>
-          {{#if opportunitySemesters item}}
-            {{opportunitySemesters item}}
-          {{else}}
-            Not in Plan
-            {{> Future_Participation item=item type='opportunities'}}
-          {{/if}}
-          {{#if futureInstance item}}
-            {{> Future_Participation type='opportunities' item=item}}
-          {{/if}}
-        </div>
-      </div>
+      {{/if}}
     </div>
   </div>
 

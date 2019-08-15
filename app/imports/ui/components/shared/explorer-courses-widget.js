@@ -72,7 +72,6 @@ Template.Explorer_Courses_Widget.helpers({
     }
   },
   getStatusTooltip(index) {
-    console.log('getStatusTooltip', index);
     switch (index) {
       case 0:
         return 'Completed';

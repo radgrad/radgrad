@@ -25,7 +25,6 @@ Template.Explorer_CareerGoals_Widget.helpers({
   },
   hasTeaser(item) {
     const teaser = Teasers.find({ targetSlugID: item.slugID }).fetch();
-    console.log(item, teaser);
     return teaser.length > 0;
   },
   interestsRouteName() {

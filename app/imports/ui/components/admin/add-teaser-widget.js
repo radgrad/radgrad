@@ -42,6 +42,8 @@ Template.Add_Teaser_Widget.events({
     instance.context.reset();
     addSchema.clean(newData, { mutate: true });
     instance.context.validate(newData);
+    // Need to clean the targetSlug. It includes the type.
+    newData.targetSlug = newData.targetSlug.split(' ')[0];
     if (instance.context.isValid()) {
       defineMethod.call({ collectionName: 'TeaserCollection', definitionData: newData }, (error) => {
         if (error) {

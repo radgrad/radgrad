@@ -30,6 +30,11 @@
                   N/A
                 {{/if}}
               {{/if}}
+              {{#if isLabel descriptionPair.label 'Interests'}}
+                <div style="margin-top: 5px">
+                  {{> Interest_List item=item size='mini'}}
+                </div>
+              {{/if}}
             {{/each}}
           </div>
           <div style="margin-top: 0" class="seven wide column">
@@ -45,25 +50,14 @@
                   N/A
                 {{/if}}
               {{/if}}
+              {{#if isLabel descriptionPair.label 'Interests'}}
+                <div style="margin-top: 5px">
+                  {{> Interest_List item=item size='mini'}}
+                </div>
+              {{/if}}
             {{/each}}
           </div>
         {{/if}}
-      </div>
-      <div style="margin-top: 0" class="ui stackable grid">
-        <div class="column">
-          {{#each descriptionPair in descriptionPairs}}
-            {{#if isLabel descriptionPair.label 'Interests'}}
-              <div style="margin-top: 5px">
-                {{> Interest_List item=item size='mini'}}
-                  <!--{{#each interest in descriptionPair.value}}-->
-                <!--<a class="ui right aligned mini label" href="{{pathFor interestsRouteName username=routeUserName
-                                                                           interest = (interestSlugName interest)}}"><i class="fitted star icon"></i>{{interest}}</a>-->
-                  <!--{{/each}}-->
-              </div>
-            {{/if}}
-
-          {{/each}}
-        </div>
       </div>
     </div>
 

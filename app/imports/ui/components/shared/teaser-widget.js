@@ -11,7 +11,7 @@ function getTeaserURL() {
   const targetSlug = path.substring(lastIndex);
   const targetSlugID = Slugs.findDoc({ name: targetSlug })._id;
   const teaser = Teasers.findNonRetired({ targetSlugID });
-  console.log(targetSlug, teaser);
+  // console.log(targetSlug, teaser);
   return teaser && teaser[0] && teaser[0].url;
 }
 Template.Teaser_Widget.onCreated(function teaserWidgetOnCreated() {
