@@ -11,8 +11,16 @@ import { getUserIdFromRoute } from './get-user-id-from-route';
 import PreferredChoice from '../../../api/degree-plan/PreferredChoice';
 import { FavoriteOpportunities } from '../../../api/favorite/FavoriteOpportunityCollection';
 
+export const sortOrderKeys = {
+  match: 'match',
+  i: 'innovation',
+  e: 'experience',
+  alpha: 'alphabetical',
+};
+
 Template.Card_Explorer_Opportunities_Widget.onCreated(function studentCardExplorerOppWidgetOnCreated() {
   this.hidden = new ReactiveVar(true);
+  this.sortOrder = new ReactiveVar(sortOrderKeys.match);
 });
 
 const availableOpps = () => {
@@ -109,7 +117,23 @@ Template.Card_Explorer_Opportunities_Widget.helpers({
     } else {
       visibleOpportunities = opportunities;
     }
+    switch (Template.instance().sortOrder.get()) {
+      case sortOrderKeys.i:
+        visibleOpportunities = _.sortBy(visibleOpportunities, (o) => o.ice.i).reverse();
+        break;
+      case sortOrderKeys.e:
+        visibleOpportunities = _.sortBy(visibleOpportunities, (o) => o.ice.e).reverse();
+        break;
+      case sortOrderKeys.alpha:
+        visibleOpportunities = _.sortBy(visibleOpportunities, (o) => o.name);
+        break;
+      default:
+        // don't do anything already doing match.
+    }
     return visibleOpportunities;
+  },
+  sortOrder() {
+    return Template.instance().sortOrder;
   },
   typeCourse() {
     return this.type === 'courses';

@@ -92,6 +92,9 @@ import './observe-interactions';
 import './opportunity-scoreboard-widget.html';
 import './opportunity-scoreboard-widget';
 
+import './opportunity-sort-order-widget.html';
+import './opportunity-sort-order-widget';
+
 import './plan-card.html';
 import './plan-card';
 

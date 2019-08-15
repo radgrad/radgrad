@@ -1,9 +1,9 @@
 <template name="Card_Explorer_Opportunities_Widget">
   <div class="ui padded segment">
-    <div class="ui dividing header">
-      <h4><span
-          style="text-transform: uppercase;">OPPORTUNITIES</span> {{> Widget_Header_Number inputValue = itemCount}}</h4>
-    </div>
+      <h4 class="ui dividing header"><span
+          style="text-transform: uppercase;">OPPORTUNITIES</span> {{> Widget_Header_Number inputValue = itemCount}}
+      </h4>
+      {{> Opportunity_Sort_Order_Widget sortOrder=sortOrder}}
     {{#if hiddenExists}}
       {{#if hidden}}
         <div class="ui basic green mini button showHidden"><i class="chevron up icon"></i> HIDDEN <span

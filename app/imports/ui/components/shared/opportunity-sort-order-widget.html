@@ -1,0 +1,31 @@
+<template name="Opportunity_Sort_Order_Widget">
+  <div class="ui form">
+    <div class="inline fields">
+      <label for="sortOrder">Sort By:</label>
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input type="radio" name="sortOrder" checked="{{isMatch}}" tabindex="0" class="hidden" value="{{match}}">
+          <label>Interest Match</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input type="radio" name="sortOrder" checked="{{isInnovation}}" tabindex="0" class="hidden" value="{{i}}">
+          <label>Innovation</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input type="radio" name="sortOrder" checked="{{isExperience}}" tabindex="0" class="hidden" value="{{e}}">
+          <label>Experience</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input type="radio" name="sortOrder" checked="{{isAlpha}}" tabindex="0" class="hidden" value="{{alpha}}">
+          <label>Alphabetical</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
