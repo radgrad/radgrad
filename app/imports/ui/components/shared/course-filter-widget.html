@@ -1,0 +1,25 @@
+<template name="Course_Filter_Widget">
+  <div class="ui form">
+    <div class="inline fields">
+      <label for="courseFilter">Filter Courses:</label>
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input type="radio" name="courseFilter" checked="{{isAll}}" tabindex="0" class="hidden" value="{{all}}">
+          <label>All</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input type="radio" name="courseFilter" checked="{{is300}}" tabindex="0" class="hidden" value="{{threeHundredPlus}}">
+          <label>300+</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input type="radio" name="courseFilter" checked="{{is400}}" tabindex="0" class="hidden" value="{{fourHundredPlus}}">
+          <label>400+</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

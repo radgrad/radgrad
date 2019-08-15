@@ -4,6 +4,7 @@
       <h4><span
           style="text-transform: uppercase;">COURSES</span> {{> Widget_Header_Number inputValue = itemCount}}</h4>
     </div>
+    {{> Course_Filter_Widget filter=courseFilter}}
     {{#if hiddenExists}}
       {{#if hidden}}
         <div class="ui basic green mini button showHidden"><i class="chevron up icon"></i> HIDDEN <span

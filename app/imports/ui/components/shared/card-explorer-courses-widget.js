@@ -13,8 +13,15 @@ import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { FavoriteCourses } from '../../../api/favorite/FavoriteCourseCollection';
 
+export const courseFilterKeys = {
+  none: 'none',
+  threeHundredPLus: '300+',
+  fourHundredPlus: '400+',
+};
+
 Template.Card_Explorer_Courses_Widget.onCreated(function cardExplorerCoursesWidgetOnCreated() {
   this.hidden = new ReactiveVar(true);
+  this.filter = new ReactiveVar(courseFilterKeys.none);
 });
 
 const availableCourses = () => {
@@ -80,7 +87,27 @@ Template.Card_Explorer_Courses_Widget.helpers({
     } else {
       visibleCourses = courses;
     }
+    switch (Template.instance().filter.get()) {
+      case courseFilterKeys.threeHundredPLus:
+        visibleCourses = _.filter(visibleCourses, (c) => {
+          const num = parseInt(c.number.split(' ')[1], 10);
+          return num >= 300;
+        });
+        break;
+      case courseFilterKeys.fourHundredPlus:
+        visibleCourses = _.filter(visibleCourses, (c) => {
+          const num = parseInt(c.number.split(' ')[1], 10);
+          return num >= 400;
+        });
+        break;
+      default:
+        // do nothing.
+
+    }
     return visibleCourses;
+  },
+  courseFilter() {
+    return Template.instance().filter;
   },
   hidden() {
     return Template.instance()
@@ -97,7 +124,7 @@ Template.Card_Explorer_Courses_Widget.helpers({
     return false;
   },
   itemCount() {
-    return hiddenCoursesHelper().length;
+    return Template.instance().view.template.__helpers[' courses']().length;
   },
   typeCourse() {
     return true;

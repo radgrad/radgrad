@@ -33,6 +33,9 @@ import './card-explorer-plans-widget';
 import './card-explorer-users-widget.html';
 import './card-explorer-users-widget';
 
+import './course-filter-widget.html';
+import './course-filter-widget';
+
 import './course-scoreboard-widget.html';
 import './course-scoreboard-widget';
 
