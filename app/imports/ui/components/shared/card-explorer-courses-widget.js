@@ -9,14 +9,15 @@ import { getRouteUserName } from '../shared/route-user-name';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import PreferredChoice from '../../../api/degree-plan/PreferredChoice';
 import { ROLE } from '../../../api/role/Role';
-import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { FavoriteCourses } from '../../../api/favorite/FavoriteCourseCollection';
+import { FavoriteAcademicPlans } from '../../../api/favorite/FavoriteAcademicPlanCollection';
 
 export const courseFilterKeys = {
   none: 'none',
   threeHundredPLus: '300+',
   fourHundredPlus: '400+',
+  sixHundredPlus: '600+',
 };
 
 Template.Card_Explorer_Courses_Widget.onCreated(function cardExplorerCoursesWidgetOnCreated() {
@@ -27,17 +28,22 @@ Template.Card_Explorer_Courses_Widget.onCreated(function cardExplorerCoursesWidg
 const availableCourses = () => {
   const courses = Courses.findNonRetired({});
   const studentID = getUserIdFromRoute();
-  const favorites = FavoriteCourses.findNonRetired({ studentID });
+  let favorites = FavoriteCourses.findNonRetired({ studentID });
   const favoriteIDs = _.map(favorites, (f) => f.courseID);
   let filtered = _.filter(courses, function filter(course) {
     return !_.includes(favoriteIDs, course._id);
   });
   if (Roles.userIsInRole(studentID, [ROLE.STUDENT])) {
-    const profile = StudentProfiles.findDoc({ userID: studentID });
-    const plan = AcademicPlans.findDoc(profile.academicPlanID);
-    if (plan.coursesPerSemester.length < 15) { // not bachelors and masters
+    favorites = FavoriteAcademicPlans.findNonRetired({ studentID });
+    // console.log(favorites);
+    let isGraduate = false;
+    _.forEach(favorites, (f) => {
+      const grad = AcademicPlans.isGraduatePlan(f.academicPlanID);
+      isGraduate = isGraduate || grad;
+    });
+    if (!isGraduate) { // not bachelors and masters
       const regex = /[1234]\d\d/g;
-      filtered = _.filter(filtered, (c) => c.number.match(regex));
+      filtered = _.filter(filtered, (c) => c.num.match(regex));
     }
   }
   return filtered;
@@ -98,6 +104,12 @@ Template.Card_Explorer_Courses_Widget.helpers({
         visibleCourses = _.filter(visibleCourses, (c) => {
           const num = parseInt(c.number.split(' ')[1], 10);
           return num >= 400;
+        });
+        break;
+      case courseFilterKeys.sixHundredPlus:
+        visibleCourses = _.filter(visibleCourses, (c) => {
+          const num = parseInt(c.number.split(' ')[1], 10);
+          return num >= 600;
         });
         break;
       default:

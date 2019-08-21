@@ -189,6 +189,16 @@ class AcademicPlanCollection extends BaseSlugCollection {
   }
 
   /**
+   * Returns true if the give academic plan includes graduate classes.
+   * @param {string} planID the id of the academic plan.
+   * @returns {boolean}
+   */
+  isGraduatePlan(planID) {
+    const plan = this.findDoc(planID);
+    return plan.coursesPerSemester.length > 12;
+  }
+
+  /**
    * Returns an array of the latest AcademicPlans.
    * @return {array}
    */

@@ -24,6 +24,12 @@ Template.Course_Filter_Widget.helpers({
   fourHundredPlus() {
     return courseFilterKeys.fourHundredPlus;
   },
+  is600() {
+    return Template.instance().filter.get() === courseFilterKeys.sixHundredPlus;
+  },
+  sixHundredPlus() {
+    return courseFilterKeys.sixHundredPlus;
+  },
 });
 
 Template.Course_Filter_Widget.events({
