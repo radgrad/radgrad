@@ -73,6 +73,7 @@ Template.Update_Teaser_Widget.events({
     instance.context.reset();
     updateSchema.clean(updateData, { mutate: true });
     updateData.retired = updateData.retired === 'true';
+    updateData.targetSlug = updateData.targetSlug.split(' ')[0];
     instance.context.validate(updateData);
     if (instance.context.isValid()) {
       updateData.id = instance.data.updateID.get();
