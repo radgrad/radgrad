@@ -43,7 +43,7 @@ const availableCourses = () => {
     });
     if (!isGraduate) { // not bachelors and masters
       const regex = /[1234]\d\d/g;
-      filtered = _.filter(filtered, (c) => c.num.match(regex));
+      filtered = _.filter(filtered, (c) => c.number.match(regex));
     }
   }
   return filtered;
