@@ -31,7 +31,10 @@ Template.Add_Teaser_Widget.helpers({
     return Opportunities.findNonRetired({}, { sort: { name: 1 } });
   },
   slugs() {
-    return Slugs.findNonRetired({}, { sort: { name: 1 } });
+    const opportunitySlugs = Slugs.findNonRetired({ entityName: 'Opportunity' }, { sort: { name: 1 } });
+    const courseSlugs = Slugs.findNonRetired({ entityName: 'Course' }, { sort: { name: 1 } });
+    // return Slugs.findNonRetired({}, { sort: { name: 1 } });
+    return opportunitySlugs.concat(courseSlugs);
   },
 });
 
