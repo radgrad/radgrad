@@ -47,6 +47,7 @@ Template.List_Verification_Requests_Widget.helpers({
       { label: 'Opportunity',
         value: `${OpportunityInstances.getOpportunityDoc(vr.opportunityInstanceID).name}` },
       { label: 'Submitted on', value: vr.submittedOn.toString() },
+      { label: 'Documentation', value: vr.documentation },
       { label: 'Status', value: vr.status },
       { label: 'ICE', value: `${vr.ice.i}, ${vr.ice.c}, ${vr.ice.e}` },
       { label: 'Retired', value: vr.retired ? 'True' : 'False' },

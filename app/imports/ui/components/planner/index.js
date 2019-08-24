@@ -55,6 +55,9 @@ import './recommendation-item.html';
 import './recommendations-and-warnings.html';
 import './recommendations-and-warnings.js';
 
+import './request-verification-form.html';
+import './request-verification-form';
+
 import './semester-list.css';
 
 import './semester-list-2.html';

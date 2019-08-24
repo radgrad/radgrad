@@ -18,22 +18,18 @@
       {{> Future_Participation type='opportunities' item=opportunity}}
       <p style="text-align: right;">
         <a href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=opportunitySlug}}"
-        target="_blank">
+           target="_blank">
           View in Explorer <i class="arrow right icon"></i>
         </a>
       </p>
-      {{#if isPastInstance}}
-        <div class="ui divider"></div>
-        <div style="text-align: center;">
-          <button class="ui tiny green basic button verifyInstance center aligned" id="{{instanceID}}">
-            Request Verification
-          </button>
-        </div>
+      {{#if isPastUnverifiedOrRejected}}
+        {{> Request_Verification_Form instance=opportunityInstance}}
       {{/if}}
       {{#if hasRequest}}
         <div class="ui divider"></div>
         <h4 class="ui center aligned header">REQUEST STATUS</h4>
-        <strong>Date Submitted:</strong> {{requestWhenSubmitted}} <br>
+        <strong>Date Submitted:</strong> {{requestWhenSubmitted}} <br/>
+        <strong>Documentation:</strong> {{requestDocumentation}} <br/>
         <strong>Status: </strong>{{requestStatus}}
         <p>
           {{#each processed in requestHistory}}

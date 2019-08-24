@@ -58,6 +58,24 @@ Template.Detail_Opportunity_Card.helpers({
       .state
       .get(plannerKeys.detailsOpportunity)._id;
   },
+  isPastUnverifiedOrRejected() {
+    const currentSemester = Semesters.getCurrentSemesterDoc();
+    const oi = Template.instance()
+      .state
+      .get(plannerKeys.detailsOpportunity);
+    const oppSemester = Semesters.findDoc(oi.semesterID);
+    const studentID = getUserIdFromRoute();
+    const requests = VerificationRequests.find({ opportunityInstanceID: oi._id, studentID })
+      .fetch();
+    if (!oi.verified && oppSemester.semesterNumber <= currentSemester.semesterNumber && requests.length === 0) {
+      return true;
+    }
+    if (requests.length > 0) {
+      const request = requests[0]; // should only be one request per oi
+      return request.status === VerificationRequests.REJECTED;
+    }
+    return false;
+  },
   name() {
     const opportunity = Opportunities.findDoc(Template.instance()
       .state
@@ -73,11 +91,27 @@ Template.Detail_Opportunity_Card.helpers({
   opportunitiesRouteName() {
     return RouteNames.studentExplorerOpportunitiesPageRouteName;
   },
+  opportunityInstance() {
+    return Template.instance()
+      .state
+      .get(plannerKeys.detailsOpportunity);
+  },
   opportunitySlug() {
     const opportunity = Opportunities.findDoc(Template.instance()
       .state
       .get(plannerKeys.detailsOpportunity).opportunityID);
     return Slugs.getNameFromID(opportunity.slugID);
+  },
+  requestDocumentation() {
+    const oppInstance = Template.instance()
+      .state
+      .get(plannerKeys.detailsOpportunity);
+    const request = VerificationRequests.find({ opportunityInstanceID: oppInstance._id })
+      .fetch();
+    if (request.length > 0) {
+      return request[0].documentation;
+    }
+    return '';
   },
   requestHistory() {
     const oppInstance = Template.instance()

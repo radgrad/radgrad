@@ -30,6 +30,7 @@ if (Meteor.isServer) {
       let docID = VerificationRequests.define({ student, opportunityInstance });
       expect(VerificationRequests.isDefined(docID)).to.be.true;
       expect(VerificationRequests.findOne({ opportunityInstanceID: opportunityInstance })).to.exist;
+      expect(VerificationRequests.findDoc(docID).documentation).to.equal('None');
       VerificationRequests.toString(docID);
       let dumpObject = VerificationRequests.dumpOne(docID);
       expect(dumpObject.retired).to.be.undefined;
