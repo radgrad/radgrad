@@ -53,13 +53,7 @@ class BaseCollection {
    */
   publish() {
     if (Meteor.isServer) {
-      Meteor.publish(this._collectionName, () => {
-        // console.log('isAdmin = ', Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]))
-        if (Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN])) {
-          return this._collection.find();
-        }
-        return this._collection.find({ retired: { $not: { $eq: true } } });
-      });
+      Meteor.publish(this._collectionName, () => this._collection.find());
     }
   }
 

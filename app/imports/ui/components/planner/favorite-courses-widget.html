@@ -1,0 +1,13 @@
+<template name="Favorite_Courses_Widget">
+  {{#if getCourses}}
+    <div class="ui one cards segment" style="overflow-y: auto; height: 400px">
+      {{#each course in getCourses}}
+        {{> Favorite_Course_Card course=course}}
+      {{/each}}
+    </div>
+  {{else}}
+    <p style="margin-bottom: 0px">No courses favorited yet.</p>
+    <p><a href="{{pathFor courseExplorerRouteName username=routeUserName}}">Update in course
+      explorer</a></p>
+  {{/if}}
+</template>

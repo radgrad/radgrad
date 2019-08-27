@@ -49,7 +49,10 @@ Template.List_Academic_Plans_Widget.helpers({
     return false;
   },
   slugName(slugID) {
-    return Slugs.findDoc(slugID).name;
+    if (Slugs.isDefined(slugID)) {
+      return Slugs.findDoc(slugID).name;
+    }
+    return '';
   },
   descriptionPairs(academicPlan) {
     return [

@@ -11,6 +11,7 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
+import { FavoriteOpportunities } from '../../../api/favorite/FavoriteOpportunityCollection';
 
 function interestedUsers(opportunity) {
   const interested = [];
@@ -45,26 +46,15 @@ function semesters(opportunity) {
 }
 
 function teaser(opp) {
-  const oppTeaser = Teasers.find({ opportunityID: opp._id }).fetch();
+  const oppTeaser = Teasers.find({ targetSlugID: opp.slugID }).fetch();
   return oppTeaser[0];
 }
 
 Template.Explorer_Opportunities_Page.helpers({
   addedOpportunities() {
-    const addedOpportunities = [];
-    const allOpportunities = Opportunities.findNonRetired({}, { sort: { name: 1 } });
-    const userID = getUserIdFromRoute();
-    _.forEach(allOpportunities, (opportunity) => {
-      const oi = OpportunityInstances.find({
-        studentID: userID,
-        opportunityID: opportunity._id,
-      }).fetch();
-      if (oi.length > 0) {
-        addedOpportunities.push({ item: opportunity, count: oi.length });
-      }
-    });
-    console.log('addedOpportunities %o', addedOpportunities);
-    return addedOpportunities;
+    const studentID = getUserIdFromRoute();
+    const favorites = FavoriteOpportunities.find({ studentID }).fetch();
+    return _.map(favorites, (f) => ({ item: Opportunities.findDoc(f.opportunityID), count: 1 }));
   },
   completed() {
     const opportunitySlugName = FlowRouter.getParam('opportunity');
@@ -96,17 +86,18 @@ Template.Explorer_Opportunities_Page.helpers({
   nonAddedOpportunities() {
     const allOpportunities = Opportunities.findNonRetired({}, { sort: { name: 1 } });
     const userID = getUserIdFromRoute();
-    const nonAddedOpportunities = _.filter(allOpportunities, function (opportunity) {
-      const oi = OpportunityInstances.find({
-        studentID: userID,
-        opportunityID: opportunity._id,
-      }).fetch();
-      if (oi.length > 0) {
-        return false;
-      }
-      return true;
-    });
-    return nonAddedOpportunities;
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'faculty') {
+      return _.filter(allOpportunities, o => o.sponsorID !== userID);
+    } else if (group === 'student') {
+      const favorites = FavoriteOpportunities.find({ studentID: userID }).fetch();
+      const favoriteIDs = _.map(favorites, (f) => f.opportunityID);
+      const nonAddedOpportunities = _.filter(allOpportunities, function (opportunity) {
+        return !_.includes(favoriteIDs, opportunity._id);
+      });
+      return nonAddedOpportunities;
+    }
+    return allOpportunities;
   },
   opportunity() {
     const opportunitySlugName = FlowRouter.getParam('opportunity');

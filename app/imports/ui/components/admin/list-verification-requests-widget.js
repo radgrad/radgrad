@@ -39,7 +39,7 @@ Template.List_Verification_Requests_Widget.helpers({
     return `${student}: ${opportunityName} - ${semester}`; // eslint-disable-line
   },
   slugName(slugID) {
-    return Slugs.findDoc(slugID).name;
+    return slugID && Slugs.hasSlug(slugID) && Slugs.findDoc(slugID).name;
   },
   descriptionPairs(vr) {
     return [
@@ -47,6 +47,7 @@ Template.List_Verification_Requests_Widget.helpers({
       { label: 'Opportunity',
         value: `${OpportunityInstances.getOpportunityDoc(vr.opportunityInstanceID).name}` },
       { label: 'Submitted on', value: vr.submittedOn.toString() },
+      { label: 'Documentation', value: vr.documentation },
       { label: 'Status', value: vr.status },
       { label: 'ICE', value: `${vr.ice.i}, ${vr.ice.c}, ${vr.ice.e}` },
       { label: 'Retired', value: vr.retired ? 'True' : 'False' },

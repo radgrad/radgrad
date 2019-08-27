@@ -27,7 +27,7 @@
       <div class="menu">
         {{#if isType type 'courses'}}
           <div class="header">
-            COURSES IN MY PLAN
+            MY FAVORITE COURSES
           </div>
           <div class="divider"></div>
           {{#each listItem in menuAddedList}}
@@ -38,7 +38,7 @@
         {{else}}
           {{#if isType type 'careerGoals'}}
             <div class="header">
-              MY CAREER GOALS
+              MY FAVORITE CAREER GOALS
             </div>
             <div class="divider"></div>
             {{#each listItem in menuAddedList}}
@@ -60,7 +60,7 @@
             {{else}}
               {{#if isType type 'opportunities'}}
                 <div class="header">
-                  OPPORTUNITIES IN MY PLAN
+                  MY FAVORITE OPPORTUNITIES
                 </div>
                 <div class="divider"></div>
                 {{#each listItem in menuAddedList}}
@@ -71,7 +71,7 @@
               {{else}}
                 {{#if isType type 'interests'}}
                   <div class="header">
-                    MY INTERESTS
+                    MY FAVORITE INTERESTS
                   </div>
                   <div class="divider"></div>
                   {{#each listItem in menuAddedList}}
@@ -111,11 +111,11 @@
 
   <div class="ui vertical text menu mobile hidden">
     {{#if isType type 'courses'}}
+      <a class="ui button" href="{{pathFor coursesCardRouteName username=routeUserName}}"><i
+          class="chevron circle left icon"></i><br>Back to Courses</a>
       {{#if isInRole 'student'}}
-        <a class="ui button" href="{{pathFor coursesCardRouteName username=routeUserName}}"><i
-            class="chevron circle left icon"></i><br>Back to Courses</a>
         <h4 class="ui dividing header">
-          COURSES IN MY PLAN
+          MY FAVORITE COURSES
         </h4>
         {{#each listItem in menuAddedList}}
           <a class="{{classType (slugName listItem.item) 'course'}}" data-tab="tab-name"
@@ -130,7 +130,7 @@
         <a class="ui button" href="{{pathFor careerGoalsCardRouteName username=routeUserName}}"><i
             class="chevron circle left icon"></i><br>Back to Career Goals</a>
         <h4 class="ui dividing header">
-          MY CAREER GOALS
+          MY FAVORITE CAREER GOALS
         </h4>
         {{#each listItem in menuAddedList}}
           <a class="{{classType (slugName listItem.item) 'careerGoal'}}" data-tab="tab-name"
@@ -149,7 +149,7 @@
                 class="chevron circle left icon"></i><br>Back to Opportunities</a>
             {{#if isInRole 'student'}}
               <h4 class="ui dividing header">
-                OPPORTUNITIES IN MY PLAN
+                MY FAVORITE OPPORTUNITIES
               </h4>
             {{else}}
               {{#if isInRole 'faculty'}}
@@ -170,7 +170,7 @@
               <a class="ui button" href="{{pathFor interestsCardRouteName username=routeUserName}}"><i
                   class="chevron circle left icon"></i><br>Back to Interests</a>
               <h4 class="ui dividing header">
-                MY INTERESTS
+                MY FAVORITE INTERESTS
               </h4>
               {{#each listItem in menuAddedList}}
                 <a class="{{classType (slugName listItem.item) 'interest'}}" data-tab="tab-name"
@@ -193,7 +193,7 @@
                     class="chevron circle left icon"></i><br>Back to Academic Plans</a>
                 {{#if isInRole 'student'}}
                   <div class="ui dividing header">
-                    MY ACADEMIC PLAN
+                    MY FAVORITE ACADEMIC PLANS
                   </div>
                   {{#each listItem in menuAddedList}}
                     <a class="{{classType (slugName listItem.item) 'plan'}}" data-tab="tab-name"

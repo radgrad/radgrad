@@ -15,7 +15,7 @@ const updateSchema = new SimpleSchema({
   description: String,
   duration: { type: String, optional: true },
   interests: { type: Array, minCount: 1 }, 'interests.$': String,
-  opportunity: String,
+  targetSlug: String,
   retired: Boolean,
 }, { tracker: Tracker });
 
@@ -25,25 +25,46 @@ Template.Update_Teaser_Widget.onCreated(function onCreated() {
 
 Template.Update_Teaser_Widget.helpers({
   teaser() {
-    return Teasers.findDoc(Template.currentData().updateID.get());
+    return Teasers.findDoc(Template.currentData()
+      .updateID
+      .get());
   },
   slug() {
-    const teaser = Teasers.findDoc(Template.currentData().updateID.get());
+    const teaser = Teasers.findDoc(Template.currentData()
+      .updateID
+      .get());
     return Slugs.findDoc(teaser.slugID).name;
   },
   interests() {
     return Interests.find({}, { sort: { name: 1 } });
   },
   selectedInterestIDs() {
-    const teaser = Teasers.findDoc(Template.currentData().updateID.get());
+    const teaser = Teasers.findDoc(Template.currentData()
+      .updateID
+      .get());
     return teaser.interestIDs;
   },
   opportunity() {
-    const teaser = Teasers.findDoc(Template.currentData().updateID.get());
+    const teaser = Teasers.findDoc(Template.currentData()
+      .updateID
+      .get());
     return teaser.opportunityID;
   },
   opportunities() {
-    return Opportunities.find().fetch();
+    return Opportunities.find()
+      .fetch();
+  },
+  targetSlugID() {
+    const teaser = Teasers.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return teaser.targetSlugID;
+  },
+  slugs() {
+    const opportunitySlugs = Slugs.findNonRetired({ entityName: 'Opportunity' }, { sort: { name: 1 } });
+    const courseSlugs = Slugs.findNonRetired({ entityName: 'Course' }, { sort: { name: 1 } });
+    // return Slugs.findNonRetired({}, { sort: { name: 1 } });
+    return opportunitySlugs.concat(courseSlugs);
   },
   falseValueRetired() {
     const plan = Teasers.findDoc(Template.currentData()
@@ -66,6 +87,7 @@ Template.Update_Teaser_Widget.events({
     instance.context.reset();
     updateSchema.clean(updateData, { mutate: true });
     updateData.retired = updateData.retired === 'true';
+    updateData.targetSlug = updateData.targetSlug.split(' ')[0];
     instance.context.validate(updateData);
     if (instance.context.isValid()) {
       updateData.id = instance.data.updateID.get();

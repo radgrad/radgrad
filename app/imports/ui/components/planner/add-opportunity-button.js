@@ -34,16 +34,16 @@ Template.Add_Opportunity_Button.events({
   'click .removeFromPlan': function clickItemRemoveFromPlan(event) {
     event.preventDefault();
     const opportunity = this.opportunity;
-    const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
+    const oi = Template.instance().state.get(plannerKeys.detailOpportunity);
     const collectionName = OpportunityInstances.getCollectionName();
     const template = Template.instance();
     removeItMethod.call({ collectionName, instance: oi._id }, (error) => {
       if (!error) {
         template.state.set(plannerKeys.detailCourse, null);
-        template.state.set(plannerKeys.detailCourseInstance, null);
-        template.state.set(plannerKeys.detailOpportunity, opportunity);
-        template.state.set(plannerKeys.detailOpportunityInstance, null);
+        template.state.set(plannerKeys.detailOpportunity, null);
         template.$('.chooseSemester').popup('hide');
+        template.state.set(plannerKeys.selectedOpportunities, true);
+        template.state.set(plannerKeys.selectedDetails, false);
       }
     });
     const interactionData = { username: getRouteUserName(), type: 'removeOpportunity',

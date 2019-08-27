@@ -7,7 +7,9 @@
         <h4 class="ui left floated header">{{toUpper name}}</h4>
         {{#if isInRole 'student'}}
           {{#if userStatus item}}
-            <button value="{{id}}" class="ui basic green mini right floated button addItem">SET AS ACADEMIC PLAN</button>
+            <button value="{{id}}" class="ui basic green mini right floated button deleteItem" style="margin-bottom: 1rem;"><i class="red heart outline icon"></i><i class="minus icon"></i> REMOVE FROM FAVORITES</button>
+          {{else}}
+            <button value="{{id}}" class="ui basic green mini right floated button addItem mobile hidden" style="margin-bottom: 1rem;"><i class="red heart icon"></i><i class="plus icon"></i> ADD TO FAVORITES</button>
           {{/if}}
         {{/if}}
       </div>

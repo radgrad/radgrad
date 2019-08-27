@@ -6,7 +6,7 @@ import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { buildSimpleName } from '../../../api/degree-plan/PlanChoiceUtilities';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
-import { plannerKeys } from './academic-plan';
+import { plannerKeys, selectFavoriteCoursesTab } from './academic-plan';
 import { getFutureEnrollmentMethod } from '../../../api/course/CourseCollection.methods';
 import { userInteractionDefineMethod } from '../../../api/analytic/UserInteractionCollection.methods';
 
@@ -40,14 +40,11 @@ Template.Add_Course_Button.events({
     event.preventDefault();
     const course = this.course;
     const instance = Template.instance();
-    const ci = instance.state.get(plannerKeys.detailCourseInstance);
-    instance.state.set(plannerKeys.detailCourse, course);
-    instance.state.set(plannerKeys.detailCourseInstance, null);
-    instance.state.set(plannerKeys.detailOpportunity, null);
-    instance.state.set(plannerKeys.detailOpportunityInstance, null);
+    const ci = instance.state.get(plannerKeys.detailsCourse);
     const collectionName = CourseInstances.getCollectionName();
     removeItMethod.call({ collectionName, instance: ci._id }, (error) => {
       if (!error) {
+        selectFavoriteCoursesTab(instance.state); // CAM: What is the correct tab to select?
         FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
         FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
         FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());

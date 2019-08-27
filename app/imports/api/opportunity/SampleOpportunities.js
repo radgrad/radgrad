@@ -5,6 +5,7 @@ import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollecti
 import { Semesters } from '../semester/SemesterCollection';
 import { makeSampleInterest } from '../interest/SampleInterests';
 
+export const sampleOpportunityName = 'Sample Opportunity';
 
 /**
  * Creates an OpportunityType with a unique slug and returns its docID.
@@ -26,7 +27,7 @@ export function makeSampleOpportunityType() {
  * @memberOf api/opportunity
  */
 export function makeSampleOpportunity(sponsor) {
-  const name = 'Sample Opportunity';
+  const name = sampleOpportunityName;
   const slug = `opportunity-${moment().format('YYYY-MM-DD-HH-mm-ss-SSSSS')}`;
   const description = 'Sample Opportunity Description';
   const opportunityType = makeSampleOpportunityType();

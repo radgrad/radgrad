@@ -33,6 +33,9 @@ import './card-explorer-plans-widget';
 import './card-explorer-users-widget.html';
 import './card-explorer-users-widget';
 
+import './course-filter-widget.html';
+import './course-filter-widget';
+
 import './course-scoreboard-widget.html';
 import './course-scoreboard-widget';
 
@@ -60,6 +63,18 @@ import './explorer-opportunities-widget.js';
 import './explorer-plans-widget.html';
 import './explorer-plans-widget';
 
+import './favorite-add.html';
+import './favorite-add';
+
+import './favorite-button.html';
+import './favorite-button';
+
+import './favorite-card.html';
+import './favorite-card';
+
+import './future-participation.html';
+import './future-participation';
+
 import './get-user-id-from-route';
 
 import './help-panel-widget.html';
@@ -80,6 +95,9 @@ import './observe-interactions';
 import './opportunity-scoreboard-widget.html';
 import './opportunity-scoreboard-widget';
 
+import './opportunity-sort-order-widget.html';
+import './opportunity-sort-order-widget';
+
 import './plan-card.html';
 import './plan-card';
 
@@ -96,11 +114,8 @@ import './route-user-name.js';
 import './scoreboard-menu.html';
 import './scoreboard-menu';
 
-import './semester-add.html';
-import './semester-add';
-
-import './semester-card.html';
-import './semester-card';
+import './teaser-widget.html';
+import './teaser-widget';
 
 import '../advisor/student-selector-widget.html';
 import '../advisor/student-selector-widget.js';

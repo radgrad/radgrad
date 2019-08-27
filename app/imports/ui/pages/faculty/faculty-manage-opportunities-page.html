@@ -1,19 +1,20 @@
 <template name="Faculty_Manage_Opportunities_Page">
   <div class="layout-page">
-  {{#if Template.subscriptionsReady}}
-    <div class="ui container stackable grid ">
-      <div class="row">
-        {{> Help_Panel_Widget }}
+    {{#if Template.subscriptionsReady}}
+      <div class="ui container stackable grid ">
+        <div class="row">
+          {{> Help_Panel_Widget }}
+        </div>
       </div>
-    </div>
       {{#if displayUpdateWidget}}
         {{> Update_Opportunity_Widget updateID=updateID}}
       {{else}}
         {{> Add_Opportunity_Widget }}
       {{/if}}
       {{> List_Opportunities_Widget updateID=updateID}}
-  {{else}}
-    {{> Loading message="Waiting for subscriptions."}}
-  {{/if}}
+    {{else}}
+      {{> Loading message="Waiting for subscriptions."}}
+    {{/if}}
+    {{> Back_To_Top_Button}}
   </div>
 </template>

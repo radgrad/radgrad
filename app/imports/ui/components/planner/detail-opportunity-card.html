@@ -1,0 +1,43 @@
+<template name="Detail_Opportunity_Card">
+  <div class="card">
+    <div class="content">
+      <h4>{{> ICE_header ice=ice }} {{name}}</h4>
+    </div>
+    <div class="content">
+      {{#if futureInstance}}
+        {{> Add_Opportunity_Button buttonType='remove' dictionary=dictionary opportunity=opportunity}}
+      {{else}}
+        {{#if unverified}}
+          {{> Add_Opportunity_Button buttonType='remove' dictionary=dictionary opportunity=opportunity}}
+        {{/if}}
+      {{/if}}
+    </div>
+    <div class="content">
+      {{> Add_Opportunity_Button buttonType='add' dictionary=dictionary opportunity=opportunity}}
+      <p><b>When: </b> {{semester}}</p>
+      {{> Future_Participation type='opportunities' item=opportunity}}
+      <p style="text-align: right;">
+        <a href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=opportunitySlug}}"
+           target="_blank">
+          View in Explorer <i class="arrow right icon"></i>
+        </a>
+      </p>
+      {{#if isPastUnverifiedOrRejected}}
+        {{> Request_Verification_Form instance=opportunityInstance}}
+      {{/if}}
+      {{#if hasRequest}}
+        <div class="ui divider"></div>
+        <h4 class="ui center aligned header">REQUEST STATUS</h4>
+        <strong>Date Submitted:</strong> {{requestWhenSubmitted}} <br/>
+        <strong>Documentation:</strong> {{requestDocumentation}} <br/>
+        <strong>Status: </strong>{{requestStatus}}
+        <p>
+          {{#each processed in requestHistory}}
+            <span>Processed: {{processed.date}} by {{processed.verifier}}
+              ({{processed.status}}) <em>{{processed.feedback}}</em></span><br>
+          {{/each}}
+        </p>
+      {{/if}}
+    </div>
+  </div>
+</template>

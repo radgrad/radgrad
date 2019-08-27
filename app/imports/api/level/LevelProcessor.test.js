@@ -71,15 +71,6 @@ if (Meteor.isServer) {
         .equal(3);
     });
 
-    it('Betty Level 3 no picture', function noPicture() {
-      this.timeout(5000);
-      defineTestFixtures(['betty.level4']); // [30, 36, 35]
-      const bettyProfile = StudentProfiles.findDoc({ username: 'betty@hawaii.edu' });
-      expect(defaultCalcLevel(bettyProfile.userID))
-        .to
-        .equal(3);
-    });
-
     it('Betty Level 4', function levelFour() {
       this.timeout(5000);
       removeAllEntities();

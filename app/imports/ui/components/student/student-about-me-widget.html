@@ -26,50 +26,54 @@
 
       <div class="row">
         <div class="two wide column">
-          <p><b>Career Goals</b></p>
+          <p><b>My Favorite Career Goals</b></p>
         </div>
         <div class="six wide column">
           {{#if careerGoals}}
             {{#each goal in careerGoals}}
               <a class="ui tiny label"
-                 href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=(slugName goal)}}"><i
+                 href="{{pathFor careerGoalRouteName username=routeUserName careerGoal=(slugName goal)}}"><i
                   class="fitted suitcase icon"></i>{{goalName goal}}</a>
             {{/each}}
             <br>
           {{else}}
             <p style="margin-bottom: 0px">No career goals added yet.</p>
           {{/if}}
-          <a href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=firstCareerGoal}}">Edit in
-            career explorer</a>
+          <a href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=firstCareerGoal}}">Update in
+            career goal explorer</a>
         </div>
         <div class="two wide column">
-          <p><b>Interests</b></p>
+          <p><b>My Favorite Interests</b></p>
         </div>
         <div class="five wide column">
           {{#if interests}}
             {{#each interest in interests}}
               <a class="ui tiny label"
-                 href="{{pathFor interestsRouteName username=routeUserName interest=(slugName interest)}}"><i
+                 href="{{pathFor interestRouteName username=routeUserName interest=(slugName interest)}}"><i
                   class="fitted star icon"></i>{{interestName interest}}</a>
             {{/each}}
             <br>
           {{else}}
-            <p style="margin-bottom: 0px">No interests added yet.</p>
+            <p style="margin-bottom: 0px">No interests favorited yet.</p>
           {{/if}}
-          <a href="{{pathFor interestsRouteName username=routeUserName interest=firstInterest}}">Edit in interest
+          <a href="{{pathFor interestsRouteName username=routeUserName}}">Update in interest
             explorer</a>
         </div>
       </div>
 
       <div class="row">
         <div class="two wide column">
-          <b>Desired Academic Plan</b>
+          <b>My Favorite Academic Plans</b>
         </div>
         <div class="six wide column">
-          <p style="margin-bottom: 0">
-            {{desiredDegree}}
-          </p>
-          <p><a href="{{pathFor degreesRouteName username=routeUserName degree=firstDegree}}">Edit in degree
+          {{#if desiredDegrees}}
+            {{#each plan in desiredDegrees}}
+              <a class="ui tiny label" href="{{pathFor degreeRouteName username=routeUserName plan=(slugName plan)}}"><i class="fitted map outline icon"></i>{{planName plan}}</a>
+            {{/each}}
+          {{else}}
+            <p style="margin-bottom: 0px">No academic plans favorited yet.</p>
+          {{/if}}
+          <p><a href="{{pathFor degreesRouteName username=routeUserName degree=firstDegree}}">Update in academic plan
             explorer</a></p>
         </div>
       </div>

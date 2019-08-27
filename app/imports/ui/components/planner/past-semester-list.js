@@ -2,7 +2,7 @@ import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { $ } from 'meteor/jquery';
-import { plannerKeys } from './academic-plan';
+import { plannerKeys, showCourseDetails, showOpportunityDetails } from './academic-plan';
 import { defineMethod, updateMethod } from '../../../api/base/BaseCollection.methods';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { Courses } from '../../../api/course/CourseCollection';
@@ -75,19 +75,7 @@ Template.Past_Semester_List.events({
                 FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
                 FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
                 const ci = CourseInstances.findDoc(res);
-                instance.state.set(plannerKeys.detailCourse, null);
-                instance.state.set(plannerKeys.detailCourseInstance, ci);
-                instance.state.set(plannerKeys.detailICE, ci.ice);
-                instance.state.set(plannerKeys.selectedInspectorTab, true);
-                instance.state.set(plannerKeys.selectedPlanTab, false);
-                getFutureEnrollmentMethod.call(courseID, (err, result) => {
-                  if (err) {
-                    console.log('Error in getting future enrollment', error);
-                  } else
-                    if (courseID === result.courseID) {
-                      instance.state.set(plannerKeys.plannedEnrollment, result);
-                    }
-                });
+                showCourseDetails(instance.state, ci);
                 const interactionData = { username, type: 'addCourse', typeData: slug };
                 userInteractionDefineMethod.call(interactionData, (err) => {
                   if (err) {
@@ -116,13 +104,7 @@ Template.Past_Semester_List.events({
                   FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
                   FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
                   const oi = OpportunityInstances.findDoc(res);
-                  instance.state.set(plannerKeys.detailCourse, null);
-                  instance.state.set(plannerKeys.detailCourseInstance, null);
-                  instance.state.set(plannerKeys.detailICE, null);
-                  instance.state.set(plannerKeys.detailOpportunityInstance, oi);
-                  instance.state.set(plannerKeys.detailOpportunity, null);
-                  instance.state.set(plannerKeys.selectedInspectorTab, true);
-                  instance.state.set(plannerKeys.selectedPlanTab, false);
+                  showOpportunityDetails(instance.state, oi);
                   const interactionData = { username, type: 'addOpportunity', typeData: slug };
                   userInteractionDefineMethod.call(interactionData, (err) => {
                     if (err) {
@@ -203,22 +185,12 @@ Template.Past_Semester_List.events({
     const template = Template.instance();
     if (firstClass === 'courseInstance') {
       const ci = template.data.icsCourses[target.id];
-      template.state.set(plannerKeys.detailCourse, null);
-      template.state.set(plannerKeys.detailCourseInstance, ci);
-      template.state.set(plannerKeys.detailICE, ci.ice);
-      template.state.set(plannerKeys.detailOpportunity, null);
-      template.state.set(plannerKeys.detailOpportunityInstance, null);
+      showCourseDetails(template.state, ci);
     } else
       if (firstClass === 'opportunityInstance') {
         const oi = template.data.semesterOpportunities[target.id];
-        template.state.set(plannerKeys.detailOpportunity, null);
-        template.state.set(plannerKeys.detailOpportunityInstance, oi);
-        template.state.set(plannerKeys.detailICE, oi.ice);
-        template.state.set(plannerKeys.detailCourse, null);
-        template.state.set(plannerKeys.detailCourseInstance, null);
+        showOpportunityDetails(template.state, oi);
       }
-    template.state.set(plannerKeys.selectedInspectorTab, true);
-    template.state.set(plannerKeys.selectedPlanTab, false);
   },
 });
 

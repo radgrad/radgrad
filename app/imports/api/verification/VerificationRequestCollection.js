@@ -38,6 +38,7 @@ class VerificationRequestCollection extends BaseCollection {
       studentID: SimpleSchema.RegEx.Id,
       opportunityInstanceID: SimpleSchema.RegEx.Id,
       submittedOn: Date,
+      documentation: String,
       status: String,
       processed: [ProcessedSchema],
       ice: { type: Object, optional: true, blackbox: true },
@@ -52,7 +53,7 @@ class VerificationRequestCollection extends BaseCollection {
    * Defines a verification request.
    * @example
    * VerificationRequests.define({ student: 'joesmith',
-   *                               opportunityInstance: 'EiQYeRP4jyyre28Zw' });
+   *                               opportunityInstance: 'EiQYeRP4jyyre28Zw'});
    * or
    * VerificationRequests.define({ student: 'joesmith',
    *                               opportunity: 'TechHui',
@@ -67,7 +68,7 @@ class VerificationRequestCollection extends BaseCollection {
    */
   define({
            student, opportunityInstance, submittedOn = moment()
-      .toDate(), status = this.OPEN, processed = [],
+      .toDate(), status = this.OPEN, processed = [], documentation = 'None',
            semester, opportunity, retired,
          }) {
     const studentID = Users.getID(student);
@@ -81,7 +82,7 @@ class VerificationRequestCollection extends BaseCollection {
     const ice = Opportunities.findDoc(oppInstance.opportunityID).ice;
     // Define and return the new VerificationRequest
     const requestID = this._collection.insert({
-      studentID, opportunityInstanceID, submittedOn, status, processed, ice, retired,
+      studentID, opportunityInstanceID, submittedOn, documentation, status, processed, ice, retired,
     });
     return requestID;
   }
@@ -211,9 +212,15 @@ class VerificationRequestCollection extends BaseCollection {
    * @param docID the ID of the verification request.
    * @param retired the retired status.
    */
-  update(docID, { retired }) {
+  update(docID, { documentation, status, retired }) {
     this.assertDefined(docID);
     const updateData = {};
+    if (documentation) {
+      updateData.documentation = documentation;
+    }
+    if (status) {
+      updateData.status = status;
+    }
     if (_.isBoolean(retired)) {
       updateData.retired = retired;
     }
@@ -302,7 +309,8 @@ class VerificationRequestCollection extends BaseCollection {
     const status = doc.status;
     const processed = doc.processed;
     const retired = doc.retired;
-    return { student, semester, opportunity, submittedOn, status, processed, retired };
+    const documentation = doc.documentation;
+    return { student, semester, opportunity, submittedOn, documentation, status, processed, retired };
   }
 }
 

@@ -7,6 +7,11 @@ import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Courses } from '../../../api/course/CourseCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
 import { FacultyProfiles } from '../../../api/user/FacultyProfileCollection';
+import { FavoriteAcademicPlans } from '../../../api/favorite/FavoriteAcademicPlanCollection';
+import { FavoriteCareerGoals } from '../../../api/favorite/FavoriteCareerGoalCollection';
+import { FavoriteCourses } from '../../../api/favorite/FavoriteCourseCollection';
+import { FavoriteInterests } from '../../../api/favorite/FavoriteInterestCollection';
+import { FavoriteOpportunities } from '../../../api/favorite/FavoriteOpportunityCollection';
 import { HelpMessages } from '../../../api/help/HelpMessageCollection';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { InterestTypes } from '../../../api/interest/InterestTypeCollection';
@@ -38,7 +43,7 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 
 // cacheLimit default is 10, so increased to handle all our subscriptions.
 // expireLimit set to 30 minutes because: why not.
-const globalSubs = new SubsManager({ cacheLimit: 26, expireIn: 30 });
+const globalSubs = new SubsManager({ cacheLimit: 31, expireIn: 30 });
 
 Template.With_Global_Subscriptions.onCreated(function onCreated() {
   const self = this;
@@ -51,6 +56,11 @@ Template.With_Global_Subscriptions.onCreated(function onCreated() {
     globalSubs.subscribe(Courses.getPublicationName());
     globalSubs.subscribe(DesiredDegrees.getPublicationName());
     globalSubs.subscribe(FacultyProfiles.getPublicationName());
+    globalSubs.subscribe(FavoriteAcademicPlans.publicationNames.scoreboard);
+    globalSubs.subscribe(FavoriteCareerGoals.publicationNames.scoreboard);
+    globalSubs.subscribe(FavoriteCourses.publicationNames.scoreboard);
+    globalSubs.subscribe(FavoriteInterests.publicationNames.scoreboard);
+    globalSubs.subscribe(FavoriteOpportunities.publicationNames.scoreboard);
     globalSubs.subscribe(Feeds.getPublicationName());
     globalSubs.subscribe(HelpMessages.getPublicationName());
     globalSubs.subscribe(Interests.getPublicationName());

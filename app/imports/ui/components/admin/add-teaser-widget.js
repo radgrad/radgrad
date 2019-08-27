@@ -6,6 +6,7 @@ import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import * as FormUtils from '../form-fields/form-field-utilities.js';
+import { Slugs } from '../../../api/slug/SlugCollection';
 
 const addSchema = new SimpleSchema({
   title: String,
@@ -13,7 +14,7 @@ const addSchema = new SimpleSchema({
   author: String,
   url: String,
   description: String,
-  opportunity: String,
+  targetSlug: String,
   duration: { type: String, optional: true },
   interests: { type: Array, minCount: 1 }, 'interests.$': String,
 }, { tracker: Tracker });
@@ -29,6 +30,12 @@ Template.Add_Teaser_Widget.helpers({
   opportunities() {
     return Opportunities.findNonRetired({}, { sort: { name: 1 } });
   },
+  slugs() {
+    const opportunitySlugs = Slugs.findNonRetired({ entityName: 'Opportunity' }, { sort: { name: 1 } });
+    const courseSlugs = Slugs.findNonRetired({ entityName: 'Course' }, { sort: { name: 1 } });
+    // return Slugs.findNonRetired({}, { sort: { name: 1 } });
+    return opportunitySlugs.concat(courseSlugs);
+  },
 });
 
 Template.Add_Teaser_Widget.events({
@@ -38,6 +45,8 @@ Template.Add_Teaser_Widget.events({
     instance.context.reset();
     addSchema.clean(newData, { mutate: true });
     instance.context.validate(newData);
+    // Need to clean the targetSlug. It includes the type.
+    newData.targetSlug = newData.targetSlug.split(' ')[0];
     if (instance.context.isValid()) {
       defineMethod.call({ collectionName: 'TeaserCollection', definitionData: newData }, (error) => {
         if (error) {

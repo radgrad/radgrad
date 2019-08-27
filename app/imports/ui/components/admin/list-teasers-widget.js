@@ -4,7 +4,6 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Teasers } from '../../../api/teaser/TeaserCollection';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection';
-import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { makeLink } from './datamodel-utilities';
 import * as FormUtils from '../form-fields/form-field-utilities.js';
@@ -15,8 +14,8 @@ function numReferences() {
 }
 
 function opportunity(teaser) {
-  if (teaser.opportunityID) {
-    return Opportunities.findDoc(teaser.opportunityID).name;
+  if (teaser.targetSlugID) {
+    return Slugs.findDoc(teaser.targetSlugID).name;
   }
   return '';
 }
@@ -40,7 +39,7 @@ Template.List_Teasers_Widget.helpers({
     return (numReferences(teaser) > 0) ? 'disabled' : '';
   },
   slugName(slugID) {
-    return Slugs.findDoc(slugID).name;
+    return slugID && Slugs.hasSlug(slugID) && Slugs.findDoc(slugID).name;
   },
   descriptionPairs(teaser) {
     return [
@@ -48,8 +47,8 @@ Template.List_Teasers_Widget.helpers({
       { label: 'Author', value: teaser.author },
       { label: 'Duration', value: teaser.duration },
       { label: 'Interests', value: _.sortBy(Interests.findNames(teaser.interestIDs)) },
-      { label: 'URL', value: makeLink(teaser.url) },
-      { label: 'Opportunity', value: opportunity(teaser) },
+      { label: 'Youtube ID', value: makeLink(teaser.url) },
+      { label: 'Target Slug', value: opportunity(teaser) },
       { label: 'Retired', value: teaser.retired ? 'True' : 'False' },
     ];
   },

@@ -38,7 +38,10 @@ Template.List_Career_Goals_Widget.helpers({
     return (numReferences(careerGoal) > 0) ? 'disabled' : '';
   },
   slugName(slugID) {
-    return Slugs.findDoc(slugID).name;
+    if (Slugs.isDefined(slugID)) {
+      return Slugs.findDoc(slugID).name;
+    }
+    return '';
   },
   descriptionPairs(careerGoal) {
     return [

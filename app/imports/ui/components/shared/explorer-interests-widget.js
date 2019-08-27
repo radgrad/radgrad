@@ -9,10 +9,12 @@ import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js
 import { getRouteUserName } from './route-user-name';
 import { isInRole, isLabel } from '../../utilities/template-helpers';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
-import { updateMethod } from '../../../api/base/BaseCollection.methods';
+import { defineMethod, removeItMethod, updateMethod } from '../../../api/base/BaseCollection.methods';
 import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 import { FacultyProfiles } from '../../../api/user/FacultyProfileCollection';
 import { MentorProfiles } from '../../../api/user/MentorProfileCollection';
+import { FavoriteInterests } from '../../../api/favorite/FavoriteInterestCollection';
+import { Teasers } from '../../../api/teaser/TeaserCollection';
 
 Template.Explorer_Interests_Widget.onCreated(function explorerInterestsWidgetOnCreated() {
   // console.log(this.data);
@@ -47,6 +49,10 @@ Template.Explorer_Interests_Widget.helpers({
       default:
         return 'ERROR: More than one table.';
     }
+  },
+  hasTeaser(item) {
+    const teaser = Teasers.find({ targetSlugID: item.slugID }).fetch();
+    return teaser.length > 0;
   },
   isInRole,
   isLabel,
@@ -116,6 +122,16 @@ Template.Explorer_Interests_Widget.events({
         console.log(`Error updating ${profile.username}'s interests`, error);
       }
     });
+    collectionName = FavoriteInterests.getCollectionName();
+    const definitionData = {};
+    definitionData.student = getRouteUserName();
+    const item = Template.instance().data.item;
+    definitionData.interest = Slugs.getNameFromID(item.slugID);
+    defineMethod.call({ collectionName, definitionData }, (error) => {
+      if (error) {
+        console.error('Failed defining faborites', error);
+      }
+    });
   },
   'click .deleteItem': function clickRemoveItem(event) {
     event.preventDefault();
@@ -138,6 +154,14 @@ Template.Explorer_Interests_Widget.events({
     updateMethod.call({ collectionName, updateData }, (error) => {
       if (error) {
         console.log(`Error updating ${profile.username}'s interests`, error);
+      }
+    });
+    collectionName = FavoriteInterests.getCollectionName();
+    const favorite = FavoriteInterests.findDoc({ interestID: id });
+    const instance = favorite._id;
+    removeItMethod.call({ collectionName, instance }, (error) => {
+      if (error) {
+        console.error('Failed deleting favorites', error);
       }
     });
   },

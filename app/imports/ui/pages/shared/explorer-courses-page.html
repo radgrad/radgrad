@@ -1,5 +1,6 @@
 <template name="Explorer_Courses_Page">
   {{#Explorer_Layout addedList = addedCourses nonAddedList = nonAddedCourses type = 'courses'}}
     {{> Explorer_Courses_Widget name=course.name shortName=course.shortName slug=(slugName course.slugID) descriptionPairs=(descriptionPairs course) id=course._id updateID=updateID item=course completed=completed reviewed=(reviewed course)}}
+    {{> Back_To_Top_Button}}
   {{/Explorer_Layout}}
 </template>

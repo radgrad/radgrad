@@ -35,6 +35,9 @@ import './mobile-second-menu.js';
 import './with-advisor-subscriptions.html';
 import './with-advisor-subscriptions.js';
 
+import './with-landing-subscriptions.html';
+import './with-landing-subscriptions';
+
 import './with-global-subscriptions.html';
 import './with-global-subscriptions.js';
 

@@ -4,6 +4,7 @@
       <h4><span
           style="text-transform: uppercase;">COURSES</span> {{> Widget_Header_Number inputValue = itemCount}}</h4>
     </div>
+    {{> Course_Filter_Widget filter=courseFilter}}
     {{#if hiddenExists}}
       {{#if hidden}}
         <div class="ui basic green mini button showHidden"><i class="chevron up icon"></i> HIDDEN <span
@@ -20,7 +21,7 @@
     <div style="max-height: 750px; overflow-x:hidden; overflow-y:scroll; margin-top: 10px;"
          class="ui stackable two cards">
       {{#each course in courses}}
-        {{> Semester_Card item=course type='courses' canAdd=true}}
+        {{> Favorite_Card item=course type='courses' canAdd=true}}
       {{/each}}
     </div>
   </div>

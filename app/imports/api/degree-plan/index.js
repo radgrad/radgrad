@@ -5,3 +5,5 @@ import './AcademicYearUtilities';
 import './DesiredDegreeCollection';
 import './PlanChoiceCollection';
 import './PreferredChoice';
+import './SampleAcademicPlans';
+import './SampleDesiredDegrees';

@@ -15,6 +15,13 @@ import { removeAllEntities } from '../../api/base/BaseUtilities';
 import { checkIntegrity } from '../../api/integrity/IntegrityChecker';
 import { ROLE } from '../../api/role/Role';
 import { StudentParticipation } from '../../api/public-stats/StudentParticipationCollection';
+import { AdvisorProfiles } from '../../api/user/AdvisorProfileCollection';
+import { Slugs } from '../../api/slug/SlugCollection';
+import { FavoriteInterests } from '../../api/favorite/FavoriteInterestCollection';
+import { FavoriteCareerGoals } from '../../api/favorite/FavoriteCareerGoalCollection';
+import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
+import { StudentProfiles } from '../../api/user/StudentProfileCollection';
+import { MentorProfiles } from '../../api/user/MentorProfileCollection';
 
 /* global Assets */
 /* eslint no-console: "off" */
@@ -221,6 +228,46 @@ function fixUserInteractions() {
   }
 }
 
+function favoriteInterests(profile) {
+  const student = profile.username;
+  _.forEach(profile.interestIDs, (id) => {
+    const doc = Interests.findDoc(id);
+    const interest = Slugs.getNameFromID(doc.slugID);
+    FavoriteInterests.define({ student, interest });
+  });
+}
+
+function favoriteCareerGoals(profile) {
+  const student = profile.username;
+  _.forEach(profile.careerGoalIDs, (id) => {
+    const doc = CareerGoals.findDoc(id);
+    const careerGoal = Slugs.getNameFromID(doc.slugID);
+    FavoriteCareerGoals.define({ student, careerGoal });
+  });
+}
+function ensureFavorites() {
+  let profiles = AdvisorProfiles.findNonRetired();
+  _.forEach(profiles, (profile) => {
+    favoriteCareerGoals(profile);
+    favoriteInterests(profile);
+  });
+  profiles = FacultyProfiles.findNonRetired();
+  _.forEach(profiles, (profile) => {
+    favoriteCareerGoals(profile);
+    favoriteInterests(profile);
+  });
+  profiles = MentorProfiles.findNonRetired();
+  _.forEach(profiles, (profile) => {
+    favoriteCareerGoals(profile);
+    favoriteInterests(profile);
+  });
+  profiles = StudentProfiles.findNonRetired({ alumni: false });
+  _.forEach(profiles, (profile) => {
+    favoriteCareerGoals(profile);
+    favoriteInterests(profile);
+  });
+}
+
 // Add a startup callback that distinguishes between test and dev/prod mode and does the right thing.
 Meteor.startup(() => {
   if (Meteor.isTest || Meteor.isAppTest) {
@@ -235,6 +282,7 @@ Meteor.startup(() => {
     startupPublicStats();
     startupStudentParticipation();
     fixUserInteractions();
+    ensureFavorites();
     SyncedCron.start();
   }
 });

@@ -27,8 +27,7 @@ export function defaultCalcLevel(studentID) {
   const numOppReviews = Reviews.find({ studentID, reviewType: 'opportunity', moderated: true, visible: true })
     .count();
   const numReviews = numCourseReviews + numOppReviews;
-  const hasPicture = StudentProfiles.hasSetPicture(studentID);
-  // console.log('defaultCalcLevel', earnedICE, plannedICE, numReviews, hasPicture);
+  // console.log('defaultCalcLevel', earnedICE, plannedICE, numReviews);
   let level = 1;
   if (earnedICE.i >= 100 &&
     earnedICE.c >= 100 &&
@@ -36,8 +35,7 @@ export function defaultCalcLevel(studentID) {
     numReviews >= 6 &&
     plannedICE.i >= 100 &&
     plannedICE.c >= 100 &&
-    plannedICE.e >= 100 &&
-    hasPicture) {
+    plannedICE.e >= 100) {
     level = 6;
   } else if (earnedICE.i >= 80 &&
     earnedICE.c >= 80 &&
@@ -45,8 +43,7 @@ export function defaultCalcLevel(studentID) {
     numReviews >= 1 &&
     plannedICE.i >= 100 &&
     plannedICE.c >= 100 &&
-    plannedICE.e >= 100 &&
-    hasPicture) {
+    plannedICE.e >= 100) {
     level = 5;
   } else if (earnedICE.i >= 30 &&
     earnedICE.c >= 36 &&
@@ -54,8 +51,7 @@ export function defaultCalcLevel(studentID) {
     numReviews >= 0 &&
     plannedICE.i >= 100 &&
     plannedICE.c >= 100 &&
-    plannedICE.e >= 100 &&
-    hasPicture) {
+    plannedICE.e >= 100) {
     level = 4;
   } else if ((earnedICE.i >= 1 ||
       earnedICE.e >= 1) &&

@@ -6,6 +6,8 @@ import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { getRouteUserName } from './route-user-name';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection';
+import { FavoriteAcademicPlans } from '../../../api/favorite/FavoriteAcademicPlanCollection';
+import { getUserIdFromRoute } from './get-user-id-from-route';
 
 function availableAcademicPlans() {
   let plans = AcademicPlans.findNonRetired({}, { sort: { year: 1, name: 1 } });
@@ -20,11 +22,16 @@ function availableAcademicPlans() {
           year: 1,
           name: 1,
         },
-      }).fetch(), (ap) => !ap.retired);
+      })
+        .fetch(), (ap) => !ap.retired);
+      if (plans.length === 0) {
+        plans = AcademicPlans.getLatestPlans();
+      }
     }
-    if (profile.academicPlanID) {
-      return _.filter(plans, p => profile.academicPlanID !== p._id);
-    }
+    const studentID = getUserIdFromRoute();
+    const favorites = FavoriteAcademicPlans.findNonRetired({ studentID });
+    const favoriteIDs = _.map(favorites, (f) => f.academicPlanID);
+    plans = _.filter(plans, (p) => !_.includes(favoriteIDs, p._id));
   }
   return plans;
 }
@@ -40,9 +47,9 @@ Template.Card_Explorer_Plans_Widget.helpers({
   noPlan() {
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
-      if (getRouteUserName()) {
-        return _.isNil(Users.getProfile(getRouteUserName()).academicPlanID);
-      }
+      const studentID = getUserIdFromRoute();
+      const favorites = FavoriteAcademicPlans.findNonRetired({ studentID });
+      return favorites.length === 0;
     }
     return false;
   },

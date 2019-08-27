@@ -1,0 +1,13 @@
+<template name="Future_Participation">
+  <div class="ui table">
+  </div>
+  <div class="ui equal width padded grid" style="margin: 4px 4px 4px 0px">
+    {{#each semester in semesters}}
+      <div class="{{highlightString item semester}} column">
+        <b>{{semesterName semester}}</b>
+        <br/>
+        {{semesterScore item semester}}
+      </div>
+    {{/each}}
+  </div>
+</template>

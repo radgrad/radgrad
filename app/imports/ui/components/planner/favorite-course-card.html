@@ -1,0 +1,39 @@
+<template name="Favorite_Course_Card">
+  <div class="card">
+    <div class="content">
+      <div class="header">
+        <h4>{{> ICE_header ice=ice }} {{courseNumber}}: {{name}}</h4>
+      </div>
+    </div>
+    <div class="content">
+      {{#if isInPlan}}
+        {{#if futureInstance}}
+          {{> Add_Course_Button buttonType='remove' dictionary=dictionary course=selectedCourse}}
+        {{else}}
+          {{#if passedCourse}}
+            {{> Add_Course_Button buttonType='taken'}}
+          {{else}}
+            {{#if notFromSTAR}}
+              {{> Add_Course_Button buttonType='remove' dictionary=dictionary course=selectedCourse}}
+            {{else}}
+              {{> Add_Course_Button buttonType='add' dictionary=dictionary course=selectedCourse}}
+            {{/if}}
+          {{/if}}
+        {{/if}}
+      {{else}}
+        {{> Add_Course_Button buttonType='add' dictionary=dictionary course=course}}
+      {{/if}}
+      <b>Scheduled:</b> {{#if instanceSemester}} {{instanceSemester}} {{else}} N/A {{/if}}
+      {{> Future_Participation type='courses' item=course}}
+      {{#if courseEnrollmentData}}
+        {{> Future_Enrollment_Widget dictionary=dictionary}}
+      {{/if}}
+      <p style="text-align: right;">
+        <a href="{{pathFor coursesRouteName username=routeUserName course=courseSlug}}"
+        target="_blank">
+          View in Explorer <i class="arrow right icon"></i>
+        </a>
+      </p>
+    </div>
+  </div>
+</template>

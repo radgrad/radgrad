@@ -2,10 +2,10 @@
   <div class="ui padded container segment">
     <div class="ui top attached tabular stackable menu">
       <a class="{{#if showPlan}}active{{/if}} item jsInspectorTab" data-tab="plan">ACADEMIC PLAN</a>
-      <a class="{{#if showInspector}}active{{/if}} item jsInspectorTab" data-tab="inspector">INSPECTOR</a>
+      <a class="{{#if showInspector}}active{{/if}} item jsInspectorTab" data-tab="inspector">FAVORITES</a>
     </div>
     <div class="ui bottom attached {{#if showPlan}}active{{/if}} tab segment" data-tab="plan">
-      {{> Academic_Plan_Viewer_Widget degreePlanner=true dictionary=getDictionary}}
+      {{> Favorite_Academic_Plan_Viewer_Widget degreePlanner=true dictionary=getDictionary}}
     </div>
     <div class="ui bottom attached {{#if showInspector}}active{{/if}} tab segment" data-tab="inspector">
       {{> Inspector dictionary=getDictionary}}

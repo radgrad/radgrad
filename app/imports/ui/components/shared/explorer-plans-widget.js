@@ -1,16 +1,18 @@
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import * as RouteNames from '../../../startup/client/router.js';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
-import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getUserIdFromRoute } from './get-user-id-from-route';
 import { getRouteUserName } from './route-user-name';
-import { updateMethod } from '../../../api/base/BaseCollection.methods';
+import { defineMethod, removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { isInRole } from '../../utilities/template-helpers';
 import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
+import { FavoriteAcademicPlans } from '../../../api/favorite/FavoriteAcademicPlanCollection';
+import { Slugs } from '../../../api/slug/SlugCollection';
 
 Template.Explorer_Plans_Widget.onCreated(function studentExplorerPlansWidgetOnCreated() {
   this.planVar = new ReactiveVar();
@@ -47,7 +49,9 @@ Template.Explorer_Plans_Widget.helpers({
   },
   userStatus(plan) {
     const profile = Users.getProfile(getRouteUserName());
-    return profile.academicPlanID !== plan._id;
+    const plans = _.map(FavoriteAcademicPlans.find({ studentID: profile.userID }).fetch(),
+      (p) => AcademicPlans.findDoc(p.academicPlanID)._id);
+    return _.includes(plans, plan._id);
   },
   userUsername(user) {
     if (getUserIdFromRoute() !== user._id) {
@@ -83,14 +87,24 @@ Template.Explorer_Plans_Widget.helpers({
 Template.Explorer_Plans_Widget.events({
   'click .addItem': function selectAcademicPlan(event, instance) {
     event.preventDefault();
-    const profile = Users.getProfile(getRouteUserName());
-    const updateData = {};
-    const collectionName = StudentProfiles.getCollectionName();
-    updateData.id = profile._id;
-    updateData.academicPlan = instance.data.id;
-    updateMethod.call({ collectionName, updateData }, (error) => {
+    const collectionName = FavoriteAcademicPlans.getCollectionName();
+    const doc = AcademicPlans.findDoc(instance.data.id);
+    const definitionData = {};
+    definitionData.student = getRouteUserName();
+    definitionData.academicPlan = Slugs.getNameFromID(doc.slugID);
+    defineMethod.call({ collectionName, definitionData }, (error) => {
       if (error) {
-        console.log(`Error updating ${getRouteUserName()}'s academic plan ${JSON.stringify(error)}`);
+        console.error('Failed to define favorite', error);
+      }
+    });
+  },
+  'click .deleteItem': function deleteAcademicPlan(event, instance) {
+    event.preventDefault();
+    const collectionName = FavoriteAcademicPlans.getCollectionName();
+    const favorite = FavoriteAcademicPlans.findDoc({ academicPlanID: instance.data.id });
+    removeItMethod.call({ collectionName, instance: favorite._id }, (error) => {
+      if (error) {
+        console.error('Failed to remove favorite', error);
       }
     });
   },

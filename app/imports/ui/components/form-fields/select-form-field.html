@@ -1,0 +1,12 @@
+<template name="Select_Form_Field">
+  <div class="{{#if required}}required{{/if}} field">
+    <label>{{label}}</label>
+    <select class="ui {{#if disabled}}disabled{{/if}} dropdown" name="{{name}}">
+      <option value="">Select {{label}}</option>
+      {{#each item in items}}
+        <option value="{{item.id}}" selected="{{isSelected item._id selectedItemID}}">{{item.name}}</option>
+      {{/each}}
+    </select>
+    {{> Form_Error_Message errorMessage=errorMessage}}
+  </div>
+</template>

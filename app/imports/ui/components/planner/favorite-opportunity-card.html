@@ -1,0 +1,35 @@
+<template name="Favorite_Opportunity_Card">
+  <div class="card">
+    <div class="content">
+      <div class="header">
+        <h4>{{> ICE_header ice=ice }} {{name}}</h4>
+      </div>
+    </div>
+    <div class="content">
+      {{#if isInPlan}}
+        {{#if futureInstance}}
+          {{> Add_Opportunity_Button buttonType='remove' dictionary=dictionary opportunity=opportunity}}
+        {{else}}
+          {{#if unverified}}
+            {{> Add_Opportunity_Button buttonType='remove' dictionary=dictionary opportunity=opportunity}}
+          {{/if}}
+        {{/if}}
+      {{/if}}
+      <div class="content">
+        {{> Add_Opportunity_Button buttonType='add' dictionary=dictionary opportunity=opportunity}}
+        {{#if isInPlan}}
+          <b>In Plan: </b> {{semesters}}
+          {{else}}
+          <b>Not in plan</b>
+        {{/if}}
+      </div>
+      {{> Future_Participation type='opportunities' item=opportunity}}
+      <p style="text-align: right;">
+        <a href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=opportunitySlug}}"
+           target="_blank">
+          View in Explorer <i class="arrow right icon"></i>
+        </a>
+      </p>
+    </div>
+  </div>
+</template>

@@ -3,7 +3,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Slugs } from '../slug/SlugCollection';
 import BaseSlugCollection from '../base/BaseSlugCollection';
 import { Interests } from '../interest/InterestCollection';
-import { Opportunities } from '../opportunity/OpportunityCollection.js';
+import { Opportunities } from '../opportunity/OpportunityCollection';
 
 /**
  * Represents a teaser instance, such as "ACM Webmasters".
@@ -23,7 +23,8 @@ class TeaserCollection extends BaseSlugCollection {
       url: String,
       description: String,
       interestIDs: [SimpleSchema.RegEx.Id],
-      opportunityID: SimpleSchema.RegEx.Id,
+      opportunityID: { type: SimpleSchema.RegEx.Id, optional: true },
+      targetSlugID: SimpleSchema.RegEx.Id,
       duration: { type: String, optional: true },
       retired: { type: Boolean, optional: true },
     }));
@@ -54,15 +55,23 @@ class TeaserCollection extends BaseSlugCollection {
    * if the slug is already defined, or if the opportunity is supplied and not found.
    * @returns The newly created docID.
    */
-  define({ title, slug, author, url, description, duration, interests, opportunity, retired }) {
+  define({ title, slug, author, url, description, duration, interests, opportunity, targetSlug, retired }) {
     // Get InterestIDs, throw error if any of them are not found.
     const interestIDs = Interests.getIDs(interests);
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
-    // Get OpportunityID, throw error if not found.
-    const opportunityID = Opportunities.getID(opportunity);
+    let targetSlugID;
+    if (!_.isUndefined(opportunity)) {
+      // Get OpportunityID, throw error if not found.
+      const opportunityID = Opportunities.getID(opportunity);
+      // if ()
+      targetSlugID = Slugs.findDoc({ entityID: opportunityID })._id;
+    }
+    if (!_.isUndefined(targetSlug)) {
+      targetSlugID = Slugs.findDoc({ name: targetSlug })._id;
+    }
     const teaserID = this._collection.insert({ title, slugID, author, url, description, duration, interestIDs,
-      opportunityID, retired });
+      targetSlugID, retired });
     // Connect the Slug to this teaser
     Slugs.updateEntityID(slugID, teaserID);
     return teaserID;
@@ -73,14 +82,14 @@ class TeaserCollection extends BaseSlugCollection {
    * @param docID The docID to be updated.
    * @throws { Meteor.Error } If docID is not defined, or if any interest or opportunity is undefined.
    */
-  update(docID, { title, opportunity, interests, author, url, description, duration, retired }) {
+  update(docID, { title, targetSlug, interests, author, url, description, duration, retired }) {
     this.assertDefined(docID);
     const updateData = {};
     if (title) {
       updateData.title = title;
     }
-    if (opportunity) {
-      updateData.opportunityID = Opportunities.getID(opportunity);
+    if (targetSlug) {
+      updateData.targetSlugID = Slugs.findDoc({ name: targetSlug })._id;
     }
     if (interests) {
       updateData.interestIDs = Interests.getIDs(interests);
@@ -129,16 +138,16 @@ class TeaserCollection extends BaseSlugCollection {
   }
 
   /**
-   * Returns true if teaser has the specified opportunity.
+   * Returns true if teaser has the specified slug.
    * @param teaser The teaser (docID or slug)
-   * @param opportunity The Interest (docID or slug).
-   * @returns {boolean} True if the teaser has the associated Opportunity.
-   * @throws { Meteor.Error } If teaser is not a teaser or opportunity is not a Opportunity.
+   * @param target The target (slug).
+   * @returns {boolean} True if the teaser has the associated slug.
+   * @throws { Meteor.Error } If teaser is not a teaser or target isn't a defined slug.
    */
-  hasOpportunity(teaser, opportunity) {
-    const opportunityID = Opportunities.getID(opportunity);
+  hasTarget(teaser, target) {
+    const targetSlugID = Slugs.findDoc({ name: target })._id;
     const doc = this.findDoc(teaser);
-    return (doc.opportunityID === opportunityID);
+    return (doc.targetSlugID === targetSlugID);
   }
 
   /**
@@ -158,8 +167,22 @@ class TeaserCollection extends BaseSlugCollection {
           problems.push(`Bad interestID: ${interestID}`);
         }
       });
-      if (doc.opportunityID && !Opportunities.isDefined(doc.opportunityID)) {
-        problems.push(`Bad opportunityID: ${doc.opportunityID}`);
+      if (doc.opportunityID) {
+        if (!doc.targetSlugID) {
+          const slugDoc = Slugs.findDoc({ entityID: doc.opportunityID });
+          const docID = doc._id;
+          const updateData = {};
+          updateData.targetSlugID = slugDoc._id;
+          if (slugDoc) {
+            this._collection.update(docID, { $set: updateData });
+          }
+        }
+        if (!Opportunities.isDefined(doc.opportunityID)) {
+          problems.push(`Bad opportunityID ${doc.opportunityID}`);
+        }
+      }
+      if (doc.targetSlugID && !Slugs.isDefined(doc.targetSlugID)) {
+        problems.push(`Bad targetSlugID: ${doc.targetSlugID}`);
       }
     });
     return problems;
@@ -179,12 +202,12 @@ class TeaserCollection extends BaseSlugCollection {
     const description = doc.description;
     const duration = doc.duration;
     const interests = _.map(doc.interestIDs, interestID => Interests.findSlugByID(interestID));
-    let opportunity;
-    if (doc.opportunityID) {
-      opportunity = Opportunities.findSlugByID(doc.opportunityID);
+    let targetSlug;
+    if (doc.targetSlugID) {
+      targetSlug = Slugs.getNameFromID(doc.targetSlugID);
     }
     const retired = doc.retired;
-    return { title, slug, author, url, description, duration, interests, opportunity, retired };
+    return { title, slug, author, url, description, duration, interests, targetSlug, retired };
   }
 }
 

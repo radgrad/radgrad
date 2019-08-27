@@ -8,6 +8,33 @@ import './add-course-button.js';
 import './add-opportunity-button.html';
 import './add-opportunity-button.js';
 
+import './detail-course-card.html';
+import './detail-course-card';
+
+import './detail-opportunity-card.html';
+import './detail-opportunity-card';
+
+import './details-card.html';
+import './details-card';
+
+import './favorite-academic-plan-viewer-widget.html';
+import './favorite-academic-plan-viewer-widget';
+
+import './favorite-course-card.html';
+import './favorite-course-card';
+
+import './favorite-courses-widget.html';
+import './favorite-courses-widget';
+
+import './favorite-opportunities-widget.html';
+import './favorite-opportunities-widget';
+
+import './favorite-opportunity-card.html';
+import './favorite-opportunity-card';
+
+import './favorite-tabs.html';
+import './favorite-tabs';
+
 import './future-enrollment-widget.html';
 import './future-enrollment-widget';
 
@@ -27,6 +54,9 @@ import './recommendation-item.html';
 
 import './recommendations-and-warnings.html';
 import './recommendations-and-warnings.js';
+
+import './request-verification-form.html';
+import './request-verification-form';
 
 import './semester-list.css';
 

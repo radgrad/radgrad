@@ -10,17 +10,12 @@ import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js
 import { getUserIdFromRoute } from './get-user-id-from-route';
 import { isInRole, isLabel } from '../../utilities/template-helpers';
 import { isSingleChoice } from '../../../api/degree-plan/PlanChoiceUtilities';
+import { Teasers } from '../../../api/teaser/TeaserCollection';
 
 Template.Explorer_Courses_Widget.helpers({
   choices(prerequisite) {
     // console.log(prerequisite);
     return prerequisite.course.split(',');
-  },
-  color(table) {
-    if (table.length === 0) {
-      return 'whitesmoke';
-    }
-    return '';
   },
   courseNameFromSlug(courseSlugName) {
     // console.log(courseSlugName);
@@ -37,6 +32,21 @@ Template.Explorer_Courses_Widget.helpers({
     }
     return RouteNames.mentorExplorerCoursesPageRouteName;
   },
+  courseSemesters(course) {
+    const cis = CourseInstances.find({
+      studentID: getUserIdFromRoute(),
+      courseID: course._id,
+    }).fetch();
+    const currentSemester = Semesters.getCurrentSemesterDoc();
+    const semesterNames = _.map(cis, (ci) => {
+      const sem = Semesters.findDoc(ci.semesterID);
+      if (sem.semesterNumber < currentSemester.semesterNumber) {
+        return `Taken ${Semesters.toString(ci.semesterID, false)}`;
+      }
+      return `In plan ${Semesters.toString(ci.semesterID, false)}`;
+    });
+    return semesterNames.join(', ');
+  },
   futureInstance(course) {
     let ret = false;
     const ci = CourseInstances.find({
@@ -51,26 +61,29 @@ Template.Explorer_Courses_Widget.helpers({
     });
     return ret;
   },
-  getTableTitle(tableIndex, table) {
-    switch (tableIndex) {
+  getStatusIconName(index) {
+    switch (index) {
       case 0:
-        if (table.length !== 0) {
-          return '<h4><i class="green checkmark icon"></i>Completed</h4>';
-        }
-        return '<h4 style="color:grey"><i class="grey checkmark icon"></i>Completed</h4>';
+        return 'green checkmark icon';
       case 1:
-        if (table.length !== 0) {
-          return '<h4><i class="yellow warning sign icon"></i>In Plan (Not Yet Completed)</h4>';
-        }
-        return '<h4 style="color:grey"><i class="grey warning sign icon"></i>In Plan (Not Yet Completed)</h4>';
-      case 2:
-        if (table.length !== 0) {
-          return '<h4><i class="red warning circle icon"></i>Not in Plan</h4>';
-        }
-        return '<h4 style="color:grey"><i class="grey warning circle icon"></i>Not in Plan</h4>';
+        return 'yellow warning sign icon';
       default:
-        return 'ERROR: More than one table.';
+        return 'red warning circle icon';
     }
+  },
+  getStatusTooltip(index) {
+    switch (index) {
+      case 0:
+        return 'Completed';
+      case 1:
+        return 'In Plan (Not Yet Completed)';
+      default:
+        return 'Not in Plan';
+    }
+  },
+  hasTeaser(item) {
+    const teaser = Teasers.find({ targetSlugID: item.slugID }).fetch();
+    return teaser.length > 0;
   },
   isInRole,
   isLabel,

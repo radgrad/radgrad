@@ -7,40 +7,44 @@ import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from './route-user-name';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
-import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { getUserIdFromRoute } from './get-user-id-from-route';
 import PreferredChoice from '../../../api/degree-plan/PreferredChoice';
+import { FavoriteOpportunities } from '../../../api/favorite/FavoriteOpportunityCollection';
+
+export const sortOrderKeys = {
+  match: 'match',
+  i: 'innovation',
+  e: 'experience',
+  alpha: 'alphabetical',
+};
 
 Template.Card_Explorer_Opportunities_Widget.onCreated(function studentCardExplorerOppWidgetOnCreated() {
   this.hidden = new ReactiveVar(true);
+  this.sortOrder = new ReactiveVar(sortOrderKeys.match);
 });
 
 const availableOpps = () => {
   const notRetired = Opportunities.findNonRetired({});
   const currentSemester = Semesters.getCurrentSemesterDoc();
   const group = FlowRouter.current().route.group.name;
+  const studentID = getUserIdFromRoute();
   if (group === 'student') {
-    if (notRetired.length > 0) {
-      const filteredBySem = _.filter(notRetired, function filter(opp) {
-        const oi = OpportunityInstances.find({
-          studentID: getUserIdFromRoute(),
-          opportunityID: opp._id,
-        })
-          .fetch();
-        return oi.length === 0;
+    const favorites = FavoriteOpportunities.findNonRetired({ studentID });
+    const favoriteIDs = _.map(favorites, (f) => f.opportunityID);
+    const filteredBySem = _.filter(notRetired, function filter(opp) {
+      return !_.includes(favoriteIDs, opp._id);
+    });
+    const filteredByInstance = _.filter(filteredBySem, function filter(opp) {
+      let inFuture = false;
+      _.forEach(opp.semesterIDs, (semID) => {
+        const sem = Semesters.findDoc(semID);
+        if (sem.semesterNumber >= currentSemester.semesterNumber) {
+          inFuture = true;
+        }
       });
-      const filteredByInstance = _.filter(filteredBySem, function filter(opp) {
-        let inFuture = false;
-        _.forEach(opp.semesterIDs, (semID) => {
-          const sem = Semesters.findDoc(semID);
-          if (sem.semesterNumber >= currentSemester.semesterNumber) {
-            inFuture = true;
-          }
-        });
-        return inFuture;
-      });
-      return filteredByInstance;
-    }
+      return inFuture;
+    });
+    return filteredByInstance;
   } else if (group === 'faculty') {
     return _.filter(notRetired, o => o.sponsorID !== getUserIdFromRoute());
   }
@@ -113,7 +117,23 @@ Template.Card_Explorer_Opportunities_Widget.helpers({
     } else {
       visibleOpportunities = opportunities;
     }
+    switch (Template.instance().sortOrder.get()) {
+      case sortOrderKeys.i:
+        visibleOpportunities = _.sortBy(visibleOpportunities, (o) => o.ice.i).reverse();
+        break;
+      case sortOrderKeys.e:
+        visibleOpportunities = _.sortBy(visibleOpportunities, (o) => o.ice.e).reverse();
+        break;
+      case sortOrderKeys.alpha:
+        visibleOpportunities = _.sortBy(visibleOpportunities, (o) => o.name);
+        break;
+      default:
+        // don't do anything already doing match.
+    }
     return visibleOpportunities;
+  },
+  sortOrder() {
+    return Template.instance().sortOrder;
   },
   typeCourse() {
     return this.type === 'courses';

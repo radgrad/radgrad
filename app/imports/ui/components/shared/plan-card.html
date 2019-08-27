@@ -1,25 +1,21 @@
 <template name="Plan_Card">
   <div class="ui card radgrad-interest-card">
     <div class="content">
-      <div class="header">{{itemName item}}</div>
+      <div class="ui dividing header">{{itemName item}}</div>
       <div class="meta">
       </div>
-    </div>
-    <div class="content">
       <p>{{itemShortDescription item}}...</p>
       {{> Academic_Plan_Static_Viewer plan=item}}
+      <hr/>
+      <h3 class="uh header">STUDENTS PARTICIPATING {{> Widget_Header_Number inputValue=(numberStudents item)}}</h3>
     </div>
-    <div class="content">
-      <span>STUDENTS PARTICIPATING {{> Widget_Header_Number inputValue=(numberStudents item)}}</span>
-    </div>
-
     <div class="radgrad-home-buttons ui center aligned three bottom attached {{hidden}} buttons">
       <a class="ui button"
          href="{{pathFor plansRouteName username=routeUserName plan=(itemSlug item)}}"><i
           class="chevron circle right icon"></i><br>View More</a>
-      {{#if canAdd}}
-        {{> Profile_Add item=item type=type}}
-      {{/if}}
+<!--      {{#if canAdd}}-->
+<!--        {{> Profile_Add item=item type=type}}-->
+<!--      {{/if}}-->
     </div>
   </div>
 </template>

@@ -14,8 +14,25 @@ import {
   opportunitySemesters,
 } from '../../utilities/template-helpers';
 import { StudentParticipation } from '../../../api/public-stats/StudentParticipationCollection';
+import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
+import { getUserIdFromRoute } from './get-user-id-from-route';
+import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
+import { makeCourseICE } from '../../../api/ice/IceProcessor';
 
-Template.Semester_Card.helpers({
+Template.Favorite_Card.helpers({
+  courseICE(item) {
+    const studentID = getUserIdFromRoute();
+    const courseID = item._id;
+    const instances = CourseInstances.findNonRetired({ studentID, courseID });
+    let ice = { i: 0, c: 0, e: 0 };
+    _.forEach(instances, (instance) => {
+      const instICE = makeCourseICE(Slugs.getNameFromID(item.slugID), instance.grade);
+      if (instICE.c > ice.c) {
+        ice = instICE;
+      }
+    });
+    return ice;
+  },
   coursesRouteName() {
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
@@ -25,6 +42,24 @@ Template.Semester_Card.helpers({
       return RouteNames.facultyExplorerCoursesPageRouteName;
     }
     return RouteNames.mentorExplorerCoursesPageRouteName;
+  },
+  futureItem(item) {
+    if (this.type === 'opportunities') {
+      return true;
+    }
+    const studentID = getUserIdFromRoute();
+    const currentSemester = Semesters.getCurrentSemesterDoc();
+    let instances;
+    if (this.type === 'courses') {
+      instances = CourseInstances.findNonRetired({ studentID, courseID: item._id });
+    } else if (this.type === 'opportunities') {
+      instances = OpportunityInstances.findNonRetired({ studentID, opportunityID: item._id });
+    }
+    if (instances.length === 0) {
+      return true;
+    }
+    const instanceSemesters = _.map(instances, (i) => Semesters.findDoc(i.semesterID));
+    return _.some(instanceSemesters, (sem) => sem.semesterNumber >= currentSemester.semesterNumber);
   },
   hidden() {
     let ret = '';
@@ -38,6 +73,18 @@ Template.Semester_Card.helpers({
       ret = 'grey';
     }
     return ret;
+  },
+  inPlan(item) {
+    const studentID = getUserIdFromRoute();
+    let instances;
+    if (this.type === 'courses') {
+      const courseID = item._id;
+      instances = CourseInstances.findNonRetired({ studentID, courseID });
+    } else if (this.type === 'opportunities') {
+      const opportunityID = item._id;
+      instances = OpportunityInstances.findNonRetired({ studentID, opportunityID });
+    }
+    return instances.length > 0;
   },
   isInRole,
   isType(type, value) {
@@ -100,6 +147,20 @@ Template.Semester_Card.helpers({
     }
     return RouteNames.mentorExplorerOpportunitiesPageRouteName;
   },
+  planSemesters(item) {
+    const studentID = getUserIdFromRoute();
+    let instances;
+    if (this.type === 'courses') {
+      const courseID = item._id;
+      instances = CourseInstances.findNonRetired({ studentID, courseID });
+    } else if (this.type === 'opportunities') {
+      const opportunityID = item._id;
+      instances = OpportunityInstances.findNonRetired({ studentID, opportunityID });
+    }
+    const semesters = _.map(instances, (i) => Semesters.toString(i.semesterID, false));
+    const semString = semesters.join(' - ');
+    return semString.replace(/Summer/g, 'Sum').replace(/Spring/g, 'Spr');
+  },
   replaceSemString(array) {
     // console.log('array', array);
     const currentSem = Semesters.getCurrentSemesterDoc();
@@ -122,6 +183,13 @@ Template.Semester_Card.helpers({
       return '';
     }
     return Users.getFullName(studentID);
+  },
+  takenCourse(item) {
+    const studentID = getUserIdFromRoute();
+    const courseID = item._id;
+    const currentSemester = Semesters.getCurrentSemesterDoc();
+    const instances = CourseInstances.findNonRetired({ studentID, courseID });
+    return _.some(instances, (i) => Semesters.findDoc(i.semesterID).semesterNumber < currentSemester.semesterNumber);
   },
   typeCourse() {
     return (this.type === 'courses');
@@ -148,7 +216,7 @@ Template.Semester_Card.helpers({
   },
 });
 
-Template.Semester_Card.events({
+Template.Favorite_Card.events({
   'click .hide': function clickItemHide(event) {
     event.preventDefault();
     const profile = Users.getProfile(getRouteUserName());
@@ -195,6 +263,6 @@ Template.Semester_Card.events({
   },
 });
 
-Template.Semester_Card.onRendered(function semesterCardOnRendered() {
+Template.Favorite_Card.onRendered(function semesterCardOnRendered() {
   this.$('.ui .image').popup();
 });

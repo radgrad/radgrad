@@ -7,9 +7,11 @@ import * as RouteNames from '../../../startup/client/router';
 import { isInRole } from '../../utilities/template-helpers';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { getRouteUserName } from './route-user-name';
-import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { getUserIdFromRoute } from './get-user-id-from-route';
-import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
+import { FavoriteAcademicPlans } from '../../../api/favorite/FavoriteAcademicPlanCollection';
+import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
+import { FavoriteCourses } from '../../../api/favorite/FavoriteCourseCollection';
+import { FavoriteOpportunities } from '../../../api/favorite/FavoriteOpportunityCollection';
 
 Template.Explorer_Menu.helpers({
   academicPlansCardRouteName() {
@@ -243,10 +245,9 @@ Template.Explorer_Menu.helpers({
   },
   userCourses(course) {
     let ret = '';
-    const ci = CourseInstances.find({
-      studentID: getUserIdFromRoute(),
-      courseID: course._id,
-    }).fetch();
+    const studentID = getUserIdFromRoute();
+    const courseID = course._id;
+    const ci = FavoriteCourses.findNonRetired({ studentID, courseID });
     if (ci.length > 0) {
       ret = 'check green circle outline icon';
     }
@@ -271,10 +272,9 @@ Template.Explorer_Menu.helpers({
   },
   userOpportunities(opportunity) {
     let ret = '';
-    const oi = OpportunityInstances.find({
-      studentID: getUserIdFromRoute(),
-      opportunityID: opportunity._id,
-    }).fetch();
+    const studentID = getUserIdFromRoute();
+    const opportunityID = opportunity._id;
+    const oi = FavoriteOpportunities.findNonRetired({ studentID, opportunityID });
     if (oi.length > 0) {
       ret = 'check green circle outline icon';
     }
@@ -282,8 +282,10 @@ Template.Explorer_Menu.helpers({
   },
   userPlans(plan) {
     let ret = '';
-    const profile = Users.getProfile(getRouteUserName());
-    if (_.includes(profile.academicPlanID, plan._id)) {
+    const studentID = getUserIdFromRoute();
+    const favorites = _.map(FavoriteAcademicPlans.find({ studentID }).fetch(),
+      (p) => AcademicPlans.findDoc(p.academicPlanID)._id);
+    if (_.includes(favorites, plan._id)) {
       ret = 'check green circle outline icon';
     }
     return ret;

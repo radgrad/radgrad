@@ -1,6 +1,7 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { isLabel } from '../../utilities/template-helpers';
+import { Teasers } from '../../../api/teaser/TeaserCollection';
 
 Template.Landing_Explorer_Opportunities_Widget.onCreated(function studentExplorerOpportunitiesWidgetOnCreated() {
   this.updated = new ReactiveVar(false);
@@ -11,9 +12,16 @@ Template.Landing_Explorer_Opportunities_Widget.helpers({
     const semString = array.join(', ');
     return semString.replace(/Summer/g, 'Sum').replace(/Spring/g, 'Spr');
   },
+  hasTeaser(opportunity) {
+    const teaser = Teasers.findNonRetired({ targetSlugID: opportunity.slugID });
+    return teaser.length > 0;
+  },
   isLabel,
   toUpper(string) {
-    return string.toUpperCase();
+    if (string) {
+      return string.toUpperCase();
+    }
+    return '';
   },
   updatedTeaser(teaser) {
     return teaser;

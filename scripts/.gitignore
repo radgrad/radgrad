@@ -2,3 +2,5 @@ emails*.txt
 star*.json
 node_modules
 alumni*.txt
+dump*.json
+analysis*.txt

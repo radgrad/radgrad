@@ -1,0 +1,15 @@
+<template name="Details_Card">
+  {{#if hasSelection}}
+    <div class="ui segment">
+      {{#if selectedCourse}}
+        {{> Detail_Course_Card dictionary=getDictionary}}
+      {{/if}}
+      {{#if selectedOpportunity}}
+        {{> Detail_Opportunity_Card dictionary=getDictionary}}
+      {{/if}}
+    </div>
+  {{else}}
+    <div class="ui message">No course or opportunity selected. Please click on a course or opportunity to the left.
+    </div>
+  {{/if}}
+</template>

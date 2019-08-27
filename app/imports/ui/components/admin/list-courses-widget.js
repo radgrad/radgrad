@@ -32,7 +32,10 @@ Template.List_Courses_Widget.helpers({
     return `${course.number}: ${course.shortName}`;
   },
   slugName(slugID) {
-    return Slugs.findDoc(slugID).name;
+    if (Slugs.isDefined(slugID)) {
+      return Slugs.findDoc(slugID).name;
+    }
+    return '';
   },
   deleteDisabled(course) {
     return (numReferences(course) > 0) ? 'disabled' : '';

@@ -12,8 +12,8 @@ Template.Student_Layout.helpers({
   secondMenuItems() {
     return [
       { label: 'Home', route: RouteNames.studentHomePageRouteName, regex: 'home' },
-      { label: 'Degree Planner', route: RouteNames.studentDegreePlannerPageRouteName, regex: 'degree-planner' },
       { label: 'Explorer', route: RouteNames.studentExplorerPageRouteName, regex: 'explorer' },
+      { label: 'Degree Planner', route: RouteNames.studentDegreePlannerPageRouteName, regex: 'degree-planner' },
       { label: 'Mentor Space', route: RouteNames.studentMentorSpacePageRouteName, regex: 'mentor-space' },
     ];
   },

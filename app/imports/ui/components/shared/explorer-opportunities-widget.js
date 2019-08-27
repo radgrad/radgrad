@@ -10,6 +10,7 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { getUserIdFromRoute } from './get-user-id-from-route';
 import { isInRole, isLabel } from '../../utilities/template-helpers';
 import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
+import { Teasers } from '../../../api/teaser/TeaserCollection';
 
 Template.Explorer_Opportunities_Widget.onCreated(function studentExplorerOpportunitiesWidgetOnCreated() {
   this.updated = new ReactiveVar(false);
@@ -33,11 +34,34 @@ Template.Explorer_Opportunities_Widget.helpers({
     });
     return ret;
   },
+  hasTeaser(opportunity) {
+    const teaser = Teasers.find({ targetSlugID: opportunity.slugID }).fetch();
+    return teaser.length > 0;
+  },
   isInRole,
   isLabel,
   replaceSemString(array) {
     const semString = array.join(', ');
     return semString.replace(/Summer/g, 'Sum').replace(/Spring/g, 'Spr');
+  },
+  opportunitySemesters(opportunity) {
+    const ois = OpportunityInstances.find({
+      studentID: getUserIdFromRoute(),
+      opportunityID: opportunity._id,
+    })
+      .fetch();
+    const currentSemester = Semesters.getCurrentSemesterDoc();
+    const names = _.map(ois, (oi) => {
+      const sem = Semesters.findDoc(oi.semesterID);
+      if (sem.semesterNumber < currentSemester.semesterNumber) {
+        if (oi.verified) {
+          return `Verified ${Semesters.toString(oi.semesterID, false)}`;
+        }
+        return `Unverified ${Semesters.toString(oi.semesterID, false)}`;
+      }
+      return `In plan ${Semesters.toString(oi.semesterID, false)}`;
+    });
+    return names.join(', ');
   },
   review() {
     let review = '';

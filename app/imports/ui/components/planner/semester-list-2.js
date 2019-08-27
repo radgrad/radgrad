@@ -11,7 +11,11 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
-import { plannerKeys } from './academic-plan';
+import {
+  plannerKeys, resetDetails,
+  showCourseDetails,
+  showOpportunityDetails,
+} from './academic-plan';
 import { getFutureEnrollmentMethod } from '../../../api/course/CourseCollection.methods';
 import { userInteractionDefineMethod } from '../../../api/analytic/UserInteractionCollection.methods';
 
@@ -243,49 +247,32 @@ Template.Semester_List_2.events({
     if (firstClass === 'courseInstance') {
       if (CourseInstances.isDefined(target.id)) {
         const ci = CourseInstances.findDoc(target.id);
-        template.state.set(plannerKeys.detailCourse, null);
-        template.state.set(plannerKeys.detailCourseInstance, ci);
-        template.state.set(plannerKeys.detailICE, ci.ice);
-        const course = Courses.findDoc(ci.courseID);
-        getFutureEnrollmentMethod.call(ci.courseID, (error, result) => {
-          if (error) {
-            console.log('Error in getting future enrollment', error);
-          } else
-            if (course._id === result.courseID) {
-              template.state.set(plannerKeys.plannedEnrollment, result);
-            }
-        });
-      } else
-        if (Courses.isDefined(target.id)) {
-          const course = Courses.findDoc(target.id);
-          template.state.set(plannerKeys.detailCourse, course);
-          template.state.set(plannerKeys.detailCourseInstance, null);
-        } else {
-          template.state.set(plannerKeys.detailCourse, null);
-        }
-      template.state.set(plannerKeys.detailOpportunity, null);
-      template.state.set(plannerKeys.detailOpportunityInstance, null);
+        showCourseDetails(template.state, ci);
+        // template.state.set(plannerKeys.detailCourse, ci);
+        // template.state.set(plannerKeys.detailICE, ci.ice);
+        // const course = Courses.findDoc(ci.courseID);
+        // getFutureEnrollmentMethod.call(ci.courseID, (error, result) => {
+        //   if (error) {
+        //     console.log('Error in getting future enrollment', error);
+        //   } else
+        //     if (course._id === result.courseID) {
+        //       template.state.set(plannerKeys.plannedEnrollment, result);
+        //     }
+        // });
+      }
+      // template.state.set(plannerKeys.detailOpportunity, null);
+      // template.state.set(plannerKeys.detailOpportunityInstance, null);
     } else
       if (firstClass === 'opportunityInstance') {
         if (OpportunityInstances.isDefined(target.id)) {
           const oi = OpportunityInstances.findDoc(target.id);
-          template.state.set(plannerKeys.detailOpportunity, null);
-          template.state.set(plannerKeys.detailOpportunityInstance, oi);
-          template.state.set(plannerKeys.detailICE, oi.ice);
-        } else
-          if (Opportunities.isDefined(target.id)) {
-            const opportunity = Opportunities.findDoc(target.id);
-            template.state.set(plannerKeys.detailOpportunity, opportunity);
-            template.state.set(plannerKeys.detailOpportunityInstance, null);
-          } else {
-            template.state.set(plannerKeys.detailOpportunity, null);
-            template.state.set(plannerKeys.detailOpportunityInstance, null);
-          }
-        template.state.set(plannerKeys.detailCourse, null);
-        template.state.set(plannerKeys.detailCourseInstance, null);
+          showOpportunityDetails(template.state, oi);
+          // template.state.set(plannerKeys.detailOpportunity, oi);
+          // template.state.set(plannerKeys.detailICE, oi.ice);
+        }
+        // template.state.set(plannerKeys.detailCourse, null);
+        // template.state.set(plannerKeys.detailCourseInstance, null);
       }
-    template.state.set(plannerKeys.selectedInspectorTab, true);
-    template.state.set(plannerKeys.selectedPlanTab, false);
   },
   'click .jsDelCourse': function clickJsDelCourse(event) {
     event.preventDefault();
@@ -299,14 +286,7 @@ Template.Semester_List_2.events({
       }
     });
     const template = Template.instance();
-    template.state.set(plannerKeys.selectedPlanTab, true);
-    template.state.set(plannerKeys.selectedInspectorTab, false);
-    template.state.set(plannerKeys.detailCourse, null);
-    template.state.set(plannerKeys.detailCourseInstance, null);
-    template.state.set(plannerKeys.detailICE, null);
-    template.state.set(plannerKeys.detailOpportunity, null);
-    template.state.set(plannerKeys.detailOpportunityInstance, null);
-    template.state.set(plannerKeys.detailICE, null);
+    resetDetails(template.state);
   },
   'click .jsDelOpp': function clickJsDelOpp(event) {
     event.preventDefault();
@@ -320,14 +300,7 @@ Template.Semester_List_2.events({
       }
     });
     const template = Template.instance();
-    template.state.set(plannerKeys.selectedPlanTab, true);
-    template.state.set(plannerKeys.selectedInspectorTab, false);
-    template.state.set(plannerKeys.detailCourse, null);
-    template.state.set(plannerKeys.detailCourseInstance, null);
-    template.state.set(plannerKeys.detailICE, null);
-    template.state.set(plannerKeys.detailOpportunity, null);
-    template.state.set(plannerKeys.detailOpportunityInstance, null);
-    template.state.set(plannerKeys.detailICE, null);
+    resetDetails(template.state);
   },
 });
 

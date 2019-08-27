@@ -6,6 +6,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { RadGrad } from '../radgrad/RadGrad';
 import { ROLE } from '../role/Role';
 import { loadCollectionNewDataOnly } from '../utilities/load-fixtures';
+import { Feeds } from '../feed/FeedCollection';
 
 /**
  * Allows admins to create and return a JSON object to the client representing a snapshot of the RadGrad database.
@@ -70,9 +71,18 @@ export const defineMethod = new ValidatedMethod({
   mixins: [CallPromiseMixin],
   validate: null,
   run({ collectionName, definitionData }) {
-    const collection = RadGrad.getCollection(collectionName);
-    collection.assertValidRoleForMethod(this.userId);
-    return collection.define(definitionData);
+    if (collectionName === Feeds.getCollectionName()) {
+      if (Meteor.isServer) {
+        const collection = RadGrad.getCollection(collectionName);
+        collection.assertValidRoleForMethod(this.userId);
+        return collection.define(definitionData);
+      }
+    } else {
+      const collection = RadGrad.getCollection(collectionName);
+      collection.assertValidRoleForMethod(this.userId);
+      return collection.define(definitionData);
+    }
+    return '';
   },
 });
 

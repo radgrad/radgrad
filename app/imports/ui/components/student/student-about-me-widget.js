@@ -8,6 +8,8 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection.js';
 import { getRouteUserName } from '../../components/shared/route-user-name.js';
+import { FavoriteAcademicPlans } from '../../../api/favorite/FavoriteAcademicPlanCollection';
+import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
 Template.Student_About_Me_Widget.helpers({
   careerGoals() {
@@ -20,20 +22,26 @@ Template.Student_About_Me_Widget.helpers({
     }
     return ret;
   },
+  careerGoalRouteName() {
+    return RouteNames.studentExplorerCareerGoalsPageRouteName;
+  },
   careerGoalsRouteName() {
     return RouteNames.studentCardExplorerCareerGoalsPageRouteName;
+  },
+  degreeRouteName() {
+    return RouteNames.studentExplorerPlansPageRouteName;
   },
   degreesRouteName() {
     return RouteNames.studentCardExplorerPlansPageRouteName;
   },
-  desiredDegree() {
-    let ret = 'Not yet specified.';
-    if (getRouteUserName()) {
-      const profile = Users.getProfile(getRouteUserName());
-      if (profile.academicPlanID) {
-        const plan = AcademicPlans.findDoc(profile.academicPlanID);
-        ret = plan.name;
-      }
+  desiredDegrees() {
+    const ret = [];
+    if (getUserIdFromRoute()) {
+      const studentID = getUserIdFromRoute();
+      const favorites = FavoriteAcademicPlans.findNonRetired({ studentID });
+      _.forEach(favorites, (f) => {
+        ret.push(AcademicPlans.findDoc(f.academicPlanID));
+      });
     }
     return ret;
   },
@@ -60,14 +68,6 @@ Template.Student_About_Me_Widget.helpers({
     }
     return ret;
   },
-  firstInterest() {
-    let ret;
-    const interests = Interests.find({}, { sort: { name: 1 } }).fetch();
-    if (interests.length > 0) {
-      ret = Slugs.findDoc(interests[0].slugID).name;
-    }
-    return ret;
-  },
   getDictionary() {
     return Template.instance().state;
   },
@@ -87,6 +87,9 @@ Template.Student_About_Me_Widget.helpers({
     }
     return ret;
   },
+  interestRouteName() {
+    return RouteNames.studentExplorerInterestsPageRouteName;
+  },
   interestsRouteName() {
     return RouteNames.studentCardExplorerInterestsPageRouteName;
   },
@@ -102,6 +105,9 @@ Template.Student_About_Me_Widget.helpers({
       return profile.picture;
     }
     return '';
+  },
+  planName(plan) {
+    return plan.name;
   },
   slugName(item) {
     return Slugs.findDoc(item.slugID).name;

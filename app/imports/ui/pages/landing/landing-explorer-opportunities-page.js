@@ -19,7 +19,7 @@ function semesters(opportunity) {
 }
 
 function teaser(opp) {
-  const oppTeaser = Teasers.find({ opportunityID: opp._id }).fetch();
+  const oppTeaser = Teasers.find({ targetSlugID: opp.slugID }).fetch();
   return oppTeaser[0];
 }
 

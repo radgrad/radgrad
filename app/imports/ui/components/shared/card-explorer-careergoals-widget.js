@@ -7,7 +7,7 @@ import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import PreferredChoice from '../../../api/degree-plan/PreferredChoice';
 
 function availableCareerGoals() {
-  const careers = CareerGoals.find({}).fetch();
+  const careers = CareerGoals.findNonRetired({});
   if (getRouteUserName()) {
     const profile = Users.getProfile(getRouteUserName());
     const careerGoalIDs = profile.careerGoalIDs;
