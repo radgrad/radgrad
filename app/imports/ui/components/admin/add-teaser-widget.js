@@ -1,12 +1,15 @@
 import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import * as FormUtils from '../form-fields/form-field-utilities.js';
 import { Slugs } from '../../../api/slug/SlugCollection';
+import { CareerGoals } from '../../../api/career/CareerGoalCollection';
+import { Courses } from '../../../api/course/CourseCollection';
 
 const addSchema = new SimpleSchema({
   title: String,
@@ -31,10 +34,20 @@ Template.Add_Teaser_Widget.helpers({
     return Opportunities.findNonRetired({}, { sort: { name: 1 } });
   },
   slugs() {
-    const opportunitySlugs = Slugs.findNonRetired({ entityName: 'Opportunity' }, { sort: { name: 1 } });
-    const courseSlugs = Slugs.findNonRetired({ entityName: 'Course' }, { sort: { name: 1 } });
+    const opportunities = Opportunities.findNonRetired({});
+    let opportunitySlugs = _.map(opportunities, (o) => Slugs.findDoc(o.slugID));
+    opportunitySlugs = _.sortBy(opportunitySlugs, ['name']);
+    const courses = Courses.findNonRetired({});
+    let courseSlugs = _.map(courses, (c) => Slugs.findDoc(c.slugID));
+    courseSlugs = _.sortBy(courseSlugs, ['name']);
+    const careerGoals = CareerGoals.findNonRetired({});
+    let careerGoalSlugs = _.map(careerGoals, (c) => Slugs.findDoc(c.slugID));
+    careerGoalSlugs = _.sortBy(careerGoalSlugs, ['name']);
+    const interests = Interests.findNonRetired({});
+    let interestSlugs = _.map(interests, (i) => Slugs.findDoc(i.slugID));
+    interestSlugs = _.sortBy(interestSlugs, ['name']);
     // return Slugs.findNonRetired({}, { sort: { name: 1 } });
-    return opportunitySlugs.concat(courseSlugs);
+    return opportunitySlugs.concat(courseSlugs.concat(interestSlugs.concat(careerGoalSlugs)));
   },
 });
 
