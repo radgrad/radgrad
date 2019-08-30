@@ -61,8 +61,8 @@ Template.Semester_List_2.helpers({
     return opp.ice.e;
   },
   opportunityName(opportunityID) {
-    const opp = OpportunityInstances.findDoc({ _id: opportunityID });
-    if (opp) {
+    if (OpportunityInstances.isDefined(opportunityID)) {
+      const opp = OpportunityInstances.findDoc({ _id: opportunityID });
       const opportunity = Opportunities.findDoc({ _id: opp.opportunityID });
       if (opportunity) {
         const name = opportunity.name;
@@ -135,10 +135,9 @@ Template.Semester_List_2.events({
                 getFutureEnrollmentMethod.call(courseID, (err, result) => {
                   if (err) {
                     console.log('Error in getting future enrollment', error);
-                  } else
-                    if (courseID === result.courseID) {
-                      instance.state.set(plannerKeys.plannedEnrollment, result);
-                    }
+                  } else if (courseID === result.courseID) {
+                    instance.state.set(plannerKeys.plannedEnrollment, result);
+                  }
                 });
                 const interactionData = { username, type: 'addCourse', typeData: slug };
                 userInteractionDefineMethod.call(interactionData, (err) => {
@@ -149,34 +148,33 @@ Template.Semester_List_2.events({
               }
             });
           }
-        } else
-          if (Slugs.isSlugForEntity(slug, 'Opportunity')) {
-            const opportunityID = Slugs.getEntityID(slug, 'Opportunity');
-            const semesterID = Template.instance().localState.get('semester')._id;
-            const collectionName = OpportunityInstances.getCollectionName();
-            const definitionData = {
-              semester: semSlug,
-              opportunity: slug,
-              verified: false,
-              student: username,
-            };
-            // eslint-disable-next-line
-            if (OpportunityInstances.find({ opportunityID, studentID: getUserIdFromRoute(), semesterID }).count() === 0) {
-              defineMethod.call({ collectionName, definitionData }, (error) => {
-                if (!error) {
-                  FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
-                  FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
-                  FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
-                  const interactionData = { username, type: 'addOpportunity', typeData: slug };
-                  userInteractionDefineMethod.call(interactionData, (err) => {
-                    if (err) {
-                      console.log('Error creating UserInteraction', err);
-                    }
-                  });
-                }
-              });
-            }
+        } else if (Slugs.isSlugForEntity(slug, 'Opportunity')) {
+          const opportunityID = Slugs.getEntityID(slug, 'Opportunity');
+          const semesterID = Template.instance().localState.get('semester')._id;
+          const collectionName = OpportunityInstances.getCollectionName();
+          const definitionData = {
+            semester: semSlug,
+            opportunity: slug,
+            verified: false,
+            student: username,
+          };
+          // eslint-disable-next-line
+          if (OpportunityInstances.find({ opportunityID, studentID: getUserIdFromRoute(), semesterID }).count() === 0) {
+            defineMethod.call({ collectionName, definitionData }, (error) => {
+              if (!error) {
+                FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
+                FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
+                FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+                const interactionData = { username, type: 'addOpportunity', typeData: slug };
+                userInteractionDefineMethod.call(interactionData, (err) => {
+                  if (err) {
+                    console.log('Error creating UserInteraction', err);
+                  }
+                });
+              }
+            });
           }
+        }
       } else {
         const semesterID = Template.instance().localState.get('semester')._id;
         if (CourseInstances.isDefined(id)) {
@@ -203,36 +201,34 @@ Template.Semester_List_2.events({
               getFutureEnrollmentMethod.call(course._id, (err, result) => {
                 if (err) {
                   console.log('Error in getting future enrollment', error);
-                } else
-                  if (course._id === result.courseID) {
-                    instance.state.set(plannerKeys.plannedEnrollment, result);
-                  }
+                } else if (course._id === result.courseID) {
+                  instance.state.set(plannerKeys.plannedEnrollment, result);
+                }
               });
             }
           });
-        } else
-          if (OpportunityInstances.isDefined(id)) {
-            // There's gotta be a better way of doing this.
-            const collectionName = OpportunityInstances.getCollectionName();
-            const updateData = {};
-            _.mapKeys(OpportunityInstances.findDoc(id), (value, key) => {
-              if (key !== '_id') {
-                updateData[key] = value;
-              }
-            });
-            updateData.id = id;
-            updateData.semesterID = semesterID;
-            updateMethod.call({ collectionName, updateData }, (error) => {
-              if (!error) {
-                FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
-                FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
-                FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
-                FeedbackFunctions.checkOverloadedSemesters(getUserIdFromRoute());
-                FeedbackFunctions.generateNextLevelRecommendation(getUserIdFromRoute());
-                // FeedbackFunctions.generateRecommendedCurrentSemesterOpportunities(getUserIdFromRoute());
-              }
-            });
-          }
+        } else if (OpportunityInstances.isDefined(id)) {
+          // There's gotta be a better way of doing this.
+          const collectionName = OpportunityInstances.getCollectionName();
+          const updateData = {};
+          _.mapKeys(OpportunityInstances.findDoc(id), (value, key) => {
+            if (key !== '_id') {
+              updateData[key] = value;
+            }
+          });
+          updateData.id = id;
+          updateData.semesterID = semesterID;
+          updateMethod.call({ collectionName, updateData }, (error) => {
+            if (!error) {
+              FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
+              FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
+              FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+              FeedbackFunctions.checkOverloadedSemesters(getUserIdFromRoute());
+              FeedbackFunctions.generateNextLevelRecommendation(getUserIdFromRoute());
+              // FeedbackFunctions.generateRecommendedCurrentSemesterOpportunities(getUserIdFromRoute());
+            }
+          });
+        }
       }
     }
   },
@@ -262,23 +258,22 @@ Template.Semester_List_2.events({
       }
       // template.state.set(plannerKeys.detailOpportunity, null);
       // template.state.set(plannerKeys.detailOpportunityInstance, null);
-    } else
-      if (firstClass === 'opportunityInstance') {
-        if (OpportunityInstances.isDefined(target.id)) {
-          const oi = OpportunityInstances.findDoc(target.id);
-          showOpportunityDetails(template.state, oi);
-          // template.state.set(plannerKeys.detailOpportunity, oi);
-          // template.state.set(plannerKeys.detailICE, oi.ice);
-        }
-        // template.state.set(plannerKeys.detailCourse, null);
-        // template.state.set(plannerKeys.detailCourseInstance, null);
+    } else if (firstClass === 'opportunityInstance') {
+      if (OpportunityInstances.isDefined(target.id)) {
+        const oi = OpportunityInstances.findDoc(target.id);
+        showOpportunityDetails(template.state, oi);
+        // template.state.set(plannerKeys.detailOpportunity, oi);
+        // template.state.set(plannerKeys.detailICE, oi.ice);
       }
+      // template.state.set(plannerKeys.detailCourse, null);
+      // template.state.set(plannerKeys.detailCourseInstance, null);
+    }
   },
   'click .jsDelCourse': function clickJsDelCourse(event) {
     event.preventDefault();
     // console.log(event.target);
     const instance = event.target.id;
-    console.log(`removing CourseInstance ${instance}`);
+    // console.log(`removing CourseInstance ${instance}`);
     const collectionName = CourseInstances.getCollectionName();
     removeItMethod.call({ collectionName, instance }, (error) => {
       if (error) {
@@ -292,7 +287,7 @@ Template.Semester_List_2.events({
     event.preventDefault();
     // console.log(event.target);
     const instance = event.target.id;
-    console.log(`removing OpportunityInstance ${instance}`);
+    // console.log(`removing OpportunityInstance ${instance}`);
     const collectionName = OpportunityInstances.getCollectionName();
     removeItMethod.call({ collectionName, instance }, (error) => {
       if (error) {

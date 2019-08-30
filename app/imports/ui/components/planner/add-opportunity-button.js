@@ -2,7 +2,7 @@ import { Template } from 'meteor/templating';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
-import { plannerKeys } from './academic-plan';
+import { plannerKeys, resetDetails } from './academic-plan';
 import { getRouteUserName } from '../shared/route-user-name';
 import { userInteractionDefineMethod } from '../../../api/analytic/UserInteractionCollection.methods';
 
@@ -34,16 +34,12 @@ Template.Add_Opportunity_Button.events({
   'click .removeFromPlan': function clickItemRemoveFromPlan(event) {
     event.preventDefault();
     const opportunity = this.opportunity;
-    const oi = Template.instance().state.get(plannerKeys.detailOpportunity);
+    const oi = Template.instance().state.get(plannerKeys.detailsOpportunity);
     const collectionName = OpportunityInstances.getCollectionName();
     const template = Template.instance();
     removeItMethod.call({ collectionName, instance: oi._id }, (error) => {
       if (!error) {
-        template.state.set(plannerKeys.detailCourse, null);
-        template.state.set(plannerKeys.detailOpportunity, null);
-        template.$('.chooseSemester').popup('hide');
-        template.state.set(plannerKeys.selectedOpportunities, true);
-        template.state.set(plannerKeys.selectedDetails, false);
+        resetDetails(template.state);
       }
     });
     const interactionData = { username: getRouteUserName(), type: 'removeOpportunity',
@@ -57,11 +53,7 @@ Template.Add_Opportunity_Button.events({
 });
 
 Template.Add_Opportunity_Button.onRendered(function addOpportunityButtonOnRendered() {
-  const template = this;
-  template.$('.chooseSemester')
-      .popup({
-        on: 'click',
-      });
+
 });
 
 Template.Add_Opportunity_Button.onDestroyed(function addOpportunityButtonOnDestroyed() {

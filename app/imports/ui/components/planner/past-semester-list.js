@@ -45,12 +45,12 @@ Template.Past_Semester_List.helpers({
 Template.Past_Semester_List.events({
   'drop .bodyDrop': function dropBodyDrop(event) {
     event.preventDefault();
-    console.log('pastSemester body drop', Template.instance().localState.get('semester'));
+    // console.log('pastSemester body drop', Template.instance().localState.get('semester'));
     if (Template.instance().localState.get('semester')) {
       const id = event.originalEvent.dataTransfer.getData('text');
       const slug = event.originalEvent.dataTransfer.getData('slug');
       const instance = Template.instance();
-      console.log(id, slug);
+      // console.log(id, slug);
       if (slug) {
         const username = getRouteUserName();
         const semSlug = Slugs.getNameFromID(Template.instance().localState.get('semester').slugID);
@@ -79,7 +79,7 @@ Template.Past_Semester_List.events({
                 const interactionData = { username, type: 'addCourse', typeData: slug };
                 userInteractionDefineMethod.call(interactionData, (err) => {
                   if (err) {
-                    console.log('Error creating UserInteraction', err);
+                    console.error('Error creating UserInteraction', err);
                   }
                 });
               }
@@ -108,7 +108,7 @@ Template.Past_Semester_List.events({
                   const interactionData = { username, type: 'addOpportunity', typeData: slug };
                   userInteractionDefineMethod.call(interactionData, (err) => {
                     if (err) {
-                      console.log('Error creating UserInteraction', err);
+                      console.error('Error creating UserInteraction', err);
                     }
                   });
                 }
@@ -141,7 +141,7 @@ Template.Past_Semester_List.events({
               // console.log(message);
               getFutureEnrollmentMethod.call(course._id, (err, result) => {
                 if (err) {
-                  console.log('Error in getting future enrollment', error);
+                  console.error('Error in getting future enrollment', error);
                 } else
                   if (course._id === result.courseID) {
                     instance.state.set(plannerKeys.plannedEnrollment, result);

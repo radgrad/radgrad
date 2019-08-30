@@ -7,7 +7,6 @@ import { buildSimpleName } from '../../../api/degree-plan/PlanChoiceUtilities';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 import { plannerKeys, selectFavoriteCoursesTab } from './academic-plan';
-import { getFutureEnrollmentMethod } from '../../../api/course/CourseCollection.methods';
 import { userInteractionDefineMethod } from '../../../api/analytic/UserInteractionCollection.methods';
 
 Template.Add_Course_Button.onCreated(function addCourseButtonOnCreated() {
@@ -48,14 +47,6 @@ Template.Add_Course_Button.events({
         FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
         FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
         FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
-        getFutureEnrollmentMethod.call(course._id, (err, result) => {
-          if (err) {
-            console.log('Error in getting future enrollment', err);
-          } else
-            if (course._id === result.courseID) {
-              instance.state.set(plannerKeys.plannedEnrollment, result);
-            }
-        });
       }
     });
     const interactionData = { username: getRouteUserName(), type: 'removeCourse',

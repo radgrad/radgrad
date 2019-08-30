@@ -94,7 +94,7 @@ export class FeedbackFunctionClass {
    */
   checkCompletePlan(user) {
     const functionName = 'checkCompletePlan';
-    console.log(`Running feedback function ${functionName}`);
+    // console.log(`Running feedback function ${functionName}`);
     const feedbackType = FeedbackInstances.WARNING;
 
     // First clear any feedback instances previously created for this student.
@@ -146,7 +146,7 @@ export class FeedbackFunctionClass {
    */
   checkOverloadedSemesters(user) {
     const functionName = 'checkOverloadedSemesters';
-    console.log(`Running feedback function ${functionName}`);
+    // console.log(`Running feedback function ${functionName}`);
     const feedbackType = FeedbackInstances.WARNING;
     const studentID = Users.getID(user);
 
@@ -181,7 +181,7 @@ export class FeedbackFunctionClass {
    */
   generateRecommendedCourse(user) {
     const functionName = 'generateRecommendedCourse';
-    console.log(`Running feedback function ${functionName}`);
+    // console.log(`Running feedback function ${functionName}`);
     const feedbackType = FeedbackInstances.RECOMMENDATION;
 
     // First clear any feedback instances previously created for this student.
@@ -237,7 +237,7 @@ export class FeedbackFunctionClass {
 
   generateRecommended400LevelCourse(user) {
     const functionName = 'generateRecommended400LevelCourse';
-    console.log(`Running feedback function ${functionName}`);
+    // console.log(`Running feedback function ${functionName}`);
     const feedbackType = FeedbackInstances.RECOMMENDATION;
 
     // First clear any feedback instances previously created for this student.
@@ -282,7 +282,7 @@ export class FeedbackFunctionClass {
    */
   generateRecommendedCurrentSemesterOpportunities(user) {
     const functionName = 'generateRecommendedCurrentSemesterOpportunities';
-    console.log(`Running feedback function ${functionName}`);
+    // console.log(`Running feedback function ${functionName}`);
     const feedbackType = FeedbackInstances.RECOMMENDATION;
     const studentID = Users.getID(user);
 
@@ -318,7 +318,7 @@ export class FeedbackFunctionClass {
    */
   generateNextLevelRecommendation(user) {
     const functionName = 'generateNextLevelRecommendation';
-    console.log(`Running feedback function ${functionName}`);
+    // console.log(`Running feedback function ${functionName}`);
     const feedbackType = FeedbackInstances.RECOMMENDATION;
 
     // First clear any feedback instances previously created for this student.
