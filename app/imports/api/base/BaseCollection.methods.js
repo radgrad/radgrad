@@ -7,6 +7,7 @@ import { RadGrad } from '../radgrad/RadGrad';
 import { ROLE } from '../role/Role';
 import { loadCollectionNewDataOnly } from '../utilities/load-fixtures';
 import { Feeds } from '../feed/FeedCollection';
+import { StudentProfiles } from '../user/StudentProfileCollection';
 
 /**
  * Allows admins to create and return a JSON object to the client representing a snapshot of the RadGrad database.
@@ -60,6 +61,32 @@ export const loadFixtureMethod = new ValidatedMethod({
   },
 });
 
+export const alumniEmailsMethod = new ValidatedMethod({
+  name: 'base.alumniEmails',
+  validate: null,
+  run(emails) {
+    if (!this.userId) {
+      throw new Meteor.Error('unauthorized', 'You must be logged in to update alumni.', '', Error().stack);
+    } else
+    if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN])) {
+      throw new Meteor.Error('unauthorized', 'You must be an admin to update alumni.', '', Error().stack);
+    }
+    if (Meteor.isServer) {
+      const alumniEmails = emails.split('\n');
+      let count = 0;
+      _.forEach(alumniEmails, (e) => {
+        if (e !== 'samplestudent@hawaii.edu' && e !== 'opq@hawaii.edu' && e !== 'spaek@hawaii.edu' && e !== 'peterleo@hawaii.edu') {
+          const profile = StudentProfiles.findDoc({ username: e });
+          if (!profile.isAlumni) {
+            StudentProfiles.update(profile._id, { isAlumni: true });
+            count++;
+          }
+        }
+      });
+      return `Changed ${count} students to alumni.`;
+    }
+  },
+});
 /**
  * Meteor method used to define new instances of the given collection name.
  * @param collectionName the name of the collection.

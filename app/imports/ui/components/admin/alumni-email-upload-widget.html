@@ -1,0 +1,26 @@
+<template name="Alumni_Email_Upload_Widget">
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>ALUMNI EMAIL UPDATE</h4></div>
+    <form class="ui equal width form {{successClass}} {{errorClass}}">
+      <div class="field">
+        <!-- CSV -->
+        <label>BULK ALUMNI EMAILS</label>
+        <div class="ui action input">
+          {{#with currentUpload}}
+            Uploading <b>{{file.name}}</b>:
+            <span id="progress">{{progress.get}}%</span>
+          {{else}}
+            <input id="fileInput" type="file"/>
+          {{/with}}
+        </div>
+      </div>
+      <button style="margin-bottom: 14px;" class="ui tiny basic {{#if starWorking}}loading{{/if}} green button jsAlumniEmails" type="submit">LOAD ALUMNI EMAILS
+      </button>
+    </form>
+    {{#if uploadResult}}
+      <div class="ui message">
+        <p>{{uploadResult}}</p>
+      </div>
+    {{/if}}
+  </div>
+</template>

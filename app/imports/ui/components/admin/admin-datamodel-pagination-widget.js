@@ -28,10 +28,19 @@ Template.Admin_Datamodel_Pagination_Widget.helpers({
     return Template.instance().showIndex.get() === 0;
   },
   lastDisabled() {
-    const count = Template.instance().collection.count();
-    const index = Template.instance().showIndex.get();
-    const showCount = Template.instance().showItemCount.get();
-    return (index + showCount) >= count;
+    if (Template.instance().collection) {
+      const count = Template.instance()
+        .collection
+        .count();
+      const index = Template.instance()
+        .showIndex
+        .get();
+      const showCount = Template.instance()
+        .showItemCount
+        .get();
+      return (index + showCount) >= count;
+    }
+    return false;
   },
   isSelected(count) {
     return count === Template.instance().showItemCount.get();
