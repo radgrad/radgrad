@@ -33,7 +33,7 @@ Template.Alumni_Email_Upload_Widget.events({
       const alumniEmailFilename = fileName.files[0];
       const fr = new FileReader();
       fr.onload = (e) => {
-        console.log(e.target.result);
+        // console.log(e.target.result);
         alumniEmailsMethod.call(e.target.result, (error, result) => {
           if (error) {
             console.error('Failed to load alumni emails', error);
@@ -48,12 +48,3 @@ Template.Alumni_Email_Upload_Widget.events({
     }
   },
 });
-
-Template.Alumni_Email_Upload_Widget.onRendered(function alumniEmailUploadWidgetOnRendered() {
-  // add your statement here
-});
-
-Template.Alumni_Email_Upload_Widget.onDestroyed(function alumniEmailUploadWidgetOnDestroyed() {
-  // add your statement here
-});
-
