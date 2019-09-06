@@ -75,7 +75,8 @@ export const alumniEmailsMethod = new ValidatedMethod({
       const alumniEmails = emails.split('\n');
       let count = 0;
       _.forEach(alumniEmails, (e) => {
-        if (e !== 'samplestudent@hawaii.edu' && e !== 'opq@hawaii.edu' && e !== 'spaek@hawaii.edu' && e !== 'peterleo@hawaii.edu') {
+        // TODO load the names from a config file.
+        if (e !== 'samplestudent@hawaii.edu' && e !== 'opq@hawaii.edu' && e !== 'spaek@hawaii.edu' && e !== 'peterleo@hawaii.edu') { // eslint-disable-line max-len
           const profile = StudentProfiles.findDoc({ username: e });
           if (!profile.isAlumni) {
             StudentProfiles.update(profile._id, { isAlumni: true });
@@ -85,6 +86,7 @@ export const alumniEmailsMethod = new ValidatedMethod({
       });
       return `Changed ${count} students to alumni.`;
     }
+    return null;
   },
 });
 /**

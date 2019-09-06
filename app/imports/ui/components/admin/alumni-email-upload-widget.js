@@ -1,6 +1,8 @@
 import { Template } from 'meteor/templating';
-import { ReactiveVar } from "meteor/reactive-var";
+import { ReactiveVar } from 'meteor/reactive-var';
 import { alumniEmailsMethod } from '../../../api/base/BaseCollection.methods';
+
+/* global FileReader */
 
 Template.Alumni_Email_Upload_Widget.onCreated(function alumniEmailUploadWidgetOnCreated() {
   this.currentUpload = new ReactiveVar(false);
