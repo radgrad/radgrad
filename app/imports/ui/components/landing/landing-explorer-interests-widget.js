@@ -6,6 +6,7 @@ import { Courses } from '../../../api/course/CourseCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { isLabel } from '../../utilities/template-helpers';
 import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
+import { Teasers } from '../../../api/teaser/TeaserCollection';
 
 Template.Landing_Explorer_Interests_Widget.helpers({
   courseNameFromSlug(courseSlugName) {
@@ -30,6 +31,10 @@ Template.Landing_Explorer_Interests_Widget.helpers({
       default:
         return 'ERROR: More than one table.';
     }
+  },
+  hasTeaser(item) {
+    const teaser = Teasers.find({ targetSlugID: item.slugID }).fetch();
+    return teaser.length > 0;
   },
   isLabel,
   opportunitiesRouteName() {

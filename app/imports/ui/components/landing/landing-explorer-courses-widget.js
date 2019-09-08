@@ -7,6 +7,7 @@ import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { isLabel } from '../../utilities/template-helpers';
+import { Teasers } from '../../../api/teaser/TeaserCollection';
 
 Template.Landing_Explorer_Courses_Widget.helpers({
   color(table) {
@@ -57,6 +58,10 @@ Template.Landing_Explorer_Courses_Widget.helpers({
       default:
         return 'ERROR: More than one table.';
     }
+  },
+  hasTeaser(item) {
+    const teaser = Teasers.find({ targetSlugID: item.slugID }).fetch();
+    return teaser.length > 0;
   },
   isLabel,
   length(table) {

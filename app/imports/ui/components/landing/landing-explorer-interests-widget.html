@@ -10,18 +10,35 @@
       <div class="ui divider" style="margin-top: 0;"></div>
 
       <div class="ui stackable grid">
-        <div class="column">
-          {{#each descriptionPair in descriptionPairs}}
-
-            {{#if isLabel descriptionPair.label 'Description'}}
-              <b>{{descriptionPair.label}}:</b>
-              {{#if descriptionPair.value}} {{{markdownify descriptionPair.value}}} <br> <br>
-              {{else}}
-                N/A <br> <br>
+        {{#if hasTeaser item}}
+          <div style="margin-top: 0" class="nine wide column">
+            {{#each descriptionPair in descriptionPairs}}
+              {{#if isLabel descriptionPair.label 'Description'}}
+                <b>{{descriptionPair.label}}:</b>
+                {{#if descriptionPair.value}} {{{markdownify descriptionPair.value}}}
+                {{else}}
+                  N/A
+                {{/if}}
               {{/if}}
-            {{/if}}
-          {{/each}}
-        </div>
+            {{/each}}
+          </div>
+          <div style="margin-top: 0" class="seven wide column">
+            {{> Teaser_Widget}}
+          </div>
+        {{else}}
+          <div class="column">
+            {{#each descriptionPair in descriptionPairs}}
+
+              {{#if isLabel descriptionPair.label 'Description'}}
+                <b>{{descriptionPair.label}}:</b>
+                {{#if descriptionPair.value}} {{{markdownify descriptionPair.value}}} <br> <br>
+                {{else}}
+                  N/A <br> <br>
+                {{/if}}
+              {{/if}}
+            {{/each}}
+          </div>
+        {{/if}}
       </div>
     </div>
   </div>

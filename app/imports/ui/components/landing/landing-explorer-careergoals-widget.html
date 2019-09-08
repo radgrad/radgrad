@@ -1,31 +1,39 @@
 <template name="Landing_Explorer_CareerGoals_Widget">
 
-    <div class="ui segments" style="background-color: white;">
-      <div class="ui padded segment container">
+  <div class="ui segments" style="background-color: white;">
+    <div class="ui padded segment container">
 
-        <div class="ui clearing basic segment" style="margin: 0; padding: 0;">
-          <h4 class="ui left floated header vertically aligned">{{toUpper name}}</h4>
-        </div>
+      <div class="ui clearing basic segment" style="margin: 0; padding: 0;">
+        <h4 class="ui left floated header vertically aligned">{{toUpper name}}</h4>
+      </div>
 
-        <div class="ui divider" style="margin-top: 0;"></div>
+      <div class="ui divider" style="margin-top: 0;"></div>
 
-        <div class="ui stackable grid">
-          <div class="column">
+      <div class="ui stackable grid">
+        {{#if hasTeaser item}}
+          <div style="margin-top: 0" class="nine wide column">
             {{#each descriptionPair in descriptionPairs}}
-
               {{#if isLabel descriptionPair.label 'Description'}}
                 <b>{{descriptionPair.label}}:</b>
                 {{#if descriptionPair.value}} {{{markdownify descriptionPair.value}}}
-                  {{else}}
-                    N/A <br>
+                {{else}}
+                  N/A
                 {{/if}}
+              {{/if}}
+              {{#if isLabel descriptionPair.label 'Interests'}}
+                <div style="margin-top: 5px">
+                  {{> Landing_Interest_List item=item size='mini'}}
+                </div>
               {{/if}}
             {{/each}}
           </div>
-        </div>
-        <div class="ui dividing header">Career Goal Interests</div>
-        {{> Landing_Interest_List item=item size='small'}}
+          <div style="margin-top: 0" class="seven wide column">
+            {{> Teaser_Widget}}
+          </div>
+        {{else}}
+        {{/if}}
       </div>
     </div>
+  </div>
 
 </template>
