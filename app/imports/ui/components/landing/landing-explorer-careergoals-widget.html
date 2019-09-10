@@ -31,6 +31,22 @@
             {{> Teaser_Widget}}
           </div>
         {{else}}
+          <div style="margin-top: 0" class="column">
+            {{#each descriptionPair in descriptionPairs}}
+              {{#if isLabel descriptionPair.label 'Interests'}}
+                {{> Landing_Interest_List item=item size='mini'}}
+              {{/if}}
+            {{/each}}
+            {{#each descriptionPair in descriptionPairs}}
+              {{#if isLabel descriptionPair.label 'Description'}}
+                <b>{{descriptionPair.label}}:</b>
+                {{#if descriptionPair.value}} {{{markdownify descriptionPair.value}}}
+                {{else}}
+                  N/A
+                {{/if}}
+              {{/if}}
+            {{/each}}
+          </div>
         {{/if}}
       </div>
     </div>

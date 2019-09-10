@@ -69,7 +69,12 @@
           </div>
         </div>
       {{else}}
-        <div class="ui stackable two column grid">
+        <div class="ui stackable grid">
+          <div class="column" style="padding-top: 5px; padding-bottom: 0px;">
+            {{> Landing_Interest_List item=item size='mini'}}
+          </div>
+        </div>
+        <div style="margin-top: 0" class="ui stackable two column grid">
           <div class="six wide column">
             {{#each descriptionPair in descriptionPairs}}
 
@@ -144,10 +149,6 @@
             {{/each}}
           </div>
         </div>
-        <h4 class="ui horizontal divider header">
-          Course Interests
-        </h4>
-        {{> Landing_Interest_List item=item size='small'}}
       {{/if}}
     </div>
   </div>

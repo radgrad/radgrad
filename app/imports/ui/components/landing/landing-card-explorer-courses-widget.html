@@ -4,6 +4,7 @@
       <h4><span
           style="text-transform: uppercase;">COURSES</span> {{> Widget_Header_Number inputValue=itemCount}}</h4>
     </div>
+    {{> Course_Filter_Widget filter=courseFilter}}
     <div style="max-height: 750px; overflow-x:hidden; overflow-y:scroll; margin-top: 10px;"
          class="ui stackable two cards">
       {{#each course in courses}}

@@ -4,13 +4,21 @@
       {{#if typeCourses}}
         <div class="header">{{itemName item}} ({{item.number}})</div>
       {{else}}
-        <div class="header">{{itemName item}}</div>
+        <div class="header">{{itemName item}}
+        {{#if typeOpportunities}}
+          {{> ICE_header ice=item.ice}}
+        {{/if}}
+        </div>
       {{/if}}
       <div class="meta">
+        {{#if itemSemesters}}
+          {{replaceSemString itemSemesters}}
+        {{/if}}
       </div>
     </div>
     <div class="content">
       <p>{{itemShortDescription item}}...</p>
+      {{> Landing_Interest_List item=item size='mini'}}
     </div>
     <div class="radgrad-home-buttons ui center aligned three bottom attached {{hidden}} buttons">
       {{#if typeCareerGoals}}

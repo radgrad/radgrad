@@ -1,6 +1,8 @@
 import { Template } from 'meteor/templating';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import * as RouteNames from '../../../startup/client/router';
+import { opportunitySemesters } from '../../utilities/template-helpers';
+import { Semesters } from '../../../api/semester/SemesterCollection';
 
 Template.Landing_Explorer_Card.helpers({
   careerGoalsRouteName() {
@@ -17,6 +19,15 @@ Template.Landing_Explorer_Card.helpers({
   },
   itemName(item) {
     return item.name;
+  },
+  itemSemesters() {
+    let ret = [];
+    if (this.type === 'courses') {
+      // do nothing
+    } else {
+      ret = opportunitySemesters(this.item);
+    }
+    return ret;
   },
   itemShortDescription(item) {
     let description = item.description;
@@ -36,6 +47,17 @@ Template.Landing_Explorer_Card.helpers({
   },
   opportunityRouteName() {
     return RouteNames.landingExplorerOpportunitiesPageRouteName;
+  },
+  replaceSemString(array) {
+    // console.log('array', array);
+    const currentSem = Semesters.getCurrentSemesterDoc();
+    const currentYear = currentSem.year;
+    let fourRecentSem = _.filter(array, function isRecent(semesterYear) {
+      return semesterYear.split(' ')[1] >= currentYear;
+    });
+    fourRecentSem = array.slice(0, 4);
+    const semString = fourRecentSem.join(' - ');
+    return semString.replace(/Summer/g, 'Sum').replace(/Spring/g, 'Spr');
   },
   typeCareerGoals() {
     return (this.type === 'careergoals');
