@@ -13,6 +13,11 @@
       </div>
       <div class="ui divider" style="margin-top: 0;"></div>
 
+      <div class="ui stackable grid">
+        <div class="column" style="padding-top: 5px; padding-bottom: 0px;">
+          {{> Landing_Interest_List item=item size='mini'}}
+        </div>
+      </div>
 
       {{#if hasTeaser item}}
         <div class="ui stackable two column grid">
@@ -60,13 +65,6 @@
               {{/if}}
             {{/each}}
             {{> Teaser_Widget}}
-            {{#each descriptionPair in descriptionPairs}}
-              {{#if isLabel descriptionPair.label 'Interests'}}
-                <div style="margin-top: 5px">
-                  {{> Landing_Interest_List item=item size='mini'}}
-                </div>
-              {{/if}}
-            {{/each}}
           </div>
         </div>
       {{else}}
@@ -115,11 +113,6 @@
                 {{else}}
                   N/A
                 {{/if}}
-              {{/if}}
-              {{#if isLabel descriptionPair.label 'Interests'}}
-                <div style="margin-top: 5px">
-                  {{> Landing_Interest_List item=item size='mini'}}
-                </div>
               {{/if}}
             {{/each}}
           </div>

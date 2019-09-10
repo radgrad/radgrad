@@ -1,4 +1,6 @@
 import { Template } from 'meteor/templating';
+import { _ } from 'meteor/erasaur:meteor-lodash';
+
 import { Slugs } from '../../../api/slug/SlugCollection';
 import * as RouteNames from '../../../startup/client/router';
 import { opportunitySemesters } from '../../utilities/template-helpers';

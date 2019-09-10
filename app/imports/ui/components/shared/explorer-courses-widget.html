@@ -10,6 +10,11 @@
         {{/if}}
       </div>
       <div class="ui divider" style="margin-top: 0;"></div>
+      <div class="ui stackable grid">
+        <div class="column" style="padding-top: 5px; padding-bottom: 0px;">
+          {{> Interest_List item=item size='mini'}}
+        </div>
+      </div>
       {{#if hasTeaser item}}
         <div class="ui stackable two column grid">
           <div class="nine wide column">
@@ -34,11 +39,6 @@
                 {{else}}
                   N/A
                 {{/if}}
-              {{/if}}
-              {{#if isLabel descriptionPair.label 'Interests'}}
-                <div style="margin-top: 5px">
-                  {{> Interest_List item=item size='mini'}}
-                </div>
               {{/if}}
               {{#if isLabel descriptionPair.label 'Prerequisites'}}
                 {{#if descriptionPair.value}}
@@ -140,7 +140,6 @@
             {{/each}}
           </div>
         </div>
-
         <div style="margin-top: 0" class="ui stackable grid">
           {{#if hasTeaser item}}
             <div style="margin-top: 0" class="nine wide column">
@@ -171,18 +170,6 @@
             </div>
           {{/if}}
         </div>
-        <div style="margin-top: 0" class="ui stackable grid">
-          <div class="column">
-            {{#each descriptionPair in descriptionPairs}}
-              {{#if isLabel descriptionPair.label 'Interests'}}
-                <div style="margin-top: 5px">
-                  {{> Interest_List item=item size='mini'}}
-                </div>
-              {{/if}}
-            {{/each}}
-          </div>
-        </div>
-
         <div style="margin-top: 0" class="ui stackable grid">
           <div class="column">
             {{#each descriptionPair in descriptionPairs}}

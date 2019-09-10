@@ -18,6 +18,11 @@
       </div>
 
       <div class="ui divider" style="margin-top: 0;"></div>
+      <div class="ui stackable grid">
+        <div class="column" style="padding-top: 5px; padding-bottom: 0px;">
+          {{> Interest_List item=item size='mini'}}
+        </div>
+      </div>
 
       <div class="ui stackable grid">
         {{#if hasTeaser item}}
@@ -29,11 +34,6 @@
                 {{else}}
                   N/A
                 {{/if}}
-              {{/if}}
-              {{#if isLabel descriptionPair.label 'Interests'}}
-                <div style="margin-top: 5px">
-                  {{> Interest_List item=item size='mini'}}
-                </div>
               {{/if}}
             {{/each}}
           </div>
@@ -49,11 +49,6 @@
                 {{else}}
                   N/A
                 {{/if}}
-              {{/if}}
-              {{#if isLabel descriptionPair.label 'Interests'}}
-                <div style="margin-top: 5px">
-                  {{> Interest_List item=item size='mini'}}
-                </div>
               {{/if}}
             {{/each}}
           </div>
