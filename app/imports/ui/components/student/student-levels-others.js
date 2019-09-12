@@ -4,6 +4,7 @@ import * as RouteNames from '../../../startup/client/router.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { ROLE } from '../../../api/role/Role.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
+import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 
 Template.Student_Levels_Others.helpers({
   fullName(student) {
@@ -38,7 +39,7 @@ Template.Student_Levels_Others.helpers({
     const profiles = Users.findProfilesWithRole(ROLE.STUDENT);
     _.forEach(profiles, (profile) => {
       if (profile.level === userLevel) {
-        if (profile.userID !== getUserIdFromRoute()) {
+        if (profile.userID !== getUserIdFromRoute() && profile.picture !== defaultProfilePicture) {
           students.push(profile);
         }
       }

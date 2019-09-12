@@ -123,3 +123,77 @@ export function updateAllStudentLevels(advisor) {
   return StudentProfiles.find()
     .count();
 }
+
+export function getLevelCriteriaStringMarkdown(level) {
+  if (!_.includes(['six', 'five', 'four', 'three', 'two'], level)) {
+    throw new Meteor.Error(`${level} is not a valid level`);
+  }
+  const criteria = Meteor.settings.public.level[level];
+  let plannedICEStr = '';
+  if (criteria.plannedICE.i !== 0 || criteria.plannedICE.c !== 0 || criteria.plannedICE.e !== 0) {
+    plannedICEStr = 'planned ICE of';
+    if (criteria.plannedICE.i !== 0) {
+      plannedICEStr = `${plannedICEStr} I >= ${criteria.plannedICE.i}`;
+    }
+    if (criteria.plannedICE.c !== 0) {
+      plannedICEStr = `${plannedICEStr} C >= ${criteria.plannedICE.c}`;
+    }
+    if (criteria.plannedICE.e !== 0) {
+      plannedICEStr = `${plannedICEStr} E >= ${criteria.plannedICE.e}`;
+    }
+  }
+  let earnedICEStr = '';
+  if (criteria.earnedICE.i !== 0 || criteria.earnedICE.c !== 0 || criteria.earnedICE.e !== 0) {
+    earnedICEStr = 'earned ICE of';
+    if (criteria.earnedICE.i !== 0) {
+      earnedICEStr = `${earnedICEStr} I >= ${criteria.earnedICE.i}`;
+    }
+    if (criteria.earnedICE.c !== 0) {
+      earnedICEStr = `${earnedICEStr} C >= ${criteria.earnedICE.c}`;
+    }
+    if (criteria.earnedICE.e !== 0) {
+      earnedICEStr = `${earnedICEStr} E >= ${criteria.earnedICE.e}`;
+    }
+  }
+  let reviewsStr = '';
+  if (criteria.reviews > 1) {
+    reviewsStr = `${criteria.reviews} reviews of courses or opportunities`;
+  } else if (criteria.reviews === 1) {
+    reviewsStr = `${criteria.reviews} review of a course or opportunity`;
+  }
+  let criteriaString = '';
+  if (plannedICEStr !== '' && earnedICEStr !== '' && reviewsStr !== '') {
+    criteriaString = `having ${plannedICEStr}, ${earnedICEStr} and ${reviewsStr}`;
+  } else if (plannedICEStr !== '' && earnedICEStr !== '' && reviewsStr === '') {
+    criteriaString = `having ${plannedICEStr} and ${earnedICEStr}`;
+  } else if (plannedICEStr === '' && earnedICEStr !== '' && reviewsStr === '') {
+    criteriaString = `having ${earnedICEStr}`;
+  }
+  let result = '';
+  switch (level) {
+    case 'six':
+      // eslint-disable-next-line max-len
+      result = `If you achieve Level 6, you are truly one of the elite ICS students, and you will have demonstrated excellent preparation for entering the workforce, or going on to Graduate School, whichever you prefer. Congratulations! The criteria for Level 6 is ${criteriaString}.`;
+      break;
+    case 'five':
+      // eslint-disable-next-line max-len
+      result = `Level 5 students are far along in their degree program, and they've made significant progress toward 100 verified points in each of the three ICE categories. You will probably be at least a Junior before Level 5 becomes a realistic option for you. The criteria for Level 5 is ${criteriaString}.`;
+      break;
+    case 'four':
+      // eslint-disable-next-line max-len
+      result = `ICS has a "core curriculum", and Level 4 students have not only finished it, but they have also thought beyond mere competency. The criteria for Level 4 is ${criteriaString}.`;
+      break;
+    case 'three':
+      // eslint-disable-next-line max-len
+      result = `With any luck, you'll achieve Level 3 after you complete your second semester of ICS coursework, as long as your grades are good. The criteria for Level 3 is ${criteriaString}.`;
+      break;
+    case 'two':
+      // eslint-disable-next-line max-len
+      result = `Successfully finish your first semester of ICS coursework. The criteria for Level 2 is ${criteriaString}.`;
+      break;
+    default:
+      // eslint-disable-next-line max-len
+      result = 'You begin your RadGrad experience at Level 1, and you will receive this laptop sticker when you first sign up for RadGrad with your advisor. *"A journey of a thousand miles begins with a single step" -- Lao Tzu*';
+  }
+  return result;
+}

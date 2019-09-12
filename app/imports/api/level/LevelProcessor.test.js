@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import { StudentProfiles } from '../user/StudentProfileCollection';
-import { defaultCalcLevel } from './LevelProcessor';
+import { defaultCalcLevel, getLevelCriteriaStringMarkdown } from './LevelProcessor';
 import { removeAllEntities } from '../base/BaseUtilities';
 import { RadGrad } from '../radgrad/RadGrad';
 import { defineTestFixtures } from '../test/test-utilities';
@@ -103,6 +103,16 @@ if (Meteor.isServer) {
       expect(defaultCalcLevel(bettyProfile.userID))
         .to
         .equal(6);  // CAM: This will have to change with issue-302
+      done();
+    });
+
+    it('Criteria Strings', function criteriaString(done) {
+      this.timeout(15000);
+      console.log(getLevelCriteriaStringMarkdown('six'));
+      console.log(getLevelCriteriaStringMarkdown('five'));
+      console.log(getLevelCriteriaStringMarkdown('four'));
+      console.log(getLevelCriteriaStringMarkdown('three'));
+      console.log(getLevelCriteriaStringMarkdown('two'));
       done();
     });
   });
