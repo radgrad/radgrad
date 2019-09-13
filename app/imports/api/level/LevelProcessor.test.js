@@ -106,14 +106,5 @@ if (Meteor.isServer) {
       done();
     });
 
-    it('Criteria Strings', function criteriaString(done) {
-      this.timeout(15000);
-      console.log(getLevelCriteriaStringMarkdown('six'));
-      console.log(getLevelCriteriaStringMarkdown('five'));
-      console.log(getLevelCriteriaStringMarkdown('four'));
-      console.log(getLevelCriteriaStringMarkdown('three'));
-      console.log(getLevelCriteriaStringMarkdown('two'));
-      done();
-    });
   });
 }
