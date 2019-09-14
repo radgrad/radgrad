@@ -202,9 +202,9 @@ function verifyOppRecommendation(student) {
   const html = {};
   html.header = 'Verify Your Opportunities';
   html.info = '<p>You have unverified opportunities. To verify them, visit your RadGrad Degree Planner and' +
-      ' click on the <em>Inspector</em> tab to the right. Select the opportunity you want to verify in your planner' +
-      ' and it should be displayed in the Inspector, along with an option at the bottom to request verification.' +
-      ' There may be additional requirements in addition to requesting the verification. Here is a list of' +
+      ' click on the opportunity with the red question mark. <img src="radgrad.ics.hawaii.edu/images/help/degree-planner-unverified-opportunity.png" width="100"> Select the opportunity you want to verify in your planner' +
+      ' and it should be displayed in the Details tab, along with an option at the bottom to request verification.' +
+      ' You must supply a brief explanation of how you participated. There may be additional requirements in addition to requesting the verification. Here is a list of' +
       ' past or current opportunities that you have not yet verified:</p>';
   html.info += '<ul>';
   _.each(currentUnverifiedOpps, function (unverifiedOpp) {
