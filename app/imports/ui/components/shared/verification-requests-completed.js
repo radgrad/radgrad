@@ -80,7 +80,7 @@ Template.Verification_Requests_Completed.events({
       id: oi._id,
       verified: false,
     };
-    updateMethod.call(collectionName, updateData, (error) => {
+    updateMethod.call({ collectionName, updateData }, (error) => {
       if (error) {
         console.error('Failed to update the opportunity instance', error);
       }

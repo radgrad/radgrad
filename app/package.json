@@ -12,8 +12,8 @@
     "test-app": "METEOR_NO_RELEASE_CHECK=1 TEST_BROWSER_DRIVER=nightmare meteor test --full-app --once --driver-package dispatch:mocha --settings ../config/settings.development.json --port 3100",
     "test-watch": "TEST_WATCH=1 TEST_BROWSER_DRIVER=nightmare meteor test --driver-package dispatch:mocha --no-release-check --port 3100",
     "pretest-win": "npm run lint",
-    "test-win": "meteor test --once --driver-package dispatch:mocha --no-release-check --port 3100",
-    "test-app-win": "meteor test --full-app --once --driver-package dispatch:mocha --no-release-check --port 3100",
+    "test-win": "meteor test --once --driver-package dispatch:mocha --no-release-check --settings ../config/settings.development.json --port 3100",
+    "test-app-win": "meteor test --full-app --once --driver-package dispatch:mocha --no-release-check --settings ../config/settings.development.json --port 3100",
     "coverage-cam": "meteor test --driver-package practicalmeteor:mocha --port 3100 --no-release-check --settings ../config/settings.coverage.cam.json",
     "jsdoc": "./node_modules/.bin/jsdoc -c ./jsdoc.json -r .",
     "deploy": "DEPLOY_HOSTNAME=galaxy.meteor.com meteor deploy radgrad.meteorapp.com --settings ../config/settings.production.json"
