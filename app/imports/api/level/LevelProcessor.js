@@ -184,37 +184,41 @@ ${earnedICEStr}`;
     
 ${earnedICEStr}`;
   }
+  return criteriaString;
+}
+
+export function getLevelHintStringMarkdown(level) {
   let result = '';
   switch (level) {
     case 'six':
       // eslint-disable-next-line max-len
       result = `If you achieve Level 6, you are truly one of the elite ICS students, and you will have demonstrated excellent preparation for entering the workforce, or going on to Graduate School, whichever you prefer. Congratulations! 
       
-The criteria for **Level 6** is ${criteriaString}.`;
+The criteria for **Level 6** is ${getLevelCriteriaStringMarkdown(level)}.`;
       break;
     case 'five':
       // eslint-disable-next-line max-len
       result = `Level 5 students are far along in their degree program, and they've made significant progress toward 100 verified points in each of the three ICE categories. You will probably be at least a Junior before Level 5 becomes a realistic option for you. 
       
-The criteria for **Level 5** is ${criteriaString}.`;
+The criteria for **Level 5** is ${getLevelCriteriaStringMarkdown(level)}.`;
       break;
     case 'four':
       // eslint-disable-next-line max-len
       result = `ICS has a "core curriculum", and Level 4 students have not only finished it, but they have also thought beyond mere competency. 
       
-The criteria for **Level 4** is ${criteriaString}.`;
+The criteria for **Level 4** is ${getLevelCriteriaStringMarkdown(level)}.`;
       break;
     case 'three':
       // eslint-disable-next-line max-len
       result = `With any luck, you'll achieve Level 3 after you complete your second semester of ICS coursework, as long as your grades are good. 
       
-The criteria for **Level 3** is ${criteriaString}.`;
+The criteria for **Level 3** is ${getLevelCriteriaStringMarkdown(level)}.`;
       break;
     case 'two':
       // eslint-disable-next-line max-len
       result = `Successfully finish your first semester of ICS coursework. 
       
-The criteria for **Level 2** is ${criteriaString}.`;
+The criteria for **Level 2** is ${getLevelCriteriaStringMarkdown(level)}.`;
       break;
     default:
       // eslint-disable-next-line max-len

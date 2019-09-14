@@ -65,8 +65,10 @@ Template.Student_Explorer_Courses_Widget_Button.events({
     defineMethod.call({ collectionName, definitionData }, (error) => {
       if (!error) {
         FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
-        FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
-        FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+        // FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
+        // FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+        FeedbackFunctions.checkOverloadedSemesters(getUserIdFromRoute());
+        FeedbackFunctions.generateNextLevelRecommendation(getUserIdFromRoute());
       }
     });
     const interactionData = { username, type: 'addCourse', typeData: courseSlug.name };
@@ -95,8 +97,10 @@ Template.Student_Explorer_Courses_Widget_Button.events({
     removeItMethod.call({ collectionName, instance: ci[0]._id }, (error) => {
       if (!error) {
         FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
-        FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
-        FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+        // FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
+        // FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+        FeedbackFunctions.checkOverloadedSemesters(getUserIdFromRoute());
+        FeedbackFunctions.generateNextLevelRecommendation(getUserIdFromRoute());
       }
     });
     const interactionData = { username: getRouteUserName(), type: 'removeCourse',

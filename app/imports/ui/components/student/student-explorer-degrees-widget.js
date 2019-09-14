@@ -2,7 +2,6 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import * as RouteNames from '../../../startup/client/router.js';
-import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
 import { Users } from '../../../api/user/UserCollection.js';
@@ -84,7 +83,7 @@ Template.Student_Explorer_Degrees_Widget.events({
       if (error) {
         console.log('Error updating student\'s academic plan', error);
       } else {
-        FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
+        // FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
       }
     });
   },

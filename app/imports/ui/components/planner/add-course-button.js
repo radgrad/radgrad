@@ -45,8 +45,10 @@ Template.Add_Course_Button.events({
       if (!error) {
         selectFavoriteCoursesTab(instance.state); // CAM: What is the correct tab to select?
         FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
-        FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
-        FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+        // FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
+        // FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+        FeedbackFunctions.checkOverloadedSemesters(getUserIdFromRoute());
+        FeedbackFunctions.generateNextLevelRecommendation(getUserIdFromRoute());
       }
     });
     const interactionData = { username: getRouteUserName(), type: 'removeCourse',

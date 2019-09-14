@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import { StudentProfiles } from '../user/StudentProfileCollection';
-import { defaultCalcLevel, getLevelCriteriaStringMarkdown } from './LevelProcessor';
+import { defaultCalcLevel } from './LevelProcessor';
 import { removeAllEntities } from '../base/BaseUtilities';
 import { RadGrad } from '../radgrad/RadGrad';
 import { defineTestFixtures } from '../test/test-utilities';
@@ -105,6 +105,5 @@ if (Meteor.isServer) {
         .equal(6);  // CAM: This will have to change with issue-302
       done();
     });
-
   });
 }

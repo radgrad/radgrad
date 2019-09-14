@@ -72,8 +72,10 @@ Template.Past_Semester_List.events({
             defineMethod.call({ collectionName, definitionData }, (error, res) => {
               if (!error) {
                 FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
-                FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
-                FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+                // FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
+                // FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+                FeedbackFunctions.checkOverloadedSemesters(getUserIdFromRoute());
+                FeedbackFunctions.generateNextLevelRecommendation(getUserIdFromRoute());
                 const ci = CourseInstances.findDoc(res);
                 showCourseDetails(instance.state, ci);
                 const interactionData = { username, type: 'addCourse', typeData: slug };
@@ -101,8 +103,10 @@ Template.Past_Semester_List.events({
               defineMethod.call({ collectionName, definitionData }, (error, res) => {
                 if (!error) {
                   FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
-                  FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
-                  FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+                  // FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
+                  // FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+                  FeedbackFunctions.checkOverloadedSemesters(getUserIdFromRoute());
+                  FeedbackFunctions.generateNextLevelRecommendation(getUserIdFromRoute());
                   const oi = OpportunityInstances.findDoc(res);
                   showOpportunityDetails(instance.state, oi);
                   const interactionData = { username, type: 'addOpportunity', typeData: slug };
@@ -131,8 +135,8 @@ Template.Past_Semester_List.events({
           updateMethod.call({ collectionName, updateData }, (error) => {
             if (!error) {
               FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
-              FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
-              FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+              // FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
+              // FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
               FeedbackFunctions.checkOverloadedSemesters(getUserIdFromRoute());
               FeedbackFunctions.generateNextLevelRecommendation(getUserIdFromRoute());
               // FeedbackFunctions.generateRecommendedCurrentSemesterOpportunities(getUserIdFromRoute());
@@ -164,8 +168,8 @@ Template.Past_Semester_List.events({
             updateMethod.call({ collectionName, updateData }, (error) => {
               if (!error) {
                 FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
-                FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
-                FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+                // FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
+                // FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
                 FeedbackFunctions.checkOverloadedSemesters(getUserIdFromRoute());
                 FeedbackFunctions.generateNextLevelRecommendation(getUserIdFromRoute());
                 // FeedbackFunctions.generateRecommendedCurrentSemesterOpportunities(getUserIdFromRoute());

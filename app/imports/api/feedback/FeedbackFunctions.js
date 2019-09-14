@@ -15,6 +15,7 @@ import * as yearUtils from '../degree-plan/AcademicYearUtilities';
 import * as planUtils from '../degree-plan/PlanChoiceUtilities';
 import { Slugs } from '../slug/SlugCollection';
 import { Users } from '../user/UserCollection';
+import { getLevelCriteriaStringMarkdown } from '../level/LevelProcessor';
 
 /* eslint-disable class-methods-use-this */
 
@@ -335,21 +336,41 @@ export class FeedbackFunctionClass {
         break;
       case 1:
         // eslint-disable-next-line max-len
-        description = `${description} Take and pass [ICS 211](${basePath}explorer/courses/ics211) and [ICS 241](${basePath}explorer/courses/ics241)`;
+        description = `${description} Take and pass [ICS 211](${basePath}explorer/courses/ics211) and [ICS 241](${basePath}explorer/courses/ics241)
+
+The criteria for *Level 2* is
+
+${getLevelCriteriaStringMarkdown('two')}`;
         break;
       case 2:
-        description = `${description} Get some innovation and experience [ICE points](${basePath}home/ice)`;
+        description = `${description} Get some innovation and experience [ICE points](${basePath}home/ice)
+        
+The criteria for *Level 3* is
+
+${getLevelCriteriaStringMarkdown('three')}`;
         break;
       case 3:
-        description = `${description} Get some more innovation and experience [ICE points](${basePath}home/ice)`;
+        description = `${description} Get some more innovation and experience [ICE points](${basePath}home/ice)
+        
+The criteria for *Level 4* is
+
+${getLevelCriteriaStringMarkdown('four')}`;
         break;
       case 4:
         // eslint-disable-next-line max-len
-        description = `${description} Get some more innovation and experience [ICE points](${basePath}home/ice) and go review something.`;
+        description = `${description} Get some more innovation and experience [ICE points](${basePath}home/ice) and go review something.
+        
+The criteria for *Level 5* is
+
+${getLevelCriteriaStringMarkdown('five')}`;
         break;
       case 5:
         // eslint-disable-next-line max-len
-        description = `${description} Get some more innovation and experience [ICE points](${basePath}home/ice) and do more reviews.`;
+        description = `${description} Get some more innovation and experience [ICE points](${basePath}home/ice) and do more reviews.
+        
+The criteria for *Level 6* is
+
+${getLevelCriteriaStringMarkdown('six')}`;
         break;
       default:
         description = '';

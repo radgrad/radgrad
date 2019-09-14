@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
-import { getLevelCriteriaStringMarkdown } from '../../../api/level/LevelProcessor';
+import { getLevelHintStringMarkdown } from '../../../api/level/LevelProcessor';
 
 /* eslint-disable max-len */
 
@@ -34,15 +34,15 @@ Template.Student_Levels_Widget.helpers({
     // The following text is copied from the Help Pane widget. Try to keep the two in sync.
     switch (levelNumber) {
       case 1:
-        return getLevelCriteriaStringMarkdown('two');
+        return getLevelHintStringMarkdown('two');
       case 2:
-        return getLevelCriteriaStringMarkdown('three');
+        return getLevelHintStringMarkdown('three');
       case 3:
-        return getLevelCriteriaStringMarkdown('four');
+        return getLevelHintStringMarkdown('four');
       case 4:
-        return getLevelCriteriaStringMarkdown('five');
+        return getLevelHintStringMarkdown('five');
       case 5:
-        return getLevelCriteriaStringMarkdown('six');
+        return getLevelHintStringMarkdown('six');
       case 6:
         return 'Congratulations!  You have reached the top of the RadGrad mountain!  As a Level 6 RadGrad Ninja, you need not strive any further. There are no further levels to reach.';
       default:
