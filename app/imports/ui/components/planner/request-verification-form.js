@@ -42,7 +42,7 @@ Template.Request_Verification_Form.events({
         }
       });
     } else {
-      const documentation = `${request[0].documentation}\n${data.documentation}`;
+      const documentation = `${request[0].documentation}\n\n${data.documentation}`;
       const status = VerificationRequests.OPEN;
       const updateData = {};
       updateData.id = request[0]._id;

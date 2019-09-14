@@ -11,11 +11,14 @@ import { verificationRequestsUpdateStatusMethod }
   from '../../../api/verification/VerificationRequestCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection';
+import { updateMethod } from '../../../api/base/BaseCollection.methods';
 
 Template.Verification_Requests_Completed.helpers({
   completedVerifications() {
     const group = FlowRouter.current().route.group.name;
-    const openRequests = VerificationRequests.find({ status: { $ne: VerificationRequests.OPEN } }).fetch();
+    const openRequests = VerificationRequests.find({ status: { $ne: VerificationRequests.OPEN } },
+      { sort: { submittedOn: -1 } })
+      .fetch();
     if (group === 'faculty') {
       return _.filter(openRequests, (request) => {
         const oi = OpportunityInstances.findDoc(request.opportunityInstanceID);
@@ -70,5 +73,17 @@ Template.Verification_Requests_Completed.events({
     const processed = request.processed;
     processed.push(processRecord);
     verificationRequestsUpdateStatusMethod.call({ id, status, processed });
+    // update the OpportunityInstance so that it isn't verified.
+    const oi = OpportunityInstances.findDoc(request.opportunityInstanceID);
+    const collectionName = OpportunityInstances.getCollectionName();
+    const updateData = {
+      id: oi._id,
+      verified: false,
+    };
+    updateMethod.call(collectionName, updateData, (error) => {
+      if (error) {
+        console.error('Failed to update the opportunity instance', error);
+      }
+    });
   },
 });

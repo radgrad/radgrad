@@ -1,7 +1,7 @@
 <template name="Request_Verification_Form">
   <div class="ui dividing header">VERIFICATION</div>
   <form class="ui equal width form {{successClass}} {{errorClass}}">
-    {{> Input_Form_Field label="Documentation" name="documentation" placeholder="Briefly document your participation" errorMessage=(fieldError "documentation") required=false}}
+    {{> Input_Form_Field label="Documentation" name="documentation" placeholder="Briefly document your participation" errorMessage=(fieldError "documentation") required=true}}
     <button class="ui green basic button" type="submit">Request Verification</button>
   </form>
 </template>
