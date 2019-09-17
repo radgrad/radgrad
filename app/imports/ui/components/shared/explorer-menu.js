@@ -17,69 +17,69 @@ import { FavoriteOpportunities } from '../../../api/favorite/FavoriteOpportunity
 
 Template.Explorer_Menu.helpers({
   academicPlansCardRouteName() {
-    window.camDebugging.start('academicPlansCardRouteName');
+    window.camDebugging.start('ExplorerMenu.academicPlansCardRouteName');
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
-      window.camDebugging.stop('academicPlansCardRouteName');
+      window.camDebugging.stop('ExplorerMenu.academicPlansCardRouteName');
       return RouteNames.studentCardExplorerPlansPageRouteName;
     } else
     if (group === 'faculty') {
-      window.camDebugging.stop('academicPlansCardRouteName');
+      window.camDebugging.stop('ExplorerMenu.academicPlansCardRouteName');
       return RouteNames.facultyCardExplorerPlansPageRouteName;
     }
-    window.camDebugging.stop('academicPlansCardRouteName');
+    window.camDebugging.stop('ExplorerMenu.academicPlansCardRouteName');
     return RouteNames.mentorCardExplorerPlansPageRouteName;
   },
   academicPlansRouteName() {
-    window.camDebugging.start('academicPlansRouteName');
+    window.camDebugging.start('ExplorerMenu.academicPlansRouteName');
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
-      window.camDebugging.stop('academicPlansRouteName');
+      window.camDebugging.stop('ExplorerMenu.academicPlansRouteName');
       return RouteNames.studentExplorerPlansPageRouteName;
     } else
     if (group === 'faculty') {
-      window.camDebugging.stop('academicPlansRouteName');
+      window.camDebugging.stop('ExplorerMenu.academicPlansRouteName');
       return RouteNames.facultyExplorerPlansPageRouteName;
     }
-    window.camDebugging.stop('academicPlansRouteName');
+    window.camDebugging.stop('ExplorerMenu.academicPlansRouteName');
     return RouteNames.mentorExplorerPlansPageRouteName;
   },
   adminEmail() {
-    window.camDebugging.start('adminEmail');
+    window.camDebugging.start('ExplorerMenu.adminEmail');
     const admin = Users._adminUsername();
-    window.camDebugging.stop('adminEmail');
+    window.camDebugging.stop('ExplorerMenu.adminEmail');
     return admin;
   },
   careerGoalsCardRouteName() {
-    window.camDebugging.start('careerGoalsCardRouteName');
+    window.camDebugging.start('ExplorerMenu.careerGoalsCardRouteName');
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
-      window.camDebugging.stop('careerGoalsCardRouteName');
+      window.camDebugging.stop('ExplorerMenu.careerGoalsCardRouteName');
       return RouteNames.studentCardExplorerCareerGoalsPageRouteName;
     } else
     if (group === 'faculty') {
-      window.camDebugging.stop('careerGoalsCardRouteName');
+      window.camDebugging.stop('ExplorerMenu.careerGoalsCardRouteName');
       return RouteNames.facultyCardExplorerCareerGoalsPageRouteName;
     }
-    window.camDebugging.stop('careerGoalsCardRouteName');
+    window.camDebugging.stop('ExplorerMenu.careerGoalsCardRouteName');
     return RouteNames.mentorCardExplorerCareerGoalsPageRouteName;
   },
   careerGoalsRouteName() {
-    window.camDebugging.start('careerGoalsRouteName');
+    window.camDebugging.start('ExplorerMenu.careerGoalsRouteName');
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
-      window.camDebugging.stop('careerGoalsRouteName');
+      window.camDebugging.stop('ExplorerMenu.careerGoalsRouteName');
       return RouteNames.studentExplorerCareerGoalsPageRouteName;
     } else
     if (group === 'faculty') {
-      window.camDebugging.stop('careerGoalsRouteName');
+      window.camDebugging.stop('ExplorerMenu.careerGoalsRouteName');
       return RouteNames.facultyExplorerCareerGoalsPageRouteName;
     }
-    window.camDebugging.stop('careerGoalsRouteName');
+    window.camDebugging.stop('ExplorerMenu.careerGoalsRouteName');
     return RouteNames.mentorExplorerCareerGoalsPageRouteName;
   },
   classType(item, type) {
-    window.camDebugging.start('classType');
+    window.camDebugging.start('ExplorerMenu.classType');
     let ret = 'item';
     let current;
     if (type === 'course') {
@@ -103,116 +103,155 @@ Template.Explorer_Menu.helpers({
     if (item === current) {
       ret = 'active item';
     }
-    window.camDebugging.stop('classType');
+    window.camDebugging.stop('ExplorerMenu.classType');
     return ret;
   },
   courseName(course) {
+    window.camDebugging.start('ExplorerMenu.courseName');
     const countStr = `x${course.count}`;
     if (course.count > 1) {
+      window.camDebugging.stop('ExplorerMenu.courseName');
       return `${course.item.shortName} ${countStr}`;
     }
+    window.camDebugging.stop('ExplorerMenu.courseName');
     return `${course.item.shortName}`;
   },
   coursesCardRouteName() {
+    window.camDebugging.start('ExplorerMenu.coursesCardRouteName');
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
+      window.camDebugging.stop('ExplorerMenu.coursesCardRouteName');
       return RouteNames.studentCardExplorerCoursesPageRouteName;
     } else
     if (group === 'faculty') {
+      window.camDebugging.stop('ExplorerMenu.coursesCardRouteName');
       return RouteNames.facultyCardExplorerCoursesPageRouteName;
     }
+    window.camDebugging.stop('ExplorerMenu.coursesCardRouteName');
     return RouteNames.mentorCardExplorerCoursesPageRouteName;
   },
   coursesRouteName() {
+    window.camDebugging.start('ExplorerMenu.coursesRouteName');
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
+      window.camDebugging.stop('ExplorerMenu.coursesRouteName');
       return RouteNames.studentExplorerCoursesPageRouteName;
     } else
     if (group === 'faculty') {
+      window.camDebugging.stop('ExplorerMenu.coursesRouteName');
       return RouteNames.facultyExplorerCoursesPageRouteName;
     }
+    window.camDebugging.stop('ExplorerMenu.coursesRouteName');
     return RouteNames.mentorExplorerCoursesPageRouteName;
   },
   degreesCardRouteName() {
+    window.camDebugging.start('ExplorerMenu.degreesCardRouteName');
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
+      window.camDebugging.stop('ExplorerMenu.degreesCardRouteName');
       return RouteNames.studentCardExplorerDegreesPageRouteName;
     } else
     if (group === 'faculty') {
+      window.camDebugging.stop('ExplorerMenu.degreesCardRouteName');
       return RouteNames.facultyCardExplorerDegreesPageRouteName;
     }
+    window.camDebugging.stop('ExplorerMenu.degreesCardRouteName');
     return RouteNames.mentorCardExplorerDegreesPageRouteName;
   },
   degreesRouteName() {
+    window.camDebugging.start('ExplorerMenu.degreesRouteName');
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
+      window.camDebugging.stop('ExplorerMenu.degreesRouteName');
       return RouteNames.studentExplorerDegreesPageRouteName;
     } else
     if (group === 'faculty') {
+      window.camDebugging.stop('ExplorerMenu.degreesRouteName');
       return RouteNames.facultyExplorerDegreesPageRouteName;
     }
+    window.camDebugging.stop('ExplorerMenu.degreesRouteName');
     return RouteNames.mentorExplorerDegreesPageRouteName;
   },
   equals(a, b) {
+    window.camDebugging.start('ExplorerMenu.equals');
     const listArg = b.split(',');
     if (listArg.indexOf(a) < 0) {
+      window.camDebugging.stop('ExplorerMenu.equals');
       return false;
     }
+    window.camDebugging.stop('ExplorerMenu.equals');
     return true;
   },
   getRouteName() {
+    window.camDebugging.start('ExplorerMenu.getRouteName');
     const routeName = FlowRouter.getRouteName();
     switch (routeName) {
       case RouteNames.studentExplorerCareerGoalsPageRouteName:
       case RouteNames.facultyExplorerCareerGoalsPageRouteName:
       case RouteNames.mentorExplorerCareerGoalsPageRouteName:
+        window.camDebugging.stop('ExplorerMenu.getRouteName');
         return 'Career Goals';
       case RouteNames.studentExplorerCoursesPageRouteName:
       case RouteNames.facultyExplorerCoursesPageRouteName:
       case RouteNames.mentorExplorerCoursesPageRouteName:
+        window.camDebugging.stop('ExplorerMenu.getRouteName');
         return 'Courses';
       case RouteNames.studentExplorerPlansPageRouteName:
       case RouteNames.facultyExplorerPlansPageRouteName:
       case RouteNames.mentorExplorerPlansPageRouteName:
+        window.camDebugging.stop('ExplorerMenu.getRouteName');
         return 'Academic Plans';
       case RouteNames.studentExplorerDegreesPageRouteName:
       case RouteNames.facultyExplorerDegreesPageRouteName:
       case RouteNames.mentorExplorerDegreesPageRouteName:
+        window.camDebugging.stop('ExplorerMenu.getRouteName');
         return 'Degrees';
       case RouteNames.studentExplorerInterestsPageRouteName:
       case RouteNames.facultyExplorerInterestsPageRouteName:
       case RouteNames.mentorExplorerInterestsPageRouteName:
+        window.camDebugging.stop('ExplorerMenu.getRouteName');
         return 'Interests';
       case RouteNames.studentExplorerOpportunitiesPageRouteName:
       case RouteNames.facultyExplorerOpportunitiesPageRouteName:
       case RouteNames.mentorExplorerOpportunitiesPageRouteName:
+        window.camDebugging.stop('ExplorerMenu.getRouteName');
         return 'Opportunities';
       case RouteNames.studentCardExplorerUsersPageRouteName:
       case RouteNames.facultyCardExplorerUsersPageRouteName:
       case RouteNames.mentorCardExplorerUsersPageRouteName:
+        window.camDebugging.stop('ExplorerMenu.getRouteName');
         return 'Users';
       default:
+        window.camDebugging.stop('ExplorerMenu.getRouteName');
         return 'Select Explorer';
     }
   },
   interestsCardRouteName() {
+    window.camDebugging.start('ExplorerMenu.interestsCardRouteName');
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
+      window.camDebugging.stop('ExplorerMenu.interestsCardRouteName');
       return RouteNames.studentCardExplorerInterestsPageRouteName;
     } else
     if (group === 'faculty') {
+      window.camDebugging.stop('ExplorerMenu.interestsCardRouteName');
       return RouteNames.facultyExplorerInterestsPageRouteName;
     }
+    window.camDebugging.stop('ExplorerMenu.interestsCardRouteName');
     return RouteNames.mentorExplorerInterestsPageRouteName;
   },
   interestsRouteName() {
+    window.camDebugging.start('ExplorerMenu.interestsRouteName');
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
+      window.camDebugging.stop('ExplorerMenu.interestsRouteName');
       return RouteNames.studentExplorerInterestsPageRouteName;
     } else
     if (group === 'faculty') {
+      window.camDebugging.stop('ExplorerMenu.interestsRouteName');
       return RouteNames.facultyExplorerInterestsPageRouteName;
     }
+    window.camDebugging.stop('ExplorerMenu.interestsRouteName');
     return RouteNames.mentorExplorerInterestsPageRouteName;
   },
   isInRole,
@@ -220,10 +259,13 @@ Template.Explorer_Menu.helpers({
     return type === value;
   },
   itemName(item) {
+    window.camDebugging.start('ExplorerMenu.itemName');
     const countStr = `x${item.count}`;
     if (item.count > 1) {
+      window.camDebugging.stop('ExplorerMenu.itemName');
       return `${item.item.name} ${countStr}`;
     }
+    window.camDebugging.stop('ExplorerMenu.itemName');
     return `${item.item.name}`;
   },
   opportunityItemName(item) {

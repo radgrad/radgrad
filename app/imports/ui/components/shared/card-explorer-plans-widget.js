@@ -9,7 +9,10 @@ import { Users } from '../../../api/user/UserCollection';
 import { FavoriteAcademicPlans } from '../../../api/favorite/FavoriteAcademicPlanCollection';
 import { getUserIdFromRoute } from './get-user-id-from-route';
 
+/* global window */
+
 function availableAcademicPlans() {
+  window.camDebugging.start('CardPlan.availablePlans');
   let plans = AcademicPlans.findNonRetired({}, { sort: { year: 1, name: 1 } });
   if (getRouteUserName()) {
     const profile = Users.getProfile(getRouteUserName());
@@ -33,22 +36,27 @@ function availableAcademicPlans() {
     const favoriteIDs = _.map(favorites, (f) => f.academicPlanID);
     plans = _.filter(plans, (p) => !_.includes(favoriteIDs, p._id));
   }
+  window.camDebugging.stop('CardPlan.availablePlans');
   return plans;
 }
 
 Template.Card_Explorer_Plans_Widget.helpers({
   canAdd() {
+    window.camDebugging.start('CardPlan.canAdd');
     const group = FlowRouter.current().route.group.name;
+    window.camDebugging.stop('CardPlan.canAdd');
     return group === 'student';
   },
   itemCount() {
     return availableAcademicPlans().length;
   },
   noPlan() {
+    window.camDebugging.start('CardPlan.noPlan');
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
       const studentID = getUserIdFromRoute();
       const favorites = FavoriteAcademicPlans.findNonRetired({ studentID });
+      window.camDebugging.stop('CardPlan.noPlan');
       return favorites.length === 0;
     }
     return false;

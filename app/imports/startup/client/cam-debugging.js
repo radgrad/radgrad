@@ -86,6 +86,7 @@ window.camDebugging.incHelper = function incHelper(name) {
 
 window.camDebugging.resetCount = function resetCount() {
   window.camDebugging.helperCount = 0;
+  window.camDebugging.helperCounts = {};
 };
 
 window.camDebugging.early = function early(name) {
