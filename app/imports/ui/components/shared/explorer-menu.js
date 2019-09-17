@@ -13,52 +13,73 @@ import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { FavoriteCourses } from '../../../api/favorite/FavoriteCourseCollection';
 import { FavoriteOpportunities } from '../../../api/favorite/FavoriteOpportunityCollection';
 
+/* global window */
+
 Template.Explorer_Menu.helpers({
   academicPlansCardRouteName() {
+    window.camDebugging.start('academicPlansCardRouteName');
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
+      window.camDebugging.stop('academicPlansCardRouteName');
       return RouteNames.studentCardExplorerPlansPageRouteName;
     } else
     if (group === 'faculty') {
+      window.camDebugging.stop('academicPlansCardRouteName');
       return RouteNames.facultyCardExplorerPlansPageRouteName;
     }
+    window.camDebugging.stop('academicPlansCardRouteName');
     return RouteNames.mentorCardExplorerPlansPageRouteName;
   },
   academicPlansRouteName() {
+    window.camDebugging.start('academicPlansRouteName');
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
+      window.camDebugging.stop('academicPlansRouteName');
       return RouteNames.studentExplorerPlansPageRouteName;
     } else
     if (group === 'faculty') {
+      window.camDebugging.stop('academicPlansRouteName');
       return RouteNames.facultyExplorerPlansPageRouteName;
     }
+    window.camDebugging.stop('academicPlansRouteName');
     return RouteNames.mentorExplorerPlansPageRouteName;
   },
   adminEmail() {
+    window.camDebugging.start('adminEmail');
     const admin = Users._adminUsername();
+    window.camDebugging.stop('adminEmail');
     return admin;
   },
   careerGoalsCardRouteName() {
+    window.camDebugging.start('careerGoalsCardRouteName');
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
+      window.camDebugging.stop('careerGoalsCardRouteName');
       return RouteNames.studentCardExplorerCareerGoalsPageRouteName;
     } else
     if (group === 'faculty') {
+      window.camDebugging.stop('careerGoalsCardRouteName');
       return RouteNames.facultyCardExplorerCareerGoalsPageRouteName;
     }
+    window.camDebugging.stop('careerGoalsCardRouteName');
     return RouteNames.mentorCardExplorerCareerGoalsPageRouteName;
   },
   careerGoalsRouteName() {
+    window.camDebugging.start('careerGoalsRouteName');
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
+      window.camDebugging.stop('careerGoalsRouteName');
       return RouteNames.studentExplorerCareerGoalsPageRouteName;
     } else
     if (group === 'faculty') {
+      window.camDebugging.stop('careerGoalsRouteName');
       return RouteNames.facultyExplorerCareerGoalsPageRouteName;
     }
+    window.camDebugging.stop('careerGoalsRouteName');
     return RouteNames.mentorExplorerCareerGoalsPageRouteName;
   },
   classType(item, type) {
+    window.camDebugging.start('classType');
     let ret = 'item';
     let current;
     if (type === 'course') {
@@ -82,6 +103,7 @@ Template.Explorer_Menu.helpers({
     if (item === current) {
       ret = 'active item';
     }
+    window.camDebugging.stop('classType');
     return ret;
   },
   courseName(course) {
