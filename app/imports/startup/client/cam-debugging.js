@@ -49,7 +49,7 @@ window.camDebugging.stop = function stop(name) {
     const stopTime = moment();
     if (window.camDebugging.startTimes[name]) {
       if (window.camDebugging.runTimes[name]) {
-        // console.log(moment.utc(stopTime.diff(window.camDebugging.startTimes[name])).format('ss.SSSS'));
+        // console.log(`${name}: ${moment.utc(stopTime.diff(window.camDebugging.startTimes[name])).format('ss.SSSS')}`);
         window.camDebugging.runTimes[name] += moment.utc(stopTime.diff(window.camDebugging.startTimes[name]));
       } else {
         window.camDebugging.runTimes[name] = moment.utc(stopTime.diff(window.camDebugging.startTimes[name]));

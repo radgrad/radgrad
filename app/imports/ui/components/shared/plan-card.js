@@ -14,7 +14,7 @@ Template.Plan_Card.helpers({
     return item.name;
   },
   itemShortDescription(item) {
-    window.camDebugging.start('PlanCard.itemShortDescprion');
+    window.camDebugging.start('PlanCard.itemShortDescription');
     let description = item.description;
     if (description.length > 200) {
       description = `${description.substring(0, 200)}`;
@@ -22,7 +22,7 @@ Template.Plan_Card.helpers({
         description = `${description.substring(0, 199)}`;
       }
     }
-    window.camDebugging.stop('PlanCard.itemShortDescprion');
+    window.camDebugging.stop('PlanCard.itemShortDescription');
     return description;
   },
   itemSlug(item) {
