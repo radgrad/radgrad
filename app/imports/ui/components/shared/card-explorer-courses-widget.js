@@ -121,22 +121,15 @@ Template.Card_Explorer_Courses_Widget.helpers({
   courseFilter() {
     return Template.instance().filter;
   },
-  hidden() {
-    return Template.instance()
-      .hidden
-      .get();
-  },
-  hiddenExists() {
-    if (getRouteUserName()) {
-      const profile = Users.getProfile(getRouteUserName());
-      if (profile.hiddenCourseIDs) {
-        return profile.hiddenCourseIDs.length !== 0;
-      }
-    }
-    return false;
-  },
   itemCount() {
     return Template.instance().view.template.__helpers[' courses']().length;
+  },
+  noInterests() {
+    if (getRouteUserName()) {
+      const profile = Users.getProfile(getRouteUserName());
+      return profile.interestIDs.length === 0;
+    }
+    return true;
   },
   typeCourse() {
     return true;
