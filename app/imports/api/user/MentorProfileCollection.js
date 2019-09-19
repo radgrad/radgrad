@@ -71,7 +71,7 @@ class MentorProfileCollection extends BaseProfileCollection {
    * @param motivation the motivation (optional).
    */
   update(docID, { firstName, lastName, picture, website, interests, careerGoals, company, career, location, linkedin,
-    motivation, retired }) {
+    motivation, retired, courseExplorerFilter, opportunityExplorerSortOrder }) {
     this.assertDefined(docID);
     const updateData = {};
     this._updateCommonFields(updateData, { firstName, lastName, picture, website, interests, careerGoals, retired });
@@ -89,6 +89,12 @@ class MentorProfileCollection extends BaseProfileCollection {
     }
     if (motivation) {
       updateData.motivation = motivation;
+    }
+    if (courseExplorerFilter) {
+      updateData.courseExplorerFilter = courseExplorerFilter;
+    }
+    if (opportunityExplorerSortOrder) {
+      updateData.opportunityExplorerSortOrder = opportunityExplorerSortOrder;
     }
     this._collection.update(docID, { $set: updateData });
   }

@@ -150,3 +150,11 @@ Template.Card_Explorer_Courses_Widget.events({
       .set(true);
   },
 });
+
+Template.Card_Explorer_Courses_Widget.onRendered(function cardExplorerCoursesWidgetOnRendered() {
+  const profile = Users.getProfile(getUserIdFromRoute());
+  // console.log(profile);
+  if (profile.courseExplorerFilter) {
+    Template.instance().filter.set(profile.courseExplorerFilter);
+  }
+});

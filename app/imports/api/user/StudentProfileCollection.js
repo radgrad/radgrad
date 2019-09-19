@@ -149,7 +149,8 @@ class StudentProfileCollection extends BaseProfileCollection {
   update(docID, {
     firstName, lastName, picture, website, interests, careerGoals, level, academicPlan, declaredSemester,
     hiddenCourses, hiddenOpportunities, isAlumni, retired, shareUsername, sharePicture, shareWebsite, shareInterests,
-    shareCareerGoals, shareAcademicPlan, shareCourses, shareOpportunities, shareLevel,
+    shareCareerGoals, shareAcademicPlan, shareCourses, shareOpportunities, shareLevel, courseExplorerFilter,
+    opportunityExplorerSortOrder
   }) {
     this.assertDefined(docID);
     const profile = this.findDoc(docID);
@@ -223,6 +224,12 @@ class StudentProfileCollection extends BaseProfileCollection {
     }
     if (_.isBoolean(shareLevel)) {
       updateData.shareLevel = shareLevel;
+    }
+    if (courseExplorerFilter) {
+      updateData.courseExplorerFilter = courseExplorerFilter;
+    }
+    if (opportunityExplorerSortOrder) {
+      updateData.opportunityExplorerSortOrder = opportunityExplorerSortOrder;
     }
     // console.log('StudentProfile.update %o', updateData);
     this._collection.update(docID, { $set: updateData });
@@ -491,6 +498,8 @@ class StudentProfileCollection extends BaseProfileCollection {
             shareOpportunities: 1,
             shareCourses: 1,
             shareLevel: 1,
+            courseExplorerFilter: 1,
+            opportunityExplorerSortOrder: 1,
             optedIn: {
               $cond: [{
                 $or: [

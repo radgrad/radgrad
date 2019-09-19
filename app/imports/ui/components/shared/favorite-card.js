@@ -68,6 +68,9 @@ Template.Favorite_Card.helpers({
     }
     return RouteNames.mentorExplorerOpportunitiesPageRouteName;
   },
+  typeCourse() {
+    return (this.type === 'courses');
+  },
   typeOpportunity() {
     return (this.type === 'opportunities');
   },
