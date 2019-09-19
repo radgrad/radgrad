@@ -150,7 +150,7 @@ class StudentProfileCollection extends BaseProfileCollection {
     firstName, lastName, picture, website, interests, careerGoals, level, academicPlan, declaredSemester,
     hiddenCourses, hiddenOpportunities, isAlumni, retired, shareUsername, sharePicture, shareWebsite, shareInterests,
     shareCareerGoals, shareAcademicPlan, shareCourses, shareOpportunities, shareLevel, courseExplorerFilter,
-    opportunityExplorerSortOrder
+    opportunityExplorerSortOrder,
   }) {
     this.assertDefined(docID);
     const profile = this.findDoc(docID);

@@ -157,3 +157,11 @@ Template.Card_Explorer_Opportunities_Widget.events({
       .set(true);
   },
 });
+
+Template.Card_Explorer_Opportunities_Widget.onRendered(function cardExplorerOpportunitesWidgetOnRendered() {
+  const profile = Users.getProfile(getUserIdFromRoute());
+  // console.log(profile);
+  if (profile.opportunityExplorerSortOrder) {
+    Template.instance().sortOrder.set(profile.opportunityExplorerSortOrder);
+  }
+});

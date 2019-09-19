@@ -62,7 +62,7 @@ Template.Course_Filter_Widget.events({
     const updateData = {};
     updateData.id = profile._id;
     updateData.courseExplorerFilter = event.target.value;
-    console.log(collectionName, updateData);
+    // console.log(collectionName, updateData);
     updateMethod.call({ collectionName, updateData }, (error) => {
       if (error) {
         console.error('Failed to update course explorer filter', error);
