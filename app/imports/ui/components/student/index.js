@@ -78,9 +78,6 @@ import './student-mentorspace-question-form.js';
 import './student-mentorspace-mentor-directory.html';
 import './student-mentorspace-mentor-directory.js';
 
-import './student-of-interest-add.html';
-import './student-of-interest-add.js';
-
 import './student-of-interest-card.html';
 import './student-of-interest-card.js';
 
@@ -95,9 +92,6 @@ import './student-plan-card';
 
 import './student-profile-card.html';
 import './student-profile-card';
-
-import './student-semester-card.html';
-import './student-semester-card';
 
 import './student-share-info-widget.html';
 import './student-share-info-widget';

@@ -94,6 +94,7 @@ Template.Student_About_Me_Widget.helpers({
     return RouteNames.studentCardExplorerInterestsPageRouteName;
   },
   name() {
+    console.log(Template.instance());
     if (getRouteUserName()) {
       return Users.getFullName(getRouteUserName());
     }

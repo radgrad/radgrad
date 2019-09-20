@@ -6,8 +6,9 @@
         {{> Student_Home_Menu}}
       </div>
       <div class="fourteen wide stretched column">
-        {{> Student_About_Me_Widget}}
+        {{> Student_About_Me_Widget student=getStudent}}
       </div>
+      {{getStudent}}
     </div>
     {{> Back_To_Top_Button}}
   </div>
