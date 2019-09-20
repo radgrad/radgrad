@@ -5,19 +5,7 @@
         {{#if typeOpportunity}}
           {{> ICE_header ice=item.ice}}
         {{/if}}
-<!--        {{#if takenCourse item}}-->
-<!--          {{> ICE_header ice=(courseICE item)}}-->
-<!--        {{/if}}-->
       </div>
-<!--      <div class="meta">-->
-<!--        {{#if inPlan item}}-->
-<!--          In Plan: {{planSemesters item}}-->
-<!--        {{else}}-->
-<!--          {{#if itemSemesters}}-->
-<!--            {{replaceSemString itemSemesters}}-->
-<!--          {{/if}}-->
-<!--        {{/if}}-->
-<!--      </div>-->
     </div>
     <div class="content">
       <p>{{{markdownify (itemShortDescription item)}}}</p>
@@ -25,9 +13,7 @@
     </div>
     <div class="content">
       <span>STUDENTS PARTICIPATING {{> Widget_Header_Number inputValue = (numberStudents item)}}</span>
-<!--      {{> Future_Participation type=type item=item}}-->
     </div>
-
     <div class="radgrad-home-buttons ui center aligned three bottom attached {{hidden}} buttons">
       {{#if typeCourse}}
         <a class="ui button" href="{{pathFor coursesRouteName username=routeUserName course=(itemSlug item)}}"><i
