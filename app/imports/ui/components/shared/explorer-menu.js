@@ -159,17 +159,17 @@ Template.Explorer_Menu.helpers({
     return RouteNames.mentorCardExplorerDegreesPageRouteName;
   },
   degreesRouteName() {
-    window.camDebugging.start('ExplorerMenu.degreesRouteName');
+    window.camDebugging.start('ExplorerMenu.academicPlansRouteName');
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
-      window.camDebugging.stop('ExplorerMenu.degreesRouteName');
+      window.camDebugging.stop('ExplorerMenu.academicPlansRouteName');
       return RouteNames.studentExplorerDegreesPageRouteName;
     } else
     if (group === 'faculty') {
-      window.camDebugging.stop('ExplorerMenu.degreesRouteName');
+      window.camDebugging.stop('ExplorerMenu.academicPlansRouteName');
       return RouteNames.facultyExplorerDegreesPageRouteName;
     }
-    window.camDebugging.stop('ExplorerMenu.degreesRouteName');
+    window.camDebugging.stop('ExplorerMenu.academicPlansRouteName');
     return RouteNames.mentorExplorerDegreesPageRouteName;
   },
   equals(a, b) {
