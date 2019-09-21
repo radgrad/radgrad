@@ -1,5 +1,4 @@
 import { Template } from 'meteor/templating';
-import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Users } from '../../../api/user/UserCollection.js';
 import { dateDiffInDays } from '../../utilities/template-helpers';
 import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';

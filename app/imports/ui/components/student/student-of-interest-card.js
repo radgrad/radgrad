@@ -1,13 +1,7 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
-import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
-import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
-import { Users } from '../../../api/user/UserCollection.js';
-import { updateMethod } from '../../../api/base/BaseCollection.methods';
-import { getRouteUserName } from '../shared/route-user-name';
 import * as RouteNames from '../../../startup/client/router.js';
 import {
   opportunitySemesters,

@@ -3,7 +3,6 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import * as RouteNames from '../../../startup/client/router.js';
 import { Teasers } from '../../../api/teaser/TeaserCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
-import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 import { Users } from '../../../api/user/UserCollection.js';
