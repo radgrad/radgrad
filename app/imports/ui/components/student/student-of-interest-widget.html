@@ -18,11 +18,11 @@
            class="ui stackable two cards">
         {{#if typeCourse}}
           {{#each course in courses}}
-            {{> Student_Of_Interest_Card item = course type = type canAdd=true}}
+            {{> Student_Of_Interest_Card item = course type = type}}
           {{/each}}
         {{else}}
           {{#each opp in opportunities}}
-            {{> Student_Of_Interest_Card item = opp type = type canAdd=true}}
+            {{> Student_Of_Interest_Card item = opp type = type}}
           {{/each}}
         {{/if}}
       </div>

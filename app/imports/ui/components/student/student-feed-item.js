@@ -22,13 +22,6 @@ Template.Student_Feed_Item.helpers({
   multipleUsers(feed) {
     return feed.userIDs.length > 1;
   },
-  students(feed) {
-    const students = [];
-    _.forEach(feed.userIDs, function (userID) {
-      students.push(Users.getProfile(userID));
-    });
-    return students;
-  },
   picture(feed) {
     // console.log('Student_Feed_Item userIDs = %o', feed.userIDs);
     if (feed.userIDs.length === 0) {

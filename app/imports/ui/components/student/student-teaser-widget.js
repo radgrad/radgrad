@@ -38,33 +38,48 @@ function matchingTeasers() {
   return [];
 }
 
+Template.Student_Teaser_Widget.onCreated(function studentTeaserWidgetOnCreated() {
+  this.data.teasers = matchingTeasers();
+});
+
 Template.Student_Teaser_Widget.helpers({
-  opportunitiesRouteName() {
+  careerGoalRouteName() {
+    return RouteNames.studentExplorerCareerGoalsPageRouteName;
+  },
+  courseRouteName() {
+    return RouteNames.studentExplorerCoursesPageRouteName;
+  },
+  interestRouteName() {
+    return RouteNames.studentExplorerInterestsPageRouteName;
+  },
+  isCareerGoal(teaser) {
+    const slugDoc = Slugs.findDoc(teaser.targetSlugID);
+    return slugDoc.entityName === 'CareerGoal';
+  },
+  isCourse(teaser) {
+    const slugDoc = Slugs.findDoc(teaser.targetSlugID);
+    return slugDoc.entityName === 'Course';
+  },
+  isInterest(teaser) {
+    const slugDoc = Slugs.findDoc(teaser.targetSlugID);
+    return slugDoc.entityName === 'Interest';
+  },
+  isOpportunity(teaser) {
+    const slugDoc = Slugs.findDoc(teaser.targetSlugID);
+    return slugDoc.entityName === 'Opportunity';
+  },
+  opportunityRouteName() {
     return RouteNames.studentExplorerOpportunitiesPageRouteName;
   },
-  opportunitySlug(teaser) {
-    let ret;
-    if (teaser.opportunityID) {
-      ret = Slugs.findDoc(Opportunities.findDoc(teaser.opportunityID).slugID).name;
-    } else {
-      ret = '#';
-    }
-    return ret;
-  },
-  teaserAuthor(teaser) {
-    return teaser.author;
+  slugName(teaser) {
+    const slugDoc = Slugs.findDoc(teaser.targetSlugID);
+    return slugDoc.name;
   },
   teaserCount() {
-    return matchingTeasers().length;
+    return Template.instance().data.teasers.length;
   },
   teasers() {
-    return matchingTeasers();
-  },
-  teaserTitle(teaser) {
-    return teaser.title;
-  },
-  teaserUrl(teaser) {
-    return teaser.url;
+    return Template.instance().data.teasers;
   },
 });
 

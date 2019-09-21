@@ -8,18 +8,33 @@
         {{#each teaser in teasers}}
           <div class="ui centered card">
             <div class="content">
-              <div class="header">{{teaserTitle teaser}}</div>
-              <div class="meta">By {{teaserAuthor teaser}}</div>
+              <div class="header">{{teaser.title}}</div>
+              <div class="meta">By {{teaser.author}}</div>
             </div>
             <div style="padding:0;" class="content">
-              {{> Student_Teaser_Widget_Video teaser = (teaserUrl teaser)}}
+              {{> Student_Teaser_Widget_Video teaser = (teaser.url)}}
             </div>
             <div class="content">
               {{> Interest_List item=teaser size='mini'}}
             </div>
-            {{#if teaser.opportunityID}}
+            {{#if (isCareerGoal teaser)}}
               <a class="ui bottom attached button"
-                 href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(opportunitySlug teaser)}}">
+                 href="{{pathFor careerGoalRouteName username=routeUserName careerGoal=(slugName teaser)}}">
+                <i class="chevron circle right icon" style="margin-right: 1px;"></i>View More</a>
+            {{/if}}
+            {{#if (isCourse teaser)}}
+              <a class="ui bottom attached button"
+                 href="{{pathFor courseRouteName username=routeUserName course=(slugName teaser)}}">
+                <i class="chevron circle right icon" style="margin-right: 1px;"></i>View More</a>
+            {{/if}}
+            {{#if (isInterest teaser)}}
+              <a class="ui bottom attached button"
+                 href="{{pathFor interestRouteName username=routeUserName interest=(slugName teaser)}}">
+                <i class="chevron circle right icon" style="margin-right: 1px;"></i>View More</a>
+            {{/if}}
+            {{#if (isOpportunity teaser)}}
+              <a class="ui bottom attached button"
+                 href="{{pathFor opportunityRouteName username=routeUserName opportunity=(slugName teaser)}}">
                 <i class="chevron circle right icon" style="margin-right: 1px;"></i>View More</a>
             {{/if}}
           </div>
