@@ -15,8 +15,8 @@ import { getStudentsCurrentSemesterNumber } from '../degree-plan/AcademicYearUti
  * @memberOf api/opportunity
  */
 export function getRandomInt(min, max) {
-  min = Math.ceil(min);  // eslint-disable-line no-param-reassign
-  max = Math.floor(max);  // eslint-disable-line no-param-reassign
+  min = Math.ceil(min); // eslint-disable-line no-param-reassign
+  max = Math.floor(max); // eslint-disable-line no-param-reassign
   return Math.floor(Math.random() * (max - min)) + min;
 }
 

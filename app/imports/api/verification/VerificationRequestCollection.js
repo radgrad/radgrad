@@ -29,7 +29,6 @@ export const ProcessedSchema = new SimpleSchema({
  * @memberOf api/verification
  */
 class VerificationRequestCollection extends BaseCollection {
-
   /**
    * Creates the VerificationRequest collection.
    */
@@ -67,10 +66,10 @@ class VerificationRequestCollection extends BaseCollection {
    * @returns The newly created docID.
    */
   define({
-           student, opportunityInstance, submittedOn = moment()
+    student, opportunityInstance, submittedOn = moment()
       .toDate(), status = this.OPEN, processed = [], documentation = 'None',
-           semester, opportunity, retired,
-         }) {
+    semester, opportunity, retired,
+  }) {
     const studentID = Users.getID(student);
     const oppInstance = opportunityInstance ? OpportunityInstances.findDoc(opportunityInstance) :
       OpportunityInstances.findOpportunityInstanceDoc(semester, opportunity, student);
@@ -190,7 +189,7 @@ class VerificationRequestCollection extends BaseCollection {
       const instance = this;
       // eslint-disable-next-line meteor/audit-argument-checks
       Meteor.publish(this._collectionName, function publish(studentID) {
-        if (!this.userId) {  // https://github.com/meteor/meteor/issues/9619
+        if (!this.userId) { // https://github.com/meteor/meteor/issues/9619
           return this.ready();
         }
         if (Roles.userIsInRole(this.userId, [ROLE.ADMIN])) {

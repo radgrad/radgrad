@@ -82,11 +82,11 @@ Template.Update_User_Widget.onCreated(function onCreated() {
   if (role === ROLE.STUDENT || role === ROLE.ALUMNI) {
     FormUtils.setupFormWidget(this, updateStudentSchema);
   } else
-    if (role === ROLE.MENTOR) {
-      FormUtils.setupFormWidget(this, updateMentorSchema);
-    } else {
-      FormUtils.setupFormWidget(this, updateSchema);
-    }
+  if (role === ROLE.MENTOR) {
+    FormUtils.setupFormWidget(this, updateMentorSchema);
+  } else {
+    FormUtils.setupFormWidget(this, updateSchema);
+  }
 });
 
 Template.Update_User_Widget.helpers({

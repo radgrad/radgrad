@@ -25,7 +25,8 @@ window.camDebugging.start = function start(name) {
     }
     // early time
     if (window.camDebugging.earlyTimes[name]) {
-      if (moment().isBefore(window.camDebugging.earlyTimes[name])) {
+      if (moment()
+        .isBefore(window.camDebugging.earlyTimes[name])) {
         window.camDebugging.earlyTimes[name] = moment();
       }
     } else {
@@ -36,7 +37,8 @@ window.camDebugging.start = function start(name) {
   }
   window.camDebugging.helperCount += 1;
   if (window.camDebugging.earliest) {
-    if (moment().isBefore(window.camDebugging.earliest)) {
+    if (moment()
+      .isBefore(window.camDebugging.earliest)) {
       window.camDebugging.earliest = moment();
     }
   } else {
@@ -56,7 +58,8 @@ window.camDebugging.stop = function stop(name) {
       }
     }
     if (window.camDebugging.lateTimes[name]) {
-      if (moment().isAfter(window.camDebugging.lateTimes[name])) {
+      if (moment()
+        .isAfter(window.camDebugging.lateTimes[name])) {
         window.camDebugging.lateTimes[name] = moment();
       }
     } else {
@@ -64,7 +67,8 @@ window.camDebugging.stop = function stop(name) {
     }
   }
   if (window.camDebugging.latest) {
-    if (moment().isAfter(window.camDebugging.latest)) {
+    if (moment()
+      .isAfter(window.camDebugging.latest)) {
       window.camDebugging.latest = moment();
     }
   } else {
@@ -92,44 +96,47 @@ window.camDebugging.resetCount = function resetCount() {
 window.camDebugging.early = function early(name) {
   if (name) {
     if (window.camDebugging.earlyTimes[name]) {
-      if (moment().isBefore(window.camDebugging.earlyTimes[name])) {
+      if (moment()
+        .isBefore(window.camDebugging.earlyTimes[name])) {
         window.camDebugging.earlyTimes[name] = moment();
       }
     } else {
       window.camDebugging.earlyTimes[name] = moment();
     }
-  } else
-    if (window.camDebugging.earliest) {
-      if (moment().isBefore(window.camDebugging.earliest)) {
-        window.camDebugging.earliest = moment();
-      }
-    } else {
+  } else if (window.camDebugging.earliest) {
+    if (moment()
+      .isBefore(window.camDebugging.earliest)) {
       window.camDebugging.earliest = moment();
     }
+  } else {
+    window.camDebugging.earliest = moment();
+  }
 };
 
 window.camDebugging.late = function late(name) {
   if (name) {
     if (window.camDebugging.lateTimes[name]) {
-      if (moment().isBefore(window.camDebugging.lateTimes[name])) {
+      if (moment()
+        .isBefore(window.camDebugging.lateTimes[name])) {
         window.camDebugging.lateTimes[name] = moment();
       }
     } else {
       window.camDebugging.lateTimes[name] = moment();
     }
-  } else
-    if (window.camDebugging.latest) {
-      if (moment().isAfter(window.camDebugging.latest)) {
-        window.camDebugging.latest = moment();
-      }
-    } else {
+  } else if (window.camDebugging.latest) {
+    if (moment()
+      .isAfter(window.camDebugging.latest)) {
       window.camDebugging.latest = moment();
     }
+  } else {
+    window.camDebugging.latest = moment();
+  }
 };
 
 window.camDebugging.deltaT = function deltaT() {
   if (window.camDebugging.latest && window.camDebugging.earliest) {
-    return moment.utc(window.camDebugging.latest.diff(window.camDebugging.earliest)).format('ss.SSS');
+    return moment.utc(window.camDebugging.latest.diff(window.camDebugging.earliest))
+      .format('ss.SSS');
   }
   return '';
 };

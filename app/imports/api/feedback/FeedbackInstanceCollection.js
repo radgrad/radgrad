@@ -12,7 +12,6 @@ import BaseCollection from '../base/BaseCollection';
  * @memberOf api/feedback
  */
 class FeedbackInstanceCollection extends BaseCollection {
-
   /**
    * Creates the FeedbackInstance collection.
    */
@@ -171,7 +170,7 @@ class FeedbackInstanceCollection extends BaseCollection {
       // eslint-disable-next-line meteor/audit-argument-checks
       Meteor.publish(this._collectionName, function publish(userID) {
         // console.log('FeedbackInstances.publish ', userID);
-        if (!this.userId) {  // https://github.com/meteor/meteor/issues/9619
+        if (!this.userId) { // https://github.com/meteor/meteor/issues/9619
           return this.ready();
         }
         if (!userID) {
@@ -216,7 +215,6 @@ class FeedbackInstanceCollection extends BaseCollection {
     const retired = doc.retired;
     return { user, functionName, description, feedbackType, retired };
   }
-
 }
 
 /**

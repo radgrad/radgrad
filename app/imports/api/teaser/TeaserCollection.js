@@ -11,7 +11,6 @@ import { Opportunities } from '../opportunity/OpportunityCollection';
  * @memberOf api/teaser
  */
 class TeaserCollection extends BaseSlugCollection {
-
   /**
    * Creates the Teaser collection.
    */

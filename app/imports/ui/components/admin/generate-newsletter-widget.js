@@ -75,14 +75,14 @@ function iceRecHelper(student, value, component) {
     html += `Congratulations! You have achieved 100 ${iceMap[component].name} points!`;
     return html;
   } else
-    if (value < 30) {
-      html += iceMap[component].low;
-    } else
-      if (value < 60) {
-        html += iceMap[component].med;
-      } else {
-        html += iceMap[component].high;
-      }
+  if (value < 30) {
+    html += iceMap[component].low;
+  } else
+  if (value < 60) {
+    html += iceMap[component].med;
+  } else {
+    html += iceMap[component].high;
+  }
   const studentInterests = Users.getInterestIDs(student.userID);
   if (component === 'c') {
     if (studentInterests.length === 0) {
@@ -156,11 +156,11 @@ function iceRecommendation(student) {
     if (value < 30) {
       iceLevel = '<span style="color: red;"><strong>NEEDS WORK</strong></span>';
     } else
-      if (value < 60) {
-        iceLevel = '<span style="color: orange;"><strong>NEEDS WORK</strong></span>';
-      } else {
-        iceLevel = '<span style="color: green;"><strong>GOOD</strong></span>';
-      }
+    if (value < 60) {
+      iceLevel = '<span style="color: orange;"><strong>NEEDS WORK</strong></span>';
+    } else {
+      iceLevel = '<span style="color: green;"><strong>GOOD</strong></span>';
+    }
     html.info += `<p><span style="color: ${iceMap[component].color}">${iceMap[component].name} (${value} points)</span>
       : ${iceLevel}</p>`;
     html.info += `<ul><li>${iceRecHelper(student, value, component)}</li></ul>`;
@@ -278,11 +278,11 @@ function completePlanRecommendation(student) {
       });
       _.pullAt(reqListPartition[0], duplicateChoiceIndices[0]);
     } else
-      if (duplicateChoiceIndices.length === 1) {
-        _.pullAt(reqListPartition[0], duplicateChoiceIndices[0]);
-      } else {
-        remainingStudentCourses.push(course);
-      }
+    if (duplicateChoiceIndices.length === 1) {
+      _.pullAt(reqListPartition[0], duplicateChoiceIndices[0]);
+    } else {
+      remainingStudentCourses.push(course);
+    }
   });
   _.each(remainingStudentCourses, function (course) {
     const electified = course.replace(/\d(?=\d?$)/g, '0');
@@ -331,9 +331,9 @@ function completePlanRecommendation(student) {
 
 function reviewCourseRecommendation(student) {
   const completedCourses = _.map(CourseInstances.find({ studentID: student.userID, verified: true }).fetch(),
-      function (instance) {
-        return instance.courseID;
-      });
+    function (instance) {
+      return instance.courseID;
+    });
   const nonReviewedCourses = _.filter(completedCourses, function (courseID) {
     return !(Reviews.findOne({ studentID: student.userID, revieweeID: courseID }));
   });
@@ -372,9 +372,9 @@ function reviewCourseRecommendation(student) {
 
 function reviewOppRecommendation(student) {
   const completedOpps = _.map(OpportunityInstances.find({ studentID: student.userID, verified: true }).fetch(),
-      function (instance) {
-        return instance.opportunityID;
-      });
+    function (instance) {
+      return instance.opportunityID;
+    });
   const nonReviewedOpps = _.filter(completedOpps, function (oppID) {
     return !(Reviews.findOne({ studentID: student.userID, revieweeID: oppID }));
   });

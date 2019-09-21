@@ -37,8 +37,8 @@ Template.Student_Feed_Item.helpers({
 Template.Student_Feed_Item.onRendered(function studentFeedItemOnRendered() {
   const template = this;
   template.$('.studentList')
-      .popup({
-        inline: true,
-        on: 'click',
-      });
+    .popup({
+      inline: true,
+      on: 'click',
+    });
 });

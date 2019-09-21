@@ -30,7 +30,6 @@ import { FacultyProfiles } from './FacultyProfileCollection';
  * @memberOf api/user
  */
 class UserCollection {
-
   constructor() {
     this._collectionName = 'UserCollection';
   }
@@ -217,8 +216,8 @@ class UserCollection {
    * @private
    */
   _adminUsername() {
-    return (_.has(Meteor, 'settings.public.admin.username')) ?
-        Meteor.settings.public.admin.username : 'radgrad@hawaii.edu';
+    return (_.has(Meteor, 'settings.public.admin.username')) ? Meteor.settings.public.admin.username :
+      'radgrad@hawaii.edu';
   }
 
   /**

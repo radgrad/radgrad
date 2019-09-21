@@ -17,10 +17,8 @@ import { RadGrad } from '../radgrad/RadGrad';
  * @memberOf api/level
  */
 export function defaultCalcLevel(studentID) {
-  const instances = _.concat(CourseInstances.find({ studentID })
-      .fetch(),
-    OpportunityInstances.find({ studentID })
-      .fetch());
+  const instances = _.concat(CourseInstances.find({ studentID }).fetch(),
+    OpportunityInstances.find({ studentID }).fetch());
   const earnedICE = getEarnedICE(instances);
   const plannedICE = getProjectedICE(instances);
   const numCourseReviews = Reviews.find({ studentID, reviewType: 'course', moderated: true, visible: true })

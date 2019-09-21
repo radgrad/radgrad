@@ -30,8 +30,7 @@ class FacultyProfileCollection extends BaseProfileCollection {
    * @throws { Meteor.Error } If username has been previously defined, or if any interests or careerGoals are invalid.
    * @return { String } The docID of the FacultyProfile.
    */
-  define({ username, firstName, lastName, picture = defaultProfilePicture, website, interests,
-           careerGoals, retired }) {
+  define({ username, firstName, lastName, picture = defaultProfilePicture, website, interests, careerGoals, retired }) {
     if (Meteor.isServer) {
       const role = ROLE.FACULTY;
       const interestIDs = Interests.getIDs(interests);

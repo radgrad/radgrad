@@ -44,7 +44,7 @@ class MentorProfileCollection extends BaseProfileCollection {
    * @return { String } The docID of the MentorProfile.
    */
   define({ username, firstName, lastName, picture = defaultProfilePicture, website, interests,
-           careerGoals, company, career, location, linkedin, motivation, retired }) {
+    careerGoals, company, career, location, linkedin, motivation, retired }) {
     if (Meteor.isServer) {
       const role = ROLE.MENTOR;
       const interestIDs = Interests.getIDs(interests);

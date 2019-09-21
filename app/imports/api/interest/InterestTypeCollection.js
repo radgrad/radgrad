@@ -8,7 +8,6 @@ import BaseTypeCollection from '../base/BaseTypeCollection';
  * @memberOf api/interest
  */
 class InterestTypeCollection extends BaseTypeCollection {
-
   /**
    * Creates the InterestType collection.
    */
@@ -51,7 +50,6 @@ class InterestTypeCollection extends BaseTypeCollection {
     }
     this._collection.update(docID, { $set: updateData });
   }
-
 }
 
 /**

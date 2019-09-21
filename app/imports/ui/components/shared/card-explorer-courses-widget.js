@@ -114,7 +114,6 @@ Template.Card_Explorer_Courses_Widget.helpers({
         break;
       default:
         // do nothing.
-
     }
     return visibleCourses;
   },

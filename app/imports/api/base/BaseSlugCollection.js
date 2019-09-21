@@ -13,7 +13,6 @@ import BaseCollection from '../base/BaseCollection';
  * @extends api/base.BaseCollection
  */
 class BaseSlugCollection extends BaseCollection {
-
   /**
    * Returns the docID associated with instance, or throws an error if it cannot be found.
    * If instance is an object with an _id field, then that value is checked to see if it's in the collection.

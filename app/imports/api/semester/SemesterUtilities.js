@@ -1,3 +1,4 @@
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Semesters } from './SemesterCollection';
 
 /**
@@ -5,7 +6,8 @@ import { Semesters } from './SemesterCollection';
  * @memberOf api/semester
  */
 export function defineSemesters() {
-  if (Semesters.find().count() === 0) {
+  if (Semesters.find()
+    .count() === 0) {
     Semesters.define({ term: Semesters.FALL, year: 2016 });
     Semesters.define({ term: Semesters.SPRING, year: 2017 });
     Semesters.define({ term: Semesters.SUMMER, year: 2017 });
@@ -41,12 +43,11 @@ export function nextSemester(semesterDoc) {
   if (currentTerm === Semesters.FALL) {
     term = Semesters.SPRING;
     year += 1;
-  } else
-    if (currentTerm === Semesters.SPRING) {
-      term = Semesters.SUMMER;
-    } else {
-      term = Semesters.FALL;
-    }
+  } else if (currentTerm === Semesters.SPRING) {
+    term = Semesters.SUMMER;
+  } else {
+    term = Semesters.FALL;
+  }
   return Semesters.findDoc(Semesters.define({ term, year }));
 }
 
@@ -72,5 +73,6 @@ export function nextFallSpringSemester(semester) {
 export function upComingSemesters() {
   const currentSemester = Semesters.getCurrentSemesterDoc();
   const nine = currentSemester.semesterNumber + 10;
-  return _.sortBy(Semesters.find({ semesterNumber: { $gt: currentSemester.semesterNumber, $lt: nine } }).fetch(), (sem) => sem.semesterNumber); // eslint-disable-line
+  return _.sortBy(Semesters.find({ semesterNumber: { $gt: currentSemester.semesterNumber, $lt: nine } })
+    .fetch(), (sem) => sem.semesterNumber); // eslint-disable-line
 }

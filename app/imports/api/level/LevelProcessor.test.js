@@ -79,7 +79,7 @@ if (Meteor.isServer) {
       const bettyProfile = StudentProfiles.findDoc({ username: 'betty@hawaii.edu' });
       expect(defaultCalcLevel(bettyProfile.userID))
         .to
-        .equal(4);  // CAM: This will have to change with issue-302
+        .equal(4); // CAM: This will have to change with issue-302
     });
 
     it('Betty Level 5', function levelFive(done) {
@@ -90,7 +90,7 @@ if (Meteor.isServer) {
       const bettyProfile = StudentProfiles.findDoc({ username: 'betty@hawaii.edu' });
       expect(defaultCalcLevel(bettyProfile.userID))
         .to
-        .equal(5);  // CAM: This will have to change with issue-302
+        .equal(5); // CAM: This will have to change with issue-302
       done();
     });
 
@@ -102,7 +102,7 @@ if (Meteor.isServer) {
       const bettyProfile = StudentProfiles.findDoc({ username: 'betty@hawaii.edu' });
       expect(defaultCalcLevel(bettyProfile.userID))
         .to
-        .equal(6);  // CAM: This will have to change with issue-302
+        .equal(6); // CAM: This will have to change with issue-302
       done();
     });
   });

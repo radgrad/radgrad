@@ -107,6 +107,7 @@ export function complexChoiceToComplexArray(planChoice) {
   }
   return ret;
 }
+
 /**
  * Creates the course name from the slug. Course names have department in all caps.
  * @param slug the course slug.
@@ -178,10 +179,9 @@ function satisfiesSinglePlanChoice(planChoice, courseSlug) {
   const dept = getDepartment(planChoice);
   if (planChoice.includes('300+')) {
     return courseSlug.startsWith(`${dept}_3`) || courseSlug.startsWith(`${dept}_4`);
-  } else
-    if (planChoice.includes('400+')) {
-      return courseSlug.startsWith(`${dept}_4`);
-    }
+  } else if (planChoice.includes('400+')) {
+    return courseSlug.startsWith(`${dept}_4`);
+  }
   return planChoice.indexOf(courseSlug) !== -1;
 }
 

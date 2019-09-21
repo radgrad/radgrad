@@ -12,7 +12,6 @@ import BaseCollection from '../base/BaseCollection';
  * @extends api/base.BaseCollection
  */
 class BaseTypeCollection extends BaseCollection {
-
   /**
    * Creates the BaseType collection.
    */

@@ -88,37 +88,37 @@ Template.Past_Semester_List.events({
             });
           }
         } else
-          if (Slugs.isSlugForEntity(slug, 'Opportunity')) {
-            const opportunityID = Slugs.getEntityID(slug, 'Opportunity');
-            const semesterID = Template.instance().localState.get('semester')._id;
-            const collectionName = OpportunityInstances.getCollectionName();
-            const definitionData = {
-              semester: semSlug,
-              opportunity: slug,
-              verified: false,
-              student: username,
-            };
+        if (Slugs.isSlugForEntity(slug, 'Opportunity')) {
+          const opportunityID = Slugs.getEntityID(slug, 'Opportunity');
+          const semesterID = Template.instance().localState.get('semester')._id;
+          const collectionName = OpportunityInstances.getCollectionName();
+          const definitionData = {
+            semester: semSlug,
+            opportunity: slug,
+            verified: false,
+            student: username,
+          };
             // eslint-disable-next-line
             if (OpportunityInstances.find({ opportunityID, studentID: getUserIdFromRoute(), semesterID }).count() === 0) {
-              defineMethod.call({ collectionName, definitionData }, (error, res) => {
-                if (!error) {
-                  FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
-                  // FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
-                  // FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
-                  FeedbackFunctions.checkOverloadedSemesters(getUserIdFromRoute());
-                  FeedbackFunctions.generateNextLevelRecommendation(getUserIdFromRoute());
-                  const oi = OpportunityInstances.findDoc(res);
-                  showOpportunityDetails(instance.state, oi);
-                  const interactionData = { username, type: 'addOpportunity', typeData: slug };
-                  userInteractionDefineMethod.call(interactionData, (err) => {
-                    if (err) {
-                      console.error('Error creating UserInteraction', err);
-                    }
-                  });
-                }
-              });
-            }
+            defineMethod.call({ collectionName, definitionData }, (error, res) => {
+              if (!error) {
+                FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
+                // FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
+                // FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+                FeedbackFunctions.checkOverloadedSemesters(getUserIdFromRoute());
+                FeedbackFunctions.generateNextLevelRecommendation(getUserIdFromRoute());
+                const oi = OpportunityInstances.findDoc(res);
+                showOpportunityDetails(instance.state, oi);
+                const interactionData = { username, type: 'addOpportunity', typeData: slug };
+                userInteractionDefineMethod.call(interactionData, (err) => {
+                  if (err) {
+                    console.error('Error creating UserInteraction', err);
+                  }
+                });
+              }
+            });
           }
+        }
       } else {
         const semesterID = Template.instance().localState.get('semester')._id;
         if (CourseInstances.isDefined(id)) {
@@ -147,35 +147,35 @@ Template.Past_Semester_List.events({
                 if (err) {
                   console.error('Error in getting future enrollment', error);
                 } else
-                  if (course._id === result.courseID) {
-                    instance.state.set(plannerKeys.plannedEnrollment, result);
-                  }
+                if (course._id === result.courseID) {
+                  instance.state.set(plannerKeys.plannedEnrollment, result);
+                }
               });
             }
           });
         } else
-          if (OpportunityInstances.isDefined(id)) {
-            // There's gotta be a better way of doing this.
-            const collectionName = OpportunityInstances.getCollectionName();
-            const updateData = {};
-            _.mapKeys(OpportunityInstances.findDoc(id), (value, key) => {
-              if (key !== '_id') {
-                updateData[key] = value;
-              }
-            });
-            updateData.id = id;
-            updateData.semesterID = semesterID;
-            updateMethod.call({ collectionName, updateData }, (error) => {
-              if (!error) {
-                FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
-                // FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
-                // FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
-                FeedbackFunctions.checkOverloadedSemesters(getUserIdFromRoute());
-                FeedbackFunctions.generateNextLevelRecommendation(getUserIdFromRoute());
-                // FeedbackFunctions.generateRecommendedCurrentSemesterOpportunities(getUserIdFromRoute());
-              }
-            });
-          }
+        if (OpportunityInstances.isDefined(id)) {
+          // There's gotta be a better way of doing this.
+          const collectionName = OpportunityInstances.getCollectionName();
+          const updateData = {};
+          _.mapKeys(OpportunityInstances.findDoc(id), (value, key) => {
+            if (key !== '_id') {
+              updateData[key] = value;
+            }
+          });
+          updateData.id = id;
+          updateData.semesterID = semesterID;
+          updateMethod.call({ collectionName, updateData }, (error) => {
+            if (!error) {
+              FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
+              // FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
+              // FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+              FeedbackFunctions.checkOverloadedSemesters(getUserIdFromRoute());
+              FeedbackFunctions.generateNextLevelRecommendation(getUserIdFromRoute());
+              // FeedbackFunctions.generateRecommendedCurrentSemesterOpportunities(getUserIdFromRoute());
+            }
+          });
+        }
       }
     }
   },
@@ -191,10 +191,10 @@ Template.Past_Semester_List.events({
       const ci = template.data.icsCourses[target.id];
       showCourseDetails(template.state, ci);
     } else
-      if (firstClass === 'opportunityInstance') {
-        const oi = template.data.semesterOpportunities[target.id];
-        showOpportunityDetails(template.state, oi);
-      }
+    if (firstClass === 'opportunityInstance') {
+      const oi = template.data.semesterOpportunities[target.id];
+      showOpportunityDetails(template.state, oi);
+    }
   },
 });
 

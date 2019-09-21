@@ -116,11 +116,11 @@ Template.Student_Explorer_Courses_Widget_Button.events({
 Template.Student_Explorer_Courses_Widget_Button.onRendered(function studentExplorerCoursesWidgetButtonOnRendered() {
   const template = this;
   template.$('.chooseYear')
-      .popup({
-        on: 'click',
-      });
+    .popup({
+      on: 'click',
+    });
   template.$('.chooseSemester')
-      .popup({
-        on: 'click',
-      });
+    .popup({
+      on: 'click',
+    });
 });

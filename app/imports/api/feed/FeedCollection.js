@@ -156,9 +156,9 @@ class FeedCollection extends BaseCollection {
    * @throws {Meteor.Error} If not a valid user.
    */
   _defineNewUser({
-                   user, feedType, timestamp = moment()
+    user, feedType, timestamp = moment()
       .toDate(), retired,
-                 }) {
+  }) {
     // First, see if we've already defined any users within the past day.
     const recentFeedID = this.checkPastDayFeed(this.NEW_USER);
     // If there's a recentFeed, then update it instead with this user's info.
@@ -189,9 +189,9 @@ class FeedCollection extends BaseCollection {
    * @throws {Meteor.Error} If not a valid course.
    */
   _defineNewCourse({
-                     course, feedType, timestamp = moment()
+    course, feedType, timestamp = moment()
       .toDate(), retired,
-                   }) {
+  }) {
     const courseID = Courses.getID(course);
     const c = Courses.findDoc(courseID);
     const description = `[${c.name}](./explorer/courses/${Slugs.getNameFromID(c.slugID)}) 
@@ -219,9 +219,9 @@ class FeedCollection extends BaseCollection {
    * @throws {Meteor.Error} If not a valid opportunity.
    */
   _defineNewOpportunity({
-                          opportunity, feedType, timestamp = moment()
+    opportunity, feedType, timestamp = moment()
       .toDate(), retired,
-                        }) {
+  }) {
     const opportunityID = Opportunities.getID(opportunity);
     const o = Opportunities.findDoc(opportunityID);
     const description = `[${o.name}](./explorer/opportunities/${Slugs.getNameFromID(o.slugID)}) 
@@ -256,9 +256,9 @@ class FeedCollection extends BaseCollection {
    * @throws {Meteor.Error} If not a valid opportunity, semester, or user.
    */
   _defineNewVerifiedOpportunity({
-                                  user, opportunity, semester, feedType, timestamp = moment()
+    user, opportunity, semester, feedType, timestamp = moment()
       .toDate(), retired,
-                                }) {
+  }) {
     // First, see if we've already defined any verified-opportunities for this opportunity within the past day.
     const recentFeedID = this.checkPastDayFeed(this.VERIFIED_OPPORTUNITY, opportunity);
     // If there's a recentFeed, then update it instead with this user's info and return.
@@ -294,9 +294,9 @@ class FeedCollection extends BaseCollection {
    * @throws {Meteor.Error} If not a valid course or user.
    */
   _defineNewCourseReview({
-                           user, course, feedType, timestamp = moment()
+    user, course, feedType, timestamp = moment()
       .toDate(), retired,
-                         }) {
+  }) {
     let picture;
     const userID = Users.getID((_.isArray(user)) ? user[0] : user);
     const courseID = Courses.getID(course);
@@ -331,9 +331,9 @@ class FeedCollection extends BaseCollection {
    * @throws {Meteor.Error} If not a valid opportunity or user.
    */
   _defineNewOpportunityReview({
-                                user, opportunity, feedType, timestamp = moment()
+    user, opportunity, feedType, timestamp = moment()
       .toDate(), retired,
-                              }) {
+  }) {
     let picture;
     const userID = Users.getID((_.isArray(user)) ? user[0] : user);
     const opportunityID = Opportunities.getID(opportunity);
@@ -364,9 +364,9 @@ class FeedCollection extends BaseCollection {
    * @private
    */
   _defineNewLevel({
-                    user, level, feedType, timestamp = moment()
+    user, level, feedType, timestamp = moment()
       .toDate(), retired,
-                  }) {
+  }) {
     // First, see if we've already defined any users within the past day.
     const recentFeedID = this.checkPastDayLevelFeed(level, timestamp);
     // If there's a recentFeed, then update it instead with this user's info.

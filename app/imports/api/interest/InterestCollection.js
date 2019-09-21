@@ -17,7 +17,6 @@ import BaseSlugCollection from '../base/BaseSlugCollection';
  * @memberOf api/interest
  */
 class InterestCollection extends BaseSlugCollection {
-
   /**
    * Creates the Interest collection.
    */
@@ -92,7 +91,7 @@ class InterestCollection extends BaseSlugCollection {
    */
   assertUnusedInterest(collectionList, docID) { // eslint-disable-line class-methods-use-this
     _.forEach(collectionList, function (collection) {
-      collection.find().map(function (doc) {  // eslint-disable-line array-callback-return
+      collection.find().map(function (doc) { // eslint-disable-line array-callback-return
         if (collection.hasInterest(doc, docID)) {
           throw new Meteor.Error(`Interest ${docID.name} is referenced by collection ${collection._collectionName}.`,
             '', Error().stack);

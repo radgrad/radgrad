@@ -18,7 +18,6 @@ import { VerificationRequests } from '../verification/VerificationRequestCollect
  * @memberOf api/opportunity
  */
 class OpportunityInstanceCollection extends BaseCollection {
-
   /**
    * Creates the OpportunityInstance collection.
    */

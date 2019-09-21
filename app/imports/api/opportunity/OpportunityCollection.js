@@ -20,7 +20,6 @@ import { assertICE } from '../ice/IceProcessor';
  * @memberOf api/opportunity
  */
 class OpportunityCollection extends BaseSlugCollection {
-
   /**
    * Creates the Opportunity collection.
    */
@@ -64,10 +63,8 @@ class OpportunityCollection extends BaseSlugCollection {
    * or startActive or endActive are not valid.
    * @returns The newly created docID.
    */
-  define({ name, slug, description, opportunityType, sponsor, interests, semesters, ice, eventDate = null,
-           retired }) {
+  define({ name, slug, description, opportunityType, sponsor, interests, semesters, ice, eventDate = null, retired }) {
     // Get instances, or throw error
-
     const opportunityTypeID = OpportunityTypes.getID(opportunityType);
     const sponsorID = Users.getID(sponsor);
     Users.assertInRole(sponsorID, [ROLE.FACULTY, ROLE.ADVISOR, ROLE.ADMIN]);
@@ -154,14 +151,14 @@ class OpportunityCollection extends BaseSlugCollection {
   removeIt(instance) {
     const docID = this.getID(instance);
     // Check that this opportunity is not referenced by any Opportunity Instance.
-    OpportunityInstances.find().map(function (opportunityInstance) {  // eslint-disable-line array-callback-return
+    OpportunityInstances.find().map(function (opportunityInstance) { // eslint-disable-line array-callback-return
       if (opportunityInstance.opportunityID === docID) {
         throw new Meteor.Error(`Opportunity ${instance} referenced by a opportunity instance ${opportunityInstance}.`,
           '', Error().stack);
       }
     });
     // Check that this opportunity is not referenced by any Teaser.
-    Teasers.find().map(function (teaser) {  // eslint-disable-line array-callback-return
+    Teasers.find().map(function (teaser) { // eslint-disable-line array-callback-return
       if (Teasers.hasOpportunity(teaser, docID)) {
         throw new Meteor.Error(`Opportunity ${instance} referenced by a teaser ${teaser}.`, '', Error().stack);
       }

@@ -43,7 +43,7 @@ Template.Student_Update_Picture_Widget.events({
       if (error) {
         console.log('Error during Student profile picture update', error);
       } else {
-       // alert('Picture update successful.');
+        // alert('Picture update successful.');
         let level;
         if (RadGrad.calcLevel) {
           level = RadGrad.calcLevel(profile.userID);

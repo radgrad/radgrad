@@ -22,8 +22,8 @@ Template.Opportunity_Scoreboard_Widget.helpers({
     return Template.instance()
       .successOrError
       .get() === 'error' ? Template.instance()
-      .results
-      .get() : '';
+        .results
+        .get() : '';
   },
   highlight(course, semester) {
     const id = `${course._id} ${semester._id}`;

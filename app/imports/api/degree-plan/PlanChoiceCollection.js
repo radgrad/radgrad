@@ -9,7 +9,6 @@ import { buildSimpleName } from './PlanChoiceUtilities';
  * @memberOf api/degree-plan
  */
 class PlanChoiceCollection extends BaseCollection {
-
   /**
    * Creates a plan choice.
    */
@@ -79,17 +78,16 @@ class PlanChoiceCollection extends BaseCollection {
         } else {
           slug = '';
         }
-      } else
-        if (slug.indexOf(',') !== -1) {
-          index = slug.indexOf(',');
-          temp = slug.substring(0, index);
-          slug = slug.substring(index + 1);
-          ret = `${ret}${buildSimpleName(temp)} or `;
-        } else {
-          temp = slug;
-          slug = '';
-          ret = `${ret}${buildSimpleName(temp)} or `;
-        }
+      } else if (slug.indexOf(',') !== -1) {
+        index = slug.indexOf(',');
+        temp = slug.substring(0, index);
+        slug = slug.substring(index + 1);
+        ret = `${ret}${buildSimpleName(temp)} or `;
+      } else {
+        temp = slug;
+        slug = '';
+        ret = `${ret}${buildSimpleName(temp)} or `;
+      }
     }
     return ret.substring(0, ret.length - 4);
   }
@@ -112,7 +110,6 @@ class PlanChoiceCollection extends BaseCollection {
     const doc = this.findDoc(docID);
     return { choice: doc.choice, retired: doc.retired };
   }
-
 }
 
 /**

@@ -21,7 +21,6 @@ import { ROLE } from '../role/Role';
  * @memberOf api/analytic
  */
 class UserInteractionCollection extends BaseCollection {
-
   /**
    * Creates the UserInteraction collection
    */

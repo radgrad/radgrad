@@ -14,7 +14,6 @@ import { Users } from '../user/UserCollection';
  * @memberOf api/log
  */
 class AdvisorLogCollection extends BaseCollection {
-
   /**
    * Creates the AdvisorLog collection.
    */
@@ -101,7 +100,7 @@ class AdvisorLogCollection extends BaseCollection {
       const instance = this;
       // eslint-disable-next-line meteor/audit-argument-checks
       Meteor.publish(this._collectionName, function publish(studentID) {
-        if (!this.userId) {  // https://github.com/meteor/meteor/issues/9619
+        if (!this.userId) { // https://github.com/meteor/meteor/issues/9619
           return this.ready();
         }
         if (!studentID) {

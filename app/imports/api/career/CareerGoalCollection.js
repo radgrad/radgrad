@@ -12,7 +12,6 @@ import BaseSlugCollection from '../base/BaseSlugCollection';
  * @extends api/base.BaseSlugCollection
  */
 class CareerGoalCollection extends BaseSlugCollection {
-
   /**
    * Creates the CareerGoal collection.
    */

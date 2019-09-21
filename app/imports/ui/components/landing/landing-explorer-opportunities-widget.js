@@ -34,7 +34,7 @@ Template.Landing_Explorer_Opportunities_Widget.onRendered(function enableVideo()
   }, 300);
   const template = this;
   template.$('.chooseSemester')
-      .popup({
-        on: 'click',
-      });
+    .popup({
+      on: 'click',
+    });
 });

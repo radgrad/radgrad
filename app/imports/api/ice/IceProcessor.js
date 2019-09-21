@@ -8,11 +8,11 @@ import { Courses } from '../../api/course/CourseCollection';
  * @type {*|Function}
  */
 Number.isInteger = Number.isInteger ||
-    function test(value) {
-      return typeof value === 'number' &&
-          isFinite(value) &&
-          Math.floor(value) === value;
-    };
+  function test(value) {
+    return typeof value === 'number' &&
+      isFinite(value) &&
+      Math.floor(value) === value;
+  };
 
 /**
  * The competency points earned for each grade A, B, or C.
@@ -71,13 +71,11 @@ export function makeCourseICE(course, grade) {
   // Courses get competency points only if you get an A or a B.
   if (_.includes(['B+', 'B', 'B-'], grade)) {
     c = gradeCompetency.B;
-  } else
-    if (_.includes(['A+', 'A', 'A-'], grade)) {
-      c = gradeCompetency.A;
-    } else
-      if (_.includes(['*', '**', '***'], grade)) {
-        c = 9;
-      }
+  } else if (_.includes(['A+', 'A', 'A-'], grade)) {
+    c = gradeCompetency.A;
+  } else if (_.includes(['*', '**', '***'], grade)) {
+    c = 9;
+  }
   return { i, c, e };
 }
 

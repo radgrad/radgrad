@@ -71,10 +71,10 @@ Template.Inspector.helpers({
     if (Template.instance().state.get(plannerKeys.detailCourse)) {
       return Template.instance().state.get(plannerKeys.detailCourse).description;
     } else
-      if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
-        const course = Courses.findDoc(Template.instance().state.get(plannerKeys.detailCourseInstance).courseID);
-        return course.description;
-      }
+    if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
+      const course = Courses.findDoc(Template.instance().state.get(plannerKeys.detailCourseInstance).courseID);
+      return course.description;
+    }
     return null;
   },
   courseEnrollmentData() {
@@ -82,9 +82,9 @@ Template.Inspector.helpers({
     if (Template.instance().state.get(plannerKeys.detailCourse)) {
       courseID = Template.instance().state.get(plannerKeys.detailCourse)._id;
     } else
-      if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
-        courseID = Template.instance().state.get(plannerKeys.detailCourseInstance).courseID;
-      }
+    if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
+      courseID = Template.instance().state.get(plannerKeys.detailCourseInstance).courseID;
+    }
     if (courseID && Template.instance().state.get(plannerKeys.plannedEnrollment) &&
         courseID === Template.instance().state.get(plannerKeys.plannedEnrollment).courseID) {
       return Template.instance().state.get(plannerKeys.plannedEnrollment).enrollmentData;
@@ -95,20 +95,20 @@ Template.Inspector.helpers({
     if (Template.instance().state.get(plannerKeys.detailCourse)) {
       return Template.instance().state.get(plannerKeys.detailCourse).name;
     } else
-      if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
-        const course = Courses.findDoc(Template.instance().state.get(plannerKeys.detailCourseInstance).courseID);
-        return course.name;
-      }
+    if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
+      const course = Courses.findDoc(Template.instance().state.get(plannerKeys.detailCourseInstance).courseID);
+      return course.name;
+    }
     return null;
   },
   courseNumber() {
     if (Template.instance().state.get(plannerKeys.detailCourse)) {
       return Template.instance().state.get(plannerKeys.detailCourse).number;
     } else
-      if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
-        const course = Courses.findDoc(Template.instance().state.get(plannerKeys.detailCourseInstance).courseID);
-        return course.number;
-      }
+    if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
+      const course = Courses.findDoc(Template.instance().state.get(plannerKeys.detailCourseInstance).courseID);
+      return course.number;
+    }
     return null;
   },
   courseIce() {
@@ -122,11 +122,11 @@ Template.Inspector.helpers({
       const ice = makeCourseICE(slug.name, 'C');
       return ice;
     } else
-      if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
-        const ci = Template.instance().state.get(plannerKeys.detailCourseInstance);
-        const ice = ci.ice;
-        return ice;
-      }
+    if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
+      const ci = Template.instance().state.get(plannerKeys.detailCourseInstance);
+      const ice = ci.ice;
+      return ice;
+    }
     return null;
   },
   courseSlugID() {
@@ -134,10 +134,10 @@ Template.Inspector.helpers({
     if (Template.instance().state.get(plannerKeys.detailCourse)) {
       return Slugs.getNameFromID(Template.instance().state.get(plannerKeys.detailCourse).slugID);
     } else
-      if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
-        const course = Courses.findDoc(Template.instance().state.get(plannerKeys.detailCourseInstance).courseID);
-        return Slugs.getNameFromID(course.slugID);
-      }
+    if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
+      const course = Courses.findDoc(Template.instance().state.get(plannerKeys.detailCourseInstance).courseID);
+      return Slugs.getNameFromID(course.slugID);
+    }
     return null;
   },
   coursesRouteName() {
@@ -164,10 +164,10 @@ Template.Inspector.helpers({
     if (Template.instance().state.get(plannerKeys.detailCourse)) {
       return Template.instance().state.get(plannerKeys.detailCourse);
     } else
-      if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
-        const course = Courses.findDoc(Template.instance().state.get(plannerKeys.detailCourseInstance).courseID);
-        return course;
-      }
+    if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
+      const course = Courses.findDoc(Template.instance().state.get(plannerKeys.detailCourseInstance).courseID);
+      return course;
+    }
     return null;
   },
   getOpportunity() {
@@ -176,9 +176,9 @@ Template.Inspector.helpers({
       const opp = Opportunities.findDoc({ _id: oi.opportunityID });
       return opp;
     } else
-      if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
-        return Template.instance().state.get(plannerKeys.detailOpportunity);
-      }
+    if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
+      return Template.instance().state.get(plannerKeys.detailOpportunity);
+    }
     return null;
   },
   hasCourse() {
@@ -200,15 +200,15 @@ Template.Inspector.helpers({
     if (Template.instance().state.get(plannerKeys.detailCourse)) {
       return Template.instance().state.get(plannerKeys.detailCourse)._id;
     } else
-      if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
-        return Template.instance().state.get(plannerKeys.detailCourseInstance)._id;
-      } else
-        if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
-          return Template.instance().state.get(plannerKeys.detailOpportunity)._id;
-        } else
-          if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
-            return Template.instance().state.get(plannerKeys.detailOpportunityInstance)._id;
-          }
+    if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
+      return Template.instance().state.get(plannerKeys.detailCourseInstance)._id;
+    } else
+    if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
+      return Template.instance().state.get(plannerKeys.detailOpportunity)._id;
+    } else
+    if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
+      return Template.instance().state.get(plannerKeys.detailOpportunityInstance)._id;
+    }
     return null;
   },
   instanceSemester() {
@@ -224,19 +224,19 @@ Template.Inspector.helpers({
       const course = Template.instance().state.get(plannerKeys.detailCourse);
       return _.map(course.interestIDs, (iid) => Interests.findDoc(iid));
     } else
-      if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
-        const course = Courses.findDoc(Template.instance().state.get(plannerKeys.detailCourseInstance).courseID);
-        return _.map(course.interestIDs, (iid) => Interests.findDoc(iid));
-      } else
-        if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
-          return _.map(Template.instance().state.get(plannerKeys.detailOpportunity).interestIDs, (iid) =>
-              Interests.findDoc(iid));
-        } else
-          if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
-            const opp = Opportunities.findDoc(Template.instance().state.get(
-                plannerKeys.detailOpportunityInstance).opportunityID);
-            return _.map(opp.interestIDs, (iid) => Interests.findDoc(iid));
-          }
+    if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
+      const course = Courses.findDoc(Template.instance().state.get(plannerKeys.detailCourseInstance).courseID);
+      return _.map(course.interestIDs, (iid) => Interests.findDoc(iid));
+    } else
+    if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
+      return _.map(Template.instance().state.get(plannerKeys.detailOpportunity).interestIDs, (iid) =>
+        Interests.findDoc(iid));
+    } else
+    if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
+      const opp = Opportunities.findDoc(Template.instance().state.get(
+        plannerKeys.detailOpportunityInstance).opportunityID);
+      return _.map(opp.interestIDs, (iid) => Interests.findDoc(iid));
+    }
     return [];
   },
   isInPlan() {
@@ -250,13 +250,13 @@ Template.Inspector.helpers({
       const ciSemester = Semesters.findDoc(ci.semesterID);
       return ciSemester.semesterNumber <= currentSemester.semesterNumber;
     } else
-      if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
-        const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
-        const studentID = getUserIdFromRoute();
-        const requests = VerificationRequests.find({ opportunityInstanceID: oi._id, studentID }).fetch();
-        const oppSemester = Semesters.findDoc(oi.semesterID);
-        return !oi.verified && oppSemester.semesterNumber <= currentSemester.semesterNumber && requests.length === 0;
-      }
+    if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
+      const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
+      const studentID = getUserIdFromRoute();
+      const requests = VerificationRequests.find({ opportunityInstanceID: oi._id, studentID }).fetch();
+      const oppSemester = Semesters.findDoc(oi.semesterID);
+      return !oi.verified && oppSemester.semesterNumber <= currentSemester.semesterNumber && requests.length === 0;
+    }
     return false;
   },
   prereqName(prereq) {
@@ -294,9 +294,9 @@ Template.Inspector.helpers({
       const opp = Opportunities.findDoc({ _id: oi.opportunityID });
       return opp.description;
     } else
-      if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
-        return Template.instance().state.get(plannerKeys.detailOpportunity).description;
-      }
+    if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
+      return Template.instance().state.get(plannerKeys.detailOpportunity).description;
+    }
     return null;
   },
   opportunityIce() {
@@ -304,9 +304,9 @@ Template.Inspector.helpers({
       const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
       return Opportunities.findDoc(oi.opportunityID).ice;
     } else
-      if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
-        return Template.instance().state.get(plannerKeys.detailOpportunity).ice;
-      }
+    if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
+      return Template.instance().state.get(plannerKeys.detailOpportunity).ice;
+    }
     return null;
   },
   opportunityName() {
@@ -315,9 +315,9 @@ Template.Inspector.helpers({
       const opp = Opportunities.findDoc({ _id: oi.opportunityID });
       return opp.name;
     } else
-      if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
-        return Template.instance().state.get(plannerKeys.detailOpportunity).name;
-      }
+    if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
+      return Template.instance().state.get(plannerKeys.detailOpportunity).name;
+    }
     return null;
   },
   opportunityMenuName(opportunity) {
@@ -333,26 +333,26 @@ Template.Inspector.helpers({
       const semester = OpportunityInstances.getSemesterDoc(oi._id);
       return `${semester.term} ${semester.year}`;
     } else
-      if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
-        const opportunity = Template.instance().state.get(plannerKeys.detailOpportunity);
-        let semesterStr = '';
-        opportunity.semesterIDs.forEach((sem) => {
-          semesterStr += Semesters.toString(sem, false);
-          semesterStr += ', ';
-        });
-        return semesterStr.substring(0, semesterStr.length - 2);
-      }
+    if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
+      const opportunity = Template.instance().state.get(plannerKeys.detailOpportunity);
+      let semesterStr = '';
+      opportunity.semesterIDs.forEach((sem) => {
+        semesterStr += Semesters.toString(sem, false);
+        semesterStr += ', ';
+      });
+      return semesterStr.substring(0, semesterStr.length - 2);
+    }
     return null;
   },
   opportunitySlugID() {
     if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
       return Slugs.getNameFromID(Template.instance().state.get(plannerKeys.detailOpportunity).slugID);
     } else
-      if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
-        const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
-        const opp = Opportunities.findDoc({ _id: oi.opportunityID });
-        return Slugs.getNameFromID(opp.slugID);
-      }
+    if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
+      const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
+      const opp = Opportunities.findDoc({ _id: oi.opportunityID });
+      return Slugs.getNameFromID(opp.slugID);
+    }
     return null;
   },
   passedCourse() {
@@ -372,10 +372,10 @@ Template.Inspector.helpers({
     if (Template.instance().state.get(plannerKeys.detailCourse)) {
       return Template.instance().state.get(plannerKeys.detailCourse).prerequisites;
     } else
-      if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
-        const course = Courses.findDoc(Template.instance().state.get(plannerKeys.detailCourseInstance).courseID);
-        return course.prerequisites;
-      }
+    if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
+      const course = Courses.findDoc(Template.instance().state.get(plannerKeys.detailCourseInstance).courseID);
+      return course.prerequisites;
+    }
     return [];
   },
   requestHistory() {
@@ -413,19 +413,19 @@ Template.Inspector.helpers({
     if (Template.instance().state.get(plannerKeys.detailCourse)) {
       return Template.instance().state.get(plannerKeys.detailCourse);
     } else
-      if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
-        return Courses.findDoc(Template.instance().state.get(plannerKeys.detailCourseInstance).courseID);
-      }
+    if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
+      return Courses.findDoc(Template.instance().state.get(plannerKeys.detailCourseInstance).courseID);
+    }
     return null;
   },
   selectedOpportunity() {
     if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
       return Template.instance().state.get(plannerKeys.detailOpportunity);
     } else
-      if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
-        // eslint-disable-next-line
+    if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
+      // eslint-disable-next-line
         return Opportunities.findDoc(Template.instance().state.get(plannerKeys.detailOpportunityInstance).opportunityID);
-      }
+    }
     return null;
   },
   unverified() {
@@ -449,9 +449,9 @@ Template.Inspector.events({
       if (error) {
         console.log('Error in getting future enrollment', error);
       } else
-        if (course._id === result.courseID) {
-          instance.state.set(plannerKeys.plannedEnrollment, result);
-        }
+      if (course._id === result.courseID) {
+        instance.state.set(plannerKeys.plannedEnrollment, result);
+      }
     });
   },
   'click .opportunity.item': function clickOpportunityItem(event) {

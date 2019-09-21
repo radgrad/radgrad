@@ -238,8 +238,7 @@ export const testBulkLoadErrorMethod = new ValidatedMethod({
   validate: null,
   run(data) {
     if (!this.userId) {
-      throw new Meteor.Error('unauthorized', 'You must be logged in to define Star data.',
-         Error().stack);
+      throw new Meteor.Error('unauthorized', 'You must be logged in to define Star data.', Error().stack);
     }
     if (Meteor.isServer) {
       return Users.getID(data);

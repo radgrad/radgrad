@@ -64,7 +64,7 @@ Template.Add_Student_Widget.events({
     instance.context.validate(newData);
     if (instance.context.isValid()) {
       const collectionName = StudentProfiles.getCollectionName();
-      newData.level = 1;  // new students start at level 1.
+      newData.level = 1; // new students start at level 1.
       newData.isAlumni = newData.isAlumni === 'true';
       defineMethod.call({ collectionName, definitionData: newData }, (error) => {
         if (error) {

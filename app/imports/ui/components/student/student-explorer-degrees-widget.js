@@ -35,9 +35,9 @@ Template.Student_Explorer_Degrees_Widget.helpers({
     if (group === 'student') {
       return RouteNames.studentCardExplorerUsersPageRouteName;
     } else
-      if (group === 'faculty') {
-        return RouteNames.facultyCardExplorerUsersPageRouteName;
-      }
+    if (group === 'faculty') {
+      return RouteNames.facultyCardExplorerUsersPageRouteName;
+    }
     return RouteNames.mentorCardExplorerUsersPageRouteName;
   },
   userStatus(degree) {
