@@ -76,6 +76,7 @@ Template.Card_Explorer_Menu.helpers({
     return ret;
   },
   courseName(course) {
+    // console.log(course);
     const countStr = `x${course.item}`;
     if (course.count > 1) {
       return `${course.item.shortName} ${countStr}`;
@@ -183,6 +184,7 @@ Template.Card_Explorer_Menu.helpers({
     return type === value;
   },
   itemName(item) {
+    // console.log(item);
     const countStr = `x${item.count}`;
     if (item.count > 1) {
       return `${item.item.name} ${countStr}`;
@@ -190,6 +192,7 @@ Template.Card_Explorer_Menu.helpers({
     return `${item.item.name}`;
   },
   opportunityItemName(item) {
+    // console.log(item);
     const countStr = `x${item.count}`;
     const iceString = `(${item.item.ice.i}/${item.item.ice.c}/${item.item.ice.e})`;
     if (item.count > 1) {

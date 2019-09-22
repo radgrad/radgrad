@@ -5,12 +5,12 @@
           style="text-transform: uppercase;">INTERESTS</span> {{> Widget_Header_Number inputValue = itemCount}}</h4>
     </div>
     {{#if noInterests}}
-      <p>You have no Interests, select add to profile to add an interest.</p>
+      <p>You have no Favorite Interests, select 'View More' to see more information about an interest.</p>
     {{/if}}
     <div style="max-height: 750px; overflow-x:hidden; overflow-y:scroll; margin-top: 10px;"
          class="ui stackable two cards">
       {{#each interest in interests}}
-        {{> Profile_Card item=interest type='interests' canAdd=true}}
+        {{> Profile_Card item=interest type='interests'}}
       {{/each}}
     </div>
   </div>
