@@ -7,14 +7,8 @@ import './explorer-choose-user-widget.js';
 import './student-home-menu.html';
 import './student-home-menu.js';
 
-import './student-card-explorer-menu.html';
-import './student-card-explorer-menu';
-
 import './student-explorer-courses-widget-button.html';
 import './student-explorer-courses-widget-button.js';
-
-import './student-explorer-degrees-widget.html';
-import './student-explorer-degrees-widget.js';
 
 import './student-explorer-menu.html';
 import './student-explorer-menu.js';

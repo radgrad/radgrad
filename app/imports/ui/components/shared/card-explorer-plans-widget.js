@@ -41,12 +41,6 @@ function availableAcademicPlans() {
 }
 
 Template.Card_Explorer_Plans_Widget.helpers({
-  canAdd() {
-    window.camDebugging.start('CardPlan.canAdd');
-    const group = FlowRouter.current().route.group.name;
-    window.camDebugging.stop('CardPlan.canAdd');
-    return group === 'student';
-  },
   itemCount() {
     return availableAcademicPlans().length;
   },

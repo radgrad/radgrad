@@ -21,19 +21,6 @@ Template.Favorite_Card.helpers({
     }
     return RouteNames.mentorExplorerCoursesPageRouteName;
   },
-  hidden() {
-    let ret = '';
-    const profile = Users.getProfile(getRouteUserName());
-    if (this.type === 'courses') {
-      if (_.includes(profile.hiddenCourseIDs, this.item._id)) {
-        ret = 'grey';
-      }
-    } else
-    if (_.includes(profile.hiddenOpportunityIDs, this.item._id)) {
-      ret = 'grey';
-    }
-    return ret;
-  },
   itemName(item) {
     if (this.type === 'courses') {
       return `${item.name} (${item.number})`;

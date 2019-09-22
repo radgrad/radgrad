@@ -1,6 +1,0 @@
-<template name="Explorer_Degrees_Page">
-  {{#Explorer_Layout addedList=addedDegrees nonAddedList=nonAddedDegrees type='degrees'}}
-    {{> Explorer_Degrees_Widget name=degree.name slug=(slugName degree.slugID) descriptionPairs=(descriptionPairs degree) socialPairs=(socialPairs degree) id=degree._id updateID=updateID item=degree}}
-    {{> Back_To_Top_Button}}
-  {{/Explorer_Layout}}
-</template>

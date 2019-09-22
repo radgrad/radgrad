@@ -9,12 +9,12 @@
         left.</p>
     {{/if}}
     {{#if noCareerGoals}}
-      <p>You have no Career Goals, select 'Add to Profile' to add a career goal.</p>
+      <p>You have no Favorite Career Goals, select 'View More' to see more information. Then you can favorite a career goal.</p>
     {{/if}}
     <div style="max-height: 750px; overflow-x:hidden; overflow-y:scroll; margin-top: 10px;"
          class="ui stackable two cards">
       {{#each career in careers}}
-        {{> Profile_Card item=career type='careergoals' canAdd=true}}
+        {{> Profile_Card item=career type='careergoals'}}
       {{/each}}
     </div>
   </div>

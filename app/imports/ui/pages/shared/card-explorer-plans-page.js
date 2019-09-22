@@ -23,7 +23,7 @@ Template.Card_Explorer_Plans_Page.helpers({
       const favorites = _.map(FavoriteAcademicPlans.find({ studentID }).fetch(), (f) => f.academicPlanID);
       return _.filter(plans, p => _.includes(favorites, p._id));
     }
-    console.log('nonAddedPlans', plans);
+    // console.log('nonAddedPlans', plans);
     return plans;
   },
 });
