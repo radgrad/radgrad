@@ -21,14 +21,22 @@ Template.RadGrad_Login_Buttons.events({
         instance.$('div .ui.error.message.hidden').text('You are not yet registered. Go see your Advisor.');
         instance.$('div .ui.error.message.hidden').removeClass('hidden');
       } else {
-        const username = Meteor.user('username').username;
+        let username = Meteor.user('username').username;
+        if (!username) {
+          const profileName = Meteor.user().profile.name.toLowerCase();
+          username = `${profileName}@hawaii.edu`;
+        }
+        const profile = Users.findProfileFromUsername(username);
         const id = Meteor.userId();
         let role = Roles.getRolesForUser(id)[0];
+        console.log(Meteor.user(), username, id, role, profile);
+        console.log(Users.findProfileFromUsername('johnson@hawaii.edu'));
         const studentp = role.toLowerCase() === 'student';
         if (studentp) {
-          const profile = Users.findProfileFromUsername(username);
-          if (profile.isAlumni) {
+          if (profile && profile.isAlumni) {
             role = 'Alumni';
+          } else if (!profile) {
+            console.error(`${username} is not a defined user.`);
           }
         }
         FlowRouter.go(`/${role.toLowerCase()}/${username}/home`);

@@ -1,9 +1,5 @@
 import { Template } from 'meteor/templating';
 import * as RouteNames from '../../../startup/client/router.js';
-import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
-import { Courses } from '../../../api/course/CourseCollection';
-import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
-import { Slugs } from '../../../api/slug/SlugCollection';
 
 Template.Landing_Section_2.helpers({
   academicPlansRouteName() {
@@ -14,32 +10,6 @@ Template.Landing_Section_2.helpers({
   },
   coursesRouteName() {
     return RouteNames.landingCardExplorerCoursesPageRouteName;
-  },
-  degreesRouteName() {
-    return RouteNames.landingCardExplorerDegreesPageRouteName;
-  },
-  firstCourse() {
-    let ret = 'ics_361';
-    const notRetired = Courses.findNonRetired({}, { sort: { shortName: 1 } });
-    if (notRetired.length > 0) {
-      ret = Slugs.findDoc(notRetired[0].slugID).name;
-    }
-    return ret;
-  },
-  firstDegree() {
-    let ret = 'ba-ics';
-    const degrees = DesiredDegrees.findNonRetired({}, { sort: { name: 1 } });
-    if (degrees.length > 0) {
-      ret = Slugs.findDoc(degrees[0].slugID).name;
-    }
-    return ret;
-  },
-  firstPlan() {
-    const plan = AcademicPlans.findOne({}, { sort: { name: 1 } });
-    if (plan) {
-      return (Slugs.findDoc(plan.slugID)).name;
-    }
-    return '';
   },
   interestsRouteName() {
     return RouteNames.landingCardExplorerInterestsPageRouteName;
