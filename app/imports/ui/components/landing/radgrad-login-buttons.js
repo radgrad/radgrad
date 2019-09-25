@@ -3,7 +3,9 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { $ } from 'meteor/jquery';
-import { Users } from '../../../api/user/UserCollection';
+import { getStudentProfileMethod } from '../../../api/user/StudentProfileCollection.methods';
+
+/* global alert */
 
 Template.RadGrad_Login_Buttons.events({
 
@@ -21,23 +23,25 @@ Template.RadGrad_Login_Buttons.events({
         instance.$('div .ui.error.message.hidden').text('You are not yet registered. Go see your Advisor.');
         instance.$('div .ui.error.message.hidden').removeClass('hidden');
       } else {
-        let username = Meteor.user('username').username;
+        const username = Meteor.user('username').username;
         if (!username) {
-          const profileName = Meteor.user().profile.name.toLowerCase();
-          username = `${profileName}@hawaii.edu`;
+          alert('You must use only lower case letters in your username.');
+          Meteor.logout();
         }
-        const profile = Users.findProfileFromUsername(username);
         const id = Meteor.userId();
         let role = Roles.getRolesForUser(id)[0];
-        console.log(Meteor.user(), username, id, role, profile);
-        console.log(Users.findProfileFromUsername('johnson@hawaii.edu'));
         const studentp = role.toLowerCase() === 'student';
         if (studentp) {
-          if (profile && profile.isAlumni) {
-            role = 'Alumni';
-          } else if (!profile) {
-            console.error(`${username} is not a defined user.`);
-          }
+          getStudentProfileMethod.call(username, (err, result) => {
+            if (err) {
+              console.error('Failed to get profile', error);
+            } else {
+              if (result.isAlumni) {
+                role = 'Alumni';
+              }
+              FlowRouter.go(`/${role.toLowerCase()}/${username}/home`);
+            }
+          });
         }
         FlowRouter.go(`/${role.toLowerCase()}/${username}/home`);
       }

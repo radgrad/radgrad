@@ -27,6 +27,7 @@ Template.Observe_Interactions.helpers({
       const studentDocumentsCursor = StudentProfiles.find({ userID: `${Meteor.userId()}` });
       cursorHandle = studentDocumentsCursor.observeChanges({
         changed: function (id, field) {
+          console.log(field);
           _.each(field, function (value, key) {
             const username = getRouteUserName();
             const type = key;
