@@ -19,7 +19,7 @@ Template.Student_Feed_Modal.helpers({
   },
   students(feed) {
     const students = [];
-    _.forEach(feed.userIDs, function (userID) {
+    _.forEach(_.uniq(feed.userIDs), function (userID) {
       students.push(Users.getProfile(userID));
     });
     return students;

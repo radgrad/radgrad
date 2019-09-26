@@ -124,7 +124,7 @@ class FeedCollection extends BaseCollection {
       updateData.picture = picture;
     }
     if (users) {
-      updateData.userIDs = Users.getIDs(users);
+      updateData.userIDs = _.uniq(Users.getIDs(users));
     }
     if (opportunity) {
       updateData.opportunityID = Opportunities.getID(opportunity);
@@ -169,7 +169,7 @@ class FeedCollection extends BaseCollection {
     // Otherwise create and return a new feed instance.
     // First, create an array of users if we weren't passed one initially.
     const users = (_.isArray(user)) ? user : [user];
-    const userIDs = Users.getIDs(users);
+    const userIDs = _.uniq(Users.getIDs(users));
     const description = `A student has joined RadGrad${(userIDs.length > 1) ? ' along with some others.' : '.'}`;
     let picture = Users.getProfile(userIDs[0]).picture;
     if (!picture || picture === '') {
@@ -268,7 +268,7 @@ class FeedCollection extends BaseCollection {
     }
     // Otherwise, define a new feed instance.
     const users = (_.isArray(user)) ? user : [user];
-    const userIDs = Users.getIDs(users);
+    const userIDs = _.uniq(Users.getIDs(users));
     const semesterID = Semesters.getID(semester);
     const opportunityID = Opportunities.getID(opportunity);
     const o = Opportunities.findDoc(opportunityID);
@@ -453,8 +453,9 @@ class FeedCollection extends BaseCollection {
     const userID = Users.getID(username);
     this.assertDefined(existingFeedID);
     const existingFeed = this.findDoc(existingFeedID);
-    const userIDs = existingFeed.userIDs;
+    let userIDs = existingFeed.userIDs;
     userIDs.push(userID);
+    userIDs = _.uniq(userIDs);
     const description = `A student and ${userIDs.length - 1} others have joined RadGrad.`;
     let picture = Users.getProfile(userIDs[0]).picture;
     if (!picture || picture === '') {
@@ -467,8 +468,9 @@ class FeedCollection extends BaseCollection {
     const userID = Users.getID((_.isArray(user)) ? user[0] : user);
     this.assertDefined(existingFeedID);
     const existingFeed = this.findDoc(existingFeedID);
-    const userIDs = existingFeed.userIDs;
+    let userIDs = existingFeed.userIDs;
     userIDs.push(userID);
+    userIDs = _.uniq(userIDs);
     const description = `A student and ${userIDs.length - 1} others have achieved level ${level}.`;
     let picture = Users.getProfile(userIDs[0]).picture;
     if (!picture || picture === '') {
@@ -487,8 +489,9 @@ class FeedCollection extends BaseCollection {
     const userID = Users.getID(username);
     this.assertDefined(existingFeedID);
     const existingFeed = this.findDoc(existingFeedID);
-    const userIDs = existingFeed.userIDs;
+    let userIDs = existingFeed.userIDs;
     userIDs.push(userID);
+    userIDs = _.uniq(userIDs);
     const o = Opportunities.findDoc(existingFeed.opportunityID);
     const description = `A student and ${userIDs.length - 1} others have been verified for 
       [${o.name}](./explorer/opportunities/${Slugs.getNameFromID(o.slugID)}) 
