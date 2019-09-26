@@ -50,6 +50,8 @@ class BaseProfileCollection extends BaseSlugCollection {
       shareWebsite: { type: Boolean, optional: true },
       shareInterests: { type: Boolean, optional: true },
       shareCareerGoals: { type: Boolean, optional: true },
+      courseExplorerFilter: { type: String, optional: true },
+      opportunityExplorerSortOrder: { type: String, optional: true },
     })));
   }
 

@@ -46,7 +46,7 @@ Template.Student_Selector_Tabs.helpers({
     //   if (rangeLength === 4) {
     //     eslint-disable-next-line
         // regex = new RegExp(`^${range.substring(0, 1)}|^${range.substring(1, 2)}|^${range.substring(2, 3)}|^${range.substring(3, 4)}`);
-      // }
+    // }
 
     const profiles = Users.findProfilesWithRole(role, {}, { sort: { lastName: 1 } });
     regex = RegExp(Template.instance().firstNameRegex.get());
@@ -64,7 +64,7 @@ Template.Student_Selector_Tabs.helpers({
     //   regex = new RegExp(`^${range.substring(0, 1)}|^${range.substring(1, 2)}|^${range.substring(2, 3)}`);
     // } else
     // if (rangeLength === 4) {
-      // eslint-disable-next-line
+    // eslint-disable-next-line
       // regex = new RegExp(`^${range.substring(0, 1)}|^${range.substring(1, 2)}|^${range.substring(2, 3)}|^${range.substring(3, 4)}`);
     // }
     const profiles = Users.findProfilesWithRole(role, {}, { sort: { lastName: 1 } });

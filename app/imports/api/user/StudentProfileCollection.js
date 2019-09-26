@@ -73,12 +73,12 @@ class StudentProfileCollection extends BaseProfileCollection {
    * @return { String } The docID of the StudentProfile.
    */
   define({
-           username, firstName, lastName, picture = defaultProfilePicture, website, interests,
-           careerGoals, level, academicPlan, declaredSemester, hiddenCourses = [], hiddenOpportunities = [],
-           isAlumni = false, retired, shareUsername = false, sharePicture = false, shareWebsite = false,
-           shareInterests = false, shareCareerGoals = false, shareAcademicPlan = false, shareCourses = false,
-           shareOpportunities = false, shareLevel = false,
-         }) {
+    username, firstName, lastName, picture = defaultProfilePicture, website, interests,
+    careerGoals, level, academicPlan, declaredSemester, hiddenCourses = [], hiddenOpportunities = [],
+    isAlumni = false, retired, shareUsername = false, sharePicture = false, shareWebsite = false,
+    shareInterests = false, shareCareerGoals = false, shareAcademicPlan = false, shareCourses = false,
+    shareOpportunities = false, shareLevel = false,
+  }) {
     if (Meteor.isServer) {
       // Validate parameters.
       const interestIDs = Interests.getIDs(interests);
@@ -149,7 +149,8 @@ class StudentProfileCollection extends BaseProfileCollection {
   update(docID, {
     firstName, lastName, picture, website, interests, careerGoals, level, academicPlan, declaredSemester,
     hiddenCourses, hiddenOpportunities, isAlumni, retired, shareUsername, sharePicture, shareWebsite, shareInterests,
-    shareCareerGoals, shareAcademicPlan, shareCourses, shareOpportunities, shareLevel,
+    shareCareerGoals, shareAcademicPlan, shareCourses, shareOpportunities, shareLevel, courseExplorerFilter,
+    opportunityExplorerSortOrder,
   }) {
     this.assertDefined(docID);
     const profile = this.findDoc(docID);
@@ -224,6 +225,12 @@ class StudentProfileCollection extends BaseProfileCollection {
     if (_.isBoolean(shareLevel)) {
       updateData.shareLevel = shareLevel;
     }
+    if (courseExplorerFilter) {
+      updateData.courseExplorerFilter = courseExplorerFilter;
+    }
+    if (opportunityExplorerSortOrder) {
+      updateData.opportunityExplorerSortOrder = opportunityExplorerSortOrder;
+    }
     // console.log('StudentProfile.update %o', updateData);
     this._collection.update(docID, { $set: updateData });
   }
@@ -247,7 +254,7 @@ class StudentProfileCollection extends BaseProfileCollection {
    * Asserts that level is an integer between 1 and 6.
    * @param level The level.
    */
-  assertValidLevel(level) {  // eslint-disable-line class-methods-use-this
+  assertValidLevel(level) { // eslint-disable-line class-methods-use-this
     if (!_.isInteger(level) && !_.inRange(level, 1, 7)) {
       throw new Meteor.Error(`Level ${level} is not between 1 and 6.`, '', Error().stack);
     }
@@ -491,6 +498,8 @@ class StudentProfileCollection extends BaseProfileCollection {
             shareOpportunities: 1,
             shareCourses: 1,
             shareLevel: 1,
+            courseExplorerFilter: 1,
+            opportunityExplorerSortOrder: 1,
             optedIn: {
               $cond: [{
                 $or: [

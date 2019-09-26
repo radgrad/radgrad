@@ -1,7 +1,10 @@
 import { Template } from 'meteor/templating';
 
+/* global window */
+
 Template.Academic_Plan_Static_Viewer.helpers({
   courses(yearNumber, semesterNumber) {
+    window.camDebugging.start('AcademicPlanStaticViewer.courses');
     const ret = [];
     const totalSem = (3 * yearNumber) + semesterNumber;
     // console.log(`courses(${yearNumber}, ${semesterNumber}) ${totalSem}`);
@@ -18,18 +21,24 @@ Template.Academic_Plan_Static_Viewer.helpers({
       const course = courseList.splice(0, 1);
       ret.push(course[0]);
     }
+    window.camDebugging.stop('AcademicPlanStaticViewer.courses');
     return ret;
   },
   hasSummer(yearNum) {
+    window.camDebugging.start('AcademicPlanStaticViewer.hasSummer');
     const plan = Template.instance().data.plan;
     const numCoursesList = plan.coursesPerSemester.slice(0);
+    window.camDebugging.stop('AcademicPlanStaticViewer.hasSummer');
     return numCoursesList[(3 * yearNum) + 2] !== 0;
   },
   years() {
+    window.camDebugging.start('AcademicPlanStaticViewer.years');
     const plan = Template.instance().data.plan;
     if (plan.coursesPerSemester.length === 15) {
+      window.camDebugging.stop('AcademicPlanStaticViewer.years');
       return ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'];
     }
+    window.camDebugging.stop('AcademicPlanStaticViewer.years');
     return ['Year 1', 'Year 2', 'Year 3', 'Year 4'];
   },
 });

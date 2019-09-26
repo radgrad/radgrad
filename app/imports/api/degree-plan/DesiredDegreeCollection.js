@@ -11,7 +11,6 @@ import { Slugs } from '../slug/SlugCollection';
  * @memberOf api/degree-plan
  */
 class DesiredDegreeCollection extends BaseSlugCollection {
-
   /**
    * Creates the DesiredDegree collection.
    */
@@ -82,7 +81,7 @@ class DesiredDegreeCollection extends BaseSlugCollection {
     const desiredDegreeID = this.getID(instance);
     // Check that this is not referenced by any AcademicPlans.
     AcademicPlans.find()
-      .map(function (plan) {  // eslint-disable-line array-callback-return
+      .map(function (plan) { // eslint-disable-line array-callback-return
         if (plan.degreeID === desiredDegreeID) {
           throw new Meteor.Error(`DesiredDegree ${instance} is referenced by a academic plan ${plan}.`,
             '', Error().stack);

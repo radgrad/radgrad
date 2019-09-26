@@ -6,8 +6,6 @@ import { Courses } from '../course/CourseCollection';
 import { Slugs } from '../slug/SlugCollection';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 
-/* global isNaN */
-
 /**
  * Given the semester string from STAR (for example, 'Fall 2015 ext'), parses it, defines the corresponding semester,
  * and returns the Semester slug.

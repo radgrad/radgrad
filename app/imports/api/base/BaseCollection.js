@@ -14,7 +14,6 @@ import { ROLE } from '../role/Role';
  * @memberOf api/base
  */
 class BaseCollection {
-
   /**
    * Superclass constructor for all RadGrad entities.
    * Defines internal fields needed by all entities: _type, _collectionName, _collection, and _schema.
@@ -248,7 +247,7 @@ class BaseCollection {
    * @returns True if no error is thrown.
    * @ignore
    */
-  _assertRole(userId, roles) {  // eslint-disable-line class-methods-use-this
+  _assertRole(userId, roles) { // eslint-disable-line class-methods-use-this
     if (!userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in.', '', Error().stack);
     } else if (!Roles.userIsInRole(userId, roles)) {
@@ -264,7 +263,7 @@ class BaseCollection {
    * @returns true if the user is in the roles, false otherwise.
    * @ignore
    */
-  _hasRole(userId, roles) {  // eslint-disable-line class-methods-use-this
+  _hasRole(userId, roles) { // eslint-disable-line class-methods-use-this
     if (!userId) {
       return false;
     }
@@ -286,7 +285,7 @@ class BaseCollection {
    * Returns an array with a string indicating that this method is not overridden.
    * @returns { array } An array containing a string indicating the use of the default integrity checker.
    */
-  checkIntegrity() {  // eslint-disable-line class-methods-use-this
+  checkIntegrity() { // eslint-disable-line class-methods-use-this
     return ['There is no integrity checker defined for this collection.'];
   }
 

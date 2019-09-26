@@ -1,5 +1,4 @@
 import { Template } from 'meteor/templating';
-import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Users } from '../../../api/user/UserCollection.js';
 import { dateDiffInDays } from '../../utilities/template-helpers';
 import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
@@ -22,13 +21,6 @@ Template.Student_Feed_Item.helpers({
   multipleUsers(feed) {
     return feed.userIDs.length > 1;
   },
-  students(feed) {
-    const students = [];
-    _.forEach(feed.userIDs, function (userID) {
-      students.push(Users.getProfile(userID));
-    });
-    return students;
-  },
   picture(feed) {
     // console.log('Student_Feed_Item userIDs = %o', feed.userIDs);
     if (feed.userIDs.length === 0) {
@@ -45,8 +37,8 @@ Template.Student_Feed_Item.helpers({
 Template.Student_Feed_Item.onRendered(function studentFeedItemOnRendered() {
   const template = this;
   template.$('.studentList')
-      .popup({
-        inline: true,
-        on: 'click',
-      });
+    .popup({
+      inline: true,
+      on: 'click',
+    });
 });

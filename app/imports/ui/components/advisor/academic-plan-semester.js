@@ -34,8 +34,8 @@ function checkIfPlanSlugIsSatisfied(takenCourseSlugs, planCourseSlugs, planSlug)
   }
   const depts = planChoiceUtils.getDepartments(planSlug);
   const cleanedTaken = removeTakenCourses(takenCourseSlugs, planCourseSlugs);
-  if (planCount === 1) {  // Only need one instance of the planSlug in the takenCourseSlugs
-    if (planSlug.indexOf('400+') !== -1) {  // 400 or above choice
+  if (planCount === 1) { // Only need one instance of the planSlug in the takenCourseSlugs
+    if (planSlug.indexOf('400+') !== -1) { // 400 or above choice
       _.forEach(cleanedTaken, (s) => {
         _.forEach(depts, (d) => {
           if (s.startsWith(`${d}_4`)) {
@@ -43,7 +43,7 @@ function checkIfPlanSlugIsSatisfied(takenCourseSlugs, planCourseSlugs, planSlug)
           }
         });
       });
-    } else if (planSlug.indexOf('300+') !== -1) {  // 300 or above choice
+    } else if (planSlug.indexOf('300+') !== -1) { // 300 or above choice
       const pcs = planCourseSlugs.slice();
       const tcs = takenCourseSlugs.slice();
       _.forEach(takenCourseSlugs, (ts) => {
@@ -64,7 +64,7 @@ function checkIfPlanSlugIsSatisfied(takenCourseSlugs, planCourseSlugs, planSlug)
           }
         });
       });
-    } else {  // specific plan choice must match
+    } else { // specific plan choice must match
       _.forEach(takenCourseSlugs, (slug) => {
         if (planSlug.indexOf(slug) !== -1) {
           ret = true;

@@ -104,10 +104,10 @@ Template.Student_Explorer_Opportunities_Widget_Button.events({
 });
 
 Template.Student_Explorer_Opportunities_Widget_Button.onRendered(function
-    studentExplorerOpportunitiesWidgetButtonOnRendered() {
+studentExplorerOpportunitiesWidgetButtonOnRendered() {
   const template = this;
   template.$('.chooseSemester')
-      .popup({
-        on: 'click',
-      });
+    .popup({
+      on: 'click',
+    });
 });

@@ -13,7 +13,6 @@ import { Users } from '../user/UserCollection';
  * @memberOf api/degree-plan
  */
 class AcademicPlanCollection extends BaseSlugCollection {
-
   /**
    * Creates the AcademicPlan collection.
    */
@@ -252,7 +251,6 @@ class AcademicPlanCollection extends BaseSlugCollection {
     const retired = doc.retired;
     return { slug, degreeSlug, name, description, semester, coursesPerSemester, courseList, retired };
   }
-
 }
 
 /**

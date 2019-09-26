@@ -19,15 +19,14 @@ export const dumpDatabaseMethod = new ValidatedMethod({
   run() {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to dump the database..', '', Error().stack);
-    } else
-      if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN])) {
-        throw new Meteor.Error('unauthorized', 'You must be an admin to dump the database.', '', Error().stack);
-      }
+    } else if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN])) {
+      throw new Meteor.Error('unauthorized', 'You must be an admin to dump the database.', '', Error().stack);
+    }
     // Don't do the dump except on server side (disable client-side simulation).
     // Return an object with fields timestamp and collections.
     if (Meteor.isServer) {
       const collections = _.sortBy(RadGrad.collectionLoadSequence.map(collection => collection.dumpAll()),
-          entry => entry.name);
+        entry => entry.name);
       const timestamp = new Date();
       return { timestamp, collections };
     }
@@ -41,8 +40,7 @@ export const loadFixtureMethod = new ValidatedMethod({
   run(fixtureData) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to load a fixture.', '', Error().stack);
-    } else
-    if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN])) {
+    } else if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN])) {
       throw new Meteor.Error('unauthorized', 'You must be an admin to load a fixture.', '', Error().stack);
     }
     if (Meteor.isServer) {
@@ -67,8 +65,7 @@ export const alumniEmailsMethod = new ValidatedMethod({
   run(emails) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to update alumni.', '', Error().stack);
-    } else
-    if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN])) {
+    } else if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN])) {
       throw new Meteor.Error('unauthorized', 'You must be an admin to update alumni.', '', Error().stack);
     }
     if (Meteor.isServer) {

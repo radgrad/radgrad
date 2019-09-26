@@ -5,7 +5,7 @@ import { Users } from '../../../api/user/UserCollection';
 import { Interests } from '../../../api/interest/InterestCollection';
 
 function availableInterests() {
-  let interests = Interests.find({}).fetch();
+  let interests = Interests.findNonRetired();
   if (getRouteUserName()) {
     const profile = Users.getProfile(getRouteUserName());
     const allInterests = Users.getInterestIDsByType(profile.userID);
@@ -21,5 +21,13 @@ Template.Card_Explorer_Interests_Widget.helpers({
   },
   itemCount() {
     return availableInterests().length;
+  },
+  noInterests() {
+    if (getRouteUserName()) {
+      const profile = Users.getProfile(getRouteUserName());
+      const interests = Users.getInterestIDs(profile.userID);
+      return interests.length === 0;
+    }
+    return false;
   },
 });

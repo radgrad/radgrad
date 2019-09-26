@@ -8,7 +8,6 @@ import BaseTypeCollection from '../base/BaseTypeCollection';
  * @memberOf api/opportunity
  */
 class OpportunityTypeCollection extends BaseTypeCollection {
-
   /**
    * Creates the OpportunityType collection.
    */
@@ -51,7 +50,6 @@ class OpportunityTypeCollection extends BaseTypeCollection {
     }
     this._collection.update(docID, { $set: updateData });
   }
-
 }
 
 /**

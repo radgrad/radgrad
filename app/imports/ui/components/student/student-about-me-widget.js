@@ -6,17 +6,22 @@ import { Interests } from '../../../api/interest/InterestCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
-import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection.js';
 import { getRouteUserName } from '../../components/shared/route-user-name.js';
 import { FavoriteAcademicPlans } from '../../../api/favorite/FavoriteAcademicPlanCollection';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
+
+Template.Student_About_Me_Widget.onCreated(function studentAboutMeWidgetOnCreated() {
+  this.data.student = Users.getProfile(getRouteUserName());
+  this.data.name = Users.getFullName(getRouteUserName());
+  // console.log('Student_About_Me_Widget', this.data);
+});
 
 Template.Student_About_Me_Widget.helpers({
   careerGoals() {
     const ret = [];
     if (getRouteUserName()) {
-      const profile = Users.getProfile(getRouteUserName());
-      _.forEach(profile.careerGoalIDs, (id) => {
+      const student = Template.instance().data.student;
+      _.forEach(student.careerGoalIDs, (id) => {
         ret.push(CareerGoals.findDoc(id));
       });
     }
@@ -28,13 +33,13 @@ Template.Student_About_Me_Widget.helpers({
   careerGoalsRouteName() {
     return RouteNames.studentCardExplorerCareerGoalsPageRouteName;
   },
-  degreeRouteName() {
+  academicPlanRouteName() {
     return RouteNames.studentExplorerPlansPageRouteName;
   },
-  degreesRouteName() {
+  academicPlansRouteName() {
     return RouteNames.studentCardExplorerPlansPageRouteName;
   },
-  desiredDegrees() {
+  favoriteAcademicPlans() {
     const ret = [];
     if (getUserIdFromRoute()) {
       const studentID = getUserIdFromRoute();
@@ -47,41 +52,15 @@ Template.Student_About_Me_Widget.helpers({
   },
   email() {
     if (getRouteUserName()) {
-      const profile = Users.getProfile(getRouteUserName());
-      return profile.username;
+      return Template.instance().data.student.username;
     }
     return '';
-  },
-  firstCareerGoal() {
-    let ret;
-    const careerGoals = CareerGoals.find({}, { sort: { name: 1 } }).fetch();
-    if (careerGoals.length > 0) {
-      ret = Slugs.findDoc(careerGoals[0].slugID).name;
-    }
-    return ret;
-  },
-  firstDegree() {
-    let ret;
-    const degrees = DesiredDegrees.findNonRetired({}, { sort: { name: 1 } });
-    if (degrees.length > 0) {
-      ret = Slugs.findDoc(degrees[0].slugID).name;
-    }
-    return ret;
-  },
-  getDictionary() {
-    return Template.instance().state;
-  },
-  goalName(goal) {
-    return goal.name;
-  },
-  interestName(interest) {
-    return interest.name;
   },
   interests() {
     const ret = [];
     if (getRouteUserName()) {
-      const profile = Users.getProfile(getRouteUserName());
-      _.forEach(profile.interestIDs, (id) => {
+      const student = Template.instance().data.student;
+      _.forEach(student.interestIDs, (id) => {
         ret.push(Interests.findDoc(id));
       });
     }
@@ -95,36 +74,12 @@ Template.Student_About_Me_Widget.helpers({
   },
   name() {
     if (getRouteUserName()) {
-      return Users.getFullName(getRouteUserName());
+      return Template.instance().data.name;
     }
     return '';
-  },
-  picture() {
-    if (getRouteUserName()) {
-      const profile = Users.getProfile(getRouteUserName());
-      return profile.picture;
-    }
-    return '';
-  },
-  planName(plan) {
-    return plan.name;
   },
   slugName(item) {
     return Slugs.findDoc(item.slugID).name;
-  },
-  studentPicture() {
-    if (getRouteUserName()) {
-      const profile = Users.getProfile(getRouteUserName());
-      return profile.picture;
-    }
-    return '';
-  },
-  website() {
-    if (getRouteUserName()) {
-      const profile = Users.getProfile(getRouteUserName());
-      return profile.website;
-    }
-    return '';
   },
 });
 

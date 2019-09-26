@@ -131,5 +131,5 @@ Template.Landing_Explorer_Menu.helpers({
 Template.Landing_Explorer_Menu.onRendered(function landingExplorerMenuOnRendered() {
   const template = this;
   template.$('.ui.dropdown')
-      .dropdown();
+    .dropdown();
 });

@@ -35,7 +35,6 @@ import { getLevelCriteriaStringMarkdown } from '../level/LevelProcessor';
  * @memberOf api/feedback
  */
 export class FeedbackFunctionClass {
-
   /**
    * Checks the student's degree plan to ensure that all the prerequisites are met.
    * @param user the student's ID.
@@ -50,7 +49,8 @@ export class FeedbackFunctionClass {
     clearFeedbackInstancesMethod.call({ user, functionName });
 
     // Now iterate through all the CourseInstances associated with this student.
-    const cis = CourseInstances.find({ studentID }).fetch();
+    const cis = CourseInstances.find({ studentID })
+      .fetch();
     cis.forEach((ci) => {
       const semester = Semesters.findDoc(ci.semesterID);
       if (semester.semesterNumber > currentSemester.semesterNumber) {
@@ -72,14 +72,14 @@ export class FeedbackFunctionClass {
                 if (preSemester.semesterNumber >= semester.semesterNumber) {
                   const semesterName2 = Semesters.toString(preSemester._id, false);
                   const description = `${semesterName}: ${course.number}'s prerequisite ${preCourse.number} is ` +
-                      `after or in ${semesterName2}.`;
+                    `after or in ${semesterName2}.`;
                   const definitionData = { user, functionName, description, feedbackType };
                   defineMethod.call({ collectionName: 'FeedbackInstanceCollection', definitionData });
                 }
               }
             } else {
               const description = `${semesterName}: Prerequisite ${prerequisiteCourse.number} for ${course.number}` +
-                  ' not found.';
+                ' not found.';
               const definitionData = { user, functionName, description, feedbackType };
               defineMethod.call({ collectionName: 'FeedbackInstanceCollection', definitionData });
             }
@@ -122,18 +122,16 @@ export class FeedbackFunctionClass {
           });
           description = description.substring(0, description.length - 4);
           description = `${description}, `;
-        } else
-          if (slug.indexOf('400+') !== -1) {
-            description = `${description} \n- a 400 level elective, `;
-          } else
-            if (slug.indexOf('300+') !== -1) {
-              description = `${description} \n- a 300+ level elective, `;
-            } else {
-              const id = Slugs.getEntityID(planUtils.stripCounter(slug), 'Course');
-              const course = Courses.findDoc(id);
-              // eslint-disable-next-line max-len
-              description = `${description} \n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${planUtils.stripCounter(slug)}), `;
-            }
+        } else if (slug.indexOf('400+') !== -1) {
+          description = `${description} \n- a 400 level elective, `;
+        } else if (slug.indexOf('300+') !== -1) {
+          description = `${description} \n- a 300+ level elective, `;
+        } else {
+          const id = Slugs.getEntityID(planUtils.stripCounter(slug), 'Course');
+          const course = Courses.findDoc(id);
+          // eslint-disable-next-line max-len
+          description = `${description} \n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${planUtils.stripCounter(slug)}), `;
+        }
       });
       description = description.substring(0, description.length - 2);
       const definitionData = { user, functionName, description, feedbackType };
@@ -161,7 +159,8 @@ export class FeedbackFunctionClass {
     _.forEach(semesters, (semesterID) => {
       const semester = Semesters.findDoc(semesterID);
       if (semester.semesterNumber > currentSemester.semesterNumber) {
-        const cis = CourseInstances.find({ studentID, semesterID, note: /ICS/ }).fetch();
+        const cis = CourseInstances.find({ studentID, semesterID, note: /ICS/ })
+          .fetch();
         if (cis.length > 2) {
           haveOverloaded = true;
           description = `${description} ${Semesters.toString(semesterID, false)}, `;
@@ -216,21 +215,19 @@ export class FeedbackFunctionClass {
           // eslint-disable-next-line max-len
           description = `${description} \n\n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${courseSlug.name}), `;
         }
-      } else
-        if (slug.startsWith('ics_4')) {
-          const bestChoice = courseUtils.chooseStudent400LevelCourse(user, coursesTakenSlugs);
-          if (bestChoice) {
-            const cSlug = Slugs.findDoc(bestChoice.slugID);
-            // eslint-disable-next-line max-len
-            description = `${description} \n- [${bestChoice.number} ${bestChoice.shortName}](${basePath}explorer/courses/${cSlug.name}), `;
-          }
-        } else
-          if (slug.startsWith('ics')) {
-            const courseID = Slugs.getEntityID(planUtils.stripCounter(slug), 'Course');
-            const course = Courses.findDoc(courseID);
-            // eslint-disable-next-line max-len
-            description = `${description} \n\n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${slug}), `;
-          }
+      } else if (slug.startsWith('ics_4')) {
+        const bestChoice = courseUtils.chooseStudent400LevelCourse(user, coursesTakenSlugs);
+        if (bestChoice) {
+          const cSlug = Slugs.findDoc(bestChoice.slugID);
+          // eslint-disable-next-line max-len
+          description = `${description} \n- [${bestChoice.number} ${bestChoice.shortName}](${basePath}explorer/courses/${cSlug.name}), `;
+        }
+      } else if (slug.startsWith('ics')) {
+        const courseID = Slugs.getEntityID(planUtils.stripCounter(slug), 'Course');
+        const course = Courses.findDoc(courseID);
+        // eslint-disable-next-line max-len
+        description = `${description} \n\n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${slug}), `;
+      }
       const definitionData = { user, functionName, description, feedbackType };
       defineMethod.call({ collectionName: 'FeedbackInstanceCollection', definitionData });
     }
@@ -293,8 +290,9 @@ export class FeedbackFunctionClass {
     let bestChoices = oppUtils.getStudentCurrentSemesterOpportunityChoices(user);
     const basePath = this._getBasePath(user);
     const semesterID = Semesters.getCurrentSemesterID();
-    const oppInstances = OpportunityInstances.find({ studentID, semesterID }).fetch();
-    if (oppInstances.length === 0) {  // only make suggestions if there are no opportunities planned.
+    const oppInstances = OpportunityInstances.find({ studentID, semesterID })
+      .fetch();
+    if (oppInstances.length === 0) { // only make suggestions if there are no opportunities planned.
       // console.log(bestChoices);
       if (bestChoices) {
         const len = bestChoices.length;
@@ -402,7 +400,8 @@ ${getLevelCriteriaStringMarkdown('six')}`;
 
   _getBasePath(studentID) {
     const getPosition = function (string, subString, index) {
-      return string.split(subString, index).join(subString).length;
+      return string.split(subString, index)
+        .join(subString).length;
     };
     let basePath = '';
     if (FlowRouter.current()) {

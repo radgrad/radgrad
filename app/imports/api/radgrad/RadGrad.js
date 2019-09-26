@@ -41,7 +41,6 @@ import { FavoriteOpportunities } from '../favorite/FavoriteOpportunityCollection
  * @memberOf api/radgrad
  */
 class RadGradClass {
-
   constructor() {
     /**
      * A list of all RadGrad API collections in alphabetical order.

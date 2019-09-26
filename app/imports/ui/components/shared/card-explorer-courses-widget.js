@@ -12,6 +12,8 @@ import { ROLE } from '../../../api/role/Role';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { FavoriteCourses } from '../../../api/favorite/FavoriteCourseCollection';
 import { FavoriteAcademicPlans } from '../../../api/favorite/FavoriteAcademicPlanCollection';
+import { FavoriteInterests } from '../../../api/favorite/FavoriteInterestCollection';
+import { FavoriteCareerGoals } from '../../../api/favorite/FavoriteCareerGoalCollection';
 
 export const courseFilterKeys = {
   none: 'none',
@@ -21,7 +23,6 @@ export const courseFilterKeys = {
 };
 
 Template.Card_Explorer_Courses_Widget.onCreated(function cardExplorerCoursesWidgetOnCreated() {
-  this.hidden = new ReactiveVar(true);
   this.filter = new ReactiveVar(courseFilterKeys.none);
 });
 
@@ -60,39 +61,10 @@ function matchingCourses() {
   return [];
 }
 
-function hiddenCoursesHelper() {
-  if (getRouteUserName()) {
-    const courses = matchingCourses();
-    let nonHiddenCourses;
-    if (Template.instance()
-      .hidden
-      .get()) {
-      const profile = Users.getProfile(getRouteUserName());
-      nonHiddenCourses = _.filter(courses, (course) => {
-        if (_.includes(profile.hiddenCourseIDs, course._id)) {
-          return false;
-        }
-        return true;
-      });
-    } else {
-      nonHiddenCourses = courses;
-    }
-    return nonHiddenCourses;
-  }
-  return [];
-}
-
 Template.Card_Explorer_Courses_Widget.helpers({
   courses() {
     const courses = matchingCourses();
-    let visibleCourses;
-    if (Template.instance()
-      .hidden
-      .get()) {
-      visibleCourses = hiddenCoursesHelper();
-    } else {
-      visibleCourses = courses;
-    }
+    let visibleCourses = courses;
     switch (Template.instance().filter.get()) {
       case courseFilterKeys.threeHundredPLus:
         visibleCourses = _.filter(visibleCourses, (c) => {
@@ -114,46 +86,30 @@ Template.Card_Explorer_Courses_Widget.helpers({
         break;
       default:
         // do nothing.
-
     }
     return visibleCourses;
   },
   courseFilter() {
     return Template.instance().filter;
   },
-  hidden() {
-    return Template.instance()
-      .hidden
-      .get();
-  },
-  hiddenExists() {
-    if (getRouteUserName()) {
-      const profile = Users.getProfile(getRouteUserName());
-      if (profile.hiddenCourseIDs) {
-        return profile.hiddenCourseIDs.length !== 0;
-      }
-    }
-    return false;
-  },
   itemCount() {
     return Template.instance().view.template.__helpers[' courses']().length;
   },
-  typeCourse() {
+  noInterests() {
+    if (getRouteUserName()) {
+      const studentID = getUserIdFromRoute();
+      const favoriteInterest = FavoriteInterests.findNonRetired({ studentID });
+      const favoriteCareerGoals = FavoriteCareerGoals.findNonRetired({ studentID });
+      return favoriteInterest.length === 0 && favoriteCareerGoals.length === 0;
+    }
     return true;
   },
 });
 
-Template.Card_Explorer_Courses_Widget.events({
-  'click .showHidden': function clickShowHidden(event) {
-    event.preventDefault();
-    Template.instance()
-      .hidden
-      .set(false);
-  },
-  'click .hideHidden': function clickHideHidden(event) {
-    event.preventDefault();
-    Template.instance()
-      .hidden
-      .set(true);
-  },
+Template.Card_Explorer_Courses_Widget.onRendered(function cardExplorerCoursesWidgetOnRendered() {
+  const profile = Users.getProfile(getUserIdFromRoute());
+  // console.log(profile);
+  if (profile.courseExplorerFilter) {
+    Template.instance().filter.set(profile.courseExplorerFilter);
+  }
 });

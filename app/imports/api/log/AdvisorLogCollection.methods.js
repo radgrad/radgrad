@@ -14,11 +14,10 @@ export const advisorLogsDefineMethod = new ValidatedMethod({
   run(helpDefn) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define AdvisorLogs.', Error().stack);
-    } else
-      if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
-        throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to define new AdvisorLogs.',
-          Error().stack);
-      }
+    } else if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
+      throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to define new AdvisorLogs.',
+        Error().stack);
+    }
     return AdvisorLogs.define(helpDefn);
   },
 });
@@ -33,11 +32,10 @@ export const advisorLogsUpdateMethod = new ValidatedMethod({
   run(update) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to update AdvisorLogs.', Error().stack);
-    } else
-      if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
-        throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to update AdvisorLogs.',
-          Error().stack);
-      }
+    } else if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
+      throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to update AdvisorLogs.',
+        Error().stack);
+    }
     return AdvisorLogs.update(update.id, { $set: update });
   },
 });
@@ -52,11 +50,10 @@ export const AdvisorLogsRemoveItMethod = new ValidatedMethod({
   run(removeArgs) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to remove AdvisorLogs.', Error().stack);
-    } else
-      if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
-        throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to remove AdvisorLogs.',
-          Error().stack);
-      }
+    } else if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
+      throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to remove AdvisorLogs.',
+        Error().stack);
+    }
     return AdvisorLogs.removeIt(removeArgs.id);
   },
 });

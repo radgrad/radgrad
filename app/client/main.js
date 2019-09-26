@@ -74,6 +74,9 @@ import '/imports/ui/utilities';
 import './lib/semantic-ui/semantic.min.js';
 import '../imports/ui/stylesheets/style.css';
 
+// turn on Cam's debugging.
+import '../imports/startup/client/cam-debugging';
+
 Tracker.autorun(function (c) {
   try {
     UserStatus.startMonitor({

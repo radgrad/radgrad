@@ -27,6 +27,7 @@ Template.Observe_Interactions.helpers({
       const studentDocumentsCursor = StudentProfiles.find({ userID: `${Meteor.userId()}` });
       cursorHandle = studentDocumentsCursor.observeChanges({
         changed: function (id, field) {
+          // console.log(field);
           _.each(field, function (value, key) {
             const username = getRouteUserName();
             const type = key;
@@ -37,7 +38,10 @@ Template.Observe_Interactions.helpers({
                 case 'careerGoalIDs':
                   return _.map(value, docID => CareerGoals.getSlug(`${docID}`));
                 case 'academicPlanID':
-                  return _.map([value], docID => AcademicPlans.findSlugByID(`${docID}`));
+                  if (value) {
+                    return _.map([value], docID => AcademicPlans.findSlugByID(`${docID}`));
+                  }
+                  return [];
                 case 'declaredSemesterID':
                   return _.map([value], docID => Semesters.getSlug(`${docID}`));
                 case 'picture':
@@ -51,11 +55,13 @@ Template.Observe_Interactions.helpers({
             const interactionData = { username, type, typeData };
             if (typeData !== null) {
               setTimeout(function () {
-                userInteractionDefineMethod.call(interactionData, (error) => {
-                  if (error) {
-                    console.log('Error creating UserInteraction.', error);
-                  }
-                });
+                if (Meteor.userId()) {
+                  userInteractionDefineMethod.call(interactionData, (error) => {
+                    if (error) {
+                      console.log('Error creating UserInteraction.', error);
+                    }
+                  });
+                }
               }, 0);
             }
           });

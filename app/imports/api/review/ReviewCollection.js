@@ -15,7 +15,6 @@ import BaseSlugCollection from '../base/BaseSlugCollection';
  * @memberOf api/review
  */
 class ReviewCollection extends BaseSlugCollection {
-
   /**
    * Creates the Review collection.
    */
@@ -65,9 +64,9 @@ class ReviewCollection extends BaseSlugCollection {
    * @returns The newly created docID.
    */
   define({
-           slug, student, reviewType, reviewee, semester, rating = 3, comments, moderated = false, visible = true,
-           moderatorComments, retired,
-         }) {
+    slug, student, reviewType, reviewee, semester, rating = 3, comments, moderated = false, visible = true,
+    moderatorComments, retired,
+  }) {
     // Validate student, get studentID.
     const studentID = Users.getID(student);
     Users.assertInRole(studentID, [ROLE.STUDENT, ROLE.ALUMNI]);

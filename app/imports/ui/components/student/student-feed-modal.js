@@ -7,7 +7,7 @@ import { Users } from '../../../api/user/UserCollection.js';
 Template.Student_Feed_Modal.helpers({
   fullName(student) {
     if (student.username === '') {
-      return student.username;
+      return 'Anonymous Student';
     }
     return Users.getFullName(student.username);
   },
@@ -19,7 +19,7 @@ Template.Student_Feed_Modal.helpers({
   },
   students(feed) {
     const students = [];
-    _.forEach(feed.userIDs, function (userID) {
+    _.forEach(_.uniq(feed.userIDs), function (userID) {
       students.push(Users.getProfile(userID));
     });
     return students;

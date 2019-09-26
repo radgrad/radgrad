@@ -4495,6 +4495,26 @@
       ]
     },
     {
+      "name": "FavoriteAcademicPlanCollection",
+      "contents": []
+    },
+    {
+      "name": "FavoriteCareerGoalCollection",
+      "contents": []
+    },
+    {
+      "name": "FavoriteCourseCollection",
+      "contents": []
+    },
+    {
+      "name": "FavoriteInterestCollection",
+      "contents": []
+    },
+    {
+      "name": "FavoriteOpportunityCollection",
+      "contents": []
+    },
+    {
       "name": "FeedCollection",
       "contents": [
         {

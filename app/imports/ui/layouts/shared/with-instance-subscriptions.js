@@ -25,7 +25,7 @@ Template.With_Instance_Subscriptions.onCreated(function withInstanceSubscription
   // console.log('With_Instance_Subscriptions', getUserIdFromRoute());
   this.autorun(function () {
     const userID = getUserIdFromRoute();
-    if (userID) {  // if logged out don't subscribe
+    if (userID) { // if logged out don't subscribe
       // get your information
       instanceSubs.subscribe(AcademicYearInstances.getPublicationName(), userID);
       instanceSubs.subscribe(AdvisorLogs.getPublicationName(), userID);

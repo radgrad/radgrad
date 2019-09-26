@@ -124,7 +124,7 @@ class FeedCollection extends BaseCollection {
       updateData.picture = picture;
     }
     if (users) {
-      updateData.userIDs = Users.getIDs(users);
+      updateData.userIDs = _.uniq(Users.getIDs(users));
     }
     if (opportunity) {
       updateData.opportunityID = Opportunities.getID(opportunity);
@@ -156,9 +156,9 @@ class FeedCollection extends BaseCollection {
    * @throws {Meteor.Error} If not a valid user.
    */
   _defineNewUser({
-                   user, feedType, timestamp = moment()
+    user, feedType, timestamp = moment()
       .toDate(), retired,
-                 }) {
+  }) {
     // First, see if we've already defined any users within the past day.
     const recentFeedID = this.checkPastDayFeed(this.NEW_USER);
     // If there's a recentFeed, then update it instead with this user's info.
@@ -169,7 +169,7 @@ class FeedCollection extends BaseCollection {
     // Otherwise create and return a new feed instance.
     // First, create an array of users if we weren't passed one initially.
     const users = (_.isArray(user)) ? user : [user];
-    const userIDs = Users.getIDs(users);
+    const userIDs = _.uniq(Users.getIDs(users));
     const description = `A student has joined RadGrad${(userIDs.length > 1) ? ' along with some others.' : '.'}`;
     let picture = Users.getProfile(userIDs[0]).picture;
     if (!picture || picture === '') {
@@ -189,9 +189,9 @@ class FeedCollection extends BaseCollection {
    * @throws {Meteor.Error} If not a valid course.
    */
   _defineNewCourse({
-                     course, feedType, timestamp = moment()
+    course, feedType, timestamp = moment()
       .toDate(), retired,
-                   }) {
+  }) {
     const courseID = Courses.getID(course);
     const c = Courses.findDoc(courseID);
     const description = `[${c.name}](./explorer/courses/${Slugs.getNameFromID(c.slugID)}) 
@@ -219,9 +219,9 @@ class FeedCollection extends BaseCollection {
    * @throws {Meteor.Error} If not a valid opportunity.
    */
   _defineNewOpportunity({
-                          opportunity, feedType, timestamp = moment()
+    opportunity, feedType, timestamp = moment()
       .toDate(), retired,
-                        }) {
+  }) {
     const opportunityID = Opportunities.getID(opportunity);
     const o = Opportunities.findDoc(opportunityID);
     const description = `[${o.name}](./explorer/opportunities/${Slugs.getNameFromID(o.slugID)}) 
@@ -256,9 +256,9 @@ class FeedCollection extends BaseCollection {
    * @throws {Meteor.Error} If not a valid opportunity, semester, or user.
    */
   _defineNewVerifiedOpportunity({
-                                  user, opportunity, semester, feedType, timestamp = moment()
+    user, opportunity, semester, feedType, timestamp = moment()
       .toDate(), retired,
-                                }) {
+  }) {
     // First, see if we've already defined any verified-opportunities for this opportunity within the past day.
     const recentFeedID = this.checkPastDayFeed(this.VERIFIED_OPPORTUNITY, opportunity);
     // If there's a recentFeed, then update it instead with this user's info and return.
@@ -268,7 +268,7 @@ class FeedCollection extends BaseCollection {
     }
     // Otherwise, define a new feed instance.
     const users = (_.isArray(user)) ? user : [user];
-    const userIDs = Users.getIDs(users);
+    const userIDs = _.uniq(Users.getIDs(users));
     const semesterID = Semesters.getID(semester);
     const opportunityID = Opportunities.getID(opportunity);
     const o = Opportunities.findDoc(opportunityID);
@@ -294,9 +294,9 @@ class FeedCollection extends BaseCollection {
    * @throws {Meteor.Error} If not a valid course or user.
    */
   _defineNewCourseReview({
-                           user, course, feedType, timestamp = moment()
+    user, course, feedType, timestamp = moment()
       .toDate(), retired,
-                         }) {
+  }) {
     let picture;
     const userID = Users.getID((_.isArray(user)) ? user[0] : user);
     const courseID = Courses.getID(course);
@@ -331,9 +331,9 @@ class FeedCollection extends BaseCollection {
    * @throws {Meteor.Error} If not a valid opportunity or user.
    */
   _defineNewOpportunityReview({
-                                user, opportunity, feedType, timestamp = moment()
+    user, opportunity, feedType, timestamp = moment()
       .toDate(), retired,
-                              }) {
+  }) {
     let picture;
     const userID = Users.getID((_.isArray(user)) ? user[0] : user);
     const opportunityID = Opportunities.getID(opportunity);
@@ -364,9 +364,9 @@ class FeedCollection extends BaseCollection {
    * @private
    */
   _defineNewLevel({
-                    user, level, feedType, timestamp = moment()
+    user, level, feedType, timestamp = moment()
       .toDate(), retired,
-                  }) {
+  }) {
     // First, see if we've already defined any users within the past day.
     const recentFeedID = this.checkPastDayLevelFeed(level, timestamp);
     // If there's a recentFeed, then update it instead with this user's info.
@@ -453,8 +453,9 @@ class FeedCollection extends BaseCollection {
     const userID = Users.getID(username);
     this.assertDefined(existingFeedID);
     const existingFeed = this.findDoc(existingFeedID);
-    const userIDs = existingFeed.userIDs;
+    let userIDs = existingFeed.userIDs;
     userIDs.push(userID);
+    userIDs = _.uniq(userIDs);
     const description = `A student and ${userIDs.length - 1} others have joined RadGrad.`;
     let picture = Users.getProfile(userIDs[0]).picture;
     if (!picture || picture === '') {
@@ -467,8 +468,9 @@ class FeedCollection extends BaseCollection {
     const userID = Users.getID((_.isArray(user)) ? user[0] : user);
     this.assertDefined(existingFeedID);
     const existingFeed = this.findDoc(existingFeedID);
-    const userIDs = existingFeed.userIDs;
+    let userIDs = existingFeed.userIDs;
     userIDs.push(userID);
+    userIDs = _.uniq(userIDs);
     const description = `A student and ${userIDs.length - 1} others have achieved level ${level}.`;
     let picture = Users.getProfile(userIDs[0]).picture;
     if (!picture || picture === '') {
@@ -487,8 +489,9 @@ class FeedCollection extends BaseCollection {
     const userID = Users.getID(username);
     this.assertDefined(existingFeedID);
     const existingFeed = this.findDoc(existingFeedID);
-    const userIDs = existingFeed.userIDs;
+    let userIDs = existingFeed.userIDs;
     userIDs.push(userID);
+    userIDs = _.uniq(userIDs);
     const o = Opportunities.findDoc(existingFeed.opportunityID);
     const description = `A student and ${userIDs.length - 1} others have been verified for 
       [${o.name}](./explorer/opportunities/${Slugs.getNameFromID(o.slugID)}) 

@@ -5,7 +5,6 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
  * @memberOf api/degree-plan
  */
 class PreferredChoice {
-
   /**
    * Creates a new PreferredChoice instance given the array of choices and array of interestIDs.
    * @param choices

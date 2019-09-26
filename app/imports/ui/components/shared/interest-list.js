@@ -9,46 +9,52 @@ import * as RouteNames from '../../../startup/client/router.js';
 
 function matchingInterestsHelper(item) {
   const matchingInterests = [];
-  const userInterestIDs = Users.getInterestIDs(getRouteUserName());
-  const userInterests = _.map(userInterestIDs, (id) => Interests.findDoc(id));
-  const itemInterests = _.map(item.interestIDs, (id) => Interests.findDoc(id));
-  _.forEach(itemInterests, (itemInterest) => {
-    _.forEach(userInterests, (userInterest) => {
-      if (_.isEqual(itemInterest, userInterest)) {
-        matchingInterests.push(userInterest);
-      }
+  if (getRouteUserName()) {
+    const userInterestIDs = Users.getInterestIDs(getRouteUserName());
+    const userInterests = _.map(userInterestIDs, (id) => Interests.findDoc(id));
+    const itemInterests = _.map(item.interestIDs, (id) => Interests.findDoc(id));
+    _.forEach(itemInterests, (itemInterest) => {
+      _.forEach(userInterests, (userInterest) => {
+        if (_.isEqual(itemInterest, userInterest)) {
+          matchingInterests.push(userInterest);
+        }
+      });
     });
-  });
+  }
   return matchingInterests;
 }
 
 function matchingUserInterestsHelper(item) {
   const matchingInterests = [];
-  const userInterestIDs = Users.getInterestIDsByType(getRouteUserName());
-  const userInterests = _.map(userInterestIDs[0], (id) => Interests.findDoc(id));
-  const itemInterests = _.map(item.interestIDs, (id) => Interests.findDoc(id));
-  _.forEach(itemInterests, (itemInterest) => {
-    _.forEach(userInterests, (userInterest) => {
-      if (_.isEqual(itemInterest, userInterest)) {
-        matchingInterests.push(userInterest);
-      }
+  if (getRouteUserName()) {
+    const userInterestIDs = Users.getInterestIDsByType(getRouteUserName());
+    const userInterests = _.map(userInterestIDs[0], (id) => Interests.findDoc(id));
+    const itemInterests = _.map(item.interestIDs, (id) => Interests.findDoc(id));
+    _.forEach(itemInterests, (itemInterest) => {
+      _.forEach(userInterests, (userInterest) => {
+        if (_.isEqual(itemInterest, userInterest)) {
+          matchingInterests.push(userInterest);
+        }
+      });
     });
-  });
+  }
   return matchingInterests;
 }
 
 function matchingCareerInterestsHelper(item) {
   const matchingInterests = [];
-  const userInterestIDs = Users.getInterestIDsByType(getRouteUserName());
-  const userInterests = _.map(userInterestIDs[1], (id) => Interests.findDoc(id));
-  const itemInterests = _.map(item.interestIDs, (id) => Interests.findDoc(id));
-  _.forEach(itemInterests, (itemInterest) => {
-    _.forEach(userInterests, (userInterest) => {
-      if (_.isEqual(itemInterest, userInterest)) {
-        matchingInterests.push(userInterest);
-      }
+  if (getRouteUserName()) {
+    const userInterestIDs = Users.getInterestIDsByType(getRouteUserName());
+    const userInterests = _.map(userInterestIDs[1], (id) => Interests.findDoc(id));
+    const itemInterests = _.map(item.interestIDs, (id) => Interests.findDoc(id));
+    _.forEach(itemInterests, (itemInterest) => {
+      _.forEach(userInterests, (userInterest) => {
+        if (_.isEqual(itemInterest, userInterest)) {
+          matchingInterests.push(userInterest);
+        }
+      });
     });
-  });
+  }
   return matchingInterests;
 }
 

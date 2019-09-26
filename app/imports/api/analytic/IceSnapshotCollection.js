@@ -10,7 +10,6 @@ import { Users } from '../user/UserCollection';
  * @memberOf api/analytic
  */
 class IceSnapshotCollection extends BaseCollection {
-
   /**
    * Creates the IceSnapshot collection.
    */

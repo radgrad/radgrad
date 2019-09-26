@@ -16,7 +16,6 @@ import { isSingleChoice } from '../degree-plan/PlanChoiceUtilities';
  * @extends api/base.BaseSlugCollection
  */
 class CourseCollection extends BaseSlugCollection {
-
   /**
    * Creates the Course collection.
    */
@@ -63,8 +62,8 @@ class CourseCollection extends BaseSlugCollection {
    * @returns The newly created docID.
    */
   define({
-      name, shortName = name, slug, number, description, creditHrs = 3,
-      interests = [], syllabus, prerequisites = [], retired,
+    name, shortName = name, slug, number, description, creditHrs = 3,
+    interests = [], syllabus, prerequisites = [], retired,
   }) {
     try {
       // Check to see if is defined already.
@@ -88,9 +87,9 @@ class CourseCollection extends BaseSlugCollection {
     //   _.each(prerequisites, (prerequisite) => this.getID(prerequisite));
     // Instead, we check that prereqs are valid as part of checkIntegrity.
     const courseID =
-        this._collection.insert({
-          name, shortName, slugID, number, description, creditHrs, interestIDs, syllabus, prerequisites, retired,
-        });
+      this._collection.insert({
+        name, shortName, slugID, number, description, creditHrs, interestIDs, syllabus, prerequisites, retired,
+      });
     // Connect the Slug to this Interest
     Slugs.updateEntityID(slugID, courseID);
     return courseID;
@@ -159,16 +158,18 @@ class CourseCollection extends BaseSlugCollection {
   removeIt(instance) {
     const docID = this.getID(instance);
     // Check that this is not referenced by any Course Instance.
-    CourseInstances.find().map(function (courseInstance) {  // eslint-disable-line array-callback-return
-      if (courseInstance.courseID === docID) {
-        throw new Meteor.Error(`Course ${instance} is referenced by a course instance ${courseInstance}.`,
-          '', Error().stack);
-      }
-    });
+    CourseInstances.find()
+      .map(function (courseInstance) { // eslint-disable-line array-callback-return
+        if (courseInstance.courseID === docID) {
+          throw new Meteor.Error(`Course ${instance} is referenced by a course instance ${courseInstance}.`,
+            '', Error().stack);
+        }
+      });
     // OK to delete. First remove any Feeds that reference this course.
-    Feeds.find({ courseID: docID }).map(function (feed) { // eslint-disable-line array-callback-return
-      Feeds.removeIt(feed._id);
-    });
+    Feeds.find({ courseID: docID })
+      .map(function (feed) { // eslint-disable-line array-callback-return
+        Feeds.removeIt(feed._id);
+      });
     // Now remove the Course.
     super.removeIt(docID);
   }
@@ -200,30 +201,31 @@ class CourseCollection extends BaseSlugCollection {
    */
   checkIntegrity() {
     const problems = [];
-    this.find().forEach(doc => {
-      if (!Slugs.isDefined(doc.slugID)) {
-        problems.push(`Bad slugID: ${doc.slugID}`);
-      }
-      _.forEach(doc.interestIDs, interestID => {
-        if (!Interests.isDefined(interestID)) {
-          problems.push(`Bad interestID: ${interestID}`);
+    this.find()
+      .forEach(doc => {
+        if (!Slugs.isDefined(doc.slugID)) {
+          problems.push(`Bad slugID: ${doc.slugID}`);
         }
-      });
-      _.forEach(doc.prerequisites, prereq => {
-        if (isSingleChoice(prereq)) {
-          if (!this.hasSlug(prereq)) {
-            problems.push(`Bad course prerequisite slug: ${prereq}`);
+        _.forEach(doc.interestIDs, interestID => {
+          if (!Interests.isDefined(interestID)) {
+            problems.push(`Bad interestID: ${interestID}`);
           }
-        } else {
-          const slugs = prereq.split(',');
-          _.forEach(slugs, (slug) => {
-            if (!this.hasSlug(slug)) {
-              problems.push(`Bad course prerequisite slug: ${slug}`);
+        });
+        _.forEach(doc.prerequisites, prereq => {
+          if (isSingleChoice(prereq)) {
+            if (!this.hasSlug(prereq)) {
+              problems.push(`Bad course prerequisite slug: ${prereq}`);
             }
-          });
-        }
+          } else {
+            const slugs = prereq.split(',');
+            _.forEach(slugs, (slug) => {
+              if (!this.hasSlug(slug)) {
+                problems.push(`Bad course prerequisite slug: ${slug}`);
+              }
+            });
+          }
+        });
       });
-    });
     return problems;
   }
 
@@ -244,8 +246,10 @@ class CourseCollection extends BaseSlugCollection {
     const syllabus = doc.syllabus;
     const prerequisites = doc.prerequisites;
     const retired = doc.retired;
-    return { name, shortName, slug, number, description, creditHrs, interests, syllabus,
-      prerequisites, retired };
+    return {
+      name, shortName, slug, number, description, creditHrs, interests, syllabus,
+      prerequisites, retired,
+    };
   }
 }
 

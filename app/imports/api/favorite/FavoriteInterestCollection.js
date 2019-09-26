@@ -9,7 +9,6 @@ import { Users } from '../user/UserCollection';
 import { ROLE } from '../role/Role';
 
 class FavoriteInterestCollection extends BaseCollection {
-
   /** Creates the FavoriteInterest collection */
   constructor() {
     super('FavoriteInterest', new SimpleSchema({
@@ -192,7 +191,6 @@ class FavoriteInterestCollection extends BaseCollection {
     const retired = doc.retired;
     return { interest, student, retired };
   }
-
 }
 
 export const FavoriteInterests = new FavoriteInterestCollection();

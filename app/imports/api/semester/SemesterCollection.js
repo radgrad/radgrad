@@ -10,7 +10,6 @@ import BaseSlugCollection from '../base/BaseSlugCollection';
  * @memberOf api/semester
  */
 class SemesterCollection extends BaseSlugCollection {
-
   /**
    * Creates the Semester collection.
    */

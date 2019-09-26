@@ -30,8 +30,7 @@ class FacultyProfileCollection extends BaseProfileCollection {
    * @throws { Meteor.Error } If username has been previously defined, or if any interests or careerGoals are invalid.
    * @return { String } The docID of the FacultyProfile.
    */
-  define({ username, firstName, lastName, picture = defaultProfilePicture, website, interests,
-           careerGoals, retired }) {
+  define({ username, firstName, lastName, picture = defaultProfilePicture, website, interests, careerGoals, retired }) {
     if (Meteor.isServer) {
       const role = ROLE.FACULTY;
       const interestIDs = Interests.getIDs(interests);
@@ -52,10 +51,17 @@ class FacultyProfileCollection extends BaseProfileCollection {
    * You cannot change the username or role once defined.
    * @param docID the id of the FacultyProfile.
    */
-  update(docID, { firstName, lastName, picture, website, interests, careerGoals, retired }) {
+  update(docID, { firstName, lastName, picture, website, interests, careerGoals, retired, courseExplorerFilter,
+    opportunityExplorerSortOrder }) {
     this.assertDefined(docID);
     const updateData = {};
     this._updateCommonFields(updateData, { firstName, lastName, picture, website, interests, careerGoals, retired });
+    if (courseExplorerFilter) {
+      updateData.courseExplorerFilter = courseExplorerFilter;
+    }
+    if (opportunityExplorerSortOrder) {
+      updateData.opportunityExplorerSortOrder = opportunityExplorerSortOrder;
+    }
     this._collection.update(docID, { $set: updateData });
   }
 

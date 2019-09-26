@@ -212,11 +212,11 @@ Template.Academic_Plan.helpers({
         if (currentAyIndex > 0 && currentAyIndex < ay.length - 4) {
           instance.startYearIndex.set(currentAyIndex - 1);
         } else
-          if (currentAyIndex > 0 && currentAyIndex >= ay.length - 4) {
-            instance.startYearIndex.set(ay.length - 4);
-          } else {
-            instance.startYearIndex.set(0);
-          }
+        if (currentAyIndex > 0 && currentAyIndex >= ay.length - 4) {
+          instance.startYearIndex.set(ay.length - 4);
+        } else {
+          instance.startYearIndex.set(0);
+        }
       } else {
         instance.startYearIndex.set(0);
       }
