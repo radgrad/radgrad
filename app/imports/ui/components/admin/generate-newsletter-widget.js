@@ -543,7 +543,7 @@ Template.Generate_Newsletter_Widget.events({
   'submit .level': function sendToAdmin(event, instance) {
     event.preventDefault();
     instance.studentsWorking.set(true);
-    console.log('submit .level %o', instance.studentsWorking.get());
+    // console.log('submit .level %o', instance.studentsWorking.get());
     const adminMessage = $('.markdown').html();
     if (!(adminMessage.match(/[a-z]/i))) {
       instance.levelEmailStatus.set('Please input an admin message');
