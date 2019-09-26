@@ -14,7 +14,7 @@ import { Teasers } from '../../../api/teaser/TeaserCollection';
 
 /* eslint-disable object-shorthand */
 
-const landingSubs = new SubsManager({ cacheLimit: 26, expireIn: 30 });
+const landingSubs = new SubsManager({ cacheLimit: 11, expireIn: 30 });
 
 Template.With_Landing_Subscriptions.onCreated(function withlandingsubscriptionsOnCreated() {
   // console.log('WithLandingSubscriptions.onCreated')
