@@ -26,7 +26,7 @@ function matchingInterestsHelper(item) {
 
 function matchingUserInterestsHelper(item) {
   const matchingInterests = [];
-  if(getRouteUserName()) {
+  if (getRouteUserName()) {
     const userInterestIDs = Users.getInterestIDsByType(getRouteUserName());
     const userInterests = _.map(userInterestIDs[0], (id) => Interests.findDoc(id));
     const itemInterests = _.map(item.interestIDs, (id) => Interests.findDoc(id));
