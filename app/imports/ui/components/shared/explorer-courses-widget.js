@@ -9,17 +9,12 @@ import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { getUserIdFromRoute } from './get-user-id-from-route';
 import { isInRole, isLabel } from '../../utilities/template-helpers';
-import { isSingleChoice } from '../../../api/degree-plan/PlanChoiceUtilities';
 import { Teasers } from '../../../api/teaser/TeaserCollection';
 
 Template.Explorer_Courses_Widget.helpers({
-  choices(prerequisite) {
-    // console.log(prerequisite);
-    return prerequisite.course.split(',');
-  },
   courseNameFromSlug(courseSlugName) {
     // console.log(courseSlugName);
-    const slug = Slugs.find({ name: courseSlugName }).fetch();
+    const slug = Slugs.findNonRetired({ name: courseSlugName });
     const course = Courses.findDoc({ slugID: slug[0]._id });
     return course.shortName;
   },
@@ -82,34 +77,13 @@ Template.Explorer_Courses_Widget.helpers({
     }
   },
   hasTeaser(item) {
-    const teaser = Teasers.find({ targetSlugID: item.slugID }).fetch();
+    const teaser = Teasers.findNonRetired({ targetSlugID: item.slugID });
     return teaser.length > 0;
   },
   isInRole,
   isLabel,
   length(table) {
     return table.length !== 0;
-  },
-  isSingleChoice(prerequisite) {
-    // console.log(prerequisite);
-    return isSingleChoice(prerequisite.course);
-  },
-  isFirst(index) {
-    return index === 0;
-  },
-  passedCourse(course) {
-    let ret = false;
-    const ci = CourseInstances.find({
-      studentID: getUserIdFromRoute(),
-      courseID: course._id,
-    }).fetch();
-    _.forEach(ci, function (c) {
-      if (c.grade === 'A+' || c.grade === 'A' || c.grade === 'A-' ||
-          c.grade === 'B+' || c.grade === 'B') {
-        ret = true;
-      }
-    });
-    return ret;
   },
   review() {
     let review = '';

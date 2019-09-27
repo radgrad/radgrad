@@ -41,13 +41,11 @@
                 {{#if descriptionPair.value}}
                   <b>{{descriptionPair.label}}:</b>
                   <div class="ui horizontal bulleted list">
-                    {{#each prerequisiteList in descriptionPair.value}}
-                      {{#each prereq in prerequisiteList}}
+                    {{#each prereq in descriptionPair.value}}
+                      {{prereq}}
                         <a class="item">
                           <a class="{{isActiveRoute coursesRouteName}} item"
-                             href="{{pathFor coursesRouteName username=routeUserName
-                                             course=prereq.course}}">{{courseNameFromSlug prereq.course}}</a> </a>
-                      {{/each}}
+                             href="{{pathFor coursesRouteName course=prereq}}">{{courseNameFromSlug prereq}}</a> </a>
                     {{/each}}
                   </div>
                 {{/if}}
@@ -72,7 +70,6 @@
         <div style="margin-top: 0" class="ui stackable two column grid">
           <div class="six wide column">
             {{#each descriptionPair in descriptionPairs}}
-
               {{#if isLabel descriptionPair.label 'Course Number'}}
                 <b>{{descriptionPair.label}}:</b>
                 {{#if descriptionPair.value}} {{descriptionPair.value}} <br>
@@ -80,7 +77,6 @@
                   N/A <br>
                 {{/if}}
               {{/if}}
-
               {{#if isLabel descriptionPair.label 'Credit Hours'}}
                 <b>{{descriptionPair.label}}:</b>
                 {{#if descriptionPair.value}} {{descriptionPair.value}} <br>
@@ -88,13 +84,10 @@
                   N/A <br>
                 {{/if}}
               {{/if}}
-
             {{/each}}
           </div>
-
           <div class="ten wide column">
             {{#each descriptionPair in descriptionPairs}}
-
               {{#if isLabel descriptionPair.label 'Syllabus'}}
                 <b>{{descriptionPair.label}}:</b>
                 {{#if descriptionPair.value}}
@@ -103,30 +96,42 @@
                   N/A <br>
                 {{/if}}
               {{/if}}
-
             {{/each}}
           </div>
         </div>
-
         <div style="margin-top: 0" class="ui stackable grid">
-          <div class="column">
-            {{#each descriptionPair in descriptionPairs}}
-
-              {{#if isLabel descriptionPair.label 'Description'}}
-                <b>{{descriptionPair.label}}:</b>
-                {{#if descriptionPair.value}} {{{markdownify descriptionPair.value}}} <br>
-                {{else}}
-                  N/A <br>
+          {{#if hasTeaser item}}
+            <div style="margin-top: 0" class="nine wide column">
+              {{#each descriptionPair in descriptionPairs}}
+                {{#if isLabel descriptionPair.label 'Description'}}
+                  <b>{{descriptionPair.label}}:</b>
+                  {{#if descriptionPair.value}} {{{markdownify descriptionPair.value}}}
+                  {{else}}
+                    N/A
+                  {{/if}}
                 {{/if}}
-              {{/if}}
-            {{/each}}
-          </div>
+              {{/each}}
+            </div>
+            <div style="margin-top: 0" class="seven wide column">
+              {{> Teaser_Widget}}
+            </div>
+          {{else}}
+            <div style="margin-top: 0" class="column">
+              {{#each descriptionPair in descriptionPairs}}
+                {{#if isLabel descriptionPair.label 'Description'}}
+                  <b>{{descriptionPair.label}}:</b>
+                  {{#if descriptionPair.value}} {{{markdownify descriptionPair.value}}} <br>
+                  {{else}}
+                    N/A <br>
+                  {{/if}}
+                {{/if}}
+              {{/each}}
+            </div>
+          {{/if}}
         </div>
-
         <div style="margin-top: 0" class="ui stackable grid">
           <div class="column">
             {{#each descriptionPair in descriptionPairs}}
-
               {{#if isLabel descriptionPair.label 'Prerequisites'}}
                 {{#if descriptionPair.value}}
                   <h4 class="ui horizontal divider header">
