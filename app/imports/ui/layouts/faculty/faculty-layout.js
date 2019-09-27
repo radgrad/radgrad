@@ -10,8 +10,11 @@ Template.Faculty_Layout.helpers({
   secondMenuItems() {
     let openRequests = VerificationRequests.find({ status: VerificationRequests.OPEN }).fetch();
     openRequests = _.filter(openRequests, (request) => {
-      const oi = OpportunityInstances.findDoc(request.opportunityInstanceID);
-      return Opportunities.findDoc(oi.opportunityID).sponsorID === getUserIdFromRoute();
+      const oi = OpportunityInstances.findNonRetired(request.opportunityInstanceID);
+      if (oi.length > 0) {
+        return Opportunities.findDoc(oi[0].opportunityID).sponsorID === getUserIdFromRoute();
+      }
+      return false;
     });
 
     const numRequests = openRequests.length;
