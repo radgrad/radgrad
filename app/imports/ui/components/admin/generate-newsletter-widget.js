@@ -183,8 +183,6 @@ function levelRecommendation(student) {
     `href="https://radgrad.ics.hawaii.edu/student/${student.username}/home/levels">Level Page</a>` +
       ' to view specific level requirements.</p>';
   }
-  html.info += '<a style="color: #6FBE44; font-weight: bold"' +
-    ' href="https://radgrad.ics.hawaii.edu/">Take me to RadGrad!</a>';
   return html;
 }
 
