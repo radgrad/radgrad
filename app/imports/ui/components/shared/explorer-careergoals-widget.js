@@ -1,6 +1,5 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { FlowRouter } from 'meteor/kadira:flow-router';
 import * as RouteNames from '../../../startup/client/router.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
@@ -13,6 +12,7 @@ import { defineMethod, removeItMethod, updateMethod } from '../../../api/base/Ba
 import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 import { FavoriteCareerGoals } from '../../../api/favorite/FavoriteCareerGoalCollection';
 import { Teasers } from '../../../api/teaser/TeaserCollection';
+import { getGroupName } from './route-group-name';
 
 Template.Explorer_CareerGoals_Widget.helpers({
   careerGoalName(careerGoalSlugName) {
@@ -43,7 +43,7 @@ Template.Explorer_CareerGoals_Widget.helpers({
     return picture || defaultProfilePicture;
   },
   usersRouteName() {
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentCardExplorerUsersPageRouteName;
     } else if (group === 'faculty') {

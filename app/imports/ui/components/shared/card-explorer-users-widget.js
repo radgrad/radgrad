@@ -1,5 +1,4 @@
 import { Template } from 'meteor/templating';
-import { FlowRouter } from 'meteor/kadira:flow-router';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
 import { ROLE } from '../../../api/role/Role';
@@ -8,6 +7,7 @@ import { Users } from '../../../api/user/UserCollection';
 import * as RouteNames from '../../../startup/client/router';
 import { getRouteUserName } from './route-user-name';
 import PreferredChoice from '../../../api/degree-plan/PreferredChoice';
+import { getGroupName } from './route-group-name';
 
 Template.Card_Explorer_Users_Widget.onCreated(function studentcardexploreruserswidgetOnCreated() {
   // add your statement here
@@ -55,7 +55,7 @@ Template.Card_Explorer_Users_Widget.helpers({
     return users;
   },
   usersRouteName() {
-    const group = FlowRouter.current().route.group && FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentCardExplorerUsersPageRouteName;
     } else if (group === 'faculty') {

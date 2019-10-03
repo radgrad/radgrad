@@ -1,5 +1,4 @@
 import { Template } from 'meteor/templating';
-import { FlowRouter } from 'meteor/kadira:flow-router';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
 import { Slugs } from '../../../api/slug/SlugCollection.js';
@@ -9,10 +8,11 @@ import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { getRouteUserName } from '../shared/route-user-name';
 import * as RouteNames from '../../../startup/client/router.js';
 import { StudentParticipation } from '../../../api/public-stats/StudentParticipationCollection';
+import { getGroupName } from './route-group-name';
 
 Template.Favorite_Card.helpers({
   coursesRouteName() {
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentExplorerCoursesPageRouteName;
     } else
@@ -41,12 +41,12 @@ Template.Favorite_Card.helpers({
     return Slugs.findDoc(item.slugID).name;
   },
   numberStudents(course) {
-    const enrollment = StudentParticipation.findDoc({ itemID: course._id });
+    const enrollment = StudentParticipation.findOne({ itemID: course._id });
     // console.log(course.name, enrollment.itemCount);
-    return enrollment.itemCount;
+    return enrollment ? enrollment.itemCount : 0;
   },
   opportunitiesRouteName() {
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentExplorerOpportunitiesPageRouteName;
     } else

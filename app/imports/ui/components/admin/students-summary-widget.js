@@ -57,7 +57,7 @@ Template.Students_Summary_Widget.helpers({
         behaviorsByDate[moment(date).format('MMM D, YYYY')] = [];
       });
       const behaviorList = ['Log In', 'Change Outlook', 'Exploration', 'Planning', 'Verification',
-        'Reviewing', 'Mentorship', 'Level Up', 'Complete Plan', 'Profile'];
+        'Reviewing', 'Mentorship', 'Level Up', 'Complete Plan', 'Profile', 'Log Out'];
       _.each(behaviorsByDate, function (array, date, obj) {
         _.each(interactionsByUser, function (interactions) {
           const interactionsWithinDate = _.filter(interactions, function (interaction) {
@@ -96,6 +96,9 @@ Template.Students_Summary_Widget.helpers({
           }
           if (_.some(interactionsWithinDate, (i) => i.type === 'picture' || i.type === 'website')) {
             obj[date].push(behaviorList[9]);
+          }
+          if (_.some(interactionsWithinDate, (i) => i.type === 'logout')) {
+            obj[date].push(behaviorList[10]);
           }
         });
       });
@@ -194,7 +197,8 @@ Template.Students_Summary_Widget.events({
           { type: 'Mentorship', count: 0, users: [], description: 'Visited the MentorSpace page or asked a question' },
           { type: 'Level Up', count: 0, users: [], description: 'Leveled up' },
           { type: 'Complete Plan', count: 0, users: [], description: 'Created a plan with 100 ICE' },
-          { type: 'Profile', count: 0, users: [], description: 'Updated personal image or website url' }];
+          { type: 'Profile', count: 0, users: [], description: 'Updated personal image or website url' },
+          { type: 'Log Out', count: 0, users: [], description: 'Logged out' }];
         _.each(users, function (interactions, user) {
           if (_.some(interactions, { type: 'login' })) {
             behaviors[0].count++;
@@ -238,6 +242,10 @@ Template.Students_Summary_Widget.events({
           if (_.some(interactions, (i) => i.type === 'picture' || i.type === 'website')) {
             behaviors[9].count++;
             behaviors[9].users.push(user);
+          }
+          if (_.some(interactions, { type: 'logout' })) {
+            behaviors[10].count++;
+            behaviors[10].users.push(user);
           }
         });
         instance.interactionsByUser.set(users);

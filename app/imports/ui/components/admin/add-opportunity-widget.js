@@ -3,7 +3,6 @@ import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
-import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Roles } from 'meteor/alanning:roles';
 import { ROLE } from '../../../api/role/Role.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
@@ -15,6 +14,7 @@ import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import * as FormUtils from '../form-fields/form-field-utilities.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
+import { getGroupName } from '../shared/route-group-name';
 
 const addSchema = new SimpleSchema({
   name: String,
@@ -38,11 +38,11 @@ Template.Add_Opportunity_Widget.helpers({
     return OpportunityTypes.find({}, { sort: { name: 1 } });
   },
   faculty() {
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     return group === 'faculty';
   },
   admin() {
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     return group === 'admin';
   },
   interests() {
@@ -52,7 +52,7 @@ Template.Add_Opportunity_Widget.helpers({
     return Semesters.findNonRetired({}, { sort: { semesterNumber: 1 } });
   },
   sponsor() {
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'faculty') {
       return getUserIdFromRoute();
     }

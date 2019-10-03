@@ -10,10 +10,14 @@ Template.Academic_Plan_Viewer_Widget.onCreated(function academicPlanWidgetOnCrea
 
 Template.Academic_Plan_Viewer_Widget.helpers({
   getPlan() {
-    const studentID = getUserIdFromRoute();
-    const profile = Users.getProfile(studentID);
-    if (profile.academicPlanID) {
-      Template.instance().plan.set(AcademicPlans.findDoc(profile.academicPlanID));
+    if (getUserIdFromRoute()) {
+      const studentID = getUserIdFromRoute();
+      const profile = Users.getProfile(studentID);
+      if (profile.academicPlanID) {
+        Template.instance()
+          .plan
+          .set(AcademicPlans.findDoc(profile.academicPlanID));
+      }
     }
     return Template.instance().plan;
   },

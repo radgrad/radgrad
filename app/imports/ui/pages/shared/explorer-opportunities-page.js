@@ -12,17 +12,21 @@ import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollec
 import { Users } from '../../../api/user/UserCollection.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 import { FavoriteOpportunities } from '../../../api/favorite/FavoriteOpportunityCollection';
+import { getGroupName } from '../../components/shared/route-group-name';
 
 function interestedUsers(opportunity) {
   const interested = [];
-  const ci = OpportunityInstances.find({
-    opportunityID: opportunity._id,
-  }).fetch();
-  _.forEach(ci, (c) => {
-    if (!_.includes(interested, c.studentID)) {
-      interested.push(c.studentID);
-    }
-  });
+  if (opportunity) {
+    const ci = OpportunityInstances.find({
+      opportunityID: opportunity._id,
+    })
+      .fetch();
+    _.forEach(ci, (c) => {
+      if (!_.includes(interested, c.studentID)) {
+        interested.push(c.studentID);
+      }
+    });
+  }
   return interested;
 }
 
@@ -58,35 +62,44 @@ Template.Explorer_Opportunities_Page.helpers({
   },
   completed() {
     const opportunitySlugName = FlowRouter.getParam('opportunity');
-    let ret = false;
-    const slug = Slugs.find({ name: opportunitySlugName }).fetch();
-    const opportunity = Opportunities.find({ slugID: slug[0]._id }).fetch();
-    const oi = OpportunityInstances.find({
-      studentID: getUserIdFromRoute(),
-      opportunityID: opportunity[0]._id,
-      verified: true,
-    }).fetch();
-    if (oi.length > 0) {
-      ret = true;
+    if (opportunitySlugName) {
+      let ret = false;
+      const slug = Slugs.find({ name: opportunitySlugName })
+        .fetch();
+      const opportunity = Opportunities.find({ slugID: slug[0]._id })
+        .fetch();
+      const oi = OpportunityInstances.find({
+        studentID: getUserIdFromRoute(),
+        opportunityID: opportunity[0]._id,
+        verified: true,
+      })
+        .fetch();
+      if (oi.length > 0) {
+        ret = true;
+      }
+      return ret;
     }
-    return ret;
+    return false;
   },
   descriptionPairs(opportunity) {
-    return [
-      { label: 'Opportunity Type', value: opportunityType(opportunity) },
-      { label: 'Semesters', value: semesters(opportunity) },
-      { label: 'Event Date', value: opportunity.eventDate },
-      { label: 'Sponsor', value: sponsor(opportunity) },
-      { label: 'Description', value: opportunity.description },
-      { label: 'Interests', value: opportunity.interestIDs },
-      { label: 'ICE', value: opportunity.ice },
-      { label: 'Teaser', value: teaser(opportunity) },
-    ];
+    if (opportunity) {
+      return [
+        { label: 'Opportunity Type', value: opportunityType(opportunity) },
+        { label: 'Semesters', value: semesters(opportunity) },
+        { label: 'Event Date', value: opportunity.eventDate },
+        { label: 'Sponsor', value: sponsor(opportunity) },
+        { label: 'Description', value: opportunity.description },
+        { label: 'Interests', value: opportunity.interestIDs },
+        { label: 'ICE', value: opportunity.ice },
+        { label: 'Teaser', value: teaser(opportunity) },
+      ];
+    }
+    return [];
   },
   nonAddedOpportunities() {
     const allOpportunities = Opportunities.findNonRetired({}, { sort: { name: 1 } });
     const userID = getUserIdFromRoute();
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'faculty') {
       return _.filter(allOpportunities, o => o.sponsorID !== userID);
     } else if (group === 'student') {
@@ -101,28 +114,44 @@ Template.Explorer_Opportunities_Page.helpers({
   },
   opportunity() {
     const opportunitySlugName = FlowRouter.getParam('opportunity');
-    const slug = Slugs.find({ name: opportunitySlugName }).fetch();
-    const opportunity = Opportunities.find({ slugID: slug[0]._id }).fetch();
-    return opportunity[0];
+    if (opportunitySlugName) {
+      const slug = Slugs.find({ name: opportunitySlugName })
+        .fetch();
+      const opportunity = Opportunities.find({ slugID: slug[0]._id })
+        .fetch();
+      return opportunity[0];
+    }
+    return opportunitySlugName;
   },
   reviewed(opportunity) {
     let ret = false;
-    const review = Reviews.find({
-      studentID: getUserIdFromRoute(),
-      revieweeID: opportunity._id,
-    }).fetch();
-    if (review.length > 0) {
-      ret = true;
+    if (opportunity) {
+      const review = Reviews.find({
+        studentID: getUserIdFromRoute(),
+        revieweeID: opportunity._id,
+      })
+        .fetch();
+      if (review.length > 0) {
+        ret = true;
+      }
     }
     return ret;
   },
   slugName(slugID) {
-    return Slugs.findDoc(slugID).name;
+    if (slugID) {
+      return Slugs.findDoc(slugID).name;
+    }
+    return '';
   },
   socialPairs(opportunity) {
-    return [
-      { label: 'students', amount: numUsers(opportunity),
-        value: interestedUsers(opportunity) },
-    ];
+    if (opportunity) {
+      return [
+        {
+          label: 'students', amount: numUsers(opportunity),
+          value: interestedUsers(opportunity)
+        },
+      ];
+    }
+    return [];
   },
 });

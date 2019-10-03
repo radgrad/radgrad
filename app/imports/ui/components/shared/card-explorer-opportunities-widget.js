@@ -1,5 +1,4 @@
 import { Template } from 'meteor/templating';
-import { FlowRouter } from 'meteor/kadira:flow-router';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
@@ -10,6 +9,7 @@ import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js
 import { getUserIdFromRoute } from './get-user-id-from-route';
 import PreferredChoice from '../../../api/degree-plan/PreferredChoice';
 import { FavoriteOpportunities } from '../../../api/favorite/FavoriteOpportunityCollection';
+import { getGroupName } from './route-group-name';
 
 export const sortOrderKeys = {
   match: 'match',
@@ -26,7 +26,7 @@ Template.Card_Explorer_Opportunities_Widget.onCreated(function studentCardExplor
 const availableOpps = () => {
   const notRetired = Opportunities.findNonRetired({});
   const currentSemester = Semesters.getCurrentSemesterDoc();
-  const group = FlowRouter.current().route.group.name;
+  const group = getGroupName();
   const studentID = getUserIdFromRoute();
   if (group === 'student') {
     const favorites = FavoriteOpportunities.findNonRetired({ studentID });
@@ -54,10 +54,13 @@ const availableOpps = () => {
 // TODO Can we move this code into some sort of helperFunction file? I've seen this a lot.
 function matchingOpportunities() {
   const allOpportunities = availableOpps();
-  const profile = Users.getProfile(getRouteUserName());
-  const interestIDs = Users.getInterestIDs(profile.userID);
-  const preferred = new PreferredChoice(allOpportunities, interestIDs);
-  return preferred.getOrderedChoices();
+  if (getRouteUserName()) {
+    const profile = Users.getProfile(getRouteUserName());
+    const interestIDs = Users.getInterestIDs(profile.userID);
+    const preferred = new PreferredChoice(allOpportunities, interestIDs);
+    return preferred.getOrderedChoices();
+  }
+  return allOpportunities;
 }
 
 function hiddenOpportunitiesHelper() {
@@ -158,10 +161,14 @@ Template.Card_Explorer_Opportunities_Widget.events({
   },
 });
 
-Template.Card_Explorer_Opportunities_Widget.onRendered(function cardExplorerOpportunitesWidgetOnRendered() {
-  const profile = Users.getProfile(getUserIdFromRoute());
-  // console.log(profile);
-  if (profile.opportunityExplorerSortOrder) {
-    Template.instance().sortOrder.set(profile.opportunityExplorerSortOrder);
+Template.Card_Explorer_Opportunities_Widget.onRendered(function cardExplorerOpportunitiesWidgetOnRendered() {
+  if (getUserIdFromRoute()) {
+    const profile = Users.getProfile(getUserIdFromRoute());
+    // console.log(profile);
+    if (profile.opportunityExplorerSortOrder) {
+      Template.instance()
+        .sortOrder
+        .set(profile.opportunityExplorerSortOrder);
+    }
   }
 });

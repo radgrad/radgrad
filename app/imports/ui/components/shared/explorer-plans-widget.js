@@ -1,4 +1,3 @@
-import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
@@ -13,6 +12,7 @@ import { isInRole } from '../../utilities/template-helpers';
 import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 import { FavoriteAcademicPlans } from '../../../api/favorite/FavoriteAcademicPlanCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
+import { getGroupName } from './route-group-name';
 
 Template.Explorer_Plans_Widget.onCreated(function studentExplorerPlansWidgetOnCreated() {
   this.planVar = new ReactiveVar();
@@ -38,7 +38,7 @@ Template.Explorer_Plans_Widget.helpers({
     return defaultProfilePicture;
   },
   usersRouteName() {
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentCardExplorerUsersPageRouteName;
     } else

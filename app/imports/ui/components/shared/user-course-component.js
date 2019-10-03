@@ -1,9 +1,9 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { FlowRouter } from 'meteor/kadira:flow-router';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { Courses } from '../../../api/course/CourseCollection';
 import { getRouteUserName } from '../shared/route-user-name';
+import { getGroupName } from './route-group-name';
 
 function getCourses(studentID, isPast) {
   const courseInstances = CourseInstances.find({ studentID, verified: isPast }).fetch();
@@ -55,7 +55,7 @@ Template.User_Course_Component.helpers({
   courseURL(c) {
     const course = Courses.findDoc(c.courseID);
     const slug = Courses.getSlug(course._id);
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       return `/student/${getRouteUserName()}/explorer/courses/${slug}`;
     } else if (group === 'faculty') {

@@ -23,7 +23,10 @@ Template.Mentor_MentorSpace_Questions_Accordion.helpers({
     return MentorAnswers.getAnswers(questionID).count() === 1;
   },
   isMentor() {
-    return Roles.userIsInRole(getUserIdFromRoute(), [ROLE.MENTOR]);
+    if (getUserIdFromRoute()) {
+      return Roles.userIsInRole(getUserIdFromRoute(), [ROLE.MENTOR]);
+    }
+    return false;
   },
   listAnswers(questionID) {
     return MentorAnswers.getAnswers(questionID);

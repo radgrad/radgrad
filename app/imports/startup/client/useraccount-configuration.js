@@ -2,7 +2,10 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-import { userInteractionDefineMethod } from '../../api/analytic/UserInteractionCollection.methods';
+import {
+  userInteractionDefineMethod,
+  userInteractionLogoutMethod,
+} from '../../api/analytic/UserInteractionCollection.methods';
 
 Accounts.ui.config({
   passwordSignupFields: 'USERNAME_ONLY',
@@ -44,5 +47,17 @@ Accounts.onLogin(function onLogin() {
 });
 
 Accounts.onLogout(function logout() {
+  const username = Meteor.user('username').username;
+  const interactionData = {
+    username,
+    type: 'logout',
+    typeData: 'logout',
+  };
+  userInteractionLogoutMethod.call(interactionData, (error) => {
+    if (error) {
+      console.log('Error creating UserInteraction.', error);
+    }
+  });
+  // console.log('logout', Meteor.user());
   FlowRouter.go('/');
 });

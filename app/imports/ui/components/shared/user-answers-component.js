@@ -1,8 +1,8 @@
 import { Template } from 'meteor/templating';
-import { FlowRouter } from 'meteor/kadira:flow-router';
 import { MentorAnswers } from '../../../api/mentor/MentorAnswerCollection';
 import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection';
 import { getRouteUserName } from '../shared/route-user-name';
+import { getGroupName } from './route-group-name';
 
 function getAnswers(mentorID) {
   return MentorAnswers.find({ mentorID }).fetch();
@@ -28,7 +28,7 @@ Template.User_Answers_Component.helpers({
     return null;
   },
   questionURL() {
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       return `/student/${getRouteUserName()}/mentor-space`;
     } else if (group === 'faculty') {

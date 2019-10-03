@@ -17,6 +17,19 @@ export const userInteractionDefineMethod = new ValidatedMethod({
 });
 
 /**
+ * The validated method for defining logout UserInteractions.
+ * @type {ValidatedMethod}
+ */
+export const userInteractionLogoutMethod = new ValidatedMethod({
+  name: 'UserInteraction.logout',
+  validate: null,
+  mixins: [CallPromiseMixin],
+  run(interactionData) {
+    return UserInteractions.define(interactionData);
+  },
+});
+
+/**
  * The validated method for removing UserInteractions.
  * @memberOf api/analytic
  */

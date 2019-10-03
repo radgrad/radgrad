@@ -133,26 +133,28 @@ Template.Academic_Plan_Semester.helpers({
     return course && planChoiceUtils.complexChoiceToComplexArray(course);
   },
   courseName(planSlug) {
-    let inPlan = false;
-    const planCourses = Template.instance().data.plan.courseList;
-    const studentID = getUserIdFromRoute();
-    if (Roles.userIsInRole(studentID, [ROLE.STUDENT])) {
-      const courses = CourseInstances.findNonRetired({ studentID });
-      const courseSlugs = takenSlugs(courses);
-      inPlan = checkIfPlanSlugIsSatisfied(courseSlugs, planCourses, planSlug);
-    } else {
-      inPlan = true;
-    }
-    if (planChoiceUtils.isSingleChoice(planSlug)) {
-      if (!planChoiceUtils.isXXChoice(planSlug)) {
-        const courseSlug = planChoiceUtils.stripCounter(planSlug);
-        const course = Courses.findDocBySlug(courseSlug);
-        return `${course.name} ${inPlan ? '' : ': drag to add to plan'} `;
+    if (getUserIdFromRoute()) {
+      let inPlan = false;
+      const planCourses = Template.instance().data.plan.courseList;
+      const studentID = getUserIdFromRoute();
+      if (Roles.userIsInRole(studentID, [ROLE.STUDENT])) {
+        const courses = CourseInstances.findNonRetired({ studentID });
+        const courseSlugs = takenSlugs(courses);
+        inPlan = checkIfPlanSlugIsSatisfied(courseSlugs, planCourses, planSlug);
+      } else {
+        inPlan = true;
       }
-      if (!inPlan) {
-        return 'Use the Explorer/Inspector to choose a course';
+      if (planChoiceUtils.isSingleChoice(planSlug)) {
+        if (!planChoiceUtils.isXXChoice(planSlug)) {
+          const courseSlug = planChoiceUtils.stripCounter(planSlug);
+          const course = Courses.findDocBySlug(courseSlug);
+          return `${course.name} ${inPlan ? '' : ': drag to add to plan'} `;
+        }
+        if (!inPlan) {
+          return 'Use the Explorer/Inspector to choose a course';
+        }
+        return 'Satisfied';
       }
-      return 'Satisfied';
     }
     return '';
   },
@@ -163,7 +165,7 @@ Template.Academic_Plan_Semester.helpers({
     return '';
   },
   inPlan(course) {
-    if (course) {
+    if (course && getUserIdFromRoute()) {
       // console.log('inPlan(%o)', course);
       const planCourses = Template.instance().data.plan.courseList;
       const studentID = getUserIdFromRoute();

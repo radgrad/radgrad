@@ -1,11 +1,11 @@
 import { Template } from 'meteor/templating';
-import { FlowRouter } from 'meteor/kadira:flow-router';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import * as RouteNames from '../../../startup/client/router.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
+import { getGroupName } from '../shared/route-group-name';
 
 Template.Student_Explorer_Review_Widget.helpers({
   abbreviateSemester(semester) {
@@ -28,10 +28,16 @@ Template.Student_Explorer_Review_Widget.helpers({
     return `${semName} ${semNameYear[1]}`;
   },
   currentUserName() {
-    return Users.getFullName(getUserIdFromRoute());
+    if (getUserIdFromRoute()) {
+      return Users.getFullName(getUserIdFromRoute());
+    }
+    return '';
   },
   currentUserPicture() {
-    return Users.getProfile(getUserIdFromRoute()).picture;
+    if (getUserIdFromRoute()) {
+      return Users.getProfile(getUserIdFromRoute()).picture;
+    }
+    return '';
   },
   reviewData(review) {
     const profile = Users.getProfile(review.studentID);
@@ -60,7 +66,7 @@ Template.Student_Explorer_Review_Widget.helpers({
     return matchingReviewsFinal;
   },
   usersRouteName() {
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentCardExplorerUsersPageRouteName;
     } else if (group === 'faculty') {

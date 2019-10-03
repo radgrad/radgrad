@@ -4,7 +4,6 @@ import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import SimpleSchema from 'simpl-schema';
 import { Roles } from 'meteor/alanning:roles';
-import { FlowRouter } from 'meteor/kadira:flow-router';
 import { ROLE } from '../../../api/role/Role.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection.js';
@@ -14,6 +13,7 @@ import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import * as FormUtils from '../form-fields/form-field-utilities.js';
+import { getGroupName } from '../shared/route-group-name';
 
 const updateSchema = new SimpleSchema({
   name: String,
@@ -40,7 +40,7 @@ Template.Update_Opportunity_Widget.helpers({
     return Interests.find({}, { sort: { name: 1 } });
   },
   admin() {
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     return group === 'admin';
   },
   semesters() {
@@ -69,7 +69,7 @@ Template.Update_Opportunity_Widget.helpers({
     return opportunity.semesterIDs;
   },
   faculty() {
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     return group === 'faculty';
   },
   falseValueRetired() {

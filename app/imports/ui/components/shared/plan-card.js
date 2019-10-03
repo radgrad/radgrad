@@ -1,9 +1,9 @@
 import { Template } from 'meteor/templating';
-import { FlowRouter } from 'meteor/kadira:flow-router';
 
 import * as RouteNames from '../../../startup/client/router';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { StudentParticipation } from '../../../api/public-stats/StudentParticipationCollection';
+import { getGroupName } from './route-group-name';
 
 /* global window */
 
@@ -33,11 +33,11 @@ Template.Plan_Card.helpers({
   },
   numberStudents(course) {
     const item = StudentParticipation.findOne({ itemID: course._id });
-    return item.itemCount;
+    return item ? item.itemCount : 0;
   },
   plansRouteName() {
     window.camDebugging.start('PlanCard.plansRouteName');
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       window.camDebugging.stop('PlanCard.plansRouteName');
       return RouteNames.studentExplorerPlansPageRouteName;

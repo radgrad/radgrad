@@ -3,6 +3,7 @@ import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Semesters } from '../../api/semester/SemesterCollection';
 import { Users } from '../../api/user/UserCollection.js';
+import { getGroupName } from '../components/shared/route-group-name';
 
 /**
  * Returns the explorerUserName portion of the route.
@@ -45,7 +46,7 @@ export function opportunitySemesters(opportunityInstance) {
  * @memberOf ui/utilities
  */
 export function isInRole(role) {
-  const group = FlowRouter.current().route.group.name;
+  const group = getGroupName();
   return group === role;
 }
 

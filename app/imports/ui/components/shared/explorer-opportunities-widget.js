@@ -1,5 +1,4 @@
 import { Template } from 'meteor/templating';
-import { FlowRouter } from 'meteor/kadira:flow-router';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import * as RouteNames from '../../../startup/client/router.js';
@@ -11,6 +10,7 @@ import { getUserIdFromRoute } from './get-user-id-from-route';
 import { isInRole, isLabel } from '../../utilities/template-helpers';
 import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 import { Teasers } from '../../../api/teaser/TeaserCollection';
+import { getGroupName } from './route-group-name';
 
 Template.Explorer_Opportunities_Widget.onCreated(function studentExplorerOpportunitiesWidgetOnCreated() {
   this.updated = new ReactiveVar(false);
@@ -22,69 +22,87 @@ Template.Explorer_Opportunities_Widget.helpers({
   },
   futureInstance(opportunity) {
     let ret = false;
-    const oi = OpportunityInstances.find({
-      studentID: getUserIdFromRoute(),
-      opportunityID: opportunity._id,
-    }).fetch();
-    _.forEach(oi, function (opportunityInstance) {
-      if (Semesters.findDoc(opportunityInstance.semesterID).semesterNumber >=
+    if (opportunity) {
+      const oi = OpportunityInstances.find({
+        studentID: getUserIdFromRoute(),
+        opportunityID: opportunity._id,
+      })
+        .fetch();
+      _.forEach(oi, function (opportunityInstance) {
+        if (Semesters.findDoc(opportunityInstance.semesterID).semesterNumber >=
           Semesters.getCurrentSemesterDoc().semesterNumber) {
-        ret = true;
-      }
-    });
+          ret = true;
+        }
+      });
+    }
     return ret;
   },
   hasTeaser(opportunity) {
-    const teaser = Teasers.find({ targetSlugID: opportunity.slugID }).fetch();
-    return teaser.length > 0;
+    if (opportunity) {
+      const teaser = Teasers.find({ targetSlugID: opportunity.slugID })
+        .fetch();
+      return teaser.length > 0;
+    }
+    return false;
   },
   isInRole,
   isLabel,
   replaceSemString(array) {
     const semString = array.join(', ');
-    return semString.replace(/Summer/g, 'Sum').replace(/Spring/g, 'Spr');
+    return semString.replace(/Summer/g, 'Sum')
+      .replace(/Spring/g, 'Spr');
   },
   opportunitySemesters(opportunity) {
-    const ois = OpportunityInstances.find({
-      studentID: getUserIdFromRoute(),
-      opportunityID: opportunity._id,
-    })
-      .fetch();
-    const currentSemester = Semesters.getCurrentSemesterDoc();
-    const names = _.map(ois, (oi) => {
-      const sem = Semesters.findDoc(oi.semesterID);
-      if (sem.semesterNumber < currentSemester.semesterNumber) {
-        if (oi.verified) {
-          return `Verified ${Semesters.toString(oi.semesterID, false)}`;
+    if (opportunity) {
+      const ois = OpportunityInstances.find({
+        studentID: getUserIdFromRoute(),
+        opportunityID: opportunity._id,
+      })
+        .fetch();
+      const currentSemester = Semesters.getCurrentSemesterDoc();
+      const names = _.map(ois, (oi) => {
+        const sem = Semesters.findDoc(oi.semesterID);
+        if (sem.semesterNumber < currentSemester.semesterNumber) {
+          if (oi.verified) {
+            return `Verified ${Semesters.toString(oi.semesterID, false)}`;
+          }
+          return `Unverified ${Semesters.toString(oi.semesterID, false)}`;
         }
-        return `Unverified ${Semesters.toString(oi.semesterID, false)}`;
-      }
-      return `In plan ${Semesters.toString(oi.semesterID, false)}`;
-    });
-    return names.join(', ');
+        return `In plan ${Semesters.toString(oi.semesterID, false)}`;
+      });
+      return names.join(', ');
+    }
+    return '';
   },
   review() {
-    let review = '';
-    review = Reviews.find({
-      studentID: getUserIdFromRoute(),
-      revieweeID: this.item._id,
-    }).fetch();
-    return review[0];
+    if (this.item) {
+      let review = '';
+      review = Reviews.find({
+        studentID: getUserIdFromRoute(),
+        revieweeID: this.item._id,
+      })
+        .fetch();
+      return review[0];
+    }
+    return '';
   },
   toUpper(string) {
     return string.toUpperCase();
   },
   unverified(opportunity) {
     let ret = false;
-    const oi = OpportunityInstances.find({
-      studentID: getUserIdFromRoute(),
-      opportunityID: opportunity._id,
-    }).fetch();
-    _.forEach(oi, function (opportunityInstance) {
-      if (!opportunityInstance.verified) {
-        ret = true;
-      }
-    });
+    if (opportunity) {
+      const oi = OpportunityInstances.find({
+        studentID: getUserIdFromRoute(),
+        opportunityID: opportunity._id,
+      })
+        .fetch();
+      _.forEach(oi, function (opportunityInstance) {
+        if (!opportunityInstance.verified) {
+          ret = true;
+        }
+      });
+    }
     return ret;
   },
   updatedTeaser(teaser) {
@@ -94,7 +112,7 @@ Template.Explorer_Opportunities_Widget.helpers({
     return Users.getProfile(user).picture || defaultProfilePicture;
   },
   usersRouteName() {
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentCardExplorerUsersPageRouteName;
     } else if (group === 'faculty') {
@@ -104,12 +122,15 @@ Template.Explorer_Opportunities_Widget.helpers({
   },
   userStatus(opportunity) {
     let ret = false;
-    const oi = OpportunityInstances.find({
-      studentID: getUserIdFromRoute(),
-      opportunityID: opportunity._id,
-    }).fetch();
-    if (oi.length > 0) {
-      ret = true;
+    if (opportunity) {
+      const oi = OpportunityInstances.find({
+        studentID: getUserIdFromRoute(),
+        opportunityID: opportunity._id,
+      })
+        .fetch();
+      if (oi.length > 0) {
+        ret = true;
+      }
     }
     return ret;
   },
@@ -120,7 +141,8 @@ Template.Explorer_Opportunities_Widget.helpers({
 
 Template.Explorer_Opportunities_Widget.onRendered(function enableVideo() {
   setTimeout(function () {
-    this.$('.ui.embed').embed();
+    this.$('.ui.embed')
+      .embed();
   }, 300);
   const template = this;
   template.$('.chooseSemester')

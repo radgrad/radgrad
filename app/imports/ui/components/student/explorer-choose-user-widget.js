@@ -1,9 +1,9 @@
 import { Template } from 'meteor/templating';
-import { FlowRouter } from 'meteor/kadira:flow-router';
 import * as RouteNames from '../../../startup/client/router.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { ROLE } from '../../../api/role/Role.js';
 import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
+import { getGroupName } from '../shared/route-group-name';
 
 Template.Explorer_Choose_User_Widget.onCreated(function explorerChooseUserWidgetOnCreated() {
   if (this.data.userID) {
@@ -41,7 +41,7 @@ Template.Explorer_Choose_User_Widget.helpers({
     return Users.findProfilesWithRole(role, {}, { sort: { lastName: 1 } });
   },
   usersRouteName() {
-    const group = FlowRouter.current().route.group && FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentCardExplorerUsersPageRouteName;
     } else if (group === 'faculty') {

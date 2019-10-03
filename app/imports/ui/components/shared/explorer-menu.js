@@ -12,13 +12,14 @@ import { FavoriteAcademicPlans } from '../../../api/favorite/FavoriteAcademicPla
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { FavoriteCourses } from '../../../api/favorite/FavoriteCourseCollection';
 import { FavoriteOpportunities } from '../../../api/favorite/FavoriteOpportunityCollection';
+import { getGroupName } from './route-group-name';
 
 /* global window */
 
 Template.Explorer_Menu.helpers({
   academicPlansCardRouteName() {
     window.camDebugging.start('ExplorerMenu.academicPlansCardRouteName');
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       window.camDebugging.stop('ExplorerMenu.academicPlansCardRouteName');
       return RouteNames.studentCardExplorerPlansPageRouteName;
@@ -32,7 +33,7 @@ Template.Explorer_Menu.helpers({
   },
   academicPlansRouteName() {
     window.camDebugging.start('ExplorerMenu.academicPlansRouteName');
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       window.camDebugging.stop('ExplorerMenu.academicPlansRouteName');
       return RouteNames.studentExplorerPlansPageRouteName;
@@ -52,7 +53,7 @@ Template.Explorer_Menu.helpers({
   },
   careerGoalsCardRouteName() {
     window.camDebugging.start('ExplorerMenu.careerGoalsCardRouteName');
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       window.camDebugging.stop('ExplorerMenu.careerGoalsCardRouteName');
       return RouteNames.studentCardExplorerCareerGoalsPageRouteName;
@@ -66,7 +67,7 @@ Template.Explorer_Menu.helpers({
   },
   careerGoalsRouteName() {
     window.camDebugging.start('ExplorerMenu.careerGoalsRouteName');
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       window.camDebugging.stop('ExplorerMenu.careerGoalsRouteName');
       return RouteNames.studentExplorerCareerGoalsPageRouteName;
@@ -118,7 +119,7 @@ Template.Explorer_Menu.helpers({
   },
   coursesCardRouteName() {
     window.camDebugging.start('ExplorerMenu.coursesCardRouteName');
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       window.camDebugging.stop('ExplorerMenu.coursesCardRouteName');
       return RouteNames.studentCardExplorerCoursesPageRouteName;
@@ -132,7 +133,7 @@ Template.Explorer_Menu.helpers({
   },
   coursesRouteName() {
     window.camDebugging.start('ExplorerMenu.coursesRouteName');
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       window.camDebugging.stop('ExplorerMenu.coursesRouteName');
       return RouteNames.studentExplorerCoursesPageRouteName;
@@ -146,7 +147,7 @@ Template.Explorer_Menu.helpers({
   },
   degreesCardRouteName() {
     window.camDebugging.start('ExplorerMenu.degreesCardRouteName');
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       window.camDebugging.stop('ExplorerMenu.degreesCardRouteName');
       return RouteNames.studentCardExplorerDegreesPageRouteName;
@@ -160,7 +161,7 @@ Template.Explorer_Menu.helpers({
   },
   degreesRouteName() {
     window.camDebugging.start('ExplorerMenu.academicPlansRouteName');
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       window.camDebugging.stop('ExplorerMenu.academicPlansRouteName');
       return RouteNames.studentExplorerDegreesPageRouteName;
@@ -228,7 +229,7 @@ Template.Explorer_Menu.helpers({
   },
   interestsCardRouteName() {
     window.camDebugging.start('ExplorerMenu.interestsCardRouteName');
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       window.camDebugging.stop('ExplorerMenu.interestsCardRouteName');
       return RouteNames.studentCardExplorerInterestsPageRouteName;
@@ -242,7 +243,7 @@ Template.Explorer_Menu.helpers({
   },
   interestsRouteName() {
     window.camDebugging.start('ExplorerMenu.interestsRouteName');
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       window.camDebugging.stop('ExplorerMenu.interestsRouteName');
       return RouteNames.studentExplorerInterestsPageRouteName;
@@ -281,7 +282,7 @@ Template.Explorer_Menu.helpers({
   },
   opportunitiesCardRouteName() {
     window.camDebugging.start('ExplorerMenu.opportunityCardRouteName');
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       window.camDebugging.stop('ExplorerMenu.opportunityCardRouteName');
       return RouteNames.studentExplorerOpportunitiesPageRouteName;
@@ -295,7 +296,7 @@ Template.Explorer_Menu.helpers({
   },
   opportunitiesRouteName() {
     window.camDebugging.start('ExplorerMenu.opportunityRouteName');
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       window.camDebugging.stop('ExplorerMenu.opportunityRouteName');
       return RouteNames.studentExplorerOpportunitiesPageRouteName;
@@ -377,7 +378,7 @@ Template.Explorer_Menu.helpers({
   },
   usersCardRouteName() {
     window.camDebugging.start('ExplorerMenu.usersCardRouteName');
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       window.camDebugging.stop('ExplorerMenu.usersCardRouteName');
       return RouteNames.studentCardExplorerUsersPageRouteName;
@@ -391,7 +392,7 @@ Template.Explorer_Menu.helpers({
   },
   usersRouteName() {
     window.camDebugging.start('ExplorerMenu.usersRouteName');
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       window.camDebugging.stop('ExplorerMenu.usersRouteName');
       return RouteNames.studentCardExplorerUsersPageRouteName;

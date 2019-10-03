@@ -25,6 +25,7 @@ Template.Landing_Interest_List.helpers({
     return RouteNames.landingExplorerInterestsPageRouteName;
   },
   interestSlug(interest) {
-    return Slugs.findDoc(interest.slugID).name;
+    const slug = Slugs.findOne({ _id: interest.slugID });
+    return slug ? slug.name : '';
   },
 });

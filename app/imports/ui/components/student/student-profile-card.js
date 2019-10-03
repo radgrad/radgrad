@@ -1,5 +1,4 @@
 import { Template } from 'meteor/templating';
-import { FlowRouter } from 'meteor/kadira:flow-router';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
@@ -8,6 +7,7 @@ import { Slugs } from '../../../api/slug/SlugCollection';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { Users } from '../../../api/user/UserCollection';
 import * as RouteNames from '../../../startup/client/router';
+import { getGroupName } from '../shared/route-group-name';
 
 Template.Student_Profile_Card.onCreated(function studentProfileCardOnCreated() {
   this.hidden = new ReactiveVar(true);
@@ -37,7 +37,7 @@ function interestedStudentsHelper(item, type) {
 
 Template.Student_Profile_Card.helpers({
   careerGoalsRouteName() {
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentExplorerCareerGoalsPageRouteName;
     } else
@@ -50,7 +50,7 @@ Template.Student_Profile_Card.helpers({
     return Template.instance().hidden.get();
   },
   interestRouteName() {
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentExplorerInterestsPageRouteName;
     } else
@@ -111,7 +111,7 @@ Template.Student_Profile_Card.helpers({
     return (this.type === 'interests');
   },
   usersRouteName() {
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentCardExplorerUsersPageRouteName;
     } else

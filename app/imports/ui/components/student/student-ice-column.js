@@ -196,8 +196,11 @@ Template.Student_Ice_Column.helpers({
     return ret;
   },
   hasNoInterests() {
-    const user = Users.getProfile(getRouteUserName());
-    return user.interestIDs === undefined;
+    if (getRouteUserName()) {
+      const user = Users.getProfile(getRouteUserName());
+      return user.interestIDs === undefined || user.interestIDs.length === 0;
+    }
+    return false;
   },
   innovationPoints(ice) {
     return ice.i;
@@ -233,15 +236,18 @@ Template.Student_Ice_Column.helpers({
     return null;
   },
   points(ice) {
-    let ret;
-    if (this.type === 'Innovation') {
-      ret = ice.i;
-    } else if (this.type === 'Competency') {
-      ret = ice.c;
-    } else if (this.type === 'Experience') {
-      ret = ice.e;
+    if (ice) {
+      let ret;
+      if (this.type === 'Innovation') {
+        ret = ice.i;
+      } else if (this.type === 'Competency') {
+        ret = ice.c;
+      } else if (this.type === 'Experience') {
+        ret = ice.e;
+      }
+      return ret;
     }
-    return ret;
+    return 0;
   },
   printSemester(semester) {
     return Semesters.toString(semester._id, false);

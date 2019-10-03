@@ -3,6 +3,7 @@ import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { ROLE } from '../../../api/role/Role';
 import { Users } from '../../../api/user/UserCollection';
+import { getGroupName } from '../../components/shared/route-group-name';
 
 /* eslint-disable object-shorthand */
 
@@ -46,7 +47,7 @@ Template.If_Authorized.helpers({
     }
     // 3. Determine the user and role specified in the URL.
     const pathUserName = FlowRouter.getParam('username');
-    const pathRole = FlowRouter.current().route.group.name;
+    const pathRole = getGroupName();
     // Determine the user and role who is logged in right now.
     const userName = Meteor.user('username').username;
     const userRole = Meteor.user('roles').roles[0];

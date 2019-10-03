@@ -1,5 +1,4 @@
 import { Template } from 'meteor/templating';
-import { FlowRouter } from 'meteor/kadira:flow-router';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Interests } from '../../../api/interest/InterestCollection';
@@ -12,6 +11,7 @@ import { Users } from '../../../api/user/UserCollection';
 import * as FormUtils from '../form-fields/form-field-utilities.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 import { isInRole } from '../../utilities/template-helpers';
+import { getGroupName } from '../shared/route-group-name';
 
 function numReferences() {
   // This code made the opportunities page on radgrad.ics.hawaii.edu unresponsive.
@@ -37,7 +37,7 @@ Template.List_Opportunities_Widget.helpers({
     return Opportunities.find({ sponsorID: getUserIdFromRoute() }, { sort: { name: 1 } });
   },
   opportunities() {
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'faculty') {
       return Opportunities.find({ sponsorID: { $ne: getUserIdFromRoute() } }, { sort: { name: 1 } });
     }
@@ -50,7 +50,7 @@ Template.List_Opportunities_Widget.helpers({
     return Opportunities.find({ sponsorID: { $ne: getUserIdFromRoute() } }).count();
   },
   deleteDisabled(opportunity) {
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'faculty') {
       if (opportunity.sponsorID !== getUserIdFromRoute()) {
         return 'disabled';
@@ -69,7 +69,7 @@ Template.List_Opportunities_Widget.helpers({
   },
   isInRole,
   updateDisabled(opportunity) {
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'faculty') {
       if (opportunity.sponsorID !== getUserIdFromRoute()) {
         return 'disabled';

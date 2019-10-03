@@ -1,5 +1,4 @@
 import { Template } from 'meteor/templating';
-import { FlowRouter } from 'meteor/kadira:flow-router';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
@@ -11,6 +10,7 @@ import * as RouteNames from '../../../startup/client/router';
 import { isInRole } from '../../utilities/template-helpers';
 import { StudentParticipation } from '../../../api/public-stats/StudentParticipationCollection';
 import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
+import { getGroupName } from './route-group-name';
 
 Template.Profile_Card.onCreated(function profileCardOnCreated() {
   this.hidden = new ReactiveVar(true);
@@ -44,7 +44,7 @@ function interestedStudentsHelper(item, type) {
 
 Template.Profile_Card.helpers({
   careerGoalsRouteName() {
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentExplorerCareerGoalsPageRouteName;
     } else
@@ -57,7 +57,7 @@ Template.Profile_Card.helpers({
     return Template.instance().hidden.get();
   },
   interestRouteName() {
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentExplorerInterestsPageRouteName;
     } else
@@ -88,7 +88,7 @@ Template.Profile_Card.helpers({
   },
   numberStudents(course) {
     const item = StudentParticipation.findOne({ itemID: course._id });
-    return item.itemCount;
+    return item ? item.itemCount : 0;
   },
   replaceSemString(array) {
     // console.log('array', array);
@@ -120,7 +120,7 @@ Template.Profile_Card.helpers({
     return (this.type === 'interests');
   },
   usersRouteName() {
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentCardExplorerUsersPageRouteName;
     } else

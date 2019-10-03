@@ -1,9 +1,9 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { getRouteUserName } from '../shared/route-user-name';
+import { getGroupName } from './route-group-name';
 
 Template.User_Interests_Component.helpers({
   count() {
@@ -28,7 +28,7 @@ Template.User_Interests_Component.helpers({
     return Template.instance().labelSize;
   },
   interestURL(i) {
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     const slug = Interests.getSlug(i._id);
 
     if (group === 'student') {

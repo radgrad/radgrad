@@ -107,9 +107,13 @@ Template.Card_Explorer_Courses_Widget.helpers({
 });
 
 Template.Card_Explorer_Courses_Widget.onRendered(function cardExplorerCoursesWidgetOnRendered() {
-  const profile = Users.getProfile(getUserIdFromRoute());
-  // console.log(profile);
-  if (profile.courseExplorerFilter) {
-    Template.instance().filter.set(profile.courseExplorerFilter);
+  if (getUserIdFromRoute()) {
+    const profile = Users.getProfile(getUserIdFromRoute());
+    // console.log(profile);
+    if (profile.courseExplorerFilter) {
+      Template.instance()
+        .filter
+        .set(profile.courseExplorerFilter);
+    }
   }
 });

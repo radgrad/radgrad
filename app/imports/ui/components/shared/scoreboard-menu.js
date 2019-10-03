@@ -1,11 +1,11 @@
 import { Template } from 'meteor/templating';
-import { FlowRouter } from 'meteor/kadira:flow-router';
 
 import * as RouteNames from '../../../startup/client/router';
+import { getGroupName } from './route-group-name';
 
 Template.Scoreboard_Menu.helpers({
   courseScoreboardRouteName() {
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     // console.log('group=%o', group);
     if (group === 'admin') {
       return RouteNames.adminCourseScoreboardPageRouteName;
@@ -19,7 +19,7 @@ Template.Scoreboard_Menu.helpers({
     return '';
   },
   opportunityScoreboardRouteName() {
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     // console.log('group=%o', group);
     if (group === 'admin') {
       return RouteNames.adminOpportunityScoreboardPageRouteName;

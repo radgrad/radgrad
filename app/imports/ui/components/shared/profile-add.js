@@ -1,5 +1,4 @@
 import { Template } from 'meteor/templating';
-import { FlowRouter } from 'meteor/kadira:flow-router';
 
 import { getRouteUserName } from '../shared/route-user-name';
 import { Users } from '../../../api/user/UserCollection';
@@ -11,6 +10,7 @@ import { FavoriteCareerGoals } from '../../../api/favorite/FavoriteCareerGoalCol
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { FavoriteInterests } from '../../../api/favorite/FavoriteInterestCollection';
 import { FavoriteAcademicPlans } from '../../../api/favorite/FavoriteAcademicPlanCollection';
+import { getGroupName } from './route-group-name';
 
 Template.Profile_Add.helpers({
   isPlan(type) {
@@ -25,7 +25,7 @@ Template.Profile_Add.events({
       const updateData = {};
       const profile = Users.getProfile(getRouteUserName());
       updateData.id = profile._id;
-      const group = FlowRouter.current().route.group.name;
+      const group = getGroupName();
       let collectionName = '';
       if (group === 'student') {
         collectionName = StudentProfiles.getCollectionName();

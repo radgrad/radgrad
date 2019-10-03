@@ -1,5 +1,4 @@
 import { Template } from 'meteor/templating';
-import { FlowRouter } from 'meteor/kadira:flow-router';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import * as RouteNames from '../../../startup/client/router.js';
 import { Users } from '../../../api/user/UserCollection.js';
@@ -15,6 +14,7 @@ import { FacultyProfiles } from '../../../api/user/FacultyProfileCollection';
 import { MentorProfiles } from '../../../api/user/MentorProfileCollection';
 import { FavoriteInterests } from '../../../api/favorite/FavoriteInterestCollection';
 import { Teasers } from '../../../api/teaser/TeaserCollection';
+import { getGroupName } from './route-group-name';
 
 Template.Explorer_Interests_Widget.onCreated(function explorerInterestsWidgetOnCreated() {
   // console.log(this.data);
@@ -27,7 +27,7 @@ Template.Explorer_Interests_Widget.helpers({
     return course.shortName;
   },
   coursesRouteName() {
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentExplorerCoursesPageRouteName;
     } else if (group === 'faculty') {
@@ -57,7 +57,7 @@ Template.Explorer_Interests_Widget.helpers({
   isInRole,
   isLabel,
   opportunitiesRouteName() {
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentExplorerOpportunitiesPageRouteName;
     } else if (group === 'faculty') {
@@ -77,7 +77,7 @@ Template.Explorer_Interests_Widget.helpers({
     return Users.getProfile(user).picture || defaultProfilePicture;
   },
   usersRouteName() {
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentCardExplorerUsersPageRouteName;
     } else if (group === 'faculty') {
@@ -104,7 +104,7 @@ Template.Explorer_Interests_Widget.events({
     const profile = Users.getProfile(getRouteUserName());
     const id = event.target.value;
     const studentItems = profile.interestIDs;
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     let collectionName = '';
     if (group === 'student') {
       collectionName = StudentProfiles.getCollectionName();
@@ -138,7 +138,7 @@ Template.Explorer_Interests_Widget.events({
     const profile = Users.getProfile(getRouteUserName());
     const id = event.target.value;
     let studentItems = profile.interestIDs;
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     let collectionName = '';
     if (group === 'student') {
       collectionName = StudentProfiles.getCollectionName();

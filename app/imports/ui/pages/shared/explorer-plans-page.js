@@ -53,8 +53,11 @@ Template.Explorer_Plans_Page.helpers({
   },
   plan() {
     const planSlugName = FlowRouter.getParam('plan');
-    const slug = Slugs.findDoc({ name: planSlugName });
-    return AcademicPlans.findDoc({ slugID: slug._id });
+    if (planSlugName) {
+      const slug = Slugs.findDoc({ name: planSlugName });
+      return AcademicPlans.findDoc({ slugID: slug._id });
+    }
+    return '';
   },
   slugName(slugID) {
     return Slugs.findDoc(slugID).name;

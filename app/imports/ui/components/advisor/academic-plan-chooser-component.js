@@ -19,7 +19,9 @@ Template.Academic_Plan_Chooser_Component.onCreated(function academicPlanChooserC
 
 Template.Academic_Plan_Chooser_Component.helpers({
   names() {
-    const chosen = parseInt(Template.instance().chosenYear.get(), 10);
+    const chosen = parseInt(Template.instance()
+      .chosenYear
+      .get(), 10);
     const plans = AcademicPlans.findNonRetired();
     let name = _.filter(plans, (p) => {
       const year = Semesters.findDoc(p.effectiveSemesterID).year;
@@ -31,78 +33,102 @@ Template.Academic_Plan_Chooser_Component.helpers({
     }]);
   },
   selectedName() {
-    if (Template.instance().plan.get()) {
-      return Template.instance().plan.get().name;
+    if (Template.instance()
+      .plan
+      .get()) {
+      return Template.instance()
+        .plan
+        .get().name;
     }
     return '';
   },
   selectedYear() {
-    if (Template.instance().plan.get()) {
-      const plan = Template.instance().plan.get();
+    if (Template.instance()
+      .plan
+      .get()) {
+      const plan = Template.instance()
+        .plan
+        .get();
       const semester = Semesters.findDoc(plan.effectiveSemesterID);
-      Template.instance().chosenYear.set(semester.year);
+      Template.instance()
+        .chosenYear
+        .set(semester.year);
       return semester.year;
     }
     return '';
   },
   years() {
-    const studentID = getUserIdFromRoute();
-    const profile = Users.getProfile(studentID);
-    let declaredYear;
-    if (profile.declaredSemesterID) {
-      const decSem = Semesters.findDoc(profile.declaredSemesterID);
-      declaredYear = decSem.year;
-    }
-    let plans = AcademicPlans.findNonRetired();
-    plans = _.uniqBy(plans, (p) => Semesters.findDoc(p.effectiveSemesterID).year);
-    plans = _.filter(plans, (p) => {
-      const year = Semesters.findDoc(p.effectiveSemesterID).year;
-      if (declaredYear && year >= declaredYear) {
-        return true;
-      } else if (!declaredYear) {
-        return true;
+    if (getUserIdFromRoute()) {
+      const studentID = getUserIdFromRoute();
+      const profile = Users.getProfile(studentID);
+      let declaredYear;
+      if (profile.declaredSemesterID) {
+        const decSem = Semesters.findDoc(profile.declaredSemesterID);
+        declaredYear = decSem.year;
       }
-      return false;
-    });
-    const years = _.map(plans, (p) => Semesters.findDoc(p.effectiveSemesterID).year);
-    return _.sortBy(years, [function sort(o) {
-      return o;
-    }]);
+      let plans = AcademicPlans.findNonRetired();
+      plans = _.uniqBy(plans, (p) => Semesters.findDoc(p.effectiveSemesterID).year);
+      plans = _.filter(plans, (p) => {
+        const year = Semesters.findDoc(p.effectiveSemesterID).year;
+        if (declaredYear && year >= declaredYear) {
+          return true;
+        } else if (!declaredYear) {
+          return true;
+        }
+        return false;
+      });
+      const years = _.map(plans, (p) => Semesters.findDoc(p.effectiveSemesterID).year);
+      return _.sortBy(years, [function sort(o) {
+        return o;
+      }]);
+    }
+    return [];
   },
 });
 
 Template.Academic_Plan_Chooser_Component.events({
   'change [name=year]': function changeYear(event) {
     event.preventDefault();
-    Template.instance().chosenYear.set($(event.target).val());
+    Template.instance()
+      .chosenYear
+      .set($(event.target)
+        .val());
   },
   'change [name=name]': function changePlan(event) {
     event.preventDefault();
-    const year = Template.instance().chosenYear.get();
+    const year = Template.instance()
+      .chosenYear
+      .get();
     const semesterSlug = `Fall-${year}`;
     const effectiveSemesterID = Slugs.getEntityID(semesterSlug, 'Semester');
-    const name = $(event.target).val();
+    const name = $(event.target)
+      .val();
     const plan = AcademicPlans.findDoc({ effectiveSemesterID, name });
-    Template.instance().plan.set(plan);
-    if (Roles.userIsInRole(getUserIdFromRoute(), ROLE.STUDENT)) {
-      const updateData = {};
-      updateData.id = getUserIdFromRoute();
-      updateData.academicPlan = plan._id;
-      updateAcademicPlanMethod.call(plan._id, (error) => {
-        if (error) {
-          console.log('Error updating student\' academic plan', error);
-        } else {
-          // FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
-        }
-      });
+    Template.instance()
+      .plan
+      .set(plan);
+    if (getUserIdFromRoute()) {
+      if (Roles.userIsInRole(getUserIdFromRoute(), ROLE.STUDENT)) {
+        const updateData = {};
+        updateData.id = getUserIdFromRoute();
+        updateData.academicPlan = plan._id;
+        updateAcademicPlanMethod.call(plan._id, (error) => {
+          if (error) {
+            console.log('Error updating student\' academic plan', error);
+          } else {
+            // FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
+          }
+        });
+      }
     }
   },
 });
 
 Template.Academic_Plan_Chooser_Component.onRendered(function academicPlanChooserComponentOnRendered() {
-  this.$('.dropdown').dropdown({
-    // action: 'select',
-  });
+  this.$('.dropdown')
+    .dropdown({
+      // action: 'select',
+    });
 });
 
 Template.Academic_Plan_Chooser_Component.onDestroyed(function academicPlanChooserComponentOnDestroyed() {

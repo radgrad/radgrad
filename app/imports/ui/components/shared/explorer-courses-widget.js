@@ -1,6 +1,5 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { FlowRouter } from 'meteor/kadira:flow-router';
 import * as RouteNames from '../../../startup/client/router.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
@@ -10,6 +9,7 @@ import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js
 import { getUserIdFromRoute } from './get-user-id-from-route';
 import { isInRole, isLabel } from '../../utilities/template-helpers';
 import { Teasers } from '../../../api/teaser/TeaserCollection';
+import { getGroupName } from './route-group-name';
 
 Template.Explorer_Courses_Widget.helpers({
   courseNameFromSlug(courseSlugName) {
@@ -19,7 +19,7 @@ Template.Explorer_Courses_Widget.helpers({
     return course.shortName;
   },
   coursesRouteName() {
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentExplorerCoursesPageRouteName;
     } else if (group === 'faculty') {

@@ -1,11 +1,11 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 import * as RouteNames from '../../../startup/client/router.js';
+import { getGroupName } from './route-group-name';
 
 function matchingInterestsHelper(item) {
   const matchingInterests = [];
@@ -69,7 +69,7 @@ Template.Interest_List.helpers({
     return interest.name;
   },
   interestsRouteName() {
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentExplorerInterestsPageRouteName;
     } else if (group === 'faculty') {

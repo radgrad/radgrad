@@ -1,10 +1,10 @@
 import { Template } from 'meteor/templating';
-import { FlowRouter } from 'meteor/kadira:flow-router';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 import { FavoriteOpportunities } from '../../../api/favorite/FavoriteOpportunityCollection';
+import { getGroupName } from '../../components/shared/route-group-name';
 
 Template.Card_Explorer_Opportunities_Page.helpers({
   addedOpportunities() {
@@ -15,7 +15,7 @@ Template.Card_Explorer_Opportunities_Page.helpers({
   nonAddedOpportunities() {
     const allOpportunities = Opportunities.findNonRetired({}, { sort: { name: 1 } });
     const userID = getUserIdFromRoute();
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'faculty') {
       return _.filter(allOpportunities, o => o.sponsorID !== userID);
     } else if (group === 'student') {

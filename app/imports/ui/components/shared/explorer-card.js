@@ -1,12 +1,12 @@
 import { Template } from 'meteor/templating';
-import { FlowRouter } from 'meteor/kadira:flow-router';
 
 import * as RouteNames from '../../../startup/client/router';
 import { Slugs } from '../../../api/slug/SlugCollection';
+import { getGroupName } from './route-group-name';
 
 Template.Explorer_Card.helpers({
   careerGoalsRouteName() {
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentExplorerCareerGoalsPageRouteName;
     } else if (group === 'faculty') {
@@ -15,7 +15,7 @@ Template.Explorer_Card.helpers({
     return RouteNames.mentorExplorerCareerGoalsPageRouteName;
   },
   coursesRouteName() {
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentExplorerCoursesPageRouteName;
     } else if (group === 'faculty') {
@@ -24,7 +24,7 @@ Template.Explorer_Card.helpers({
     return RouteNames.mentorExplorerCoursesPageRouteName;
   },
   degreesRouteName() {
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentExplorerDegreesPageRouteName;
     } else if (group === 'faculty') {
@@ -33,7 +33,7 @@ Template.Explorer_Card.helpers({
     return RouteNames.mentorExplorerDegreesPageRouteName;
   },
   interestRouteName() {
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentExplorerInterestsPageRouteName;
     } else if (group === 'faculty') {
@@ -58,7 +58,7 @@ Template.Explorer_Card.helpers({
     return Slugs.findDoc(item.slugID).name;
   },
   opportunityRouteName() {
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentExplorerOpportunitiesPageRouteName;
     } else if (group === 'faculty') {

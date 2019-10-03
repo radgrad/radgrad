@@ -1,7 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { FlowRouter } from 'meteor/kadira:flow-router';
 import { moment } from 'meteor/momentjs:moment';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
@@ -12,10 +11,11 @@ import { verificationRequestsUpdateStatusMethod }
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
+import { getGroupName } from './route-group-name';
 
 Template.Verification_Requests_Completed.helpers({
   completedVerifications() {
-    const group = FlowRouter.current().route.group.name;
+    const group = getGroupName();
     const openRequests = VerificationRequests.find({ status: { $ne: VerificationRequests.OPEN } },
       { sort: { submittedOn: -1 } })
       .fetch();
