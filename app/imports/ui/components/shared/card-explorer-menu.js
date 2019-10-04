@@ -142,10 +142,6 @@ Template.Card_Explorer_Menu.helpers({
       case RouteNames.facultyCardExplorerPlansPageRouteName:
       case RouteNames.mentorCardExplorerPlansPageRouteName:
         return 'Academic Plans';
-      case RouteNames.studentCardExplorerDegreesPageRouteName:
-      case RouteNames.facultyCardExplorerDegreesPageRouteName:
-      case RouteNames.mentorCardExplorerDegreesPageRouteName:
-        return 'Degrees';
       case RouteNames.studentCardExplorerInterestsPageRouteName:
       case RouteNames.facultyCardExplorerInterestsPageRouteName:
       case RouteNames.mentorCardExplorerInterestsPageRouteName:
@@ -220,13 +216,18 @@ Template.Card_Explorer_Menu.helpers({
     return RouteNames.mentorExplorerOpportunitiesPageRouteName;
   },
   slugName(item) {
-    return Slugs.findDoc(item.slugID).name;
+    if (item) {
+      return Slugs.findDoc(item.slugID).name;
+    }
+    return '';
   },
   userCareerGoals(careerGoal) {
     let ret = '';
-    const profile = Users.getProfile(getRouteUserName());
-    if (_.includes(profile.careerGoalIDs, careerGoal._id)) {
-      ret = 'check green circle outline icon';
+    if (getRouteUserName()) {
+      const profile = Users.getProfile(getRouteUserName());
+      if (_.includes(profile.careerGoalIDs, careerGoal._id)) {
+        ret = 'check green circle outline icon';
+      }
     }
     return ret;
   },
@@ -242,18 +243,22 @@ Template.Card_Explorer_Menu.helpers({
   },
   userDegrees(degree) {
     let ret = '';
-    const profile = Users.getProfile(getRouteUserName());
-    // TODO This won't work, profile does not have desiredDegreeID.
-    if (_.includes(profile.desiredDegreeID, degree._id)) {
-      ret = 'check green circle outline icon';
+    if (getRouteUserName()) {
+      const profile = Users.getProfile(getRouteUserName());
+      // TODO This won't work, profile does not have desiredDegreeID.
+      if (_.includes(profile.desiredDegreeID, degree._id)) {
+        ret = 'check green circle outline icon';
+      }
     }
     return ret;
   },
   userInterests(interest) {
     let ret = '';
-    const profile = Users.getProfile(getRouteUserName());
-    if (_.includes(Users.getInterestIDs(profile.userID), interest._id)) {
-      ret = 'check green circle outline icon';
+    if (getRouteUserName()) {
+      const profile = Users.getProfile(getRouteUserName());
+      if (_.includes(Users.getInterestIDs(profile.userID), interest._id)) {
+        ret = 'check green circle outline icon';
+      }
     }
     return ret;
   },

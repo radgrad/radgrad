@@ -153,58 +153,85 @@ function careerGoals(interest) {
 
 Template.Explorer_Interests_Page.helpers({
   addedCareerInterests() {
-    const profile = Users.getProfile(getRouteUserName());
-    const allInterests = Users.getInterestIDsByType(profile.userID);
-    return _.map(allInterests[1], (interest) => ({ item: Interests.findDoc(interest), count: 1 }));
+    if (getRouteUserName()) {
+      const profile = Users.getProfile(getRouteUserName());
+      const allInterests = Users.getInterestIDsByType(profile.userID);
+      return _.map(allInterests[1], (interest) => ({ item: Interests.findDoc(interest), count: 1 }));
+    }
+    return [];
   },
   addedInterests() {
     const addedInterests = [];
-    const allInterests = Interests.find({}, { sort: { name: 1 } }).fetch();
-    const profile = Users.getProfile(getRouteUserName());
-    _.forEach(allInterests, (interest) => {
-      if (_.includes(profile.interestIDs, interest._id)) {
-        addedInterests.push({ item: interest, count: 1 });
-      }
-    });
+    if (getRouteUserName()) {
+      const allInterests = Interests.find({}, { sort: { name: 1 } })
+        .fetch();
+      const profile = Users.getProfile(getRouteUserName());
+      _.forEach(allInterests, (interest) => {
+        if (_.includes(profile.interestIDs, interest._id)) {
+          addedInterests.push({ item: interest, count: 1 });
+        }
+      });
+    }
     return addedInterests;
   },
   descriptionPairs(interest) {
-    return [
-      { label: 'Description', value: interest.description },
-      { label: 'Related Career Goals', value: careerGoals(interest) },
-      { label: 'Related Courses', value: courses(interest) },
-      { label: 'Related Opportunities', value: opportunities(interest) },
-    ];
+    if (interest) {
+      return [
+        { label: 'Description', value: interest.description },
+        { label: 'Related Career Goals', value: careerGoals(interest) },
+        { label: 'Related Courses', value: courses(interest) },
+        { label: 'Related Opportunities', value: opportunities(interest) },
+      ];
+    }
+    return [];
   },
   interest() {
     const interestSlugName = FlowRouter.getParam('interest');
-    const slug = Slugs.find({ name: interestSlugName }).fetch();
-    const interest = Interests.find({ slugID: slug[0]._id }).fetch();
-    return interest[0];
+    if (interestSlugName) {
+      const slug = Slugs.find({ name: interestSlugName })
+        .fetch();
+      const interest = Interests.find({ slugID: slug[0]._id })
+        .fetch();
+      return interest[0];
+    }
+    return '';
   },
   nonAddedInterests() {
     const allInterests = Interests.find({}, { sort: { name: 1 } }).fetch();
-    const profile = Users.getProfile(getRouteUserName());
-    const nonAddedInterests = _.filter(allInterests, function (interest) {
-      if (_.includes(Users.getInterestIDs(profile.userID), interest._id)) {
-        return false;
-      }
-      return true;
-    });
-    return nonAddedInterests;
+    if (getRouteUserName()) {
+      const profile = Users.getProfile(getRouteUserName());
+      const nonAddedInterests = _.filter(allInterests, function (interest) {
+        if (_.includes(Users.getInterestIDs(profile.userID), interest._id)) {
+          return false;
+        }
+        return true;
+      });
+      return nonAddedInterests;
+    }
+    return allInterests;
   },
   slugName(slugID) {
-    return Slugs.findDoc(slugID).name;
+    if (slugID) {
+      return Slugs.findDoc(slugID).name;
+    }
+    return '';
   },
   socialPairs(interest) {
-    return [
-      { label: 'students', amount: numStudents(interest),
-        value: interestedUsers(interest, ROLE.STUDENT) },
-      { label: 'faculty members', amount: numUsers(interest, ROLE.FACULTY),
-        value: interestedUsers(interest, ROLE.FACULTY) },
-      { label: 'alumni', amount: numUsers(interest, ROLE.ALUMNI), value: interestedUsers(interest, ROLE.ALUMNI) },
-      { label: 'mentor', amount: numUsers(interest, ROLE.MENTOR), value: interestedUsers(interest, ROLE.MENTOR) },
-    ];
+    if (interest) {
+      return [
+        {
+          label: 'students', amount: numStudents(interest),
+          value: interestedUsers(interest, ROLE.STUDENT),
+        },
+        {
+          label: 'faculty members', amount: numUsers(interest, ROLE.FACULTY),
+          value: interestedUsers(interest, ROLE.FACULTY),
+        },
+        { label: 'alumni', amount: numUsers(interest, ROLE.ALUMNI), value: interestedUsers(interest, ROLE.ALUMNI) },
+        { label: 'mentor', amount: numUsers(interest, ROLE.MENTOR), value: interestedUsers(interest, ROLE.MENTOR) },
+      ];
+    }
+    return [];
   },
 });
 

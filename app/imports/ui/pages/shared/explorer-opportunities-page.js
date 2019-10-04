@@ -148,7 +148,7 @@ Template.Explorer_Opportunities_Page.helpers({
       return [
         {
           label: 'students', amount: numUsers(opportunity),
-          value: interestedUsers(opportunity)
+          value: interestedUsers(opportunity),
         },
       ];
     }

@@ -34,22 +34,28 @@ Template.Explorer_Plans_Page.helpers({
     return plans;
   },
   descriptionPairs(plan) {
-    const degree = DesiredDegrees.findDoc(plan.degreeID);
-    const description = `${degree.description}\n\n${plan.description}`;
-    return [
-      { label: 'Description', value: description },
-    ];
+    if (plan) {
+      const degree = DesiredDegrees.findDoc(plan.degreeID);
+      const description = `${degree.description}\n\n${plan.description}`;
+      return [
+        { label: 'Description', value: description },
+      ];
+    }
+    return [];
   },
   nonAddedPlans() {
     const allPlans = AcademicPlans.findNonRetired({}, { sort: { semesterNumber: 1, name: 1 } });
-    const profile = Users.getProfile(getRouteUserName());
-    const nonAddedPlans = _.filter(allPlans, function (plan) {
-      if (_.includes(profile.academicPlanID, plan._id)) {
-        return false;
-      }
-      return true;
-    });
-    return _.map(nonAddedPlans, (p) => ({ item: p, count: 1 }));
+    if (getRouteUserName()) {
+      const profile = Users.getProfile(getRouteUserName());
+      const nonAddedPlans = _.filter(allPlans, function (plan) {
+        if (_.includes(profile.academicPlanID, plan._id)) {
+          return false;
+        }
+        return true;
+      });
+      return _.map(nonAddedPlans, (p) => ({ item: p, count: 1 }));
+    }
+    return _.map(allPlans, (p) => ({ item: p, count: 1 }));
   },
   plan() {
     const planSlugName = FlowRouter.getParam('plan');
@@ -60,12 +66,20 @@ Template.Explorer_Plans_Page.helpers({
     return '';
   },
   slugName(slugID) {
-    return Slugs.findDoc(slugID).name;
+    if (slugID) {
+      return Slugs.findDoc(slugID).name;
+    }
+    return '';
   },
   socialPairs(plan) {
-    return [
-      { label: 'students', amount: numUsers(plan),
-        value: interestedUsers(plan) },
-    ];
+    if (plan) {
+      return [
+        {
+          label: 'students', amount: numUsers(plan),
+          value: interestedUsers(plan),
+        },
+      ];
+    }
+    return [];
   },
 });

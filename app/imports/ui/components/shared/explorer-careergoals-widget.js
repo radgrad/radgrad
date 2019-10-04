@@ -53,14 +53,19 @@ Template.Explorer_CareerGoals_Widget.helpers({
   },
   userStatus(careerGoal) {
     let ret = false;
-    const profile = Users.getProfile(getRouteUserName());
-    if (_.includes(profile.careerGoalIDs, careerGoal._id)) {
-      ret = true;
+    if (getRouteUserName()) {
+      const profile = Users.getProfile(getRouteUserName());
+      if (_.includes(profile.careerGoalIDs, careerGoal._id)) {
+        ret = true;
+      }
     }
     return ret;
   },
   userUsername(user) {
-    return Users.getProfile(user).username;
+    if (user) {
+      return Users.getProfile(user).username;
+    }
+    return '';
   },
 });
 

@@ -85,29 +85,36 @@ Template.Explorer_Courses_Page.helpers({
   completed() {
     let ret = false;
     const courseSlugName = FlowRouter.getParam('course');
-    const courseStatus = passedCourseHelper(courseSlugName);
-    if (courseStatus === 'Completed') {
-      ret = true;
+    if (courseSlugName) {
+      const courseStatus = passedCourseHelper(courseSlugName);
+      if (courseStatus === 'Completed') {
+        ret = true;
+      }
     }
     return ret;
   },
   course() {
     const courseSlugName = FlowRouter.getParam('course');
-    const slug = Slugs.find({ name: courseSlugName })
-      .fetch();
-    const course = Courses.findDoc({ slugID: slug[0]._id });
-    return course;
+    if (courseSlugName) {
+      const slug = Slugs.find({ name: courseSlugName })
+        .fetch();
+      const course = Courses.findDoc({ slugID: slug[0]._id });
+      return course;
+    }
+    return '';
   },
   descriptionPairs(course) {
-    return [
-      { label: 'Course Number', value: course.number },
-      { label: 'Credit Hours', value: course.creditHrs },
-      { label: 'Description', value: course.description },
-      { label: 'Syllabus', value: makeLink(course.syllabus) },
-      { label: 'Interests', value: _.sortBy(Interests.findNames(course.interestIDs)) },
-      { label: 'Prerequisites', value: prerequisites(course) },
-      // { label: 'Teaser', value: teaser(course) }, TODO: CAM need to add support for non opportunity teasers.
-    ];
+    if (course) {
+      return [
+        { label: 'Course Number', value: course.number },
+        { label: 'Credit Hours', value: course.creditHrs },
+        { label: 'Description', value: course.description },
+        { label: 'Syllabus', value: makeLink(course.syllabus) },
+        { label: 'Interests', value: _.sortBy(Interests.findNames(course.interestIDs)) },
+        { label: 'Prerequisites', value: prerequisites(course) },
+      ];
+    }
+    return [];
   },
   nonAddedCourses() {
     const allCourses = Courses.findNonRetired({}, { sort: { shortName: 1 } });
@@ -121,17 +128,22 @@ Template.Explorer_Courses_Page.helpers({
   },
   reviewed(course) {
     let ret = false;
-    const review = Reviews.find({
-      studentID: getUserIdFromRoute(),
-      revieweeID: course._id,
-    })
-      .fetch();
-    if (review.length > 0) {
-      ret = true;
+    if (course) {
+      const review = Reviews.find({
+        studentID: getUserIdFromRoute(),
+        revieweeID: course._id,
+      })
+        .fetch();
+      if (review.length > 0) {
+        ret = true;
+      }
     }
     return ret;
   },
   slugName(slugID) {
-    return Slugs.findDoc(slugID).name;
+    if (slugID) {
+      return Slugs.findDoc(slugID).name;
+    }
+    return '';
   },
 });

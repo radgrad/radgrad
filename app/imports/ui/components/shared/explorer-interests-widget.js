@@ -74,7 +74,10 @@ Template.Explorer_Interests_Widget.helpers({
     return string.toUpperCase();
   },
   userPicture(user) {
-    return Users.getProfile(user).picture || defaultProfilePicture;
+    if (user) {
+      return Users.getProfile(user).picture || defaultProfilePicture;
+    }
+    return defaultProfilePicture;
   },
   usersRouteName() {
     const group = getGroupName();
@@ -87,14 +90,19 @@ Template.Explorer_Interests_Widget.helpers({
   },
   userStatus(interest) {
     let ret = false;
-    const profile = Users.getProfile(getRouteUserName());
-    if (_.includes(profile.interestIDs, interest._id)) {
-      ret = true;
+    if (getRouteUserName()) {
+      const profile = Users.getProfile(getRouteUserName());
+      if (_.includes(profile.interestIDs, interest._id)) {
+        ret = true;
+      }
     }
     return ret;
   },
   userUsername(user) {
-    return Users.getProfile(user).username;
+    if (user) {
+      return Users.getProfile(user).username;
+    }
+    return '';
   },
 });
 

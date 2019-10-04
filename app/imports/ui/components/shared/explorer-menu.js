@@ -314,66 +314,78 @@ Template.Explorer_Menu.helpers({
   userCareerGoals(careerGoal) {
     window.camDebugging.start('ExplorerMenu.userCareerGoal');
     let ret = '';
-    const profile = Users.getProfile(getRouteUserName());
-    if (_.includes(profile.careerGoalIDs, careerGoal._id)) {
-      ret = 'check green circle outline icon';
+    if (getRouteUserName()) {
+      const profile = Users.getProfile(getRouteUserName());
+      if (_.includes(profile.careerGoalIDs, careerGoal._id)) {
+        ret = 'check green circle outline icon';
+      }
+      window.camDebugging.stop('ExplorerMenu.userCareerGoal');
     }
-    window.camDebugging.stop('ExplorerMenu.userCareerGoal');
     return ret;
   },
   userCourses(course) {
     window.camDebugging.start('ExplorerMenu.userCourses');
     let ret = '';
-    const studentID = getUserIdFromRoute();
-    const courseID = course._id;
-    const ci = FavoriteCourses.findNonRetired({ studentID, courseID });
-    if (ci.length > 0) {
-      ret = 'check green circle outline icon';
+    if (getRouteUserName()) {
+      const studentID = getUserIdFromRoute();
+      const courseID = course._id;
+      const ci = FavoriteCourses.findNonRetired({ studentID, courseID });
+      if (ci.length > 0) {
+        ret = 'check green circle outline icon';
+      }
+      window.camDebugging.stop('ExplorerMenu.userCourses');
     }
-    window.camDebugging.stop('ExplorerMenu.userCourses');
     return ret;
   },
   userDegrees(degree) {
     let ret = '';
-    const profile = Users.getProfile(getRouteUserName());
-    // TODO This won't work, profile does not have desiredDegreeID.
-    if (_.includes(profile.desiredDegreeID, degree._id)) {
-      ret = 'check green circle outline icon';
+    if (getRouteUserName()) {
+      const profile = Users.getProfile(getRouteUserName());
+      // TODO This won't work, profile does not have desiredDegreeID.
+      if (_.includes(profile.desiredDegreeID, degree._id)) {
+        ret = 'check green circle outline icon';
+      }
     }
     return ret;
   },
   userInterests(interest) {
     window.camDebugging.start('ExplorerMenu.userInterests');
     let ret = '';
-    const profile = Users.getProfile(getRouteUserName());
-    if (_.includes(Users.getInterestIDs(profile.userID), interest._id)) {
-      ret = 'check green circle outline icon';
+    if (getRouteUserName()) {
+      const profile = Users.getProfile(getRouteUserName());
+      if (_.includes(Users.getInterestIDs(profile.userID), interest._id)) {
+        ret = 'check green circle outline icon';
+      }
+      window.camDebugging.stop('ExplorerMenu.userInterests');
     }
-    window.camDebugging.stop('ExplorerMenu.userInterests');
     return ret;
   },
   userOpportunities(opportunity) {
     window.camDebugging.start('ExplorerMenu.userOpportunities');
     let ret = '';
-    const studentID = getUserIdFromRoute();
-    const opportunityID = opportunity._id;
-    const oi = FavoriteOpportunities.findNonRetired({ studentID, opportunityID });
-    if (oi.length > 0) {
-      ret = 'check green circle outline icon';
+    if (getRouteUserName()) {
+      const studentID = getUserIdFromRoute();
+      const opportunityID = opportunity._id;
+      const oi = FavoriteOpportunities.findNonRetired({ studentID, opportunityID });
+      if (oi.length > 0) {
+        ret = 'check green circle outline icon';
+      }
+      window.camDebugging.stop('ExplorerMenu.userOpportunities');
     }
-    window.camDebugging.stop('ExplorerMenu.userOpportunities');
     return ret;
   },
   userPlans(plan) {
     window.camDebugging.start('ExplorerMenu.userPlans');
     let ret = '';
-    const studentID = getUserIdFromRoute();
-    const favorites = _.map(FavoriteAcademicPlans.find({ studentID }).fetch(),
-      (p) => AcademicPlans.findDoc(p.academicPlanID)._id);
-    if (_.includes(favorites, plan._id)) {
-      ret = 'check green circle outline icon';
+    if (getRouteUserName()) {
+      const studentID = getUserIdFromRoute();
+      const favorites = _.map(FavoriteAcademicPlans.find({ studentID }).fetch(),
+        (p) => AcademicPlans.findDoc(p.academicPlanID)._id);
+      if (_.includes(favorites, plan._id)) {
+        ret = 'check green circle outline icon';
+      }
+      window.camDebugging.stop('ExplorerMenu.userPlans');
     }
-    window.camDebugging.stop('ExplorerMenu.userPlans');
     return ret;
   },
   usersCardRouteName() {

@@ -35,50 +35,79 @@ function numStudents(careerGoal) {
 Template.Explorer_CareerGoals_Page.helpers({
   addedCareerGoals() {
     const addedCareerGoals = [];
-    const allCareerGoals = CareerGoals.find({}, { sort: { name: 1 } }).fetch();
-    const profile = Users.getProfile(getRouteUserName());
-    _.forEach(allCareerGoals, (careerGoal) => {
-      if (_.includes(profile.careerGoalIDs, careerGoal._id)) {
-        addedCareerGoals.push({ item: careerGoal, count: 1 });
-      }
-    });
+    if (getRouteUserName()) {
+      const allCareerGoals = CareerGoals.find({}, { sort: { name: 1 } })
+        .fetch();
+      const profile = Users.getProfile(getRouteUserName());
+      _.forEach(allCareerGoals, (careerGoal) => {
+        if (_.includes(profile.careerGoalIDs, careerGoal._id)) {
+          addedCareerGoals.push({ item: careerGoal, count: 1 });
+        }
+      });
+    }
     return addedCareerGoals;
   },
   careerGoal() {
     const careerGoalSlugName = FlowRouter.getParam('careerGoal');
-    const slug = Slugs.find({ name: careerGoalSlugName }).fetch();
-    const careerGoal = CareerGoals.find({ slugID: slug[0]._id }).fetch();
-    return careerGoal[0];
+    if (careerGoalSlugName) {
+      const slug = Slugs.find({ name: careerGoalSlugName })
+        .fetch();
+      const careerGoal = CareerGoals.find({ slugID: slug[0]._id })
+        .fetch();
+      return careerGoal[0];
+    }
+    return '';
   },
   descriptionPairs(careerGoal) {
-    return [
-      { label: 'Description', value: careerGoal.description },
-      { label: 'Interests', value: _.sortBy(Interests.findNames(careerGoal.interestIDs)) },
-    ];
+    if (careerGoal) {
+      return [
+        { label: 'Description', value: careerGoal.description },
+        { label: 'Interests', value: _.sortBy(Interests.findNames(careerGoal.interestIDs)) },
+      ];
+    }
+    return [];
   },
   nonAddedCareerGoals() {
-    const profile = Users.getProfile(getRouteUserName());
-    const allCareerGoals = CareerGoals.find({}, { sort: { name: 1 } }).fetch();
-    const nonAddedCareerGoals = _.filter(allCareerGoals, function (careerGoal) {
-      if (_.includes(profile.careerGoalIDs, careerGoal._id)) {
-        return false;
-      }
-      return true;
-    });
-    return nonAddedCareerGoals;
+    if (getRouteUserName()) {
+      const profile = Users.getProfile(getRouteUserName());
+      const allCareerGoals = CareerGoals.find({}, { sort: { name: 1 } })
+        .fetch();
+      const nonAddedCareerGoals = _.filter(allCareerGoals, function (careerGoal) {
+        if (_.includes(profile.careerGoalIDs, careerGoal._id)) {
+          return false;
+        }
+        return true;
+      });
+      return nonAddedCareerGoals;
+    }
+    return CareerGoals.findNonRetired({}, { sort: { name: 1 } });
   },
   slugName(slugID) {
-    return Slugs.findDoc(slugID).name;
+    if (slugID) {
+      return Slugs.findDoc(slugID).name;
+    }
+    return '';
   },
   socialPairs(careerGoal) {
-    return [
-      { label: 'students', amount: numStudents(careerGoal),
-        value: interestedUsers(careerGoal, ROLE.STUDENT) },
-      { label: 'faculty members', amount: numUsers(careerGoal, ROLE.FACULTY),
-        value: interestedUsers(careerGoal, ROLE.FACULTY) },
-      { label: 'alumni', amount: numUsers(careerGoal, ROLE.ALUMNI), value: interestedUsers(careerGoal, ROLE.ALUMNI) },
-      { label: 'mentors', amount: numUsers(careerGoal, ROLE.MENTOR), value: interestedUsers(careerGoal, ROLE.MENTOR) },
-    ];
+    if (careerGoal) {
+      return [
+        {
+          label: 'students', amount: numStudents(careerGoal),
+          value: interestedUsers(careerGoal, ROLE.STUDENT),
+        },
+        {
+          label: 'faculty members', amount: numUsers(careerGoal, ROLE.FACULTY),
+          value: interestedUsers(careerGoal, ROLE.FACULTY),
+        },
+        { label: 'alumni', amount: numUsers(careerGoal, ROLE.ALUMNI), value: interestedUsers(careerGoal, ROLE.ALUMNI) },
+        {
+          label: 'mentors',
+          amount: numUsers(careerGoal, ROLE.MENTOR),
+          value: interestedUsers(careerGoal, ROLE.MENTOR),
+        },
+      ];
+    }
+    return [];
   },
 });
 
