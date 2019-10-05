@@ -5,7 +5,7 @@ import { Teasers } from '../../../api/teaser/TeaserCollection';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
-import { makeLink } from './datamodel-utilities';
+import { makeLink, makeYoutubeLink } from './datamodel-utilities';
 import * as FormUtils from '../form-fields/form-field-utilities.js';
 
 function numReferences() {
@@ -47,7 +47,7 @@ Template.List_Teasers_Widget.helpers({
       { label: 'Author', value: teaser.author },
       { label: 'Duration', value: teaser.duration },
       { label: 'Interests', value: _.sortBy(Interests.findNames(teaser.interestIDs)) },
-      { label: 'Youtube ID', value: makeLink(teaser.url) },
+      { label: 'Youtube ID', value: makeYoutubeLink(teaser.url) },
       { label: 'Target Slug', value: opportunity(teaser) },
       { label: 'Retired', value: teaser.retired ? 'True' : 'False' },
     ];

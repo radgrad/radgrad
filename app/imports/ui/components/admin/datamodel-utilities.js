@@ -7,3 +7,5 @@
 export function makeLink(url) {
   return (url) ? `<a target='_blank' href="${url}">${url}</a>` : '';
 }
+
+export const makeYoutubeLink = (url) => (url ? `<a target='_blank' href="https://youtu.be/${url}">${url}</a>` : '');
