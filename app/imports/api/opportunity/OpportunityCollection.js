@@ -159,7 +159,7 @@ class OpportunityCollection extends BaseSlugCollection {
     });
     // Check that this opportunity is not referenced by any Teaser.
     Teasers.find().map(function (teaser) { // eslint-disable-line array-callback-return
-      if (Teasers.hasOpportunity(teaser, docID)) {
+      if (Teasers.hasTarget(teaser, docID)) {
         throw new Meteor.Error(`Opportunity ${instance} referenced by a teaser ${teaser}.`, '', Error().stack);
       }
     });
