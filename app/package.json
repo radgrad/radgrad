@@ -4,9 +4,9 @@
   "scripts": {
     "start": "meteor --settings ../config/settings.development.json --no-release-check",
     "start-local-production": "meteor --settings ../config/settings.production.local.json --no-release-check",
-    "lint": "eslint --quiet ./imports",
-    "lint-loud": "eslint ./imports",
-    "lint-fix": "eslint --quiet --fix ./imports",
+    "lint": "./node_modules/.bin/eslint --quiet ./imports",
+    "lint-loud": "./node_modules/.bin/eslint ./imports",
+    "lint-fix": "./node_modules/.bin/eslint --quiet --fix ./imports",
     "pretest": "npm run lint",
     "test": "TEST_BROWSER_DRIVER=nightmare meteor test --once --driver-package dispatch:mocha --settings ../config/settings.development.json --no-release-check --port 3100",
     "test-debug": "TEST_BROWSER_DRIVER=nightmare meteor test --once --driver-package dispatch:mocha --no-release-check --port 3100 --inspect-brk=5858",
