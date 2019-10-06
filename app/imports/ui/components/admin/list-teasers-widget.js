@@ -5,7 +5,7 @@ import { Teasers } from '../../../api/teaser/TeaserCollection';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
-import { makeLink, makeYoutubeLink } from './datamodel-utilities';
+import { makeYoutubeLink } from './datamodel-utilities';
 import * as FormUtils from '../form-fields/form-field-utilities.js';
 
 function numReferences() {
