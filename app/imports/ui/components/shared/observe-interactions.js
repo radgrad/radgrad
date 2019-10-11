@@ -72,5 +72,7 @@ Template.Observe_Interactions.helpers({
 });
 
 Template.Observe_Interactions.onDestroyed(function () {
-  cursorHandle.stop();
+  if (cursorHandle) {
+    cursorHandle.stop();
+  }
 });

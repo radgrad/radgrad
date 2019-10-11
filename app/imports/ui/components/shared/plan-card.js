@@ -9,12 +9,12 @@ import { getGroupName } from './route-group-name';
 
 Template.Plan_Card.helpers({
   itemName(item) {
-    window.camDebugging.start('PlanCard.itemName');
-    window.camDebugging.stop('PlanCard.itemName');
+    // window.camDebugging.start('PlanCard.itemName');
+    // window.camDebugging.stop('PlanCard.itemName');
     return item.name;
   },
   itemShortDescription(item) {
-    window.camDebugging.start('PlanCard.itemShortDescription');
+    // window.camDebugging.start('PlanCard.itemShortDescription');
     let description = item.description;
     if (description.length > 200) {
       description = `${description.substring(0, 200)}`;
@@ -22,13 +22,13 @@ Template.Plan_Card.helpers({
         description = `${description.substring(0, 199)}`;
       }
     }
-    window.camDebugging.stop('PlanCard.itemShortDescription');
+    // window.camDebugging.stop('PlanCard.itemShortDescription');
     return description;
   },
   itemSlug(item) {
-    window.camDebugging.start('PlanCard.itemSlug');
+    // window.camDebugging.start('PlanCard.itemSlug');
     const name = Slugs.findDoc(item.slugID).name;
-    window.camDebugging.stop('PlanCard.itemSlug');
+    // window.camDebugging.stop('PlanCard.itemSlug');
     return name;
   },
   numberStudents(course) {
@@ -36,17 +36,17 @@ Template.Plan_Card.helpers({
     return item ? item.itemCount : 0;
   },
   plansRouteName() {
-    window.camDebugging.start('PlanCard.plansRouteName');
+    // window.camDebugging.start('PlanCard.plansRouteName');
     const group = getGroupName();
     if (group === 'student') {
-      window.camDebugging.stop('PlanCard.plansRouteName');
+      // window.camDebugging.stop('PlanCard.plansRouteName');
       return RouteNames.studentExplorerPlansPageRouteName;
     } else
     if (group === 'faculty') {
-      window.camDebugging.stop('PlanCard.plansRouteName');
+      // window.camDebugging.stop('PlanCard.plansRouteName');
       return RouteNames.facultyExplorerPlansPageRouteName;
     }
-    window.camDebugging.stop('PlanCard.plansRouteName');
+    // window.camDebugging.stop('PlanCard.plansRouteName');
     return RouteNames.mentorExplorerPlansPageRouteName;
   },
 });

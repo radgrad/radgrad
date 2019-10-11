@@ -12,7 +12,7 @@ import { getGroupName } from './route-group-name';
 /* global window */
 
 function availableAcademicPlans() {
-  window.camDebugging.start('CardPlan.availablePlans');
+  // window.camDebugging.start('CardPlan.availablePlans');
   let plans = AcademicPlans.findNonRetired({}, { sort: { year: 1, name: 1 } });
   if (getRouteUserName()) {
     const profile = Users.getProfile(getRouteUserName());
@@ -36,7 +36,7 @@ function availableAcademicPlans() {
     const favoriteIDs = _.map(favorites, (f) => f.academicPlanID);
     plans = _.filter(plans, (p) => !_.includes(favoriteIDs, p._id));
   }
-  window.camDebugging.stop('CardPlan.availablePlans');
+  // window.camDebugging.stop('CardPlan.availablePlans');
   return plans;
 }
 
@@ -45,12 +45,12 @@ Template.Card_Explorer_Plans_Widget.helpers({
     return availableAcademicPlans().length;
   },
   noPlan() {
-    window.camDebugging.start('CardPlan.noPlan');
+    // window.camDebugging.start('CardPlan.noPlan');
     const group = getGroupName();
     if (group === 'student') {
       const studentID = getUserIdFromRoute();
       const favorites = FavoriteAcademicPlans.findNonRetired({ studentID });
-      window.camDebugging.stop('CardPlan.noPlan');
+      // window.camDebugging.stop('CardPlan.noPlan');
       return favorites.length === 0;
     }
     return false;
