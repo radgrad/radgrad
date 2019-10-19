@@ -8,14 +8,18 @@ const gap = 10;
 
 Template.Student_Timeline_Modal.helpers({
   behaviors(session) {
-    const actions = { login: [], careerGoalIDs: [], interestIDs: [], academicPlanID: [], pageView: [],
+    const actions = {
+      login: [], careerGoalIDs: [], interestIDs: [], academicPlanID: [], pageView: [],
       addCourse: [], removeCourse: [], addOpportunity: [], removeOpportunity: [], verifyRequest: [],
-      addReview: [], askQuestion: [], level: [], picture: [], website: [] };
+      addReview: [], askQuestion: [], level: [], picture: [], website: [],
+    };
     _.each(session, function (interaction) {
       actions[interaction.type].push(interaction.typeData.join(', '));
     });
-    const behaviors = { 'Log In': [], 'Change Outlook': [], Exploration: [], Planning: [], Verification: [],
-      Reviewing: [], Mentorship: [], 'Level Up': [], Profile: [] };
+    const behaviors = {
+      'Log In': [], 'Change Outlook': [], Exploration: [], Planning: [], Verification: [],
+      Reviewing: [], Mentorship: [], 'Level Up': [], Profile: [],
+    };
     _.each(actions, function (array, action) {
       if (array.length !== 0) {
         if (action === 'login') {
@@ -30,15 +34,17 @@ Template.Student_Timeline_Modal.helpers({
           behaviors['Change Outlook'].push(`User modified academic plan ${array.length} time(s)`);
           behaviors['Change Outlook'].push(`Academic plan at end of session: ${_.last(array)}`);
         } else if (action === 'pageView') {
-          const explorerPages = { 'career-goals': [], plans: [], opportunities: [], courses: [], users: [],
-            interests: [], degrees: [] };
+          const explorerPages = {
+            'career-goals': [], plans: [], opportunities: [], courses: [], users: [],
+            interests: [], degrees: [],
+          };
           let visitedMentor = false;
           _.each(array, function (url) {
             if (url.includes('explorer/')) {
               const parsedUrl = url.split('/');
               if (parsedUrl.length > 2) {
                 if (parsedUrl[1] === 'users') {
-                  parsedUrl[2] = parsedUrl[2].split(/[@%]/)[0];
+                  [parsedUrl[2]] = parsedUrl[2].split(/[@%]/);
                 }
                 explorerPages[parsedUrl[1]].push(parsedUrl[2]);
               }

@@ -37,7 +37,7 @@ Template.Add_Course_Button.helpers({
 Template.Add_Course_Button.events({
   'click .removeFromPlan': function clickItemRemoveFromPlan(event) {
     event.preventDefault();
-    const course = this.course;
+    const { course } = this;
     const instance = Template.instance();
     const ci = instance.state.get(plannerKeys.detailsCourse);
     const collectionName = CourseInstances.getCollectionName();
@@ -51,8 +51,10 @@ Template.Add_Course_Button.events({
         FeedbackFunctions.generateNextLevelRecommendation(getUserIdFromRoute());
       }
     });
-    const interactionData = { username: getRouteUserName(), type: 'removeCourse',
-      typeData: Slugs.getNameFromID(course.slugID) };
+    const interactionData = {
+      username: getRouteUserName(), type: 'removeCourse',
+      typeData: Slugs.getNameFromID(course.slugID),
+    };
     userInteractionDefineMethod.call(interactionData, (err) => {
       if (err) {
         console.log('Error creating UserInteraction', err);

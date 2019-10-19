@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
-import { FeedbackInstances } from '../feedback/FeedbackInstanceCollection';
+import { FeedbackInstances } from './FeedbackInstanceCollection';
 import { makeSampleUser } from '../user/SampleUsers';
 import { removeAllEntities } from '../base/BaseUtilities';
 
@@ -22,7 +22,9 @@ if (Meteor.isServer) {
       const functionName = 'checkPrerequisites';
       const description = 'The prereqs for ICS 314 were not satisfied.';
       const feedbackType = FeedbackInstances.WARNING;
-      let docID = FeedbackInstances.define({ user, functionName, description, feedbackType });
+      let docID = FeedbackInstances.define({
+        user, functionName, description, feedbackType,
+      });
       expect(FeedbackInstances.isDefined(docID)).to.be.true;
       let dumpObject = FeedbackInstances.dumpOne(docID);
       expect(dumpObject.retired).to.be.undefined;
@@ -45,11 +47,12 @@ if (Meteor.isServer) {
       const functionName = 'checkPrerequisites';
       const description = 'The prereqs for ICS 314 were not satisfied.';
       const feedbackType = FeedbackInstances.RECOMMENDATION;
-      const docID = FeedbackInstances.define({ user, functionName, description, feedbackType });
+      const docID = FeedbackInstances.define({
+        user, functionName, description, feedbackType,
+      });
       expect(FeedbackInstances.isDefined(docID)).to.be.true;
       FeedbackInstances.clear(user, functionName);
       expect(FeedbackInstances.isDefined(docID)).to.be.false;
     });
   });
 }
-

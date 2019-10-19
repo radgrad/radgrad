@@ -1,8 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import { Semesters } from '../semester/SemesterCollection';
-import { CourseInstances } from '../course/CourseInstanceCollection';
-import { makeSampleCourse, sampleCourseName } from '../course/SampleCourses';
+import { CourseInstances } from './CourseInstanceCollection';
+import { makeSampleCourse, sampleCourseName } from './SampleCourses';
 import { makeSampleUser } from '../user/SampleUsers';
 import { removeAllEntities } from '../base/BaseUtilities';
 
@@ -31,7 +31,9 @@ if (Meteor.isServer) {
     });
 
     it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne', function test() {
-      let docID = CourseInstances.define({ semester, course, verified, grade, student });
+      let docID = CourseInstances.define({
+        semester, course, verified, grade, student,
+      });
       expect(CourseInstances.isDefined(docID)).to.be.true;
       let dumpObject = CourseInstances.dumpOne(docID);
       expect(dumpObject.retired).to.be.undefined;
@@ -49,11 +51,12 @@ if (Meteor.isServer) {
     });
 
     it('#findCourseName, #toString', function test() {
-      const courseInstanceID = CourseInstances.define({ semester, course, verified, grade, student });
+      const courseInstanceID = CourseInstances.define({
+        semester, course, verified, grade, student,
+      });
       CourseInstances.toString(courseInstanceID);
       expect(CourseInstances.findCourseName(courseInstanceID)).to.equal(sampleCourseName);
       CourseInstances.removeIt(courseInstanceID);
     });
   });
 }
-

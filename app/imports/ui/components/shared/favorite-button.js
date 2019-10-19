@@ -84,4 +84,3 @@ Template.Favorite_Button.onRendered(function favoriteButtonOnRendered() {
 Template.Favorite_Button.onDestroyed(function favoriteButtonOnDestroyed() {
   // add your statement here
 });
-

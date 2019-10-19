@@ -2,7 +2,7 @@ import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Users } from '../../../api/user/UserCollection';
-import { getRouteUserName } from '../shared/route-user-name';
+import { getRouteUserName } from './route-user-name';
 import { getGroupName } from './route-group-name';
 
 Template.User_Interests_Component.helpers({
@@ -33,7 +33,7 @@ Template.User_Interests_Component.helpers({
 
     if (group === 'student') {
       return `/student/${getRouteUserName()}/explorer/interests/${slug}`;
-    } else if (group === 'faculty') {
+    } if (group === 'faculty') {
       return `/faculty/${getRouteUserName()}/explorer/interests/${slug}`;
     }
     return `/mentor/${getRouteUserName()}/explorer/interests/${slug}`;
@@ -56,4 +56,3 @@ Template.User_Interests_Component.onRendered(function userInterestsComponentOnRe
 Template.User_Interests_Component.onDestroyed(function userInterestsComponentOnDestroyed() {
   // add your statement here
 });
-

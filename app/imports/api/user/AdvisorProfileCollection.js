@@ -2,7 +2,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import BaseProfileCollection, { defaultProfilePicture } from './BaseProfileCollection';
-import { Users } from '../user/UserCollection';
+import { Users } from './UserCollection';
 import { Interests } from '../interest/InterestCollection';
 import { CareerGoals } from '../career/CareerGoalCollection';
 import { Slugs } from '../slug/SlugCollection';
@@ -31,7 +31,9 @@ class AdvisorProfileCollection extends BaseProfileCollection {
    * @throws { Meteor.Error } If username has been previously defined, or if any interests or careerGoals are invalid.
    * @return { String } The docID of the AdvisorProfile.
    */
-  define({ username, firstName, lastName, picture = defaultProfilePicture, website, interests, careerGoals, retired }) {
+  define({
+    username, firstName, lastName, picture = defaultProfilePicture, website, interests, careerGoals, retired,
+  }) {
     if (Meteor.isServer) {
       const role = ROLE.ADVISOR;
       const interestIDs = Interests.getIDs(interests);
@@ -39,7 +41,8 @@ class AdvisorProfileCollection extends BaseProfileCollection {
       Slugs.define({ name: username, entityName: this.getType() });
       const profileID = this._collection.insert({
         username, firstName, lastName, role, picture, website, interestIDs,
-        careerGoalIDs, userID: this.getFakeUserId(), retired });
+        careerGoalIDs, userID: this.getFakeUserId(), retired,
+      });
       const userID = Users.define({ username, role });
       this._collection.update(profileID, { $set: { userID } });
       return profileID;
@@ -52,10 +55,14 @@ class AdvisorProfileCollection extends BaseProfileCollection {
    * You cannot change the username or role once defined.
    * @param docID the id of the AdvisorProfile.
    */
-  update(docID, { firstName, lastName, picture, website, interests, careerGoals, retired }) {
+  update(docID, {
+    firstName, lastName, picture, website, interests, careerGoals, retired,
+  }) {
     this.assertDefined(docID);
     const updateData = {};
-    this._updateCommonFields(updateData, { firstName, lastName, picture, website, interests, careerGoals, retired });
+    this._updateCommonFields(updateData, {
+      firstName, lastName, picture, website, interests, careerGoals, retired,
+    });
     this._collection.update(docID, { $set: updateData });
   }
 
@@ -93,15 +100,17 @@ class AdvisorProfileCollection extends BaseProfileCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const username = doc.username;
-    const firstName = doc.firstName;
-    const lastName = doc.lastName;
-    const picture = doc.picture;
-    const website = doc.website;
+    const { username } = doc;
+    const { firstName } = doc;
+    const { lastName } = doc;
+    const { picture } = doc;
+    const { website } = doc;
     const interests = _.map(doc.interestIDs, interestID => Interests.findSlugByID(interestID));
     const careerGoals = _.map(doc.careerGoalIDs, careerGoalID => CareerGoals.findSlugByID(careerGoalID));
-    const retired = doc.retired;
-    return { username, firstName, lastName, picture, website, interests, careerGoals, retired };
+    const { retired } = doc;
+    return {
+      username, firstName, lastName, picture, website, interests, careerGoals, retired,
+    };
   }
 }
 

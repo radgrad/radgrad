@@ -1,7 +1,7 @@
 import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import BaseCollection from '../base/BaseCollection';
-import { MentorQuestions } from '../mentor/MentorQuestionCollection';
+import { MentorQuestions } from './MentorQuestionCollection';
 import { ROLE } from '../role/Role';
 import { Users } from '../user/UserCollection';
 
@@ -38,11 +38,15 @@ class MentorAnswerCollection extends BaseCollection {
    * @return { String } The docID of the answer.
    * @throws { Meteor.Error } If question or mentor is undefined.
    */
-  define({ question, mentor, text, retired }) {
+  define({
+    question, mentor, text, retired,
+  }) {
     const questionID = MentorQuestions.getID(question);
     const mentorID = Users.getID(mentor);
     Users.assertInRole(mentorID, ROLE.MENTOR);
-    return this._collection.insert({ questionID, mentorID, text, retired });
+    return this._collection.insert({
+      questionID, mentorID, text, retired,
+    });
   }
 
   /**
@@ -162,9 +166,11 @@ class MentorAnswerCollection extends BaseCollection {
     const doc = this.findDoc(docID);
     const question = MentorQuestions.findSlugByID(doc.questionID);
     const mentor = Users.getProfile(doc.mentorID).username;
-    const text = doc.text;
-    const retired = doc.retired;
-    return { question, mentor, text, retired };
+    const { text } = doc;
+    const { retired } = doc;
+    return {
+      question, mentor, text, retired,
+    };
   }
 }
 

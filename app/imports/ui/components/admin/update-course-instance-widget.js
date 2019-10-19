@@ -19,9 +19,15 @@ const updateSchema = new SimpleSchema({
   creditHrs: String,
   note: String,
   student: String,
-  innovation: { type: Number, optional: false, min: 0, max: 100 },
-  competency: { type: Number, optional: false, min: 0, max: 100 },
-  experience: { type: Number, optional: false, min: 0, max: 100 },
+  innovation: {
+    type: Number, optional: false, min: 0, max: 100,
+  },
+  competency: {
+    type: Number, optional: false, min: 0, max: 100,
+  },
+  experience: {
+    type: Number, optional: false, min: 0, max: 100,
+  },
   retired: Boolean,
 }, { tracker: Tracker });
 

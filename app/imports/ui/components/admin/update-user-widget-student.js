@@ -112,4 +112,3 @@ Template.Update_User_Widget_Student.onRendered(function addUserWidgetStudentOnRe
 Template.Update_User_Widget_Student.onDestroyed(function addUserWidgetStudentOnDestroyed() {
   // add your statement here
 });
-

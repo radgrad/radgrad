@@ -43,7 +43,9 @@ if (Meteor.isClient) {
       const prerequisites = ['ics_111', 'ics_141'];
       await updateMethod.callPromise({
         collectionName,
-        updateData: { id, name, description, interests, prerequisites },
+        updateData: {
+          id, name, description, interests, prerequisites,
+        },
       });
     });
 
@@ -68,8 +70,10 @@ if (Meteor.isClient) {
         note: '',
         creditHrs: 3,
       };
-      await defineMethod.callPromise({ collectionName: 'CourseInstanceCollection',
-        definitionData: courseInstanceDefinitionData });
+      await defineMethod.callPromise({
+        collectionName: 'CourseInstanceCollection',
+        definitionData: courseInstanceDefinitionData,
+      });
 
       // We'll now expect next semester to have enrollment of 1.
       id = Courses.findIdBySlug('ics_111');

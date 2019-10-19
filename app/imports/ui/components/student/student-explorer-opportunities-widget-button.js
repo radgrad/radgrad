@@ -17,7 +17,7 @@ Template.Student_Explorer_Opportunities_Widget_Button.helpers({
   },
   existingSemesters() {
     const semesters = [];
-    const opportunity = this.opportunity;
+    const { opportunity } = this;
     const oi = OpportunityInstances.find({
       studentID: getUserIdFromRoute(),
       opportunityID: opportunity._id,
@@ -35,7 +35,7 @@ Template.Student_Explorer_Opportunities_Widget_Button.helpers({
     const takenSemesters = [];
     const semesterNames = [];
     const currentSemester = Semesters.getCurrentSemesterDoc();
-    const opportunity = this.opportunity;
+    const { opportunity } = this;
     const oi = OpportunityInstances.find({
       studentID: getUserIdFromRoute(),
       opportunityID: opportunity._id,
@@ -57,7 +57,7 @@ Template.Student_Explorer_Opportunities_Widget_Button.helpers({
 Template.Student_Explorer_Opportunities_Widget_Button.events({
   'click .addToPlan': function clickItemAddToPlan(event) {
     event.preventDefault();
-    const opportunity = this.opportunity;
+    const { opportunity } = this;
     const semester = event.target.text;
     const oppSlug = Slugs.findDoc({ _id: opportunity.slugID });
     const semSplit = semester.split(' ');
@@ -79,7 +79,7 @@ Template.Student_Explorer_Opportunities_Widget_Button.events({
   },
   'click .removeFromPlan': function clickItemRemoveFromPlan(event) {
     event.preventDefault();
-    const opportunity = this.opportunity;
+    const { opportunity } = this;
     const semester = event.target.text;
     const semSplit = semester.split(' ');
     const semSlug = `${semSplit[0]}-${semSplit[1]}`;
@@ -93,8 +93,10 @@ Template.Student_Explorer_Opportunities_Widget_Button.events({
       console.log('Too many opportunity instances found for a single semester.');
     }
     removeItMethod.call({ collectionName: 'OpportunityInstanceCollection', instance: oi[0]._id });
-    const interactionData = { username: getRouteUserName(), type: 'removeOpportunity',
-      typeData: Slugs.getNameFromID(opportunity.slugID) };
+    const interactionData = {
+      username: getRouteUserName(), type: 'removeOpportunity',
+      typeData: Slugs.getNameFromID(opportunity.slugID),
+    };
     userInteractionDefineMethod.call(interactionData, (err) => {
       if (err) {
         console.log('Error creating UserInteraction', err);

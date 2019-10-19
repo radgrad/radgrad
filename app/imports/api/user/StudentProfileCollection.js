@@ -12,7 +12,7 @@ import { Interests } from '../interest/InterestCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
 import { Semesters } from '../semester/SemesterCollection';
-import { Users } from '../user/UserCollection';
+import { Users } from './UserCollection';
 import { Slugs } from '../slug/SlugCollection';
 import { ROLE } from '../role/Role';
 import { getProjectedICE, getEarnedICE } from '../ice/IceProcessor';
@@ -155,7 +155,9 @@ class StudentProfileCollection extends BaseProfileCollection {
     this.assertDefined(docID);
     const profile = this.findDoc(docID);
     const updateData = {};
-    this._updateCommonFields(updateData, { firstName, lastName, picture, website, interests, careerGoals, retired });
+    this._updateCommonFields(updateData, {
+      firstName, lastName, picture, website, interests, careerGoals, retired,
+    });
     if (academicPlan) {
       updateData.academicPlanID = AcademicPlans.getID(academicPlan);
       if (profile.academicPlanID !== updateData.academicPlanID) {
@@ -177,7 +179,7 @@ class StudentProfileCollection extends BaseProfileCollection {
     // Only Admins and Advisors can update the isAlumni and level fields.
     // Or if no one is logged in when this is executed (i.e. for testing) then it's cool.
     if (Meteor.isTest || !Meteor.userId() || this._hasRole(Meteor.userId(), [ROLE.ADMIN, ROLE.ADVISOR])) {
-      const userID = this.findDoc(docID).userID;
+      const { userID } = this.findDoc(docID);
       if (_.isBoolean(isAlumni)) {
         updateData.isAlumni = isAlumni;
         if (isAlumni) {
@@ -529,29 +531,29 @@ class StudentProfileCollection extends BaseProfileCollection {
   dumpOne(docID) {
     const doc = this.findDoc(docID);
     // console.log('StudentProfiles.dumpOne %o', doc);
-    const username = doc.username;
-    const firstName = doc.firstName;
-    const lastName = doc.lastName;
-    const picture = doc.picture;
-    const website = doc.website;
+    const { username } = doc;
+    const { firstName } = doc;
+    const { lastName } = doc;
+    const { picture } = doc;
+    const { website } = doc;
     const interests = _.map(doc.interestIDs, interestID => Interests.findSlugByID(interestID));
     const careerGoals = _.map(doc.careerGoalIDs, careerGoalID => CareerGoals.findSlugByID(careerGoalID));
-    const level = doc.level;
+    const { level } = doc;
     const academicPlan = doc.academicPlanID && AcademicPlans.findSlugByID(doc.academicPlanID);
     const declaredSemester = doc.declaredSemesterID && Semesters.getSlug(doc.declaredSemesterID);
     const hiddenCourses = _.map(doc.hiddenCourseIDs, hiddenCourseID => Courses.findSlugByID(hiddenCourseID));
-    const hiddenOpportunities = _.map(doc.hiddenOpportunityIDs, hiddenOpportunityID =>
-      Opportunities.findSlugByID(hiddenOpportunityID));
-    const isAlumni = doc.isAlumni;
-    const retired = doc.retired;
-    const shareUsername = doc.shareUsername;
-    const sharePicture = doc.sharePicture;
-    const shareWebsite = doc.shareWebsite;
-    const shareInterests = doc.shareInterests;
-    const shareCareerGoals = doc.shareCareerGoals;
-    const shareOpportunities = doc.shareOpportunities;
-    const shareCourses = doc.shareCourses;
-    const shareLevel = doc.shareLevel;
+    const hiddenOpportunities = _.map(doc.hiddenOpportunityIDs,
+      hiddenOpportunityID => Opportunities.findSlugByID(hiddenOpportunityID));
+    const { isAlumni } = doc;
+    const { retired } = doc;
+    const { shareUsername } = doc;
+    const { sharePicture } = doc;
+    const { shareWebsite } = doc;
+    const { shareInterests } = doc;
+    const { shareCareerGoals } = doc;
+    const { shareOpportunities } = doc;
+    const { shareCourses } = doc;
+    const { shareLevel } = doc;
     return {
       username, firstName, lastName, picture, website, interests, careerGoals, level, academicPlan,
       declaredSemester, hiddenCourses, hiddenOpportunities, isAlumni, retired, shareUsername, sharePicture,

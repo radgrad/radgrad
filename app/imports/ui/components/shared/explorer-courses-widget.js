@@ -22,7 +22,7 @@ Template.Explorer_Courses_Widget.helpers({
     const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentExplorerCoursesPageRouteName;
-    } else if (group === 'faculty') {
+    } if (group === 'faculty') {
       return RouteNames.facultyExplorerCoursesPageRouteName;
     }
     return RouteNames.mentorExplorerCoursesPageRouteName;
@@ -49,8 +49,8 @@ Template.Explorer_Courses_Widget.helpers({
       courseID: course._id,
     }).fetch();
     _.forEach(ci, function (courseInstance) {
-      if (Semesters.findDoc(courseInstance.semesterID).semesterNumber >=
-          Semesters.getCurrentSemesterDoc().semesterNumber) {
+      if (Semesters.findDoc(courseInstance.semesterID).semesterNumber
+          >= Semesters.getCurrentSemesterDoc().semesterNumber) {
         ret = true;
       }
     });

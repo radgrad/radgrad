@@ -74,10 +74,10 @@ class BaseCollection {
    */
   findDoc(name) {
     const doc = (
-      this._collection.findOne(name) ||
-      this._collection.findOne({ name }) ||
-      this._collection.findOne({ _id: name }) ||
-      this._collection.findOne({ username: name }));
+      this._collection.findOne(name)
+      || this._collection.findOne({ name })
+      || this._collection.findOne({ _id: name })
+      || this._collection.findOne({ username: name }));
     if (!doc) {
       if (typeof name !== 'string') {
         throw new Meteor.Error(`${JSON.stringify(name)} is not a defined ${this._type}`, '', Error().stack);
@@ -148,9 +148,9 @@ class BaseCollection {
       return false;
     }
     return (
-      !!this._collection.findOne(name) ||
-      !!this._collection.findOne({ name }) ||
-      !!this._collection.findOne({ _id: name }));
+      !!this._collection.findOne(name)
+      || !!this._collection.findOne({ name })
+      || !!this._collection.findOne({ _id: name }));
   }
 
   /**

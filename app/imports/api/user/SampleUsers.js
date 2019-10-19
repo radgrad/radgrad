@@ -1,9 +1,9 @@
 import { moment } from 'meteor/momentjs:moment';
 import { Meteor } from 'meteor/meteor';
-import { StudentProfiles } from '../user/StudentProfileCollection';
-import { AdvisorProfiles } from '../user/AdvisorProfileCollection';
-import { MentorProfiles } from '../user/MentorProfileCollection';
-import { FacultyProfiles } from '../user/FacultyProfileCollection';
+import { StudentProfiles } from './StudentProfileCollection';
+import { AdvisorProfiles } from './AdvisorProfileCollection';
+import { MentorProfiles } from './MentorProfileCollection';
+import { FacultyProfiles } from './FacultyProfileCollection';
 import { ROLE } from '../role/Role';
 
 function makeSampleStudent() {
@@ -54,7 +54,9 @@ function makeSampleAdvisor() {
   const website = 'http://glau.github.io';
   const interests = [];
   const careerGoals = [];
-  const profileID = AdvisorProfiles.define({ username, firstName, lastName, picture, website, interests, careerGoals });
+  const profileID = AdvisorProfiles.define({
+    username, firstName, lastName, picture, website, interests, careerGoals,
+  });
   return AdvisorProfiles.getUserID(profileID);
 }
 
@@ -67,7 +69,9 @@ function makeSampleFaculty() {
   const website = 'http://esb.github.io';
   const interests = [];
   const careerGoals = [];
-  const profileID = FacultyProfiles.define({ username, firstName, lastName, picture, website, interests, careerGoals });
+  const profileID = FacultyProfiles.define({
+    username, firstName, lastName, picture, website, interests, careerGoals,
+  });
   return FacultyProfiles.getUserID(profileID);
 }
 

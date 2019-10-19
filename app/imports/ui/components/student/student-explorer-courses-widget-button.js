@@ -15,7 +15,7 @@ Template.Student_Explorer_Courses_Widget_Button.helpers({
   },
   existingSemesters() {
     const semesters = [];
-    const course = this.course;
+    const { course } = this;
     const ci = CourseInstances.find({
       studentID: getUserIdFromRoute(),
       courseID: course._id,
@@ -47,7 +47,7 @@ Template.Student_Explorer_Courses_Widget_Button.helpers({
 Template.Student_Explorer_Courses_Widget_Button.events({
   'click .addToPlan': function clickItemAddToPlan(event) {
     event.preventDefault();
-    const course = this.course;
+    const { course } = this;
     const semester = event.target.text;
     const courseSlug = Slugs.findDoc({ _id: course.slugID });
     const semSplit = semester.split(' ');
@@ -80,7 +80,7 @@ Template.Student_Explorer_Courses_Widget_Button.events({
   },
   'click .removeFromPlan': function clickItemRemoveFromPlan(event) {
     event.preventDefault();
-    const course = this.course;
+    const { course } = this;
     const semester = event.target.text;
     const semSplit = semester.split(' ');
     const semSlug = `${semSplit[0]}-${semSplit[1]}`;
@@ -103,8 +103,10 @@ Template.Student_Explorer_Courses_Widget_Button.events({
         FeedbackFunctions.generateNextLevelRecommendation(getUserIdFromRoute());
       }
     });
-    const interactionData = { username: getRouteUserName(), type: 'removeCourse',
-      typeData: Slugs.getNameFromID(course.slugID) };
+    const interactionData = {
+      username: getRouteUserName(), type: 'removeCourse',
+      typeData: Slugs.getNameFromID(course.slugID),
+    };
     userInteractionDefineMethod.call(interactionData, (err) => {
       if (err) {
         console.log('Error creating UserInteraction', err);

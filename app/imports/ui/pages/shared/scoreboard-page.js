@@ -19,4 +19,3 @@ Template.Scoreboard_Page.onRendered(function scoreboardPageOnRendered() {
 Template.Scoreboard_Page.onDestroyed(function scoreboardPageOnDestroyed() {
   // add your statement here
 });
-

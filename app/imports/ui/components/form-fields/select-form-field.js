@@ -21,4 +21,3 @@ Template.Select_Form_Field.onRendered(function selectFormFieldOnRendered() {
 Template.Select_Form_Field.onDestroyed(function selectFormFieldOnDestroyed() {
   // add your statement here
 });
-

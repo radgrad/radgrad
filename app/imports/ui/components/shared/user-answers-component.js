@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 import { MentorAnswers } from '../../../api/mentor/MentorAnswerCollection';
 import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection';
-import { getRouteUserName } from '../shared/route-user-name';
+import { getRouteUserName } from './route-user-name';
 import { getGroupName } from './route-group-name';
 
 function getAnswers(mentorID) {
@@ -11,7 +11,7 @@ function getAnswers(mentorID) {
 Template.User_Answers_Component.helpers({
   count() {
     if (Template.instance().userID) {
-      const userID = Template.instance().userID;
+      const { userID } = Template.instance();
       return getAnswers(userID).length;
     }
     return 0;
@@ -22,7 +22,7 @@ Template.User_Answers_Component.helpers({
   },
   answers() {
     if (Template.instance().userID) {
-      const userID = Template.instance().userID;
+      const { userID } = Template.instance();
       return getAnswers(userID);
     }
     return null;
@@ -31,7 +31,7 @@ Template.User_Answers_Component.helpers({
     const group = getGroupName();
     if (group === 'student') {
       return `/student/${getRouteUserName()}/mentor-space`;
-    } else if (group === 'faculty') {
+    } if (group === 'faculty') {
       return `/mentor/${getRouteUserName()}/mentor-space`;
     }
     return `/mentor/${getRouteUserName()}/mentor-space`;

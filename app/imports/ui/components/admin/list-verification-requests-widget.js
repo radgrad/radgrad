@@ -44,8 +44,10 @@ Template.List_Verification_Requests_Widget.helpers({
   descriptionPairs(vr) {
     return [
       { label: 'Student', value: `${Users.getFullName(vr.studentID)}` },
-      { label: 'Opportunity',
-        value: `${OpportunityInstances.getOpportunityDoc(vr.opportunityInstanceID).name}` },
+      {
+        label: 'Opportunity',
+        value: `${OpportunityInstances.getOpportunityDoc(vr.opportunityInstanceID).name}`,
+      },
       { label: 'Submitted on', value: vr.submittedOn.toString() },
       { label: 'Documentation', value: vr.documentation },
       { label: 'Status', value: vr.status },

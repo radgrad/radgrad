@@ -116,4 +116,3 @@ Template.Update_Academic_Plan_Widget.onRendered(function updateAcademicPlanWidge
 Template.Update_Academic_Plan_Widget.onDestroyed(function updateAcademicPlanWidgetOnDestroyed() {
   // add your statement here
 });
-

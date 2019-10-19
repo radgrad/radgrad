@@ -13,7 +13,9 @@ import { Email } from 'meteor/email';
  * @param templateData Custom data to be rendered in the email template. SSR is used to compile and
  * render the final content.
  */
-export function sendEmail({ to, bcc, from, replyTo, subject, templateData, filename }) {
+export function sendEmail({
+  to, bcc, from, replyTo, subject, templateData, filename,
+}) {
   if (Meteor.isServer) {
     SSR.compileTemplate('htmlEmail', Assets.getText(`email/${filename}`));
     const html = SSR.render('htmlEmail', templateData);

@@ -217,8 +217,8 @@ class UserCollection {
    * @private
    */
   _adminUsername() {
-    return (_.has(Meteor, 'settings.public.admin.username')) ? Meteor.settings.public.admin.username :
-      'radgrad@hawaii.edu';
+    return (_.has(Meteor, 'settings.public.admin.username')) ? Meteor.settings.public.admin.username
+      : 'radgrad@hawaii.edu';
   }
 
   /**
@@ -247,7 +247,9 @@ class UserCollection {
   _getAdminProfile() {
     const adminUsername = this._adminUsername();
     const adminID = Meteor.users.findOne({ username: adminUsername })._id;
-    return { username: adminUsername, firstName: 'RadGrad', lastName: 'Admin', role: ROLE.ADMIN, userID: adminID };
+    return {
+      username: adminUsername, firstName: 'RadGrad', lastName: 'Admin', role: ROLE.ADMIN, userID: adminID,
+    };
   }
 
   /**
@@ -431,7 +433,7 @@ class UserCollection {
    */
   getInterestIDs(user) {
     const profile = this.getProfile(user);
-    let interestIDs = profile.interestIDs;
+    let { interestIDs } = profile;
     _.forEach(profile.careerGoalIDs, (careerGoalID) => {
       const goal = CareerGoals.findDoc(careerGoalID);
       interestIDs = _.union(interestIDs, goal.interestIDs);
@@ -465,11 +467,13 @@ class UserCollection {
    */
   publish() {
     if (Meteor.isServer) {
-      Meteor.publish(this._collectionName, () => Meteor.users.find({}, { fields: {
-        username: 1,
-        roles: 1,
-        status: 1,
-      } }));
+      Meteor.publish(this._collectionName, () => Meteor.users.find({}, {
+        fields: {
+          username: 1,
+          roles: 1,
+          status: 1,
+        },
+      }));
     }
   }
 

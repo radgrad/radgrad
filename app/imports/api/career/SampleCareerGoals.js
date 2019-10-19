@@ -10,5 +10,7 @@ export function makeSampleCareerGoal() {
   const slug = `career-goal-${uniqueString}`;
   const description = 'Sample career goal description';
   const interests = [makeSampleInterest()];
-  return CareerGoals.define({ name, slug, description, interests });
+  return CareerGoals.define({
+    name, slug, description, interests,
+  });
 }

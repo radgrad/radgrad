@@ -39,7 +39,11 @@ if (Meteor.isClient) {
       const verified = false;
       const grade = 'A';
       const creditHrs = 4;
-      await updateMethod.callPromise({ collectionName, updateData: { id, verified, grade, creditHrs } });
+      await updateMethod.callPromise({
+        collectionName, updateData: {
+          id, verified, grade, creditHrs,
+        },
+      });
     });
 
     it('Remove Method', async function () {

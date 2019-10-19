@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
-import { Courses } from '../course/CourseCollection';
+import { Courses } from './CourseCollection';
 import { makeSampleInterest } from '../interest/SampleInterests';
 import { removeAllEntities } from '../base/BaseUtilities';
 
@@ -24,7 +24,9 @@ if (Meteor.isServer) {
       const description = 'Study algorithms';
       const creditHrs = 3;
       const interests = [makeSampleInterest()];
-      const docID = Courses.define({ name, slug, number, description, creditHrs, interests });
+      const docID = Courses.define({
+        name, slug, number, description, creditHrs, interests,
+      });
       expect(Courses.isDefined(slug)).to.be.true;
       expect(Courses.findDoc(docID).shortName).to.equal(name);
       let dumpObject = Courses.dumpOne(docID);
@@ -51,7 +53,9 @@ if (Meteor.isServer) {
       const description = 'Study algorithms';
       const creditHrs = 3;
       const interests = [makeSampleInterest()];
-      const docID = Courses.define({ name, shortName, slug, number, description, creditHrs, interests });
+      const docID = Courses.define({
+        name, shortName, slug, number, description, creditHrs, interests,
+      });
       expect(Courses.isDefined(slug)).to.be.true;
       expect(Courses.findDoc(docID).shortName).to.equal(shortName);
       Courses.removeIt(slug);
@@ -59,4 +63,3 @@ if (Meteor.isServer) {
     });
   });
 }
-

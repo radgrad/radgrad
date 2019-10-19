@@ -38,7 +38,7 @@ Template.Academic_Plan_Form_Fields.helpers({
         const semester = Semesters.findDoc(plan.effectiveSemesterID);
         let plans = AcademicPlans.findNonRetired();
         plans = _.filter(plans, (p) => {
-          const year = Semesters.findDoc(p.effectiveSemesterID).year;
+          const { year } = Semesters.findDoc(p.effectiveSemesterID);
           return semester.year === year;
         });
         return _.sortBy(plans, [function sort(o) {
@@ -48,7 +48,7 @@ Template.Academic_Plan_Form_Fields.helpers({
       const chosen = parseInt(Template.instance().chosenYear.get(), 10);
       let plans = AcademicPlans.findNonRetired();
       plans = _.filter(plans, (p) => {
-        const year = Semesters.findDoc(p.effectiveSemesterID).year;
+        const { year } = Semesters.findDoc(p.effectiveSemesterID);
         return chosen === year;
       });
       return _.sortBy(plans, [function sort(o) {
@@ -66,7 +66,7 @@ Template.Academic_Plan_Form_Fields.helpers({
       }
       let plans = AcademicPlans.findNonRetired();
       plans = _.filter(plans, (p) => {
-        const year = Semesters.findDoc(p.effectiveSemesterID).year;
+        const { year } = Semesters.findDoc(p.effectiveSemesterID);
         if (declaredYear) {
           return year >= declaredYear;
         }
@@ -96,4 +96,3 @@ Template.Academic_Plan_Form_Fields.onRendered(function academicPlanFormFieldsOnR
 Template.Academic_Plan_Form_Fields.onDestroyed(function academicPlanFormFieldsOnDestroyed() {
   // add your statement here
 });
-

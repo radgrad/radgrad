@@ -63,7 +63,9 @@ class OpportunityCollection extends BaseSlugCollection {
    * or startActive or endActive are not valid.
    * @returns The newly created docID.
    */
-  define({ name, slug, description, opportunityType, sponsor, interests, semesters, ice, eventDate = null, retired }) {
+  define({
+    name, slug, description, opportunityType, sponsor, interests, semesters, ice, eventDate = null, retired,
+  }) {
     // Get instances, or throw error
     const opportunityTypeID = OpportunityTypes.getID(opportunityType);
     const sponsorID = Users.getID(sponsor);
@@ -78,11 +80,13 @@ class OpportunityCollection extends BaseSlugCollection {
       // Define the new Opportunity and its Slug.
       opportunityID = this._collection.insert({
         name, slugID, description, opportunityTypeID, sponsorID,
-        interestIDs, semesterIDs, ice, eventDate, retired });
+        interestIDs, semesterIDs, ice, eventDate, retired,
+      });
     } else {
       opportunityID = this._collection.insert({
         name, slugID, description, opportunityTypeID, sponsorID,
-        interestIDs, semesterIDs, ice, retired });
+        interestIDs, semesterIDs, ice, retired,
+      });
     }
     Slugs.updateEntityID(slugID, opportunityID);
 
@@ -103,7 +107,9 @@ class OpportunityCollection extends BaseSlugCollection {
    * @param ice An ICE object (optional).
    * @param retired a boolean (optional).
    */
-  update(instance, { name, description, opportunityType, sponsor, interests, semesters, eventDate, ice, retired }) {
+  update(instance, {
+    name, description, opportunityType, sponsor, interests, semesters, eventDate, ice, retired,
+  }) {
     const docID = this.getID(instance);
     const updateData = {};
     if (name) {
@@ -256,17 +262,19 @@ class OpportunityCollection extends BaseSlugCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const name = doc.name;
+    const { name } = doc;
     const slug = Slugs.getNameFromID(doc.slugID);
     const opportunityType = OpportunityTypes.findSlugByID(doc.opportunityTypeID);
     const sponsor = Users.getProfile(doc.sponsorID).username;
-    const description = doc.description;
-    const ice = doc.ice;
+    const { description } = doc;
+    const { ice } = doc;
     const interests = _.map(doc.interestIDs, interestID => Interests.findSlugByID(interestID));
     const semesters = _.map(doc.semesterIDs, semesterID => Semesters.findSlugByID(semesterID));
-    const eventDate = doc.eventDate;
-    const retired = doc.retired;
-    return { name, slug, description, opportunityType, sponsor, ice, interests, semesters, eventDate, retired };
+    const { eventDate } = doc;
+    const { retired } = doc;
+    return {
+      name, slug, description, opportunityType, sponsor, ice, interests, semesters, eventDate, retired,
+    };
   }
 }
 

@@ -78,4 +78,3 @@ Template.Course_Filter_Widget.onRendered(function coursefilterwidgetOnRendered()
 Template.Course_Filter_Widget.onDestroyed(function coursefilterwidgetOnDestroyed() {
   // add your statement here
 });
-

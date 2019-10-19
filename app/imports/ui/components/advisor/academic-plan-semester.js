@@ -151,7 +151,7 @@ Template.Academic_Plan_Semester.helpers({
           return `${course.name} ${inPlan ? '' : ': drag to add to plan'} `;
         }
         if (!inPlan) {
-          return 'Use the Explorer/Inspector to choose a course';
+          return 'Use the Explorer/Favorites to choose a course';
         }
         return 'Satisfied';
       }

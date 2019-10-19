@@ -26,7 +26,7 @@ Template.List_Reviews_Widget.helpers({
     const sortByReviewee = _.sortBy(allReviews, function (review) {
       if (review.reviewType === 'course') {
         return Courses.getSlug(review.revieweeID);
-      } else if (review.reviewType === 'opportunity') {
+      } if (review.reviewType === 'opportunity') {
         return Opportunities.getSlug(review.revieweeID);
       }
       return '';

@@ -12,8 +12,8 @@ Accounts.validateNewUser(function validate(user) {
 
   // Figure out the username. Note that we hardwire the @hawaii.edu if it's CAS!
   // @TODO Make hawaii.edu a configuration parameter if RadGrad goes to other universities.
-  const username = (user && user.services.cas) ?
-    `${user.services.cas.id}@hawaii.edu` : user.services.password && user.username;
+  const username = (user && user.services.cas)
+    ? `${user.services.cas.id}@hawaii.edu` : user.services.password && user.username;
 
   // Allow definition of the admin user, who doesn't have a profile.
   if (username === Meteor.settings.public.admin.username) {

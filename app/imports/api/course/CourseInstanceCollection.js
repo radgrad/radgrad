@@ -3,7 +3,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Roles } from 'meteor/alanning:roles';
 import SimpleSchema from 'simpl-schema';
 import { ReactiveAggregate } from 'meteor/jcbernack:reactive-aggregate';
-import { Courses } from '../course/CourseCollection';
+import { Courses } from './CourseCollection';
 import { AcademicYearInstances } from '../degree-plan/AcademicYearInstanceCollection';
 import { ROLE } from '../role/Role';
 import { Semesters } from '../semester/SemesterCollection';
@@ -65,7 +65,9 @@ class CourseInstanceCollection extends BaseCollection {
    * @throws {Meteor.Error} If the definition includes an undefined course or student.
    * @returns The newly created docID.
    */
-  define({ semester, course, verified = false, fromSTAR = false, grade = '', note = '', student, creditHrs, retired }) {
+  define({
+    semester, course, verified = false, fromSTAR = false, grade = '', note = '', student, creditHrs, retired,
+  }) {
     // Check arguments
     const semesterID = Semesters.getID(semester);
     const semesterDoc = Semesters.findDoc(semesterID);
@@ -122,7 +124,9 @@ class CourseInstanceCollection extends BaseCollection {
    * @param note optional.
    * @param ice an object with fields i, c, e (optional)
    */
-  update(docID, { semesterID, verified, fromSTAR, grade, creditHrs, note, ice, retired }) {
+  update(docID, {
+    semesterID, verified, fromSTAR, grade, creditHrs, note, ice, retired,
+  }) {
     // console.log('CourseInstances.update', semesterID, verified, fromSTAR, grade, creditHrs, note, ice);
     this.assertDefined(docID);
     const updateData = {};
@@ -241,7 +245,7 @@ class CourseInstanceCollection extends BaseCollection {
    */
   findCourseName(courseInstanceID) {
     this.assertDefined(courseInstanceID);
-    const courseID = this.findDoc(courseInstanceID).courseID;
+    const { courseID } = this.findDoc(courseInstanceID);
     return Courses.findDoc(courseID).name;
   }
 
@@ -327,7 +331,7 @@ class CourseInstanceCollection extends BaseCollection {
     const courseInstanceDoc = this.findDoc(courseInstanceID);
     const courseName = this.findCourseName(courseInstanceID);
     const semester = Semesters.toString(courseInstanceDoc.semesterID);
-    const grade = courseInstanceDoc.grade;
+    const { grade } = courseInstanceDoc;
     return `[CI ${semester} ${courseName} ${grade}]`;
   }
 
@@ -387,14 +391,16 @@ class CourseInstanceCollection extends BaseCollection {
     const doc = this.findDoc(docID);
     const semester = Semesters.findSlugByID(doc.semesterID);
     const course = Courses.findSlugByID(doc.courseID);
-    const note = doc.note;
-    const verified = doc.verified;
-    const creditHrs = doc.creditHrs;
-    const grade = doc.grade;
-    const fromSTAR = doc.fromSTAR;
+    const { note } = doc;
+    const { verified } = doc;
+    const { creditHrs } = doc;
+    const { grade } = doc;
+    const { fromSTAR } = doc;
     const student = Users.getProfile(doc.studentID).username;
-    const retired = doc.retired;
-    return { semester, course, note, verified, fromSTAR, creditHrs, grade, student, retired };
+    const { retired } = doc;
+    return {
+      semester, course, note, verified, fromSTAR, creditHrs, grade, student, retired,
+    };
   }
 }
 

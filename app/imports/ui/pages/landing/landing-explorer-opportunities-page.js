@@ -14,7 +14,7 @@ function opportunityType(opportunity) {
 }
 
 function semesters(opportunity) {
-  const semesterIDs = opportunity.semesterIDs;
+  const { semesterIDs } = opportunity;
   return _.map(semesterIDs, (semID) => Semesters.toString(semID));
 }
 
@@ -59,4 +59,3 @@ Template.Landing_Explorer_Opportunities_Page.helpers({
     return [];
   },
 });
-

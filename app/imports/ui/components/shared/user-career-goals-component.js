@@ -2,7 +2,7 @@ import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Users } from '../../../api/user/UserCollection';
-import { getRouteUserName } from '../shared/route-user-name';
+import { getRouteUserName } from './route-user-name';
 import { getGroupName } from './route-group-name';
 
 Template.User_Career_Goals_Component.helpers({
@@ -21,7 +21,7 @@ Template.User_Career_Goals_Component.helpers({
     const group = getGroupName();
     if (group === 'student') {
       return `/student/${getRouteUserName()}/explorer/career-goals/${slug}`;
-    } else if (group === 'faculty') {
+    } if (group === 'faculty') {
       return `/faculty/${getRouteUserName()}/explorer/career-goals/${slug}`;
     }
     return `/mentor/${getRouteUserName()}/explorer/career-goals/${slug}`;
@@ -55,4 +55,3 @@ Template.User_Career_Goals_Component.onRendered(function userCareerGoalsComponen
 Template.User_Career_Goals_Component.onDestroyed(function userCareerGoalsComponentOnDestroyed() {
   // add your statement here
 });
-

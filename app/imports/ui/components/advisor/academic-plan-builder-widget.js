@@ -11,7 +11,7 @@ import { Semesters } from '../../../api/semester/SemesterCollection';
 import slugify, { Slugs } from '../../../api/slug/SlugCollection';
 import * as FormUtils from '../form-fields/form-field-utilities.js';
 import { buildSimpleName } from '../../../api/degree-plan/PlanChoiceUtilities';
-import { getAllElementsWithAttribute, removeElement } from '../../../ui/utilities/dom-utilities';
+import { getAllElementsWithAttribute, removeElement } from '../../utilities/dom-utilities';
 
 /* global document */
 const addSchema = new SimpleSchema({
@@ -89,7 +89,7 @@ Template.Academic_Plan_Builder_Widget.events({
       inPlan.push(slug);
     }
     Template.instance().inPlan.set(inPlan);
-    const target = event.target;
+    const { target } = event;
     const div = document.createElement('div');
     div.setAttribute('id', `${slug}-${numInPlan}`);
     div.setAttribute('slug', slug);
@@ -181,7 +181,7 @@ Template.Academic_Plan_Builder_Widget.events({
       const definitionData = {};
       const desiredDegree = DesiredDegrees.findDoc(newData.desiredDegree);
       const degreeSlug = Slugs.findDoc(desiredDegree.slugID).name;
-      const name = newData.name;
+      const { name } = newData;
       const semester = `Fall-${newData.year}`;
       const coursesPerSemester = [];
       const courseList = [];
@@ -227,4 +227,3 @@ Template.Academic_Plan_Builder_Widget.onRendered(function academicPlanWidgetOnRe
 Template.Academic_Plan_Builder_Widget.onDestroyed(function academicPlanWidgetOnDestroyed() {
   // add your statement here
 });
-

@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
-import { InterestTypes } from '../interest/InterestTypeCollection';
+import { InterestTypes } from './InterestTypeCollection';
 import { removeAllEntities } from '../base/BaseUtilities';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
@@ -69,4 +69,3 @@ if (Meteor.isServer) {
     });
   });
 }
-

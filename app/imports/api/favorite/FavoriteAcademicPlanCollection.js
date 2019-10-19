@@ -188,7 +188,7 @@ class FavoriteAcademicPlanCollection extends BaseCollection {
     const doc = this.findDoc(docID);
     const academicPlan = AcademicPlans.findSlugByID(doc.academicPlanID);
     const student = Users.getProfile(doc.studentID).username;
-    const retired = doc.retired;
+    const { retired } = doc;
     return { academicPlan, student, retired };
   }
 }

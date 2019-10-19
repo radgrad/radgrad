@@ -53,7 +53,9 @@ if (Meteor.isClient) {
       const moderatorComments = 'comments';
       await updateMethod.callPromise({
         collectionName: questionCollectionName,
-        updateData: { id, question, student, moderated, visible, moderatorComments },
+        updateData: {
+          id, question, student, moderated, visible, moderatorComments,
+        },
       });
       const doc = MentorQuestions.findDoc(id);
       expect(doc.question).to.equal(question);

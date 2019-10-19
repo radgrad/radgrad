@@ -44,7 +44,7 @@ Template.Favorite_Tabs.helpers({
 Template.Favorite_Tabs.events({
   'click .jsInspectorTab': function clickInspectorTab(event) {
     const tabName = event.target.dataset.tab;
-    const state = Template.instance().state;
+    const { state } = Template.instance();
     switch (tabName) {
       case plannerKeys.selectedCourses:
         selectFavoriteCoursesTab(state);
@@ -72,4 +72,3 @@ Template.Favorite_Tabs.onRendered(function favoriteTabsOnRendered() {
 Template.Favorite_Tabs.onDestroyed(function favoriteTabsOnDestroyed() {
   // add your statement here
 });
-

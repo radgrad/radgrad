@@ -49,4 +49,3 @@ Template.Student_Update_Website_Widget.onRendered(function studentupdatewebsitew
 Template.Student_Update_Website_Widget.onDestroyed(function studentupdatewebsitewidgetOnDestroyed() {
   // add your statement here
 });
-

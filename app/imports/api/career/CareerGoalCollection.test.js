@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
-import { CareerGoals } from '../career/CareerGoalCollection';
+import { CareerGoals } from './CareerGoalCollection';
 import { makeSampleInterest } from '../interest/SampleInterests';
 import { removeAllEntities } from '../base/BaseUtilities';
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
@@ -23,7 +23,9 @@ if (Meteor.isServer) {
 
     it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne, #getSlug, #findNames', function test() {
       const interests = [makeSampleInterest()];
-      let docID = CareerGoals.define({ name, slug, description, interests }); // without retired flag
+      let docID = CareerGoals.define({
+        name, slug, description, interests,
+      }); // without retired flag
       expect(CareerGoals.isDefined(slug)).to.be.true;
       expect(CareerGoals.getSlug(docID)).to.equal(slug);
       expect(CareerGoals.findNonRetired().length).to.equal(1);
@@ -46,4 +48,3 @@ if (Meteor.isServer) {
     });
   });
 }
-

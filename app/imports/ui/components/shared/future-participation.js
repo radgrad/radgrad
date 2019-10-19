@@ -87,4 +87,3 @@ Template.Future_Participation.onRendered(function futureParticipationOnRendered(
 Template.Future_Participation.onDestroyed(function futureParticipationOnDestroyed() {
   // add your statement here
 });
-

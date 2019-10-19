@@ -17,10 +17,10 @@ function verifyNotification() {
       emailData.subject = 'RadGrad Notification: There Are Pending Verifications';
       emailData.templateData = {
         role: 'Advisors',
-        message: `There are currently <span style="color: red;">${pendingVerifications.length}</span>` +
-        ' pending verification requests. Please visit the' +
-        ` <a href="https://radgrad.ics.hawaii.edu/advisor/${advisor}/verification-requests">` +
-        ' verification request</a> page to review these requests.',
+        message: `There are currently <span style="color: red;">${pendingVerifications.length}</span>`
+        + ' pending verification requests. Please visit the'
+        + ` <a href="https://radgrad.ics.hawaii.edu/advisor/${advisor}/verification-requests">`
+        + ' verification request</a> page to review these requests.',
       };
       emailData.filename = 'notification.html';
       sendEmail(emailData);
@@ -39,10 +39,10 @@ function reviewNotification() {
     emailData.subject = 'RadGrad Notification: There Are Pending Reviews';
     emailData.templateData = {
       role: 'Admins',
-      message: `There are currently <span style="color: red;">${pendingReviews.length}</span>` +
-      ' pending reviews. Please visit the' +
-      ` <a href="https://radgrad.ics.hawaii.edu/admin/${admin}/moderation">` +
-      ' review</a> page to review these requests.',
+      message: `There are currently <span style="color: red;">${pendingReviews.length}</span>`
+      + ' pending reviews. Please visit the'
+      + ` <a href="https://radgrad.ics.hawaii.edu/admin/${admin}/moderation">`
+      + ' review</a> page to review these requests.',
     };
     emailData.filename = 'notification.html';
     sendEmail(emailData);

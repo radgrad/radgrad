@@ -15,7 +15,7 @@ import { CourseInstances } from '../course/CourseInstanceCollection';
  * @memberOf api/star
  */
 function findSemesterSlug(starDataObject) {
-  const semester = starDataObject.semester;
+  const { semester } = starDataObject;
   if ((!_.isString(semester)) || (semester.length < 8)) {
     throw new Meteor.Error(`Could not parse semester data: ${JSON.stringify(starDataObject)}`,
       '', Error().stack);
@@ -42,8 +42,10 @@ function findSemesterSlug(starDataObject) {
       return null;
   }
   let year = parseInt(semesterTokens[1], 10);
+  // eslint-disable-next-line no-restricted-globals
   if (isNaN(year)) {
     year = parseInt(semesterTokens[2], 10);
+    // eslint-disable-next-line no-restricted-globals
     if (isNaN(year)) {
       return null;
     }
@@ -140,20 +142,24 @@ export function processStarCsvData(student, csvData) {
       const name = data[nameIndex];
       let grade = data[gradeIndex];
       console.log(`grade ${grade}`);
+      // eslint-disable-next-line no-restricted-globals
       if (grade === 'CR' && data[transferGradeIndex] && isNaN(data[transferGradeIndex])) {
         grade = data[transferGradeIndex];
+        // eslint-disable-next-line no-restricted-globals
       } else if (grade === 'CR' && data[transferGradeIndex] && !isNaN(data[transferGradeIndex])) {
         // got number assuming it is AP exam score need to determine the type of the exam.
         // const exam = data[transferCourseDesc];
         if (data[transferGradeIndex] > 2) {
           grade = 'B';
         }
+        // eslint-disable-next-line no-restricted-globals
       } else if (grade === 'unknown' && data[transferGradeIndex] && isNaN(data[transferGradeIndex])) {
         grade = data[transferGradeIndex];
       } else if (grade.includes('L')) {
         grade = 'C';
       }
       let number = data[numberIndex];
+      // eslint-disable-next-line no-restricted-globals
       if (isNaN(number)) {
         number = data[transferCourseNumberIndex];
       }
@@ -208,20 +214,24 @@ export function processBulkStarCsvData(csvData) {
       const name = data[nameIndex];
       let grade = data[gradeIndex];
       console.log(`grade ${grade}`);
+      // eslint-disable-next-line no-restricted-globals
       if (grade === 'CR' && data[transferGradeIndex] && isNaN(data[transferGradeIndex])) {
         grade = data[transferGradeIndex];
+        // eslint-disable-next-line no-restricted-globals
       } else if (grade === 'CR' && data[transferGradeIndex] && !isNaN(data[transferGradeIndex])) {
         // got number assuming it is AP exam score need to determine the type of the exam.
         // const exam = data[transferCourseDesc];
         if (data[transferGradeIndex] > 2) {
           grade = 'B';
         }
+        // eslint-disable-next-line no-restricted-globals
       } else if (grade === 'unknown' && data[transferGradeIndex] && isNaN(data[transferGradeIndex])) {
         grade = data[transferGradeIndex];
       } else if (grade.includes('L')) {
         grade = 'C';
       }
       let number = data[numberIndex];
+      // eslint-disable-next-line no-restricted-globals
       if (isNaN(number)) {
         number = data[transferCourseNumberIndex];
       }
@@ -264,13 +274,15 @@ export function processStarJsonData(student, jsonData) {
   if (student !== jsonData.email) {
     throw new Meteor.Error(`JSON data is not for ${student}`, '', Error().stack);
   }
-  const courses = jsonData.courses;
+  const { courses } = jsonData;
   const dataObjects = _.map(courses, (course) => {
-    const name = course.name;
-    let grade = course.grade;
+    const { name } = course;
+    let { grade } = course;
     if (_.includes(CourseInstances.validGrades, grade)) {
+      // eslint-disable-next-line no-restricted-globals
       if (grade === 'CR' && course.transferGrade && isNaN(course.transferGrade)) {
         grade = course.transferGrade;
+        // eslint-disable-next-line no-restricted-globals
       } else if (grade === 'CR' && course.transferGrade && !isNaN(course.transferGrade)) {
         // got number assuming it is AP exam score need to determine the type of the exam.
         if (course.transferGrade > 2) {
@@ -280,7 +292,8 @@ export function processStarJsonData(student, jsonData) {
     } else {
       grade = 'OTHER';
     }
-    let number = course.number;
+    let { number } = course;
+    // eslint-disable-next-line no-restricted-globals
     if (isNaN(number)) {
       number = course.transferNumber;
     }

@@ -20,4 +20,3 @@ Template.Boolean_Checkbox_Field.onRendered(function booleanCheckboxFieldOnRender
 Template.Boolean_Checkbox_Field.onDestroyed(function booleanCheckboxFieldOnDestroyed() {
   // add your statement here
 });
-

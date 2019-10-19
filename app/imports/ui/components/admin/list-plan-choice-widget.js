@@ -66,4 +66,3 @@ Template.List_Plan_Choice_Widget.onRendered(function listPlanChoiceWidgetOnRende
 Template.List_Plan_Choice_Widget.onDestroyed(function listPlanChoiceWidgetOnDestroyed() {
   // add your statement here
 });
-

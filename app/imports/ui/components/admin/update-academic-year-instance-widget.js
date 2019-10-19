@@ -74,4 +74,3 @@ Template.Update_Academic_Year_Instance_Widget.onRendered(function updateacademic
 Template.Update_Academic_Year_Instance_Widget.onDestroyed(function updateacademicyearinstancewidgetOnDestroyed() {
   // add your statement here
 });
-

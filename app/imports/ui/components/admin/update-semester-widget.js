@@ -71,4 +71,3 @@ Template.Update_Semester_Widget.onRendered(function updateSemesterWidgetOnRender
 Template.Update_Semester_Widget.onDestroyed(function updateSemesterWidgetOnDestroyed() {
   // add your statement here
 });
-

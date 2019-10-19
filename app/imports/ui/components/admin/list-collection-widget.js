@@ -19,4 +19,3 @@ Template.List_Collection_Widget.onRendered(function listCollectionWidgetOnRender
 Template.List_Collection_Widget.onDestroyed(function listCollectionWidgetOnDestroyed() {
   // add your statement here
 });
-

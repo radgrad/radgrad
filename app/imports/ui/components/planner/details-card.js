@@ -10,15 +10,15 @@ Template.Details_Card.helpers({
     return Template.instance().state;
   },
   hasSelection() {
-    const state = Template.instance().state;
+    const { state } = Template.instance();
     return state.get(plannerKeys.detailsOpportunity) || state.get(plannerKeys.detailsCourse);
   },
   selectedCourse() {
-    const state = Template.instance().state;
+    const { state } = Template.instance();
     return state.get(plannerKeys.detailsCourse);
   },
   selectedOpportunity() {
-    const state = Template.instance().state;
+    const { state } = Template.instance();
     return state.get(plannerKeys.detailsOpportunity);
   },
 });
@@ -34,4 +34,3 @@ Template.Details_Card.onRendered(function detailsCardOnRendered() {
 Template.Details_Card.onDestroyed(function detailsCardOnDestroyed() {
   // add your statement here
 });
-

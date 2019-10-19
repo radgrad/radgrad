@@ -23,8 +23,7 @@ Template.Explorer_Menu.helpers({
     if (group === 'student') {
       window.camDebugging.stop('ExplorerMenu.academicPlansCardRouteName');
       return RouteNames.studentCardExplorerPlansPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } if (group === 'faculty') {
       window.camDebugging.stop('ExplorerMenu.academicPlansCardRouteName');
       return RouteNames.facultyCardExplorerPlansPageRouteName;
     }
@@ -37,8 +36,7 @@ Template.Explorer_Menu.helpers({
     if (group === 'student') {
       window.camDebugging.stop('ExplorerMenu.academicPlansRouteName');
       return RouteNames.studentExplorerPlansPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } if (group === 'faculty') {
       window.camDebugging.stop('ExplorerMenu.academicPlansRouteName');
       return RouteNames.facultyExplorerPlansPageRouteName;
     }
@@ -57,8 +55,7 @@ Template.Explorer_Menu.helpers({
     if (group === 'student') {
       window.camDebugging.stop('ExplorerMenu.careerGoalsCardRouteName');
       return RouteNames.studentCardExplorerCareerGoalsPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } if (group === 'faculty') {
       window.camDebugging.stop('ExplorerMenu.careerGoalsCardRouteName');
       return RouteNames.facultyCardExplorerCareerGoalsPageRouteName;
     }
@@ -71,8 +68,7 @@ Template.Explorer_Menu.helpers({
     if (group === 'student') {
       window.camDebugging.stop('ExplorerMenu.careerGoalsRouteName');
       return RouteNames.studentExplorerCareerGoalsPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } if (group === 'faculty') {
       window.camDebugging.stop('ExplorerMenu.careerGoalsRouteName');
       return RouteNames.facultyExplorerCareerGoalsPageRouteName;
     }
@@ -123,8 +119,7 @@ Template.Explorer_Menu.helpers({
     if (group === 'student') {
       window.camDebugging.stop('ExplorerMenu.coursesCardRouteName');
       return RouteNames.studentCardExplorerCoursesPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } if (group === 'faculty') {
       window.camDebugging.stop('ExplorerMenu.coursesCardRouteName');
       return RouteNames.facultyCardExplorerCoursesPageRouteName;
     }
@@ -137,8 +132,7 @@ Template.Explorer_Menu.helpers({
     if (group === 'student') {
       window.camDebugging.stop('ExplorerMenu.coursesRouteName');
       return RouteNames.studentExplorerCoursesPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } if (group === 'faculty') {
       window.camDebugging.stop('ExplorerMenu.coursesRouteName');
       return RouteNames.facultyExplorerCoursesPageRouteName;
     }
@@ -151,8 +145,7 @@ Template.Explorer_Menu.helpers({
     if (group === 'student') {
       window.camDebugging.stop('ExplorerMenu.degreesCardRouteName');
       return RouteNames.studentCardExplorerDegreesPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } if (group === 'faculty') {
       window.camDebugging.stop('ExplorerMenu.degreesCardRouteName');
       return RouteNames.facultyCardExplorerDegreesPageRouteName;
     }
@@ -165,8 +158,7 @@ Template.Explorer_Menu.helpers({
     if (group === 'student') {
       window.camDebugging.stop('ExplorerMenu.academicPlansRouteName');
       return RouteNames.studentExplorerDegreesPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } if (group === 'faculty') {
       window.camDebugging.stop('ExplorerMenu.academicPlansRouteName');
       return RouteNames.facultyExplorerDegreesPageRouteName;
     }
@@ -233,8 +225,7 @@ Template.Explorer_Menu.helpers({
     if (group === 'student') {
       window.camDebugging.stop('ExplorerMenu.interestsCardRouteName');
       return RouteNames.studentCardExplorerInterestsPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } if (group === 'faculty') {
       window.camDebugging.stop('ExplorerMenu.interestsCardRouteName');
       return RouteNames.facultyExplorerInterestsPageRouteName;
     }
@@ -247,8 +238,7 @@ Template.Explorer_Menu.helpers({
     if (group === 'student') {
       window.camDebugging.stop('ExplorerMenu.interestsRouteName');
       return RouteNames.studentExplorerInterestsPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } if (group === 'faculty') {
       window.camDebugging.stop('ExplorerMenu.interestsRouteName');
       return RouteNames.facultyExplorerInterestsPageRouteName;
     }
@@ -286,8 +276,7 @@ Template.Explorer_Menu.helpers({
     if (group === 'student') {
       window.camDebugging.stop('ExplorerMenu.opportunityCardRouteName');
       return RouteNames.studentExplorerOpportunitiesPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } if (group === 'faculty') {
       window.camDebugging.stop('ExplorerMenu.opportunityCardRouteName');
       return RouteNames.facultyExplorerOpportunitiesPageRouteName;
     }
@@ -300,8 +289,7 @@ Template.Explorer_Menu.helpers({
     if (group === 'student') {
       window.camDebugging.stop('ExplorerMenu.opportunityRouteName');
       return RouteNames.studentExplorerOpportunitiesPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } if (group === 'faculty') {
       window.camDebugging.stop('ExplorerMenu.opportunityRouteName');
       return RouteNames.facultyExplorerOpportunitiesPageRouteName;
     }
@@ -394,8 +382,7 @@ Template.Explorer_Menu.helpers({
     if (group === 'student') {
       window.camDebugging.stop('ExplorerMenu.usersCardRouteName');
       return RouteNames.studentCardExplorerUsersPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } if (group === 'faculty') {
       window.camDebugging.stop('ExplorerMenu.usersCardRouteName');
       return RouteNames.facultyCardExplorerUsersPageRouteName;
     }
@@ -408,8 +395,7 @@ Template.Explorer_Menu.helpers({
     if (group === 'student') {
       window.camDebugging.stop('ExplorerMenu.usersRouteName');
       return RouteNames.studentCardExplorerUsersPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } if (group === 'faculty') {
       window.camDebugging.stop('ExplorerMenu.usersRouteName');
       return RouteNames.facultyCardExplorerUsersPageRouteName;
     }

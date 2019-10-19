@@ -11,7 +11,7 @@ import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getEarnedICE, getProjectedICE } from '../../../api/ice/IceProcessor';
-import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
+import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 
 function getEventsHelper(iceType, type, earned, semester) {
@@ -20,12 +20,16 @@ function getEventsHelper(iceType, type, earned, semester) {
     let allInstances = [];
     const iceInstances = [];
     if (type === 'course') {
-      const courseInstances = CourseInstances.find({ semesterID: semester._id, studentID: profile.userID,
-        verified: earned }).fetch();
+      const courseInstances = CourseInstances.find({
+        semesterID: semester._id, studentID: profile.userID,
+        verified: earned,
+      }).fetch();
       courseInstances.forEach(courseInstance => allInstances.push(courseInstance));
     } else {
-      allInstances = OpportunityInstances.find({ semesterID: semester._id, studentID: profile.userID,
-        verified: earned }).fetch();
+      allInstances = OpportunityInstances.find({
+        semesterID: semester._id, studentID: profile.userID,
+        verified: earned,
+      }).fetch();
     }
     allInstances.forEach((instance) => {
       if (iceType === 'Innovation') {
@@ -189,8 +193,8 @@ Template.Student_Ice_Column.helpers({
   },
   hasEvents(earned, semester) {
     let ret = false;
-    if ((getEventsHelper(this.type, 'course', earned, semester).length > 0) ||
-        (getEventsHelper(this.type, 'opportunity', earned, semester).length > 0)) {
+    if ((getEventsHelper(this.type, 'course', earned, semester).length > 0)
+        || (getEventsHelper(this.type, 'opportunity', earned, semester).length > 0)) {
       ret = true;
     }
     return ret;
@@ -322,4 +326,3 @@ Template.Student_Ice_Column.onRendered(function enableAccordion() {
     exclusive: false,
   });
 });
-

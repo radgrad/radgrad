@@ -77,7 +77,7 @@ const updateMentorSchema = new SimpleSchema({
 Template.Update_User_Widget.onCreated(function onCreated() {
   this.chosenYear = new ReactiveVar('');
   this.role = new ReactiveVar();
-  const role = Users.getProfile(this.data.updateID.get()).role;
+  const { role } = Users.getProfile(this.data.updateID.get());
   this.role.set(role);
   if (role === ROLE.STUDENT || role === ROLE.ALUMNI) {
     FormUtils.setupFormWidget(this, updateStudentSchema);

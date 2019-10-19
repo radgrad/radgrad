@@ -23,21 +23,31 @@ Template.Faculty_Layout.helpers({
       requestsLabel = `${requestsLabel} (${numRequests})`;
     }
     return [
-      { label: 'Home',
+      {
+        label: 'Home',
         route: RouteNames.facultyHomePageRouteName,
-        regex: 'home' },
-      { label: 'Manage Opportunities',
+        regex: 'home',
+      },
+      {
+        label: 'Manage Opportunities',
         route: RouteNames.facultyManageOpportunitiesPageRouteName,
-        regex: 'manage-opportunities' },
-      { label: requestsLabel,
+        regex: 'manage-opportunities',
+      },
+      {
+        label: requestsLabel,
         route: RouteNames.facultyVerificationPageRouteName,
-        regex: 'verification' },
-      { label: 'Explorer',
+        regex: 'verification',
+      },
+      {
+        label: 'Explorer',
         route: RouteNames.facultyExplorerPageRouteName,
-        regex: 'explorer' },
-      { label: 'Scoreboard',
+        regex: 'explorer',
+      },
+      {
+        label: 'Scoreboard',
         route: RouteNames.facultyScoreboardPageRouteName,
-        regex: 'scoreboard' },
+        regex: 'scoreboard',
+      },
     ];
   },
   secondMenuLength() {

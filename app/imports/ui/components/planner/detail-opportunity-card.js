@@ -162,7 +162,7 @@ Template.Detail_Opportunity_Card.helpers({
 Template.Detail_Opportunity_Card.events({
   'click button.verifyInstance': function clickButtonVerifyInstance(event) {
     event.preventDefault();
-    const id = event.target.id;
+    const { id } = event.target;
     const definitionData = { student: getRouteUserName(), opportunityInstance: id };
     const collectionName = VerificationRequests.getCollectionName();
     defineMethod.call({ collectionName, definitionData });
@@ -183,4 +183,3 @@ Template.Detail_Opportunity_Card.onRendered(function detailopportunitycardOnRend
 Template.Detail_Opportunity_Card.onDestroyed(function detailopportunitycardOnDestroyed() {
   // add your statement here
 });
-

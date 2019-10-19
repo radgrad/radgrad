@@ -201,12 +201,12 @@ class BaseProfileCollection extends BaseSlugCollection {
   removeIt(profileID) {
     // console.log('BaseProfileCollection.removeIt(%o)', profileID);
     const profile = this._collection.findOne({ _id: profileID });
-    const userID = profile.userID;
+    const { userID } = profile;
     if (!Users.isReferenced(userID)) {
       // Automatically remove references to user from other collections that are "private" to this user.
       _.forEach([Feeds, CourseInstances, OpportunityInstances, AcademicYearInstances, FeedbackInstances, AdvisorLogs,
         VerificationRequests], collection => collection.removeUser(userID));
-      const username = profile.username;
+      const { username } = profile;
       Meteor.users.remove({ _id: profile.userID });
       Slugs._collection.remove({ name: username });
       super.removeIt(profileID);
@@ -218,7 +218,9 @@ class BaseProfileCollection extends BaseSlugCollection {
    * Destructively modifies updateData with the values of the passed fields.
    * Call this function for side-effect only.
    */
-  _updateCommonFields(updateData, { firstName, lastName, picture, website, interests, careerGoals, retired }) {
+  _updateCommonFields(updateData, {
+    firstName, lastName, picture, website, interests, careerGoals, retired,
+  }) {
     if (firstName) {
       updateData.firstName = firstName;
     }

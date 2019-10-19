@@ -2,7 +2,7 @@ import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Slugs } from '../slug/SlugCollection';
-import BaseCollection from '../base/BaseCollection';
+import BaseCollection from './BaseCollection';
 
 /**
  * BaseSlugCollection is an abstract superclass for use by entities that have a slug.

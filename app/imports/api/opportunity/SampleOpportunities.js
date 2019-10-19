@@ -1,7 +1,7 @@
 import { moment } from 'meteor/momentjs:moment';
-import { OpportunityTypes } from '../opportunity/OpportunityTypeCollection';
-import { Opportunities } from '../opportunity/OpportunityCollection';
-import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
+import { OpportunityTypes } from './OpportunityTypeCollection';
+import { Opportunities } from './OpportunityCollection';
+import { OpportunityInstances } from './OpportunityInstanceCollection';
 import { Semesters } from '../semester/SemesterCollection';
 import { makeSampleInterest } from '../interest/SampleInterests';
 
@@ -35,7 +35,9 @@ export function makeSampleOpportunity(sponsor) {
   const semester = Semesters.define({ term: Semesters.SPRING, year: 2015 });
   const semesters = [semester];
   const ice = { i: 10, c: 0, e: 10 };
-  return Opportunities.define({ name, slug, description, opportunityType, sponsor, interests, semesters, ice });
+  return Opportunities.define({
+    name, slug, description, opportunityType, sponsor, interests, semesters, ice,
+  });
 }
 
 /**
@@ -49,5 +51,7 @@ export function makeSampleOpportunityInstance(student, sponsor) {
   const semester = Semesters.define({ term: Semesters.SPRING, year: 2015 });
   const opportunity = makeSampleOpportunity(sponsor);
   const verified = false;
-  return OpportunityInstances.define({ semester, opportunity, verified, student });
+  return OpportunityInstances.define({
+    semester, opportunity, verified, student,
+  });
 }

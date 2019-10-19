@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
-import { DesiredDegrees } from '../degree-plan/DesiredDegreeCollection';
-import { AcademicPlans } from '../degree-plan/AcademicPlanCollection';
+import { DesiredDegrees } from './DesiredDegreeCollection';
+import { AcademicPlans } from './AcademicPlanCollection';
 import { Semesters } from '../semester/SemesterCollection';
 import { removeAllEntities } from '../base/BaseUtilities';
 
@@ -95,7 +95,9 @@ if (Meteor.isServer) {
 
     it('#define, #isDefined, #findIdBySlug, #removeIt, #dumpOne, #restoreOne #checkIntegrity', function test() {
       Semesters.define({ term: 'Spring', year: 2017 });
-      DesiredDegrees.define({ name, shortName, slug: degreeSlug, description });
+      DesiredDegrees.define({
+        name, shortName, slug: degreeSlug, description,
+      });
       let docID = AcademicPlans.define({
         slug, degreeSlug, name: description, description, semester, coursesPerSemester, courseList,
       });
@@ -136,7 +138,9 @@ if (Meteor.isServer) {
       errors = AcademicPlans.checkIntegrity();
       expect(errors.length).to.equal(1);
       AcademicPlans.removeIt(badID);
-      DesiredDegrees.define({ name: bamName, shortName, slug: bamDegreeSlug, description });
+      DesiredDegrees.define({
+        name: bamName, shortName, slug: bamDegreeSlug, description,
+      });
       const bamDocID = AcademicPlans.define({
         slug: bamSlug, degreeSlug: bamDegreeSlug, name: bamDescription, description: bamDescription, semester,
         coursesPerSemester: bamCoursesPerSemester, courseList: bamCourseList,

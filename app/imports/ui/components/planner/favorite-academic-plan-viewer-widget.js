@@ -42,4 +42,3 @@ Template.Favorite_Academic_Plan_Viewer_Widget.onRendered(function favoriteAcadem
 Template.Favorite_Academic_Plan_Viewer_Widget.onDestroyed(function favoriteAcademicPlanViewerWidgetOnDestroyed() {
   // add your statement here
 });
-

@@ -1,8 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
-import { InterestTypes } from '../interest/InterestTypeCollection';
-import { Interests } from '../interest/InterestCollection';
-import { makeSampleInterestType } from '../interest/SampleInterests';
+import { InterestTypes } from './InterestTypeCollection';
+import { Interests } from './InterestCollection';
+import { makeSampleInterestType } from './SampleInterests';
 import { removeAllEntities } from '../base/BaseUtilities';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
@@ -23,8 +23,12 @@ if (Meteor.isServer) {
     before(function setup() {
       removeAllEntities();
       interestType = InterestTypes.findSlugByID(makeSampleInterestType());
-      interest1 = { name, slug, description, interestType };
-      interest2 = { name: name2, slug: slug2, description: description2, interestType };
+      interest1 = {
+        name, slug, description, interestType,
+      };
+      interest2 = {
+        name: name2, slug: slug2, description: description2, interestType,
+      };
     });
 
     after(function teardown() {
@@ -85,11 +89,10 @@ if (Meteor.isServer) {
 
     it('#hasSlug', function test() {
       const docID = Interests.define(interest1);
-      const slugID = Interests.findDoc(docID).slugID;
+      const { slugID } = Interests.findDoc(docID);
       expect(Interests.hasSlug(slugID)).to.be.true;
       expect(Interests.hasSlug('foo')).to.be.false;
       Interests.removeIt(slug);
     });
   });
 }
-

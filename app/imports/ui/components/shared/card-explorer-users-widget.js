@@ -58,7 +58,7 @@ Template.Card_Explorer_Users_Widget.helpers({
     const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentCardExplorerUsersPageRouteName;
-    } else if (group === 'faculty') {
+    } if (group === 'faculty') {
       return RouteNames.facultyCardExplorerUsersPageRouteName;
     }
     return RouteNames.mentorCardExplorerUsersPageRouteName;
@@ -77,4 +77,3 @@ Template.Card_Explorer_Users_Widget.onRendered(function studentcardexplorerusers
 Template.Card_Explorer_Users_Widget.onDestroyed(function studentcardexploreruserswidgetOnDestroyed() {
   // add your statement here
 });
-

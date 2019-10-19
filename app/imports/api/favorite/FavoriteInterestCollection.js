@@ -188,7 +188,7 @@ class FavoriteInterestCollection extends BaseCollection {
     const doc = this.findDoc(docID);
     const interest = Interests.findSlugByID(doc.interestID);
     const student = Users.getProfile(doc.studentID).username;
-    const retired = doc.retired;
+    const { retired } = doc;
     return { interest, student, retired };
   }
 }

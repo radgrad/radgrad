@@ -37,4 +37,3 @@ Template.Landing_Explorer_CareerGoals_Page.helpers({
     return [];
   },
 });
-

@@ -38,7 +38,9 @@ class MentorQuestionCollection extends BaseSlugCollection {
    * @param retired the retired status (optional).
    * @return { String } the docID of this question.
    */
-  define({ question, slug, student, moderated = false, visible = false, moderatorComments = '', retired }) {
+  define({
+    question, slug, student, moderated = false, visible = false, moderatorComments = '', retired,
+  }) {
     const studentID = Users.getID(student);
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
     const docID = this._collection.insert({
@@ -64,7 +66,9 @@ class MentorQuestionCollection extends BaseSlugCollection {
    * @param moderatorComments string (optional).
    * @param retired the new retired status (optional).
    */
-  update(instance, { question, student, moderated, visible, moderatorComments, retired }) {
+  update(instance, {
+    question, student, moderated, visible, moderatorComments, retired,
+  }) {
     const docID = this.getID(instance);
     const updateData = {};
     if (question) {
@@ -144,17 +148,19 @@ class MentorQuestionCollection extends BaseSlugCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const question = doc.question;
+    const { question } = doc;
     let slug;
     if (doc.slugID) {
       slug = Slugs.getNameFromID(doc.slugID);
     }
     const student = Users.getProfile(doc.studentID).username;
-    const moderated = doc.moderated;
-    const visible = doc.visible;
-    const moderatorComments = doc.moderatorComments;
-    const retired = doc.retired;
-    return { question, slug, student, moderated, visible, moderatorComments, retired };
+    const { moderated } = doc;
+    const { visible } = doc;
+    const { moderatorComments } = doc;
+    const { retired } = doc;
+    return {
+      question, slug, student, moderated, visible, moderatorComments, retired,
+    };
   }
 }
 
@@ -164,4 +170,3 @@ class MentorQuestionCollection extends BaseSlugCollection {
  * @memberOf api/mentor
  */
 export const MentorQuestions = new MentorQuestionCollection();
-

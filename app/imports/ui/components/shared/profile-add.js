@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 
-import { getRouteUserName } from '../shared/route-user-name';
+import { getRouteUserName } from './route-user-name';
 import { Users } from '../../../api/user/UserCollection';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { defineMethod, updateMethod } from '../../../api/base/BaseCollection.methods';

@@ -45,7 +45,7 @@ const availableOpps = () => {
       return inFuture;
     });
     return filteredByInstance;
-  } else if (group === 'faculty') {
+  } if (group === 'faculty') {
     return _.filter(notRetired, o => o.sponsorID !== getUserIdFromRoute());
   }
   return notRetired;

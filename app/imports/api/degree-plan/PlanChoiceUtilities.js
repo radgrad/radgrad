@@ -76,7 +76,7 @@ export function complexChoiceToArray(planChoice) {
   return _.map(split, (slug) => {
     if (slug.startsWith('(')) {
       return slug.substring(1);
-    } else if (slug.endsWith(')')) {
+    } if (slug.endsWith(')')) {
       return slug.substring(0, slug.length - 1);
     }
     return slug;
@@ -179,7 +179,7 @@ function satisfiesSinglePlanChoice(planChoice, courseSlug) {
   const dept = getDepartment(planChoice);
   if (planChoice.includes('300+')) {
     return courseSlug.startsWith(`${dept}_3`) || courseSlug.startsWith(`${dept}_4`);
-  } else if (planChoice.includes('400+')) {
+  } if (planChoice.includes('400+')) {
     return courseSlug.startsWith(`${dept}_4`);
   }
   return planChoice.indexOf(courseSlug) !== -1;

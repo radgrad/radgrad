@@ -200,7 +200,7 @@ function fixUserInteractions() {
       if (!Array.isArray(interaction.typeData)) {
         const oldTypeData = interaction.typeData.split(',');
         const typeData = [];
-        const type = interaction.type;
+        const { type } = interaction;
         if (type === 'interestIDs' && oldTypeData[0] !== 'n/a') {
           _.each(oldTypeData, function (entry) {
             typeData.push(Interests.findSlugByID(entry));

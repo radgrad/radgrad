@@ -24,7 +24,7 @@ Template.Academic_Plan_Chooser_Component.helpers({
       .get(), 10);
     const plans = AcademicPlans.findNonRetired();
     let name = _.filter(plans, (p) => {
-      const year = Semesters.findDoc(p.effectiveSemesterID).year;
+      const { year } = Semesters.findDoc(p.effectiveSemesterID);
       return chosen === year;
     });
     name = _.map(name, (n) => n.name);
@@ -69,10 +69,10 @@ Template.Academic_Plan_Chooser_Component.helpers({
       let plans = AcademicPlans.findNonRetired();
       plans = _.uniqBy(plans, (p) => Semesters.findDoc(p.effectiveSemesterID).year);
       plans = _.filter(plans, (p) => {
-        const year = Semesters.findDoc(p.effectiveSemesterID).year;
+        const { year } = Semesters.findDoc(p.effectiveSemesterID);
         if (declaredYear && year >= declaredYear) {
           return true;
-        } else if (!declaredYear) {
+        } if (!declaredYear) {
           return true;
         }
         return false;
@@ -134,4 +134,3 @@ Template.Academic_Plan_Chooser_Component.onRendered(function academicPlanChooser
 Template.Academic_Plan_Chooser_Component.onDestroyed(function academicPlanChooserComponentOnDestroyed() {
   // add your statement here
 });
-

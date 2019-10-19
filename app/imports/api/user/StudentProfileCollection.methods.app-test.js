@@ -37,7 +37,9 @@ if (Meteor.isClient) {
     it('Define Method', async function () {
       await withLoggedInUser();
       await withRadGradSubscriptions();
-      const definitionData = { username, firstName, lastName, picture, website, interests, careerGoals, level };
+      const definitionData = {
+        username, firstName, lastName, picture, website, interests, careerGoals, level,
+      };
       const profileID = await defineMethod.callPromise({ collectionName, definitionData });
       await sleep(delay); // give the system time to propagate the changes
       const profile = StudentProfiles.findDoc({ _id: profileID });

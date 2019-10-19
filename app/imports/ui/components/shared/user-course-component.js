@@ -2,7 +2,7 @@ import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { Courses } from '../../../api/course/CourseCollection';
-import { getRouteUserName } from '../shared/route-user-name';
+import { getRouteUserName } from './route-user-name';
 import { getGroupName } from './route-group-name';
 
 function getCourses(studentID, isPast) {
@@ -58,7 +58,7 @@ Template.User_Course_Component.helpers({
     const group = getGroupName();
     if (group === 'student') {
       return `/student/${getRouteUserName()}/explorer/courses/${slug}`;
-    } else if (group === 'faculty') {
+    } if (group === 'faculty') {
       return `/faculty/${getRouteUserName()}/explorer/courses/${slug}`;
     }
     return `/mentor/${getRouteUserName()}/explorer/courses/${slug}`;
@@ -82,4 +82,3 @@ Template.User_Course_Component.onRendered(function userCourseTakenComponentOnRen
 Template.User_Course_Component.onDestroyed(function userCourseTakenComponentOnDestroyed() {
   // add your statement here
 });
-

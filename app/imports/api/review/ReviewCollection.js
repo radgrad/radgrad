@@ -144,7 +144,9 @@ class ReviewCollection extends BaseSlugCollection {
    * @param moderatorComments the new moderator comments (optional).
    * @param retired the new retired status (optional).
    */
-  update(docID, { semester, rating, comments, moderated, visible, moderatorComments, retired }) {
+  update(docID, {
+    semester, rating, comments, moderated, visible, moderatorComments, retired,
+  }) {
     this.assertDefined(docID);
     const updateData = {};
     if (semester) {
@@ -250,7 +252,7 @@ class ReviewCollection extends BaseSlugCollection {
     const doc = this.findDoc(docID);
     const slug = Slugs.getNameFromID(doc.slugID);
     const student = Users.getProfile(doc.studentID).username;
-    const reviewType = doc.reviewType;
+    const { reviewType } = doc;
     let reviewee;
     if (reviewType === this.COURSE) {
       reviewee = Courses.findSlugByID(doc.revieweeID);
@@ -258,12 +260,12 @@ class ReviewCollection extends BaseSlugCollection {
       reviewee = Opportunities.findSlugByID(doc.revieweeID);
     }
     const semester = Semesters.findSlugByID(doc.semesterID);
-    const rating = doc.rating;
-    const comments = doc.comments;
-    const moderated = doc.moderated;
-    const visible = doc.visible;
-    const moderatorComments = doc.moderatorComments;
-    const retired = doc.retired;
+    const { rating } = doc;
+    const { comments } = doc;
+    const { moderated } = doc;
+    const { visible } = doc;
+    const { moderatorComments } = doc;
+    const { retired } = doc;
     return {
       slug,
       student,

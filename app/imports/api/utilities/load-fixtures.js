@@ -112,7 +112,9 @@ export function loadCollectionNewDataOnly(collection, loadJSON, consolep) {
       case AdvisorLogs.getType(): {
         const advisorID = Users.getID(definition.advisor);
         const studentID = Users.getID(definition.student);
-        if (AdvisorLogs.find({ advisorID, studentID, text: definition.text, createdOn: definition.createdOn })
+        if (AdvisorLogs.find({
+          advisorID, studentID, text: definition.text, createdOn: definition.createdOn,
+        })
           .count() === 0) {
           collection.define(definition);
           count++;

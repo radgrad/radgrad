@@ -18,7 +18,7 @@ Template.Add_Opportunity_Button.helpers({
     return this.opportunity._id;
   },
   name() {
-    const name = this.opportunity.name;
+    const { name } = this.opportunity;
     if (name.length > 15) {
       return `${name.substring(0, 12)}...`;
     }
@@ -33,7 +33,7 @@ Template.Add_Opportunity_Button.helpers({
 Template.Add_Opportunity_Button.events({
   'click .removeFromPlan': function clickItemRemoveFromPlan(event) {
     event.preventDefault();
-    const opportunity = this.opportunity;
+    const { opportunity } = this;
     const oi = Template.instance().state.get(plannerKeys.detailsOpportunity);
     const collectionName = OpportunityInstances.getCollectionName();
     const template = Template.instance();
@@ -42,8 +42,10 @@ Template.Add_Opportunity_Button.events({
         resetDetails(template.state);
       }
     });
-    const interactionData = { username: getRouteUserName(), type: 'removeOpportunity',
-      typeData: Slugs.getNameFromID(opportunity.slugID) };
+    const interactionData = {
+      username: getRouteUserName(), type: 'removeOpportunity',
+      typeData: Slugs.getNameFromID(opportunity.slugID),
+    };
     userInteractionDefineMethod.call(interactionData, (err) => {
       if (err) {
         console.log('Error creating UserInteraction', err);
@@ -59,4 +61,3 @@ Template.Add_Opportunity_Button.onRendered(function addOpportunityButtonOnRender
 Template.Add_Opportunity_Button.onDestroyed(function addOpportunityButtonOnDestroyed() {
   // add your statement here
 });
-

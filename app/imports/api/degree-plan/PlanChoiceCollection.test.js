@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
-import { PlanChoices } from '../degree-plan/PlanChoiceCollection';
+import { PlanChoices } from './PlanChoiceCollection';
 import { removeAllEntities } from '../base/BaseUtilities';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
@@ -43,9 +43,8 @@ if (Meteor.isServer) {
       expect(PlanChoices.toStringFromSlug(simple) === 'ICS 111').to.be.true;
       expect(PlanChoices.toStringFromSlug(choice) === 'ICS 313 or ICS 361').to.be.true;
       expect(PlanChoices.toStringFromSlug(complex) === 'ICS 321 or ICS 332 or (ICS 415 or ICS 351)').to.be.true;
-      expect(PlanChoices.toStringFromSlug(complex2) ===
-          '(ICS 312 or ICS 331) or (ICS 313 or ICS 361) or ICS 355').to.be.true;
+      expect(PlanChoices.toStringFromSlug(complex2)
+          === '(ICS 312 or ICS 331) or (ICS 313 or ICS 361) or ICS 355').to.be.true;
     });
   });
 }
-

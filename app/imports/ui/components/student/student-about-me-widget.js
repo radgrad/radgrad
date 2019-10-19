@@ -6,7 +6,7 @@ import { Interests } from '../../../api/interest/InterestCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
-import { getRouteUserName } from '../../components/shared/route-user-name.js';
+import { getRouteUserName } from '../shared/route-user-name.js';
 import { FavoriteAcademicPlans } from '../../../api/favorite/FavoriteAcademicPlanCollection';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
@@ -20,7 +20,7 @@ Template.Student_About_Me_Widget.helpers({
   careerGoals() {
     const ret = [];
     if (getRouteUserName()) {
-      const student = Template.instance().data.student;
+      const { student } = Template.instance().data;
       _.forEach(student.careerGoalIDs, (id) => {
         ret.push(CareerGoals.findDoc(id));
       });
@@ -59,7 +59,7 @@ Template.Student_About_Me_Widget.helpers({
   interests() {
     const ret = [];
     if (getRouteUserName()) {
-      const student = Template.instance().data.student;
+      const { student } = Template.instance().data;
       _.forEach(student.interestIDs, (id) => {
         ret.push(Interests.findDoc(id));
       });

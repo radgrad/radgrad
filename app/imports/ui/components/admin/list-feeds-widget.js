@@ -63,8 +63,10 @@ Template.List_Feeds_Widget.helpers({
       { label: 'Feed Type', value: feed.feedType },
       { label: 'Description', value: feed.description },
       { label: 'Timestamp', value: feed.timestamp.toString() },
-      { label: 'Picture',
-        value: `<div class="ui feed"><div class="event"><div class="label"><img src="${feed.picture}"/></div></div></div>` },
+      {
+        label: 'Picture',
+        value: `<div class="ui feed"><div class="event"><div class="label"><img src="${feed.picture}"/></div></div></div>`,
+      },
       { label: 'Users', value: users.toString() },
       { label: 'Opportunity', value: opportunityName },
       { label: 'Course', value: courseName },

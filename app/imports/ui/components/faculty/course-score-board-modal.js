@@ -7,16 +7,16 @@ import * as RouteNames from '../../../startup/client/router';
 
 Template.Course_Score_Board_Modal.helpers({
   courseCount() {
-    const course = Template.instance().data.course;
-    const semester = Template.instance().data.semester;
+    const { course } = Template.instance().data;
+    const { semester } = Template.instance().data;
     // console.log(Template.instance().data, course, semester);
     const count = CourseInstances.find({ courseID: course._id, semesterID: semester._id }).count();
     return count;
   },
   students() {
     // console.log('students');
-    const course = Template.instance().data.course;
-    const semester = Template.instance().data.semester;
+    const { course } = Template.instance().data;
+    const { semester } = Template.instance().data;
     // console.log(course, semester);
     const cis = CourseInstances.find({ courseID: course._id, semesterID: semester._id }).fetch();
     const students = [];

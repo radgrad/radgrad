@@ -29,8 +29,12 @@ class HelpMessageCollection extends BaseCollection {
    * @param retired the retired status.
    * @return {any} the ID of the help.
    */
-  define({ routeName, title, text, retired }) {
-    return this._collection.insert({ routeName, title, text, retired });
+  define({
+    routeName, title, text, retired,
+  }) {
+    return this._collection.insert({
+      routeName, title, text, retired,
+    });
   }
 
   /**
@@ -42,7 +46,9 @@ class HelpMessageCollection extends BaseCollection {
    * @param retired new retired status. (optional).
    * @throws { Meteor.Error } If docID is not defined.
    */
-  update(docID, { routeName, title, text, retired }) {
+  update(docID, {
+    routeName, title, text, retired,
+  }) {
     this.assertDefined(docID);
     const updateData = {};
     if (routeName) {
@@ -112,11 +118,13 @@ class HelpMessageCollection extends BaseCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const routeName = doc.routeName;
-    const title = doc.title;
-    const text = doc.text;
-    const retired = doc.retired;
-    return { routeName, title, text, retired };
+    const { routeName } = doc;
+    const { title } = doc;
+    const { text } = doc;
+    const { retired } = doc;
+    return {
+      routeName, title, text, retired,
+    };
   }
 }
 

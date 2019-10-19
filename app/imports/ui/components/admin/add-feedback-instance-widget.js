@@ -38,8 +38,8 @@ Template.Add_Feedback_Instance_Widget.events({
     instance.context.reset();
     addSchema.clean(newData, { mutate: true });
     instance.context.validate(newData);
-    if (instance.context.isValid() &&
-        !FeedbackInstances.isFeedbackInstance(newData.user, newData.functionName, newData.feedbackType)) {
+    if (instance.context.isValid()
+        && !FeedbackInstances.isFeedbackInstance(newData.user, newData.functionName, newData.feedbackType)) {
       defineMethod.call({ collectionName: FeedbackInstances.getCollectionName(), definitionData: newData }, (error) => {
         if (error) {
           FormUtils.indicateError(instance, error);

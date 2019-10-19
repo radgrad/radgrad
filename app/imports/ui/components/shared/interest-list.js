@@ -3,7 +3,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
-import { getRouteUserName } from '../shared/route-user-name';
+import { getRouteUserName } from './route-user-name';
 import * as RouteNames from '../../../startup/client/router.js';
 import { getGroupName } from './route-group-name';
 
@@ -72,7 +72,7 @@ Template.Interest_List.helpers({
     const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentExplorerInterestsPageRouteName;
-    } else if (group === 'faculty') {
+    } if (group === 'faculty') {
       return RouteNames.facultyExplorerInterestsPageRouteName;
     }
     return RouteNames.mentorExplorerInterestsPageRouteName;

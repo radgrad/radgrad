@@ -5,7 +5,7 @@ import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { Users } from '../../../api/user/UserCollection.js';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
-import { getRouteUserName } from '../shared/route-user-name';
+import { getRouteUserName } from './route-user-name';
 import * as RouteNames from '../../../startup/client/router.js';
 import { StudentParticipation } from '../../../api/public-stats/StudentParticipationCollection';
 import { getGroupName } from './route-group-name';
@@ -15,8 +15,7 @@ Template.Favorite_Card.helpers({
     const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentExplorerCoursesPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } if (group === 'faculty') {
       return RouteNames.facultyExplorerCoursesPageRouteName;
     }
     return RouteNames.mentorExplorerCoursesPageRouteName;
@@ -28,7 +27,7 @@ Template.Favorite_Card.helpers({
     return item.name;
   },
   itemShortDescription(item) {
-    let description = item.description;
+    let { description } = item;
     if (description.length > 200) {
       description = `${description.substring(0, 200)}`;
       if (description.charAt(description.length - 1) === ' ') {
@@ -49,8 +48,7 @@ Template.Favorite_Card.helpers({
     const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentExplorerOpportunitiesPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } if (group === 'faculty') {
       return RouteNames.facultyExplorerOpportunitiesPageRouteName;
     }
     return RouteNames.mentorExplorerOpportunitiesPageRouteName;

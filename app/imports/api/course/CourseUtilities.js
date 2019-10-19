@@ -71,7 +71,7 @@ export function getStudent300LevelDocs(studentID, coursesTakenSlugs) {
 
 export function bestStudent300LevelCourses(studentID, coursesTakenSlugs) {
   const choices = getStudent300LevelDocs(studentID, coursesTakenSlugs);
-  const interestIDs = Users.getProfile(studentID).interestIDs;
+  const { interestIDs } = Users.getProfile(studentID);
   const preferred = new PreferredChoice(choices, interestIDs);
   return preferred.getBestChoices();
 }
@@ -108,7 +108,7 @@ export function getStudent400LevelDocs(studentID, coursesTakenSlugs) {
 
 export function bestStudent400LevelCourses(studentID, coursesTakenSlugs) {
   const choices = getStudent400LevelDocs(studentID, coursesTakenSlugs);
-  const interestIDs = Users.getProfile(studentID).interestIDs;
+  const { interestIDs } = Users.getProfile(studentID);
   const preferred = new PreferredChoice(choices, interestIDs);
   return preferred.getBestChoices();
 }
@@ -136,7 +136,7 @@ export function chooseBetween(slugs, studentID, coursesTakenSlugs) {
       courses.push(Courses.findDoc(courseID));
     }
   });
-  const interestIDs = Users.getProfile(studentID).interestIDs;
+  const { interestIDs } = Users.getProfile(studentID);
   const preferred = new PreferredChoice(courses, interestIDs);
   const best = preferred.getBestChoices();
   if (best) {

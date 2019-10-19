@@ -24,4 +24,3 @@ Template.Admin_Analytics_Activity_Monitor_Page.helpers({
     return Template.instance().userList.get();
   },
 });
-

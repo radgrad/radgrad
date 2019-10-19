@@ -181,7 +181,7 @@ Template.Past_Semester_List.events({
   },
   'click tr.clickEnabled': function clickTrClickEnabled(event) {
     event.preventDefault();
-    let target = event.target;
+    let { target } = event;
     while (target && target.nodeName !== 'TR') {
       target = target.parentNode;
     }

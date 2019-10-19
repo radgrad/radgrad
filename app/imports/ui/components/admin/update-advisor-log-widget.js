@@ -80,4 +80,3 @@ Template.Update_Advisor_Log_Widget.onRendered(function updateadvisorlogwidgetOnR
 Template.Update_Advisor_Log_Widget.onDestroyed(function updateadvisorlogwidgetOnDestroyed() {
   // add your statement here
 });
-

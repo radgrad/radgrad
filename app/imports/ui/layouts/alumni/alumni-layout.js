@@ -8,9 +8,11 @@ Template.Alumni_Layout.onCreated(function alumniLayoutOnCreated() {
 Template.Alumni_Layout.helpers({
   secondMenuItems() {
     return [
-      { label: 'Home',
+      {
+        label: 'Home',
         route: RouteNames.alumniHomePageRouteName,
-        regex: 'home' },
+        regex: 'home',
+      },
     ];
   },
   secondMenuLength() {
@@ -29,4 +31,3 @@ Template.Alumni_Layout.onRendered(function alumniLayoutOnRendered() {
 Template.Alumni_Layout.onDestroyed(function alumniLayoutOnDestroyed() {
   // add your statement here
 });
-

@@ -41,9 +41,9 @@ class SemesterCollection extends BaseSlugCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const term = doc.term;
-    const year = doc.year;
-    const retired = doc.retired;
+    const { term } = doc;
+    const { year } = doc;
+    const { retired } = doc;
     return { term, year, retired };
   }
 
@@ -96,7 +96,9 @@ class SemesterCollection extends BaseSlugCollection {
       throw new Meteor.Error(`Slug is already defined for undefined semester: ${slug}`, '', Error().stack);
     }
     const slugID = Slugs.define({ name: slug, entityName: 'Semester' });
-    const semesterID = this._collection.insert({ term, year, semesterNumber, slugID, retired });
+    const semesterID = this._collection.insert({
+      term, year, semesterNumber, slugID, retired,
+    });
     Slugs.updateEntityID(slugID, semesterID);
     return semesterID;
   }

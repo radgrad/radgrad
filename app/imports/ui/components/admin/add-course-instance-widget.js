@@ -46,8 +46,8 @@ Template.Add_Course_Instance_Widget.events({
     instance.context.reset();
     addSchema.clean(newData, { mutate: true });
     instance.context.validate(newData);
-    if (instance.context.isValid() &&
-        !CourseInstances.isCourseInstance(newData.semester, newData.course, newData.user)) {
+    if (instance.context.isValid()
+        && !CourseInstances.isCourseInstance(newData.semester, newData.course, newData.user)) {
       FormUtils.convertICE(newData);
       newData.verified = (newData.verified === 'true');
       newData.fromSTAR = (newData.fromSTAR === 'true');

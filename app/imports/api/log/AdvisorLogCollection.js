@@ -41,10 +41,14 @@ class AdvisorLogCollection extends BaseCollection {
    * @param createdOn the Date the log was created (optional).
    * @param retired the retired status (optional).
    */
-  define({ advisor, student, text, createdOn = moment().toDate(), retired }) {
+  define({
+    advisor, student, text, createdOn = moment().toDate(), retired,
+  }) {
     const advisorID = Users.getID(advisor);
     const studentID = Users.getID(student);
-    return this._collection.insert({ advisorID, studentID, text, createdOn, retired });
+    return this._collection.insert({
+      advisorID, studentID, text, createdOn, retired,
+    });
   }
 
   update(docID, { text, retired }) {
@@ -146,10 +150,12 @@ class AdvisorLogCollection extends BaseCollection {
     const doc = this.findDoc(docID);
     const student = Users.getProfile(doc.studentID).username;
     const advisor = Users.getProfile(doc.advisorID).username;
-    const text = doc.text;
-    const createdOn = doc.createdOn;
-    const retired = doc.retired;
-    return { student, advisor, text, createdOn, retired };
+    const { text } = doc;
+    const { createdOn } = doc;
+    const { retired } = doc;
+    return {
+      student, advisor, text, createdOn, retired,
+    };
   }
 }
 

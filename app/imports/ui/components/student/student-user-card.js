@@ -122,4 +122,3 @@ Template.Student_User_Card.onRendered(function studentusercardOnRendered() {
 Template.Student_User_Card.onDestroyed(function studentusercardOnDestroyed() {
   // add your statement here
 });
-

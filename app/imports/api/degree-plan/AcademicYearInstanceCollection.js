@@ -52,7 +52,9 @@ class AcademicYearInstanceCollection extends BaseCollection {
           semesterIDs.push(Semesters.getID(`${Semesters.FALL}-${y}`));
           semesterIDs.push(Semesters.getID(`${Semesters.SPRING}-${y + 1}`));
           semesterIDs.push(Semesters.getID(`${Semesters.SUMMER}-${y + 1}`));
-          this._collection.insert({ year: y, springYear: y + 1, studentID, semesterIDs });
+          this._collection.insert({
+            year: y, springYear: y + 1, studentID, semesterIDs,
+          });
         }
       }
     }
@@ -65,7 +67,9 @@ class AcademicYearInstanceCollection extends BaseCollection {
           semesterIDs.push(Semesters.getID(`${Semesters.FALL}-${y}`));
           semesterIDs.push(Semesters.getID(`${Semesters.SPRING}-${y + 1}`));
           semesterIDs.push(Semesters.getID(`${Semesters.SUMMER}-${y + 1}`));
-          this._collection.insert({ year: y, springYear: y + 1, studentID, semesterIDs });
+          this._collection.insert({
+            year: y, springYear: y + 1, studentID, semesterIDs,
+          });
         }
       }
     }
@@ -79,7 +83,9 @@ class AcademicYearInstanceCollection extends BaseCollection {
     semesterIDs.push(Semesters.getID(`${Semesters.SUMMER}-${year + 1}`));
 
     // Define and return the docID
-    return this._collection.insert({ year, springYear: year + 1, studentID, semesterIDs, retired });
+    return this._collection.insert({
+      year, springYear: year + 1, studentID, semesterIDs, retired,
+    });
   }
 
   /**
@@ -154,7 +160,7 @@ class AcademicYearInstanceCollection extends BaseCollection {
   toString(academicYearInstanceID) {
     this.assertDefined(academicYearInstanceID);
     const doc = this.findDoc(academicYearInstanceID);
-    const username = Users.getProfile(doc.studentID).username;
+    const { username } = Users.getProfile(doc.studentID);
     return `[AY ${doc.year}-${doc.year + 1} ${username}]`;
   }
 
@@ -187,8 +193,8 @@ class AcademicYearInstanceCollection extends BaseCollection {
   dumpOne(docID) {
     const doc = this.findDoc(docID);
     const student = Users.getProfile(doc.studentID).username;
-    const year = doc.year;
-    const retired = doc.retired;
+    const { year } = doc;
+    const { retired } = doc;
     return { student, year, retired };
   }
 }
@@ -199,4 +205,3 @@ class AcademicYearInstanceCollection extends BaseCollection {
  */
 export const AcademicYearInstances = new AcademicYearInstanceCollection();
 // We are not going to persist AcademicYearInstances
-

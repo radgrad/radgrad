@@ -72,4 +72,3 @@ Template.Update_Verification_Request_Widget.onRendered(function updateVerificati
 Template.Update_Verification_Request_Widget.onDestroyed(function updateVerificationRequestWidgetOnDestroyed() {
   // add your statement here
 });
-

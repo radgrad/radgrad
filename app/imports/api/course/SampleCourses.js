@@ -1,7 +1,7 @@
 import { moment } from 'meteor/momentjs:moment';
 import { Semesters } from '../semester/SemesterCollection';
-import { Courses } from '../course/CourseCollection';
-import { CourseInstances } from '../course/CourseInstanceCollection';
+import { Courses } from './CourseCollection';
+import { CourseInstances } from './CourseInstanceCollection';
 import { makeSampleInterest } from '../interest/SampleInterests';
 
 
@@ -27,7 +27,9 @@ export function makeSampleCourse(args) {
   const creditHrs = 3;
   const interestID = (args && args.interestID) ? args.interestID : makeSampleInterest();
   const interests = [interestID];
-  return Courses.define({ name, slug, number, description, creditHrs, interests });
+  return Courses.define({
+    name, slug, number, description, creditHrs, interests,
+  });
 }
 
 /**
@@ -43,5 +45,7 @@ export function makeSampleCourseInstance(student, args) {
   const course = (args && args.course) ? args.course : makeSampleCourse();
   const verified = true;
   const grade = 'A';
-  return CourseInstances.define({ semester, course, verified, grade, student });
+  return CourseInstances.define({
+    semester, course, verified, grade, student,
+  });
 }

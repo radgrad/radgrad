@@ -5,8 +5,8 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
-import { getRouteUserName } from '../shared/route-user-name';
-import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
+import { getRouteUserName } from './route-user-name';
+import { getUserIdFromRoute } from './get-user-id-from-route';
 import PreferredChoice from '../../../api/degree-plan/PreferredChoice';
 import { ROLE } from '../../../api/role/Role';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';

@@ -53,7 +53,7 @@ export const semesterOpportunities = (semester, semesterNumber) => {
       const type = Opportunities.getOpportunityTypeDoc(opportunity._id);
       return type.name === 'Club';
     });
-  } else if (semesterNumber < 6) {
+  } if (semesterNumber < 6) {
     return _.filter(semesterOpps, function onlyEvents(opportunity) {
       const type = Opportunities.getOpportunityTypeDoc(opportunity._id);
       return type.name === 'Event' || type.name === 'Club';
@@ -79,7 +79,7 @@ export const getStudentSemesterOpportunityChoices = (semester, semesterNumber, s
 
 export const chooseStudentSemesterOpportunity = (semester, semesterNumber, studentID) => {
   const choices = getStudentSemesterOpportunityChoices(semester, semesterNumber, studentID);
-  const interestIDs = Users.getProfile(studentID).interestIDs;
+  const { interestIDs } = Users.getProfile(studentID);
   const preferred = new PreferredChoice(choices, interestIDs);
   const best = preferred.getBestChoices();
   if (best) {
@@ -96,7 +96,7 @@ export const getStudentCurrentSemesterOpportunityChoices = (studentID) => {
 
 export const getRecommendedCurrentSemesterOpportunityChoices = (studentID) => {
   const choices = getStudentCurrentSemesterOpportunityChoices(studentID);
-  const interestIDs = Users.getProfile(studentID).interestIDs;
+  const { interestIDs } = Users.getProfile(studentID);
   const preferred = new PreferredChoice(choices, interestIDs);
   const best = preferred.getBestChoices();
   return best;

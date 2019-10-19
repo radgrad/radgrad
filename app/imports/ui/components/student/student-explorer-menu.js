@@ -14,8 +14,8 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
-import { getRouteUserName } from '../../components/shared/route-user-name.js';
-import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
+import { getRouteUserName } from '../shared/route-user-name.js';
+import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { isInRole } from '../../utilities/template-helpers';
 import { getGroupName } from '../shared/route-group-name';
 
@@ -71,8 +71,7 @@ Template.Student_Explorer_Menu.helpers({
     const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentCardExplorerPlansPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } if (group === 'faculty') {
       return RouteNames.facultyExplorerPlansPageRouteName;
     }
     return RouteNames.mentorExplorerPlansPageRouteName;
@@ -81,8 +80,7 @@ Template.Student_Explorer_Menu.helpers({
     const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentExplorerPlansPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } if (group === 'faculty') {
       return RouteNames.facultyExplorerPlansPageRouteName;
     }
     return RouteNames.mentorExplorerPlansPageRouteName;
@@ -91,8 +89,7 @@ Template.Student_Explorer_Menu.helpers({
     const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentCardExplorerCareerGoalsPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } if (group === 'faculty') {
       return RouteNames.facultyExplorerCareerGoalsPageRouteName;
     }
     return RouteNames.mentorExplorerCareerGoalsPageRouteName;
@@ -101,8 +98,7 @@ Template.Student_Explorer_Menu.helpers({
     const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentExplorerCareerGoalsPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } if (group === 'faculty') {
       return RouteNames.facultyExplorerCareerGoalsPageRouteName;
     }
     return RouteNames.mentorExplorerCareerGoalsPageRouteName;
@@ -140,8 +136,7 @@ Template.Student_Explorer_Menu.helpers({
     const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentCardExplorerCoursesPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } if (group === 'faculty') {
       return RouteNames.facultyExplorerCoursesPageRouteName;
     }
     return RouteNames.mentorExplorerCoursesPageRouteName;
@@ -150,8 +145,7 @@ Template.Student_Explorer_Menu.helpers({
     const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentExplorerCoursesPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } if (group === 'faculty') {
       return RouteNames.facultyExplorerCoursesPageRouteName;
     }
     return RouteNames.mentorExplorerCoursesPageRouteName;
@@ -160,8 +154,7 @@ Template.Student_Explorer_Menu.helpers({
     const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentExplorerDegreesPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } if (group === 'faculty') {
       return RouteNames.facultyExplorerDegreesPageRouteName;
     }
     return RouteNames.mentorExplorerDegreesPageRouteName;
@@ -249,8 +242,7 @@ Template.Student_Explorer_Menu.helpers({
     const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentCardExplorerInterestsPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } if (group === 'faculty') {
       return RouteNames.facultyExplorerInterestsPageRouteName;
     }
     return RouteNames.mentorExplorerInterestsPageRouteName;
@@ -259,8 +251,7 @@ Template.Student_Explorer_Menu.helpers({
     const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentExplorerInterestsPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } if (group === 'faculty') {
       return RouteNames.facultyExplorerInterestsPageRouteName;
     }
     return RouteNames.mentorExplorerInterestsPageRouteName;
@@ -280,8 +271,7 @@ Template.Student_Explorer_Menu.helpers({
     const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentExplorerOpportunitiesPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } if (group === 'faculty') {
       return RouteNames.facultyExplorerOpportunitiesPageRouteName;
     }
     return RouteNames.mentorExplorerOpportunitiesPageRouteName;
@@ -290,8 +280,7 @@ Template.Student_Explorer_Menu.helpers({
     const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentExplorerOpportunitiesPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } if (group === 'faculty') {
       return RouteNames.facultyExplorerOpportunitiesPageRouteName;
     }
     return RouteNames.mentorExplorerOpportunitiesPageRouteName;
@@ -358,8 +347,7 @@ Template.Student_Explorer_Menu.helpers({
     const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentCardExplorerUsersPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } if (group === 'faculty') {
       return RouteNames.facultyCardExplorerUsersPageRouteName;
     }
     return RouteNames.mentorExplorerUsersPageRouteName;
@@ -368,8 +356,7 @@ Template.Student_Explorer_Menu.helpers({
     const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentCardExplorerUsersPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } if (group === 'faculty') {
       return RouteNames.facultyCardExplorerUsersPageRouteName;
     }
     return RouteNames.mentorCardExplorerUsersPageRouteName;

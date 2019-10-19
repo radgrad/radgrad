@@ -47,11 +47,13 @@ Template.Student_Explorer_Review_Widget.helpers({
     const reviewSemester = Semesters.toString(review.semesterID);
     const reviewRating = review.rating;
     const reviewComments = review.comments;
-    return { name: userName, username: userUsername, picture: userPicture, semester: reviewSemester,
-      rating: reviewRating, comments: reviewComments };
+    return {
+      name: userName, username: userUsername, picture: userPicture, semester: reviewSemester,
+      rating: reviewRating, comments: reviewComments,
+    };
   },
   reviews() {
-    const event = this.event;
+    const { event } = this;
     const matchingReviews = Reviews.find({
       revieweeID: event._id,
       visible: true,
@@ -69,7 +71,7 @@ Template.Student_Explorer_Review_Widget.helpers({
     const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentCardExplorerUsersPageRouteName;
-    } else if (group === 'faculty') {
+    } if (group === 'faculty') {
       return RouteNames.facultyCardExplorerUsersPageRouteName;
     }
     return RouteNames.mentorCardExplorerUsersPageRouteName;

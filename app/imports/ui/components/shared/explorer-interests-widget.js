@@ -30,7 +30,7 @@ Template.Explorer_Interests_Widget.helpers({
     const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentExplorerCoursesPageRouteName;
-    } else if (group === 'faculty') {
+    } if (group === 'faculty') {
       return RouteNames.facultyExplorerCoursesPageRouteName;
     }
     return RouteNames.mentorExplorerCoursesPageRouteName;
@@ -60,7 +60,7 @@ Template.Explorer_Interests_Widget.helpers({
     const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentExplorerOpportunitiesPageRouteName;
-    } else if (group === 'faculty') {
+    } if (group === 'faculty') {
       return RouteNames.facultyExplorerOpportunitiesPageRouteName;
     }
     return RouteNames.mentorExplorerOpportunitiesPageRouteName;
@@ -83,7 +83,7 @@ Template.Explorer_Interests_Widget.helpers({
     const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentCardExplorerUsersPageRouteName;
-    } else if (group === 'faculty') {
+    } if (group === 'faculty') {
       return RouteNames.facultyCardExplorerUsersPageRouteName;
     }
     return RouteNames.mentorCardExplorerUsersPageRouteName;
@@ -133,7 +133,7 @@ Template.Explorer_Interests_Widget.events({
     collectionName = FavoriteInterests.getCollectionName();
     const definitionData = {};
     definitionData.student = getRouteUserName();
-    const item = Template.instance().data.item;
+    const { item } = Template.instance().data;
     definitionData.interest = Slugs.getNameFromID(item.slugID);
     defineMethod.call({ collectionName, definitionData }, (error) => {
       if (error) {

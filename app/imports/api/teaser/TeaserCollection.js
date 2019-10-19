@@ -54,7 +54,9 @@ class TeaserCollection extends BaseSlugCollection {
    * if the slug is already defined, or if the opportunity is supplied and not found.
    * @returns The newly created docID.
    */
-  define({ title, slug, author, url, description, duration, interests, opportunity, targetSlug, retired }) {
+  define({
+    title, slug, author, url, description, duration, interests, opportunity, targetSlug, retired,
+  }) {
     // Get InterestIDs, throw error if any of them are not found.
     const interestIDs = Interests.getIDs(interests);
     // Get SlugID, throw error if found.
@@ -69,8 +71,10 @@ class TeaserCollection extends BaseSlugCollection {
     if (!_.isUndefined(targetSlug)) {
       targetSlugID = Slugs.findDoc({ name: targetSlug })._id;
     }
-    const teaserID = this._collection.insert({ title, slugID, author, url, description, duration, interestIDs,
-      targetSlugID, retired });
+    const teaserID = this._collection.insert({
+      title, slugID, author, url, description, duration, interestIDs,
+      targetSlugID, retired,
+    });
     // Connect the Slug to this teaser
     Slugs.updateEntityID(slugID, teaserID);
     return teaserID;
@@ -81,7 +85,9 @@ class TeaserCollection extends BaseSlugCollection {
    * @param docID The docID to be updated.
    * @throws { Meteor.Error } If docID is not defined, or if any interest or opportunity is undefined.
    */
-  update(docID, { title, targetSlug, interests, author, url, description, duration, retired }) {
+  update(docID, {
+    title, targetSlug, interests, author, url, description, duration, retired,
+  }) {
     this.assertDefined(docID);
     const updateData = {};
     if (title) {
@@ -194,19 +200,21 @@ class TeaserCollection extends BaseSlugCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const title = doc.title;
+    const { title } = doc;
     const slug = Slugs.getNameFromID(doc.slugID);
-    const author = doc.author;
-    const url = doc.url;
-    const description = doc.description;
-    const duration = doc.duration;
+    const { author } = doc;
+    const { url } = doc;
+    const { description } = doc;
+    const { duration } = doc;
     const interests = _.map(doc.interestIDs, interestID => Interests.findSlugByID(interestID));
     let targetSlug;
     if (doc.targetSlugID) {
       targetSlug = Slugs.getNameFromID(doc.targetSlugID);
     }
-    const retired = doc.retired;
-    return { title, slug, author, url, description, duration, interests, targetSlug, retired };
+    const { retired } = doc;
+    return {
+      title, slug, author, url, description, duration, interests, targetSlug, retired,
+    };
   }
 }
 

@@ -37,8 +37,11 @@ if (Meteor.isClient) {
       const name = 'updated AcademicPlan name';
       const semester = 'Spring-2017';
       const coursesPerSemester = [5, 5, 5, 5, 2, 0, 2, 2, 0, 2, 2, 0];
-      await updateMethod.callPromise({ collectionName,
-        updateData: { id, degreeSlug, name, semester, coursesPerSemester },
+      await updateMethod.callPromise({
+        collectionName,
+        updateData: {
+          id, degreeSlug, name, semester, coursesPerSemester,
+        },
       });
     });
 

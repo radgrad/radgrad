@@ -30,4 +30,3 @@ Template.Add_User_Widget_Mentor.onRendered(function addUserWidgetMentorOnRendere
 Template.Add_User_Widget_Mentor.onDestroyed(function addUserWidgetMentorOnDestroyed() {
   // add your statement here
 });
-

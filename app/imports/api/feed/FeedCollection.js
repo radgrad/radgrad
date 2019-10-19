@@ -114,7 +114,9 @@ class FeedCollection extends BaseCollection {
    * The timestamp and feedtype fields cannot be updated once created.
    * @throws { Meteor.Error } If docID is not defined, or if users, opportunity, or course are not defined.
    */
-  update(docID, { description, picture, users, opportunity, course, semester, retired }) {
+  update(docID, {
+    description, picture, users, opportunity, course, semester, retired,
+  }) {
     this.assertDefined(docID);
     const updateData = {};
     if (description) {
@@ -171,11 +173,13 @@ class FeedCollection extends BaseCollection {
     const users = (_.isArray(user)) ? user : [user];
     const userIDs = _.uniq(Users.getIDs(users));
     const description = `A student has joined RadGrad${(userIDs.length > 1) ? ' along with some others.' : '.'}`;
-    let picture = Users.getProfile(userIDs[0]).picture;
+    let { picture } = Users.getProfile(userIDs[0]);
     if (!picture || picture === '') {
       picture = defaultProfilePicture;
     }
-    return this._collection.insert({ userIDs, description, feedType, timestamp, picture, retired });
+    return this._collection.insert({
+      userIDs, description, feedType, timestamp, picture, retired,
+    });
   }
 
   /**
@@ -453,11 +457,11 @@ class FeedCollection extends BaseCollection {
     const userID = Users.getID(username);
     this.assertDefined(existingFeedID);
     const existingFeed = this.findDoc(existingFeedID);
-    let userIDs = existingFeed.userIDs;
+    let { userIDs } = existingFeed;
     userIDs.push(userID);
     userIDs = _.uniq(userIDs);
     const description = `A student and ${userIDs.length - 1} others have joined RadGrad.`;
-    let picture = Users.getProfile(userIDs[0]).picture;
+    let { picture } = Users.getProfile(userIDs[0]);
     if (!picture || picture === '') {
       picture = defaultProfilePicture;
     }
@@ -468,11 +472,11 @@ class FeedCollection extends BaseCollection {
     const userID = Users.getID((_.isArray(user)) ? user[0] : user);
     this.assertDefined(existingFeedID);
     const existingFeed = this.findDoc(existingFeedID);
-    let userIDs = existingFeed.userIDs;
+    let { userIDs } = existingFeed;
     userIDs.push(userID);
     userIDs = _.uniq(userIDs);
     const description = `A student and ${userIDs.length - 1} others have achieved level ${level}.`;
-    let picture = Users.getProfile(userIDs[0]).picture;
+    let { picture } = Users.getProfile(userIDs[0]);
     if (!picture || picture === '') {
       picture = defaultProfilePicture;
     }
@@ -489,7 +493,7 @@ class FeedCollection extends BaseCollection {
     const userID = Users.getID(username);
     this.assertDefined(existingFeedID);
     const existingFeed = this.findDoc(existingFeedID);
-    let userIDs = existingFeed.userIDs;
+    let { userIDs } = existingFeed;
     userIDs.push(userID);
     userIDs = _.uniq(userIDs);
     const o = Opportunities.findDoc(existingFeed.opportunityID);
@@ -572,10 +576,12 @@ class FeedCollection extends BaseCollection {
     if (doc.semesterID) {
       semester = Semesters.findSlugByID(doc.semesterID);
     }
-    const feedType = doc.feedType;
-    const timestamp = doc.timestamp;
-    const retired = doc.retired;
-    return { user, opportunity, course, semester, feedType, timestamp, retired };
+    const { feedType } = doc;
+    const { timestamp } = doc;
+    const { retired } = doc;
+    return {
+      user, opportunity, course, semester, feedType, timestamp, retired,
+    };
   }
 
   /**

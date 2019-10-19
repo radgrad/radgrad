@@ -30,4 +30,3 @@ Template.Landing_Section_2.onRendered(function landingSection2OnRendered() {
 Template.Landing_Section_2.onDestroyed(function landingSection2OnDestroyed() {
   // add your statement here
 });
-
