@@ -85,3 +85,4 @@ mizzao:user-status
 msavin:usercache
 underscore@1.0.10
 jcbernack:reactive-aggregate
+meteortesting:mocha
