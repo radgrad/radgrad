@@ -8,7 +8,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 function splitEmails(emails, key, emailsPerFile) {
   const emailData = fs.readFileSync(`./${emails}`);
-  const emailArr = emailData.toString().split('\n')
+  const emailArr = emailData.toString().split('\n');
   const numEmails = emailArr.length;
   let count = 1;
   let start = 0;
