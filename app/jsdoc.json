@@ -10,7 +10,7 @@
       "node_modules"
     ],
     "includePattern": ".+\\.js(x|doc)?$",
-    "excludePattern": ".+\\app-test.js(x|doc)?$"
+    "excludePattern": ".+\\(app-)?test.js(x|doc)?$"
   },
   "plugins": ["plugins/markdown"],
   "opts": {
