@@ -28,7 +28,7 @@
     "jquery-tablesort": "0.0.11",
     "meteor-node-stubs": "^0.2.11",
     "node-balanced": "0.0.14",
-    "npm": "^6.10.1",
+    "npm": "^6.13.1",
     "selenium-webdriver": "^3.6.0",
     "simpl-schema": "^0.3.2",
     "webdriverio": "^4.13.2"
