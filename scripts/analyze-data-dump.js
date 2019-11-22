@@ -6,18 +6,18 @@ let radgradDump;
 
 const getCollectionData = (collectionName) => {
   return _.find(radgradDump.collections, (c) => c.name === collectionName).contents;
-}
+};
 
 const getUserProfile = (username) => {
   const studentProfiles = getCollectionData('StudentProfileCollection');
   return _.find(studentProfiles, (p) => p.username === username);
-}
+};
 
 const getRegisteredStudentUsernames = () => {
   const studentProfiles = getCollectionData('StudentProfileCollection');
   const students = _.filter(studentProfiles, (p) => p.isAlumni === false);
   return _.map(students, (s) => s.username);
-}
+};
 
 const getFullName = (username) => {
   const profile = getUserProfile(username);
@@ -25,24 +25,24 @@ const getFullName = (username) => {
     return `${profile.firstName} ${profile.lastName}`;
   }
   return '';
-}
+};
 
 const getIceSnapshot = (profile) => {
   const iceSnapshots = getCollectionData('IceSnapshotCollection');
   const ice = _.find(iceSnapshots.contents, (i) => i.username === profile.username);
   return ice;
-}
+};
 
 const getStudentIce = (username) => {
   const iceSnapshots = getCollectionData('IceSnapshotCollection');
   const ice = _.find(iceSnapshots, (i) => i.username === username);
   return ice;
-}
+};
 
 const getUserInteractions = () => {
   const userInteractionCollection = _.find(radgradDump.collections, (c) => c.name === 'UserInteractionCollection').contents;
   return userInteractionCollection;
-}
+};
 
 const getUserInteractionsBetween = (startStr, endStr) => {
   const start = moment(startStr);
@@ -53,14 +53,14 @@ const getUserInteractionsBetween = (startStr, endStr) => {
     return lTime.isBetween(start, end, null, '[]');
   });
   return between;
-}
+};
 
 const getActiveStudentsBetween = (startStr, endStr) => {
   const interactions = getUserInteractionsBetween(startStr, endStr);
   let users = _.map(interactions, (i) => i.username);
   users = _.uniq(users);
   return _.filter(users, (u) => u.username !== 'radgrad@hawaii.edu');
-}
+};
 
 const getActiveStudentNamesBetween = (startStr, endStr) => {
   const activeStudents = getActiveStudentsBetween(startStr, endStr);
@@ -75,26 +75,26 @@ const getActiveStudentNamesBetween = (startStr, endStr) => {
       ice.e = 0;
     }
     // console.log(ice);
-    return `${getFullName(u)}: ${getUserLoginsBetween(u,startStr, endStr).length} [${ice.i}, ${ice.c}, ${ice.e}]`;
+    return `${getFullName(u)}: ${getUserLoginsBetween(u, startStr, endStr).length} [${ice.i}, ${ice.c}, ${ice.e}]`;
   });
   // console.log(names);
   return names;
-}
+};
 
 const getInteractionsPerUser = (username) => {
   const interactions = getUserInteractions();
   return _.filter(interactions, (i) => i.username === username);
-}
+};
 
 const getInteractionsPerUserBetween = (username, startStr, endStr) => {
-  const interactions = getUserInteractionsBetween(startStr, endStr)
+  const interactions = getUserInteractionsBetween(startStr, endStr);
   return _.filter(interactions, (i) => i.username === username);
-}
+};
 
 const getInteractionsByType = (type) => {
   const interactions = getUserInteractions();
-  return  _.filter(interactions, (i) => i.type === type);
-}
+  return _.filter(interactions, (i) => i.type === type);
+};
 
 const getInteractionsByTypeBetween = (type, startStr, endStr) => {
   const start = moment(startStr);
@@ -105,11 +105,11 @@ const getInteractionsByTypeBetween = (type, startStr, endStr) => {
     return lTime.isBetween(start, end, null, '[]');
   });
   return between;
-}
+};
 
 const getLoginInteractions = () => {
   return getInteractionsByType('login');
-}
+};
 
 const getLoginsBetween = (startStr, endStr) => {
   const start = moment(startStr);
@@ -120,33 +120,33 @@ const getLoginsBetween = (startStr, endStr) => {
     return lTime.isBetween(start, end, null, '[]');
   });
   return between;
-}
+};
 
 const getLoginsBetweenWoRadgrad = (startStr, endStr) => {
   const logins = getLoginsBetween(startStr, endStr);
   return _.filter(logins, (l) => l.username !== 'radgrad@hawaii.edu');
-}
+};
 
 const getUserLogins = (profile) => {
   const logins = getLoginInteractions();
   const userLogins = _.filter(logins, (l) => l.username === profile.username);
   return userLogins;
-}
+};
 
 const getUniqLoginsBetween = (startStr, endStr) => {
   const logins = getLoginsBetween(startStr, endStr);
   return _.uniqBy(logins, (l) => l.username);
-}
+};
 
 const getUniqLoginsBetweenWoRadgrad = (startStr, endStr) => {
   const logins = getUniqLoginsBetween(startStr, endStr);
   return _.filter(logins, (l) => l.username !== 'radgrad@hawaii.edu');
-}
+};
 
 const getUserLoginsBetween = (username, startStr, endStr) => {
   const logins = getLoginsBetween(startStr, endStr);
   return _.filter(logins, (l) => l.username === username);
-}
+};
 
 const loginAnalysis = (startString, endString) => {
   const uniqLogins = getUniqLoginsBetween(startString, endString);
@@ -170,13 +170,13 @@ const loginAnalysis = (startString, endString) => {
     }
   });
   console.log('User logins min=%o max=%o sum=%o user with most %o', min, max, sum, mostLogins);
-}
+};
 
 const userAnalysis = (username, startString, endString) => {
   let results = getFullName(username);
   results = `${results}, ${getUserLoginsBetween(username, startString, endString).length}`;
   return results;
-}
+};
 
 const sessionInformationBetween = (startStr, endStr) => {
   const usernames = getActiveStudentsBetween(startStr, endStr);
@@ -188,8 +188,10 @@ const sessionInformationBetween = (startStr, endStr) => {
   let sessionEnd;
   let minSessions = 1000;
   let maxSessions = 0;
+  const studentSessionInfo = {};
   _.forEach(usernames, (username, index) => {
     const sessionInfo = sessionInformation(username, startStr, endStr);
+    studentSessionInfo[username] = sessionInfo;
     sessions += sessionInfo.sessionCount;
     sessionTime += sessionInfo.totalSessionTime;
     if (minSessions > sessionInfo.sessionCount) {
@@ -208,8 +210,9 @@ const sessionInformationBetween = (startStr, endStr) => {
   retVal.maxSessions = maxSessions;
   retVal.totalSessionTime = sessionTime;
   retVal.averageSessionTime = sessionTime / sessions;
+  retVal.studentSessionInfo = studentSessionInfo;
   return retVal;
-}
+};
 
 const sessionInformation = (username, startStr, endStr) => {
   const interactions = getInteractionsPerUserBetween(username, startStr, endStr);
@@ -259,33 +262,33 @@ const sessionInformation = (username, startStr, endStr) => {
   retVal.totalSessionTime = 0;
   retVal.averageSession = 0;
   return retVal;
-}
+};
 
 const pageViewsBetween = (startStr, endStr) => {
   const pageViews = getInteractionsByTypeBetween('pageView', startStr, endStr);
   const pageViewsByPage = _.groupBy(pageViews, (p) => p.typeData[0]);
   return _.mapValues(pageViewsByPage, (value) => value.length);
-}
+};
 
 const coursePageViewsBetween = (startStr, endStr) => {
   const views = pageViewsBetween(startStr, endStr);
   return _.pickBy(views, (value, key) => key.includes('courses'));
-}
+};
 
 const opportunityPageViewsBetween = (startStr, endStr) => {
   const views = pageViewsBetween(startStr, endStr);
   return _.pickBy(views, (value, key) => key.includes('opportunities'));
-}
+};
 
 const degreePlanPageViewsBetween = (startStr, endStr) => {
   const views = pageViewsBetween(startStr, endStr);
   return _.pickBy(views, (value, key) => key.includes('degree'));
-}
+};
 
 const explorerPageViewsBetween = (startStr, endStr) => {
   const views = pageViewsBetween(startStr, endStr);
   return _.pickBy(views, (value, key) => key.includes('explorer'));
-}
+};
 
 const initDataDump = () => {
   const argv = process.argv;
@@ -297,7 +300,7 @@ const initDataDump = () => {
     const data = fs.readFileSync(filename);
     radgradDump = JSON.parse(data.toString());
   }
-}
+};
 
 const opportunityICE = () => {
   const opportunities = getCollectionData('OpportunityCollection');
@@ -308,7 +311,7 @@ const opportunityICE = () => {
     return `${o.name}: [${o.ice.i}, ${o.ice.c}, ${o.ice.e}]`;
   });
   return info;
-}
+};
 
 const analyzeData = () => {
   initDataDump();
@@ -317,9 +320,9 @@ const analyzeData = () => {
   // const names = getActiveStudentNamesBetween('2019-01-01', '2019-05-31');
   // console.log(names.join(', '));
   // loginAnalysis('2019-01-01', '2019-05-31');
-  // console.log(sessionInformationBetween('2019-01-01', '2019-05-31'));
+  console.log(sessionInformationBetween('2019-01-01', '2019-05-31'));
   // console.log(pageViewsBetween('2019-01-01', '2019-05-31'));
-  console.log(opportunityICE());
-}
+  // console.log(opportunityICE());
+};
 
 analyzeData();
