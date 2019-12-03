@@ -13,4 +13,3 @@ Template.Faculty_Manage_Opportunities_Page.helpers({
 Template.Faculty_Manage_Opportunities_Page.onCreated(function onCreated() {
   this.updateID = new ReactiveVar('');
 });
-

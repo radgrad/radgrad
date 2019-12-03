@@ -3,8 +3,8 @@ import { expect } from 'chai';
 import { Semesters } from '../semester/SemesterCollection';
 import { defineSemesters } from '../semester/SemesterUtilities';
 import { ROLE } from '../role/Role';
-import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
-import { makeSampleOpportunity } from '../opportunity/SampleOpportunities';
+import { OpportunityInstances } from './OpportunityInstanceCollection';
+import { makeSampleOpportunity } from './SampleOpportunities';
 import { makeSampleUser } from '../user/SampleUsers';
 import { removeAllEntities } from '../base/BaseUtilities';
 import { VerificationRequests } from '../verification/VerificationRequestCollection';
@@ -29,7 +29,9 @@ if (Meteor.isServer) {
       const student = makeSampleUser();
       const opportunity = makeSampleOpportunity(faculty);
       const verified = true;
-      let docID = OpportunityInstances.define({ semester, opportunity, verified, student });
+      let docID = OpportunityInstances.define({
+        semester, opportunity, verified, student,
+      });
       expect(OpportunityInstances.isOpportunityInstance(semester, opportunity, student)).to.be.true;
       expect(OpportunityInstances.isOpportunityInstance(semester, opportunity, faculty)).to.be.false;
       let dumpObject = OpportunityInstances.dumpOne(docID);
@@ -54,7 +56,9 @@ if (Meteor.isServer) {
       const student = makeSampleUser();
       const opportunity = makeSampleOpportunity(faculty);
       const verified = false;
-      const docID = OpportunityInstances.define({ semester, opportunity, verified, student });
+      const docID = OpportunityInstances.define({
+        semester, opportunity, verified, student,
+      });
       const vrID = VerificationRequests.define({ student, opportunityInstance: docID });
       expect(OpportunityInstances.isOpportunityInstance(semester, opportunity, student)).to.be.true;
       expect(VerificationRequests.isDefined(vrID)).to.be.true;

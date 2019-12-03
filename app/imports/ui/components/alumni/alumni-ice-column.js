@@ -16,12 +16,16 @@ function getEventsHelper(iceType, type, earned, semester) {
     let allInstances = [];
     const iceInstances = [];
     if (type === 'course') {
-      const courseInstances = CourseInstances.findNonRetired({ semesterID: semester._id, studentID: profile.userID,
-        verified: earned });
+      const courseInstances = CourseInstances.findNonRetired({
+        semesterID: semester._id, studentID: profile.userID,
+        verified: earned,
+      });
       courseInstances.forEach(courseInstance => allInstances.push(courseInstance));
     } else {
-      allInstances = OpportunityInstances.findNonRetired({ semesterID: semester._id, studentID: profile.userID,
-        verified: earned });
+      allInstances = OpportunityInstances.findNonRetired({
+        semesterID: semester._id, studentID: profile.userID,
+        verified: earned,
+      });
     }
     allInstances.forEach((instance) => {
       if (iceType === 'Innovation') {
@@ -91,8 +95,8 @@ Template.Alumni_Ice_Column.helpers({
   },
   hasEvents(earned, semester) {
     let ret = false;
-    if ((getEventsHelper(this.type, 'course', earned, semester).length > 0) ||
-      (getEventsHelper(this.type, 'opportunity', earned, semester).length > 0)) {
+    if ((getEventsHelper(this.type, 'course', earned, semester).length > 0)
+      || (getEventsHelper(this.type, 'opportunity', earned, semester).length > 0)) {
       ret = true;
     }
     return ret;

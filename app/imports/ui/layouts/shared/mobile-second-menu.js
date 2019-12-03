@@ -38,4 +38,3 @@ Template.Mobile_Second_Menu.events({
     $('.ui.sidebar').sidebar('hide');
   },
 });
-

@@ -47,7 +47,9 @@ function processStudentStarDefinitions(advisor, student, definitions) {
       numInterstingCourses += 1;
       const courseID = Courses.findIdBySlug(definition.course);
       // console.log('courseID', courseID);
-      const planning = CourseInstances.find({ studentID, semesterID, courseID, verified: false })
+      const planning = CourseInstances.find({
+        studentID, semesterID, courseID, verified: false,
+      })
         .fetch();
       // console.log('planning', planning);
       planning.forEach((c) => {

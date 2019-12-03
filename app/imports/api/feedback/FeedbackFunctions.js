@@ -71,16 +71,20 @@ export class FeedbackFunctionClass {
               if (preSemester) {
                 if (preSemester.semesterNumber >= semester.semesterNumber) {
                   const semesterName2 = Semesters.toString(preSemester._id, false);
-                  const description = `${semesterName}: ${course.number}'s prerequisite ${preCourse.number} is ` +
-                    `after or in ${semesterName2}.`;
-                  const definitionData = { user, functionName, description, feedbackType };
+                  const description = `${semesterName}: ${course.number}'s prerequisite ${preCourse.number} is `
+                    + `after or in ${semesterName2}.`;
+                  const definitionData = {
+                    user, functionName, description, feedbackType,
+                  };
                   defineMethod.call({ collectionName: 'FeedbackInstanceCollection', definitionData });
                 }
               }
             } else {
-              const description = `${semesterName}: Prerequisite ${prerequisiteCourse.number} for ${course.number}` +
-                ' not found.';
-              const definitionData = { user, functionName, description, feedbackType };
+              const description = `${semesterName}: Prerequisite ${prerequisiteCourse.number} for ${course.number}`
+                + ' not found.';
+              const definitionData = {
+                user, functionName, description, feedbackType,
+              };
               defineMethod.call({ collectionName: 'FeedbackInstanceCollection', definitionData });
             }
           });
@@ -134,7 +138,9 @@ export class FeedbackFunctionClass {
         }
       });
       description = description.substring(0, description.length - 2);
-      const definitionData = { user, functionName, description, feedbackType };
+      const definitionData = {
+        user, functionName, description, feedbackType,
+      };
       defineMethod.call({ collectionName: 'FeedbackInstanceCollection', definitionData });
     }
   }
@@ -169,7 +175,9 @@ export class FeedbackFunctionClass {
     });
     description = description.substring(0, description.length - 2);
     if (haveOverloaded) {
-      const definitionData = { user, functionName, description, feedbackType };
+      const definitionData = {
+        user, functionName, description, feedbackType,
+      };
       defineMethod.call({ collectionName: 'FeedbackInstanceCollection', definitionData });
     }
   }
@@ -190,7 +198,7 @@ export class FeedbackFunctionClass {
     const coursesTakenSlugs = [];
     const studentProfile = Users.getProfile(user);
     const courseIDs = StudentProfiles.getCourseIDs(user);
-    const academicPlanID = studentProfile.academicPlanID;
+    const { academicPlanID } = studentProfile;
     const academicPlan = AcademicPlans.findDoc(academicPlanID);
     const coursesNeeded = academicPlan.courseList.slice(0);
     _.forEach(courseIDs, (cID) => {
@@ -228,7 +236,9 @@ export class FeedbackFunctionClass {
         // eslint-disable-next-line max-len
         description = `${description} \n\n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${slug}), `;
       }
-      const definitionData = { user, functionName, description, feedbackType };
+      const definitionData = {
+        user, functionName, description, feedbackType,
+      };
       defineMethod.call({ collectionName: 'FeedbackInstanceCollection', definitionData });
     }
   }
@@ -265,7 +275,9 @@ export class FeedbackFunctionClass {
           description = `${description} \n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${slug.name}), `;
         });
         description = description.substring(0, description.length - 2);
-        const definitionData = { user, functionName, description, feedbackType };
+        const definitionData = {
+          user, functionName, description, feedbackType,
+        };
         defineMethod.call({ collectionName: 'FeedbackInstanceCollection', definitionData });
       }
     } else {
@@ -305,7 +317,9 @@ export class FeedbackFunctionClass {
           description = `${description} \n- [${opp.name}](${basePath}explorer/opportunities/${slug.name}), `;
         });
         description = description.substring(0, description.length - 2);
-        const definitionData = { user, functionName, description, feedbackType };
+        const definitionData = {
+          user, functionName, description, feedbackType,
+        };
         defineMethod.call({ collectionName: 'FeedbackInstanceCollection', definitionData });
       }
     }
@@ -374,7 +388,9 @@ ${getLevelCriteriaStringMarkdown('six')}`;
         description = '';
     }
     if (description) {
-      const definitionData = { user, functionName, description, feedbackType };
+      const definitionData = {
+        user, functionName, description, feedbackType,
+      };
       defineMethod.call({ collectionName: 'FeedbackInstanceCollection', definitionData });
     }
   }
@@ -407,7 +423,7 @@ ${getLevelCriteriaStringMarkdown('six')}`;
     if (FlowRouter.current()) {
       const currentRoute = FlowRouter.current().path;
       if (currentRoute.startsWith('/advisor')) {
-        const username = Users.getProfile(studentID).username;
+        const { username } = Users.getProfile(studentID);
         basePath = `/student/${username}/`;
       } else {
         const index = getPosition(currentRoute, '/', 3);

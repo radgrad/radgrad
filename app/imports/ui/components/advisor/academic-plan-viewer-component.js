@@ -93,4 +93,3 @@ Template.Academic_Plan_Viewer_Component.onRendered(function academicPlanViewerWi
 Template.Academic_Plan_Viewer_Component.onDestroyed(function academicPlanViewerWidgetOnDestroyed() {
   // add your statement here
 });
-

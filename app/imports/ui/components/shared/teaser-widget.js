@@ -6,7 +6,7 @@ import { Teasers } from '../../../api/teaser/TeaserCollection';
 
 function getTeaserURL() {
   const current = FlowRouter.current();
-  const path = current.path;
+  const { path } = current;
   const lastIndex = path.lastIndexOf('/') + 1;
   const targetSlug = path.substring(lastIndex);
   const targetSlugID = Slugs.findDoc({ name: targetSlug })._id;

@@ -30,7 +30,7 @@ Template.List_Course_Instances_Widget.helpers({
     return CourseInstances.count();
   },
   name(courseInstance) {
-    const username = Users.getProfile(courseInstance.studentID).username;
+    const { username } = Users.getProfile(courseInstance.studentID);
     const courseNum = Courses.findDoc(courseInstance.courseID).number;
     const semester = Semesters.toString(courseInstance.semesterID, true);
     return `${username}-${courseNum}-${semester}`;
@@ -48,8 +48,10 @@ Template.List_Course_Instances_Widget.helpers({
       { label: 'CreditHrs', value: courseInstance.creditHrs },
       { label: 'Note', value: courseInstance.note },
       { label: 'Student', value: Users.getFullName(courseInstance.studentID) },
-      { label: 'ICE', value: `${courseInstance.ice.i}, ${courseInstance.ice.c}, 
-        ${courseInstance.ice.e}` },
+      {
+        label: 'ICE', value: `${courseInstance.ice.i}, ${courseInstance.ice.c}, 
+        ${courseInstance.ice.e}`,
+      },
       { label: 'Retired', value: courseInstance.retired ? 'True' : 'False' },
     ];
   },

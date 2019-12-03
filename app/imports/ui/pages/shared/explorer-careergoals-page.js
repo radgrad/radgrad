@@ -110,4 +110,3 @@ Template.Explorer_CareerGoals_Page.helpers({
     return [];
   },
 });
-

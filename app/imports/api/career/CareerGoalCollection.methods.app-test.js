@@ -32,7 +32,11 @@ if (Meteor.isClient) {
       const name = 'updated CareerGoal name';
       const description = 'updated CareerGoal description';
       const interests = ['algorithms', 'java'];
-      await updateMethod.callPromise({ collectionName, updateData: { id, name, description, interests } });
+      await updateMethod.callPromise({
+        collectionName, updateData: {
+          id, name, description, interests,
+        },
+      });
     });
 
     it('Remove Method', async function () {

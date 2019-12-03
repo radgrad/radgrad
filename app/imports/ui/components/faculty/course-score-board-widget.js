@@ -30,11 +30,11 @@ Template.Course_Score_Board_Widget.helpers({
         }
       }
       if (Template.instance().dictionary.get('byEE')) {
-        if (c.number.startsWith('EE') ||
-          c.number.startsWith('CEE') ||
-          c.number.startsWith('ME') ||
-          c.number.startsWith('OE') ||
-          c.number.startsWith('BE')) {
+        if (c.number.startsWith('EE')
+          || c.number.startsWith('CEE')
+          || c.number.startsWith('ME')
+          || c.number.startsWith('OE')
+          || c.number.startsWith('BE')) {
           retVal = true;
         }
       }

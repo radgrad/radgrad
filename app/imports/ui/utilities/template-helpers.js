@@ -10,8 +10,8 @@ import { getGroupName } from '../components/shared/route-group-name';
  * @memberOf ui/utilities
  */
 export function getExplorerUserID() {
-  const username = FlowRouter.getParam('explorerUserName') &&
-      FlowRouter.getParam('explorerUserName').replace('%2540', '@');
+  const username = FlowRouter.getParam('explorerUserName')
+      && FlowRouter.getParam('explorerUserName').replace('%2540', '@');
   return username && Users.getID(username);
 }
 
@@ -34,7 +34,7 @@ export function dateDiffInDays(a, b) {
  * @memberOf ui/utilities
  */
 export function opportunitySemesters(opportunityInstance) {
-  const semesterIDs = opportunityInstance.semesterIDs;
+  const { semesterIDs } = opportunityInstance;
   const upcomingSemesters = _.filter(semesterIDs, semesterID => Semesters.isUpcomingSemester(semesterID));
   return _.map(upcomingSemesters, semesterID => Semesters.toString(semesterID));
 }

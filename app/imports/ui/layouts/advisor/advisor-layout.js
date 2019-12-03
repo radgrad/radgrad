@@ -40,9 +40,11 @@ Template.Advisor_Layout.helpers({
         route: RouteNames.advisorAcademicPlanPageRouteName,
         regex: 'academic-plan',
       },
-      { label: 'Scoreboard',
+      {
+        label: 'Scoreboard',
         route: RouteNames.advisorScoreboardPageRouteName,
-        regex: 'scoreboard' },
+        regex: 'scoreboard',
+      },
     ];
   },
   secondMenuLength() {

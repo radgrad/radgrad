@@ -13,4 +13,3 @@ Template.Admin_DataModel_Teasers_Page.helpers({
 Template.Admin_DataModel_Teasers_Page.onCreated(function onCreated() {
   this.updateID = new ReactiveVar('');
 });
-

@@ -31,7 +31,7 @@ Template.Explorer_CareerGoals_Widget.helpers({
     return RouteNames.studentExplorerInterestsPageRouteName;
   },
   interestSlugName(interestSlugName) {
-    const slugID = Interests.findDoc(interestSlugName).slugID;
+    const { slugID } = Interests.findDoc(interestSlugName);
     return Slugs.getNameFromID(slugID);
   },
   isLabel,
@@ -39,14 +39,14 @@ Template.Explorer_CareerGoals_Widget.helpers({
     return string.toUpperCase();
   },
   userPicture(user) {
-    const picture = Users.getProfile(user).picture;
+    const { picture } = Users.getProfile(user);
     return picture || defaultProfilePicture;
   },
   usersRouteName() {
     const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentCardExplorerUsersPageRouteName;
-    } else if (group === 'faculty') {
+    } if (group === 'faculty') {
       return RouteNames.facultyCardExplorerUsersPageRouteName;
     }
     return RouteNames.mentorCardExplorerUsersPageRouteName;

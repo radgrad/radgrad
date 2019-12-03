@@ -20,7 +20,7 @@ Template.Landing_Explorer_CareerGoals_Widget.helpers({
     return RouteNames.studentExplorerInterestsPageRouteName;
   },
   interestSlugName(interestSlugName) {
-    const slugID = Interests.findDoc(interestSlugName).slugID;
+    const { slugID } = Interests.findDoc(interestSlugName);
     return Slugs.getNameFromID(slugID);
   },
   isLabel,
@@ -28,4 +28,3 @@ Template.Landing_Explorer_CareerGoals_Widget.helpers({
     return string.toUpperCase();
   },
 });
-

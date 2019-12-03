@@ -40,8 +40,12 @@ class UserInteractionCollection extends BaseCollection {
    * @param typeData Any data associated with the interaction type.
    * @param timestamp The time of interaction.
    */
-  define({ username, type, typeData, timestamp = moment().toDate() }) {
-    return this._collection.insert({ username, type, typeData, timestamp });
+  define({
+    username, type, typeData, timestamp = moment().toDate(),
+  }) {
+    return this._collection.insert({
+      username, type, typeData, timestamp,
+    });
   }
 
   /**
@@ -93,11 +97,13 @@ class UserInteractionCollection extends BaseCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const username = doc.username;
-    const timestamp = doc.timestamp;
-    const type = doc.type;
-    const typeData = doc.typeData;
-    return { username, type, typeData, timestamp };
+    const { username } = doc;
+    const { timestamp } = doc;
+    const { type } = doc;
+    const { typeData } = doc;
+    return {
+      username, type, typeData, timestamp,
+    };
   }
 
   /**

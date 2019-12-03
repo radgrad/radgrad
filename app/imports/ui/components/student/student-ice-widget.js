@@ -3,7 +3,7 @@ import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getEarnedICE, getProjectedICE } from '../../../api/ice/IceProcessor';
-import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
+import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
 Template.Student_Ice_Widget.helpers({
   earnedICE() {
@@ -52,4 +52,3 @@ Template.Student_Ice_Widget.onRendered(function enableAccordion() {
     exclusive: false,
   });
 });
-

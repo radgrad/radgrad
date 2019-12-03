@@ -4,15 +4,18 @@ import * as RouteNames from '../../../startup/client/router.js';
 Template.Mentor_Layout.helpers({
   secondMenuItems() {
     return [
-      { label: 'Home',
+      {
+        label: 'Home',
         route: RouteNames.mentorHomePageRouteName,
         regex: 'home',
       },
-      { label: 'Mentor Space',
+      {
+        label: 'Mentor Space',
         route: RouteNames.mentorMentorSpacePageRouteName,
         regex: 'mentor-space',
       },
-      { label: 'Explorer',
+      {
+        label: 'Explorer',
         route: RouteNames.mentorExplorerPageRouteName,
         regex: 'explorer',
       },

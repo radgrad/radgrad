@@ -71,14 +71,14 @@ class VerificationRequestCollection extends BaseCollection {
     semester, opportunity, retired,
   }) {
     const studentID = Users.getID(student);
-    const oppInstance = opportunityInstance ? OpportunityInstances.findDoc(opportunityInstance) :
-      OpportunityInstances.findOpportunityInstanceDoc(semester, opportunity, student);
+    const oppInstance = opportunityInstance ? OpportunityInstances.findDoc(opportunityInstance)
+      : OpportunityInstances.findOpportunityInstanceDoc(semester, opportunity, student);
     if (!oppInstance) {
       throw new Meteor.Error('Could not find the opportunity instance to associate with this verification request',
         '', Error().stack);
     }
     const opportunityInstanceID = oppInstance._id;
-    const ice = Opportunities.findDoc(oppInstance.opportunityID).ice;
+    const { ice } = Opportunities.findDoc(oppInstance.opportunityID);
     // Define and return the new VerificationRequest
     const requestID = this._collection.insert({
       studentID, opportunityInstanceID, submittedOn, documentation, status, processed, ice, retired,
@@ -266,7 +266,9 @@ class VerificationRequestCollection extends BaseCollection {
     const userID = Users.getID(verifyingUser);
     const verifier = Users.getProfile(userID).username;
     const date = new Date();
-    const processRecord = { date, status, verifier, feedback };
+    const processRecord = {
+      date, status, verifier, feedback,
+    };
     this._collection.update(verificationRequestID, { $set: { status }, $push: { processed: processRecord } });
   }
 
@@ -304,12 +306,14 @@ class VerificationRequestCollection extends BaseCollection {
     const opportunityInstance = OpportunityInstances.findDoc(doc.opportunityInstanceID);
     const semester = Semesters.findSlugByID(opportunityInstance.semesterID);
     const opportunity = Opportunities.findSlugByID(opportunityInstance.opportunityID);
-    const submittedOn = doc.submittedOn;
-    const status = doc.status;
-    const processed = doc.processed;
-    const retired = doc.retired;
-    const documentation = doc.documentation;
-    return { student, semester, opportunity, submittedOn, documentation, status, processed, retired };
+    const { submittedOn } = doc;
+    const { status } = doc;
+    const { processed } = doc;
+    const { retired } = doc;
+    const { documentation } = doc;
+    return {
+      student, semester, opportunity, submittedOn, documentation, status, processed, retired,
+    };
   }
 }
 

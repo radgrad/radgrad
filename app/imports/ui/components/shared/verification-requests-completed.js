@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
-import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
+import { getUserIdFromRoute } from './get-user-id-from-route';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
@@ -63,14 +63,14 @@ Template.Verification_Requests_Completed.helpers({
 Template.Verification_Requests_Completed.events({
   'click button': function clickButton(event) {
     event.preventDefault();
-    const id = event.target.id;
+    const { id } = event.target;
     const request = VerificationRequests.findDoc(id);
     const status = VerificationRequests.OPEN;
     const processRecord = {};
     processRecord.date = new Date();
     processRecord.status = VerificationRequests.OPEN;
     processRecord.verifier = Users.getFullName(Meteor.userId());
-    const processed = request.processed;
+    const { processed } = request;
     processed.push(processRecord);
     verificationRequestsUpdateStatusMethod.call({ id, status, processed });
     // update the OpportunityInstance so that it isn't verified.

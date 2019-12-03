@@ -133,4 +133,3 @@ Template.Opportunity_Scoreboard_Widget.onRendered(function opportunityScoreboard
 Template.Opportunity_Scoreboard_Widget.onDestroyed(function opportunityScoreboardWidgetOnDestroyed() {
   // add your statement here
 });
-

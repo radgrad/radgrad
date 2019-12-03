@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
-import { getRouteUserName } from '../shared/route-user-name';
+import { getRouteUserName } from './route-user-name';
 import { getUserIdFromRoute } from './get-user-id-from-route';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import PreferredChoice from '../../../api/degree-plan/PreferredChoice';

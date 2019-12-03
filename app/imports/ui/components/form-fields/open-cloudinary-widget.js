@@ -30,7 +30,8 @@ export function openCloudinaryWidget(nameAttribute) {
       }
       // Otherwise get the form elements
       // console.log('Cloudinary results: ', result);
-      const url = result[0].url;
+      const { url } = result[0];
       $(`input[name=${nameAttribute}]`).val(url);
-    });
+    },
+  );
 }

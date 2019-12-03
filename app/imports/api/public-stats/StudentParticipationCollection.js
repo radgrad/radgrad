@@ -81,18 +81,18 @@ class StudentParticipationCollection extends BaseCollection {
     const problems = [];
     this.find()
       .forEach(doc => {
-        if (!Courses.isDefined(doc.itemID) &&
-          !Opportunities.isDefined(doc.itemID) &&
-          !AcademicPlans.isDefined(doc.itemID) &&
-          !CareerGoals.isDefined(doc.itemID) &&
-          !Interests.isDefined(doc.itemID)) {
+        if (!Courses.isDefined(doc.itemID)
+          && !Opportunities.isDefined(doc.itemID)
+          && !AcademicPlans.isDefined(doc.itemID)
+          && !CareerGoals.isDefined(doc.itemID)
+          && !Interests.isDefined(doc.itemID)) {
           problems.push(`Bad itemID. ${doc.itemID} is neither a Course or Opportunity ID.`);
         }
-        if (!Slugs.isSlugForEntity(doc.itemSlug, Courses.getType()) &&
-          !Slugs.isSlugForEntity(doc.itemSlug, Opportunities.getType()) &&
-          !Slugs.isSlugForEntity(doc.itemSlug, AcademicPlans.getType()) &&
-          !Slugs.isSlugForEntity(doc.itemSlug, CareerGoals.getType()) &&
-          !Slugs.isSlugForEntity(doc.itemSlug, Interests.getType())) {
+        if (!Slugs.isSlugForEntity(doc.itemSlug, Courses.getType())
+          && !Slugs.isSlugForEntity(doc.itemSlug, Opportunities.getType())
+          && !Slugs.isSlugForEntity(doc.itemSlug, AcademicPlans.getType())
+          && !Slugs.isSlugForEntity(doc.itemSlug, CareerGoals.getType())
+          && !Slugs.isSlugForEntity(doc.itemSlug, Interests.getType())) {
           problems.push(`Bad itemSlug. ${doc.itemSlug} is neither a Course or Opportunity slug.`);
         }
       });
@@ -106,9 +106,9 @@ class StudentParticipationCollection extends BaseCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const itemID = doc.itemID;
-    const itemSlug = doc.itemSlug;
-    const itemCount = doc.itemCount;
+    const { itemID } = doc;
+    const { itemSlug } = doc;
+    const { itemCount } = doc;
     return { itemID, itemSlug, itemCount };
   }
 

@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
-import { ROLE, isRole, assertRole } from '../role/Role';
+import { ROLE, isRole, assertRole } from './Role';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */

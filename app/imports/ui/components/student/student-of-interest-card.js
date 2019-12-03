@@ -22,7 +22,7 @@ Template.Student_Of_Interest_Card.helpers({
     return ret;
   },
   itemShortDescription(item) {
-    let description = item.description;
+    let { description } = item;
     if (description.length > 200) {
       description = `${description.substring(0, 200)}`;
       if (description.charAt(description.length - 1) === ' ') {

@@ -3,7 +3,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import * as RouteNames from '../../../startup/client/router.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { ROLE } from '../../../api/role/Role.js';
-import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
+import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 
 Template.Student_Levels_Others.helpers({

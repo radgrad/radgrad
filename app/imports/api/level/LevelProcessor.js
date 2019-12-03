@@ -21,53 +21,57 @@ export function defaultCalcLevel(studentID) {
     OpportunityInstances.find({ studentID }).fetch());
   const earnedICE = getEarnedICE(instances);
   const plannedICE = getProjectedICE(instances);
-  const numCourseReviews = Reviews.find({ studentID, reviewType: 'course', moderated: true, visible: true })
+  const numCourseReviews = Reviews.find({
+    studentID, reviewType: 'course', moderated: true, visible: true,
+  })
     .count();
-  const numOppReviews = Reviews.find({ studentID, reviewType: 'opportunity', moderated: true, visible: true })
+  const numOppReviews = Reviews.find({
+    studentID, reviewType: 'opportunity', moderated: true, visible: true,
+  })
     .count();
   const numReviews = numCourseReviews + numOppReviews;
   // console.log('defaultCalcLevel', earnedICE, plannedICE, numReviews);
   let level = 1;
   // console.log(Meteor.settings.public);
-  if (earnedICE.i >= Meteor.settings.public.level.six.earnedICE.i &&
-    earnedICE.c >= Meteor.settings.public.level.six.earnedICE.c &&
-    earnedICE.e >= Meteor.settings.public.level.six.earnedICE.e &&
-    numReviews >= Meteor.settings.public.level.six.reviews &&
-    plannedICE.i >= Meteor.settings.public.level.six.plannedICE.i &&
-    plannedICE.c >= Meteor.settings.public.level.six.plannedICE.c &&
-    plannedICE.e >= Meteor.settings.public.level.six.plannedICE.e) {
+  if (earnedICE.i >= Meteor.settings.public.level.six.earnedICE.i
+    && earnedICE.c >= Meteor.settings.public.level.six.earnedICE.c
+    && earnedICE.e >= Meteor.settings.public.level.six.earnedICE.e
+    && numReviews >= Meteor.settings.public.level.six.reviews
+    && plannedICE.i >= Meteor.settings.public.level.six.plannedICE.i
+    && plannedICE.c >= Meteor.settings.public.level.six.plannedICE.c
+    && plannedICE.e >= Meteor.settings.public.level.six.plannedICE.e) {
     level = 6;
-  } else if (earnedICE.i >= Meteor.settings.public.level.five.earnedICE.i &&
-    earnedICE.c >= Meteor.settings.public.level.five.earnedICE.c &&
-    earnedICE.e >= Meteor.settings.public.level.five.earnedICE.e &&
-    numReviews >= Meteor.settings.public.level.five.reviews &&
-    plannedICE.i >= Meteor.settings.public.level.five.plannedICE.i &&
-    plannedICE.c >= Meteor.settings.public.level.five.plannedICE.c &&
-    plannedICE.e >= Meteor.settings.public.level.five.plannedICE.e) {
+  } else if (earnedICE.i >= Meteor.settings.public.level.five.earnedICE.i
+    && earnedICE.c >= Meteor.settings.public.level.five.earnedICE.c
+    && earnedICE.e >= Meteor.settings.public.level.five.earnedICE.e
+    && numReviews >= Meteor.settings.public.level.five.reviews
+    && plannedICE.i >= Meteor.settings.public.level.five.plannedICE.i
+    && plannedICE.c >= Meteor.settings.public.level.five.plannedICE.c
+    && plannedICE.e >= Meteor.settings.public.level.five.plannedICE.e) {
     level = 5;
-  } else if (earnedICE.i >= Meteor.settings.public.level.four.earnedICE.i &&
-    earnedICE.c >= Meteor.settings.public.level.four.earnedICE.c &&
-    earnedICE.e >= Meteor.settings.public.level.four.earnedICE.e &&
-    numReviews >= Meteor.settings.public.level.four.reviews &&
-    plannedICE.i >= Meteor.settings.public.level.four.plannedICE.i &&
-    plannedICE.c >= Meteor.settings.public.level.four.plannedICE.c &&
-    plannedICE.e >= Meteor.settings.public.level.four.plannedICE.e) {
+  } else if (earnedICE.i >= Meteor.settings.public.level.four.earnedICE.i
+    && earnedICE.c >= Meteor.settings.public.level.four.earnedICE.c
+    && earnedICE.e >= Meteor.settings.public.level.four.earnedICE.e
+    && numReviews >= Meteor.settings.public.level.four.reviews
+    && plannedICE.i >= Meteor.settings.public.level.four.plannedICE.i
+    && plannedICE.c >= Meteor.settings.public.level.four.plannedICE.c
+    && plannedICE.e >= Meteor.settings.public.level.four.plannedICE.e) {
     level = 4;
-  } else if (earnedICE.i >= Meteor.settings.public.level.three.earnedICE.i &&
-    earnedICE.c >= Meteor.settings.public.level.three.earnedICE.c &&
-    earnedICE.e >= Meteor.settings.public.level.three.earnedICE.e &&
-    numReviews >= Meteor.settings.public.level.three.reviews &&
-    plannedICE.i >= Meteor.settings.public.level.three.plannedICE.i &&
-    plannedICE.c >= Meteor.settings.public.level.three.plannedICE.c &&
-    plannedICE.e >= Meteor.settings.public.level.three.plannedICE.e) {
+  } else if (earnedICE.i >= Meteor.settings.public.level.three.earnedICE.i
+    && earnedICE.c >= Meteor.settings.public.level.three.earnedICE.c
+    && earnedICE.e >= Meteor.settings.public.level.three.earnedICE.e
+    && numReviews >= Meteor.settings.public.level.three.reviews
+    && plannedICE.i >= Meteor.settings.public.level.three.plannedICE.i
+    && plannedICE.c >= Meteor.settings.public.level.three.plannedICE.c
+    && plannedICE.e >= Meteor.settings.public.level.three.plannedICE.e) {
     level = 3;
-  } else if (earnedICE.i >= Meteor.settings.public.level.two.earnedICE.i &&
-    earnedICE.c >= Meteor.settings.public.level.two.earnedICE.c &&
-    earnedICE.e >= Meteor.settings.public.level.two.earnedICE.e &&
-    numReviews >= Meteor.settings.public.level.two.reviews &&
-    plannedICE.i >= Meteor.settings.public.level.two.plannedICE.i &&
-    plannedICE.c >= Meteor.settings.public.level.two.plannedICE.c &&
-    plannedICE.e >= Meteor.settings.public.level.two.plannedICE.e) {
+  } else if (earnedICE.i >= Meteor.settings.public.level.two.earnedICE.i
+    && earnedICE.c >= Meteor.settings.public.level.two.earnedICE.c
+    && earnedICE.e >= Meteor.settings.public.level.two.earnedICE.e
+    && numReviews >= Meteor.settings.public.level.two.reviews
+    && plannedICE.i >= Meteor.settings.public.level.two.plannedICE.i
+    && plannedICE.c >= Meteor.settings.public.level.two.plannedICE.c
+    && plannedICE.e >= Meteor.settings.public.level.two.plannedICE.e) {
     level = 2;
   }
   // console.log('defaultCalcLevel', studentID, earnedICE, plannedICE, numReviews, hasPicture, level);

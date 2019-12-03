@@ -188,7 +188,7 @@ class FavoriteCareerGoalCollection extends BaseCollection {
     const doc = this.findDoc(docID);
     const careerGoal = CareerGoals.findSlugByID(doc.careerGoalID);
     const student = Users.getProfile(doc.studentID).username;
-    const retired = doc.retired;
+    const { retired } = doc;
     return { careerGoal, student, retired };
   }
 }

@@ -69,4 +69,3 @@ Template.Student_Update_Picture_Widget.onRendered(function studentupdatepicturew
 Template.Student_Update_Picture_Widget.onDestroyed(function studentupdatepicturewidgetOnDestroyed() {
   // add your statement here
 });
-

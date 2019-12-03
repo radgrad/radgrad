@@ -3,7 +3,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import SimpleSchema from 'simpl-schema';
 import { Slugs } from '../slug/SlugCollection';
 import { Interests } from '../interest/InterestCollection';
-import { CourseInstances } from '../course/CourseInstanceCollection';
+import { CourseInstances } from './CourseInstanceCollection';
 import { Feeds } from '../feed/FeedCollection';
 import BaseSlugCollection from '../base/BaseSlugCollection';
 import { isSingleChoice } from '../degree-plan/PlanChoiceUtilities';
@@ -86,10 +86,9 @@ class CourseCollection extends BaseSlugCollection {
     // can't check the validity of prereqs during a define, such as with:
     //   _.each(prerequisites, (prerequisite) => this.getID(prerequisite));
     // Instead, we check that prereqs are valid as part of checkIntegrity.
-    const courseID =
-      this._collection.insert({
-        name, shortName, slugID, number, description, creditHrs, interestIDs, syllabus, prerequisites, retired,
-      });
+    const courseID = this._collection.insert({
+      name, shortName, slugID, number, description, creditHrs, interestIDs, syllabus, prerequisites, retired,
+    });
     // Connect the Slug to this Interest
     Slugs.updateEntityID(slugID, courseID);
     return courseID;
@@ -108,7 +107,9 @@ class CourseCollection extends BaseSlugCollection {
    * @param prerequisites An array of course slugs. (optional)
    * @param retired boolean (optional)
    */
-  update(instance, { name, shortName, number, description, creditHrs, interests, prerequisites, syllabus, retired }) {
+  update(instance, {
+    name, shortName, number, description, creditHrs, interests, prerequisites, syllabus, retired,
+  }) {
     const docID = this.getID(instance);
     const updateData = {};
     if (name) {
@@ -236,16 +237,16 @@ class CourseCollection extends BaseSlugCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const name = doc.name;
-    const shortName = doc.shortName;
+    const { name } = doc;
+    const { shortName } = doc;
     const slug = Slugs.getNameFromID(doc.slugID);
-    const number = doc.number;
-    const description = doc.description;
-    const creditHrs = doc.creditHrs;
+    const { number } = doc;
+    const { description } = doc;
+    const { creditHrs } = doc;
     const interests = _.map(doc.interestIDs, interestID => Interests.findSlugByID(interestID));
-    const syllabus = doc.syllabus;
-    const prerequisites = doc.prerequisites;
-    const retired = doc.retired;
+    const { syllabus } = doc;
+    const { prerequisites } = doc;
+    const { retired } = doc;
     return {
       name, shortName, slug, number, description, creditHrs, interests, syllabus,
       prerequisites, retired,

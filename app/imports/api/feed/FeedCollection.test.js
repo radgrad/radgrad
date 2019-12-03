@@ -96,8 +96,12 @@ if (Meteor.isServer) {
       const user1 = Users.getProfile(makeSampleUser()).username;
       const user2 = Users.getProfile(makeSampleUser()).username;
       const semester = 'Spring-2013';
-      const docID1 = Feeds.define({ feedType, user: user1, opportunity, semester });
-      const docID2 = Feeds.define({ feedType, user: user2, opportunity, semester });
+      const docID1 = Feeds.define({
+        feedType, user: user1, opportunity, semester,
+      });
+      const docID2 = Feeds.define({
+        feedType, user: user2, opportunity, semester,
+      });
       expect(Feeds.isDefined(docID1)).to.be.true;
       expect(Feeds.isDefined(docID2)).to.be.true;
       expect(docID1).to.equal(docID2);

@@ -137,8 +137,10 @@ Template.Overhead_Analysis_Widget.events({
           const sessions = [];
           let totalTime = 0;
           let slicedIndex = 0;
-          const userData = { username, 'num-sessions': 1, 'num-docs': interactions.length,
-            'docs-per-min': 0, 'total-time': 0 };
+          const userData = {
+            username, 'num-sessions': 1, 'num-docs': interactions.length,
+            'docs-per-min': 0, 'total-time': 0,
+          };
           _.each(interactions, function (interaction, index) {
             if (index !== 0) {
               const prevTimestamp = moment(new Date(interactions[index - 1].timestamp));
@@ -211,4 +213,3 @@ Template.Overhead_Analysis_Widget.onRendered(function overheadAnalysisWidgetOnRe
   });
   this.$('.pointing.menu .item').tab();
 });
-

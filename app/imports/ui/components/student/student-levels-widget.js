@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 import { Users } from '../../../api/user/UserCollection.js';
-import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
+import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getLevelHintStringMarkdown } from '../../../api/level/LevelProcessor';
 
 /* eslint-disable max-len */

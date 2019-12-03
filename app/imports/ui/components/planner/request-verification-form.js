@@ -71,4 +71,3 @@ Template.Request_Verification_Form.onRendered(function requestVerificationFormOn
 Template.Request_Verification_Form.onDestroyed(function requestVerificationFormOnDestroyed() {
   // add your statement here
 });
-

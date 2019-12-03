@@ -131,4 +131,3 @@ Template.Course_Scoreboard_Widget.onRendered(function courseScoreboardWidgetOnRe
 Template.Course_Scoreboard_Widget.onDestroyed(function courseScoreboardWidgetOnDestroyed() {
   // add your statement here
 });
-

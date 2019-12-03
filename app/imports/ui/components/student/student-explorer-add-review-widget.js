@@ -79,8 +79,10 @@ Template.Student_Explorer_Add_Review_Widget.events({
         feedData = { feedType: Feeds.NEW_OPPORTUNITY_REVIEW, user: newData.student, opportunity: newData.reviewee };
       }
       defineMethod.call({ collectionName: Feeds.getCollectionName(), definitionData: feedData });
-      const interactionData = { username: getRouteUserName(), type: 'addReview',
-        typeData: Slugs.getNameFromID(this.event.slugID) };
+      const interactionData = {
+        username: getRouteUserName(), type: 'addReview',
+        typeData: Slugs.getNameFromID(this.event.slugID),
+      };
       userInteractionDefineMethod.call(interactionData, (err) => {
         if (err) {
           console.log('Error creating UserInteraction', err);

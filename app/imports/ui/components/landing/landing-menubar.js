@@ -45,4 +45,3 @@ Template.Landing_Menubar.onRendered(function landingMenubarOnRendered() {
 Template.Landing_Menubar.onDestroyed(function landingMenubarOnDestroyed() {
   // add your statement here
 });
-

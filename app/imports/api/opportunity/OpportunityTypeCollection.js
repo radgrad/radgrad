@@ -24,8 +24,12 @@ class OpportunityTypeCollection extends BaseTypeCollection {
    * @throws { Meteor.Error } If the slug already exists.
    * @returns The newly created docID.
    */
-  define({ name, slug, description, retired }) {
-    return super.define({ name, slug, description, retired });
+  define({
+    name, slug, description, retired,
+  }) {
+    return super.define({
+      name, slug, description, retired,
+    });
   }
 
   /**
@@ -58,4 +62,3 @@ class OpportunityTypeCollection extends BaseTypeCollection {
  * @memberOf api/opportunity
  */
 export const OpportunityTypes = new OpportunityTypeCollection();
-

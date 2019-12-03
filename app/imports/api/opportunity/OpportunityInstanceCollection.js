@@ -3,7 +3,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Roles } from 'meteor/alanning:roles';
 import SimpleSchema from 'simpl-schema';
 import { ReactiveAggregate } from 'meteor/jcbernack:reactive-aggregate';
-import { Opportunities } from '../opportunity/OpportunityCollection';
+import { Opportunities } from './OpportunityCollection';
 import { ROLE } from '../role/Role';
 import { AcademicYearInstances } from '../degree-plan/AcademicYearInstanceCollection';
 import { Semesters } from '../semester/SemesterCollection';
@@ -55,7 +55,9 @@ class OpportunityInstanceCollection extends BaseCollection {
    * @returns The newly created docID.
    */
 
-  define({ semester, opportunity, sponsor = undefined, verified = false, student, retired }) {
+  define({
+    semester, opportunity, sponsor = undefined, verified = false, student, retired,
+  }) {
     // Validate semester, opportunity, verified, and studentID
     const semesterID = Semesters.getID(semester);
     const semesterDoc = Semesters.findDoc(semesterID);
@@ -80,7 +82,7 @@ class OpportunityInstanceCollection extends BaseCollection {
     if (this.isOpportunityInstance(semester, opportunity, student)) {
       return this.findOpportunityInstanceDoc(semester, opportunity, student)._id;
     }
-    const ice = Opportunities.findDoc(opportunityID).ice;
+    const { ice } = Opportunities.findDoc(opportunityID);
     // Define and return the new OpportunityInstance
     return this._collection.insert({
       semesterID,
@@ -101,7 +103,9 @@ class OpportunityInstanceCollection extends BaseCollection {
    * @param ice an object with fields i, c, e (optional).
    * @param retired the new retired status (optional).
    */
-  update(docID, { semesterID, verified, ice, retired }) {
+  update(docID, {
+    semesterID, verified, ice, retired,
+  }) {
     this.assertDefined(docID);
     const updateData = {};
     if (semesterID) {
@@ -329,11 +333,13 @@ class OpportunityInstanceCollection extends BaseCollection {
     const doc = this.findDoc(docID);
     const semester = Semesters.findSlugByID(doc.semesterID);
     const opportunity = Opportunities.findSlugByID(doc.opportunityID);
-    const verified = doc.verified;
+    const { verified } = doc;
     const student = Users.getProfile(doc.studentID).username;
     const sponsor = Users.getProfile(doc.sponsorID).username;
-    const retired = doc.retired;
-    return { semester, opportunity, verified, student, sponsor, retired };
+    const { retired } = doc;
+    return {
+      semester, opportunity, verified, student, sponsor, retired,
+    };
   }
 }
 

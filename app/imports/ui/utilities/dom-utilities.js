@@ -32,4 +32,3 @@ export function removeElement(id) {
     parent.removeChild(element);
   }
 }
-

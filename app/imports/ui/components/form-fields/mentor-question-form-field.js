@@ -9,4 +9,3 @@ Template.Mentor_Question_Form_Field.helpers({
 Template.Mentor_Question_Form_Field.onRendered(function mentorQuestionFormFieldOnRendered() {
   this.$('.dropdown').dropdown();
 });
-

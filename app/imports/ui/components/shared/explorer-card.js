@@ -9,7 +9,7 @@ Template.Explorer_Card.helpers({
     const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentExplorerCareerGoalsPageRouteName;
-    } else if (group === 'faculty') {
+    } if (group === 'faculty') {
       return RouteNames.facultyExplorerCareerGoalsPageRouteName;
     }
     return RouteNames.mentorExplorerCareerGoalsPageRouteName;
@@ -18,7 +18,7 @@ Template.Explorer_Card.helpers({
     const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentExplorerCoursesPageRouteName;
-    } else if (group === 'faculty') {
+    } if (group === 'faculty') {
       return RouteNames.facultyExplorerCoursesPageRouteName;
     }
     return RouteNames.mentorExplorerCoursesPageRouteName;
@@ -27,7 +27,7 @@ Template.Explorer_Card.helpers({
     const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentExplorerDegreesPageRouteName;
-    } else if (group === 'faculty') {
+    } if (group === 'faculty') {
       return RouteNames.facultyExplorerDegreesPageRouteName;
     }
     return RouteNames.mentorExplorerDegreesPageRouteName;
@@ -36,7 +36,7 @@ Template.Explorer_Card.helpers({
     const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentExplorerInterestsPageRouteName;
-    } else if (group === 'faculty') {
+    } if (group === 'faculty') {
       return RouteNames.facultyExplorerInterestsPageRouteName;
     }
     return RouteNames.mentorExplorerInterestsPageRouteName;
@@ -45,7 +45,7 @@ Template.Explorer_Card.helpers({
     return item.name;
   },
   itemShortDescription(item) {
-    let description = item.description;
+    let { description } = item;
     if (description.length > 200) {
       description = `${description.substring(0, 200)}`;
       if (description.charAt(description.length - 1) === ' ') {
@@ -61,7 +61,7 @@ Template.Explorer_Card.helpers({
     const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentExplorerOpportunitiesPageRouteName;
-    } else if (group === 'faculty') {
+    } if (group === 'faculty') {
       return RouteNames.facultyExplorerOpportunitiesPageRouteName;
     }
     return RouteNames.mentorExplorerOpportunitiesPageRouteName;

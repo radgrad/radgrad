@@ -47,7 +47,9 @@ class FeedbackInstanceCollection extends BaseCollection {
    * @returns The newly created docID.
    */
 
-  define({ user, functionName, description, feedbackType, retired }) {
+  define({
+    user, functionName, description, feedbackType, retired,
+  }) {
     // Validate Feedback and user.
     const userID = Users.getID(user);
     if (!_.includes(this.feedbackTypes, feedbackType)) {
@@ -55,7 +57,9 @@ class FeedbackInstanceCollection extends BaseCollection {
         '', Error().stack);
     }
     // Define and return the new FeedbackInstance
-    return this._collection.insert({ userID, functionName, description, feedbackType, retired });
+    return this._collection.insert({
+      userID, functionName, description, feedbackType, retired,
+    });
   }
 
   /**
@@ -67,7 +71,9 @@ class FeedbackInstanceCollection extends BaseCollection {
    * @param functionName the new function name, optional
    * @param retired the new retired status, optional
    */
-  update(docID, { user, description, feedbackType, functionName, retired }) {
+  update(docID, {
+    user, description, feedbackType, functionName, retired,
+  }) {
     this.assertDefined(docID);
     const updateData = {};
     if (user) {
@@ -209,11 +215,13 @@ class FeedbackInstanceCollection extends BaseCollection {
   dumpOne(docID) {
     const doc = this.findDoc(docID);
     const user = Users.getProfile(doc.userID).username;
-    const functionName = doc.functionName;
-    const description = doc.description;
-    const feedbackType = doc.feedbackType;
-    const retired = doc.retired;
-    return { user, functionName, description, feedbackType, retired };
+    const { functionName } = doc;
+    const { description } = doc;
+    const { feedbackType } = doc;
+    const { retired } = doc;
+    return {
+      user, functionName, description, feedbackType, retired,
+    };
   }
 }
 

@@ -47,8 +47,7 @@ Template.Profile_Card.helpers({
     const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentExplorerCareerGoalsPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } if (group === 'faculty') {
       return RouteNames.facultyExplorerCareerGoalsPageRouteName;
     }
     return RouteNames.mentorExplorerCareerGoalsPageRouteName;
@@ -60,8 +59,7 @@ Template.Profile_Card.helpers({
     const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentExplorerInterestsPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } if (group === 'faculty') {
       return RouteNames.facultyExplorerInterestsPageRouteName;
     }
     return RouteNames.mentorExplorerInterestsPageRouteName;
@@ -74,7 +72,7 @@ Template.Profile_Card.helpers({
     return item.name;
   },
   itemShortDescription(item) {
-    let description = item.description;
+    let { description } = item;
     if (description.length > 200) {
       description = `${description.substring(0, 200)}`;
       if (description.charAt(description.length - 1) === ' ') {
@@ -123,8 +121,7 @@ Template.Profile_Card.helpers({
     const group = getGroupName();
     if (group === 'student') {
       return RouteNames.studentCardExplorerUsersPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } if (group === 'faculty') {
       return RouteNames.facultyCardExplorerUsersPageRouteName;
     }
     return RouteNames.mentorCardExplorerUsersPageRouteName;

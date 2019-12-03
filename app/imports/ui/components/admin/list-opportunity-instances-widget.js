@@ -38,14 +38,16 @@ Template.List_Opportunity_Instances_Widget.helpers({
       { label: 'Opportunity', value: (Opportunities.findDoc(opportunityInstance.opportunityID)).name },
       { label: 'Verified', value: opportunityInstance.verified.toString() },
       { label: 'Student', value: Users.getFullName(opportunityInstance.studentID) },
-      { label: 'ICE', value: `${opportunityInstance.ice.i}, ${opportunityInstance.ice.c}, 
-        ${opportunityInstance.ice.e}` },
+      {
+        label: 'ICE', value: `${opportunityInstance.ice.i}, ${opportunityInstance.ice.c}, 
+        ${opportunityInstance.ice.e}`,
+      },
       { label: 'Retired', value: opportunityInstance.retired ? 'True' : 'False' },
     ];
   },
   name(oi) {
     const oppName = Opportunities.findDoc(oi.opportunityID).name;
-    const username = Users.getProfile(oi.studentID).username;
+    const { username } = Users.getProfile(oi.studentID);
     const semester = Semesters.toString(oi.semesterID, true);
     return `${username}-${oppName}-${semester}`;
   },

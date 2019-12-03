@@ -253,7 +253,7 @@ class PublicStatsCollection extends BaseCollection {
   firstCareerGoal() {
     const careerGoals = CareerGoals.find({}, { sort: { name: 1 } }).fetch();
     if (careerGoals.length > 0) {
-      const name = Slugs.findDoc(careerGoals[0].slugID).name;
+      const { name } = Slugs.findDoc(careerGoals[0].slugID);
       this._collection.upsert({ key: this.firstCareerGoalKey }, { $set: { value: name } });
     }
   }
@@ -261,7 +261,7 @@ class PublicStatsCollection extends BaseCollection {
   firstInterest() {
     const interests = Interests.find({}, { sort: { name: 1 } }).fetch();
     if (interests.length > 0) {
-      const name = Slugs.findDoc(interests[0].slugID).name;
+      const { name } = Slugs.findDoc(interests[0].slugID);
       this._collection.upsert({ key: this.firstInterestKey }, { $set: { value: name } });
     }
   }
@@ -269,7 +269,7 @@ class PublicStatsCollection extends BaseCollection {
   firstOpportunity() {
     const opps = Opportunities.findNonRetired({}, { sort: { name: 1 } });
     if (opps.length > 0) {
-      const name = Slugs.findDoc(opps[0].slugID).name;
+      const { name } = Slugs.findDoc(opps[0].slugID);
       this._collection.upsert({ key: this.firstOpportunityKey }, { $set: { value: name } });
     }
   }
@@ -277,7 +277,7 @@ class PublicStatsCollection extends BaseCollection {
   firstDegree() {
     const degrees = DesiredDegrees.find({}, { sort: { name: 1 } }).fetch();
     if (degrees.length > 0) {
-      const name = Slugs.findDoc(degrees[0].slugID).name;
+      const { name } = Slugs.findDoc(degrees[0].slugID);
       this._collection.upsert({ key: this.firstDegreeKey }, { $set: { value: name } });
     }
   }

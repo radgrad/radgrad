@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import { ROLE } from '../role/Role';
-import { Reviews } from '../review/ReviewCollection';
+import { Reviews } from './ReviewCollection';
 import { defineSemesters } from '../semester/SemesterUtilities';
 import { makeSampleOpportunity } from '../opportunity/SampleOpportunities';
 import { makeSampleUser } from '../user/SampleUsers';
@@ -50,4 +50,3 @@ if (Meteor.isServer) {
     });
   });
 }
-

@@ -121,19 +121,23 @@ Template.Moderation.events({
         item.moderated = true;
         item.visible = false;
       }
-      const moderatorComments = newData.moderatorComments;
-      const moderated = item.moderated;
-      const visible = item.visible;
+      const { moderatorComments } = newData;
+      const { moderated } = item;
+      const { visible } = item;
       if (split[1] === 'review') {
-        const updateData = { id: itemID, moderated, visible, moderatorComments };
+        const updateData = {
+          id: itemID, moderated, visible, moderatorComments,
+        };
         updateMethod.call({ collectionName: Reviews.getCollectionName(), updateData }, (error) => {
           if (!error) {
-            const studentID = item.studentID;
+            const { studentID } = item;
             updateLevelMethod.call({ studentID });
           }
         });
       } else {
-        const updateData = { id: itemID, moderated, visible, moderatorComments };
+        const updateData = {
+          id: itemID, moderated, visible, moderatorComments,
+        };
         updateMethod.call({ collectionName: MentorQuestions.getCollectionName(), updateData });
       }
     } else {

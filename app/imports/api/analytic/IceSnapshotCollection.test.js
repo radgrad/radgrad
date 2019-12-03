@@ -32,7 +32,9 @@ if (Meteor.isServer) {
     });
 
     it('#define, #isDefined, #removeIt', function test() {
-      const docID = IceSnapshots.define({ username, level, i, c, e, updated: moment().toDate() });
+      const docID = IceSnapshots.define({
+        username, level, i, c, e, updated: moment().toDate(),
+      });
       expect(IceSnapshots.isDefined(docID)).to.be.true;
       IceSnapshots.removeIt(docID);
       expect(IceSnapshots.isDefined(docID)).to.be.false;

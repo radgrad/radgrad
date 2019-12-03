@@ -13,4 +13,3 @@ Template.Admin_DataModel_Reviews_Page.helpers({
 Template.Admin_DataModel_Reviews_Page.onCreated(function onCreated() {
   this.updateID = new ReactiveVar('');
 });
-

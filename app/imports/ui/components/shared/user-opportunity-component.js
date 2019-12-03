@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { getRouteUserName } from '../shared/route-user-name';
+import { getRouteUserName } from './route-user-name';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
@@ -64,7 +64,7 @@ Template.User_Opportunity_Component.helpers({
     const group = getGroupName();
     if (group === 'student') {
       return `/student/${getRouteUserName()}/explorer/opportunities/${slug}`;
-    } else if (group === 'faculty') {
+    } if (group === 'faculty') {
       return `/faculty/${getRouteUserName()}/explorer/opportunities/${slug}`;
     }
     return `/mentor/${getRouteUserName()}/explorer/opportunities/${slug}`;
@@ -74,4 +74,3 @@ Template.User_Opportunity_Component.helpers({
 Template.User_Opportunity_Component.onRendered(function userOpportunityComponentOnRendered() {
   this.$('.ui.accordion').accordion();
 });
-

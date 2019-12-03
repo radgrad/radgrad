@@ -13,7 +13,7 @@ import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollec
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import * as FormUtils from '../form-fields/form-field-utilities.js';
-import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
+import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getGroupName } from '../shared/route-group-name';
 
 const addSchema = new SimpleSchema({

@@ -24,7 +24,9 @@ if (Meteor.isServer) {
       const website = 'http://glau.github.io';
       const interests = [];
       const careerGoals = [];
-      let docID = AdvisorProfiles.define({ username, firstName, lastName, picture, website, interests, careerGoals });
+      let docID = AdvisorProfiles.define({
+        username, firstName, lastName, picture, website, interests, careerGoals,
+      });
       expect(AdvisorProfiles.isDefined(docID)).to.be.true;
       let dumpObject = AdvisorProfiles.dumpOne(docID);
       expect(dumpObject.retired).to.be.undefined;

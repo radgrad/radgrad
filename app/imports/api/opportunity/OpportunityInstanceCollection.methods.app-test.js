@@ -13,7 +13,9 @@ if (Meteor.isClient) {
     const student = 'abi@hawaii.edu';
     const opportunity = 'acm-manoa';
     const verified = true;
-    const definitionData = { semester, opportunity, student, verified };
+    const definitionData = {
+      semester, opportunity, student, verified,
+    };
 
     before(function (done) {
       defineTestFixturesMethod.call(['minimal', 'abi.student', 'opportunities'], done);

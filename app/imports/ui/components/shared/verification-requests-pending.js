@@ -8,7 +8,7 @@ import { VerificationRequests } from '../../../api/verification/VerificationRequ
 import { processPendingVerificationMethod } from '../../../api/verification/VerificationRequestCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection';
-import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
+import { getUserIdFromRoute } from './get-user-id-from-route';
 import { updateLevelMethod } from '../../../api/level/LevelProcessor.methods';
 import { getGroupName } from './route-group-name';
 

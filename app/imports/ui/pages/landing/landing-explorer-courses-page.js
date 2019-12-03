@@ -44,4 +44,3 @@ Template.Landing_Explorer_Courses_Page.helpers({
     return Slugs.findDoc(slugID).name;
   },
 });
-

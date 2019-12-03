@@ -36,4 +36,3 @@ Template.Inspector_Plan_Tabs.onRendered(function inspectorPlanTabsOnRendered() {
 Template.Inspector_Plan_Tabs.onDestroyed(function inspectorPlanTabsOnDestroyed() {
   // add your statement here
 });
-

@@ -24,7 +24,9 @@ if (Meteor.isClient) {
     it('Define Method', async function () {
       await withLoggedInUser();
       await withRadGradSubscriptions();
-      const definitionData = { username, firstName, lastName, picture, website, interests, careerGoals };
+      const definitionData = {
+        username, firstName, lastName, picture, website, interests, careerGoals,
+      };
       await defineMethod.callPromise({ collectionName, definitionData });
     });
 

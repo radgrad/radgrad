@@ -88,4 +88,3 @@ Template.Detail_Course_Card.onRendered(function detailCourseCardOnRendered() {
 Template.Detail_Course_Card.onDestroyed(function detailCourseCardOnDestroyed() {
   // add your statement here
 });
-

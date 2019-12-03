@@ -30,7 +30,11 @@ if (Meteor.isClient) {
       const springYear = 2018;
       const semesterIDs = [];
       const retired = true;
-      await updateMethod.callPromise({ collectionName, updateData: { id, springYear, semesterIDs, retired } });
+      await updateMethod.callPromise({
+        collectionName, updateData: {
+          id, springYear, semesterIDs, retired,
+        },
+      });
     });
 
     it('Remove Method', async function () {

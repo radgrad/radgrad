@@ -15,7 +15,7 @@ import { CourseInstances } from '../course/CourseInstanceCollection';
  * @memberOf api/star
  */
 function findSemesterSlug(starDataObject) {
-  const semester = starDataObject.semester;
+  const { semester } = starDataObject;
   if ((!_.isString(semester)) || (semester.length < 8)) {
     throw new Meteor.Error(`Could not parse semester data: ${JSON.stringify(starDataObject)}`,
       '', Error().stack);
@@ -264,10 +264,10 @@ export function processStarJsonData(student, jsonData) {
   if (student !== jsonData.email) {
     throw new Meteor.Error(`JSON data is not for ${student}`, '', Error().stack);
   }
-  const courses = jsonData.courses;
+  const { courses } = jsonData;
   const dataObjects = _.map(courses, (course) => {
-    const name = course.name;
-    let grade = course.grade;
+    const { name } = course;
+    let { grade } = course;
     if (_.includes(CourseInstances.validGrades, grade)) {
       if (grade === 'CR' && course.transferGrade && isNaN(course.transferGrade)) {
         grade = course.transferGrade;
@@ -280,7 +280,7 @@ export function processStarJsonData(student, jsonData) {
     } else {
       grade = 'OTHER';
     }
-    let number = course.number;
+    let { number } = course;
     if (isNaN(number)) {
       number = course.transferNumber;
     }

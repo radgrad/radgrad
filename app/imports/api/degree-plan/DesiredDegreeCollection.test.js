@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
-import { DesiredDegrees } from '../degree-plan/DesiredDegreeCollection';
+import { DesiredDegrees } from './DesiredDegreeCollection';
 import { removeAllEntities } from '../base/BaseUtilities';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
@@ -22,7 +22,9 @@ if (Meteor.isServer) {
     });
 
     it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne', function test() {
-      let docID = DesiredDegrees.define({ name, shortName, slug, description });
+      let docID = DesiredDegrees.define({
+        name, shortName, slug, description,
+      });
       expect(DesiredDegrees.isDefined(slug)).to.be.true;
       let dumpObject = DesiredDegrees.dumpOne(docID);
       expect(dumpObject.retired).to.be.undefined;
@@ -40,4 +42,3 @@ if (Meteor.isServer) {
     });
   });
 }
-

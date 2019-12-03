@@ -59,7 +59,7 @@ Template.Add_Teaser_Widget.events({
     addSchema.clean(newData, { mutate: true });
     instance.context.validate(newData);
     // Need to clean the targetSlug. It includes the type.
-    newData.targetSlug = newData.targetSlug.split(' ')[0];
+    newData.targetSlug = newData.targetSlug.split(' ')[0]; // eslint-disable-line prefer-destructuring
     if (instance.context.isValid()) {
       defineMethod.call({ collectionName: 'TeaserCollection', definitionData: newData }, (error) => {
         if (error) {

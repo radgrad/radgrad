@@ -195,8 +195,8 @@ class SlugCollection extends BaseCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const name = doc.name;
-    const entityName = doc.entityName;
+    const { name } = doc;
+    const { entityName } = doc;
     return { name, entityName };
   }
 }

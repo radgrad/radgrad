@@ -3,7 +3,7 @@ import { Roles } from 'meteor/alanning:roles';
 import { CallPromiseMixin } from 'meteor/didericis:callpromise-mixin';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { ROLE } from '../../api/role/Role';
+import { ROLE } from '../role/Role';
 import { Users } from './UserCollection';
 import { StudentProfiles } from './StudentProfileCollection';
 

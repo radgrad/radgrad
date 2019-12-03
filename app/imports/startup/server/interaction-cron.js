@@ -32,8 +32,8 @@ SyncedCron.add({
   job: function () {
     _.each(StudentProfiles.find().fetch(), function (doc) {
       const iceSnap = IceSnapshots.findOne({ username: doc.username });
-      const username = doc.username;
-      const level = doc.level;
+      const { username } = doc;
+      const { level } = doc;
       if (iceSnap === undefined) {
         createSnapshot(doc);
       } else {
@@ -47,7 +47,11 @@ SyncedCron.add({
         const ice = StudentProfiles.getProjectedICE(doc.username);
         if ((iceSnap.i !== ice.i) || (iceSnap.c !== ice.c) || (iceSnap.e !== ice.e)) {
           console.log('Updating snapshot for user: ', username);
-          IceSnapshots.update({ username }, { $set: { i: ice.i, c: ice.c, e: ice.e, updated: moment().toDate() } });
+          IceSnapshots.update({ username }, {
+            $set: {
+              i: ice.i, c: ice.c, e: ice.e, updated: moment().toDate(),
+            },
+          });
           if ((iceSnap.i < 100) || (iceSnap.c < 100) || (iceSnap.e < 100)) {
             if ((ice.i >= 100) && (ice.c >= 100) && (ice.e >= 100)) {
               UserInteractions.define({ username, type: 'completePlan', typeData: [ice.i, ice.c, ice.e] });

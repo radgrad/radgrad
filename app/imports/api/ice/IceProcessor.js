@@ -1,17 +1,17 @@
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { Courses } from '../../api/course/CourseCollection';
+import { Courses } from '../course/CourseCollection';
 
 /**
  * Polyfill definition of isInteger in case it's not defined.
  * @see {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isInteger}
  * @type {*|Function}
  */
-Number.isInteger = Number.isInteger ||
-  function test(value) {
-    return typeof value === 'number' &&
-      isFinite(value) &&
-      Math.floor(value) === value;
+Number.isInteger = Number.isInteger
+  || function test(value) {
+    return typeof value === 'number'
+      && isFinite(value)
+      && Math.floor(value) === value;
   };
 
 /**

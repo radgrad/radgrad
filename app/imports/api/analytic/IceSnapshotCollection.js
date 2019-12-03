@@ -33,8 +33,12 @@ class IceSnapshotCollection extends BaseCollection {
    * @param e The student's current experience points.
    * @param updated Timestamp of most recent snapshot.
    */
-  define({ username, level, i, c, e, updated }) {
-    return this._collection.insert({ username, level, i, c, e, updated });
+  define({
+    username, level, i, c, e, updated,
+  }) {
+    return this._collection.insert({
+      username, level, i, c, e, updated,
+    });
   }
 
   /**
@@ -61,13 +65,15 @@ class IceSnapshotCollection extends BaseCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const username = doc.username;
-    const updated = doc.updated;
-    const level = doc.level;
-    const i = doc.i;
-    const c = doc.c;
-    const e = doc.e;
-    return { username, level, i, c, e, updated };
+    const { username } = doc;
+    const { updated } = doc;
+    const { level } = doc;
+    const { i } = doc;
+    const { c } = doc;
+    const { e } = doc;
+    return {
+      username, level, i, c, e, updated,
+    };
   }
 
   /**

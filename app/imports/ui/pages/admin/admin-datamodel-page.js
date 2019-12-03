@@ -58,4 +58,3 @@ Template.Admin_DataModel_Page.onRendered(function adminDatamodelPageOnRendered()
 Template.Admin_DataModel_Page.onDestroyed(function adminDatamodelPageOnDestroyed() {
   // add your statement here
 });
-

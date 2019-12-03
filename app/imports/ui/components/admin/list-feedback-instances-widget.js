@@ -29,7 +29,7 @@ Template.List_Feedback_Instances_Widget.helpers({
     return FeedbackInstances.count();
   },
   name(feedbackInstance) {
-    const username = Users.getProfile(feedbackInstance.userID).username;
+    const { username } = Users.getProfile(feedbackInstance.userID);
     const feedbackName = feedbackInstance.functionName;
     return `${username}-${feedbackName}`;
   },

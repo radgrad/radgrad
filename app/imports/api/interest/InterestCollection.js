@@ -2,7 +2,7 @@ import SimpleSchema from 'simpl-schema';
 import Meteor from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Slugs } from '../slug/SlugCollection';
-import { InterestTypes } from '../interest/InterestTypeCollection';
+import { InterestTypes } from './InterestTypeCollection';
 import { Courses } from '../course/CourseCollection';
 import { CareerGoals } from '../career/CareerGoalCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection';
@@ -43,13 +43,17 @@ class InterestCollection extends BaseSlugCollection {
    * @throws {Meteor.Error} If the interest definition includes a defined slug or undefined interestType.
    * @returns The newly created docID.
    */
-  define({ name, slug, description, interestType, retired }) {
+  define({
+    name, slug, description, interestType, retired,
+  }) {
     // Get InterestTypeID, throw error if not found.
     const interestTypeID = InterestTypes.getID(interestType);
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
     // Define the Interest and get its ID
-    const interestID = this._collection.insert({ name, description, slugID, interestTypeID, retired });
+    const interestID = this._collection.insert({
+      name, description, slugID, interestTypeID, retired,
+    });
     // Connect the Slug to this Interest
     Slugs.updateEntityID(slugID, interestID);
     return interestID;
@@ -64,7 +68,9 @@ class InterestCollection extends BaseSlugCollection {
    * @param retired the new retired status, (optional).
    * @throws { Meteor.Error } If docID is not defined, or if interestType is not valid.
    */
-  update(docID, { name, description, interestType, retired }) {
+  update(docID, {
+    name, description, interestType, retired,
+  }) {
     this.assertDefined(docID);
     const updateData = {};
     if (name) {
@@ -158,12 +164,14 @@ class InterestCollection extends BaseSlugCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const name = doc.name;
+    const { name } = doc;
     const slug = Slugs.getNameFromID(doc.slugID);
-    const description = doc.description;
+    const { description } = doc;
     const interestType = InterestTypes.findSlugByID(doc.interestTypeID);
-    const retired = doc.retired;
-    return { name, slug, description, interestType, retired };
+    const { retired } = doc;
+    return {
+      name, slug, description, interestType, retired,
+    };
   }
 }
 

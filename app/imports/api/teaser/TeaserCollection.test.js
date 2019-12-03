@@ -37,7 +37,9 @@ if (Meteor.isServer) {
       const opportunity = makeSampleOpportunity(makeSampleUser(ROLE.FACULTY));
       const opportunityDoc = Opportunities.findDoc(opportunity);
       const opportunitySlug = Slugs.getNameFromID(opportunityDoc.slugID);
-      let docID = Teasers.define({ title, slug, author, url, description, duration, interests, opportunity });
+      let docID = Teasers.define({
+        title, slug, author, url, description, duration, interests, opportunity,
+      });
       expect(Teasers.isDefined(docID)).to.be.true;
       let dumpObject = Teasers.dumpOne(docID);
       expect(dumpObject.retired).to.be.undefined;
@@ -56,7 +58,9 @@ if (Meteor.isServer) {
       const slug2 = 'teaser-2nd-title';
       const course = makeSampleCourse();
       const targetSlug = Slugs.getNameFromID(Courses.findDoc(course).slugID);
-      docID = Teasers.define({ title: title2, slug: slug2, author, url, description, duration, interests, targetSlug });
+      docID = Teasers.define({
+        title: title2, slug: slug2, author, url, description, duration, interests, targetSlug,
+      });
       expect(Teasers.isDefined(docID)).to.be.true;
       dumpObject = Teasers.dumpOne(docID);
       expect(dumpObject.retired).to.be.undefined;

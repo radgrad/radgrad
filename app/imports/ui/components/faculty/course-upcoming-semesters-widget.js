@@ -5,7 +5,7 @@ Template.Course_Upcoming_Semesters_Widget.helpers({
     return Template.instance().data.semesters;
   },
   courseName() {
-    const course = Template.instance().data.course;
+    const { course } = Template.instance().data;
     return course.number;
   },
   course() {

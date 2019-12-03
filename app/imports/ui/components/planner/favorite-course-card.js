@@ -18,22 +18,22 @@ Template.Favorite_Course_Card.helpers({
     return Template.instance().data.course;
   },
   courseNumber() {
-    const course = Template.instance().data.course;
+    const { course } = Template.instance().data;
     return course.number;
   },
   coursesRouteName() {
     return RouteNames.studentExplorerCoursesPageRouteName;
   },
   courseSlug() {
-    const course = Template.instance().data.course;
+    const { course } = Template.instance().data;
     return Slugs.getNameFromID(course.slugID);
   },
   description() {
-    const course = Template.instance().data.course;
+    const { course } = Template.instance().data;
     return course.description;
   },
   ice() {
-    const course = Template.instance().data.course;
+    const { course } = Template.instance().data;
     const slug = Slugs.findDoc(course.slugID);
     const ice = makeCourseICE(slug.name, 'C');
     return ice;
@@ -49,7 +49,7 @@ Template.Favorite_Course_Card.helpers({
     return semesterNames.join(', ');
   },
   name() {
-    const course = Template.instance().data.course;
+    const { course } = Template.instance().data;
     return course.name;
   },
   missingPrerequisite(prereqSlug) {
@@ -69,7 +69,7 @@ Template.Favorite_Course_Card.helpers({
     return PlanChoices.toStringFromSlug(prereq);
   },
   prerequisites() {
-    const course = Template.instance().data.course;
+    const { course } = Template.instance().data;
     return course.prerequisites;
   },
 });
@@ -85,4 +85,3 @@ Template.Favorite_Course_Card.onRendered(function favoriteCourseCardOnRendered()
 Template.Favorite_Course_Card.onDestroyed(function favoriteCourseCardOnDestroyed() {
   // add your statement here
 });
-

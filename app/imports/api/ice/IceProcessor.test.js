@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
-import { Courses } from '../../api/course/CourseCollection';
-import { CourseInstances } from '../../api/course/CourseInstanceCollection';
+import { Courses } from '../course/CourseCollection';
+import { CourseInstances } from '../course/CourseInstanceCollection';
 import * as ICE from './IceProcessor';
 import { removeAllEntities } from '../base/BaseUtilities';
 import { defineTestFixtures } from '../test/test-utilities';

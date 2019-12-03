@@ -15,7 +15,7 @@ Template.Plan_Card.helpers({
   },
   itemShortDescription(item) {
     window.camDebugging.start('PlanCard.itemShortDescription');
-    let description = item.description;
+    let { description } = item;
     if (description.length > 200) {
       description = `${description.substring(0, 200)}`;
       if (description.charAt(description.length - 1) === ' ') {
@@ -27,7 +27,7 @@ Template.Plan_Card.helpers({
   },
   itemSlug(item) {
     window.camDebugging.start('PlanCard.itemSlug');
-    const name = Slugs.findDoc(item.slugID).name;
+    const { name } = Slugs.findDoc(item.slugID);
     window.camDebugging.stop('PlanCard.itemSlug');
     return name;
   },
@@ -41,8 +41,7 @@ Template.Plan_Card.helpers({
     if (group === 'student') {
       window.camDebugging.stop('PlanCard.plansRouteName');
       return RouteNames.studentExplorerPlansPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } if (group === 'faculty') {
       window.camDebugging.stop('PlanCard.plansRouteName');
       return RouteNames.facultyExplorerPlansPageRouteName;
     }

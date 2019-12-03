@@ -78,4 +78,3 @@ Template.Opportunity_Sort_Order_Widget.onRendered(function opportunitysortorderw
 Template.Opportunity_Sort_Order_Widget.onDestroyed(function opportunitysortorderwidgetOnDestroyed() {
   // add your statement here
 });
-

@@ -9,8 +9,8 @@ Template.Course_Upcoming_Semester_Widget.helpers({
     return count;
   },
   hasCount() {
-    const course = Template.instance().data.course;
-    const semester = Template.instance().data.semester;
+    const { course } = Template.instance().data;
+    const { semester } = Template.instance().data;
     return CourseInstances.find({ courseID: course._id, semesterID: semester._id }).count() > 0;
   },
 });

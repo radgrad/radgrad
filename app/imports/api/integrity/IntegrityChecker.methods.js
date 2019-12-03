@@ -20,4 +20,3 @@ export const checkIntegrityMethod = new ValidatedMethod({
     return checkIntegrity();
   },
 });
-

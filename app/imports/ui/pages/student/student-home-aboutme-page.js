@@ -18,4 +18,3 @@ Template.Student_Home_AboutMe_Page.onRendered(function studentHomeAboutMePageOnR
 Template.Student_Home_AboutMe_Page.onDestroyed(function studentHomeAboutMePageOnDestroyed() {
   // add your statement here
 });
-

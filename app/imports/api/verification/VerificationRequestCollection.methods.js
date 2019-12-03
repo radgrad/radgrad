@@ -96,7 +96,9 @@ export const processVerificationEventMethod = new ValidatedMethod({
 
     // Create a Feed entry for this verification event.
     resultMessage += '  Creating a feed entry.\n';
-    Feeds.define({ feedType: Feeds.VERIFIED_OPPORTUNITY, user: student, opportunity, semester });
+    Feeds.define({
+      feedType: Feeds.VERIFIED_OPPORTUNITY, user: student, opportunity, semester,
+    });
 
     return resultMessage;
   },
@@ -144,11 +146,13 @@ export const processPendingVerificationMethod = new ValidatedMethod({
     // Create a feed entry only if it was verified
     const student = Users.getProfile(requestDoc.studentID).username;
     if (verified) {
-      const opportunityInstanceID = requestDoc.opportunityInstanceID;
+      const { opportunityInstanceID } = requestDoc;
       const opportunity = OpportunityInstances.getOpportunityDoc(opportunityInstanceID)._id;
       const semesterDoc = OpportunityInstances.getSemesterDoc(opportunityInstanceID);
       const semester = `${semesterDoc.term}-${semesterDoc.year}`;
-      Feeds.define({ feedType: Feeds.VERIFIED_OPPORTUNITY, user: student, opportunity, semester });
+      Feeds.define({
+        feedType: Feeds.VERIFIED_OPPORTUNITY, user: student, opportunity, semester,
+      });
     }
     return `Verification request for ${student} was processed`;
   },

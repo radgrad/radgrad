@@ -9,7 +9,7 @@ import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { userInteractionDefineMethod } from '../../../api/analytic/UserInteractionCollection.methods';
 import { ROLE } from '../../../api/role/Role';
-import { getRouteUserName } from '../shared/route-user-name';
+import { getRouteUserName } from './route-user-name';
 
 let cursorHandle;
 

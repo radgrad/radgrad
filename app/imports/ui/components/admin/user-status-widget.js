@@ -35,4 +35,3 @@ Template.User_Status_Widget.onRendered(function userStatusWidgetOnRendered() {
 Template.User_Status_Widget.onDestroyed(function userStatusWidgetOnDestroyed() {
   // add your statement here
 });
-

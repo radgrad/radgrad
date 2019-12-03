@@ -5,7 +5,7 @@ import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
 Template.Mentor_MentorSpace_Answer_Form.helpers({
   existingAnswer() {
-    const questionID = this.questionID;
+    const { questionID } = this;
     const existingAnswers = MentorAnswers.find({ questionID, mentorID: getUserIdFromRoute() }).fetch();
     return (existingAnswers.length > 0) ? existingAnswers[0].text : '';
   },
@@ -33,7 +33,7 @@ Template.Mentor_MentorSpace_Answer_Form.events({
   },
   'click .delete': function (event) {
     event.preventDefault();
-    const questionID = this.questionID;
+    const { questionID } = this;
     const collectionName = MentorAnswers.getCollectionName();
     const instance = MentorAnswers.findDoc({ questionID, mentorID: getUserIdFromRoute() })._id;
     removeItMethod.call({ collectionName, instance });

@@ -67,15 +67,15 @@ Template.Students_Summary_Widget.helpers({
           if (_.some(interactionsWithinDate, { type: 'login' })) {
             obj[date].push(behaviorList[0]);
           }
-          if (_.some(interactionsWithinDate, (i) => i.type === 'careerGoalIDs' || i.type === 'interestIDs' ||
-              i.type === 'academicPlanID')) {
+          if (_.some(interactionsWithinDate, (i) => i.type === 'careerGoalIDs' || i.type === 'interestIDs'
+              || i.type === 'academicPlanID')) {
             obj[date].push(behaviorList[1]);
           }
           if (_.some(interactionsWithinDate, (i) => i.type === 'pageView' && i.typeData[0].includes('explorer/'))) {
             obj[date].push(behaviorList[2]);
           }
-          if (_.some(interactionsWithinDate, (i) => i.type === 'addCourse' || i.type === 'removeCourse' ||
-              i.type === 'addOpportunity' || i.type === 'removeOpportunity')) {
+          if (_.some(interactionsWithinDate, (i) => i.type === 'addCourse' || i.type === 'removeCourse'
+              || i.type === 'addOpportunity' || i.type === 'removeOpportunity')) {
             obj[date].push(behaviorList[3]);
           }
           if (_.some(interactionsWithinDate, (i) => i.type === 'verifyRequest')) {
@@ -84,8 +84,8 @@ Template.Students_Summary_Widget.helpers({
           if (_.some(interactionsWithinDate, (i) => i.type === 'addReview')) {
             obj[date].push(behaviorList[5]);
           }
-          if (_.some(interactionsWithinDate, (i) => (i.type === 'pageView' &&
-              i.typeData[0].includes('mentor-space')) || i.type === 'askQuestion')) {
+          if (_.some(interactionsWithinDate, (i) => (i.type === 'pageView'
+              && i.typeData[0].includes('mentor-space')) || i.type === 'askQuestion')) {
             obj[date].push(behaviorList[6]);
           }
           if (_.some(interactionsWithinDate, (i) => i.type === 'level')) {
@@ -188,24 +188,46 @@ Template.Students_Summary_Widget.events({
         console.log('Error finding user interactions.', error);
       } else {
         const users = _.groupBy(_.filter(result, (u) => Users.getProfile(u.username).role === 'STUDENT'), 'username');
-        const behaviors = [{ type: 'Log In', count: 0, users: [], description: 'Logged into application' },
-          { type: 'Change Outlook', count: 0, users: [], description: 'Updated interests, career goals, or degree' },
-          { type: 'Exploration', count: 0, users: [], description: 'Viewed entries in Explorer' },
-          { type: 'Planning', count: 0, users: [], description: 'Added or removed course/opportunity' },
-          { type: 'Verification', count: 0, users: [], description: 'Requested verification' },
-          { type: 'Reviewing', count: 0, users: [], description: 'Reviewed a course' },
-          { type: 'Mentorship', count: 0, users: [], description: 'Visited the MentorSpace page or asked a question' },
-          { type: 'Level Up', count: 0, users: [], description: 'Leveled up' },
-          { type: 'Complete Plan', count: 0, users: [], description: 'Created a plan with 100 ICE' },
-          { type: 'Profile', count: 0, users: [], description: 'Updated personal image or website url' },
-          { type: 'Log Out', count: 0, users: [], description: 'Logged out' }];
+        const behaviors = [{
+          type: 'Log In', count: 0, users: [], description: 'Logged into application',
+        },
+        {
+          type: 'Change Outlook', count: 0, users: [], description: 'Updated interests, career goals, or degree',
+        },
+        {
+          type: 'Exploration', count: 0, users: [], description: 'Viewed entries in Explorer',
+        },
+        {
+          type: 'Planning', count: 0, users: [], description: 'Added or removed course/opportunity',
+        },
+        {
+          type: 'Verification', count: 0, users: [], description: 'Requested verification',
+        },
+        {
+          type: 'Reviewing', count: 0, users: [], description: 'Reviewed a course',
+        },
+        {
+          type: 'Mentorship', count: 0, users: [], description: 'Visited the MentorSpace page or asked a question',
+        },
+        {
+          type: 'Level Up', count: 0, users: [], description: 'Leveled up',
+        },
+        {
+          type: 'Complete Plan', count: 0, users: [], description: 'Created a plan with 100 ICE',
+        },
+        {
+          type: 'Profile', count: 0, users: [], description: 'Updated personal image or website url',
+        },
+        {
+          type: 'Log Out', count: 0, users: [], description: 'Logged out',
+        }];
         _.each(users, function (interactions, user) {
           if (_.some(interactions, { type: 'login' })) {
             behaviors[0].count++;
             behaviors[0].users.push(user);
           }
-          if (_.some(interactions, (i) => i.type === 'careerGoalIDs' || i.type === 'interestIDs' ||
-              i.type === 'academicPlanID')) {
+          if (_.some(interactions, (i) => i.type === 'careerGoalIDs' || i.type === 'interestIDs'
+              || i.type === 'academicPlanID')) {
             behaviors[1].count++;
             behaviors[1].users.push(user);
           }
@@ -213,8 +235,8 @@ Template.Students_Summary_Widget.events({
             behaviors[2].count++;
             behaviors[2].users.push(user);
           }
-          if (_.some(interactions, (i) => i.type === 'addCourse' || i.type === 'removeCourse' ||
-              i.type === 'addOpportunity' || i.type === 'removeOpportunity')) {
+          if (_.some(interactions, (i) => i.type === 'addCourse' || i.type === 'removeCourse'
+              || i.type === 'addOpportunity' || i.type === 'removeOpportunity')) {
             behaviors[3].count++;
             behaviors[3].users.push(user);
           }
@@ -226,8 +248,8 @@ Template.Students_Summary_Widget.events({
             behaviors[5].count++;
             behaviors[5].users.push(user);
           }
-          if (_.some(interactions, (i) => (i.type === 'pageView' && i.typeData[0].includes('mentor-space')) ||
-              i.type === 'askQuestion')) {
+          if (_.some(interactions, (i) => (i.type === 'pageView' && i.typeData[0].includes('mentor-space'))
+              || i.type === 'askQuestion')) {
             behaviors[6].count++;
             behaviors[6].users.push(user);
           }

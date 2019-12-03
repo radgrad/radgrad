@@ -64,4 +64,3 @@ Template.Update_Plan_Choice_Widget.onRendered(function updatePlanChoiceWidgetOnR
 Template.Update_Plan_Choice_Widget.onDestroyed(function updatePlanChoiceWidgetOnDestroyed() {
   // add your statement here
 });
-

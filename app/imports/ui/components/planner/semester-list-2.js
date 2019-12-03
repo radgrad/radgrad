@@ -65,7 +65,7 @@ Template.Semester_List_2.helpers({
       const opp = OpportunityInstances.findDoc({ _id: opportunityID });
       const opportunity = Opportunities.findDoc({ _id: opp.opportunityID });
       if (opportunity) {
-        const name = opportunity.name;
+        const { name } = opportunity;
         if (name.length > 20) {
           return `${name.substring(0, 16)}...`;
         }
@@ -238,7 +238,7 @@ Template.Semester_List_2.events({
   },
   'click tr.clickEnabled': function clickTrClickEnabled(event) {
     event.preventDefault();
-    let target = event.target;
+    let { target } = event;
     while (target && target.nodeName !== 'TR') {
       target = target.parentNode;
     }

@@ -89,4 +89,3 @@ Template.List_Academic_Plans_Widget.onRendered(function listacademicplanswidgetO
 Template.List_Academic_Plans_Widget.onDestroyed(function listacademicplanswidgetOnDestroyed() {
   // add your statement here
 });
-

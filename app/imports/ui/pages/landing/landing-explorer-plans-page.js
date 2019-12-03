@@ -48,8 +48,10 @@ Template.Landing_Explorer_Plans_Page.helpers({
   },
   socialPairs(plan) {
     return [
-      { label: 'students', amount: numUsers(plan),
-        value: interestedUsers(plan) },
+      {
+        label: 'students', amount: numUsers(plan),
+        value: interestedUsers(plan),
+      },
     ];
   },
 });

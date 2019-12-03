@@ -44,8 +44,8 @@ Template.Add_Opportunity_Instance_Widget.events({
     instance.context.reset();
     addSchema.clean(newData, { mutate: true });
     instance.context.validate(newData);
-    if (instance.context.isValid() &&
-        !OpportunityInstances.isOpportunityInstance(newData.semester, newData.opportunity, newData.user)) {
+    if (instance.context.isValid()
+        && !OpportunityInstances.isOpportunityInstance(newData.semester, newData.opportunity, newData.user)) {
       // Convert to boolean.
       newData.verified = (newData.verified === 'true');
       FormUtils.renameKey(newData, 'user', 'student');

@@ -2,7 +2,7 @@ import { Template } from 'meteor/templating';
 import * as RouteNames from '../../../startup/client/router.js';
 import { MentorAnswers } from '../../../api/mentor/MentorAnswerCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
-import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
+import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
 Template.Student_MentorSpace_Questions_Accordion.helpers({
   answerCount(questionID) {

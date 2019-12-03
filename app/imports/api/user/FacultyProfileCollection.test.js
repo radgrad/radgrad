@@ -24,7 +24,9 @@ if (Meteor.isServer) {
       const website = 'http://esb.github.io';
       const interests = [];
       const careerGoals = [];
-      let docID = FacultyProfiles.define({ username, firstName, lastName, picture, website, interests, careerGoals });
+      let docID = FacultyProfiles.define({
+        username, firstName, lastName, picture, website, interests, careerGoals,
+      });
       expect(FacultyProfiles.isDefined(docID)).to.be.true;
       let dumpObject = FacultyProfiles.dumpOne(docID);
       expect(dumpObject.retired).to.be.undefined;

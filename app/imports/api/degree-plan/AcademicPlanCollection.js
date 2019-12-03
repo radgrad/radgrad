@@ -57,7 +57,9 @@ class AcademicPlanCollection extends BaseSlugCollection {
    * @param retired optional, defaults to false, allows for retiring an academic plan.
    * @returns {*}
    */
-  define({ slug, degreeSlug, name, description, semester, coursesPerSemester, courseList, retired }) {
+  define({
+    slug, degreeSlug, name, description, semester, coursesPerSemester, courseList, retired,
+  }) {
     const degreeID = Slugs.getEntityID(degreeSlug, 'DesiredDegree');
     const effectiveSemesterID = Semesters.getID(semester);
     const doc = this._collection.findOne({ degreeID, name, effectiveSemesterID });
@@ -67,8 +69,8 @@ class AcademicPlanCollection extends BaseSlugCollection {
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
     const semesterDoc = Semesters.findDoc(effectiveSemesterID);
-    const semesterNumber = semesterDoc.semesterNumber;
-    const year = semesterDoc.year;
+    const { semesterNumber } = semesterDoc;
+    const { year } = semesterDoc;
     const planID = this._collection.insert({
       slugID, degreeID, name, description, effectiveSemesterID, semesterNumber, year, coursesPerSemester,
       courseList, retired,
@@ -88,7 +90,9 @@ class AcademicPlanCollection extends BaseSlugCollection {
    * @param courseList an array of PlanChoices, the choices for each course.
    * @param retired a boolean true if the academic plan is retired.
    */
-  update(instance, { degreeSlug, name, semester, coursesPerSemester, courseList, retired }) {
+  update(instance, {
+    degreeSlug, name, semester, coursesPerSemester, courseList, retired,
+  }) {
     const docID = this.getID(instance);
     const updateData = {};
     if (degreeSlug) {
@@ -242,14 +246,16 @@ class AcademicPlanCollection extends BaseSlugCollection {
     const slug = Slugs.getNameFromID(doc.slugID);
     const degree = DesiredDegrees.findDoc(doc.degreeID);
     const degreeSlug = Slugs.findDoc(degree.slugID).name;
-    const name = doc.name;
-    const description = doc.description;
+    const { name } = doc;
+    const { description } = doc;
     const semesterDoc = Semesters.findDoc(doc.effectiveSemesterID);
     const semester = Slugs.findDoc(semesterDoc.slugID).name;
-    const coursesPerSemester = doc.coursesPerSemester;
-    const courseList = doc.courseList;
-    const retired = doc.retired;
-    return { slug, degreeSlug, name, description, semester, coursesPerSemester, courseList, retired };
+    const { coursesPerSemester } = doc;
+    const { courseList } = doc;
+    const { retired } = doc;
+    return {
+      slug, degreeSlug, name, description, semester, coursesPerSemester, courseList, retired,
+    };
   }
 }
 

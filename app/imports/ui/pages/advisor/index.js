@@ -11,4 +11,3 @@ import './advisor-student-configuration-page.html';
 import './advisor-student-configuration-page.js';
 
 import './advisor-verification-requests-pending-page.html';
-

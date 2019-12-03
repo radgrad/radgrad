@@ -94,4 +94,3 @@ Template.Add_Student_Widget.onRendered(function addstudentwidgetOnRendered() {
 Template.Add_Student_Widget.onDestroyed(function addstudentwidgetOnDestroyed() {
   // add your statement here
 });
-

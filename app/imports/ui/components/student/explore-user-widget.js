@@ -128,4 +128,3 @@ Template.Explore_User_Widget.helpers({
     return '';
   },
 });
-

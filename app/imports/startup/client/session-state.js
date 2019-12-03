@@ -8,4 +8,3 @@ export const sessionKeys = {
   CURRENT_STUDENT_ID: 'currentStudentID',
   CURRENT_STUDENT_USERNAME: 'studentUsername',
 };
-

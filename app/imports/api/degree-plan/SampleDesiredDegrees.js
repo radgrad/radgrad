@@ -10,5 +10,7 @@ export function makeSampleDesiredDegree(args) {
   const uniqueString = moment().format('YYYYMMDDHHmmssSSSSS');
   const slug = `degree-${uniqueString}`;
   const description = args && args.description ? args.description : 'Sample desired degree description';
-  return DesiredDegrees.define({ name, shortName, slug, description });
+  return DesiredDegrees.define({
+    name, shortName, slug, description,
+  });
 }

@@ -8,7 +8,7 @@ Template.Academic_Plan_Static_Viewer.helpers({
     const ret = [];
     const totalSem = (3 * yearNumber) + semesterNumber;
     // console.log(`courses(${yearNumber}, ${semesterNumber}) ${totalSem}`);
-    const plan = Template.instance().data.plan;
+    const { plan } = Template.instance().data;
     const numCoursesList = plan.coursesPerSemester.slice(0);
     const numCourses = numCoursesList[totalSem];
     const courseList = plan.courseList.slice(0);
@@ -26,14 +26,14 @@ Template.Academic_Plan_Static_Viewer.helpers({
   },
   hasSummer(yearNum) {
     window.camDebugging.start('AcademicPlanStaticViewer.hasSummer');
-    const plan = Template.instance().data.plan;
+    const { plan } = Template.instance().data;
     const numCoursesList = plan.coursesPerSemester.slice(0);
     window.camDebugging.stop('AcademicPlanStaticViewer.hasSummer');
     return numCoursesList[(3 * yearNum) + 2] !== 0;
   },
   years() {
     window.camDebugging.start('AcademicPlanStaticViewer.years');
-    const plan = Template.instance().data.plan;
+    const { plan } = Template.instance().data;
     if (plan.coursesPerSemester.length === 15) {
       window.camDebugging.stop('AcademicPlanStaticViewer.years');
       return ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'];
@@ -54,4 +54,3 @@ Template.Academic_Plan_Static_Viewer.onRendered(function academicPlanStaticViewe
 Template.Academic_Plan_Static_Viewer.onDestroyed(function academicPlanStaticViewerOnDestroyed() {
   // add your statement here
 });
-

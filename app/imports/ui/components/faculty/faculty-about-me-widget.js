@@ -7,7 +7,7 @@ import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { FacultyProfiles } from '../../../api/user/FacultyProfileCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection.js';
-import { getRouteUserName } from '../../components/shared/route-user-name.js';
+import { getRouteUserName } from '../shared/route-user-name.js';
 import { openCloudinaryWidget } from '../form-fields/open-cloudinary-widget';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
 

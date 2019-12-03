@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection.js';
-import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
+import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
 Template.Student_MentorSpace_Hidden_Questions.helpers({
   moderated(question) {

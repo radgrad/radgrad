@@ -45,7 +45,7 @@ function sponsor(opportunity) {
 }
 
 function semesters(opportunity) {
-  const semesterIDs = opportunity.semesterIDs;
+  const { semesterIDs } = opportunity;
   return _.map(semesterIDs, (semID) => Semesters.toString(semID));
 }
 
@@ -102,7 +102,7 @@ Template.Explorer_Opportunities_Page.helpers({
     const group = getGroupName();
     if (group === 'faculty') {
       return _.filter(allOpportunities, o => o.sponsorID !== userID);
-    } else if (group === 'student') {
+    } if (group === 'student') {
       const favorites = FavoriteOpportunities.find({ studentID: userID }).fetch();
       const favoriteIDs = _.map(favorites, (f) => f.opportunityID);
       const nonAddedOpportunities = _.filter(allOpportunities, function (opportunity) {

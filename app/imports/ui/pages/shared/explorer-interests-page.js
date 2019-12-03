@@ -36,8 +36,8 @@ function passedCourseHelper(courseSlugName) {
   }).fetch();
   _.forEach(ci, (c) => {
     if (c.verified === true) {
-      if (c.grade === 'A+' || c.grade === 'A' || c.grade === 'A-' || c.grade === 'B+' ||
-          c.grade === 'B' || c.grade === 'B-') {
+      if (c.grade === 'A+' || c.grade === 'A' || c.grade === 'A-' || c.grade === 'B+'
+          || c.grade === 'B' || c.grade === 'B-') {
         ret = 'Completed';
       } else {
         ret = 'In plan, but not yet complete';
@@ -234,4 +234,3 @@ Template.Explorer_Interests_Page.helpers({
     return [];
   },
 });
-
