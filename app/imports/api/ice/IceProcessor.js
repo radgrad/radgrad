@@ -8,12 +8,11 @@ import { Courses } from '../course/CourseCollection';
  * @type {*|Function}
  */
 Number.isInteger = Number.isInteger
-    || function test(value) {
-      return typeof value === 'number'
-          // eslint-disable-next-line no-restricted-globals
-          && isFinite(value)
-          && Math.floor(value) === value;
-    };
+  || function test(value) {
+    return typeof value === 'number'
+      && isFinite(value)
+      && Math.floor(value) === value;
+  };
 
 /**
  * The competency points earned for each grade A, B, or C.

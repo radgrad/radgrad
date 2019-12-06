@@ -542,8 +542,7 @@ class StudentProfileCollection extends BaseProfileCollection {
     const academicPlan = doc.academicPlanID && AcademicPlans.findSlugByID(doc.academicPlanID);
     const declaredSemester = doc.declaredSemesterID && Semesters.getSlug(doc.declaredSemesterID);
     const hiddenCourses = _.map(doc.hiddenCourseIDs, hiddenCourseID => Courses.findSlugByID(hiddenCourseID));
-    const hiddenOpportunities = _.map(doc.hiddenOpportunityIDs,
-      hiddenOpportunityID => Opportunities.findSlugByID(hiddenOpportunityID));
+    const hiddenOpportunities = _.map(doc.hiddenOpportunityIDs, hiddenOpportunityID => Opportunities.findSlugByID(hiddenOpportunityID));
     const { isAlumni } = doc;
     const { retired } = doc;
     const { shareUsername } = doc;

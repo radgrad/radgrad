@@ -173,7 +173,7 @@ function levelRecommendation(student) {
   html.header = 'Level Up and Upgrade Your RadGrad Sticker';
   html.info = '<img src='
     + `"https://radgrad.ics.hawaii.edu/images/level-icons/radgrad-level-${student.level}-icon.png"`
-    + ' width="100" height="100" style="float: left; margin: 0 10px;" alt="RadGrad Level">';
+    + ' width="100" height="100" style="float: left; margin: 0 10px;">';
   html.info += `<p style="color: #6FBE44;"><strong>Current Level: ${student.level}</strong></p>`;
   html.info += '<p><em>Swing by your advisor\'s office or POST 307 to pick up a laptop sticker for'
     + ' your current level if you haven\'t already!</em></p>';
