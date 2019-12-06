@@ -10,7 +10,7 @@ import { Courses } from '../course/CourseCollection';
 Number.isInteger = Number.isInteger
   || function test(value) {
     return typeof value === 'number'
-      && isFinite(value)
+      && isFinite(value) // eslint-disable-line no-restricted-globals
       && Math.floor(value) === value;
   };
 
