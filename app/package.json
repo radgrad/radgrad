@@ -9,6 +9,7 @@
     "lint-fix": "./node_modules/.bin/eslint --quiet --fix ./imports",
     "pretest": "npm run lint",
     "test": "cross-env TEST_BROWSER_DRIVER=nightmare meteor test --once --driver-package dispatch:mocha --settings ../config/settings.development.json --no-release-check --port 3100",
+    "test-cam": "cross-env TEST_BROWSER_DRIVER=nightmare meteor test --once --driver-package dispatch:mocha --settings ../config/settings.development.json --no-release-check --port 3100",
     "test-debug": "cross-env TEST_BROWSER_DRIVER=nightmare meteor test --once --driver-package dispatch:mocha --no-release-check --port 3100 --inspect-brk=5858",
     "test-app": "cross-env METEOR_NO_RELEASE_CHECK=1 TEST_BROWSER_DRIVER=nightmare meteor test --full-app --once --driver-package dispatch:mocha --settings ../config/settings.development.json --port 3100",
     "test-watch": "cross-env TEST_WATCH=1 TEST_BROWSER_DRIVER=nightmare meteor test --driver-package dispatch:mocha --no-release-check --port 3100",

@@ -1,0 +1,57 @@
+version: v1.0
+name: RadGrad Pipeline
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: 'ESLint'
+    run:
+      when: "branch = 'master'"
+    task:
+      prologue:
+        commands:
+          # Get the latest code
+          - checkout
+          # install Meteor
+          - curl https://install.meteor.com | /bin/sh
+          - cd app
+          - meteor npm install
+      jobs:
+        - name: 'Run Lint'
+          commands:
+            - meteor npm run lint
+
+  - name: 'Unit Test'
+    run:
+      when: "branch = 'master'"
+    task:
+      prologue:
+        commands:
+          # Get the latest code
+          - checkout
+          # install Meteor
+          - curl https://install.meteor.com | /bin/sh
+          - cd app
+          - meteor npm install
+      jobs:
+        - name: Run test
+          commands:
+            - meteor npm run test-cam
+
+  - name: 'App Test'
+    run:
+      when: "branch = 'master'"
+    task:
+      prologue:
+        commands:
+          # Get the latest code
+          - checkout
+          # install Meteor
+          - curl https://install.meteor.com | /bin/sh
+          - cd app
+          - meteor npm install
+      jobs:
+        - name: Run test
+          commands:
+            - meteor npm run test-app
