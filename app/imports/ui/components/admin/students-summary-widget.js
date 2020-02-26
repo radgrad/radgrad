@@ -3,11 +3,10 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { $ } from 'meteor/jquery';
-import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { userInteractionFindMethod } from '../../../api/analytic/UserInteractionCollection.methods';
 import { Users } from '../../../api/user/UserCollection';
-
-let studentPopulation;
+import { Semesters } from '../../../api/semester/SemesterCollection';
+import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 
 Template.Students_Summary_Widget.onCreated(function studentsSummaryWidgetOnRendered() {
   this.interactionsByUser = new ReactiveVar();
@@ -15,7 +14,8 @@ Template.Students_Summary_Widget.onCreated(function studentsSummaryWidgetOnRende
   this.behaviors = new ReactiveVar();
   this.dateRange = new ReactiveVar();
   this.working = new ReactiveVar(false);
-  studentPopulation = StudentProfiles.find().count();
+  this.unique = new ReactiveVar(0);
+  this.enrolled = new ReactiveVar(0);
   /* There is a possible bug with Semantic where the timeline modal is duplicated in the DOM
     upon navigating back to the student summary page from any other page. A suggested fix (temporary)
     is to simply remove the timeline modal every time the template is created again. */
@@ -35,8 +35,23 @@ Template.Students_Summary_Widget.helpers({
     const endDate = moment(dateRange.endDate).format('MM-DD-YYYY');
     return `${startDate} to ${endDate}`;
   },
+  uniqueVisitors() {
+    const uniqueVisitors = Template.instance().unique.get();
+    if (uniqueVisitors > 0) {
+      return `Unique Visitors: ${uniqueVisitors}`;
+    }
+    return '';
+  },
+  enrolledStudents() {
+    const enrolledStudents = Template.instance().enrolled.get();
+    if (enrolledStudents > 0) {
+      return `Enrolled Students: ${enrolledStudents}`;
+    }
+    return '';
+  },
   percent(count) {
-    return ((count / studentPopulation) * 100).toFixed(0);
+    const enrolledStudents = Template.instance().enrolled.get();
+    return ((count / enrolledStudents) * 100).toFixed(0);
   },
   selectedUser() {
     return !_.isEmpty(Template.instance().selectedUser.get());
@@ -46,6 +61,7 @@ Template.Students_Summary_Widget.helpers({
   },
   timelineChart() {
     const interactionsByUser = Template.instance().interactionsByUser.get();
+    const enrolledStudents = Template.instance().enrolled.get();
     if (interactionsByUser) {
       const dateRange = Template.instance().dateRange.get();
       const startDate = moment(dateRange.startDate, 'MMMM D, YYYY');
@@ -115,7 +131,7 @@ Template.Students_Summary_Widget.helpers({
           const behaviorCount = groupedBehaviors[behavior];
           const behaviorSeries = _.find(series, { name: behavior });
           if (behaviorCount) {
-            behaviorSeries.data.push((behaviorCount.length / studentPopulation) * 100);
+            behaviorSeries.data.push((behaviorCount.length / enrolledStudents) * 100);
           } else {
             behaviorSeries.data.push(0);
           }
@@ -181,6 +197,18 @@ Template.Students_Summary_Widget.events({
     const startDate = moment(event.target.startDate.value, 'MMMM D, YYYY').toDate();
     const endDate = moment(event.target.endDate.value, 'MMMM D, YYYY').endOf('day').toDate();
     const dateRange = { startDate, endDate };
+    const startTerm = Semesters.getSemesterDoc(startDate);
+    const endTerm = Semesters.getSemesterDoc(endDate);
+    let courseInstances;
+    if (startTerm.semesterNumber !== endTerm.semesterNumber) {
+      courseInstances = CourseInstances.find({ semesterID: startTerm._id }).fetch();
+      courseInstances = courseInstances.concat(CourseInstances.find({ semesterID: endTerm._id }).fetch());
+    } else {
+      courseInstances = CourseInstances.find({ semesterID: startTerm._id }).fetch();
+    }
+    const enrolledStudents = _.uniq(_.map(courseInstances, (ci) => ci.studentID)).length;
+    // console.log(enrolledStudents);
+    instance.enrolled.set(enrolledStudents);
     const selector = { timestamp: { $gte: startDate, $lte: endDate } };
     const options = { sort: { username: 1, timestamp: 1 } };
     userInteractionFindMethod.call({ selector, options }, (error, result) => {
@@ -188,6 +216,9 @@ Template.Students_Summary_Widget.events({
         console.log('Error finding user interactions.', error);
       } else {
         const users = _.groupBy(_.filter(result, (u) => Users.getProfile(u.username).role === 'STUDENT'), 'username');
+        const uniqueVisitors = Object.keys(users).length;
+        // console.log(users, uniqueVisitors);
+        instance.unique.set(uniqueVisitors);
         const behaviors = [{
           type: 'Log In', count: 0, users: [], description: 'Logged into application',
         },

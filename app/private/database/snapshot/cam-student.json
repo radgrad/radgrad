@@ -3369,7 +3369,7 @@
           "student": "abi@hawaii.edu"
         },
         {
-          "semester": "Fall-2014",
+          "semester": "Fall-2017",
           "course": "ics_141",
           "note": "ICS 141",
           "verified": true,
@@ -3379,7 +3379,7 @@
           "student": "abi@hawaii.edu"
         },
         {
-          "semester": "Spring-2015",
+          "semester": "Spring-2018",
           "course": "ics_211",
           "note": "ICS 211",
           "verified": true,
@@ -3389,7 +3389,7 @@
           "student": "abi@hawaii.edu"
         },
         {
-          "semester": "Spring-2015",
+          "semester": "Spring-2018",
           "course": "ics_241",
           "note": "ICS 241",
           "verified": true,
@@ -3399,7 +3399,7 @@
           "student": "abi@hawaii.edu"
         },
         {
-          "semester": "Fall-2015",
+          "semester": "Fall-2018",
           "course": "ics_311",
           "note": "ICS 311",
           "verified": true,
@@ -3409,7 +3409,7 @@
           "student": "abi@hawaii.edu"
         },
         {
-          "semester": "Fall-2015",
+          "semester": "Fall-2018",
           "course": "ics_314",
           "note": "ICS 314",
           "verified": true,
@@ -3419,7 +3419,7 @@
           "student": "abi@hawaii.edu"
         },
         {
-          "semester": "Spring-2016",
+          "semester": "Spring-2019",
           "course": "ics_212",
           "note": "ICS 212",
           "verified": true,
@@ -3429,7 +3429,7 @@
           "student": "abi@hawaii.edu"
         },
         {
-          "semester": "Spring-2016",
+          "semester": "Spring-2019",
           "course": "ics_321",
           "note": "ICS 321",
           "verified": true,
@@ -3439,7 +3439,7 @@
           "student": "abi@hawaii.edu"
         },
         {
-          "semester": "Fall-2016",
+          "semester": "Fall-2019",
           "course": "ics_313",
           "note": "ICS 313",
           "verified": true,
@@ -3449,7 +3449,7 @@
           "student": "abi@hawaii.edu"
         },
         {
-          "semester": "Fall-2016",
+          "semester": "Fall-2019",
           "course": "ics_331",
           "note": "ICS 331",
           "verified": true,
@@ -3459,27 +3459,27 @@
           "student": "abi@hawaii.edu"
         },
         {
-          "semester": "Spring-2017",
+          "semester": "Spring-2020",
           "course": "ics_332",
           "note": "ICS 332",
-          "verified": true,
+          "verified": false,
           "fromSTAR": true,
           "creditHrs": 3,
           "grade": "B",
           "student": "abi@hawaii.edu"
         },
         {
-          "semester": "Spring-2017",
+          "semester": "Spring-2020",
           "course": "ics_464",
           "note": "ICS 464",
-          "verified": true,
+          "verified": false,
           "fromSTAR": true,
           "creditHrs": 3,
           "grade": "B",
           "student": "abi@hawaii.edu"
         },
         {
-          "semester": "Fall-2017",
+          "semester": "Fall-2020",
           "course": "ics_414",
           "note": "ICS 414",
           "verified": false,
@@ -3489,7 +3489,7 @@
           "student": "abi@hawaii.edu"
         },
         {
-          "semester": "Fall-2017",
+          "semester": "Fall-2020",
           "course": "ics_415",
           "note": "ICS 415",
           "verified": false,
@@ -3499,7 +3499,7 @@
           "student": "abi@hawaii.edu"
         },
         {
-          "semester": "Spring-2018",
+          "semester": "Spring-2021",
           "course": "ics_432",
           "note": "ICS 432",
           "verified": false,
@@ -3669,7 +3669,7 @@
           "student": "alfred@hawaii.edu"
         },
         {
-          "semester": "Fall-2014",
+          "semester": "Fall-2018",
           "course": "ics_111",
           "note": "ICS 111",
           "verified": true,
@@ -3679,7 +3679,7 @@
           "student": "betty@hawaii.edu"
         },
         {
-          "semester": "Fall-2014",
+          "semester": "Fall-2018",
           "course": "ics_141",
           "note": "ICS 141",
           "verified": true,
@@ -3689,7 +3689,7 @@
           "student": "betty@hawaii.edu"
         },
         {
-          "semester": "Spring-2015",
+          "semester": "Spring-2019",
           "course": "ics_211",
           "note": "ICS 211",
           "verified": true,
@@ -3699,7 +3699,7 @@
           "student": "betty@hawaii.edu"
         },
         {
-          "semester": "Spring-2015",
+          "semester": "Spring-2019",
           "course": "ics_241",
           "note": "ICS 241",
           "verified": true,
@@ -3709,7 +3709,7 @@
           "student": "betty@hawaii.edu"
         },
         {
-          "semester": "Fall-2015",
+          "semester": "Fall-2019",
           "course": "ics_311",
           "note": "ICS 311",
           "verified": true,
@@ -3719,7 +3719,7 @@
           "student": "betty@hawaii.edu"
         },
         {
-          "semester": "Fall-2015",
+          "semester": "Fall-2019",
           "course": "ics_314",
           "note": "ICS 314",
           "verified": true,
@@ -3729,67 +3729,67 @@
           "student": "betty@hawaii.edu"
         },
         {
-          "semester": "Spring-2016",
+          "semester": "Spring-2020",
           "course": "ics_212",
           "note": "ICS 212",
-          "verified": true,
+          "verified": false,
           "fromSTAR": true,
           "creditHrs": 3,
           "grade": "A",
           "student": "betty@hawaii.edu"
         },
         {
-          "semester": "Spring-2016",
+          "semester": "Spring-2020",
           "course": "ics_321",
           "note": "ICS 321",
-          "verified": true,
+          "verified": false,
           "fromSTAR": true,
           "creditHrs": 3,
           "grade": "A",
           "student": "betty@hawaii.edu"
         },
         {
-          "semester": "Fall-2016",
+          "semester": "Fall-2020",
           "course": "ics_313",
           "note": "ICS 313",
-          "verified": true,
-          "fromSTAR": true,
+          "verified": false,
+          "fromSTAR": false,
           "creditHrs": 3,
           "grade": "A",
           "student": "betty@hawaii.edu"
         },
         {
-          "semester": "Fall-2016",
+          "semester": "Fall-2020",
           "course": "ics_331",
           "note": "ICS 331",
-          "verified": true,
-          "fromSTAR": true,
+          "verified": false,
+          "fromSTAR": false,
           "creditHrs": 3,
           "grade": "A",
           "student": "betty@hawaii.edu"
         },
         {
-          "semester": "Spring-2017",
+          "semester": "Spring-2021",
           "course": "ics_332",
           "note": "ICS 332",
-          "verified": true,
-          "fromSTAR": true,
+          "verified": false,
+          "fromSTAR": false,
           "creditHrs": 3,
           "grade": "A",
           "student": "betty@hawaii.edu"
         },
         {
-          "semester": "Spring-2017",
+          "semester": "Spring-2021",
           "course": "ics_422",
           "note": "ICS 422",
-          "verified": true,
-          "fromSTAR": true,
+          "verified": false,
+          "fromSTAR": false,
           "creditHrs": 3,
           "grade": "A",
           "student": "betty@hawaii.edu"
         },
         {
-          "semester": "Fall-2017",
+          "semester": "Fall-2021",
           "course": "ics_414",
           "note": "ICS 414",
           "verified": false,
@@ -3799,7 +3799,7 @@
           "student": "betty@hawaii.edu"
         },
         {
-          "semester": "Fall-2017",
+          "semester": "Fall-2021",
           "course": "ics_471",
           "note": "ICS 471",
           "verified": false,
@@ -3809,7 +3809,7 @@
           "student": "betty@hawaii.edu"
         },
         {
-          "semester": "Spring-2018",
+          "semester": "Spring-2022",
           "course": "ics_475",
           "note": "ICS 475",
           "verified": false,
@@ -3819,7 +3819,7 @@
           "student": "betty@hawaii.edu"
         },
         {
-          "semester": "Spring-2018",
+          "semester": "Spring-2022",
           "course": "ics_484",
           "note": "ICS 484",
           "verified": false,
@@ -3872,8 +3872,8 @@
           "semester": "Fall-2017",
           "course": "ics_311",
           "note": "ICS 311",
-          "verified": false,
-          "fromSTAR": false,
+          "verified": true,
+          "fromSTAR": true,
           "creditHrs": 4,
           "grade": "A",
           "student": "charley@hawaii.edu"
@@ -3882,8 +3882,8 @@
           "semester": "Fall-2017",
           "course": "ics_314",
           "note": "ICS 314",
-          "verified": false,
-          "fromSTAR": false,
+          "verified": true,
+          "fromSTAR": true,
           "creditHrs": 4,
           "grade": "A",
           "student": "charley@hawaii.edu"
@@ -3892,8 +3892,8 @@
           "semester": "Spring-2018",
           "course": "ics_212",
           "note": "ICS 212",
-          "verified": false,
-          "fromSTAR": false,
+          "verified": true,
+          "fromSTAR": true,
           "creditHrs": 3,
           "grade": "A",
           "student": "charley@hawaii.edu"
@@ -3902,8 +3902,8 @@
           "semester": "Spring-2018",
           "course": "ics_321",
           "note": "ICS 321",
-          "verified": false,
-          "fromSTAR": false,
+          "verified": true,
+          "fromSTAR": true,
           "creditHrs": 3,
           "grade": "A",
           "student": "charley@hawaii.edu"
@@ -3912,8 +3912,8 @@
           "semester": "Fall-2019",
           "course": "ics_313",
           "note": "ICS 313",
-          "verified": false,
-          "fromSTAR": false,
+          "verified": true,
+          "fromSTAR": true,
           "creditHrs": 3,
           "grade": "A",
           "student": "charley@hawaii.edu"
@@ -3922,8 +3922,8 @@
           "semester": "Fall-2018",
           "course": "ics_331",
           "note": "ICS 331",
-          "verified": false,
-          "fromSTAR": false,
+          "verified": true,
+          "fromSTAR": true,
           "creditHrs": 3,
           "grade": "A",
           "student": "charley@hawaii.edu"
@@ -3932,8 +3932,8 @@
           "semester": "Spring-2019",
           "course": "ics_332",
           "note": "ICS 332",
-          "verified": false,
-          "fromSTAR": false,
+          "verified": true,
+          "fromSTAR": true,
           "creditHrs": 3,
           "grade": "A",
           "student": "charley@hawaii.edu"
@@ -3943,7 +3943,7 @@
           "course": "ics_422",
           "note": "ICS 422",
           "verified": false,
-          "fromSTAR": false,
+          "fromSTAR": true,
           "creditHrs": 3,
           "grade": "A",
           "student": "charley@hawaii.edu"
@@ -3953,7 +3953,7 @@
           "course": "ics_451",
           "note": "ICS 451",
           "verified": false,
-          "fromSTAR": false,
+          "fromSTAR": true,
           "creditHrs": 3,
           "grade": "B",
           "student": "charley@hawaii.edu"
@@ -3963,13 +3963,53 @@
           "course": "ics_452",
           "note": "ICS 452",
           "verified": false,
-          "fromSTAR": false,
+          "fromSTAR": true,
           "creditHrs": 3,
           "grade": "B",
           "student": "charley@hawaii.edu"
         },
         {
-          "semester": "Fall-2017",
+          "semester": "Fall-2019",
+          "course": "ics_111",
+          "note": "ICS 111",
+          "verified": true,
+          "fromSTAR": true,
+          "creditHrs": 4,
+          "grade": "B",
+          "student": "cmoore@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2019",
+          "course": "ics_141",
+          "note": "ICS 141",
+          "verified": true,
+          "fromSTAR": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "cmoore@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2020",
+          "course": "ics_211",
+          "note": "ICS 211",
+          "verified": false,
+          "fromSTAR": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "cmoore@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2020",
+          "course": "ics_241",
+          "note": "ICS 241",
+          "verified": false,
+          "fromSTAR": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "cmoore@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2019",
           "course": "ics_111",
           "note": "ICS 111",
           "verified": true,
@@ -3979,7 +4019,7 @@
           "student": "samplestudent@hawaii.edu"
         },
         {
-          "semester": "Fall-2017",
+          "semester": "Fall-2019",
           "course": "ics_141",
           "note": "ICS 141",
           "verified": true,
@@ -3989,67 +4029,67 @@
           "student": "samplestudent@hawaii.edu"
         },
         {
-          "semester": "Spring-2018",
+          "semester": "Spring-2020",
           "course": "ics_211",
           "note": "ICS 211",
-          "verified": true,
+          "verified": false,
           "fromSTAR": true,
           "creditHrs": 4,
           "grade": "A",
           "student": "samplestudent@hawaii.edu"
         },
         {
-          "semester": "Spring-2018",
+          "semester": "Spring-2020",
           "course": "ics_241",
           "note": "ICS 241",
-          "verified": true,
+          "verified": false,
           "fromSTAR": true,
           "creditHrs": 3,
           "grade": "B",
           "student": "samplestudent@hawaii.edu"
         },
         {
-          "semester": "Fall-2018",
+          "semester": "Fall-2020",
           "course": "ics_311",
           "note": "ICS 311",
-          "verified": true,
-          "fromSTAR": true,
+          "verified": false,
+          "fromSTAR": false,
           "creditHrs": 4,
           "grade": "A",
           "student": "samplestudent@hawaii.edu"
         },
         {
-          "semester": "Fall-2018",
+          "semester": "Fall-2020",
           "course": "ics_314",
           "note": "ICS 314",
-          "verified": true,
-          "fromSTAR": true,
+          "verified": false,
+          "fromSTAR": false,
           "creditHrs": 3,
           "grade": "B",
           "student": "samplestudent@hawaii.edu"
         },
         {
-          "semester": "Spring-2019",
+          "semester": "Spring-2021",
           "course": "ics_212",
           "note": "ICS 212",
           "verified": false,
-          "fromSTAR": true,
+          "fromSTAR": false,
           "creditHrs": 3,
           "grade": "***",
           "student": "samplestudent@hawaii.edu"
         },
         {
-          "semester": "Spring-2019",
+          "semester": "Spring-2021",
           "course": "ics_321",
           "note": "ICS 321",
           "verified": false,
-          "fromSTAR": true,
+          "fromSTAR": false,
           "creditHrs": 3,
           "grade": "***",
           "student": "samplestudent@hawaii.edu"
         },
         {
-          "semester": "Fall-2019",
+          "semester": "Fall-2021",
           "course": "ics_312",
           "note": "ICS 312",
           "verified": false,
@@ -4059,7 +4099,7 @@
           "student": "samplestudent@hawaii.edu"
         },
         {
-          "semester": "Fall-2019",
+          "semester": "Fall-2021",
           "course": "ics_361",
           "note": "ICS 361",
           "verified": false,
@@ -4069,7 +4109,7 @@
           "student": "samplestudent@hawaii.edu"
         },
         {
-          "semester": "Spring-2020",
+          "semester": "Spring-2022",
           "course": "ics_332",
           "note": "ICS 332",
           "verified": false,
@@ -4079,7 +4119,7 @@
           "student": "samplestudent@hawaii.edu"
         },
         {
-          "semester": "Spring-2020",
+          "semester": "Spring-2022",
           "course": "ics_414",
           "note": "ICS 414",
           "verified": false,
@@ -4089,7 +4129,7 @@
           "student": "samplestudent@hawaii.edu"
         },
         {
-          "semester": "Fall-2020",
+          "semester": "Fall-2022",
           "course": "ics_443",
           "note": "ICS 443",
           "verified": false,
@@ -4099,7 +4139,7 @@
           "student": "samplestudent@hawaii.edu"
         },
         {
-          "semester": "Fall-2020",
+          "semester": "Fall-2022",
           "course": "ics_461",
           "note": "ICS 461",
           "verified": false,
@@ -4109,7 +4149,7 @@
           "student": "samplestudent@hawaii.edu"
         },
         {
-          "semester": "Spring-2021",
+          "semester": "Spring-2023",
           "course": "ics_491",
           "note": "ICS 491",
           "verified": false,
@@ -4119,7 +4159,7 @@
           "student": "samplestudent@hawaii.edu"
         },
         {
-          "semester": "Spring-2021",
+          "semester": "Spring-2023",
           "course": "ics_499",
           "note": "ICS 499",
           "verified": false,
@@ -7189,210 +7229,210 @@
       "name": "OpportunityInstanceCollection",
       "contents": [
         {
-          "semester": "Fall-2014",
-          "opportunity": "greyhats",
-          "verified": true,
-          "student": "abi@hawaii.edu",
-          "sponsor": "glau@hawaii.edu"
-        },
-        {
-          "semester": "Spring-2015",
-          "opportunity": "greyhats",
-          "verified": true,
-          "student": "abi@hawaii.edu",
-          "sponsor": "glau@hawaii.edu"
-        },
-        {
-          "semester": "Spring-2015",
-          "opportunity": "hawaii-hacker-hours",
-          "verified": true,
-          "student": "abi@hawaii.edu",
-          "sponsor": "johnson@hawaii.edu"
-        },
-        {
-          "semester": "Fall-2015",
-          "opportunity": "greyhats",
-          "verified": true,
-          "student": "abi@hawaii.edu",
-          "sponsor": "glau@hawaii.edu"
-        },
-        {
-          "semester": "Fall-2015",
-          "opportunity": "hawaii-hacker-hours",
-          "verified": true,
-          "student": "abi@hawaii.edu",
-          "sponsor": "johnson@hawaii.edu"
-        },
-        {
-          "semester": "Spring-2015",
-          "opportunity": "ccdc",
-          "verified": true,
-          "student": "abi@hawaii.edu",
-          "sponsor": "glau@hawaii.edu"
-        },
-        {
-          "semester": "Spring-2016",
-          "opportunity": "ccdc",
-          "verified": true,
-          "student": "abi@hawaii.edu",
-          "sponsor": "glau@hawaii.edu"
-        },
-        {
-          "semester": "Spring-2016",
-          "opportunity": "greyhats",
-          "verified": true,
-          "student": "abi@hawaii.edu",
-          "sponsor": "glau@hawaii.edu"
-        },
-        {
-          "semester": "Spring-2016",
-          "opportunity": "hawaii-hacker-hours",
-          "verified": true,
-          "student": "abi@hawaii.edu",
-          "sponsor": "johnson@hawaii.edu"
-        },
-        {
-          "semester": "Fall-2016",
-          "opportunity": "greyhats",
-          "verified": true,
-          "student": "abi@hawaii.edu",
-          "sponsor": "glau@hawaii.edu"
-        },
-        {
-          "semester": "Fall-2016",
-          "opportunity": "hawaii-hacker-hours",
-          "verified": true,
-          "student": "abi@hawaii.edu",
-          "sponsor": "johnson@hawaii.edu"
-        },
-        {
-          "semester": "Fall-2016",
-          "opportunity": "asecolab",
-          "verified": true,
-          "student": "abi@hawaii.edu",
-          "sponsor": "johnson@hawaii.edu"
-        },
-        {
-          "semester": "Spring-2017",
-          "opportunity": "greyhats",
-          "verified": false,
-          "student": "abi@hawaii.edu",
-          "sponsor": "glau@hawaii.edu"
-        },
-        {
-          "semester": "Spring-2017",
-          "opportunity": "asecolab",
-          "verified": false,
-          "student": "abi@hawaii.edu",
-          "sponsor": "johnson@hawaii.edu"
-        },
-        {
-          "semester": "Spring-2017",
-          "opportunity": "hawaii-hacker-hours",
-          "verified": false,
-          "student": "abi@hawaii.edu",
-          "sponsor": "johnson@hawaii.edu"
-        },
-        {
-          "semester": "Spring-2017",
-          "opportunity": "ccdc",
-          "verified": false,
-          "student": "abi@hawaii.edu",
-          "sponsor": "glau@hawaii.edu"
-        },
-        {
-          "semester": "Fall-2017",
-          "opportunity": "asecolab",
-          "verified": false,
-          "student": "abi@hawaii.edu",
-          "sponsor": "johnson@hawaii.edu"
-        },
-        {
           "semester": "Fall-2017",
           "opportunity": "greyhats",
-          "verified": false,
+          "verified": true,
           "student": "abi@hawaii.edu",
           "sponsor": "glau@hawaii.edu"
         },
         {
           "semester": "Spring-2018",
-          "opportunity": "asecolab",
-          "verified": false,
+          "opportunity": "greyhats",
+          "verified": true,
+          "student": "abi@hawaii.edu",
+          "sponsor": "glau@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2018",
+          "opportunity": "hawaii-hacker-hours",
+          "verified": true,
+          "student": "abi@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2018",
+          "opportunity": "greyhats",
+          "verified": true,
+          "student": "abi@hawaii.edu",
+          "sponsor": "glau@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2018",
+          "opportunity": "hawaii-hacker-hours",
+          "verified": true,
           "student": "abi@hawaii.edu",
           "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Spring-2018",
+          "opportunity": "ccdc",
+          "verified": true,
+          "student": "abi@hawaii.edu",
+          "sponsor": "glau@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2019",
+          "opportunity": "ccdc",
+          "verified": true,
+          "student": "abi@hawaii.edu",
+          "sponsor": "glau@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2019",
+          "opportunity": "greyhats",
+          "verified": true,
+          "student": "abi@hawaii.edu",
+          "sponsor": "glau@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2019",
+          "opportunity": "hawaii-hacker-hours",
+          "verified": true,
+          "student": "abi@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2019",
+          "opportunity": "greyhats",
+          "verified": true,
+          "student": "abi@hawaii.edu",
+          "sponsor": "glau@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2019",
+          "opportunity": "hawaii-hacker-hours",
+          "verified": true,
+          "student": "abi@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2019",
+          "opportunity": "asecolab",
+          "verified": true,
+          "student": "abi@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2020",
           "opportunity": "greyhats",
           "verified": false,
           "student": "abi@hawaii.edu",
           "sponsor": "glau@hawaii.edu"
         },
         {
-          "semester": "Summer-2015",
+          "semester": "Spring-2020",
+          "opportunity": "asecolab",
+          "verified": false,
+          "student": "abi@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2020",
+          "opportunity": "hawaii-hacker-hours",
+          "verified": false,
+          "student": "abi@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2020",
+          "opportunity": "ccdc",
+          "verified": false,
+          "student": "abi@hawaii.edu",
+          "sponsor": "glau@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2020",
+          "opportunity": "asecolab",
+          "verified": false,
+          "student": "abi@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2020",
+          "opportunity": "greyhats",
+          "verified": false,
+          "student": "abi@hawaii.edu",
+          "sponsor": "glau@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2021",
+          "opportunity": "asecolab",
+          "verified": false,
+          "student": "abi@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2021",
+          "opportunity": "greyhats",
+          "verified": false,
+          "student": "abi@hawaii.edu",
+          "sponsor": "glau@hawaii.edu"
+        },
+        {
+          "semester": "Summer-2018",
           "opportunity": "coursera-graphic-design",
           "verified": true,
           "student": "abi@hawaii.edu",
           "sponsor": "johnson@hawaii.edu"
         },
         {
-          "semester": "Summer-2016",
+          "semester": "Summer-2019",
           "opportunity": "gen-cyber-internship",
           "verified": true,
           "student": "abi@hawaii.edu",
           "sponsor": "glau@hawaii.edu"
         },
         {
-          "semester": "Summer-2015",
+          "semester": "Summer-2019",
           "opportunity": "coursera-introduction-to-big-data",
           "verified": true,
           "student": "betty@hawaii.edu",
           "sponsor": "johnson@hawaii.edu"
         },
         {
-          "semester": "Fall-2015",
+          "semester": "Fall-2019",
           "opportunity": "lava-lab",
           "verified": true,
           "student": "betty@hawaii.edu",
           "sponsor": "leighj@hawaii.edu"
         },
         {
-          "semester": "Summer-2016",
+          "semester": "Summer-2020",
           "opportunity": "coursera-r-programming",
-          "verified": true,
+          "verified": false,
           "student": "betty@hawaii.edu",
           "sponsor": "johnson@hawaii.edu"
         },
         {
-          "semester": "Fall-2016",
+          "semester": "Fall-2020",
           "opportunity": "lava-lab",
-          "verified": true,
+          "verified": false,
           "student": "betty@hawaii.edu",
           "sponsor": "leighj@hawaii.edu"
         },
         {
-          "semester": "Spring-2016",
+          "semester": "Spring-2020",
           "opportunity": "lava-lab",
-          "verified": true,
+          "verified": false,
           "student": "betty@hawaii.edu",
           "sponsor": "leighj@hawaii.edu"
         },
         {
-          "semester": "Spring-2017",
+          "semester": "Spring-2021",
           "opportunity": "wetware-wednesday",
           "verified": false,
           "student": "betty@hawaii.edu",
           "sponsor": "johnson@hawaii.edu"
         },
         {
-          "semester": "Spring-2017",
+          "semester": "Spring-2021",
           "opportunity": "booz-allen-ideas-festival",
           "verified": false,
           "student": "betty@hawaii.edu",
           "sponsor": "johnson@hawaii.edu"
         },
         {
-          "semester": "Summer-2017",
+          "semester": "Summer-2021",
           "opportunity": "sarp-internship",
           "verified": false,
           "student": "betty@hawaii.edu",
@@ -7534,7 +7574,7 @@
         {
           "semester": "Fall-2017",
           "opportunity": "code-for-hawaii",
-          "verified": false,
+          "verified": true,
           "student": "charley@hawaii.edu",
           "sponsor": "johnson@hawaii.edu"
         },
@@ -7644,119 +7684,119 @@
           "sponsor": "johnson@hawaii.edu"
         },
         {
-          "semester": "Fall-2018",
-          "opportunity": "acm-manoa",
-          "verified": true,
-          "student": "samplestudent@hawaii.edu",
-          "sponsor": "johnson@hawaii.edu"
-        },
-        {
-          "semester": "Spring-2019",
-          "opportunity": "acm-manoa",
-          "verified": false,
-          "student": "samplestudent@hawaii.edu",
-          "sponsor": "johnson@hawaii.edu"
-        },
-        {
-          "semester": "Fall-2017",
-          "opportunity": "acm-manoa",
-          "verified": true,
-          "student": "samplestudent@hawaii.edu",
-          "sponsor": "johnson@hawaii.edu"
-        },
-        {
-          "semester": "Spring-2018",
-          "opportunity": "acm-manoa",
-          "verified": true,
-          "student": "samplestudent@hawaii.edu",
-          "sponsor": "johnson@hawaii.edu"
-        },
-        {
           "semester": "Fall-2020",
-          "opportunity": "generic-project",
+          "opportunity": "acm-manoa",
           "verified": false,
           "student": "samplestudent@hawaii.edu",
           "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Spring-2021",
-          "opportunity": "generic-project",
+          "opportunity": "acm-manoa",
           "verified": false,
           "student": "samplestudent@hawaii.edu",
           "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Fall-2019",
-          "opportunity": "wetware-wednesday",
-          "verified": false,
-          "student": "samplestudent@hawaii.edu",
-          "sponsor": "johnson@hawaii.edu"
-        },
-        {
-          "semester": "Spring-2021",
-          "opportunity": "wetware-wednesday",
-          "verified": false,
+          "opportunity": "acm-manoa",
+          "verified": true,
           "student": "samplestudent@hawaii.edu",
           "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Spring-2020",
+          "opportunity": "acm-manoa",
+          "verified": false,
+          "student": "samplestudent@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2022",
+          "opportunity": "generic-project",
+          "verified": false,
+          "student": "samplestudent@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2023",
+          "opportunity": "generic-project",
+          "verified": false,
+          "student": "samplestudent@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2021",
           "opportunity": "wetware-wednesday",
           "verified": false,
           "student": "samplestudent@hawaii.edu",
           "sponsor": "johnson@hawaii.edu"
         },
         {
-          "semester": "Spring-2020",
+          "semester": "Spring-2023",
+          "opportunity": "wetware-wednesday",
+          "verified": false,
+          "student": "samplestudent@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2022",
+          "opportunity": "wetware-wednesday",
+          "verified": false,
+          "student": "samplestudent@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2022",
           "opportunity": "hnl-tech4good",
           "verified": false,
           "student": "samplestudent@hawaii.edu",
           "sponsor": "johnson@hawaii.edu"
         },
         {
-          "semester": "Fall-2019",
+          "semester": "Fall-2021",
           "opportunity": "cs-job",
           "verified": false,
           "student": "samplestudent@hawaii.edu",
           "sponsor": "johnson@hawaii.edu"
         },
         {
-          "semester": "Summer-2019",
+          "semester": "Summer-2021",
           "opportunity": "cs-job",
           "verified": false,
           "student": "samplestudent@hawaii.edu",
           "sponsor": "johnson@hawaii.edu"
         },
         {
-          "semester": "Fall-2020",
+          "semester": "Fall-2022",
           "opportunity": "coe-career-day",
           "verified": false,
           "student": "samplestudent@hawaii.edu",
           "sponsor": "johnson@hawaii.edu"
         },
         {
-          "semester": "Summer-2020",
+          "semester": "Summer-2022",
           "opportunity": "generic-internship",
           "verified": false,
           "student": "samplestudent@hawaii.edu",
           "sponsor": "johnson@hawaii.edu"
         },
         {
-          "semester": "Fall-2018",
+          "semester": "Fall-2020",
           "opportunity": "aloha-rb",
           "verified": false,
           "student": "samplestudent@hawaii.edu",
           "sponsor": "johnson@hawaii.edu"
         },
         {
-          "semester": "Spring-2019",
+          "semester": "Spring-2021",
           "opportunity": "code-for-hawaii",
           "verified": false,
           "student": "samplestudent@hawaii.edu",
           "sponsor": "johnson@hawaii.edu"
         },
         {
-          "semester": "Summer-2019",
+          "semester": "Summer-2021",
           "opportunity": "udacity-learn-unity",
           "verified": false,
           "student": "samplestudent@hawaii.edu",
@@ -9784,6 +9824,1090 @@
             "login"
           ],
           "timestamp": "2018-11-19T23:13:58.414Z"
+        },
+        {
+          "username": "radgrad@hawaii.edu",
+          "type": "login",
+          "typeData": [
+            "login"
+          ],
+          "timestamp": "2018-11-19T23:13:58.414Z"
+        },
+        {
+          "username": "radgrad@hawaii.edu",
+          "type": "login",
+          "typeData": [
+            "login"
+          ],
+          "timestamp": "2019-12-05T22:40:17.832Z"
+        },
+        {
+          "username": "radgrad@hawaii.edu",
+          "type": "login",
+          "typeData": [
+            "login"
+          ],
+          "timestamp": "2020-01-20T18:22:55.615Z"
+        },
+        {
+          "username": "radgrad@hawaii.edu",
+          "type": "login",
+          "typeData": [
+            "login"
+          ],
+          "timestamp": "2020-01-28T20:31:22.624Z"
+        },
+        {
+          "username": "radgrad@hawaii.edu",
+          "type": "login",
+          "typeData": [
+            "login"
+          ],
+          "timestamp": "2020-02-03T21:26:22.289Z"
+        },
+        {
+          "username": "radgrad@hawaii.edu",
+          "type": "login",
+          "typeData": [
+            "login"
+          ],
+          "timestamp": "2020-02-07T20:51:01.655Z"
+        },
+        {
+          "username": "radgrad@hawaii.edu",
+          "type": "login",
+          "typeData": [
+            "login"
+          ],
+          "timestamp": "2020-02-07T22:11:41.643Z"
+        },
+        {
+          "username": "radgrad@hawaii.edu",
+          "type": "login",
+          "typeData": [
+            "login"
+          ],
+          "timestamp": "2020-02-08T00:21:06.088Z"
+        },
+        {
+          "username": "radgrad@hawaii.edu",
+          "type": "login",
+          "typeData": [
+            "login"
+          ],
+          "timestamp": "2020-02-11T22:43:30.456Z"
+        },
+        {
+          "username": "radgrad@hawaii.edu",
+          "type": "login",
+          "typeData": [
+            "login"
+          ],
+          "timestamp": "2020-02-26T19:11:37.100Z"
+        },
+        {
+          "username": "radgrad@hawaii.edu",
+          "type": "logout",
+          "typeData": [
+            "logout"
+          ],
+          "timestamp": "2020-02-26T19:12:53.003Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "login",
+          "typeData": [
+            "login"
+          ],
+          "timestamp": "2017-10-26T19:13:14.871Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "home"
+          ],
+          "timestamp": "2017-10-26T19:13:14.887Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "home/aboutme"
+          ],
+          "timestamp": "2017-10-26T19:13:26.258Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "home/ice"
+          ],
+          "timestamp": "2018-02-16T09:13:27.009Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "home/levels"
+          ],
+          "timestamp": "2018-02-16T09:15:27.793Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "home/log"
+          ],
+          "timestamp": "2019-09-26T19:13:28.944Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer"
+          ],
+          "timestamp": "2019-09-26T19:15:31.852Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/plans"
+          ],
+          "timestamp": "2019-09-26T20:13:34.381Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/plans/bs-cs-2017"
+          ],
+          "timestamp": "2019-09-27T12:13:43.243Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/career-goals"
+          ],
+          "timestamp": "2019-09-27T12:16:50.131Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/career-goals/software-developer"
+          ],
+          "timestamp": "2019-09-28T19:14:03.594Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "careerGoalIDs",
+          "typeData": [
+            "devops-engineer",
+            "software-developer"
+          ],
+          "timestamp": "2019-09-28T19:15:06.374Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "careerGoalIDs",
+          "typeData": [
+            "devops-engineer"
+          ],
+          "timestamp": "2019-09-28T19:15:07.419Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "careerGoalIDs",
+          "typeData": [
+            "devops-engineer",
+            "software-developer"
+          ],
+          "timestamp": "2019-09-28T19:15:16.430Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/career-goals"
+          ],
+          "timestamp": "2019-10-06T19:14:08.759Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/interests"
+          ],
+          "timestamp": "2019-10-06T19:14:23.711Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/interests/software-engineering"
+          ],
+          "timestamp": "2019-10-06T19:14:30.401Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/interests"
+          ],
+          "timestamp": "2020-01-04T09:14:23.352Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/career-goals"
+          ],
+          "timestamp": "2020-01-04T09:14:46.008Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "degree-planner"
+          ],
+          "timestamp": "2020-01-04T09:14:58.852Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_111"
+          ],
+          "timestamp": "2020-01-04T09:15:13.663Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_141"
+          ],
+          "timestamp": "2020-01-15T19:15:18.036Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_211"
+          ],
+          "timestamp": "2020-01-15T19:16:21.418Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_241"
+          ],
+          "timestamp": "2020-01-15T19:17:03.694Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_311"
+          ],
+          "timestamp": "2020-02-01T10:15:26.761Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_314"
+          ],
+          "timestamp": "2020-02-01T10:16:28.884Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_212"
+          ],
+          "timestamp": "2020-02-01T10:16:45.342Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_321"
+          ],
+          "timestamp": "2020-02-01T10:17:33.736Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_331"
+          ],
+          "timestamp": "2020-02-01T10:17:41.642Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_361"
+          ],
+          "timestamp": "2020-02-01T10:20:47.680Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_332"
+          ],
+          "timestamp": "2020-02-16T11:16:01.534Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer"
+          ],
+          "timestamp": "2020-02-16T11:17:08.380Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/courses"
+          ],
+          "timestamp": "2020-02-16T11:18:11.651Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/courses/ics_414"
+          ],
+          "timestamp": "2020-02-16T11:21:19.973Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/courses"
+          ],
+          "timestamp": "2020-02-16T12:16:22.911Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/courses/ics_415"
+          ],
+          "timestamp": "2020-02-16T12:16:30.819Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/courses"
+          ],
+          "timestamp": "2020-02-16T12:16:33.353Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/courses/ics_419"
+          ],
+          "timestamp": "2020-02-16T12:16:40.968Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/courses"
+          ],
+          "timestamp": "2020-02-16T12:16:44.757Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/courses/ics_424"
+          ],
+          "timestamp": "2020-02-17T19:16:53.825Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/courses"
+          ],
+          "timestamp": "2020-02-17T19:16:57.584Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/courses/ics_432"
+          ],
+          "timestamp": "2020-02-17T19:17:03.795Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "degree-planner"
+          ],
+          "timestamp": "2020-02-17T19:17:08.069Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_414"
+          ],
+          "timestamp": "2020-02-17T19:17:14.967Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_415"
+          ],
+          "timestamp": "2020-02-17T19:17:19.700Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_419"
+          ],
+          "timestamp": "2020-02-17T19:17:23.481Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_424"
+          ],
+          "timestamp": "2020-02-17T19:17:26.599Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_432"
+          ],
+          "timestamp": "2020-02-17T19:17:28.694Z"
+        },
+        {
+          "username": "abi@hawaii.edu",
+          "type": "logout",
+          "typeData": [
+            "logout"
+          ],
+          "timestamp": "2020-02-17T19:17:51.453Z"
+        },
+        {
+          "username": "radgrad@hawaii.edu",
+          "type": "login",
+          "typeData": [
+            "login"
+          ],
+          "timestamp": "2020-02-26T19:18:10.878Z"
+        },
+        {
+          "username": "betty@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_212"
+          ],
+          "timestamp": "2020-02-02T10:16:45.342Z"
+        },
+        {
+          "username": "betty@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_321"
+          ],
+          "timestamp": "2020-02-02T10:17:33.736Z"
+        },
+        {
+          "username": "betty@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_331"
+          ],
+          "timestamp": "2020-02-02T10:17:41.642Z"
+        },
+        {
+          "username": "betty@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_361"
+          ],
+          "timestamp": "2020-02-02T10:20:47.680Z"
+        },
+        {
+          "username": "betty@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_332"
+          ],
+          "timestamp": "2020-02-15T11:16:01.534Z"
+        },
+        {
+          "username": "betty@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer"
+          ],
+          "timestamp": "2020-02-15T11:17:08.380Z"
+        },
+        {
+          "username": "betty@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/courses"
+          ],
+          "timestamp": "2020-02-15T11:18:11.651Z"
+        },
+        {
+          "username": "betty@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/courses/ics_414"
+          ],
+          "timestamp": "2020-02-15T11:21:19.973Z"
+        },
+        {
+          "username": "betty@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/courses"
+          ],
+          "timestamp": "2020-02-15T12:16:22.911Z"
+        },
+        {
+          "username": "betty@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/courses/ics_415"
+          ],
+          "timestamp": "2020-02-15T12:16:30.819Z"
+        },
+        {
+          "username": "betty@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/courses"
+          ],
+          "timestamp": "2020-02-15T12:16:33.353Z"
+        },
+        {
+          "username": "betty@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/courses/ics_419"
+          ],
+          "timestamp": "2020-02-15T12:16:40.968Z"
+        },
+        {
+          "username": "betty@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/courses"
+          ],
+          "timestamp": "2020-02-15T12:16:44.757Z"
+        },
+        {
+          "username": "betty@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/courses/ics_424"
+          ],
+          "timestamp": "2020-02-18T19:16:53.825Z"
+        },
+        {
+          "username": "betty@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/courses"
+          ],
+          "timestamp": "2020-02-18T19:16:57.584Z"
+        },
+        {
+          "username": "betty@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/courses/ics_432"
+          ],
+          "timestamp": "2020-02-18T19:17:03.795Z"
+        },
+        {
+          "username": "betty@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "degree-planner"
+          ],
+          "timestamp": "2020-02-18T19:17:08.069Z"
+        },
+        {
+          "username": "betty@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_414"
+          ],
+          "timestamp": "2020-02-18T19:17:14.967Z"
+        },
+        {
+          "username": "betty@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_415"
+          ],
+          "timestamp": "2020-02-18T19:17:19.700Z"
+        },
+        {
+          "username": "betty@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_419"
+          ],
+          "timestamp": "2020-02-18T19:17:23.481Z"
+        },
+        {
+          "username": "betty@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_424"
+          ],
+          "timestamp": "2020-02-18T19:17:26.599Z"
+        },
+        {
+          "username": "betty@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_432"
+          ],
+          "timestamp": "2020-02-18T19:17:28.694Z"
+        },
+        {
+          "username": "charley@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/courses"
+          ],
+          "timestamp": "2020-01-18T19:16:57.584Z"
+        },
+        {
+          "username": "charley@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/courses/ics_432"
+          ],
+          "timestamp": "2020-01-18T19:17:03.795Z"
+        },
+        {
+          "username": "charley@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "degree-planner"
+          ],
+          "timestamp": "2020-01-18T19:17:08.069Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "login",
+          "typeData": [
+            "login"
+          ],
+          "timestamp": "2020-02-26T19:13:14.871Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "home"
+          ],
+          "timestamp": "2020-02-26T19:13:14.887Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "home/aboutme"
+          ],
+          "timestamp": "2020-02-26T19:13:26.258Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "home/ice"
+          ],
+          "timestamp": "2020-02-26T19:13:27.009Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "home/levels"
+          ],
+          "timestamp": "2020-02-26T19:13:27.793Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "home/log"
+          ],
+          "timestamp": "2020-02-26T19:13:28.944Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer"
+          ],
+          "timestamp": "2020-02-26T19:13:31.852Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/plans"
+          ],
+          "timestamp": "2020-02-26T19:13:34.381Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/plans/bs-cs-2017"
+          ],
+          "timestamp": "2020-02-26T19:13:43.243Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/career-goals"
+          ],
+          "timestamp": "2020-02-26T19:13:50.131Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/career-goals/software-developer"
+          ],
+          "timestamp": "2020-02-26T19:14:03.594Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "careerGoalIDs",
+          "typeData": [
+            "devops-engineer",
+            "software-developer"
+          ],
+          "timestamp": "2020-02-26T19:14:06.374Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "careerGoalIDs",
+          "typeData": [
+            "devops-engineer"
+          ],
+          "timestamp": "2020-02-26T19:14:06.419Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "careerGoalIDs",
+          "typeData": [
+            "devops-engineer",
+            "software-developer"
+          ],
+          "timestamp": "2020-02-26T19:14:06.430Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/career-goals"
+          ],
+          "timestamp": "2020-02-26T19:14:08.759Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/interests"
+          ],
+          "timestamp": "2020-02-26T19:14:13.711Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/interests/software-engineering"
+          ],
+          "timestamp": "2020-02-26T19:14:20.401Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/interests"
+          ],
+          "timestamp": "2020-02-26T19:14:23.352Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/career-goals"
+          ],
+          "timestamp": "2020-02-26T19:14:29.008Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "degree-planner"
+          ],
+          "timestamp": "2020-02-26T19:14:58.852Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_111"
+          ],
+          "timestamp": "2020-02-26T19:15:13.663Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_141"
+          ],
+          "timestamp": "2020-02-26T19:15:18.036Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_211"
+          ],
+          "timestamp": "2020-02-26T19:15:21.418Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_241"
+          ],
+          "timestamp": "2020-02-26T19:15:23.694Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_311"
+          ],
+          "timestamp": "2020-02-26T19:15:26.761Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_314"
+          ],
+          "timestamp": "2020-02-26T19:15:28.884Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_212"
+          ],
+          "timestamp": "2020-02-26T19:15:31.342Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_321"
+          ],
+          "timestamp": "2020-02-26T19:15:33.736Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_331"
+          ],
+          "timestamp": "2020-02-26T19:15:41.642Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_361"
+          ],
+          "timestamp": "2020-02-26T19:15:47.680Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_332"
+          ],
+          "timestamp": "2020-02-26T19:16:01.534Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer"
+          ],
+          "timestamp": "2020-02-26T19:16:08.380Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/courses"
+          ],
+          "timestamp": "2020-02-26T19:16:11.651Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/courses/ics_414"
+          ],
+          "timestamp": "2020-02-26T19:16:19.973Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/courses"
+          ],
+          "timestamp": "2020-02-26T19:16:22.911Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/courses/ics_415"
+          ],
+          "timestamp": "2020-02-26T19:16:30.819Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/courses"
+          ],
+          "timestamp": "2020-02-26T19:16:33.353Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/courses/ics_419"
+          ],
+          "timestamp": "2020-02-26T19:16:40.968Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/courses"
+          ],
+          "timestamp": "2020-02-26T19:16:44.757Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/courses/ics_424"
+          ],
+          "timestamp": "2020-02-26T19:16:53.825Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/courses"
+          ],
+          "timestamp": "2020-02-26T19:16:57.584Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "explorer/courses/ics_432"
+          ],
+          "timestamp": "2020-02-26T19:17:03.795Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "pageView",
+          "typeData": [
+            "degree-planner"
+          ],
+          "timestamp": "2020-02-26T19:17:08.069Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_414"
+          ],
+          "timestamp": "2020-02-26T19:17:14.967Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_415"
+          ],
+          "timestamp": "2020-02-26T19:17:19.700Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_419"
+          ],
+          "timestamp": "2020-02-26T19:17:23.481Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_424"
+          ],
+          "timestamp": "2020-02-26T19:17:26.599Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "addCourse",
+          "typeData": [
+            "ics_432"
+          ],
+          "timestamp": "2020-02-26T19:17:28.694Z"
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "type": "logout",
+          "typeData": [
+            "logout"
+          ],
+          "timestamp": "2020-02-26T19:17:51.453Z"
         }
       ]
     },
@@ -9792,7 +10916,7 @@
       "contents": [
         {
           "student": "abi@hawaii.edu",
-          "semester": "Fall-2014",
+          "semester": "Fall-2017",
           "opportunity": "greyhats",
           "submittedOn": "2014-11-18T00:35:00.432Z",
           "status": "Accepted",
@@ -9806,7 +10930,7 @@
         },
         {
           "student": "abi@hawaii.edu",
-          "semester": "Spring-2015",
+          "semester": "Spring-2018",
           "opportunity": "greyhats",
           "submittedOn": "2015-02-18T00:35:00.432Z",
           "status": "Accepted",
@@ -9820,7 +10944,7 @@
         },
         {
           "student": "abi@hawaii.edu",
-          "semester": "Spring-2015",
+          "semester": "Spring-2018",
           "opportunity": "hawaii-hacker-hours",
           "submittedOn": "2015-02-18T00:35:00.432Z",
           "status": "Open",
@@ -9839,7 +10963,7 @@
         },
         {
           "student": "abi@hawaii.edu",
-          "semester": "Fall-2015",
+          "semester": "Fall-2018",
           "opportunity": "greyhats",
           "submittedOn": "2015-10-18T00:35:00.432Z",
           "status": "Accepted",
@@ -9853,7 +10977,7 @@
         },
         {
           "student": "abi@hawaii.edu",
-          "semester": "Fall-2015",
+          "semester": "Fall-2018",
           "opportunity": "hawaii-hacker-hours",
           "submittedOn": "2015-10-18T00:35:00.432Z",
           "status": "Open",
@@ -9872,7 +10996,7 @@
         },
         {
           "student": "abi@hawaii.edu",
-          "semester": "Spring-2015",
+          "semester": "Spring-2018",
           "opportunity": "ccdc",
           "submittedOn": "2015-04-18T00:35:00.432Z",
           "status": "Accepted",
@@ -9886,7 +11010,7 @@
         },
         {
           "student": "abi@hawaii.edu",
-          "semester": "Spring-2016",
+          "semester": "Spring-2019",
           "opportunity": "ccdc",
           "submittedOn": "2016-04-18T00:35:00.432Z",
           "status": "Accepted",
@@ -9900,7 +11024,7 @@
         },
         {
           "student": "abi@hawaii.edu",
-          "semester": "Spring-2016",
+          "semester": "Spring-2019",
           "opportunity": "greyhats",
           "submittedOn": "2016-02-18T00:35:00.432Z",
           "status": "Accepted",
@@ -9914,7 +11038,7 @@
         },
         {
           "student": "abi@hawaii.edu",
-          "semester": "Spring-2016",
+          "semester": "Spring-2019",
           "opportunity": "hawaii-hacker-hours",
           "submittedOn": "2016-01-18T00:35:00.432Z",
           "status": "Accepted",
@@ -9928,7 +11052,7 @@
         },
         {
           "student": "abi@hawaii.edu",
-          "semester": "Fall-2016",
+          "semester": "Fall-2019",
           "opportunity": "greyhats",
           "submittedOn": "2016-09-18T00:35:00.432Z",
           "status": "Accepted",
@@ -9942,7 +11066,7 @@
         },
         {
           "student": "abi@hawaii.edu",
-          "semester": "Fall-2016",
+          "semester": "Fall-2019",
           "opportunity": "hawaii-hacker-hours",
           "submittedOn": "2016-10-18T00:35:00.432Z",
           "status": "Accepted",
@@ -9956,7 +11080,7 @@
         },
         {
           "student": "abi@hawaii.edu",
-          "semester": "Fall-2016",
+          "semester": "Fall-2019",
           "opportunity": "asecolab",
           "submittedOn": "2016-10-18T00:35:00.432Z",
           "status": "Accepted",
@@ -9969,32 +11093,10 @@
           ]
         },
         {
-          "student": "abi@hawaii.edu",
-          "semester": "Spring-2017",
-          "opportunity": "asecolab",
-          "submittedOn": "2017-01-18T00:35:00.432Z",
-          "status": "Accepted",
-          "processed": [
-            {
-              "date": "2017-02-19T00:35:00.432Z",
-              "status": "Accepted",
-              "verifier": "johnson@hawaii.edu"
-            }
-          ]
-        },
-        {
           "student": "charley@hawaii.edu",
           "semester": "Spring-2017",
           "opportunity": "acm-manoa",
           "submittedOn": "2017-01-19T00:36:15.511Z",
-          "status": "Open",
-          "processed": []
-        },
-        {
-          "student": "betty@hawaii.edu",
-          "semester": "Spring-2017",
-          "opportunity": "wetware-wednesday",
-          "submittedOn": "2017-01-19T00:36:58.741Z",
           "status": "Open",
           "processed": []
         },
@@ -10013,22 +11115,8 @@
           ]
         },
         {
-          "student": "betty@hawaii.edu",
-          "semester": "Spring-2017",
-          "opportunity": "wetware-wednesday",
-          "submittedOn": "2017-01-19T00:36:58.746Z",
-          "status": "Accepted",
-          "processed": [
-            {
-              "date": "2017-01-19T00:37:22.175Z",
-              "status": "Accepted",
-              "verifier": "glau@hawaii.edu"
-            }
-          ]
-        },
-        {
           "student": "abi@hawaii.edu",
-          "semester": "Spring-2017",
+          "semester": "Spring-2020",
           "opportunity": "hawaii-hacker-hours",
           "submittedOn": "2017-07-24T23:29:24.657Z",
           "status": "Open",

@@ -15,7 +15,7 @@ tracker@1.2.0
 session@1.2.0
 standard-minifier-js@2.6.0
 es5-shim@4.8.0
-ecmascript@0.14.0
+ecmascript@0.14.2
 ejson@1.1.1
 
 # Collections
