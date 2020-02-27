@@ -15,6 +15,8 @@ import { MentorProfiles } from '../../../api/user/MentorProfileCollection';
 import { FavoriteInterests } from '../../../api/favorite/FavoriteInterestCollection';
 import { Teasers } from '../../../api/teaser/TeaserCollection';
 import { getGroupName } from './route-group-name';
+import { userInteractionDefineMethod } from '../../../api/analytic/UserInteractionCollection.methods';
+import { Interests } from '../../../api/interest/InterestCollection';
 
 Template.Explorer_Interests_Widget.onCreated(function explorerInterestsWidgetOnCreated() {
   // console.log(this.data);
@@ -140,6 +142,16 @@ Template.Explorer_Interests_Widget.events({
         console.error('Failed defining faborites', error);
       }
     });
+    const interactionData = {
+      username: profile.username,
+      type: 'favoriteItem',
+      typeData: `${definitionData.interest} (Interest)`,
+    };
+    userInteractionDefineMethod.call(interactionData, (err) => {
+      if (err) {
+        console.error('Error creating UserInteraction', err);
+      }
+    });
   },
   'click .deleteItem': function clickRemoveItem(event) {
     event.preventDefault();
@@ -170,6 +182,17 @@ Template.Explorer_Interests_Widget.events({
     removeItMethod.call({ collectionName, instance }, (error) => {
       if (error) {
         console.error('Failed deleting favorites', error);
+      }
+    });
+    const slug = Interests.findSlugByID(id);
+    const interactionData = {
+      username: profile.username,
+      type: 'unFavoriteItem',
+      typeData: `${slug} (Interest)`,
+    };
+    userInteractionDefineMethod.call(interactionData, (err) => {
+      if (err) {
+        console.error('Error creating UserInteraction', err);
       }
     });
   },

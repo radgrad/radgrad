@@ -13,6 +13,7 @@ import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 import { FavoriteAcademicPlans } from '../../../api/favorite/FavoriteAcademicPlanCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { getGroupName } from './route-group-name';
+import { userInteractionDefineMethod } from '../../../api/analytic/UserInteractionCollection.methods';
 
 Template.Explorer_Plans_Widget.onCreated(function studentExplorerPlansWidgetOnCreated() {
   this.planVar = new ReactiveVar();
@@ -104,6 +105,16 @@ Template.Explorer_Plans_Widget.events({
         console.error('Failed to define favorite', error);
       }
     });
+    const interactionData = {
+      username: definitionData.student,
+      type: 'favoriteItem',
+      typeData: `${definitionData.interest} (AcademicPlan)`,
+    };
+    userInteractionDefineMethod.call(interactionData, (err) => {
+      if (err) {
+        console.error('Error creating UserInteraction', err);
+      }
+    });
   },
   'click .deleteItem': function deleteAcademicPlan(event, instance) {
     event.preventDefault();
@@ -112,6 +123,17 @@ Template.Explorer_Plans_Widget.events({
     removeItMethod.call({ collectionName, instance: favorite._id }, (error) => {
       if (error) {
         console.error('Failed to remove favorite', error);
+      }
+    });
+    const slug = AcademicPlans.findSlugByID(favorite._id);
+    const interactionData = {
+      username: getRouteUserName(),
+      type: 'unFavoriteItem',
+      typeData: `${slug} (AcademicPlan)`,
+    };
+    userInteractionDefineMethod.call(interactionData, (err) => {
+      if (err) {
+        console.error('Error creating UserInteraction', err);
       }
     });
   },

@@ -13,6 +13,7 @@ import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 import { FavoriteCareerGoals } from '../../../api/favorite/FavoriteCareerGoalCollection';
 import { Teasers } from '../../../api/teaser/TeaserCollection';
 import { getGroupName } from './route-group-name';
+import { userInteractionDefineMethod } from '../../../api/analytic/UserInteractionCollection.methods';
 
 Template.Explorer_CareerGoals_Widget.helpers({
   careerGoalName(careerGoalSlugName) {
@@ -95,6 +96,16 @@ Template.Explorer_CareerGoals_Widget.events({
         console.error('Failed to define favorite', error);
       }
     });
+    const interactionData = {
+      username: profile.username,
+      type: 'favoriteItem',
+      typeData: `${definitionData.careerGoal} (CareerGoal)`,
+    };
+    userInteractionDefineMethod.call(interactionData, (err) => {
+      if (err) {
+        console.error('Error creating UserInteraction', err);
+      }
+    });
   },
   'click .deleteItem': function clickRemoveItem(event) {
     event.preventDefault();
@@ -117,6 +128,17 @@ Template.Explorer_CareerGoals_Widget.events({
     removeItMethod.call({ collectionName, instance }, (error) => {
       if (error) {
         console.error('Failed to remove favorite', error);
+      }
+    });
+    const slug = CareerGoals.findSlugByID(id);
+    const interactionData = {
+      username: profile.username,
+      type: 'unFavoriteItem',
+      typeData: `${slug} (CareerGoal)`,
+    };
+    userInteractionDefineMethod.call(interactionData, (err) => {
+      if (err) {
+        console.error('Error creating UserInteraction', err);
       }
     });
   },

@@ -5,6 +5,9 @@ import { getRouteUserName } from './route-user-name';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { defineMethod, removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { getUserIdFromRoute } from './get-user-id-from-route';
+import { userInteractionDefineMethod } from '../../../api/analytic/UserInteractionCollection.methods';
+import { Courses } from '../../../api/course/CourseCollection';
+import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 
 Template.Favorite_Button.onCreated(function favoriteButtonOnCreated() {
   // add your statement here
@@ -37,16 +40,37 @@ Template.Favorite_Button.events({
         console.error('Failed to add course to favorites', error);
       }
     });
+    const interactionData = {
+      username: definitionData.student,
+      type: 'favoriteItem',
+      typeData: `${definitionData.course} (Course)`,
+    };
+    userInteractionDefineMethod.call(interactionData, (err) => {
+      if (err) {
+        console.error('Error creating UserInteraction', err);
+      }
+    });
   },
   'click .jsRemoveCourse': function deleteCourseFavorite(event) {
     event.preventDefault();
     const collectionName = FavoriteCourses.getCollectionName();
     const courseID = Template.instance().data.item._id;
+    const slug = Courses.findSlugByID(courseID);
     const studentID = getUserIdFromRoute();
     const favorite = FavoriteCourses.findDoc({ studentID, courseID });
     removeItMethod.call({ collectionName, instance: favorite._id }, (error) => {
       if (error) {
         console.error('Failed to remove course from favorites', error);
+      }
+    });
+    const interactionData = {
+      username: getRouteUserName(),
+      type: 'unFavoriteItem',
+      typeData: `${slug} (Course)`,
+    };
+    userInteractionDefineMethod.call(interactionData, (err) => {
+      if (err) {
+        console.error('Error creating UserInteraction', err);
       }
     });
   },
@@ -62,16 +86,38 @@ Template.Favorite_Button.events({
         console.error('Failed to add opportunity to favorites', error);
       }
     });
+    const interactionData = {
+      username: definitionData.student,
+      type: 'favoriteItem',
+      typeData: `${definitionData.opportunity} (Opportunity)`,
+    };
+    userInteractionDefineMethod.call(interactionData, (err) => {
+      if (err) {
+        console.error('Error creating UserInteraction', err);
+      }
+    });
   },
   'click .jsRemoveOpportunity': function removeOpportunityFavorite(event) {
     event.preventDefault();
     const collectionName = FavoriteOpportunities.getCollectionName();
     const opportunityID = Template.instance().data.item._id;
+    const slug = Opportunities.findSlugByID(opportunityID);
+    // console.log(slug);
     const studentID = getUserIdFromRoute();
     const favorite = FavoriteOpportunities.findDoc({ studentID, opportunityID });
     removeItMethod.call({ collectionName, instance: favorite._id }, (error) => {
       if (error) {
         console.error('Failed to remove favorite opportunity', error);
+      }
+    });
+    const interactionData = {
+      username: getRouteUserName(),
+      type: 'unFavoriteItem',
+      typeData: `${slug} (Opportunity)`,
+    };
+    userInteractionDefineMethod.call(interactionData, (err) => {
+      if (err) {
+        console.error('Error creating UserInteraction', err);
       }
     });
   },

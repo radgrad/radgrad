@@ -258,7 +258,12 @@ Template.Students_Summary_Widget.events({
             behaviors[0].users.push(user);
           }
           if (_.some(interactions, (i) => i.type === 'careerGoalIDs' || i.type === 'interestIDs'
-              || i.type === 'academicPlanID')) {
+              || i.type === 'academicPlanID' || (i.type === 'favoriteItem' && i.typeData[0].includes('CareerGoal'))
+            || (i.type === 'unFavoriteItem' && i.typeData[0].includes('CareerGoal'))
+            || (i.type === 'favoriteItem' && i.typeData[0].includes('Interest'))
+            || (i.type === 'unFavoriteItem' && i.typeData[0].includes('Interest'))
+            || (i.type === 'favoriteItem' && i.typeData[0].includes('AcademicPlan'))
+            || (i.type === 'unFavoriteItem' && i.typeData[0].includes('AcademicPlan')))) {
             behaviors[1].count++;
             behaviors[1].users.push(user);
           }
