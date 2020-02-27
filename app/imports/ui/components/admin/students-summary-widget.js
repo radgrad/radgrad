@@ -107,7 +107,7 @@ Template.Students_Summary_Widget.helpers({
         behaviorsByDate[moment(date)
           .format('MMM D, YYYY')] = [];
       });
-      const behaviorList = ['Log In', 'Change Outlook', 'Exploration', 'Planning', 'Verification',
+      const behaviorList = ['Log In', 'Change Outlook', 'Exploration', 'Planning', 'Favorites', 'Verification',
         'Reviewing', 'Mentorship', 'Level Up', 'Complete Plan', 'Profile', 'Log Out'];
       _.each(behaviorsByDate, function (array, date, obj) {
         _.each(interactionsByUser, function (interactions) {
@@ -130,27 +130,30 @@ Template.Students_Summary_Widget.helpers({
             || i.type === 'addOpportunity' || i.type === 'removeOpportunity')) {
             obj[date].push(behaviorList[3]);
           }
-          if (_.some(interactionsWithinDate, (i) => i.type === 'verifyRequest')) {
+          if (_.some(interactionsWithinDate, (i) => i.type === 'favoriteItem' || i.type === 'unFavoriteItem')) {
             obj[date].push(behaviorList[4]);
           }
-          if (_.some(interactionsWithinDate, (i) => i.type === 'addReview')) {
+          if (_.some(interactionsWithinDate, (i) => i.type === 'verifyRequest')) {
             obj[date].push(behaviorList[5]);
+          }
+          if (_.some(interactionsWithinDate, (i) => i.type === 'addReview')) {
+            obj[date].push(behaviorList[6]);
           }
           if (_.some(interactionsWithinDate, (i) => (i.type === 'pageView'
             && i.typeData[0].includes('mentor-space')) || i.type === 'askQuestion')) {
-            obj[date].push(behaviorList[6]);
-          }
-          if (_.some(interactionsWithinDate, (i) => i.type === 'level')) {
             obj[date].push(behaviorList[7]);
           }
-          if (_.some(interactionsWithinDate, (i) => i.type === 'completePlan')) {
+          if (_.some(interactionsWithinDate, (i) => i.type === 'level')) {
             obj[date].push(behaviorList[8]);
           }
-          if (_.some(interactionsWithinDate, (i) => i.type === 'picture' || i.type === 'website')) {
+          if (_.some(interactionsWithinDate, (i) => i.type === 'completePlan')) {
             obj[date].push(behaviorList[9]);
           }
-          if (_.some(interactionsWithinDate, (i) => i.type === 'logout')) {
+          if (_.some(interactionsWithinDate, (i) => i.type === 'picture' || i.type === 'website')) {
             obj[date].push(behaviorList[10]);
+          }
+          if (_.some(interactionsWithinDate, (i) => i.type === 'logout')) {
+            obj[date].push(behaviorList[11]);
           }
         });
       });
@@ -266,6 +269,9 @@ Template.Students_Summary_Widget.events({
         instance.unique.set(uniqueVisitors);
         const behaviors = [
           {
+            type: 'Log In', count: 0, users: [], description: 'Logged into application',
+          },
+          {
             type: 'Change Outlook', count: 0, users: [], description: 'Updated interests, career goals, or degree',
           },
           {
@@ -273,6 +279,9 @@ Template.Students_Summary_Widget.events({
           },
           {
             type: 'Planning', count: 0, users: [], description: 'Added or removed course/opportunity',
+          },
+          {
+            type: 'Favorites', count: 0, users: [], description: 'Favorited or unfavorited an item',
           },
           {
             type: 'Verification', count: 0, users: [], description: 'Requested verification',
@@ -311,6 +320,10 @@ Template.Students_Summary_Widget.events({
               lastTimeStamp = currentTimestamp;
             }
           });
+          if (_.some(interactions, { type: 'login' })) {
+            behaviors[0].count++;
+            behaviors[0].users.push(user);
+          }
           if (_.some(interactions, (i) => i.type === 'careerGoalIDs' || i.type === 'interestIDs'
             || i.type === 'academicPlanID' || (i.type === 'favoriteItem' && i.typeData[0].includes('CareerGoal'))
             || (i.type === 'unFavoriteItem' && i.typeData[0].includes('CareerGoal'))
@@ -318,46 +331,50 @@ Template.Students_Summary_Widget.events({
             || (i.type === 'unFavoriteItem' && i.typeData[0].includes('Interest'))
             || (i.type === 'favoriteItem' && i.typeData[0].includes('AcademicPlan'))
             || (i.type === 'unFavoriteItem' && i.typeData[0].includes('AcademicPlan')))) {
-            behaviors[0].count++;
-            behaviors[0].users.push(user);
-          }
-          if (_.some(interactions, (i) => i.type === 'pageView' && i.typeData[0].includes('explorer/'))) {
             behaviors[1].count++;
             behaviors[1].users.push(user);
           }
-          if (_.some(interactions, (i) => i.type === 'addCourse' || i.type === 'removeCourse'
-            || i.type === 'addOpportunity' || i.type === 'removeOpportunity')) {
+          if (_.some(interactions, (i) => i.type === 'pageView' && i.typeData[0].includes('explorer/'))) {
             behaviors[2].count++;
             behaviors[2].users.push(user);
           }
-          if (_.some(interactions, (i) => i.type === 'verifyRequest')) {
+          if (_.some(interactions, (i) => i.type === 'addCourse' || i.type === 'removeCourse'
+            || i.type === 'addOpportunity' || i.type === 'removeOpportunity')) {
             behaviors[3].count++;
             behaviors[3].users.push(user);
           }
-          if (_.some(interactions, (i) => i.type === 'addReview')) {
+          if (_.some(interactions, (i) => i.type === 'favoriteItem' || i.type === 'unFavoriteItem')) {
             behaviors[4].count++;
             behaviors[4].users.push(user);
           }
-          if (_.some(interactions, (i) => (i.type === 'pageView' && i.typeData[0].includes('mentor-space'))
-            || i.type === 'askQuestion')) {
+          if (_.some(interactions, (i) => i.type === 'verifyRequest')) {
             behaviors[5].count++;
-            behaviors[6].users.push(user);
+            behaviors[5].users.push(user);
           }
-          if (_.some(interactions, (i) => i.type === 'level')) {
+          if (_.some(interactions, (i) => i.type === 'addReview')) {
             behaviors[6].count++;
             behaviors[6].users.push(user);
           }
-          if (_.some(interactions, (i) => i.type === 'completePlan')) {
+          if (_.some(interactions, (i) => (i.type === 'pageView' && i.typeData[0].includes('mentor-space'))
+            || i.type === 'askQuestion')) {
             behaviors[7].count++;
             behaviors[7].users.push(user);
           }
-          if (_.some(interactions, (i) => i.type === 'picture' || i.type === 'website')) {
+          if (_.some(interactions, (i) => i.type === 'level')) {
             behaviors[8].count++;
             behaviors[8].users.push(user);
           }
-          if (_.some(interactions, { type: 'logout' })) {
+          if (_.some(interactions, (i) => i.type === 'completePlan')) {
             behaviors[9].count++;
             behaviors[9].users.push(user);
+          }
+          if (_.some(interactions, (i) => i.type === 'picture' || i.type === 'website')) {
+            behaviors[10].count++;
+            behaviors[10].users.push(user);
+          }
+          if (_.some(interactions, { type: 'logout' })) {
+            behaviors[11].count++;
+            behaviors[11].users.push(user);
           }
         });
         instance.interactionsByUser.set(users);

@@ -10,14 +10,15 @@ Template.Student_Timeline_Modal.helpers({
   behaviors(session) {
     const actions = {
       login: [], careerGoalIDs: [], interestIDs: [], academicPlanID: [], pageView: [],
-      addCourse: [], removeCourse: [], addOpportunity: [], removeOpportunity: [], verifyRequest: [],
+      addCourse: [], removeCourse: [], addOpportunity: [], removeOpportunity: [], favoriteItem: [],
+      unFavoriteItem: [], verifyRequest: [],
       addReview: [], askQuestion: [], level: [], picture: [], website: [],
     };
     _.each(session, function (interaction) {
       actions[interaction.type].push(interaction.typeData.join(', '));
     });
     const behaviors = {
-      'Log In': [], 'Change Outlook': [], Exploration: [], Planning: [], Verification: [],
+      'Log In': [], 'Change Outlook': [], Exploration: [], Planning: [], Favorites: [], Verification: [],
       Reviewing: [], Mentorship: [], 'Level Up': [], Profile: [],
     };
     _.each(actions, function (array, action) {
@@ -62,24 +63,28 @@ Template.Student_Timeline_Modal.helpers({
             behaviors.Mentorship.push('User visited the Mentor Space page');
           }
         } else if (action === 'addCourse') {
-          behaviors.Planning.push(`Added the following courses: ${_.uniq(array)}`);
+          behaviors.Planning.push(`Added the following courses: ${_.uniq(array).join(', ')}`);
         } else if (action === 'removeCourse') {
-          behaviors.Planning.push(`Removed the following courses: ${_.uniq(array)}`);
+          behaviors.Planning.push(`Removed the following courses: ${_.uniq(array).join(', ')}`);
         } else if (action === 'addOpportunity') {
-          behaviors.Planning.push(`Added the following opportunites: ${_.uniq(array)}`);
+          behaviors.Planning.push(`Added the following opportunites: ${_.uniq(array).join(', ')}`);
         } else if (action === 'removeOpportunity') {
-          behaviors.Planning.push(`Removed the following opportunities: ${_.uniq(array)}`);
+          behaviors.Planning.push(`Removed the following opportunities: ${_.uniq(array).join(', ')}`);
+        } else if (action === 'favoriteItem') {
+          behaviors.Favorites.push(`Favorited the following items: ${_.uniq(array).join(', ')}`);
+        } else if (action === 'unFavoriteItem') {
+          behaviors.Favorites.push(`Unfavorited the following items: ${_.uniq(array).join(', ')}`);
         } else if (action === 'verifyRequest') {
-          behaviors.Verification.push(`Requested verification for: ${_.uniq(array)}`);
+          behaviors.Verification.push(`Requested verification for: ${_.uniq(array).join(', ')}`);
         } else if (action === 'addReview') {
-          behaviors.Reviewing.push(`Reviewed the following courses: ${_.uniq(array)}`);
+          behaviors.Reviewing.push(`Reviewed the following courses: ${_.uniq(array).join(', ')}`);
         } else if (action === 'askQuestion') {
           behaviors.Mentorship.push(`Asked ${array.length} question(s): `);
           _.each(array, function (question) {
             behaviors.Mentorship.push(`Question: ${question}`);
           });
         } else if (action === 'level') {
-          behaviors['Level Up'].push(`Level updated ${array.length} time(s): ${array}`);
+          behaviors['Level Up'].push(`Level updated ${array.length} time(s): ${array.join(', ')}`);
         } else if (action === 'picture') {
           behaviors.Profile.push(`User updated their picture ${array.length} time(s)`);
         } else if (action === 'website') {
