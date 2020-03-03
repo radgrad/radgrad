@@ -304,7 +304,7 @@ Template.Students_Summary_Widget.events({
           {
             type: 'Log Out', count: 0, users: [], description: 'Logged out',
           }];
-        let sessions = 0;
+        let sessions = 1;
         _.each(users, function (interactions, user) {
           let lastTimeStamp;
           _.forEach(interactions, (i) => {
