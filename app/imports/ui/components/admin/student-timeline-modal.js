@@ -4,7 +4,7 @@ import { moment } from 'meteor/momentjs:moment';
 import { Users } from '../../../api/user/UserCollection';
 
 // This defines the time between sessions
-const gap = 10;
+const sessionGap = 10;
 
 Template.Student_Timeline_Modal.helpers({
   behaviors(session) {
@@ -12,14 +12,14 @@ Template.Student_Timeline_Modal.helpers({
       login: [], careerGoalIDs: [], interestIDs: [], academicPlanID: [], pageView: [],
       addCourse: [], removeCourse: [], addOpportunity: [], removeOpportunity: [], favoriteItem: [],
       unFavoriteItem: [], verifyRequest: [],
-      addReview: [], askQuestion: [], level: [], picture: [], website: [],
+      addReview: [], askQuestion: [], level: [], picture: [], website: [], logout: [],
     };
     _.each(session, function (interaction) {
       actions[interaction.type].push(interaction.typeData.join(', '));
     });
     const behaviors = {
       'Log In': [], 'Change Outlook': [], Exploration: [], Planning: [], Favorites: [], Verification: [],
-      Reviewing: [], Mentorship: [], 'Level Up': [], Profile: [],
+      Reviewing: [], Mentorship: [], 'Level Up': [], Profile: [], 'Log Out': [],
     };
     _.each(actions, function (array, action) {
       if (array.length !== 0) {
@@ -89,6 +89,8 @@ Template.Student_Timeline_Modal.helpers({
           behaviors.Profile.push(`User updated their picture ${array.length} time(s)`);
         } else if (action === 'website') {
           behaviors.Profile.push(`User updated their website ${array.length} time(s)`);
+        } else if (action === 'logout') {
+          behaviors['Log Out'].push(`User logged out ${array.length} time(s)`);
         }
       }
     });
@@ -114,7 +116,7 @@ Template.Student_Timeline_Modal.helpers({
         const prevTimestamp = moment(new Date(interactions[index - 1].timestamp));
         const timestamp = moment(new Date(interaction.timestamp));
         const difference = moment.duration(timestamp.diff(prevTimestamp)).asMinutes();
-        if (difference >= gap) {
+        if (difference >= sessionGap) {
           sessions.push(_.slice(interactions, slicedIndex, index));
           slicedIndex = index;
         }

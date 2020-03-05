@@ -8,6 +8,9 @@ import { Users } from '../../../api/user/UserCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 
+// This defines the time between sessions
+const sessionGap = 10;
+
 Template.Students_Summary_Widget.onCreated(function studentsSummaryWidgetOnRendered() {
   this.interactionsByUser = new ReactiveVar();
   this.selectedUser = new ReactiveVar();
@@ -304,20 +307,22 @@ Template.Students_Summary_Widget.events({
           {
             type: 'Log Out', count: 0, users: [], description: 'Logged out',
           }];
-        let sessions = 1;
+        const sessionArr = [];
         _.each(users, function (interactions, user) {
-          let lastTimeStamp;
-          _.forEach(interactions, (i) => {
-            if (_.isUndefined(lastTimeStamp)) {
-              // console.log('init');
-              lastTimeStamp = moment(i.timestamp);
-            } else {
-              // console.log('next');
-              const currentTimestamp = moment(i.timestamp);
-              if (currentTimestamp.diff(lastTimeStamp, 'hours', true) > 1) {
-                sessions++;
+          let slicedIndex = 0;
+          _.forEach(interactions, (interaction, index) => {
+            if (index !== 0) {
+              const prevTimestamp = moment(new Date(interactions[index - 1].timestamp));
+              const timestamp = moment(new Date(interaction.timestamp));
+              const difference = moment.duration(timestamp.diff(prevTimestamp))
+                .asMinutes();
+              if (difference >= sessionGap) {
+                sessionArr.push(_.slice(interactions, slicedIndex, index));
+                slicedIndex = index;
               }
-              lastTimeStamp = currentTimestamp;
+              if (index === interactions.length - 1) {
+                sessionArr.push(_.slice(interactions, slicedIndex));
+              }
             }
           });
           if (_.some(interactions, { type: 'login' })) {
@@ -380,7 +385,7 @@ Template.Students_Summary_Widget.events({
         instance.interactionsByUser.set(users);
         instance.behaviors.set(behaviors);
         instance.dateRange.set(dateRange);
-        instance.totalSessions.set(sessions);
+        instance.totalSessions.set(sessionArr.length);
         instance.working.set(false);
       }
     });
