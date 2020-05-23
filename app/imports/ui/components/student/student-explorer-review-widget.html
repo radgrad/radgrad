@@ -35,7 +35,11 @@
                 {{#if completed}}
                   <p><i>You have not reviewed this yet.</i></p>
                 {{else}}
-                  <p><i>You must complete this {{reviewType}} first to leave a review.</i></p>
+                  {{#if isCourseReview reviewType}}
+                  <p><i>You must complete this {{reviewType}} first to leave a review. If you have just completed this {{reviewType}}, it may not be available for you to review in RadGrad until a few weeks after the semester has ended. Please check back later.</i></p>
+                    {{else}}
+                    <p><i>You must verify your participation in this {{reviewType}} to leave a review. If you have not requested verification for this {{reviewType}}, please submit a verification request.</i></p>
+                    {{/if}}
                 {{/if}}
               </div>
             </div>

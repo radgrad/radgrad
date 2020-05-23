@@ -6,6 +6,8 @@ import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getGroupName } from '../shared/route-group-name';
+import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
+import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 
 Template.Student_Explorer_Review_Widget.helpers({
   abbreviateSemester(semester) {
@@ -27,6 +29,22 @@ Template.Student_Explorer_Review_Widget.helpers({
     }
     return `${semName} ${semNameYear[1]}`;
   },
+  completed() {
+    const { event, reviewType } = this;
+    // console.log(event, reviewType);
+    const studentID = getUserIdFromRoute();
+    let instances;
+    if (reviewType === 'course') {
+      const courseID = event._id;
+      instances = CourseInstances.find({ courseID, studentID })
+        .fetch();
+    }
+    if (reviewType === 'opportunity') {
+      const opportunityID = event._id;
+      instances = OpportunityInstances.find({ opportunityID, studentID }).fetch();
+    }
+    return _.some(instances, { verified: true });
+  },
   currentUserName() {
     if (getUserIdFromRoute()) {
       return Users.getFullName(getUserIdFromRoute());
@@ -38,6 +56,9 @@ Template.Student_Explorer_Review_Widget.helpers({
       return Users.getProfile(getUserIdFromRoute()).picture;
     }
     return '';
+  },
+  isCourseReview(reviewType) {
+    return reviewType === 'course';
   },
   reviewData(review) {
     const profile = Users.getProfile(review.studentID);
