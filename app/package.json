@@ -18,7 +18,7 @@
     "test-app-win": "meteor test --full-app --once --driver-package dispatch:mocha --no-release-check --settings ../config/settings.development.json --port 3100",
     "coverage-cam": "meteor test --driver-package practicalmeteor:mocha --port 3100 --no-release-check --settings ../config/settings.coverage.cam.json",
     "jsdoc": "./node_modules/.bin/jsdoc -c ./jsdoc.json -r .",
-    "deploy": "DEPLOY_HOSTNAME=galaxy.meteor.com meteor deploy radgrad.meteorapp.com --settings ../config/settings.production.json --owner philipmjohnson"
+    "deploy": "DEPLOY_HOSTNAME=galaxy.meteor.com meteor deploy radgrad.meteorapp.com --settings ../config/settings.production.json --owner radgrad"
   },
   "dependencies": {
     "@babel/runtime": "^7.9.6",
