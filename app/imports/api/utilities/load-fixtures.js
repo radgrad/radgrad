@@ -83,7 +83,7 @@ export function loadCollectionNewDataOnly(collection, loadJSON, consolep) {
           feedType: definition.feedType,
           description: definition.description,
           timestamp: definition.timestamp,
-        }).count === 0) {
+        }).count() === 0) {
           collection.define(definition);
           count++;
         }
