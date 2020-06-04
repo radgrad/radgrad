@@ -4,3 +4,4 @@ node_modules
 alumni*.txt
 dump*.json
 analysis*
+*private.json
