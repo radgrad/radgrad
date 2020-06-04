@@ -50,7 +50,7 @@ const getUserInteractionsBetween = (startStr, endStr) => {
     const lTime = moment(l.timestamp);
     return lTime.isBetween(start, end, null, '[]');
   });
-  return between;
+  return _.sortBy(between, (i) => i.timestamp);
 };
 
 const getActiveStudentsBetween = (startStr, endStr) => {
@@ -176,8 +176,11 @@ const userAnalysis = (username, startString, endString) => {
   return results;
 };
 
-const sessionInformation = (username, startStr, endStr) => {
+const sessionInformation = (username, startStr, endStr, consolep) => {
   const interactions = getInteractionsPerUserBetween(username, startStr, endStr);
+  // if (consolep) {
+  //   console.log(username, startStr, endStr, interactions.length);
+  // }
   let sessions = 0;
   const sessionLength = [];
   let lastTimeStamp;
@@ -185,14 +188,22 @@ const sessionInformation = (username, startStr, endStr) => {
   let sessionEnd;
   _.forEach(interactions, (i) => {
     if (_.isUndefined(lastTimeStamp)) {
-      // console.log('init');
+      if (consolep) {
+        console.log('init', i.timestamp);
+      }
       lastTimeStamp = moment(i.timestamp);
       sessionStart = lastTimeStamp;
       sessionEnd = sessionStart;
     } else {
-      // console.log('next');
+      // if (consolep) {
+      //   console.log('next', sessionStart.format(), i.timestamp);
+      // }
       const currentTimestamp = moment(i.timestamp);
       if (currentTimestamp.diff(lastTimeStamp, 'hours', true) > 1) {
+        if (consolep) {
+          console.log('new session', sessionStart.format(),
+            sessionEnd.format(), sessionEnd.diff(sessionStart, 'minutes'));
+        }
         sessions++;
         sessionLength.push(sessionEnd.diff(sessionStart, 'minutes'));
         sessionStart = currentTimestamp;
@@ -203,6 +214,9 @@ const sessionInformation = (username, startStr, endStr) => {
       lastTimeStamp = currentTimestamp;
     }
   });
+  if (sessionLength.length === 0 && sessionEnd && sessionStart) { // only one session
+    sessionLength.push(sessionEnd.diff(sessionStart, 'minutes'));
+  }
   let totalSessionTime = 0;
   if (sessionLength.length > 0) {
     totalSessionTime = sessionLength.reduce((total, num) => total + num);
@@ -214,6 +228,9 @@ const sessionInformation = (username, startStr, endStr) => {
     retVal.longestSession = Math.max(...sessionLength);
     retVal.totalSessionTime = totalSessionTime;
     retVal.averageSession = totalSessionTime / sessions;
+    // if (consolep) {
+    //   console.log(retVal);
+    // }
     return retVal;
   }
   // console.log(totalSessionTime);
@@ -228,13 +245,13 @@ const sessionInformation = (username, startStr, endStr) => {
   return retVal;
 };
 
-const studentSessionInformationBetween = (startStr, endStr, progressp = true) => {
+const studentSessionInformationBetween = (startStr, endStr, progressp = true, consolep) => {
   const usernames = getActiveStudentsBetween(startStr, endStr);
   const results = [];
   _.forEach(usernames, (username, index) => {
-    results.push(sessionInformation(username, startStr, endStr));
+    results.push(sessionInformation(username, startStr, endStr, consolep));
     if (index % 10 === 0 && progressp) {
-      console.log(`working ${(index / usernames.length) * 100} %`);
+      console.log(`working ${((index / usernames.length) * 100).toFixed(2)} %`);
     }
   });
   return results;
@@ -252,7 +269,7 @@ const studentSessionInformationToCSV = (data) => {
   return resultStr;
 };
 
-const sessionInformationBetween = (startStr, endStr) => {
+const sessionInformationBetween = (startStr, endStr, consolep) => {
   const usernames = getActiveStudentsBetween(startStr, endStr);
   // console.log(usernames);
   let sessions = 0;
@@ -263,7 +280,7 @@ const sessionInformationBetween = (startStr, endStr) => {
   let minSessions = 1000;
   let maxSessions = 0;
   _.forEach(usernames, (username, index) => {
-    const sessionInfo = sessionInformation(username, startStr, endStr);
+    const sessionInfo = sessionInformation(username, startStr, endStr, consolep);
     sessions += sessionInfo.sessionCount;
     sessionTime += sessionInfo.totalSessionTime;
     if (minSessions > sessionInfo.sessionCount) {
@@ -272,8 +289,8 @@ const sessionInformationBetween = (startStr, endStr) => {
     if (maxSessions < sessionInfo.sessionCount) {
       maxSessions = sessionInfo.sessionCount;
     }
-    if (index % 10 === 0) {
-      console.log('working %o', index);
+    if (index % 10 === 0 && consolep) {
+      console.log('working %o %', ((index / usernames.length) * 100).toFixed(2));
     }
   });
   const retVal = {};
@@ -338,14 +355,17 @@ const opportunityICE = () => {
 const analyzeData = () => {
   initDataDump();
   // console.log('# Registered students: %o', getRegisteredStudentUsernames().length);
-  // console.log('# Active students Spring 19: %o', getActiveStudentsBetween('2019-01-01', '2019-05-31').length);
-  // const names = getActiveStudentNamesBetween('2019-01-01', '2019-05-31');
+  // console.log('# Active students Spring 20: %o', getActiveStudentsBetween('2020-01-01', '2020-05-31').length);
+  // const names = getActiveStudentNamesBetween('2020-01-01', '2020-05-31');
   // console.log(names.join(', '));
-  // loginAnalysis('2019-01-01', '2019-05-31');
-  // console.log(sessionInformationBetween('2019-08-01', '2019-12-31'));
-  console.log(studentSessionInformationToCSV(studentSessionInformationBetween('2019-08-01', '2019-12-31', false)));
+  // loginAnalysis('2020-01-01', '2020-05-31');
+  // console.log(sessionInformationBetween('2020-01-01', '2020-05-31', false));
+  // console.log(studentSessionInformationBetween('2019-01-01', '2019-05-31', false, false));
+  // console.log(studentSessionInformationToCSV(studentSessionInformationBetween('2019-01-01', '2019-05-31', false)));
   // console.log(pageViewsBetween('2019-01-01', '2019-05-31'));
-  // console.log(opportunityICE());
+  // const oICE = opportunityICE();
+  // console.log(oICE.slice(oICE.length - 10, oICE.length));
+  // console.log(sessionInformation('gcalica@hawaii.edu', '2020-01-01', '2020-05-31', true));
 };
 
 analyzeData();
