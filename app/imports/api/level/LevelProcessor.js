@@ -98,7 +98,7 @@ export function updateStudentLevel(advisor, studentID) {
     const student = studentID;
     advisorLogsDefineMethod.call({ advisor, student, text }, (error) => {
       if (error) {
-        console.log('Error creating AdvisorLog.', error);
+        console.error('Error creating AdvisorLog.', error);
       }
     });
     const feedData = {

@@ -7,7 +7,7 @@ import BaseCollection from '../base/BaseCollection';
 /* eslint no-useless-escape: 0 */
 
 /**
- * Slugifies the give text.
+ * Slugifies the given text.
  * @param text
  * @return {string}
  * @memberOf api/slug
