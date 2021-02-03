@@ -356,11 +356,16 @@ const analyzeData = () => {
   initDataDump();
   // console.log('# Registered students: %o', getRegisteredStudentUsernames().length);
   // console.log('# Active students Spring 20: %o', getActiveStudentsBetween('2020-01-01', '2020-05-31').length);
+  // console.log('# Active students Fall 20: %o', getActiveStudentsBetween('2020-08-01', '2020-12-31').length);
   // const names = getActiveStudentNamesBetween('2020-01-01', '2020-05-31');
+  // const names = getActiveStudentNamesBetween('2020-08-01', '2020-12-31');
   // console.log(names.join(', '));
   // loginAnalysis('2020-01-01', '2020-05-31');
+  // loginAnalysis('2020-08-01', '2020-12-31');
   // console.log(sessionInformationBetween('2020-01-01', '2020-05-31', false));
+  // console.log(sessionInformationBetween('2020-08-01', '2020-12-31', false));
   // console.log(studentSessionInformationBetween('2019-01-01', '2019-05-31', false, false));
+  console.log(studentSessionInformationBetween('2019-08-01', '2019-12-31', true, false));
   // console.log(studentSessionInformationToCSV(studentSessionInformationBetween('2019-01-01', '2019-05-31', false)));
   // console.log(pageViewsBetween('2019-01-01', '2019-05-31'));
   // const oICE = opportunityICE();

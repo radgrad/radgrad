@@ -48,8 +48,8 @@ function getCourseData(username, password, emails) {
   };
 
   return new Promise((res, rej) => {
-    // request.post('https://www.star.hawaii.edu:10011/api/radgrad', params, function (err, httpRes, body) {
-    request.post('https://www.star.hawaii.edu/api/radgrad', params, function (err, httpRes, body) {
+    request.post('https://www.star.hawaii.edu:10011/api/radgrad', params, function (err, httpRes, body) {
+    // request.post('https://www.star.hawaii.edu/api/radgrad/courses', params, function (err, httpRes, body) {
       if (err) return rej(err);
       return res(httpRes);
     });
